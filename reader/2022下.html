@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f3">
+<title>2022 下半年 · 省考</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:#f5f5f3;color:#1f2937;
+  font:16px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+a{color:#2563eb}
+
+/* ---------- 吸顶条 ---------- */
+#bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;
+  padding:8px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#bar .nm{font-weight:700;font-size:14px;flex:1;min-width:110px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#bar a.back{font-size:13px;text-decoration:none;color:#6b7280;flex:0 0 auto}
+#qs{display:flex;gap:5px;overflow-x:auto;flex:0 0 auto}
+#qs button{border:1px solid #d1d5db;background:#fff;border-radius:8px;
+  padding:5px 11px;font-size:13px;color:#374151;cursor:pointer;white-space:nowrap}
+#qs button.on{background:#2563eb;border-color:#2563eb;color:#fff;font-weight:700}
+
+/* ---------- 主体 ---------- */
+#wrap{display:block;max-width:1500px;margin:0 auto}
+#left,#right{padding:14px 16px 90px}
+
+/* ---------- 题目卡 ---------- */
+.qcard{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.qcard .meta{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 9px}
+.tag{font-size:12px;padding:2px 9px;border-radius:99px;font-weight:700}
+.tag.sc{background:#fef3c7;color:#92400e}
+.tag.wd{background:#dbeafe;color:#1e40af}
+.tag.kp{background:#dcfce7;color:#166534}
+.qcard .stem{font-size:16px;font-weight:600;line-height:1.8;margin:0 0 8px}
+.qcard .req{font-size:14px;color:#6b7280;margin:0}
+
+/* ---------- 材料 ---------- */
+h3.sec{font-size:13px;color:#6b7280;font-weight:700;letter-spacing:.5px;
+  margin:18px 0 8px;padding-left:8px;border-left:3px solid #2563eb}
+.matbox{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.matbox h4{font-size:13px;color:#2563eb;margin:0 0 10px;font-weight:700}
+p.mt{margin:0 0 11px;text-align:justify;font-size:16.5px;line-height:1.95;
+  text-indent:2em}
+mark.hl{background:#fff3bf;border-bottom:2px solid #f0b429;
+  padding:1px 1px;border-radius:2px;cursor:pointer;transition:background .25s}
+mark.hl.on{background:#ffd43b;box-shadow:0 0 0 2px #fab005}
+mark.hl:after{content:attr(data-m);font-size:9px;color:#b45309;
+  vertical-align:super;margin-left:1px;font-weight:700}
+
+/* ---------- 详解 ---------- */
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.step h4{margin:0 0 10px;font-size:14.5px;color:#1f2937;font-weight:700;
+  display:flex;align-items:center;gap:7px}
+.step h4 .n{display:inline-flex;width:22px;height:22px;border-radius:50%;
+  background:#2563eb;color:#fff;font-size:12px;align-items:center;
+  justify-content:center;flex:0 0 auto}
+.step .body{font-size:15.5px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+.step.s1{border-left:4px solid #2563eb}
+.step.s2{border-left:4px solid #10b981}
+.step.s3{border-left:4px solid #f59e0b}
+.step.s4{border-left:4px solid #ef4444}
+.step.s5{border-left:4px solid #8b5cf6}
+
+/* 逐段讲解 */
+.blk{border:1px solid #e5e7eb;border-radius:10px;margin:0 0 10px;
+  overflow:hidden}
+.blk .h{background:#f9fafb;padding:8px 12px;font-size:13px;font-weight:700;
+  color:#374151;border-bottom:1px solid #e5e7eb}
+.blk .c{padding:10px 12px;font-size:15px;line-height:1.9;color:#4b5563}
+.blk .c.topic{padding-top:0;font-size:14.5px;color:#6b7280;
+  border-top:1px dashed #e5e7eb;margin-top:0}
+.blk .bind{background:#f0fdf4;border-top:1px solid #bbf7d0;
+  padding:9px 12px;font-size:14.5px;color:#166534;font-weight:600}
+
+/* 审题要点列表 */
+ul.key{margin:0;padding-left:20px}
+ul.key li{margin:0 0 7px;font-size:15px;line-height:1.9;color:#374151}
+p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
+
+.ref{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ref .item{padding:9px 0;border-bottom:1px dashed #e5e7eb;font-size:15.5px;
+  line-height:1.9;cursor:pointer}
+.ref .item:last-child{border:0}
+.ref .item.on{background:#fff3bf;border-radius:6px;padding-left:8px;
+  margin-left:-8px}
+
+.warn{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;
+  padding:11px 14px;font-size:14px;color:#991b1b;margin:0 0 12px}
+
+/* ---------- 底部翻页 ---------- */
+#nav{position:fixed;bottom:0;left:0;right:0;z-index:40;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(8px);
+  border-top:1px solid #e5e7eb;padding:8px 12px;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom));
+  display:flex;gap:8px}
+#nav button{flex:1;border:1px solid #d1d5db;background:#fff;border-radius:10px;
+  padding:10px;font-size:14px;font-weight:600;color:#374151;cursor:pointer}
+#nav button:disabled{opacity:.4}
+
+/* ---------- 平板 / 桌面：左右分栏 ---------- */
+@media(min-width:700px){
+  #wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;
+    height:calc(100vh - 52px)}
+  #left,#right{overflow-y:auto;height:100%;padding:18px 20px 90px}
+  #left{border-right:1px solid #e5e7eb}
+  body{font-size:16.5px}
+  p.mt{font-size:17px}
+  #nav{max-width:1500px;margin:0 auto}
+}
+@media(min-width:1200px){
+  #wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+}
+/* ---------- 打印 ---------- */
+@media print{
+  #bar,#nav,#tocBtn{display:none}
+  #wrap{display:block;height:auto}
+  #left,#right{overflow:visible;height:auto}
+  mark.hl{background:#fff3bf}
+}
+/* ---------- 白屏兜底 ---------- */
+#fatal{position:fixed;top:0;left:0;right:0;z-index:999;background:#dc2626;
+  color:#fff;padding:10px 14px;font-size:13px}
+
+/* ==================== AI 批注 ==================== */
+.aihint{background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0284c7;
+  border-radius:10px;padding:11px 14px;margin:16px 0 12px;
+  font-size:13.5px;line-height:1.85;color:#075985}
+.aihint b{color:#0369a1}
+.ai{background:#fbfaff;border:1px solid #e0dbff;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ai.extra{background:#fffbf5;border-color:#ffe0b2}
+.ai h4{margin:0 0 11px;font-size:14.5px;color:#4c1d95;font-weight:700;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ai.extra h4{color:#9a3412}
+.ai h4 .an{display:inline-flex;height:19px;padding:0 7px;border-radius:5px;
+  background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;
+  font-size:10.5px;font-weight:800;align-items:center;letter-spacing:.5px}
+.ai.extra h4 .an{background:linear-gradient(135deg,#ea580c,#f59e0b)}
+.ai h4 .sub{font-size:11.5px;color:#9ca3af;font-weight:400;letter-spacing:0}
+
+/* 通用正文 */
+.ai .prose{font-size:15px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+
+/* 表格通用 */
+.ai table{width:100%;border-collapse:collapse;font-size:13.5px;
+  background:#fff;border-radius:8px;overflow:hidden;
+  table-layout:fixed}
+.ai table th{background:#f3f0ff;color:#5b21b6;font-weight:700;
+  text-align:left;padding:8px 10px;border-bottom:1px solid #ddd6fe;
+  font-size:12.5px;white-space:normal;word-break:break-word}
+.ai table td{padding:9px 10px;border-bottom:1px solid #f1f0f7;
+  vertical-align:top;line-height:1.8;color:#4b5563;
+  word-break:break-word;white-space:normal;overflow-wrap:anywhere}
+.ai table tr:last-child td{border-bottom:0}
+.tstem td.w{font-weight:700;color:#1f2937;font-size:14px;word-break:break-all}
+.tstem td.act{color:#065f46;background:#f0fdf4}
+.tstem .ty{display:inline-block;padding:1px 7px;border-radius:99px;
+  font-size:11px;font-weight:700;background:#ede9fe;color:#5b21b6;
+  word-break:break-word}
+.ttrace td.pt{font-weight:600;color:#1f2937}
+.ttrace td.src{white-space:normal}
+.ttrace code{display:inline-block;background:#f3f4f6;border-radius:4px;
+  padding:1px 5px;font-size:11.5px;color:#6d28d9;margin:0 3px 2px 0;
+  font-family:inherit}
+
+/* 列宽（用 colgroup 不好控制，直接给 th 定宽） */
+.tstem th:nth-child(1){width:17%}
+.tstem th:nth-child(2){width:16%}
+.tstem th:nth-child(3){width:36%}
+.tstem th:nth-child(4){width:31%}
+.ttrace th:nth-child(1){width:27%}
+.ttrace th:nth-child(2){width:18%}
+.ttrace th:nth-child(3){width:55%}
+
+/* 材料结构图 */
+.mmwrap{display:flex;flex-direction:column;gap:8px}
+.mm{border:1px solid #e5e7eb;border-radius:9px;overflow:hidden;background:#fff}
+.mm.pt{border-left:4px solid #10b981}
+.mm.no{border-left:4px solid #d1d5db;opacity:.85}
+.mmh{display:flex;align-items:center;gap:8px;padding:7px 11px;
+  background:#fafafa;border-bottom:1px solid #f1f0f7;flex-wrap:wrap}
+.mmh b{font-size:13px;color:#1f2937}
+.mmb{font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px}
+.mm.pt .mmb{background:#d1fae5;color:#065f46}
+.mm.no .mmb{background:#f3f4f6;color:#6b7280}
+.mmr{padding:7px 11px 2px;font-size:13px;color:#374151;font-weight:600}
+.mmw{padding:0 11px 9px;font-size:13.5px;color:#6b7280;line-height:1.8}
+
+/* 找点六步 */
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{position:relative;padding:0 0 12px 30px;
+  border-left:2px dashed #ddd6fe;margin-left:9px}
+.steps li:last-child{border-left:0;padding-bottom:0}
+.steps li:before{counter-increment:s;content:counter(s);
+  position:absolute;left:-10px;top:0;width:19px;height:19px;
+  border-radius:50%;background:#7c3aed;color:#fff;font-size:11px;
+  font-weight:700;display:flex;align-items:center;justify-content:center}
+.sh{font-size:14px;font-weight:700;color:#5b21b6;margin:0 0 5px}
+.st,.ss{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ss{color:#6b7280}
+.lb{display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;
+  border-radius:4px;background:#ede9fe;color:#6d28d9;margin-right:6px}
+.ss .lb{background:#f3f4f6;color:#6b7280}
+
+/* 陷阱 */
+.traps{display:flex;flex-direction:column;gap:9px}
+.trap{background:#fff;border:1px solid #fecaca;border-radius:9px;
+  padding:10px 12px}
+.th{font-size:13.5px;font-weight:700;color:#991b1b;margin:0 0 6px;
+  line-height:1.7}
+.tw2,.ta{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ta{color:#065f46}
+.tw2 .lb{background:#fee2e2;color:#991b1b}
+.ta .lb{background:#d1fae5;color:#065f46}
+
+@media(max-width:520px){
+  .ai{padding:12px 12px}
+  .ai table{font-size:12.5px}
+  .ai table th,.ai table td{padding:7px 8px}
+  .ttrace td.pt{width:auto}
+  .ttrace td.src{width:auto}
+}
+</style>
+</head>
+<body>
+<div id="fatal" hidden></div>
+<div id="bar">
+  <a class="back" href="./index.html">←</a>
+  <span class="nm">2022 下半年 · 省考</span>
+  <div id="qs"><button type="button">第1题</button><button type="button">第2题</button><button type="button">第3题</button><button type="button">第4题</button></div>
+</div>
+<div id="wrap">
+  <div id="left"><h3 class="sec">材料原文 · 划线为粉笔标注的答案来源句</h3><div class="matbox"><h4>材料 1</h4><p class="mt">今年，F省公安厅正式启动“万警千车下基层”活动。根据部署，全省1万名警力、1200余辆制式警车支援基层一线，定点联系和支援部分中小学校和幼儿园、重点医疗机构、公安监管场所、农村派出所，加强基层基础工作，严密防范化解各类风险隐患。</p><p class="mt">罗剑是F省公安厅科技信息化总队的一名90后民警，作为“万警千车下基层”活动首批下基层支援的民警，来到泉山市公安局东江分局的梅山乡派出所工作。<mark class="hl" data-m="1" data-seq="1" data-q="1">初来乍到</mark>，<mark class="hl" data-m="2" data-seq="2" data-q="1">人生地不熟</mark>，出警的时候对路况不熟，影响工作效率，于是他<mark class="hl" data-m="3" data-seq="3" data-q="1">一有空</mark>，<mark class="hl" data-m="4" data-seq="4" data-q="1">就拿起辖区地图</mark>，走村访户，<mark class="hl" data-m="5" data-seq="5" data-q="1">很快熟悉了乡村地理情况</mark>。所里有些同志讲方言，他不能完全听懂，和村民谈话更是语言不通，沟通不畅。面对困难他没有退缩，<mark class="hl" data-m="6" data-seq="6" data-q="1">抓住一切机会向同事、村民请教</mark>，<mark class="hl" data-m="7" data-seq="7" data-q="1">学讲当地方言</mark>，<mark class="hl" data-m="8" data-seq="8" data-q="1">学习群众工作方法</mark>。经过一段时间的努力，他从不太能听懂到学会了说梅山方言。</p><p class="mt">“梅山乡面积大，人口多，工程项目多，矛盾纠纷警情占到总警情的一半以上，<mark class="hl" data-m="9" data-seq="9" data-q="1">化解矛盾纠纷是所里的重点工作</mark>。”梅山乡派出所章所长向罗剑介绍。于是，罗剑<mark class="hl" data-m="10" data-seq="10" data-q="1">主动参与到调解群众矛盾纠纷中去</mark>，一周内化解矛盾纠纷多起。“调解纠纷<mark class="hl" data-m="11" data-seq="11" data-q="1">一定要站在当事人的角度去换位思考</mark>。”罗剑说道。辖区朱家坞村68岁的村民袁某与邻居付某因琐事发生争吵，付某用拖鞋打了袁某嘴巴两下，后报警到派出所。因双方是亲戚关系，袁某觉得被小辈打了，在村里失了面子，调解难度增大。罗剑到所里后，仔细了解情况，<mark class="hl" data-m="12" data-seq="12" data-q="1">多次耐心进行调解</mark>，<mark class="hl" data-m="13" data-seq="13" data-q="1">运用法律知识分析利弊</mark>，<mark class="hl" data-m="14" data-seq="14" data-q="1">做思想工作</mark>，双方终于圆满达成协议，握手言和。</p><p class="mt">新柳村委会马家村村民代某，家里有两个小孩和一个老人，他得了尿毒症，老婆不得不外出打工，家庭十分困难。派出所梁教导员知道后，和镇政府、村委会联系，帮助协调办理了低保，申请了慰问金。罗剑来所后，<mark class="hl" data-m="15" data-seq="15" data-q="1">教导员带着他一起上门走访慰问</mark>，<mark class="hl" data-m="16" data-seq="16" data-q="1">爱心接力棒从师傅传到了徒弟手上</mark>。</p><p class="mt">“原来在省厅时，主要是公安科技信息化方面的业务，来派出所后自己的岗位、身份、职责等都变化很大。如何转变角色，提高对新工作的认识，提高业务能力，这些都是新挑战。”罗剑说。</p><p class="mt">“爸爸，今天是我生日，我想你了……”儿子4岁生日当天，罗剑到所里工作，只能通过手机视频连线为儿子祝福。“爸爸也想你，生日快乐，等爸爸回去再陪你玩。”罗剑和妻子原本商量好了怎样为儿子过生日，并买好了礼物，但因为接到了新任务不能回家，妻子很不理解。经过他耐心解释这次任务的重要性，终于得到了妻子的理解和支持。“无法将礼物亲自送给儿子，有点小遗憾。”</p><p class="mt">“春节期间，<mark class="hl" data-m="17" data-seq="17" data-q="1">罗剑主动要求留下来值班</mark>，<mark class="hl" data-m="18" data-seq="18" data-q="1">让所里的老民警回家过年</mark>。”梁教导员介绍道。“来所里后，<mark class="hl" data-m="19" data-seq="19" data-q="1">我切身感受到基层民警的辛苦和不易</mark>，<mark class="hl" data-m="20" data-seq="20" data-q="1">我要力所能及地多为他们做些事情</mark>。”罗剑说道。</p><p class="mt">“梅山所里来了一位省城下来的民警，<mark class="hl" data-m="21" data-seq="21" data-q="1">态度好和气</mark>……”村民们评论道。无论是接处警，还是接待群众咨询，<mark class="hl" data-m="22" data-seq="22" data-q="1">罗剑都是热情和气</mark>。“平时，小罗<mark class="hl" data-m="23" data-seq="23" data-q="1">能放下省厅干警的架子</mark>，<mark class="hl" data-m="24" data-seq="24" data-q="1">虚心好学</mark>，<mark class="hl" data-m="25" data-seq="25" data-q="1">积极走访辖区群众</mark>，<mark class="hl" data-m="26" data-seq="26" data-q="1">经常下村里进行</mark>预防电信网络诈骗和疫情防控宣传，走村入户，<mark class="hl" data-m="27" data-seq="27" data-q="1">与群众打成一片</mark>。<mark class="hl" data-m="28" data-seq="28" data-q="1">他还利用自己的专业特长</mark>，<mark class="hl" data-m="29" data-seq="29" data-q="1">为同事们解决</mark>科技信息化、警务通等方面<mark class="hl" data-m="30" data-seq="30" data-q="1">遇到的问题</mark>。”章所长说。</p><p class="mt">人民满意是一条走不完的路，群众工作是一本翻不完的书。罗剑和他的同事们深深体会到，要做好派出所工作，既要“键对键”，也要“面对面”，更要“心连心”，把公安工作深深扎根于广大人民群众之中，任重道远。罗剑在新的平凡工作岗位上辛勤工作，无私奉献，得到当地群众、同事的广泛好评。</p></div><div class="matbox"><h4>材料 2</h4><p class="mt">近年来，H市坚持生态优先，绿色发展，对长江入河排污口“应查尽查”，生态效益日益彰显。市环境行政执法支队<mark class="hl" data-m="31" data-seq="1" data-q="2">利用高分辨率的无人机</mark>在需要排查的区域先飞一遍，然后开展图像解译，<mark class="hl" data-m="32" data-seq="2" data-q="2">分辨疑似排污口</mark>，为后期的人工排查提供方向和坐标。无人机航测的精度非常高，不到0.1米，这意味着大约巴掌宽的口子都可以识别出来。在H市共有长18公里、宽5公里、面积90平方公里的沿江区域，<mark class="hl" data-m="33" data-seq="3" data-q="2">借助无人机航拍</mark>，<mark class="hl" data-m="34" data-seq="4" data-q="2">仅用半天时间就能识别出全部疑似排污口点位</mark>。</p><p class="mt">在地面的现场排查中，一款手机App成为排查人员的好帮手。“以前每次现场巡查后，都要用文档写下现场情况，不仅费时而且可能还不规范。<mark class="hl" data-m="35" data-seq="5" data-q="2">现在的排查App可以现场办公</mark>，一张表格7项内容，简洁高效、重点突出，一键就可以完成定位、拍照、填报等一系列工作，<mark class="hl" data-m="36" data-seq="6" data-q="2">让现场排查工作更高效、更规范</mark>。”参与排查的H市环境行政执法支队王队长说。</p><p class="mt">对水下、码头下等隐蔽盲区，无人船搭载的声呐探测设备可谓是排查利器。在H市黄角水库排查时，排查人员闻到一股刺鼻的气味，初步判定水下可能有排污口，但是由于水库较深，再加上水的颜色浑浊，排查人员很难下水排查。为了准确摸清水下情况，<mark class="hl" data-m="37" data-seq="7" data-q="2">一艘装载声呐的无人船下水探测</mark>，<mark class="hl" data-m="38" data-seq="8" data-q="2">这艘无人船可以准确探测到深度80米、宽度100米范围内的暗管</mark>。20多分钟后，黄角水库里的4根暗管，就清晰地显示在了电脑屏幕上。</p><p class="mt">2021年7月开始，H市S县市场监督管理局<mark class="hl" data-m="39" data-seq="9" data-q="2">每周都对县农贸市场摊点</mark>、副食店、超市、药品销售点、餐饮店等<mark class="hl" data-m="40" data-seq="10" data-q="2">开展常规检查</mark>，<mark class="hl" data-m="41" data-seq="11" data-q="2">每月与多部门开展执法检查活动</mark>，从县城到乡村，从单位到个体，从清洁卫生到物品价格<mark class="hl" data-m="42" data-seq="12" data-q="2">进行全方位、无死角监管检查</mark>，全力维护市场秩序。</p><p class="mt">“操作一定要按流程，才能保证消毒效果，同时还要做到环境干净整洁。”S县市场监督管理局执法人员在该县城区新开设的餐具消毒中心检查时，对管理人员不停地叮嘱。为<mark class="hl" data-m="43" data-seq="13" data-q="2">维护全县食品药品及消费市场的安全</mark>，日前，S县以<mark class="hl" data-m="44" data-seq="14" data-q="2">日常监督检查与执法打击相结合的方式</mark>，<mark class="hl" data-m="45" data-seq="15" data-q="2">在辖区不定期开展执法检查活动</mark>，有效保障了消费者的合法权益。</p><p class="mt">“有了他们的监管，知道了什么可以做、什么不可以做，诚信经营、依法经营成为了我们个体户的自觉行为，他们的保驾护航让全县的消费市场变得更安全，物价更平稳。”个体户杨某说。</p><p class="mt">为进一步整合执法资源，加大执法力度，<mark class="hl" data-m="46" data-seq="16" data-q="2">有效解决行政执法过程中的重点、难点问题</mark>，H市湖里区<mark class="hl" data-m="47" data-seq="17" data-q="2">成立联合执法工作领导小组</mark>，<mark class="hl" data-m="48" data-seq="18" data-q="2">推进执法队伍的执法力量融合、工作界面融合</mark>。湖里区<mark class="hl" data-m="49" data-seq="19" data-q="2">城管办牵头组织湖里交警大队</mark>、湖里消防救援大队、湖里区市场监管局等<mark class="hl" data-m="50" data-seq="20" data-q="2">开展全面联合执法</mark>。</p><p class="mt">金山西路上，不少沿街商户<mark class="hl" data-m="51" data-seq="21" data-q="2">将电动车违停在店门口</mark>，<mark class="hl" data-m="52" data-seq="22" data-q="2">并牵线充电</mark>，不仅影响市容市貌，还存在极大的安全隐患。“电动车切不可在店外飞线充电。”在联合执法中，执法人员逐一劝告并提醒。</p><p class="mt">湖里区城管办相关负责人表示，<mark class="hl" data-m="53" data-seq="23" data-q="2">为解决电动车充电问题</mark>，湖里区城管办<mark class="hl" data-m="54" data-seq="24" data-q="2">积极协调街道推动电动车集中充电站建设</mark>，这是今年来湖里区在城市精细化管理方面的有力举措之一。据了解，湖里区针对电动自行车充电桩设置多次召开推进会，针对不同点位设置充电桩进行系统讨论及初步方案论证。目前，湖里区已制定《湖里区电动自行车充电消防安全准则》，在主要商业街、BRT、地铁站点设置电动车充电点。这项工作全面推行，将从根本上减少私拉充电线的隐患，同时保障居民需求。</p><p class="mt">2022年初，H市南湖区综合行政执法局<mark class="hl" data-m="55" data-seq="25" data-q="2">整合治安、交警、综合执法路面视频监控终端近4000个</mark>，<mark class="hl" data-m="56" data-seq="26" data-q="2">并在执法车上装上了移动探头</mark>，<mark class="hl" data-m="57" data-seq="27" data-q="2">视频数据接入到了数字管理平台</mark>。“我们坐在指挥中心，就可以通过视频探头对各个路段的市容情况实时查看，<mark class="hl" data-m="58" data-seq="28" data-q="2">对市容管控的难点、乱点实现动态掌握</mark>。”区综合行政执法局指挥中心副指挥长说，“第一时间发现问题，<mark class="hl" data-m="59" data-seq="29" data-q="2">第一时间调配力量进行管理</mark>，<mark class="hl" data-m="60" data-seq="30" data-q="2">执法力量得到最有效配置</mark>，<mark class="hl" data-m="61" data-seq="31" data-q="2">投放更精准</mark>，以往的一些管理难点，如今已不再是难题。”</p><p class="mt">“过去，直到接近10点，南湖区中医院门口的早点摊都不会收摊。执法人员也进行过多次劝导，但摊主每次说得好好的，等到执法人员走了却还是继续摆摊。”新兴执法中队陈队长说。自从该路段探头接入数字管理平台后，只要早点摊摆摊“超时”，影响路段通行，指挥中心一发现就会立刻给中队“派单”，执法人员立刻前往整治。“几次管下来，摊主们也都能做到自觉按时收摊了。”</p><p class="mt">“许多无证设摊、占道经营、车辆违停等问题都通过这一手段得到了解决。”陈队长补充道，“各中队执法人员均能在第一时间赶到现场进行处置，有效降低了路面巡查的工作强度和压力，大大提高了管控效率。”</p></div><div class="matbox"><h4>材料 3</h4><p class="mt">Q市宁川区福兴街道地处工业园区和城乡结合地带，由于非本地人员对低价出租房有很大需求，出现了为数不少的私搭乱建的违法建筑，环境极差。漆先生在自家院子旁搭起了5间房出租，挤占了公共空间，影响周围居民日常活动与出行，怨声载道。有人将生活垃圾扔在出租房门口以示抗议，与租户发生了冲突。所在街道进行过多次调解，效果甚微。后来，居民们换了个地方“讨说法”，大伙的烦心事终于解决了，他们去的地方就是新成立的宁川区社会矛盾纠纷联合调处中心。</p><p class="mt"><mark class="hl" data-m="62" data-seq="1" data-q="3">当前基层虽已建起</mark>调解、仲裁、信访、政务热线<mark class="hl" data-m="63" data-seq="2" data-q="3">等多种社会矛盾纠纷调处渠道</mark>，<mark class="hl" data-m="64" data-seq="3" data-q="3">但往往由于协作联动机制不够顺畅</mark>，<mark class="hl" data-m="65" data-seq="4" data-q="3">群众仍有</mark>解决矛盾纠纷费时耗力的<mark class="hl" data-m="66" data-seq="5" data-q="3">抱怨</mark>，小纠纷也可能拖成大矛盾。</p><p class="mt"><mark class="hl" data-m="67" data-seq="6" data-q="3">基层社会矛盾纠纷常需跨部门</mark>、<mark class="hl" data-m="68" data-seq="7" data-q="3">跨领域协同才能及时有效调处</mark>。如城市噪声、油烟等扰民问题，环保、公安、市场监管等多个部门都有责任。“‘<mark class="hl" data-m="69" data-seq="8" data-q="3">谁都能管</mark>’<mark class="hl" data-m="70" data-seq="9" data-q="3">就容易相互推诿</mark>，<mark class="hl" data-m="71" data-seq="10" data-q="3">解决一个问题得跑多家单位</mark>，<mark class="hl" data-m="72" data-seq="11" data-q="3">群众当然不满意</mark>。”宁川区委政法委文副书记说。</p><p class="mt">宁川区高新法庭负责人表示，<mark class="hl" data-m="73" data-seq="12" data-q="3">法院与其他部门</mark>、<mark class="hl" data-m="74" data-seq="13" data-q="3">调解组织的诉前调解对接缺乏制度保障</mark>，<mark class="hl" data-m="75" data-seq="14" data-q="3">导致大量</mark>事实清楚、金额或争议不大的<mark class="hl" data-m="76" data-seq="15" data-q="3">小矛盾小纠纷进入诉讼程序</mark>，<mark class="hl" data-m="77" data-seq="16" data-q="3">基层有限的司法资源更加紧张</mark>。近5年，宁川区<mark class="hl" data-m="78" data-seq="17" data-q="3">法院受案数量逐年攀升</mark>，法官每年人均结案在300件以上，<mark class="hl" data-m="79" data-seq="18" data-q="3">压力之大可想而知</mark>。调解程序简单、耗时较短的优势无法发挥，结案周期反倒更长。</p><p class="mt"><mark class="hl" data-m="80" data-seq="19" data-q="3">针对群众解决矛盾纠纷多头跑</mark>、<mark class="hl" data-m="81" data-seq="20" data-q="3">反复跑的问题</mark>，宁川区按照“不增编制动机制、不变职能强功能”的思路，成建制整合社会治安综治中心、群众来访中心等7个平台，医疗、交通、消费等10个专业人民调解委员会，汇聚民商事审判庭、劳动争议仲裁庭、社会组织及行业协会等30余家机构，<mark class="hl" data-m="82" data-seq="21" data-q="3">共同组建宁川区社会矛盾纠纷联合调处中心</mark>（简称宁川联调中心），集中统一办公，公安、司法等15个部门轮流接访群众并参与调解。<mark class="hl" data-m="83" data-seq="22" data-q="3">联调中心将分散的众多矛盾调处机构整合成</mark>“<mark class="hl" data-m="84" data-seq="23" data-q="3">一站式</mark>”<mark class="hl" data-m="85" data-seq="24" data-q="3">调处枢纽平台</mark>，不仅是部门“物理整合”，更有功能“化学反应”，<mark class="hl" data-m="86" data-seq="25" data-q="3">让群众解决烦心事</mark>有了“主心骨”，<mark class="hl" data-m="87" data-seq="26" data-q="3">不再多头跑</mark>。</p><p class="mt">2021年9月，一物业公司向法院起诉某小区业主王某拖欠物业费。<mark class="hl" data-m="88" data-seq="27" data-q="3">宁川区高新法庭研判这是一般诉求</mark>，在征得原告同意后，<mark class="hl" data-m="89" data-seq="28" data-q="3">将该案移送宁川联调中心的物业纠纷调解委员会</mark>。调解人员经两小时调解，双方各让一步，达成物业公司提高服务质量、业主延期支付物业费的调解协议，双方当事人当场签订<mark class="hl" data-m="90" data-seq="29" data-q="3">调解协议书</mark>，<mark class="hl" data-m="91" data-seq="30" data-q="3">交由整体入驻联调中心的高新法庭司法确认</mark>，<mark class="hl" data-m="92" data-seq="31" data-q="3">形成法律约束力</mark>。“一件小小的物业纠纷，上法院诉讼可能得2个月时间，<mark class="hl" data-m="93" data-seq="32" data-q="3">部门联动之下</mark>，<mark class="hl" data-m="94" data-seq="33" data-q="3">纠纷排解得快</mark>，<mark class="hl" data-m="95" data-seq="34" data-q="3">还节省了诉讼资源</mark>。”宁川区高新法庭负责人说。</p><p class="mt">“真没想到，10天就解决了我们工资被拖欠的问题。”宁川区跃进水电安装工程有限公司员工老丁说。2021年公司累计拖欠19名员工78.5万元工资，老丁等员工到联调中心反映问题。<mark class="hl" data-m="96" data-seq="35" data-q="3">中心按照分类调处原则划定为复杂问题</mark>，经中心协调，劳动争议调委会等<mark class="hl" data-m="97" data-seq="36" data-q="3">多个部门联动调处</mark>，<mark class="hl" data-m="98" data-seq="37" data-q="3">该公司很快与员工签订了调解协议书</mark>，支付了拖欠的工资。</p><p class="mt">福兴街道居民王大姐说：“烦心事解决了，环境也好了，家里客人也多了，感觉日子都红火了。”街道办主任说：“我们街道因私搭乱建引发的诸多纠纷是个老大难，解决问题涉及众多部门，单靠街道是不行的。<mark class="hl" data-m="99" data-seq="38" data-q="3">在联调中心完备规范的接诉即办</mark>、<mark class="hl" data-m="100" data-seq="39" data-q="3">定时催办</mark>、<mark class="hl" data-m="101" data-seq="40" data-q="3">超时督办</mark>、<mark class="hl" data-m="102" data-seq="41" data-q="3">执行跟踪机制保障下</mark>，<mark class="hl" data-m="103" data-seq="42" data-q="3">可确保</mark>‘<mark class="hl" data-m="104" data-seq="43" data-q="3">件件有说法</mark>、<mark class="hl" data-m="105" data-seq="44" data-q="3">事事有落实</mark>’。纠纷少了，环境改观了，治理有序了，我们街道所辖的工业园区也受到更多优质企业青睐了。”</p><p class="mt">据统计，自2021年9月<mark class="hl" data-m="106" data-seq="45" data-q="3">运行以来</mark>，<mark class="hl" data-m="107" data-seq="46" data-q="3">宁川区联调中心</mark>累计接待群众6095人次、受理案件3666件、解决3561件，<mark class="hl" data-m="108" data-seq="47" data-q="3">推动民事一审新收案件环比下降6.8</mark>%，<mark class="hl" data-m="109" data-seq="48" data-q="3">群众信访量环比下降13</mark>%，<mark class="hl" data-m="110" data-seq="49" data-q="3">诉前调解成功率环比上升25</mark>%。宁川区联调中心成为当地矛盾纠纷调处的“始发站+终点站”，<mark class="hl" data-m="111" data-seq="50" data-q="3">将矛盾纠纷减少在源头</mark>，让当地群众解决烦心事“只进一扇门、尽量少跑路、有呼必有应”。</p></div><div class="matbox"><h4>材料 4</h4><p class="mt">习近平总书记指出：“共和国是红色的，不能淡化这个颜色。”</p><p class="mt">2022年9月30日是<mark class="hl" data-m="112" data-seq="1" data-q="4">第九个烈士纪念日</mark>。L市<mark class="hl" data-m="113" data-seq="2" data-q="4">政法系统开展“诵读红色家书，传承红色基因”主题活动</mark>，<mark class="hl" data-m="114" data-seq="3" data-q="4">大家一起重读烈士家书</mark>，<mark class="hl" data-m="115" data-seq="4" data-q="4">缅怀革命先烈</mark>，<mark class="hl" data-m="116" data-seq="5" data-q="4">传承红色基因</mark>，忠诚履职，浴火淬炼政法铁军。</p><p class="mt">“大姐为我坐监牢，外甥为我受株连，我们没有罪，我们要斗争，人该怎样做，路该怎样走，要有正确的答案。”“我一生无遗憾，认定了共产主义这个为人类翻身解放造幸福的真理，就刀山敢上，火海敢闯，甘愿抛头颅，洒热血！”</p><p class="mt">——节选自夏明翰1928年3月在监狱中写给姐姐夏明玮和她两个女儿的一封信</p><p class="mt">“我军在西北的战场上，不仅取得光荣的战绩，山西的民众，整个华北的民众，对我军极表好感，他们都唤着‘八路军是我们的救星’。我们也决心与华北人民共艰苦，共生死。不管敌人怎样进攻，我们准备不回到黄河南岸来。我们改编为国民革命军后，当局对我们仍然是苛刻，但我全军将士，都有一个决心，为了民族国家的利益，过去没有一个铜板，现在仍然是没有一个铜板，准备将来也不要一个铜板，过去吃过草，准备还吃草。”</p><p class="mt">——节选自左权1937年12月3日写给母亲张氏的一封信</p><p class="mt">“弟不意现在尚留人间，被押在大庾粤军第一军军部，以后结果怎样，尚不可知，弟准备牺牲，生是为中国，死是为中国，一切听之而已。”“我为中国革命没有一文钱的私产，把三个幼儿的养育都要累着诸兄嫂。我四川的家听说久已破产，又被抄没过，人口死亡殆尽，我已八年不通信了。为着中国民族就为不了家和个人，诸兄嫂明达当能了解，不致说弟这一生穷苦，是没有用处。”</p><p class="mt">——节选自刘伯坚1935年3月16日在国民党江西省大庾监狱写给兄嫂风笙等的信</p><p class="mt">烽火连三月，家书抵万金，在战火纷飞的年代，红色家书寄托了革命烈士对家国和亲人的至真至情。活动中，大家在背景音乐的衬托下，深情朗读这一封封感人肺腑的红色家书，一段段刻骨铭心的动人事迹，通过现场诵读者声情并茂的演绎，深深震撼着在场的每一位政法干部的心灵，<mark class="hl" data-m="117" data-seq="6" data-q="4">大家无不被革命先烈们对理想信念的执着追求</mark>、<mark class="hl" data-m="118" data-seq="7" data-q="4">对党绝对忠诚的赤子之心</mark>、<mark class="hl" data-m="119" data-seq="8" data-q="4">舍生取义的崇高气节和报国为民的炙热情怀所折服</mark>。</p><p class="mt">“革命先烈初心可鉴、正气永存，如今我们身处中国特色社会主义的新时代，更是应该在传承、担当、坚守中，为国出力，为民造福。”市委政法委机关第三党支部王书记感叹道。</p><p class="mt">种树者必培其根，种德者必养其心。<mark class="hl" data-m="120" data-seq="9" data-q="4">通过组织大家诵家书、学家书、悟家书</mark>，<mark class="hl" data-m="121" data-seq="10" data-q="4">体会革命道路的曲折和胜利的来之不易</mark>，<mark class="hl" data-m="122" data-seq="11" data-q="4">感受革命先烈崇高的精神境界和理想追求</mark>，把对党的忠诚扎根头脑、变成信仰、化为行动。</p></div></div>
+  <div id="right"><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">15 分</span><span class="tag wd">≤200 字</span><span class="tag kp">原因类</span></div><p class="stem">请根据“给定资料1”，谈谈罗剑为什么能得到大家的好评。（15分）</p><p class="req">要求：分析全面、深刻，条理清晰，不超过200字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型，题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>出现“根据”一词，提示我们只需阅读资料1</li><li>由“谈谈……为什么”可知，本题为单一题，作答要素为“原因”。③“罗剑得到大家的好评”说明罗剑可能有优秀的做法、品质等，是正面积极的，在阅读资料时可以重点关注正面信息比较集中的段落、词句，从中提炼要点</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">本段主要介绍了F省公安厅启动“万警千车下基层”活动的相关情况，未涉及罗剑的相关的内容，无要点可略读。</div></div><div class="blk"><div class="h">段 2</div><div class="c">本段主要介绍了罗剑快速融入当地工作方面的内容。阅读“初来乍到，人生地不熟……一有空，就拿起辖区地图……很快熟悉了乡村地理情况”“抓住一切机会向同事、村民请教，学讲当地方言，学习群众工作方法”可知，罗剑面对人生地不熟的情况，能很快熟悉乡村地理、学习方言和群众工作方法，从而能快速熟悉工作，由此可概括、摘抄出要点：能快速熟悉工作，初来时人生地不熟，但能很快熟悉乡村地理情况，抓住一切机会学习当地方言和群众工作方法。</div><div class="bind">✓ 要点：能快速熟悉工作，初来时人生地不熟，但能很快熟悉乡村地理情况，抓住一切机会学习当地方言和群众工作方法</div></div><div class="blk"><div class="h">段 3</div><div class="c">本段主要介绍了罗剑主动承担调解矛盾的工作。阅读“化解矛盾纠纷是所里的重点工作”“罗剑主动参与到调解群众矛盾纠纷中去”可知，罗剑主动承担了化解矛盾纠纷这一重点工作，可概括为：主动承担重点工作，参与调解群众矛盾纠纷；“一定要站在当事人的角度去换位思考”“多次耐心进行调解，运用法律知识分析利弊，做思想工作”提示了罗杰开展调解工作的优秀做法，表述规范，可摘抄出：能换位思考，耐心调解，运用法律知识分析利弊，做好思想工作。</div><div class="bind">✓ 要点：主动承担重点工作，参与调解群众矛盾纠纷</div></div><div class="blk"><div class="h">段 4</div><div class="c">本段主要介绍了罗剑参与慰问工作。阅读“教导员带着他一起上门走访慰问，爱心接力棒从师傅传到了徒弟手上”可知，罗剑传承了慰问群众的工作，可概括为：积极慰问群众。</div><div class="bind">✓ 要点：积极慰问群众</div></div><div class="blk"><div class="h">段 5</div><div class="c">本段主要介绍了罗剑对于新工作的认知，未具体展开介绍相关内容，无要点可略读。</div></div><div class="blk"><div class="h">段 6</div><div class="c">本段主要介绍了罗剑由于接到新任务不能陪儿子过生日，这是作为民警以任务为先的工作常态，所以不作为罗剑个人的优秀事迹，无要点。</div></div><div class="blk"><div class="h">段 7</div><div class="c">本段主要介绍了罗剑帮同事分担工作方面的内容。阅读“罗剑主动要求留下来值班，让所里的老民警回家过年”“我切身感受到基层民警的辛苦和不易，我要力所能及地多为他们做些事情”可知，罗剑感受到基层民警的辛苦和不易，主动要求值班，帮同事分担工作，概括为：帮同事分担工作，体谅基层民警的辛苦不易，主动值班，让同事回家过年。</div><div class="bind">✓ 要点：帮同事分担工作，体谅基层民警的辛苦不易，主动值班，让同事回家过年</div></div><div class="blk"><div class="h">段 8</div><div class="c">本段主要介绍了罗剑与群众打成一片以及帮同事分担工作方面的内容。（1）阅读“态度好和气”“罗剑都是热情和气”“能放下省厅干警的架子，虚心好学，积极走访辖区群众，经常下村里进行……与群众打成一片”提示罗剑为人热情和气又谦虚，经常下村里进行工作，能与群众达成一片，从中可摘抄、概括出：与群众打成一片，对群众热情和气，能放下架子，虚心好学，积极走访辖区群众，经常下村开展工作。（2）“他还利用自己的专业特长，为同事们解决科技信息化、警务通等方面遇到的问题”提示罗剑帮助同事分担工作，表述规范，可摘抄出：利用专业特长，为同事解决问题。</div><div class="bind">✓ 要点：与群众打成一片，对群众热情和气，能放下架子，虚心好学，积极走访辖区群众，经常下村开展工作</div></div><div class="blk"><div class="h">段 9</div><div class="c">本段总结性地指出罗剑及其同事派出所工作任重道远，无新要点。注意：其中“辛勤工作”“无私奉献”等要点前文已出，此处不重复。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">组织答案
+【梳理资料发现，要点围绕“能快速熟悉工作”“主动承担重点工作”“帮同事分担工作”“与群众打成一片”展开，属于“并列”逻辑，可依据资料顺序分条撰写。】
+1.能快速熟悉工作。初来时人生地不熟，但能很快熟悉乡村地理情况，抓住一切机会学习当地方言和群众工作方法。
+2.主动承担重点工作。参与调解群众矛盾纠纷，能换位思考，耐心调解，运用法律知识分析利弊，做好思想工作。
+3.帮同事分担工作。体谅基层民警的辛苦不易，主动值班，让同事回家过年；利用专业特长，为同事解决问题。
+4.与群众打成一片。对群众热情和气，能放下架子，虚心好学，积极走访、慰问辖区群众，经常下村开展工作。</div></div><div class="ref" data-m2r='{"5":0,"6":0,"8":0,"2":0,"7":0,"13":1,"10":1,"9":1,"11":1,"14":1,"19":2,"18":2,"28":2,"27":3,"15":3,"22":3,"24":3,"25":3,"26":3,"1":0,"3":0,"4":0,"12":1,"16":3,"17":3,"20":2,"21":2,"23":3,"29":2,"30":2}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="5,6,8,2,7,1,3,4">1.能快速熟悉工作。初来时人生地不熟，但能很快熟悉乡村地理情况，抓住一切机会学习当地方言和群众工作方法。</div><div class="item" data-mk="13,10,9,11,14,12">2.主动承担重点工作。参与调解群众矛盾纠纷，能换位思考，耐心调解，运用法律知识分析利弊，做好思想工作。</div><div class="item" data-mk="19,18,28,20,21,29,30">3.帮同事分担工作。体谅基层民警的辛苦不易，主动值班，让同事回家过年；利用专业特长，为同事解决问题。</div><div class="item" data-mk="27,15,22,24,25,26,16,17,23">4.与群众打成一片。对群众热情和气，能放下架子，虚心好学，积极走访、慰问辖区群众，经常下村开展工作。</div><div class="item" data-mk="27,9">参考答案说明：本参考答案从“能快速熟悉工作”“主动承担重点工作”“帮同事分担工作”“与群众打成一片”这四个方面展开，各条答案要点之间在内容上相互并列，没有交叉。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">资料中出现的规范词
+群众工作方法：指在党的组织领导下,通过亲切面对面、讲明实情、解决问题,直接向广大群众发动和引导，使群众有效参与政治、社会活动的工作方式。表述规范，可直接摘抄，注意积累。
+换位思考：是设身处地地为他人着想，即想人所想，理解至上的一种处理人际关系的思考方式。表述规范，可直接摘抄，注意积累。
+放下架子：比喻改掉自以为是或骄傲自大的毛病。表述规范，可直接摘抄，注意积累。
+虚心：不自满，能接受别人的意见。表述规范，可直接摘抄，注意积累。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">20 分</span><span class="tag wd">≤300 字</span><span class="tag kp">概括措施类</span></div><p class="stem">请根据“给定资料2”，概括H市提升行政执法管理服务水平的措施。（20分）</p><p class="req">要求：全面、准确、有条理，不超过300字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型，题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>由“根据”一词，可知本题只需要阅读资料2</li><li>由“概括……措施”可知本题是单一题，需围绕“H市提升行政执法管理服务水平”这一主题，作答“措施”，即“对策”这一要素，阅读资料时可以重点关注标志性动词所在的句子、段落，从中提炼出答案要点</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">本段主要介绍H市利用无人机排查排污口。阅读“利用”“借助”等标志性动词所在的句子“利用高分辨率的无人机……分辨疑似排污口”“借助无人机航拍，仅用半天时间就能识别出全部疑似排污口点位”，提示了H市执法部门借助无人机来分辨排污口点位，其中“仅用半天时间”强调了无人机的高效性，可摘抄和概括得到要点：借助无人机，高效分辨疑似排污口。</div><div class="bind">✓ 要点：借助无人机，高效分辨疑似排污口</div></div><div class="blk"><div class="h">段 2</div><div class="c">本段主要介绍H市利用APP进行现场排查。阅读王队长的话“现在的排查App可以现场办公”“让现场排查工作更高效、更规范”，提示做法且表述规范，可摘抄得到要点：使用排查App现场办公，工作更高效、规范。</div><div class="bind">✓ 要点：使用排查App现场办公，工作更高效、规范</div></div><div class="blk"><div class="h">段 3</div><div class="c">本段主要介绍H市利用声呐设备进行水下排查。阅读“一艘装载声呐的无人船下水探测，这艘无人船可以准确探测到深度80米、宽度100米范围内的暗管”，提示了H市排查人员利用声呐探测设备，来准确排查水下暗管，可摘抄和概括得到要点：利用声呐探测设备，准确探测水下暗管。</div><div class="bind">✓ 要点：利用声呐探测设备，准确探测水下暗管</div></div><div class="blk"><div class="h">段 4</div><div class="c">本段主要介绍H市开展常规检查。阅读“开展”“检查”等标志性动词所在的句子“每周都对县农贸市场摊点……开展常规检查，每月与多部门开展执法检查活动”“进行全方位、无死角监管检查”，提示了H市S县管理部门加强了对市场的监管检查，可摘抄和概括得到要点：加强监管检查，每周对农贸市场开展常规检查，每月与多部门开展执法检查活动。</div><div class="bind">✓ 要点：加强监管检查，每周对农贸市场开展常规检查，每月与多部门开展执法检查活动</div></div><div class="blk"><div class="h">段 5</div><div class="c">本段主要介绍H市开展不定期检查。阅读“维护”“开展”等标志性动词所在的句子“为维护全县食品药品及消费市场的安全，日前，S县以日常监督检查与执法打击相结合的方式，在辖区不定期开展执法检查活动”，提示做法且表述规范，可摘抄得到要点：日常监督与执法打击相结合，不定期开展执法检查活动，维护消费市场安全。</div><div class="bind">✓ 要点：日常监督与执法打击相结合，不定期开展执法检查活动，维护消费市场安全</div></div><div class="blk"><div class="h">段 6</div><div class="c">本段主要通过个体户的话，指出H市通过监管检查，维护了市场安全，前文已出点，此处不再重复。</div></div><div class="blk"><div class="h">段 7</div><div class="c">本段主要介绍H市联合执法力量，解决执法重难点。（1）阅读“成立”“推进”等标志性动词所在的句子“有效解决行政执法过程中的重点、难点问题，H市湖里区成立联合执法工作领导小组，推进执法队伍的执法力量融合、工作界面融合”，提示了H市通过成立领导小组、推进执法力量融合等联合执法措施，来解决执法重点、难点问题，可摘抄和概括得到要点：推进联合执法，解决重难点问题；成立领导小组，推进执法力量融合、工作界面融合。注意：“整合执法资源”与“执法力量融合”表意相近，不重复书写。（2）阅读“牵头”“开展”等标志性动词所在的句子“湖里区城管办牵头组织……等开展全面联合执法”，提示做法且表述规范，可摘抄得到要点：城管办牵头组织，开展全面联合执法。</div><div class="bind">✓ 要点：推进联合执法，解决重难点问题</div></div><div class="blk"><div class="h">段 9</div><div class="c">段8-9主要围绕城管办解决电动车充电问题展开，可合并阅读。阅读段8中的“将电动车违停在店门口，并牵线充电”和段9中的“为解决电动车充电问题，湖里区城管办积极协调街道推动电动车集中充电站建设”，提示了H市城管办协调解决电动车违停充电问题的做法，表述规范，可摘抄得到要点：积极协调，解决电动车违停充电问题。</div><div class="bind">✓ 要点：积极协调，解决电动车违停充电问题</div></div><div class="blk"><div class="h">段 10</div><div class="c">本段主要介绍H市南湖区利用监控视频进行精准执法。（1）阅读“整合”“装上”等标志性动词所在的句子“整合……路面视频监控终端……并在执法车上装上了移动探头，视频数据接入到了数字管理平台”“对市容管控的难点、乱点实现动态掌握”，提示做法且表述规范，可摘抄得到要点：整合路面视频监控终端，为执法车安装移动探头，接入数字管理平台，动态掌握市容管控难点、乱点。（2）尾句“第一时间调配力量进行管理，执法力量得到最有效配置，投放更精准”，提示H市可以快速且精准的调配、投放执法力量，可概括得到要点：快速、精准调配执法力量。</div><div class="bind">✓ 要点：整合路面视频监控终端，为执法车安装移动探头，接入数字管理平台，动态掌握市容管控难点、乱点</div></div><div class="blk"><div class="h">段 12</div><div class="c">段11-12主要通过具体事例介绍了H市通过监控视频，进行快速、精准的执法，该要点前文已出，此处不再重复。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">组织答案
+【梳理资料发现，要点围绕“利用科技手段，排查长江入河排污口”“加强监管检查，维护消费市场安全”“推进联合执法，解决重难点问题”和“利用监控设备，提升市容管控效率”这四个方面展开，属于“并列”逻辑，可依据资料顺序分条撰写。】
+一、利用科技手段，排查长江入河排污口。借助无人机，高效分辨疑似排污口；使用排查App现场办公，工作更高效、规范；利用声呐探测设备，准确探测水下暗管。
+二、加强监管检查，维护消费市场安全。每周对农贸市场开展常规检查，每月与多部门开展执法检查活动；日常监督与执法打击相结合，不定期开展执法检查活动。
+三、推进联合执法，解决重难点问题。成立领导小组，推进执法力量融合、工作界面融合；城管办牵头组织，开展全面联合执法；积极协调，解决电动车违停充电问题。
+四、利用监控设备，提升市容管控效率。整合路面视频监控终端，为执法车安装移动探头，接入数字管理平台，动态掌握市容管控难点、乱点，快速、精准调配执法力量。</div></div><div class="ref" data-m2r='{"32":0,"33":0,"34":0,"35":0,"36":0,"38":0,"41":1,"45":1,"44":1,"40":1,"39":1,"42":1,"43":1,"48":2,"50":2,"49":2,"51":2,"53":2,"46":2,"47":2,"54":2,"55":3,"57":3,"56":3,"58":3,"60":3,"31":0,"37":0,"52":2,"59":3,"61":3}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="32,33,34,35,36,38,31,37">一、利用科技手段，排查长江入河排污口。借助无人机，高效分辨疑似排污口；使用排查App现场办公，工作更高效、规范；利用声呐探测设备，准确探测水下暗管。</div><div class="item" data-mk="41,45,44,40,39,42,43">二、加强监管检查，维护消费市场安全。每周对农贸市场开展常规检查，每月与多部门开展执法检查活动；日常监督与执法打击相结合，不定期开展执法检查活动。</div><div class="item" data-mk="48,50,49,51,53,46,47,54,52">三、推进联合执法，解决重难点问题。成立领导小组，推进执法力量融合、工作界面融合；城管办牵头组织，开展全面联合执法；积极协调，解决电动车违停充电问题。</div><div class="item" data-mk="55,57,48,56,58,60,59,61">四、利用监控设备，提升市容管控效率。整合路面视频监控终端，为执法车安装移动探头，接入数字管理平台，动态掌握市容管控难点、乱点，快速、精准调配执法力量。</div><div class="item" data-mk="42,43,46,47,50,58">参考答案说明：本参考答案从“利用科技手段，排查长江入河排污口”“加强监管检查，维护消费市场安全”“推进联合执法，解决重难点问题”和“利用监控设备，提升市容管控效率”这四个方面展开。各条答案要点在内容上相互并列，没有交叉。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">资料中出现的规范词
+1.市容：主要指一个城市所呈现出来的景观、面貌，包括城市建筑物、市政公用设施、公共场所等。表述规范，可直接摘抄，注意积累。
+2.现场办公：是指把办公地点搬到事件发生地或生产、工作场所，通常是由有关部门就某一特定问题进行调查、处理，在现场落实解决问题的一种工作形式。表述规范，可直接摘抄，注意积累。
+3.联合执法：是两个或两个以上的行政执法机关，按照各自的职责范围，在实施行政执法时进行的联合行动。表述规范，可直接摘抄，注意积累。
+4.消费市场：主要指消费品（包括劳务）的交换领域或场所。商品生产者和消费者要通过市场交换商品和劳务，才能满足自己各种物质和文化的需要。表述规范，可直接摘抄，注意积累。
+5.领导小组：是我国所特有的一种组织方式和工作机制，指针对某一特定项目而成立，由若干分工明确，定位不一的工作者组成，负责该项目的策划、管理、招募与实施，并在特定时期，拥有跨部门协调的权力。表述规范，可直接摘抄，注意积累。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">25 分</span><span class="tag wd">≤500 字</span><span class="tag kp">总结类</span></div><p class="stem">Q市拟召开“把脉基层治理现代化转型痛点”研讨会，宁川区社会矛盾纠纷联合调处中心将在大会交流发言。请根据“给定资料3”，撰写一份发言稿。（25分）</p><p class="req">要求：（1）内容全面，条理清晰；
+（2）简明扼要，格式规范；
+（3）不超过500字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型、题目的主题、答题要素、资料范围和要求等。</div><ul class="key"><li>①出现“根据”一词，提示我们只需阅读资料3。②“一份+发言稿”提示本题为公文题，一般由格式和正文两部分构成。完整的格式包括：标题+称谓。其中：标题一般为“关于+主题词+的+文种”，结合本题主题“把脉基层治理现代化转型痛点”，可将标题写为：关于“把脉基层治理现代化转型痛点”的交流发言稿；称谓是发文的对象，结合本题“Q市拟召开”“研讨会”“在大会交流发言”，可知发文的对象应是参加此次大会的人员，因此称谓可写为：各位参会人员。正文部分包括：开头（简单阐述背景、目的等）+主体（可能包括问题、危害、意义、对策等相关要素，结合本题主题“把脉基层治理现代化转型痛点”，作答时可能涉及基层治理现代化转型过程中存在的问题、解决的对策等等，具体写什么需要根据资料而定）+结尾（一般为总结、呼吁、号召等）</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">段1主要介绍了Q市宁川区福兴街道本地居民与租户之间的纠纷，引出了本题话题，无要点，可略读。</div></div><div class="blk"><div class="h">段 2</div><div class="c">段2主要介绍了当前Q市宁川区社会矛盾纠纷调处存在的问题。阅读负面表述“当前基层虽已建起……等多种社会矛盾纠纷调处渠道，但往往……不够顺畅，群众仍有……抱怨……”，提示当前虽有多种解决矛盾纠纷的渠道，但都不够顺畅，群众抱怨不满，说明调处效果差，由此可摘抄、概括出要点：当前，基层虽已建立多种社会矛盾纠纷调处渠道，但协作联动机制不够顺畅，群众不满意，效果并不好。</div><div class="bind">✓ 要点：当前，基层虽已建立多种社会矛盾纠纷调处渠道，但协作联动机制不够顺畅，群众不满意，效果并不好</div></div><div class="blk"><div class="h">段 3</div><div class="c">段3承接段2，从政府部门层面介绍了宁川区社会矛盾纠纷调处存在的问题。阅读“基层社会矛盾纠纷常需跨部门、跨领域协同才能及时有效调处”“‘谁都能管’就容易相互推诿，解决一个问题得跑多家单位，群众当然不满意”，提示解决基层纠纷需要多部门联动，但段2提到联动机制不畅，部门之间就容易相互推诿扯皮，群众解决问题就要多头跑，最终导致群众不满意，可摘抄、概括出要点：基层社会矛盾常需跨部门、跨领域协同，但协作联动机制不够顺畅，容易相互推诿，群众解决矛盾纠纷依然要多头跑。注意：“群众不满意”上文已出点，此处不重复出点。</div><div class="bind">✓ 要点：基层社会矛盾常需跨部门、跨领域协同，但协作联动机制不够顺畅，容易相互推诿，群众解决矛盾纠纷依然要多头跑</div></div><div class="blk"><div class="h">段 4</div><div class="c">段4从法院层面介绍了宁川区社会矛盾纠纷调处存在的问题。阅读负面表述“法院与其他部门、调解组织的诉前调解对接缺乏制度保障，导致大量……小矛盾小纠纷进入诉讼程序，基层有限的司法资源更加紧张”“宁川区法院受案数量逐年攀升……压力之大可想而知”，提示法院缺乏相应的制度保障，大量小纠纷浪费了基层司法资源，最终导致法院压力过大，可摘抄出要点：法院与其他部门、调解组织的诉前调解对接缺乏制度保障，大量小矛盾、小纠纷进入诉讼程序，浪费基层有限的司法资源，最终导致法院压力大。注意：尾句“调解程序简单、耗时较短的优势无法发挥，结案周期反倒更长”说明调处效果并不好，上文已出点，此处不重复出点。</div><div class="bind">✓ 要点：法院与其他部门、调解组织的诉前调解对接缺乏制度保障，大量小矛盾、小纠纷进入诉讼程序，浪费基层有限的司法资源，最终导致法院压力大</div></div><div class="blk"><div class="h">段 5</div><div class="c">段5主要介绍了解决基层矛盾纠纷调处问题的对策。（1）首句“针对群众解决矛盾纠纷多头跑、反复跑的问题”提示问题，其中群众多头跑上文已出点，此处不重复出点，由此可摘抄出要点：群众解决矛盾纠纷依然要反复跑。（2）阅读“共同组建宁川区社会矛盾纠纷联合调处中心”“联调中心将分散的众多矛盾调处机构整合成‘一站式’调处枢纽平台”“让群众解决烦心事……不再多头跑”，动词“组建”“整合”等提示对策，指出了解决宁川区基层矛盾纠纷调处问题的对策，表述规范，可摘抄出要点：宁川区组建社会矛盾纠纷联合调处中心，将分散的众多矛盾调处机构整合成“一站式”调处枢纽平台，让群众解决纠纷不再多头跑。注意：资料中“宁川区按照……等30余家机构”“集中统一办公……参与调解”等内容都是围绕宁川区成立社会矛盾纠纷联合调处中心展开，由于字数有限，写到“宁川区组建社会矛盾纠纷联合调处中心”即可。</div><div class="bind">✓ 要点：群众解决矛盾纠纷依然要反复跑</div></div><div class="blk"><div class="h">段 7</div><div class="c">段6-7都介绍了宁川区快速高效解决矛盾纠纷的事例，可合并阅读。（1）阅读段6“宁川区高新法庭研判这是一般诉求”“将该案移送宁川联调中心的物业纠纷调解委员会”“双方当事人当场签订调解协议书，交由整体入驻联调中心的高新法庭司法确认，形成法律约束力”“还节省了诉讼资源”，指出了宁川区法庭处理矛盾纠纷诉求、形成法律约束力等具体做法，解决了上文提到的法院方面存在的浪费司法资源等问题，可摘抄、概括出要点：法庭研判诉讼，确认为一般诉求后移送联调中心，调解书交由法庭司法确认，形成法律约束力，节省诉讼资源。（2）段6尾句“部门联动之下，纠纷排解得快”、段7“中心按照分类调处原则划定为复杂问题”“多个部门联动调处，该公司很快与员工签订了调解协议书……”，可以看出宁川区在处理纠纷时，先是按照分类调处原则，确定问题的类型，然后由相关部门联动处理，最终快速解决纠纷问题，这解决了上文提到的法院方面存在的大量小矛盾、小纠纷进入诉讼程序等问题，可摘抄、概括出要点：分类调处，划定问题类别，协调相关部门联动调处，快速排解纠纷。</div><div class="bind">✓ 要点：法庭研判诉讼，确认为一般诉求后移送联调中心，调解书交由法庭司法确认，形成法律约束力，节省诉讼资源</div></div><div class="blk"><div class="h">段 8</div><div class="c">阅读街道办主任的话“在联调中心完备规范的接诉即办、定时催办、超时督办、执行跟踪机制保障下，可确保‘件件有说法、事事有落实’”，说明要建立完备规范的各种机制，确保各种事件的落实，这解决了上文提到的政府方面存在的协作联动机制不顺畅、相互推诿等问题，可摘抄出要点：建立完备规范的接诉即办、定时催办、超时督办、执行跟踪机制，保障落实。</div><div class="bind">✓ 要点：建立完备规范的接诉即办、定时催办、超时督办、执行跟踪机制，保障落实</div></div><div class="blk"><div class="h">段 9</div><div class="c">段9主要介绍宁川区联调中心成立以来取得的成绩。阅读“运行以来，宁川区联调中心……推动民事一审新收案件环比下降6.8%，群众信访量环比下降13%，诉前调解成功率环比上升25%”“将矛盾纠纷减少在源头……”，通过一系列数据说明宁川区联调中心民事一审新收案件和群众信访量下降，调解成功率上升，从源头化解了矛盾纠纷，可摘抄出要点：中心成立以来，我区调解成功率大大提升，民事一审新收案件和群众信访量明显下降，将矛盾纠纷减少在源头。</div><div class="bind">✓ 要点：中心成立以来，我区调解成功率大大提升，民事一审新收案件和群众信访量明显下降，将矛盾纠纷减少在源头</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">按照答题思路整合要点，组织答案
+【本题要求撰写“一份+发言稿”，其一般作答思路为：标题+称谓+正文。其中，结合本题，正文的作答思路可为：开头（介绍宁川区在调处基层矛盾纠纷方面存在的总体问题）+主体（介绍造成问题的原因、解决问题的对策）+结尾（总结取得的成绩等）。】
+一、标题：
+【标题一般为“关于+主题词+的+文种”，结合本题主题“把脉基层治理现代化转型痛点”，可将标题写为：关于“把脉基层治理现代化转型痛点”的交流发言稿】关于“把脉基层治理现代化转型痛点”的交流发言稿
+二、称谓：
+【称谓是发文的对象，结合本题“Q市拟召开”“研讨会”“在大会交流发言”，可知发文的对象应是参加此次大会的人员，因此称谓可写为：各位参会人员】各位参会人员：
+三、正文：
+开头：
+【段2“基层虽已建立多种社会矛盾纠纷调处渠道，群众不满意，效果并不好”、段4中提到的“法院压力大”，从宏观层面介绍了宁川区存在的总体问题，可优化合并作为背景引入置于开头】当前，基层虽已建立多种社会矛盾纠纷调处渠道，但效果并不好，群众不满意，法院压力大。
+主体：
+【段2-5都提到了造成基层矛盾纠纷调处问题的原因，可适当添加衔接语合并为一段。具体来说，段2-3中的要点“基层社会矛盾常需跨部门、跨领域协同，但协作联动机制不够顺畅，容易相互推诿，群众解决矛盾纠纷依然要多头跑”、段5中的要点“群众解决矛盾纠纷依然要反复跑”介绍了政府方面的具体原因，可合并为一条；段4介绍了法院方面的具体原因，可单独为一条】究其原因如下：一是基层社会矛盾常需跨部门、跨领域协同，但协作联动机制不够顺畅，容易相互推诿，群众解决矛盾纠纷依然要多头跑、反复跑；二是法院与其他部门、调解组织的诉前调解对接缺乏制度保障，大量小矛盾、小纠纷进入诉讼程序，浪费基层有限的司法资源。
+【段5-8介绍了解决基层矛盾纠纷调处问题的对策，可适当添加衔接语合并为一段。其中，段5提到了总体对策，置于段首即可；段6-8从“分类调处”“保障落实”“确保效力”三个方面介绍了具体对策，分条罗列即可】为解决以上问题，宁川区组建社会矛盾纠纷联合调处中心，将分散的众多矛盾调处机构整合成“一站式”调处枢纽平台，让群众解决纠纷不再多头跑。具体工作中：一、分类调处。划定问题类别，协调相关部门联动调处，快速排解纠纷。二、保障落实。建立完备规范的接诉即办、定时催办、超时督办、执行跟踪机制。三、确保效力。法庭研判诉讼，确认为一般诉求后移送联调中心，调解书交由法庭司法确认，形成法律约束力，节省诉讼资源。
+结尾：
+【段9主要介绍宁川区联调中心成立以来取得的成绩，可作为总结性的内容置于结尾，同时可适当添加结束语完善结尾】中心成立以来，我区调解成功率大大提升，民事一审新收案件和群众信访量明显下降，将矛盾纠纷减少在源头。未来，我们会继续助力基层治理现代化转型，谢谢！</div></div><div class="ref" data-m2r='{"63":2,"62":2,"67":2,"82":2,"80":2,"111":2,"74":3,"76":3,"64":3,"77":3,"73":3,"70":3,"83":4,"99":4,"92":4,"85":4,"91":4,"108":5,"109":5,"110":5,"65":3,"66":3,"68":2,"69":2,"71":3,"72":3,"75":3,"78":3,"79":3,"81":2,"84":4,"86":4,"87":4,"88":4,"89":4,"90":4,"93":4,"94":4,"95":4,"96":4,"97":4,"98":4,"100":4,"101":4,"102":4,"103":4,"104":4,"105":4,"106":4,"107":4}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item nomk">关于“把脉基层治理现代化转型痛点”的交流发言稿</div><div class="item nomk">各位参会人员：</div><div class="item" data-mk="63,62,67,82,80,111,68,69,81">当前，基层虽已建立多种社会矛盾纠纷调处渠道，但效果并不好，群众不满意，法院压力大。</div><div class="item" data-mk="74,76,64,77,80,73,67,70,65,66,71,72,75,78,79">究其原因如下：一是基层社会矛盾常需跨部门、跨领域协同，但协作联动机制不够顺畅，容易相互推诿，群众解决矛盾纠纷依然要多头跑、反复跑；二是法院与其他部门、调解组织的诉前调解对接缺乏制度保障，大量小矛盾、小纠纷进入诉讼程序，浪费基层有限的司法资源。</div><div class="item" data-mk="83,82,99,92,63,67,85,91,84,86,87,88,89,90,93,94,95,96,97,98,100,101,102,103,104,105,106,107">为解决以上问题，宁川区组建社会矛盾纠纷联合调处中心，将分散的众多矛盾调处机构整合成“一站式”调处枢纽平台，让群众解决纠纷不再多头跑。具体工作中：一、分类调处。划定问题类别，协调相关部门联动调处，快速排解纠纷。二、保障落实。建立完备规范的接诉即办、定时催办、超时督办、执行跟踪机制。三、确保效力。法庭研判诉讼，确认为一般诉求后移送联调中心，调解书交由法庭司法确认，形成法律约束力，节省诉讼资源。</div><div class="item" data-mk="111,108,109,110,63,67,80,82">中心成立以来，我区调解成功率大大提升，民事一审新收案件和群众信访量明显下降，将矛盾纠纷减少在源头。未来，我们会继续助力基层治理现代化转型，谢谢！</div><div class="item" data-mk="63,67,80,82,111">参考答案说明：（1）格式方面，本参考答案写到了“标题”和“称谓”。（2）正文部分，一方面从内容来看，围绕着“把脉基层治理现代化转型痛点”这一主题，本参考答案的开头先写到了宁川区在调处基层矛盾纠纷方面存在的总体问题；主体部分从“原因”“对策”两个方面展开。另一方面，形式上，本参考答案做到了分段、分条撰写，整体上条理较为清晰。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">资料中出现的规范词
+1.协作联动机制：是指不同领域、不同机构之间为了实现共同的目标而采取的一种协作方式。表述规范，可直接摘抄，注意积累。
+2.相互推诿：意思是彼此之间互相推托，谁也不愿承担责任。表述规范，可直接摘抄，注意积累。
+3.司法资源：是社会资源的一部分，包括司法机构、司法人员和与司法活动相关财政保障资源。表述规范，可直接摘抄，注意积累。
+4.一站式：让群众享受到一次性完成或一步到位的便捷服务，不再需要东奔西走，节省了时间，提高了效率。表述规范，可直接摘抄，注意积累。
+5.法律约束力：指人们应当按照法律规定的那样行为，必须服从。表述规范，可直接摘抄，注意积累。
+6.超时督办：指超过相应的时间就要监督执行。表述规范，可直接摘抄，注意积累。
+7.接诉即办：是指建立群众诉求快速响应机制。表述规范，可直接摘抄，注意积累。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">40 分</span><span class="tag kp">总结类</span></div><p class="stem">假如你参加了L市政法系统开展的“诵读红色家书，传承红色基因”主题活动，请根据“给定资料4”，联系实际，自选角度，自拟题目，写一篇心得体会。（40分）</p><p class="req">要求：（1）观点明确，认识深刻；
+（2）结构完整，思路清晰；
+（3）语言流畅，字数800-1000字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题目的关键信息，去找出文章的主题及其写作角度（即：文章写作的主要话题及切入点）以及资料范围，写作要求等。</div><ul class="key"><li>由“根据……资料4”“联系实际”可知，要优先且重点阅读资料4，同时可兼顾其他资料，从中提取有效信息</li><li>由“心得体会”可知，本题是一篇文章写作题。围绕“诵读红色家书，传承红色基因”这一主题，可初步构思本文写作思路：首先，“红色家书”有哪些，其折射的精神品质是什么；其次，为什么要开展“诵读红色家书，传承红色基因”的活动，意义何在；最后，如何从红色家书中，传承红色基因，应该怎么做，等等。以上写作思路，具体还要结合资料来进一步确定</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 2</div><div class="c">段1-段2交代了L市政法系统开展“诵读红色家书，传承红色基因”主题活动的相关背景。其中，“第九个烈士纪念日”“L市政法系统开展‘诵读红色家书，传承红色基因’主题活动，大家一起重读烈士家书，缅怀革命先烈，传承红色基因”等内容，可在适当改编后，作为开头部分的内容，写入心得体会。</div></div><div class="blk"><div class="h">段 6</div><div class="c">段3-段6以夏明翰、左权、刘伯坚等三位烈士的家书为例，介绍了红色精神的具体表现。阅读段6尾处的“大家无不被革命先烈们对理想信念的执着追求、对党绝对忠诚的赤子之心、舍生取义的崇高气节和报国为民的炙热情怀所折服”可知，红色家书所折射的红色精神包括四个方面：（1）以夏明翰烈士为代表，他坚定的理想信念，认定了共产主义能够为人类翻身解放造幸福，这种坚毅的精神品质，值得每一位政法工作者崇尚与效仿，由此可提炼出观点：我感受到的，是革命先烈们对理想信念的执着追求。（2）以左权将军为代表，他报国为民，坚持与人民、与国家同生死共患难，值得当代政法工作者敬仰与学习，由此可提炼出观点：我感受到的，是革命先烈们报国为民的炙热情怀。（3）以刘伯坚烈士为代表，他舍小家为大义，将国家与人民的利益摆在至高无上的位置，这可贵的精神品质，值得政法工作者敬佩与牢记，由此可提炼出观点：我感受到的，是革命先烈们舍生取义的崇高气节。（4）“对党绝对忠诚的赤子之心”提示，作为政法系统的工作者，还要向全体英烈学习忠诚于党的高贵精神品质，由此可提炼出观点：我感受到的，是革命先烈们对党绝对忠诚的赤子之心。</div><div class="bind">✓ 要点：我感受到的，是革命先烈们对理想信念的执着追求</div></div><div class="blk"><div class="h">段 8</div><div class="c">段7-段8对资料进行了总结，可合并阅读。其中，段8中的“通过组织大家诵家书、学家书、悟家书，体会革命道路的曲折和胜利的来之不易，感受革命先烈崇高的精神境界和理想追求”提示，组织诵读家书活动的崇高意义，可提炼出观点：我不但体会到了革命道路的曲折和胜利的来之不易，更深刻感受到了革命先烈崇高的精神境界和理想追求。可写入开头部分，作为全篇心得体会的核心观点。</div><div class="bind">✓ 要点：我不但体会到了革命道路的曲折和胜利的来之不易，更深刻感受到了革命先烈崇高的精神境界和理想追求</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">根据第一步的审题、第二步的阅读资料，确立文章框架
+标题：【突出“诵读红色家书，传承红色基因”这一主题】烈士英灵不朽 红色基因永存
+开头：
+点题：诵读红色家书，传承红色基因
+解题：【结合资料4段1、段8，可知解题的相关内容】活动背景、活动概况、心得综述。
+主体：
+观点1：【资料4段6主要介绍了“革命先烈的理想信念”的相关内容，可整理得出观点1】我感受到的，是革命先烈们对理想信念的执着追求。【具体论述层次可考虑：（1）理想信念的重要意义；（2）烈士夏明翰的家书及其体现的精神品质；（3）结合自身谈如何践行理想信念等。】
+观点2：【资料4段6主要介绍了“革命先烈的对党忠诚”的相关内容，可整理得出观点2】我感受到的，是革命先烈们对党绝对忠诚的赤子之心。【具体论述层次可考虑：（1）范举烈士忠诚的例子；（2）对党忠诚的品质，对中国共产党人的意义；（3）对党忠诚，对政法工作者的意义等。】
+观点3：【资料4段6主要介绍了“革命先烈的舍生取义”的相关内容，可整理得出观点3】我感受到的，是革命先烈们舍生取义的崇高气节。【具体论述层次可考虑：（1）刘伯坚的案例及其体现的精神品质；（2）当代共产党人应该具备的气节等。】
+观点4：【资料4段6主要介绍了“革命先烈的报国为民”的相关内容，可整理得出观点4】我感受到的，是革命先烈们报国为民的炙热情怀。【具体论述层次可考虑：（1）左权将军的案例及其精神品质；（2）结合自身，谈如何做好为民服务这份事业等。】
+结尾：回扣主题，适当总结、升华。</div></div><div class="ref" data-m2r='{"113":0,"116":0,"122":1,"121":1,"112":1,"114":1,"115":1,"117":1,"118":3,"119":4,"120":4}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="113,116">烈士英灵不朽 红色基因永存</div><div class="item" data-mk="113,122,121,112,114,116,115,117">在第九个烈士纪念日，作为一名政法人，我很荣幸地参加了政法系统开展的“诵读红色家书，传承红色基因”主题活动。活动中，我和同仁们一起重读烈士家书，与烈士们进行了一场跨越时空的对话，感受那些振奋人心的红色记忆。我不但体会到了革命道路的曲折和胜利的来之不易，更深刻感受到了革命先烈崇高的精神境界和理想追求。</div><div class="item" data-mk="117,115,122">我感受到的，是革命先烈们对理想信念的执着追求。坚定的理想信念是共产党人强大的精神力量，习近平总书记也指出：“坚定理想信念是终身课题，需要常修常炼，要信一辈子、守一辈子。”烈士夏明翰在家书中写道：“我一生无遗憾，认定了共产主义这个为人类翻身解放造幸福的真理，就刀山敢上，火海敢闯，甘愿抛头颅，洒热血！”从中，我看到了一种不可动摇、超越生死的信念。在今后的工作中，我定会不忘初心使命，坚定理想信念！</div><div class="item" data-mk="118,117,115,122">我感受到的，是革命先烈们对党绝对忠诚的赤子之心。“生死关头见忠诚”，烈士们用自己的无悔选择诠释了这一点。对党忠诚是共产党人首要政治品质，这种品质在如今国内社会各领域急剧转型，国际社会风云变幻的形势下尤为重要。冲击多、诱惑多，唯有铸就绝对忠诚的政治品格，才能肩负起新时代政法战线维护国家政治安全、确保社会大局稳定等诸多任务，打开政法事业发展的新天地。</div><div class="item" data-mk="119,117,115,122,120">我感受到的，是革命先烈们舍生取义的崇高气节。“弟准备牺牲，生是为中国，死是为中国，一切听之而已。”从刘伯坚在狱中留下的这封书信里，我们感受到了一名共产党人舍小家为大家、舍小义取大义的情怀。凡有成就者，必有气节。高尚的气节也已经成为当下每个党员干部应有的品质。我们在工作中，虽然不会随时面对生死考验，但“立党为公，执政为民”“铁肩担道义”“清正廉洁”等这些党员干部的气节，还需要随时锤炼，久久为功。</div><div class="item" data-mk="119,117,115,122">我感受到的，是革命先烈们报国为民的炙热情怀。左权将军在给母亲的信中表示“决心与华北人民共艰苦，共生死。”这种与人民、与国家同生死共患难的家国情怀，值得我们传承。我们须牢牢树立立党为公，执政为民的理念，常怀爱民之情、葆有实干之心，将自己短暂的一生奉献给无限的为人民服务中去。</div><div class="item" data-mk="113,116,117">忆往昔峥嵘岁月稠，看今朝重任在肩头。回顾历史，要始终牢记先烈们的奋斗历程和光荣传统；面向未来，要坚定理想信念，传承红色基因，让先辈们的精神遗产燃起熊熊大火，淬炼出一支新时代的政法铁军！</div><div class="item nomk">文章分析：</div><div class="item" data-mk="113,116">烈士英灵不朽 红色基因永存</div><div class="item nomk">【标题的优点：标题中含有主题词，使文章主题突出、清晰】</div><div class="item" data-mk="113,122,121,112,114,116,115,117">（1）在第九个烈士纪念日，作为一名政法人，我很荣幸地参加了政法系统开展的“诵读红色家书，传承红色基因”主题活动。（2）活动中，我和同仁们一起重读烈士家书，与烈士们进行了一场跨越时空的对话，感受那些振奋人心的红色记忆。（3）我不但体会到了革命道路的曲折和胜利的来之不易，更深刻感受到了革命先烈崇高的精神境界和理想追求。</div><div class="item" data-mk="113,116">【开头的优点：★内容方面。范文的开头是紧扣题目给定“诵读红色家书，传承红色基因”这一主题展开的。（1）首先交代了活动的背景。（2）接着简要概述了活动的情况。（3）最后高度总结分析了心得体会。★文字表达方面。使用了“不但”“更”等连接词，使论述逻辑更加严谨。】</div><div class="item" data-mk="117,115,122">我感受到的，是革命先烈们对理想信念的执着追求。（1）坚定的理想信念是共产党人强大的精神力量，习近平总书记也指出：“坚定理想信念是终身课题，需要常修常炼，要信一辈子、守一辈子。”（2）烈士夏明翰在家书中写道：“我一生无遗憾，认定了共产主义这个为人类翻身解放造幸福的真理，就刀山敢上，火海敢闯，甘愿抛头颅，洒热血！”从中，我看到了一种不可动摇、超越生死的信念。（3）在今后的工作中，我定会不忘初心使命，坚定理想信念！</div><div class="item" data-mk="117,113,116,115,122">【论述段1的优点：★观点句：范文的观点句是紧扣“诵读红色家书，传承红色基因”这一主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出主要论述“理想信念”。★论述内容：（1）先介绍了理想信念的重要意义；（2）接着介绍了烈士夏明翰的家书及其体现的精神品质；（3）最后结合自身谈如何践行理想信念。注意：以上几个方面的内容都是紧扣“我感受到的，是革命先烈们对理想信念的执着追求”这个观点句进行分析论述的，论述的针对性强，内容层次丰富。在论述方法上主要采用了讲道理、举例子相结合的方式。】</div><div class="item" data-mk="118,117,115,122">我感受到的，是革命先烈们对党绝对忠诚的赤子之心。（1）“生死关头见忠诚”，烈士们用自己的无悔选择诠释了这一点。（2）对党忠诚是共产党人首要政治品质，这种品质在如今国内社会各领域急剧转型，国际社会风云变幻的形势下尤为重要。（3）冲击多、诱惑多，唯有铸就绝对忠诚的政治品格，才能肩负起新时代政法战线维护国家政治安全、确保社会大局稳定等诸多任务，打开政法事业发展的新天地。</div><div class="item" data-mk="113,118,116,117,115,122">【论述段2的优点：★观点句：范文的观点句是紧扣“诵读红色家书，传承红色基因”这一主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出主要论述“对党忠诚”。★论述内容：（1）先范举了烈士忠诚的例子；（2）接着介绍了对党忠诚的品质，对中国共产党人的意义；（3）最后介绍了对党忠诚，对政法工作者的意义。注意：以上几个方面的内容都是紧扣“我感受到的，是革命先烈们对党绝对忠诚的赤子之心”这个观点句进行分析论述的，论述的针对性强，内容层次丰富。在论述方法上主要采用了讲道理、举例子相结合的方式。】</div><div class="item" data-mk="119,117,115,122">我感受到的，是革命先烈们舍生取义的崇高气节。（1）“弟准备牺牲，生是为中国，死是为中国，一切听之而已。”从刘伯坚在狱中留下的这封书信里，我们感受到了一名共产党人舍小家为大家、舍小义取大义的情怀。（2）凡有成就者，必有气节。高尚的气节也已经成为当下每个党员干部应有的品质。我们在工作中，虽然不会随时面对生死考验，但“立党为公，执政为民”“铁肩担道义”“清正廉洁”等这些党员干部的气节，还需要随时锤炼，久久为功。</div><div class="item" data-mk="113,119,116,117,115,122">【论述段3的优点：★观点句：范文的观点句是紧扣“诵读红色家书，传承红色基因”这一主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出主要论述“舍生取义”。★论述内容：（1）一方面，介绍了刘伯坚的案例及其体现的精神品质；（2）另一方面，介绍了当代共产党人应该具备的气节。注意：以上两个方面的内容都是紧扣“我感受到的，是革命先烈们舍生取义的崇高气节”这个观点句进行分析论述的，论述的针对性强，内容层次丰富。在论述方法上主要采用了讲道理、举例子相结合的方式。】</div><div class="item" data-mk="119,117,115,122">我感受到的，是革命先烈们报国为民的炙热情怀。（1）左权将军在给母亲的信中表示“决心与华北人民共艰苦，共生死。”这种与人民、与国家同生死共患难的家国情怀，值得我们传承。（2）我们须牢牢树立立党为公，执政为民的理念，常怀爱民之情、葆有实干之心，将自己短暂的一生奉献给无限的为人民服务中去。</div><div class="item" data-mk="113,119,116,117,115,122">【论述段4的优点：★观点句：范文的观点句是紧扣“诵读红色家书，传承红色基因”这一主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出主要论述“报国为民”。★论述内容：（1）一方面，介绍了左权将军的案例及其精神品质；（2）另一方面，结合自身，谈如何做好为民服务这份事业。注意：以上两个方面的内容都是紧扣“我感受到的，是革命先烈们报国为民的炙热情怀”这个观点句进行分析论述的，论述的针对性强，内容层次丰富。在论述方法上主要采用了讲道理、举例子相结合的方式。】</div><div class="item" data-mk="117,118,119,115,122">【论述段之间的关系：★内在逻辑上：范文先论述“革命先烈们对理想信念的执着追求”，接着论述“革命先烈们对党绝对忠诚的赤子之心”，再论述“革命先烈们舍生取义的崇高气节”，最后论述“革命先烈们报国为民的炙热情怀”，并列逻辑颇为清晰。】</div><div class="item" data-mk="113,116,117">忆往昔峥嵘岁月稠，看今朝重任在肩头。回顾历史，要始终牢记先烈们的奋斗历程和光荣传统；面向未来，要坚定理想信念，传承红色基因，让先辈们的精神遗产燃起熊熊大火，淬炼出一支新时代的政法铁军！</div><div class="item" data-mk="113,116">【结尾的优点：范文的结尾回扣了“诵读红色家书，传承红色基因”这个主题，并且进行了展望，发出了号召。】</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">本题的主题为“诵读红色家书，传承红色基因”，可进行拓展的内容有：
+一、与主题相关的名言金句
+1.中华民族是英雄辈出的民族，新时代是成就英雄的时代。全党全社会要崇尚英雄、学习英雄、关爱英雄，大力弘扬英雄精神，汇聚实现中华民族伟大复兴的磅礴力量。——习近平
+2.你们是全中华民族的模范人物，是推动各方面人民事业胜利前进的骨干，是人民政府的可靠支柱和人民政府联系广大群众的桥梁。——毛泽东
+3.在这样艰巨的任务之下，我们不但不能丝毫放松自己的职责，恰恰相反，因为更加重了我们的任务，特别是对于我们有了觉悟的英雄和模范来说，就更应自动地担负起这个光荣和重大的任务。——朱德
+4.英雄烈士事迹和精神是中华民族的共同历史记忆和社会主义核心价值观的重要体现。——《中华人民共和国英雄烈士保护法》
+5.举世不知何足怪，力行无顾是豪雄。——曾巩《圣贤》
+二、与主题相关的典型事例
+1.黄文秀：将青春奉献给脱贫攻坚一线
+基层干部黄文秀，2016年毕业于北京师范大学，她做出一个与众不同的选择，放弃大城市的工作机会，自愿回到百色革命老区工作，主动请缨到贫困村担任驻村第一书记，支援家乡建设。黄文秀总是乐观开朗、积极向上，从进村开始，她时刻牢记党的嘱托，自觉践行党的宗旨，把群众冷暖放在第一位。她积极促进村民发展电商产业，推动道路硬化和蓄水池修建等工程项目，帮助大多数贫困户顺利脱贫。2019年6月17日凌晨，黄文秀遭遇突发山洪不幸遇难，年仅30岁，被追授“全国脱贫攻坚模范”称号。
+2.张富清：英雄无言
+战斗英雄张富清，24岁参军，在解放战争的枪林弹雨中九死一生，曾立特等功一次，立一等功三次，立二等功一次，两次获“战斗英雄”称号。张富清1955年主动转业到湖北最艰苦的山区工作，为贫困山区奉献一生，他将赫赫战功深埋心底，从未向他人提起过自己的功绩，甚至连家人都不知情。在贫困县的这些年，无论在哪个岗位上都担当作为，竭尽所能，遇到工作中的困难，他不躲不绕，克服解决，在基层工作岗位上向党和人民交出满意答卷。直到2018年底，在退役军人信息采集中，张富清的事迹才被人们发现，张富清同志深藏功名60余年，始终践行共产主义崇高理想，是广大党员干部的学习榜样。</div></div></div></div>
+</div>
+<div id="nav">
+  <button type="button" id="prev">← 上一题</button>
+  <button type="button" id="next">下一题 →</button>
+</div>
+<script>
+(function(){
+  var fatal = function(m){
+    var d = document.getElementById('fatal');
+    if(d){ d.hidden = false; d.textContent = '页面脚本出错：' + m; }
+  };
+  window.onerror = function(m){ fatal(m); };
+
+  // ---------- 题号切换 ----------
+  var cur = 0;
+  var qbtns = Array.prototype.slice.call(document.querySelectorAll('#qs button'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.qwrap'));
+
+  function show(i){
+    if(i < 0 || i >= cards.length) return;
+    cur = i;
+    cards.forEach(function(c, k){ c.hidden = (k !== i); });
+    qbtns.forEach(function(b, k){ b.classList.toggle('on', k === i); });
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+    if(prev) prev.disabled = (i === 0);
+    if(next) next.disabled = (i === cards.length - 1);
+    try{ localStorage.setItem('sl_reader_q', String(i)); }catch(e){}
+    window.scrollTo(0, 0);
+    var L = document.getElementById('left'), R = document.getElementById('right');
+    if(L) L.scrollTop = 0;
+    if(R) R.scrollTop = 0;
+  }
+  qbtns.forEach(function(b, k){ b.onclick = function(){ show(k); }; });
+  var p = document.getElementById('prev'), n = document.getElementById('next');
+  if(p) p.onclick = function(){ show(cur - 1); };
+  if(n) n.onclick = function(){ show(cur + 1); };
+
+  // ---------- 划线 ↔ 要点 双向联动 ----------
+  function flash(el){
+    if(!el) return;
+    el.classList.add('on');
+    setTimeout(function(){ el.classList.remove('on'); }, 1600);
+  }
+  function scrollToEl(el, box){
+    if(!el || !box) return;
+    var top = el.offsetTop - box.offsetTop - 90;
+    if(box === document.body || box === document.documentElement){
+      window.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }else{
+      box.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }
+  }
+
+  var L = document.getElementById('left'), R = document.getElementById('right');
+  var wide = function(){ return window.matchMedia('(min-width:700px)').matches; };
+
+  // 点材料划线 → 高亮所有以它为来源的答案要点
+  document.addEventListener('click', function(e){
+    var mk = e.target.closest ? e.target.closest('mark.hl') : null;
+    if(mk){
+      var id = mk.getAttribute('data-m');
+      var box = mk.closest('.qwrap') || document;
+      // 优先用当前可见题
+      var vis = document.querySelector('.qwrap:not([hidden])');
+      var refBox = vis ? vis.querySelector('.ref') : null;
+      var first = null;
+      var found = 0;
+      if(refBox){
+        refBox.querySelectorAll('.item[data-mk]').forEach(function(el){
+          var ids = (el.getAttribute('data-mk') || '').split(',');
+          if(ids.indexOf(id) >= 0){ flash(el); if(!first) first = el; found++; }
+        });
+        // 兜底：用反向索引 mark2ref
+        if(found === 0){
+          var m2r = {};
+          try{ m2r = JSON.parse(refBox.getAttribute('data-m2r') || '{}'); }catch(_){}
+          var ri = m2r[id];
+          if(ri !== undefined && ri !== null){
+            var items = refBox.querySelectorAll('.item');
+            if(items[ri]){ flash(items[ri]); first = items[ri]; found = 1; }
+          }
+        }
+      }
+      if(first) scrollToEl(first, wide() ? R : document.documentElement);
+      return;
+    }
+    // 点答案要点 → 材料里所有来源划线一起闪
+    var it = e.target.closest ? e.target.closest('.ref .item') : null;
+    if(it){
+      var list = (it.getAttribute('data-mk') || '').split(',').filter(Boolean);
+      if(!list.length) return;
+      var firstMk = null;
+      list.forEach(function(mid){
+        var t2 = document.querySelector('mark.hl[data-m="' + mid + '"]');
+        if(t2){ flash(t2); if(!firstMk) firstMk = t2; }
+      });
+      if(firstMk) scrollToEl(firstMk, wide() ? L : document.documentElement);
+    }
+  });
+
+  // ---------- 记忆上次题号 ----------
+  try{
+    var s = localStorage.getItem('sl_reader_q');
+    if(s !== null) show(parseInt(s, 10) || 0); else show(0);
+  }catch(e){ show(0); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f3">
+<title>2023 上半年 · 多省联考</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:#f5f5f3;color:#1f2937;
+  font:16px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+a{color:#2563eb}
+
+/* ---------- 吸顶条 ---------- */
+#bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;
+  padding:8px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#bar .nm{font-weight:700;font-size:14px;flex:1;min-width:110px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#bar a.back{font-size:13px;text-decoration:none;color:#6b7280;flex:0 0 auto}
+#qs{display:flex;gap:5px;overflow-x:auto;flex:0 0 auto}
+#qs button{border:1px solid #d1d5db;background:#fff;border-radius:8px;
+  padding:5px 11px;font-size:13px;color:#374151;cursor:pointer;white-space:nowrap}
+#qs button.on{background:#2563eb;border-color:#2563eb;color:#fff;font-weight:700}
+
+/* ---------- 主体 ---------- */
+#wrap{display:block;max-width:1500px;margin:0 auto}
+#left,#right{padding:14px 16px 90px}
+
+/* ---------- 题目卡 ---------- */
+.qcard{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.qcard .meta{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 9px}
+.tag{font-size:12px;padding:2px 9px;border-radius:99px;font-weight:700}
+.tag.sc{background:#fef3c7;color:#92400e}
+.tag.wd{background:#dbeafe;color:#1e40af}
+.tag.kp{background:#dcfce7;color:#166534}
+.qcard .stem{font-size:16px;font-weight:600;line-height:1.8;margin:0 0 8px}
+.qcard .req{font-size:14px;color:#6b7280;margin:0}
+
+/* ---------- 材料 ---------- */
+h3.sec{font-size:13px;color:#6b7280;font-weight:700;letter-spacing:.5px;
+  margin:18px 0 8px;padding-left:8px;border-left:3px solid #2563eb}
+.matbox{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.matbox h4{font-size:13px;color:#2563eb;margin:0 0 10px;font-weight:700}
+p.mt{margin:0 0 11px;text-align:justify;font-size:16.5px;line-height:1.95;
+  text-indent:2em}
+mark.hl{background:#fff3bf;border-bottom:2px solid #f0b429;
+  padding:1px 1px;border-radius:2px;cursor:pointer;transition:background .25s}
+mark.hl.on{background:#ffd43b;box-shadow:0 0 0 2px #fab005}
+mark.hl:after{content:attr(data-m);font-size:9px;color:#b45309;
+  vertical-align:super;margin-left:1px;font-weight:700}
+
+/* ---------- 详解 ---------- */
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.step h4{margin:0 0 10px;font-size:14.5px;color:#1f2937;font-weight:700;
+  display:flex;align-items:center;gap:7px}
+.step h4 .n{display:inline-flex;width:22px;height:22px;border-radius:50%;
+  background:#2563eb;color:#fff;font-size:12px;align-items:center;
+  justify-content:center;flex:0 0 auto}
+.step .body{font-size:15.5px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+.step.s1{border-left:4px solid #2563eb}
+.step.s2{border-left:4px solid #10b981}
+.step.s3{border-left:4px solid #f59e0b}
+.step.s4{border-left:4px solid #ef4444}
+.step.s5{border-left:4px solid #8b5cf6}
+
+/* 逐段讲解 */
+.blk{border:1px solid #e5e7eb;border-radius:10px;margin:0 0 10px;
+  overflow:hidden}
+.blk .h{background:#f9fafb;padding:8px 12px;font-size:13px;font-weight:700;
+  color:#374151;border-bottom:1px solid #e5e7eb}
+.blk .c{padding:10px 12px;font-size:15px;line-height:1.9;color:#4b5563}
+.blk .c.topic{padding-top:0;font-size:14.5px;color:#6b7280;
+  border-top:1px dashed #e5e7eb;margin-top:0}
+.blk .bind{background:#f0fdf4;border-top:1px solid #bbf7d0;
+  padding:9px 12px;font-size:14.5px;color:#166534;font-weight:600}
+
+/* 审题要点列表 */
+ul.key{margin:0;padding-left:20px}
+ul.key li{margin:0 0 7px;font-size:15px;line-height:1.9;color:#374151}
+p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
+
+.ref{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ref .item{padding:9px 0;border-bottom:1px dashed #e5e7eb;font-size:15.5px;
+  line-height:1.9;cursor:pointer}
+.ref .item:last-child{border:0}
+.ref .item.on{background:#fff3bf;border-radius:6px;padding-left:8px;
+  margin-left:-8px}
+
+.warn{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;
+  padding:11px 14px;font-size:14px;color:#991b1b;margin:0 0 12px}
+
+/* ---------- 底部翻页 ---------- */
+#nav{position:fixed;bottom:0;left:0;right:0;z-index:40;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(8px);
+  border-top:1px solid #e5e7eb;padding:8px 12px;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom));
+  display:flex;gap:8px}
+#nav button{flex:1;border:1px solid #d1d5db;background:#fff;border-radius:10px;
+  padding:10px;font-size:14px;font-weight:600;color:#374151;cursor:pointer}
+#nav button:disabled{opacity:.4}
+
+/* ---------- 平板 / 桌面：左右分栏 ---------- */
+@media(min-width:700px){
+  #wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;
+    height:calc(100vh - 52px)}
+  #left,#right{overflow-y:auto;height:100%;padding:18px 20px 90px}
+  #left{border-right:1px solid #e5e7eb}
+  body{font-size:16.5px}
+  p.mt{font-size:17px}
+  #nav{max-width:1500px;margin:0 auto}
+}
+@media(min-width:1200px){
+  #wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+}
+/* ---------- 打印 ---------- */
+@media print{
+  #bar,#nav,#tocBtn{display:none}
+  #wrap{display:block;height:auto}
+  #left,#right{overflow:visible;height:auto}
+  mark.hl{background:#fff3bf}
+}
+/* ---------- 白屏兜底 ---------- */
+#fatal{position:fixed;top:0;left:0;right:0;z-index:999;background:#dc2626;
+  color:#fff;padding:10px 14px;font-size:13px}
+
+/* ==================== AI 批注 ==================== */
+.aihint{background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0284c7;
+  border-radius:10px;padding:11px 14px;margin:16px 0 12px;
+  font-size:13.5px;line-height:1.85;color:#075985}
+.aihint b{color:#0369a1}
+.ai{background:#fbfaff;border:1px solid #e0dbff;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ai.extra{background:#fffbf5;border-color:#ffe0b2}
+.ai h4{margin:0 0 11px;font-size:14.5px;color:#4c1d95;font-weight:700;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ai.extra h4{color:#9a3412}
+.ai h4 .an{display:inline-flex;height:19px;padding:0 7px;border-radius:5px;
+  background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;
+  font-size:10.5px;font-weight:800;align-items:center;letter-spacing:.5px}
+.ai.extra h4 .an{background:linear-gradient(135deg,#ea580c,#f59e0b)}
+.ai h4 .sub{font-size:11.5px;color:#9ca3af;font-weight:400;letter-spacing:0}
+
+/* 通用正文 */
+.ai .prose{font-size:15px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+
+/* 表格通用 */
+.ai table{width:100%;border-collapse:collapse;font-size:13.5px;
+  background:#fff;border-radius:8px;overflow:hidden;
+  table-layout:fixed}
+.ai table th{background:#f3f0ff;color:#5b21b6;font-weight:700;
+  text-align:left;padding:8px 10px;border-bottom:1px solid #ddd6fe;
+  font-size:12.5px;white-space:normal;word-break:break-word}
+.ai table td{padding:9px 10px;border-bottom:1px solid #f1f0f7;
+  vertical-align:top;line-height:1.8;color:#4b5563;
+  word-break:break-word;white-space:normal;overflow-wrap:anywhere}
+.ai table tr:last-child td{border-bottom:0}
+.tstem td.w{font-weight:700;color:#1f2937;font-size:14px;word-break:break-all}
+.tstem td.act{color:#065f46;background:#f0fdf4}
+.tstem .ty{display:inline-block;padding:1px 7px;border-radius:99px;
+  font-size:11px;font-weight:700;background:#ede9fe;color:#5b21b6;
+  word-break:break-word}
+.ttrace td.pt{font-weight:600;color:#1f2937}
+.ttrace td.src{white-space:normal}
+.ttrace code{display:inline-block;background:#f3f4f6;border-radius:4px;
+  padding:1px 5px;font-size:11.5px;color:#6d28d9;margin:0 3px 2px 0;
+  font-family:inherit}
+
+/* 列宽（用 colgroup 不好控制，直接给 th 定宽） */
+.tstem th:nth-child(1){width:17%}
+.tstem th:nth-child(2){width:16%}
+.tstem th:nth-child(3){width:36%}
+.tstem th:nth-child(4){width:31%}
+.ttrace th:nth-child(1){width:27%}
+.ttrace th:nth-child(2){width:18%}
+.ttrace th:nth-child(3){width:55%}
+
+/* 材料结构图 */
+.mmwrap{display:flex;flex-direction:column;gap:8px}
+.mm{border:1px solid #e5e7eb;border-radius:9px;overflow:hidden;background:#fff}
+.mm.pt{border-left:4px solid #10b981}
+.mm.no{border-left:4px solid #d1d5db;opacity:.85}
+.mmh{display:flex;align-items:center;gap:8px;padding:7px 11px;
+  background:#fafafa;border-bottom:1px solid #f1f0f7;flex-wrap:wrap}
+.mmh b{font-size:13px;color:#1f2937}
+.mmb{font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px}
+.mm.pt .mmb{background:#d1fae5;color:#065f46}
+.mm.no .mmb{background:#f3f4f6;color:#6b7280}
+.mmr{padding:7px 11px 2px;font-size:13px;color:#374151;font-weight:600}
+.mmw{padding:0 11px 9px;font-size:13.5px;color:#6b7280;line-height:1.8}
+
+/* 找点六步 */
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{position:relative;padding:0 0 12px 30px;
+  border-left:2px dashed #ddd6fe;margin-left:9px}
+.steps li:last-child{border-left:0;padding-bottom:0}
+.steps li:before{counter-increment:s;content:counter(s);
+  position:absolute;left:-10px;top:0;width:19px;height:19px;
+  border-radius:50%;background:#7c3aed;color:#fff;font-size:11px;
+  font-weight:700;display:flex;align-items:center;justify-content:center}
+.sh{font-size:14px;font-weight:700;color:#5b21b6;margin:0 0 5px}
+.st,.ss{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ss{color:#6b7280}
+.lb{display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;
+  border-radius:4px;background:#ede9fe;color:#6d28d9;margin-right:6px}
+.ss .lb{background:#f3f4f6;color:#6b7280}
+
+/* 陷阱 */
+.traps{display:flex;flex-direction:column;gap:9px}
+.trap{background:#fff;border:1px solid #fecaca;border-radius:9px;
+  padding:10px 12px}
+.th{font-size:13.5px;font-weight:700;color:#991b1b;margin:0 0 6px;
+  line-height:1.7}
+.tw2,.ta{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ta{color:#065f46}
+.tw2 .lb{background:#fee2e2;color:#991b1b}
+.ta .lb{background:#d1fae5;color:#065f46}
+
+@media(max-width:520px){
+  .ai{padding:12px 12px}
+  .ai table{font-size:12.5px}
+  .ai table th,.ai table td{padding:7px 8px}
+  .ttrace td.pt{width:auto}
+  .ttrace td.src{width:auto}
+}
+</style>
+</head>
+<body>
+<div id="fatal" hidden></div>
+<div id="bar">
+  <a class="back" href="./index.html">←</a>
+  <span class="nm">2023 上半年 · 多省联考</span>
+  <div id="qs"><button type="button">第1题</button><button type="button">第2题</button><button type="button">第3题</button><button type="button">第4题</button></div>
+</div>
+<div id="wrap">
+  <div id="left"><h3 class="sec">材料原文 · 划线为粉笔标注的答案来源句</h3><div class="matbox"><h4>材料 1</h4><p class="mt">“了解情况靠走、登记信息靠手、交流沟通靠口”，这是Z省P市欣阳社区党委郭书记20多年来的工作常态，但现在，面对新问题，这三招已经不够用了，需要新解法。</p><p class="mt">欣阳社区是典型的融合型大社区，有近2万常住人口，其中八成是外来人口，另外还有1000多家商铺，近400家企业。“<mark class="hl" data-m="1" data-seq="1" data-q="1">现在的社区</mark>，<mark class="hl" data-m="2" data-seq="2" data-q="1">规模更像是一座小型城市</mark>。”郭书记说，<mark class="hl" data-m="3" data-seq="3" data-q="1">人口密度大、单元构成复杂、利益需求多样、管理主体多元</mark>，而<mark class="hl" data-m="4" data-seq="4" data-q="1">社区干部满编也就18人</mark>，<mark class="hl" data-m="5" data-seq="5" data-q="1">仅靠传统的管理服务方式</mark>，<mark class="hl" data-m="6" data-seq="6" data-q="1">已经无法应对</mark>。</p><p class="mt">一天上午，社区网格员小吕在巡查中发现社区河道有漂浮物，<mark class="hl" data-m="7" data-seq="7" data-q="1">他通过“掌上社区”APP拍摄上报</mark>，<mark class="hl" data-m="8" data-seq="8" data-q="1">基层治理综合信息平台根据定位</mark>，<mark class="hl" data-m="9" data-seq="9" data-q="1">自动将事件派发</mark>，保洁人员当天下午就完成了清理。“这要在以往，至少得两三天，<mark class="hl" data-m="10" data-seq="10" data-q="1">幸好有数字化赋能</mark>。”小吕说。</p><p class="mt">B市清风社区所辖的青林湾小区有100多幢高层住宅。去年疫情期间，<mark class="hl" data-m="11" data-seq="11" data-q="1">清风社区在短时间内就精准高效完成了</mark>1.6万常住人口的人员排查、上门服务<mark class="hl" data-m="12" data-seq="12" data-q="1">等工作</mark>，靠的是“两张网”：一方面，<mark class="hl" data-m="13" data-seq="13" data-q="1">通过一体化智能化公共数据平台</mark>，区、乡镇（街道）的排查数据及时流转下发到社区、网格，<mark class="hl" data-m="14" data-seq="14" data-q="1">社区网格员可及时精准对接相关人员</mark>；另一方面，清风社区这两年<mark class="hl" data-m="15" data-seq="15" data-q="1">加强数字化建设</mark>，<mark class="hl" data-m="16" data-seq="16" data-q="1">通过调查收集数据建立了小应用——“活地图</mark>”，<mark class="hl" data-m="17" data-seq="17" data-q="1">标记了辖区内345名党员、志愿者的居住位置和联系方式</mark>，可随时<mark class="hl" data-m="18" data-seq="18" data-q="1">发动他们参与社区的相关工作</mark>。</p><p class="mt">针对<mark class="hl" data-m="19" data-seq="19" data-q="1">此前网格划分过大、层级过多、力量不足等问题</mark>，去年省里对网格<mark class="hl" data-m="20" data-seq="20" data-q="1">进行了科学划分、合理优化</mark>。“现在不仅<mark class="hl" data-m="21" data-seq="21" data-q="1">增加了网格的密度</mark>，还<mark class="hl" data-m="22" data-seq="22" data-q="1">在网格中按楼道、楼栋设置了微网格</mark>，<mark class="hl" data-m="23" data-seq="23" data-q="1">构建了‘村（社区）—网格-微网格’治理体系</mark>。”省政法委张副书记说，“遍布全省的‘两张网’，<mark class="hl" data-m="24" data-seq="24" data-q="1">正在提升社区治理的精度</mark>。”</p><p class="mt">在融合型大社区，通过数字化改革让居民享受更有温度的服务，是大家进一步的期待。在Y市，一个<mark class="hl" data-m="25" data-seq="25" data-q="1">集纳了线下6000多个网格的线上空间——“微家园</mark>”，<mark class="hl" data-m="26" data-seq="26" data-q="1">成为广大居民享受优质公共服务的新平台</mark>。Y市居民只要扫二维码注册、填写所属的社区网格，就能加入这个线上空间，<mark class="hl" data-m="27" data-seq="27" data-q="1">大家可以在这里发布需求</mark>，<mark class="hl" data-m="28" data-seq="28" data-q="1">与社区干部、邻居们交流</mark>。目前，“微家园”的用户数已达253万，日均活跃用户达40万，已成为一片火热的线上空间。</p><p class="mt">东湖社区的王女士前几天看到“微家园”贴出了社区举办书法培训班的通知，很快就在线上报了名。培训班由社区里有书法特长的老师义务教学，居民不用交费。“期间，<mark class="hl" data-m="29" data-seq="29" data-q="1">我们认识了很多邻居</mark>，也<mark class="hl" data-m="30" data-seq="30" data-q="1">收获了温暖的友情</mark>。”王女士说，“我们这儿是新建小区，住户来自全国各地，<mark class="hl" data-m="31" data-seq="31" data-q="1">以前相互间基本都是‘陌生人</mark>’。”</p><p class="mt">“这也是众多融合型大社区的共性问题。”Y市政法委陈副书记说，“‘<mark class="hl" data-m="32" data-seq="32" data-q="1">微家园’创造了线上交流的社区新空间</mark>，<mark class="hl" data-m="33" data-seq="33" data-q="1">通过数字化重建了熟人社会</mark>，<mark class="hl" data-m="34" data-seq="34" data-q="1">邻里关系越来越紧密</mark>。”如今，“微家园”上有了邻里互助、爱心义卖、定向捐赠等项目，<mark class="hl" data-m="35" data-seq="35" data-q="1">实现邻里需求与公共服务精准配对</mark>。“微家园”正在被复制、推广，更多实用管用的服务功能被送到“掌上社区”，满足更多个性化的需求，让大家享受到公共服务的温度。</p><p class="mt">“微家园”设有投诉功能，问题投诉可以线上发布，但必须线下解决。在融合型大社区，<mark class="hl" data-m="36" data-seq="36" data-q="1">群众投诉的问题更为复杂和棘手</mark>，仅靠社区或者街道的力量远远不够。Y市风华社区的水产市场一直被内涝问题困扰，不仅影响商户的生意，也对居民的生活造成不便。<mark class="hl" data-m="37" data-seq="37" data-q="1">许多人在“微家园”上投诉</mark>，<mark class="hl" data-m="38" data-seq="38" data-q="1">社区由于缺乏资源统筹调度能力</mark>，<mark class="hl" data-m="39" data-seq="39" data-q="1">问题不得不搁置</mark>。</p><p class="mt">2022年7月，风华社区严书记带着水务集团、镇政府相关人员，到水产市场现场协调，决定由水务集团负责新装抽水系统，镇、社区在资金、施工等环节协同配合，内涝问题很快得到解决。一个社区书记，为什么能“叫得动”水务集团和镇里的干部？原来，为了推动基层治理，特别是解决一些陈年顽疾，从2022年7月开始，<mark class="hl" data-m="40" data-seq="40" data-q="1">全市乡镇以及基层站所干部全部下沉到村（社区</mark>），<mark class="hl" data-m="41" data-seq="41" data-q="1">多跨协同形成合力</mark>，<mark class="hl" data-m="42" data-seq="42" data-q="1">帮助解难题、谋发展</mark>，<mark class="hl" data-m="43" data-seq="43" data-q="1">多元化共治力度前所未有</mark>。</p><p class="mt">“微家园”<mark class="hl" data-m="44" data-seq="44" data-q="1">还开通了政府部门、村（社区）与群众的三方对话机制</mark>。“用大数据分析和手机应用为协商议事插上了科技的翅膀，<mark class="hl" data-m="45" data-seq="45" data-q="1">让民有所呼更便捷、基层议事更智慧、为民解难更精准</mark>。”陈副书记认为，“但<mark class="hl" data-m="46" data-seq="46" data-q="1">技术手段再先进，走街访巷‘铁脚板’的老传统也不能丢</mark>，问题的‘最后一米’还是要<mark class="hl" data-m="47" data-seq="47" data-q="1">脚踏实地去解决</mark>。与此同时，也绝不能让技术浮在现实之上，要<mark class="hl" data-m="48" data-seq="48" data-q="1">防止因多头报送、重复收集数据而增加基层压力</mark>。”</p></div><div class="matbox"><h4>材料 2</h4><p class="mt">“碰碰手表，加个好友！”这句话成了当下不少儿童社交时打招呼的见面语。儿童智能手表市场蓬勃发展的背后，也暴露出不少问题。为守护儿童“腕上安全”，N市市场监管局近日召开了一次专题座谈会，听取各方意见建议。以下是部分参会人员的发言摘录：</p><p class="mt">学生家长龚某：前几天，小孩突然要我在她手表上绑定我的手机钱包。她说班上很多小朋友都这么做了，到时想买什么就买什么。有些<mark class="hl" data-m="49" data-seq="1" data-q="2">智能手表一旦关联了家长的手机</mark>，<mark class="hl" data-m="50" data-seq="2" data-q="2">就开通了免密支付</mark>，<mark class="hl" data-m="51" data-seq="3" data-q="2">在家长不知情的情况下</mark>，<mark class="hl" data-m="52" data-seq="4" data-q="2">孩子就可能会任性消费</mark>，比如打赏、购买游戏皮肤等，这<mark class="hl" data-m="53" data-seq="5" data-q="2">不但容易导致小孩养成不健康的消费习惯</mark>，还可能<mark class="hl" data-m="54" data-seq="6" data-q="2">危及家庭的资金安全</mark>。</p><p class="mt">某学校教师曾某：客观而言，智能手表有助于学生、家长和学校之间的沟通联系，但<mark class="hl" data-m="55" data-seq="7" data-q="2">学生之间语音聊天</mark>、<mark class="hl" data-m="56" data-seq="8" data-q="2">打电话越来越频繁</mark>，有的<mark class="hl" data-m="57" data-seq="9" data-q="2">还在手表里下载了游戏和短视频APP</mark>，<mark class="hl" data-m="58" data-seq="10" data-q="2">课上偷着玩</mark>，<mark class="hl" data-m="59" data-seq="11" data-q="2">课下抢着玩</mark>，不但<mark class="hl" data-m="60" data-seq="12" data-q="2">影响了正常教学秩序</mark>，也<mark class="hl" data-m="61" data-seq="13" data-q="2">不利于学生学习</mark>。</p><p class="mt">学生家长李某：给孩子买智能手表，主要是为了方便跟孩子联系，确保孩子安全。前阵子，孩子突然吵着要拿我的手机扫码听音乐，我才知道他的<mark class="hl" data-m="62" data-seq="14" data-q="2">手表电话中居然自带了语音提示</mark>：“小朋友，请用爸爸妈妈的手机扫码，开通手表音乐VIP。”其实，我觉得<mark class="hl" data-m="63" data-seq="15" data-q="2">儿童手表只要有基本功能就行</mark>，没必要<mark class="hl" data-m="64" data-seq="16" data-q="2">设置那么多诱导性的语音提示和支付绑定功能</mark>。</p><p class="mt">市教委周副主任：现在儿童智能手表都具有上网、拍照以及智能语音功能，<mark class="hl" data-m="65" data-seq="17" data-q="2">有的学生自律意识差</mark>，<mark class="hl" data-m="66" data-seq="18" data-q="2">一遇到不会做的题</mark>，<mark class="hl" data-m="67" data-seq="19" data-q="2">自己不动脑筋思考</mark>，而是<mark class="hl" data-m="68" data-seq="20" data-q="2">用手表拍照在网上搜索答案</mark>，关键有时候答案还是错的。更严重的是，<mark class="hl" data-m="69" data-seq="21" data-q="2">不少手表都与人工智能平台相连</mark>，<mark class="hl" data-m="70" data-seq="22" data-q="2">学生喜欢向手表提出各种稀奇古怪的问题</mark>，而<mark class="hl" data-m="71" data-seq="23" data-q="2">得到的回答时常会给学生造成误导</mark>，甚至<mark class="hl" data-m="72" data-seq="24" data-q="2">引起认知偏差</mark>，非常<mark class="hl" data-m="73" data-seq="25" data-q="2">不利于他们的身心健康</mark>。我们<mark class="hl" data-m="74" data-seq="26" data-q="2">正在研究相关办法</mark>，<mark class="hl" data-m="75" data-seq="27" data-q="2">加强对学生带手表入校以及具体使用行为的规范和引导</mark>，当然这<mark class="hl" data-m="76" data-seq="28" data-q="2">也需要家长们的理解和配合</mark>。</p><p class="mt">市消保委监督部黄主任：我们今年对儿童智能手表消费情况进行了调查，结果显示，<mark class="hl" data-m="77" data-seq="29" data-q="2">近一半的消费者对儿童智能手表质量表示不满</mark>，主要是<mark class="hl" data-m="78" data-seq="30" data-q="2">信号不稳定</mark>、<mark class="hl" data-m="79" data-seq="31" data-q="2">定位不准确</mark>、<mark class="hl" data-m="80" data-seq="32" data-q="2">屏幕显示质量差</mark>、<mark class="hl" data-m="81" data-seq="33" data-q="2">材质不安全等问题</mark>，<mark class="hl" data-m="82" data-seq="34" data-q="2">有的厂商涉嫌虚假宣传</mark>，<mark class="hl" data-m="83" data-seq="35" data-q="2">产品售后维修困难</mark>。</p><p class="mt">市公安局周警官：我们遇到过不少因儿童手表免密支付引发的经济损失案件。我们发现，有恶意程序伪装成游戏APP，当小孩在手表上下载安装后，恶意程序就能轻松进驻到手表中，手表就被远程控制，容易被不法分子采集位置信息、监听通话记录，甚至偷拍偷录视频，有时可能危及儿童人身安全。希望家长引导孩子正确使用手表，一旦人身和财产受到侵害，应及时寻求警方帮助。</p><p class="mt">市关工委刘副主任：由于缺乏筛选和监管，用户容易下载到血腥暴力的游戏APP和内容不健康的漫画APP，极易诱使未成年人模仿。一些APP在安装时，不用授权就可以直接获得定位、通讯录、麦克风、摄像头等多种敏感权限，轻易就能获取孩子的位置、人脸图像、录音等个人隐私信息，存在极大的信息安全漏洞。</p><p class="mt">某儿童手表公司曹经理：我们会<mark class="hl" data-m="84" data-seq="36" data-q="2">千方百计确保产品质量</mark>，<mark class="hl" data-m="85" data-seq="37" data-q="2">针对用户反馈的第三方软件问题</mark>，我们已在<mark class="hl" data-m="86" data-seq="38" data-q="2">第一时间下架处理了问题应用程序</mark>。但守护儿童“腕上安全”仅靠我们一家公司是不够的，我们已<mark class="hl" data-m="87" data-seq="39" data-q="2">向行业协会提出建议</mark>，<mark class="hl" data-m="88" data-seq="40" data-q="2">出台相应的行业自律公约</mark>，<mark class="hl" data-m="89" data-seq="41" data-q="2">共同为孩子们提供干净安全的手表</mark>。</p><p class="mt">某大学姚教授：儿童智能手表集多种功能于一体，但功能的多样性也带来了一系列“负产品”。治理儿童智能手表乱象，根本在于<mark class="hl" data-m="90" data-seq="42" data-q="2">要从更高层面出台相应的法律法规或政策标准</mark>，同时社会各界也要共同担当作为，合力确保孩子“腕上安全”。</p><p class="mt">市场监管局王副局长：大家所反映的问题都不同程度存在，且问题所涉及面较广，给执法带来一定难度。我们将<mark class="hl" data-m="91" data-seq="43" data-q="2">不断探索新的监管方式</mark>，<mark class="hl" data-m="92" data-seq="44" data-q="2">丰富监管手段</mark>，<mark class="hl" data-m="93" data-seq="45" data-q="2">提高监管专业能力</mark>。</p></div><div class="matbox"><h4>材料 3</h4><p class="mt">2022年5月，A市认定729个“五星级平安小区”，<mark class="hl" data-m="94" data-seq="1" data-q="3">光明区海港街道有12个小区获评</mark>“<mark class="hl" data-m="95" data-seq="2" data-q="3">五星级平安小区</mark>”，居光明区各街道首位。人们纷纷打探海港街道的“平安密码”到底是什么。</p><p class="mt">近日，海港街道居民吴先生出差回家后发现，自己楼下的“爱车”竟然被“毁容”。邻居家装修时工人使用电焊未加装防护措施，导致火星坠落破坏了车漆面。吴先生找到施工队负责人沟通后，赔偿金额不能达成一致。<mark class="hl" data-m="96" data-seq="3" data-q="3">街道多元化矛盾纠纷调处中心知悉后主动介入</mark>，<mark class="hl" data-m="97" data-seq="4" data-q="3">经过调解</mark>，双方达成一致，<mark class="hl" data-m="98" data-seq="5" data-q="3">纠纷成功化解</mark>。</p><p class="mt"><mark class="hl" data-m="99" data-seq="6" data-q="3">多元化矛盾纠纷调处中心以公证机关专业调解为牵引</mark>，<mark class="hl" data-m="100" data-seq="7" data-q="3">融合</mark>公证调解、人民调解、治安调解、司法调解等<mark class="hl" data-m="101" data-seq="8" data-q="3">多元调解为主体</mark>，<mark class="hl" data-m="102" data-seq="9" data-q="3">力争将矛盾解决在基层</mark>。2020年7月运行以来，中心<mark class="hl" data-m="103" data-seq="10" data-q="3">成功化解183起纠纷</mark>，成功率达98.4%，<mark class="hl" data-m="104" data-seq="11" data-q="3">接受当事人咨询631人次</mark>。</p><p class="mt">2021年3月26日晚，“超级花血月”现身A市。作为最佳观测点之一，位于海港辖区内的中兴大桥观景平台，迎来了众多专业的天文学爱好者及市民。在现场，一群<mark class="hl" data-m="105" data-seq="12" data-q="3">身着高科技装备、驾驶平衡车</mark>维持秩序的民警们格外吸睛。<mark class="hl" data-m="106" data-seq="13" data-q="3">海港街道联合派出所成立了</mark>“<mark class="hl" data-m="107" data-seq="14" data-q="3">闪警别动队</mark>”，<mark class="hl" data-m="108" data-seq="15" data-q="3">集治安巡逻</mark>、<mark class="hl" data-m="109" data-seq="16" data-q="3">反诈宣传</mark>、<mark class="hl" data-m="110" data-seq="17" data-q="3">隐患排查</mark>、<mark class="hl" data-m="111" data-seq="18" data-q="3">应急处突</mark>、<mark class="hl" data-m="112" data-seq="19" data-q="3">便民服务为一体</mark>，日常巡逻<mark class="hl" data-m="113" data-seq="20" data-q="3">搭载北斗定位系统和360度高清摄像头</mark>，<mark class="hl" data-m="114" data-seq="21" data-q="3">与派出所后台监控管理系统相连接</mark>，<mark class="hl" data-m="115" data-seq="22" data-q="3">实时传输巡逻现场画面</mark>，实现<mark class="hl" data-m="116" data-seq="23" data-q="3">一键报警</mark>、<mark class="hl" data-m="117" data-seq="24" data-q="3">智能派警</mark>、<mark class="hl" data-m="118" data-seq="25" data-q="3">快速处警</mark>。</p><p class="mt">5月20日，<mark class="hl" data-m="119" data-seq="26" data-q="3">海港街道安全教育馆迎来一群活泼可爱的小朋友</mark>，A市光明区<mark class="hl" data-m="120" data-seq="27" data-q="3">蓝天救援队队员为小朋友们讲授水上安全与自救</mark>、<mark class="hl" data-m="121" data-seq="28" data-q="3">急救包扎的知识</mark>。在现场，同学们与授课队员积极互动，场面十分活跃。</p><p class="mt">自2020年<mark class="hl" data-m="122" data-seq="29" data-q="3">海港街道安全教育馆运作以来</mark>，<mark class="hl" data-m="123" data-seq="30" data-q="3">依托蓝天救援队的专业力量</mark>，<mark class="hl" data-m="124" data-seq="31" data-q="3">常态化开展</mark>应急救护、安全演练、安全宣传、<mark class="hl" data-m="125" data-seq="32" data-q="3">安全培训</mark>、<mark class="hl" data-m="126" data-seq="33" data-q="3">心理危机干预等公益活动</mark>，为居民提供心理支持与服务，不断<mark class="hl" data-m="127" data-seq="34" data-q="3">提高辖区居民的安全意识和安全防范能力</mark>。开馆以来，已为学生和居民<mark class="hl" data-m="128" data-seq="35" data-q="3">举办40多场安全培训</mark>，累计接待居民、学生、各类团体4000余人次。</p><p class="mt">“刷脸”进出楼栋，这不是在高端小区。光明南路294号，三栋建于上世纪80年代的居民楼内，也实现了这一设想。8月中旬，随着<mark class="hl" data-m="129" data-seq="36" data-q="3">崭新的人脸识别系统在单元楼上线</mark>，无物业老旧小区的居民们靠“刷脸”就能进出楼栋，在方便出行的同时，也更有安全保障。为<mark class="hl" data-m="130" data-seq="37" data-q="3">保障居民安全</mark>，<mark class="hl" data-m="131" data-seq="38" data-q="3">派出所还牵头修缮了一批老旧防盗门</mark>。</p><p class="mt">走进海成廊桥小区，映入眼帘的是三组<mark class="hl" data-m="132" data-seq="39" data-q="3">电动车智能充电桩</mark>，满足居民电动车充电需求。海港街道坚持防范在前、疏堵结合，下大力气解决小区居民电动车停放、充电问题，<mark class="hl" data-m="133" data-seq="40" data-q="3">消除</mark>“<mark class="hl" data-m="134" data-seq="41" data-q="3">电动车进电梯</mark>”<mark class="hl" data-m="135" data-seq="42" data-q="3">而引发的安全隐患</mark>。去年10月份开始，在了解到居民的“急难愁盼”问题之后，廊桥小区物业和业委会及时进行商量，<mark class="hl" data-m="136" data-seq="43" data-q="3">充分听取居民的诉求</mark>，<mark class="hl" data-m="137" data-seq="44" data-q="3">实地勘察小区环境</mark>，<mark class="hl" data-m="138" data-seq="45" data-q="3">充分利用小区资源</mark>，在辖区内<mark class="hl" data-m="139" data-seq="46" data-q="3">开展电动自行车充电设施建设</mark>。</p><p class="mt">海港街道切实解决群众身边的“糟心事、烦心事、揪心事”，海成廊桥小区居民李先生表示：“现在小区更安全，邻里更和谐，群众更满意，对这个小区的归属感也越来越强。”</p></div><div class="matbox"><h4>材料 4</h4><p class="mt">日前，S市十五届人大常委会第43次会议表决通过了新修订的《市容环境卫生管理条例》。其中对于设摊经营、占道经营等行为由以往的<mark class="hl" data-m="140" data-seq="1" data-q="4">全面禁止变为了“重点区域禁止</mark>”，<mark class="hl" data-m="141" data-seq="2" data-q="4">不再“一禁了之</mark>”，引发了网友热议。有网友认为，<mark class="hl" data-m="142" data-seq="3" data-q="4">此举体现民意</mark>，但也有人担忧，<mark class="hl" data-m="143" data-seq="4" data-q="4">放开之后</mark>，<mark class="hl" data-m="144" data-seq="5" data-q="4">是否会增加管理成本</mark>？为此，记者进行了调研。</p><p class="mt">“星光里”夜市人流如织，老王的“地摊照相馆”人气很高。最开始，他的摊位只有一张桌子，后来他和集市上的朋友合作，以房车为载体，一边作为拍摄舱，一边售卖咖啡，挂满照片的房车自成一道独特的风景。老王说：“最初，我只是想过渡一下，没想到一直走到了现在。”</p><p class="mt">记者注意到，相比夜市的固定摊位，流动摊贩的自由度更大，成本更少，但风险也更大。这类摆摊并不被即将实施的法规所允许，但在人流量大的地铁口、交通路口，依然会有流动摊贩出没。晚上11点，在地铁口卖炸串的邹阿姨手机响了，接完电话后，她立刻招呼其他摊主收摊，大家心领神会——城管来了。邹阿姨和丈夫一人一个摊位，摆在两个相邻的路口，远处的儿子见机给父母通风报信。邹阿姨他们骑上车，藏进一家商铺的通道里。“<mark class="hl" data-m="145" data-seq="6" data-q="4">我们也想过到政府划定的区域去摆摊</mark>，<mark class="hl" data-m="146" data-seq="7" data-q="4">但是这些区域都不沿街</mark>，<mark class="hl" data-m="147" data-seq="8" data-q="4">摊位费也高</mark>，<mark class="hl" data-m="148" data-seq="9" data-q="4">对于我们这样的小摊贩并不合算</mark>。”邹阿姨对记者说。</p><p class="mt">都说“人间烟火气，当数夜市最浓”，针对这部法规的评论，网友们说得最多的一个词即“烟火气”。法规中对设摊经营不再“一禁了之”，让市民读到了一种开放与包容的城市治理气度。</p><p class="mt">“童年的回忆和烟火气一起回来了！”老马停好车，走进“九街夜市”后感慨道。天刚擦黑，“九街夜市”已是人声鼎沸。步行街两面是古色古香的殿宇楼阁，中间的小摊次第排开，水果生鲜、烧烤肉串、衣服饰品、美甲、套圈、气球、鲜花……应有尽有。老马家在长龙，这次专程带女儿小美来“赶集”。</p><p class="mt">像老马这样专程逛夜市的市民不在少数。不少市民说，<mark class="hl" data-m="149" data-seq="10" data-q="4">缺少了摊贩</mark>，<mark class="hl" data-m="150" data-seq="11" data-q="4">这座城市总觉得少了几分灵气和暖意</mark>，夜市就是一种载体，实现人与人之间更亲密的交流，使城市不再是钢筋水泥的森林。</p><p class="mt">夜市不仅是中老年人的乡愁，也是年轻人的乐园。在多个网络社交平台，夜市话题均为流量热帖。每个从夜市归来的“90后”“00后”，回家第一件事就是发朋友圈，有的甚至开启直播，而这些网上的流量又引来线下流量，为夜市积攒人气。但是，也有人坦言，“<mark class="hl" data-m="151" data-seq="12" data-q="4">烟火气</mark>”<mark class="hl" data-m="152" data-seq="13" data-q="4">管不好</mark>，很可能就变成了“火气”。</p><p class="mt">“没有人不爱路边摊，除了周边的居民。”住在新牌坊的小孙此前是夜市的投诉者，“炒河粉的摊位就在我家楼下，一直闹到凌晨4点。夜市取缔后，一下子清静了。”不过，几年之后当小孙搬到箐口后，她又异常怀念当年的喧嚣，成了夜市的支持者。</p><p class="mt"><mark class="hl" data-m="153" data-seq="14" data-q="4">市民需求关乎“里子</mark>”，<mark class="hl" data-m="154" data-seq="15" data-q="4">市容管理关乎“面子</mark>”。在“岐山夜市”，清洁工大叔指着地上散乱的竹签、纸盒，向记者吐槽：“这怎么扫？扫了前面后面还有，永远也扫不干净。”他说，至于烧烤摊留下的油污，只能等夜市收摊后才能刷洗。</p><p class="mt">夜市星光灿烂，<mark class="hl" data-m="155" data-seq="16" data-q="4">运营和管理成本却不低</mark>。一场夜市的背后，<mark class="hl" data-m="156" data-seq="17" data-q="4">除了组织方的精心策划</mark>，<mark class="hl" data-m="157" data-seq="18" data-q="4">还涉及多部门的联合行动</mark>。江北区商务委蔡主任说，如果在划定区域内开夜市，需要交通部门的支持；治安工作如何做，需要公安部门给予指导；食品摊贩的证照是否齐全，需要市场监管局的监督；摊贩的市容“善后”，需要街道、城管部门来管；一旦有流动摊贩进入夜市，还需要相关部门来执法。</p><p class="mt"><mark class="hl" data-m="158" data-seq="19" data-q="4">摆摊不能“一禁了之”，但也绝非“一放了之</mark>”。此番对设摊经营的立法疏导，对管理者也提出了更高的要求。比如哪里可以设摊？与居民区的距离多少为好？公共市政设施是否完备？消费纠纷如何调处？辐射人群是否匹配？……<mark class="hl" data-m="159" data-seq="20" data-q="4">这都需要更精细的管理体系作为支撑</mark>。</p></div></div>
+  <div id="right"><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">25 分</span><span class="tag wd">≤400 字</span><span class="tag kp">多要素组合类</span></div><p class="stem">根据“给定资料1”，概括Z省在融合型大社区治理过程中遇到的新问题以及运用的新解法。（25分）</p><p class="req">要求：全面、准确、有条理。不超过400字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型，题目的主题、答题要素、材料范围和作答要求等。</div><ul class="key"><li>由“根据”可知，本题只需要阅读资料1</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">段1介绍了Z省的社区工作常态，初步引出了话题，但不涉及具体要点，可略读。</div></div><div class="blk"><div class="h">段 2</div><div class="c">段2主要介绍了融合型大社区的规模。（1）先阅读“现在的社区，规模更像是一座小型城市”可知，融合型大社区的规模大，这意味着其治理规模同样很大，再由段尾处的负面表述“仅靠传统的管理服务方式，已经无法应对”可知，治理规模大是融合型大社区治理过程中的新问题，由此可概括出问题：治理规模大。（2）阅读“人口密度大、单元构成复杂、利益需求多样、管理主体多元，而社区干部满编也就18人”可知治理规模大的具体表现，可摘抄、概括出要点：社区人口密度大，单元构成复杂，利益需求多样，管理主体多，干部编制少。</div><div class="bind">✓ 要点：治理规模大</div></div><div class="blk"><div class="h">段 4</div><div class="c">段3-段4主要介绍了通过数字化建设助力融合型大社区治理，可合并阅读。（1）阅读段3中的“他通过‘掌上社区’APP拍摄上报，基层治理综合信息平台根据定位，自动将事件派发”、段4中的“通过一体化智能化公共数据平台……社区网格员可及时精准对接相关人员”可知，融合型大社区建立了智能化信息平台，让工作项目与工作人员准确对接，可概括出对策：建立智能化信息平台，精准对接工作人员。（2）段3尾句“幸好有数字化赋能”提示，融合型大社区利用数字化技术助力社区治理，段4中的“清风社区这两年加强数字化建设”再次证明这项措施的可行性，由此可摘抄出对策：加强数字化建设。（3）阅读段4中的“清风社区在短时间内就精准高效完成了……等工作”“通过调查收集数据建立了小应用——‘活地图’，标记了辖区内345名党员、志愿者的居住位置和联系方式，可随时发动他们参与社区的相关工作”可知，数字化建设体现在建立应用程序，记录党员以及志愿者的相关信息，并借此发动不同主体参与社区治理，提高社区治理工作的效率，由此可概括出对策：建立应用程序，记录党员志愿者信息，发动多元主体力量，提高治理效率。</div><div class="bind">✓ 要点：建立智能化信息平台，精准对接工作人员</div></div><div class="blk"><div class="h">段 5</div><div class="c">段5主要介绍了社区网格划分的问题与应对措施。（1）段首句中，负面表述“此前网格划分过大、层级过多、力量不足等问题”提示社区网格治理存在划分不合理的一些问题，可摘抄、概括出问题：网格划分不合理。网格划分大，层级多，管理力量薄弱。（2）先阅读“去年省里对网格进行了科学划分、合理优化”可知，针对存在问题，有关部门对社区网格科学划分，可摘抄出对策：科学划分网格。接着阅读“不仅增加了网格的密度，还在网格中按楼道、楼栋设置了微网格，构建了‘村（社区）—网格-微网格’治理体系”“正在提升社区治理的精度”可知科学划分网格的具体办法，可摘抄出对策：增加了网格密度，设置微网格，构建“村（社区）—网格-微网格”治理体系，提升治理的精度。</div><div class="bind">✓ 要点：网格划分不合理</div></div><div class="blk"><div class="h">段 8</div><div class="c">段6-段8主要介绍了通过“微家园”提供优质公共服务，可合并阅读。（1）阅读段6中的“一个集纳了线下6000多个网格的线上空间——‘微家园’，成为广大居民享受优质公共服务的新平台”可知，通过打造“微家园”线上空间，为社区居民提供优质的公共服务，可摘抄出对策：打造并推广“微家园”线上空间，提供优质公共服务。（2）阅读段6中的“大家可以在这里发布需求”、段8中的“实现邻里需求与公共服务精准配对”可知，“微家园”线上空间能够对接群众需求与公共服务，可摘抄出对策：将邻里需求与公共服务精准配对。（3）阅读段7中的“我们认识了很多邻居，也收获了温暖的友情”、段8中的“通过数字化重建了熟人社会，邻里关系越来越紧密”可知，打造“微家园”线上空间，让邻里感情密切，让熟人社会重建起来，可摘抄、概括出对策：重建熟人社会，增进邻里感情。（4）阅读段7尾句“我们这儿是新建小区，住户来自全国各地，以前相互间基本都是‘陌生人’”，再对比当前社区邻里关系，可知过去社区的邻里之间的关系不亲密，交流不多，感情不好且缺少人情温度，由此可概括出问题：邻里联系不紧密。居民之间缺少交流，感情淡漠，缺少温度。</div><div class="bind">✓ 要点：打造并推广“微家园”线上空间，提供优质公共服务</div></div><div class="blk"><div class="h">段 9</div><div class="c">段9主要介绍了居民投诉方面的问题。阅读负面表述“在融合型大社区，群众投诉的问题更为复杂和棘手”以及尾句“许多人在‘微家园’上投诉，社区由于缺乏资源统筹调度能力，问题不得不搁置”可知，在融合型大社区中，居民投诉问题的处理存在不足，可摘抄、概括出问题：投诉问题处理难。社区缺乏资源统筹调度能力，群众反馈问题被搁置。</div><div class="bind">✓ 要点：投诉问题处理难</div></div><div class="blk"><div class="h">段 11</div><div class="c">段10-段11主要介绍了通过协同合作解决社区问题，可合并阅读。（1）阅读段10中的“全市乡镇以及基层站所干部全部下沉到村（社区)，多跨协同形成合力，帮助解难题、谋发展，多元化共治力度前所未有”可知，当地政府通过推动干部驻扎基层，协同合作，解决社区难题，可摘抄、概括出对策：强化协同合作，推动干部下沉基层，多跨协同形成合力。（2）阅读段11中的“‘微家园’还开通了政府部门、村（社区）与群众的三方对话机制”“让民有所呼更便捷、基层议事更智慧、为民解难更精准”“技术手段再先进，走街访巷‘铁脚板’的老传统也不能丢，问题的‘最后一米’还是要脚踏实地去解决”可知，精准切实地解决问题，不仅通过三方对话机制等技术手段，还不忘走街访巷等传统方式，可摘抄、概括出对策：开通三方对话机制等技术手段与走街访巷等传统手段相结合，精准切实解决群众问题。（3）阅读段11尾句“也绝不能让技术浮在现实之上，要防止因多头报送、重复收集数据而增加基层压力”可知，协同工作还体现在注重工作协调，减少基层治理的压力，可概括出对策：加强协调，减轻基层压力。</div><div class="bind">✓ 要点：强化协同合作，推动干部下沉基层，多跨协同形成合力</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">组织答案
+【梳理资料发现，要点围绕“问题”与“对策”两个方面展开。其中“问题”包括“治理规模大”“网格划分不合理”“邻里关系不密切”“投诉问题处理难”四个层次，“对策”包括“加强数字化建设”“科学划分网格”“提供优质公共服务”“强化协同合”四个层次。】
+新问题：
+【段2介绍了“治理规模大”方面的问题，可单独作为一条要点】1.治理规模大。社区人口密度大，单元构成复杂，利益需求多样，管理主体多，干部编制少。【段5介绍了“网格划分不合理”方面的问题，可单独作为一条要点】2.网格划分不合理。网格划分大，层级多，管理力量薄弱。【段6-7介绍了“邻里联系不紧密”方面的问题，可单独作为一条要点】3.邻里联系不紧密。居民之间缺少交流，感情淡漠，缺少温度。【段9介绍了“投诉问题处理难”方面的问题，可单独作为一条要点】4.投诉问题处理难。社区缺乏资源统筹调度能力，群众反馈问题被搁置。
+新解法：
+【段3-4介绍了“加强数字化建设”方面的对策，可单独作为一条要点】1.加强数字化建设。建立智能化信息平台，精准对接工作人员，建立应用程序，记录党员志愿者信息，发动多元主体力量，提高治理效率。【段5介绍了“科学划分网格”方面的对策，可单独作为一条要点】2.科学划分网格。增加了网格密度，设置微网格，构建“村（社区）—网格—微网格”治理体系，提升治理的精度。【段6-8介绍了“提供优质公共服务”方面的对策，可单独作为一条要点】3.提供优质公共服务。打造并推广“微家园”线上空间，将邻里需求与公共服务精准配对，重建熟人社会，增进邻里感情。【段10-11介绍了“强化协同合作”方面的对策，可单独作为一条要点】4.强化协同合作。推动干部下沉基层，多跨协同形成合力，开通三方对话机制等技术手段与走街访巷等传统手段相结合，精准切实解决群众问题，加强协调，减轻基层压力。</div></div><div class="ref" data-m2r='{"3":0,"38":0,"19":0,"35":1,"23":1,"41":1,"15":1,"26":1,"44":1,"17":1,"21":1,"20":2,"1":0,"2":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"16":1,"18":1,"22":1,"24":1,"25":1,"27":1,"28":1,"29":1,"30":1,"31":1,"32":1,"33":1,"34":1,"36":1,"37":1,"39":0,"40":0,"42":1,"43":1,"45":1,"46":1,"47":1,"48":1}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="3,38,19,1,2,4,5,6,7,8,9,10,11,12,13,14,39,40">新问题：1.治理规模大。社区人口密度大，单元构成复杂，利益需求多样，管理主体多，干部编制少。2.网格划分不合理。网格划分大，层级多，管理力量薄弱。3.邻里联系不紧密。居民之间缺少交流，感情淡漠，缺少温度。4.投诉问题处理难。社区缺乏资源统筹调度能力，群众反馈问题被搁置。</div><div class="item" data-mk="35,23,41,15,26,44,17,21,16,18,22,24,25,27,28,29,30,31,32,33,34,36,37,42,43,45,46,47,48">新解法：1.加强数字化建设。建立智能化信息平台，精准对接工作人员，建立应用程序，记录党员志愿者信息，发动多元主体力量，提高治理效率。2.科学划分网格。增加了网格密度，设置微网格，构建“村（社区）—网格—微网格”治理体系，提升治理的精度。3.提供优质公共服务。打造并推广“微家园”线上空间，将邻里需求与公共服务精准配对，重建熟人社会，增进邻里感情。4.强化协同合作。推动干部下沉基层，多跨协同形成合力，开通三方对话机制等技术手段与走街访巷等传统手段相结合，精准切实解决群众问题，加强协调，减轻基层压力。</div><div class="item" data-mk="15,26,19,20,35">参考答案说明：本参考答案包括问题与对策两个方面。问题从“治理规模大”“网格划分不合理”“邻里联系不紧密”“投诉问题处理难”四个层次展开；对策从“加强数字化建设”“科学划分网格”“提供优质公共服务”“强化协同合作”四个层次展开。以上两个方面，各条答案要点之间在内容上相互并列，没有交叉。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">一、资料中出现的规范词
+人口密度：人口密度是单位土地面积上的人口数量，它是衡量一个国家或地区人口分布状况的重要指标。表述规范，可直接摘抄，注意积累。
+网格划分：在本题中是指社区网格划分，意思是将城市管理辖区按照一定的标准划分成为单元网格，有利于政府主动发现、及时处理社区问题，加强政府对城市的管理能力和处理速度。表述规范，可直接摘抄，注意积累。
+熟人社会：通俗来说是指“小圈子”社会，是20世纪费孝通在《乡土中国》提出的概念，认为中国传统社会有一张复杂庞大的关系网，人熟是一宝。表述规范，可直接摘抄，注意积累。
+公共服务：是指由政府部门、国有企事业单位和相关中介机构履行法定职责，根据公民、法人或者其他组织的要求，为其提供帮助或者办理有关事务的行为。表述规范，可直接摘抄，注意积累。
+对话机制：主要是指较为规范的沟通协作渠道，比如资料中剃刀的“政府部门、村（社区）与群众的三方对话机制”是指与三个主体相关的沟通协作渠道。表述规范，可直接摘抄，注意积累。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">20 分</span><span class="tag wd">≤300 字</span><span class="tag kp">提出对策类</span></div><p class="stem">假如你是N市市场监管局工作人员，请根据“给定资料2”，对座谈会上反映的问题提出解决的初步建议，供领导参考。（20分）</p><p class="req">要求：（1）全面、准确、有条理；
+（2）有针对性，合理可行；
+（3）不超过300字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型,题目的主题、答题要素、材料范围和作答要求等。</div><ul class="key"><li>出现“根据……”一词，提示我们只需阅读资料2</li><li>①由“提出解决……建议”可知本题为单一题，需要作答“建议”这一要素。阅读资料时，可优先确定本次座谈会的主题，并注意重点关注与主题有关的负面表述，从而明确其存在的问题。针对问题，可结合资料实际，摘抄、概括出相关解决建议或通过问题分析推导出建议</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">资料2段1</div><div class="c">段1主要介绍了座谈会的相关背景，可以看出本次专题座谈会围绕“儿童智能手表”展开，未涉及具体问题及解决建议，略读即可。</div></div><div class="blk"><div class="h">资料2段2</div><div class="c">段2介绍了儿童手表绑定家长手机支付方面的内容。阅读“有些智能手表一旦关联了家长的手机，就开通了免密支付，在家长不知情的情况下，孩子就可能会任性消费”“不但容易导致小孩养成不健康的消费习惯，还可能危及家庭的资金安全”，可知儿童手表绑定家长手机钱包不利孩子养成健康的消费习惯，还会危及家长的资金安全。</div><div class="c topic">段2话题梳理： 段2论述了儿童手表绑定家长的手机钱包不利于孩子的消费习惯以及家长的资金安全，属于“引发经济损失”方面的问题。</div><div class="bind">✓ 要点：问题：容易导致孩子任性消费，养成不健康的消费习惯，危及家长资金安全。</div></div><div class="blk"><div class="h">资料2段3</div><div class="c">段3介绍了儿童手表影响学习方面的内容。阅读“学生之间语音聊天、打电话越来越频繁”“有的还在手表里下载了游戏和短视频App，课上偷着玩，课下抢着玩，不但影响了正常教学秩序，也不利于学生学习”，可知语音聊天、游戏、短视频指等娱乐功能容易让学生沉迷，影响学习及教学秩序。</div><div class="c topic">段3话题梳理： 段3主要介绍了儿童手表的娱乐功能容易影响学习及教学秩序，属于“影响孩子学习”方面问题。</div><div class="bind">✓ 要点：问题：影响孩子学习，娱乐功能易导致沉迷，影响正常教学秩序。</div></div><div class="blk"><div class="h">资料2段4</div><div class="c">段4介绍儿童手表诱导性功能过多方面的内容。（1）阅读“手表电话中居然自带了语音提示”“设置那么多诱导性的语音提示和支付绑定功能”，可知儿童手表中诱导性语音提示和支付绑定功能过多。（2）家长的观点“儿童手表只要有基本功能就行，没必要设置那么多诱导性的语音提示和支付绑定功能”针对儿童手表诱导性功能过多的问题提出了建议，从中可概括出要点：保留基本功能，删除诱导性的语音提示和支付绑定功能。</div><div class="c topic">段4话题梳理： 段4一方面指出了儿童手表诱导性语音提示和支付绑定功能多这一问题；另一方面，针对上述问题从儿童手表的行业层面提出了建议。</div><div class="bind">✓ 要点：问题：诱导性语音提示和支付绑定功能过多。 建议：保留基本功能，删除诱导性的语音提示和支付绑定功能。</div></div><div class="blk"><div class="h">资料2段5</div><div class="c">本段围绕儿童手表对学生学习的影响展开。（1）阅读“有的学生自律意识差，一遇到不会做的题，自己不动脑筋思考，而是用手表拍照在网上搜索答案”，可知儿童手表能够直接搜索答案，不利于学生自己思考，影响学习；“不少手表都与人工智能平台相连……得到的回答时常会给学生造成误导，甚至引起认知偏差，非常不利于他们的身心健康”说明儿童手表还可能误导学生，造成认知偏差。（2）段尾句“我们正在研究相关办法，加强对学生带手表入校以及具体使用行为的规范和引导，当然这也需要家长们的理解和配合”从学校管理制度和家长两个层面提出了相关建议，表述规范，可摘抄出要点：研究相关办法，加强对学生戴手表入校以及具体使用行为的规范和引导；家长理解并配合学校的规定和安排。</div><div class="c topic">段5话题梳理： 段5主要介绍了两方面内容：一是指出了儿童手表不利于学生锻炼主动思考，甚至会产生误导，属于“影响孩子学习”方面的问题；另一方面，从学校管理制度和家长两个层面提出了相关建议。</div><div class="bind">✓ 要点：问题：拍照搜索答案功能，不利于锻炼思考能力；人工智能平台时常会造成误导，引起认知偏差。 建议：研究相关办法，加强对学生戴手表入校以及具体使用行为的规范和引导；家长理解并配合学校的规定和安排。</div></div><div class="blk"><div class="h">资料2段6</div><div class="c">段6围绕儿童手表质量方面的内容展开。阅读“近一半的消费者对儿童智能手表质量表示不满”“信号不稳定、定位不准确、屏幕显示质量差、材质不安全等问题”“有的厂商涉嫌虚假宣传，产品售后维修困难”，可知儿童手表无论是产品质量，还是售后维修，甚至厂商宣传都存在众多问题。</div><div class="c topic">段6话题梳理： 段6主要介绍了儿童手表存在众多质量问题，属于“质量问题突出”方面的问题。</div><div class="bind">✓ 要点：问题：信号不稳定、定位不准确、屏幕显示质量差、材质不安全等质量问题多发；部分厂商涉嫌虚假宣传，售后维修困难。</div></div><div class="blk"><div class="h">资料2段7</div><div class="c">本段主要围绕儿童手表的安全隐患展开。（1）“不少因儿童手表免密支付引发的经济损失案件”说明部分儿童手表会引发经济损失问题。（2）阅读“有恶意程序伪装成游戏App”“恶意程序就能轻松进驻到手表中，手表就被远程控制，容易被不法分子采集位置信息、监听通话记录，甚至偷拍偷录视频，有时可能危及儿童人身安全”，可知儿童手表容易被远程控制导致信息或隐私泄露，危及儿童安全。（3）段尾句“家长引导孩子正确使用手表，一旦人身和财产受到侵害，应及时寻求警方帮助”，从家长层面提出了建议，表述规范，可摘抄出要点：引导孩子正确使用手表，一旦人身和财产受到侵害，及时寻求警方帮助。</div><div class="c topic">段7话题梳理： 段7一方面从经济层面和安全隐患层面介绍了儿童手表存在的问题；另一方面，从家长层面指出了引导孩子正确使用手表的建议。</div><div class="bind">✓ 要点：问题：引发经济损失；恶意程序可远程控制手表，危及儿童人身安全。 建议：引导孩子正确使用手表，一旦人身和财产受到侵害，及时寻求警方帮助。</div></div><div class="blk"><div class="h">资料2段8</div><div class="c">本段主要围绕监管缺失方面的内容展开。（1）“由于缺乏筛选和监管，用户容易下载到血腥暴力的游戏App和内容不健康的漫画App，极易诱使未成年人模仿”指出了由于监管缺位，儿童手表中的不健康内容容易对孩子造成不利影响。（2）“不用授权就可以直接获得……等多种敏感权限，轻易就能获取……等个人隐私信息，存在极大的信息安全漏洞”指出了儿童手表存在的信息安全漏洞。</div><div class="c topic">段8话题梳理： 段8主要介绍了由于监管缺位导致儿童手表给未成年人带来安全隐患，属于“应用监管缺位”方面的问题。</div><div class="bind">✓ 要点：问题：应用监管缺位，不健康内容易诱使未成年人模仿；恶意程序能获得敏感权限和隐私信息。</div></div><div class="blk"><div class="h">资料2段9</div><div class="c">本段围绕儿童手表企业方面所采取的措施展开。“千方百计确保产品质量，针对用户反馈的第三方软件问题，我们已在第一时间下架处理了问题应用程序”“向行业协会提出建议，出台相应的行业自律公约，共同为孩子们提供干净安全的手表”介绍了儿童手表生产企业针对相关问题所采取的举措，可作为建议写入答案，由此可摘抄出要点：确保产品质量；针对用户反馈，及时做出处理；推动行业协会出台自律公约。</div><div class="c topic">段9话题梳理： 段9主要介绍了儿童手表企业为解决相关问题所采取的举措，可作为行业层面的建议与段4中的建议要点进行整合。</div><div class="bind">✓ 要点：建议：确保产品质量；针对用户反馈，及时做出处理；推动行业协会出台自律公约。</div></div><div class="blk"><div class="h">资料2段10</div><div class="c">（1）“功能的多样性也带来了一系列‘负产品’”总结性指出了儿童手表功能过多会带来很多问题，前文已出点，此处不用再写。（2）“治理儿童智能手表乱象，根本在于要从更高层面出台相应的法律法规或政策标准”从制度层面指出了治理儿童手表乱象的建议，表述规范，可摘抄出要点：针对乱象，从更高层面出台法律法规或政策标准。此外，“社会各界也要共同担当作为，合力确保孩子‘腕上安全’”具有总结性，字数允许的情况下，也可以写上。</div><div class="c topic">段10话题梳理： 段10主要从制度层面提出了建议，可与段5中制度层面的建议进行整合。</div><div class="bind">✓ 要点：建议：针对乱象，从更高层面出台法律法规或政策标准。</div></div><div class="blk"><div class="h">资料2段11</div><div class="c">段11对前文反映的问题进行了总结。尾句“我们将不断探索新的监管方式，丰富监管手段，提高监管专业能力”指出了市场监管局针对儿童手表所开展的监管举措，可作为建议写入答案，由此可摘抄出要点：探索新的监管方式，丰富监管手段，提升监管能力。</div><div class="c topic">段11话题梳理： 段11主要对前文内容进行总结，其中市场监管局针对儿童手表所采取的监管举措，可作为建议写入答案。</div><div class="bind">✓ 要点：建议：探索新的监管方式，丰富监管手段，提升监管能力。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">整合问题，推导对策，并结合已给出对策，形成答案框架
+【梳理资料发现，要点围绕“引发经济损失”“影响孩子学习”“质量问题突出”“应用监管缺位”4个方面的问题展开，可根据问题分析推导出对策。此外，在资料的梳理中已经从“制度层面”“家长层面”“监管层面”“行业层面”提炼出部分建议，直接罗列即可。】
+【针对段2-8中儿童智能手表存在的“引发经济损失”“影响孩子学习”“质量问题突出”“应用监管缺位”4个方面的问题，可考虑从制度层面分析推导出建议，如完善顶层制度。此外，段5中的“研究相关办法，加强对学生戴手表入校以及具体使用行为的规范和引导”，以及段10中的“针对乱象，从更高层面出台法律法规或政策标准”都属于制度层面的建议，可整合写到一起，并可将“完善顶层制度”作为前置总括词】1.完善顶层制度。针对乱象，从更高层面出台法律法规或政策标准；研究相关办法，加强对学生戴手表入校以及具体使用行为的规范和引导。
+【针对段2中的“容易导致孩子任性消费，养成不健康的消费习惯，危及家长资金安全”，段3中的“影响孩子学习，娱乐功能易导致沉迷，影响正常教学秩序”以及段5中的“拍照搜索答案功能，不利于锻炼思考能力”“人工智能平台时常会造成误导，引起认知偏差”，段7中的“引发经济损失”等问题，段5中的“家长理解并配合学校的规定和安排”，及段7中的“引导孩子正确使用手表，一旦人身和财产受到侵害，及时寻求警方帮助”从家长层面提出建议，可整合写到一起，并可概括出“引导家长配合”作为前置总括词】2.引导家长配合。引导孩子正确使用手表，一旦人身和财产受到侵害，及时寻求警方帮助；理解并配合学校的规定和安排。
+【针对段7中的“恶意程序可远程控制手表，危及儿童人身安全”，段8中的“应用监管缺位，不健康内容易诱使未成年人模仿”“恶意程序能获得敏感权限和隐私信息”等问题，段11中的“探索新的监管方式，丰富监管手段，提升监管能力”从监管层面提出建议，此外还可以考虑从强化监管、执法方面分析推导出建议，比如：市场监管局与网信等部门，开展联合执法，加强针对性监管等。由上述内容可概括出“加强市场监管”作为前置总括词】3.加强市场监管。市场监管局与网信等部门，开展联合执法，加强针对性监管；探索新的监管方式，丰富监管手段，提升监管能力。
+【针对段4中的“诱导性语音提示和支付绑定功能过多”，段6中的“信号不稳定、定位不准确、屏幕显示质量差、材质不安全等质量问题多发”“部分厂商涉嫌虚假宣传，售后维修困难”等问题，段4中的“保留基本功能，删除诱导性的语音提示和支付绑定功能”，及段9中的“确保产品质量”“针对用户反馈，及时做出处理”“推动行业协会出台自律公约”从行业层面提出建议，可整合写到一起，并可概括出“规范行业行为”作为前置总括词】4.规范行业行为。保留基本功能，删除诱导性的语音提示和支付绑定功能；确保产品质量；针对用户反馈，及时做出处理；推动行业协会出台自律公约。</div></div><div class="ref" data-m2r='{"75":0,"90":0,"74":0,"49":1,"91":2,"92":2,"64":3,"84":3,"85":3,"62":3,"63":3,"87":3,"88":3,"50":1,"51":1,"52":1,"53":1,"54":1,"55":1,"56":1,"57":1,"58":1,"59":1,"60":1,"61":1,"65":3,"66":3,"67":3,"68":3,"69":3,"70":3,"71":3,"72":3,"73":3,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"86":3,"89":3,"93":2}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="75,90,74,76,77,78,79,80,81,82,83">1.完善顶层制度。针对乱象，从更高层面出台法律法规或政策标准；研究相关办法，加强对学生戴手表入校以及具体使用行为的规范和引导。</div><div class="item" data-mk="49,50,51,52,53,54,55,56,57,58,59,60,61">2.引导家长配合。引导孩子正确使用手表，一旦人身和财产受到侵害，及时寻求警方帮助；理解并配合学校的规定和安排。</div><div class="item" data-mk="91,92,93">3.加强市场监管。市场监管局与网信等部门，开展联合执法，加强针对性监管；探索新的监管方式，丰富监管手段，提升监管能力。</div><div class="item" data-mk="64,84,85,62,63,87,88,65,66,67,68,69,70,71,72,73,86,89">4.规范行业行为。保留基本功能，删除诱导性的语音提示和支付绑定功能；确保产品质量；针对用户反馈，及时做出处理；推动行业协会出台自律公约。</div><div class="item" data-mk="63">参考答案说明：本参考答案从“完善顶层制度”“引导家长配合”“加强市场监管”“规范行业行为”4个方面对儿童手表市场存在的“问题”提出了解决建议，并进行了分类分条撰写，各条要点之间在内容上是并列关系，没有交叉。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">一、资料中出现的规范词
+消费习惯：是指消费者在日常消费生活中积久形成的某种较为定型化的消费行为模式。表述规范，可直接摘抄，注意积累。
+教学秩序：指的是教学工作中各种重要关系（时间、人物、课程进度）的安排，教学单位（学校）有条不紊活动的状态。此词表述规范，可直接摘抄，注意积累。
+认知偏差：是人们在感知自身、他人或外部环境时，常因自身或情境的原因使得感知结果出现失真的现象。表述规范，可直接摘抄，注意积累。
+人工智能：通常人工智能是指通过普通计算机程序来呈现人类智能的技术。表述规范，可直接摘抄，注意积累。
+虚假宣传：是指在商业活动中经营者利用广告或其他方法对商品或者服务做出与实际内容不相符的虚假信息，导致客户或消费者误解的行为。表述规范，可直接摘抄，注意积累。
+二、在资料中概括出的规范词
+市场监管：是通过一定的措施规范市场行为，维护市场秩序，使资源配置（商品供需、商品交易价格等）符合国家政策法律制度的要求，保护和巩固经营者的关系，进而巩固国家政权、保护公民、法人和其它经济组织的合法权益。比如：资料中出现的“我们将不断探索新的监管方式，丰富监管手段，提高监管专业能力”，说明市场监管局将加强对儿童智能手表市场的监管，推动其规范发展，此类情况可以考虑用此词或类似词进行概括。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">15 分</span><span class="tag wd">≤350 字</span><span class="tag kp">总结类</span></div><p class="stem">“给定资料3”中，海港街道有12个小区获评“五星级平安小区”，请结合材料里该街道管理的成功做法，拟写一份经验交流材料。（15分）</p><p class="req">要求：（1）内容全面；
+（2）逻辑完整，条理清楚；
+（3）不超过350字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键点，明确题型，题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>①由“给定资料3”“请结合材料里……的成功做法，拟写……”，可知本题阅读资料3即可。②由“一份+经验交流材料”可知，本题为公文题，需注意格式，经验交流材料的一般格式为：标题+正文。其中，标题的一般写法为“关于+主题词+的+文种”，也可灵活撰写，突出主题即可；正文的作答思路可为：开头（简单介绍海港街道的多个小区获评“五星级平安小区”的背景等，并添加相应的过渡句引出下文）+主体（重点介绍海港街道的多个小区获评“五星级平安小区”的经验做法等）+结尾（如果字数允许，可以进行总结、展望等），以上作答思路，具体要结合资料进一步确定</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">本段主要介绍海港街道多个小区的获奖情况。阅读“光明区海港街道有12个小区获评‘五星级平安小区’”，总体指出了海港街道管理的成功做法，表述规范，可摘抄出要点：海港街道12个小区获评“五星级平安小区”。</div><div class="bind">✓ 要点：海港街道12个小区获评“五星级平安小区”</div></div><div class="blk"><div class="h">段 2</div><div class="c">本段主要介绍海港街道调解矛盾纠纷。阅读“街道多元化矛盾纠纷调处中心知悉后主动介入，经过调解”“纠纷成功化解”可知，海港街道建立了多元化矛盾纠纷调处中心，帮助基层调解矛盾，化解纠纷，可概括出要点：建立矛盾纠纷调处中心，优化基层调解。</div><div class="bind">✓ 要点：建立矛盾纠纷调处中心，优化基层调解</div></div><div class="blk"><div class="h">段 3</div><div class="c">本段承接上文，继续介绍海港街道调解矛盾纠纷。阅读“多元化矛盾纠纷调处中心以公证机关专业调解为牵引，融合……多元调解为主体，力争将矛盾解决在基层”“成功化解183起纠纷”“接受当事人咨询631人次”可知，调处中心以公证机关为牵引，融合了多个调解主体，解决基层矛盾，提供化解纠纷和咨询服务，可摘抄、概括出要点：公证机关专业调解为牵引，融合多元调解主体，提供咨询调解服务，将矛盾解决在基层。</div><div class="bind">✓ 要点：公证机关专业调解为牵引，融合多元调解主体，提供咨询调解服务，将矛盾解决在基层</div></div><div class="blk"><div class="h">段 4</div><div class="c">本段主要介绍海港街道进行警务管控。（1）“身着高科技装备、驾驶平衡车”“海港街道联合派出所成立了‘闪警别动队’”，提示海港街道联合派出所成立了行动队，配备了高科技装备；“集治安巡逻、反诈宣传、隐患排查、应急处突、便民服务为一体”提示行动队具备治安巡逻等多种功能，可以提供一体化服务。综上，可摘抄、概括出要点：街道联合派出所成立行动队，配备高科技装备，集多功能于一体。（2）阅读“搭载北斗定位系统和360度高清摄像头，与派出所后台监控管理系统相连接，实时传输巡逻现场画面，实现一键报警、智能派警、快速处警”，其中“连接”“传输”等动词提示对策，从中可摘抄出要点：定位系统和摄像头与派出所后台监控管理系统连接，实时传输现场画面，实现一键报警、智能派警、快速处警。</div><div class="bind">✓ 要点：街道联合派出所成立行动队，配备高科技装备，集多功能于一体</div></div><div class="blk"><div class="h">段 6</div><div class="c">段5-6主要介绍海港街道开展安全教育，可合并阅读。（1）阅读段5中的“海港街道安全教育馆迎来一群活泼可爱的小朋友”与段6中的“海港街道安全教育馆运作以来”可知，海港街道建立了安全教育馆，可摘抄出要点：建立安全教育馆。（2）阅读段5中的“蓝天救援队队员为小朋友们讲授水上安全与自救、急救包扎的知识”与段6中的“依托蓝天救援队的专业力量，常态化开展……安全培训、心理危机干预等公益活动”“举办40多场安全培训”可知，安全教育馆借助蓝天救援队的专业力量，常态化开展安全培训、演练等公益活动，可概括出要点：依托专业社会救援组织，常态化开展安全培训等公益活动。（3）阅读段6中的“提高辖区居民的安全意识和安全防范能力”，动词“提高”提示对策，从中可摘抄出要点：提高居民安全意识及能力。</div><div class="bind">✓ 要点：建立安全教育馆</div></div><div class="blk"><div class="h">段 7</div><div class="c">本段主要介绍海港街道加强硬件建设。（1）阅读“崭新的人脸识别系统在单元楼上线”可知，海港街道的小区增添了人脸识别系统，完善了智能安防设施，可概括出要点：新增智能化安防设施。（2）阅读段尾处的“保障居民安全，派出所还牵头修缮了一批老旧防盗门”可知，派出所修缮了小区的防盗设施，保障安全，可摘抄、概括出要点：修缮防盗设施，保障居民安全。</div><div class="bind">✓ 要点：新增智能化安防设施</div></div><div class="blk"><div class="h">段 8</div><div class="c">本段承接上文，继续介绍海港街道加强硬件建设。（1）阅读段首处的“电动车智能充电桩”和段尾处的“开展电动自行车充电设施建设”可知，海港街道的小区增添了电动车充电设施，可摘抄出要点：新增电动自行车充电设施。（2）阅读“消除‘电动车进电梯’而引发的安全隐患”“充分听取居民的诉求，实地勘察小区环境，充分利用小区资源”，其中“消除”“听取”“勘察”“利用”等动词提示对策，从中可摘抄出要点：充分听取民意，实地勘察小区环境，充分利用小区资源，消除安全隐患。</div><div class="bind">✓ 要点：新增电动自行车充电设施</div></div><div class="blk"><div class="h">段 9</div><div class="c">本段主要介绍海港街道开展平安小区建设的结果，未出现具体做法，无要点，可略读。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">整合要点，按照答题框架，组织答案
+【回扣题干，按照答题思路“标题+正文（开头：简单介绍海港街道的多个小区获评“五星级平安小区”的背景，并添加相应的过渡句引出下文+主体：重点介绍海港街道的多个小区获评“五星级平安小区”的经验做法+结尾：简单进行总结展望）”整理要点，适当添加引导语、逻辑关联词，形成答案】
+标题
+【标题的一般写法为“关于+主题词+的+文种”，也可灵活撰写，突出主题即可。本题结合“海港街道建设五星级平安小区”这一主题，可将标题拟为：关于海港街道五星级平安小区建设的经验交流材料】关于海港街道五星级平安小区建设的经验交流材料
+正文
+开头
+【段1总体介绍了海港街道管理的成功做法，可作为背景写在交流材料的开头部分，并添加相应的过渡句引出下文】海港街道12个小区获评“五星级平安小区”，经验有：
+主体
+【段2-3主要介绍了“优化基层调解”方面的内容，可合并为一条】一、优化基层调解。建立矛盾纠纷调处中心，公证机关专业调解为牵引，融合多元调解主体，提供咨询调解服务，将矛盾解决在基层。
+【段4主要介绍了“加强警务管控”方面的内容，可合并为一条】二、加强警务管控。街道联合派出所成立行动队，配备高科技装备，集多功能于一体；定位系统和摄像头与派出所后台监控管理系统连接，实时传输现场画面，实现一键报警、智能派警、快速处警。
+【段5-6主要介绍了“深化安全教育”方面的内容，可合并为一条】三、深化安全教育。建立安全教育馆，依托专业社会救援组织，常态化开展安全培训等公益活动，提高居民安全意识及能力。
+【段7-8主要介绍了“完善硬件设施”方面的内容，可合并为一条】四、完善硬件建设。充分听取民意，实地勘察小区环境，充分利用小区资源，修缮防盗设施，新增智能化安防及电动自行车充电设施，消除安全隐患，保障居民安全。
+结尾
+【资料中未给出明确的总结性内容，字数允许，可结合题干和工作实际进行简单展望】未来，海港街道将持续发力，守护居民平安。</div></div><div class="ref" data-m2r='{"95":0,"94":0,"106":0,"119":0,"122":0,"114":2,"99":2,"139":2,"96":2,"102":2,"137":2,"138":2,"97":2,"98":2,"100":2,"101":2,"103":2,"104":2,"105":2,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"115":2,"116":2,"117":2,"118":2,"120":0,"121":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="95,94,106,119,122,107,108,109,110,111,112,113,120,121,123,124,125,126,127,128,129,130,131,132,133,134,135,136">关于海港街道五星级平安小区建设的经验交流材料</div><div class="item" data-mk="94,95,106,119,122">海港街道12个小区获评“五星级平安小区”，经验有：</div><div class="item" data-mk="114,99,106,139,96,102,137,138,97,98,100,101,103,104,105,115,116,117,118">一、优化基层调解。建立矛盾纠纷调处中心，公证机关专业调解为牵引，融合多元调解主体，提供咨询调解服务，将矛盾解决在基层。二、加强警务管控。街道联合派出所成立行动队，配备高科技装备，集多功能于一体；定位系统和摄像头与派出所后台监控管理系统连接，实时传输现场画面，实现一键报警、智能派警、快速处警。三、深化安全教育。建立安全教育馆，依托专业社会救援组织，常态化开展安全培训等公益活动，提高居民安全意识及能力。四、完善硬件建设。充分听取民意，实地勘察小区环境，充分利用小区资源，修缮防盗设施，新增智能化安防及电动自行车充电设施，消除安全隐患，保障居民安全。</div><div class="item" data-mk="94,106,119,122">未来，海港街道将持续发力，守护居民平安。</div><div class="item" data-mk="95,94,106,119,122">参考答案说明：（1）格式方面，本参考答案写到了“标题”“正文”两个部分。（2）正文部分，一方面从内容上来看，围绕“海港街道建设五星级平安小区”这一主题，本参考答案的开头先总体介绍了海港街道管理的成功做法；接着主体部分从“优化基层调解”“加强警务管控”“深化安全教育”“完善硬件设施”四个方面给出了具体的经验做法；最后结尾部分进行简单总结。另一方面，形式上，本参考答案做到了分段、分条撰写，整体上条理较为清晰。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">资料中出现的规范词
+1.安全教育：安全教育是培养和学习自我保护、远离危险和良好的应急心态的过程。表述规范，可直接摘抄，注意积累。
+2.安全意识：就是人们在生产、生活中，对有可能对自己或他人造成伤害的外在环境条件的一种戒备和警觉的心理状态。表述规范，可直接摘抄，注意积累。
+3安全隐患：意思是在日常的生产过程或社会活动中，由于人的因素，物的变化以及环境的影响等会产生各种各样的问题、缺陷、故障、苗头、隐患等不安全因素。表述规范，可直接摘抄，注意积累。
+4.安全培训：是一种教育与培训活动,旨在提高个人、组织或社会对安全问题的认识和应对能力。表述规范，可直接摘抄，注意积累。
+5.常态化：是一个用于描述一种状态或活动持续发生并达到一定稳定程度的情况的概念。这个概念通常应用于社会、经济等领域,用于描述某种现象的长期性和持续性。表述规范，可直接摘抄，注意积累。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">40 分</span><span class="tag kp">文章写作题</span></div><p class="stem">根据“给定资料4”，以“面子、里子”为话题，联系实际，自选角度，自拟题目，写一篇文章。（40分）</p><p class="req">要求：（1）观点明确，见解深刻。
+（2）参考给定资料，但不拘泥于给定资料。
+（3）思路清晰，语言流畅。
+（4）字数800-1000字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题目的关键信息，去找出文章的主题及其写作角度（即：文章写作的主要话题及切入点）以及资料范围，写作要求等。</div><ul class="key"><li>本题要优先重点阅读资料4，为确保全面，同时要兼顾其他资料</li><li>①要注意紧扣题目给定的“面子、里子”这一话题来写文章，不能偏题；②针对这一主题可以思考的写作角度有：第一、“面子”“里子”具体指什么，有什么特点？第二为什么需要“面子”和“里子”，两者有什么关系，有可能要正面分析两者的重要性，也有可能反面分析存在的问题；第三，如何做到平衡“面子”和“里子”，即对策</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 11</div><div class="c">资料4通过路边摊的事例，解读了“里子”“面子”。（1）阅读段1中的“对于设摊经营、占道经营等行为由以往的全面禁止变为了‘重点区域禁止’，不再‘一禁了之’，引发了网友热议。有网友认为，此举体现民意，但也有人担忧，放开之后，是否会增加管理成本”，段3中的“我们也想过到政府划定的区域去摆摊，但是这些区域都不沿街，摊位费也高，对于我们这样的小摊贩并不合算”，段4中的“让市民读到了一种开放与包容的城市治理气度”“网友们说的最多的一个词即‘烟火气’”，段6中的“缺少了摊贩，这座城市总觉得少了几分灵气和暖意”，段7中的“‘烟火气’管不好，很可能就变成了‘火气’”，段9中的“市民需求关乎‘里子’，市容管理关乎‘面子’”可知，对设摊经营不在“一禁了之”体现了城市包容的气度，让城市有了灵气、烟火气，虽然看不见、摸不到，但是关乎到路边摊主的利益，周边群众的诉求，但同时也可能会加重城市“火气”，因此也要注重城市安全，由此可概括出“里子”的含义：“里子”是城市的气度、灵气、烟火气，是看不见，却涉及城市安全和群众利益的服务、民生诉求等，关乎生活品质。同时，路边摊的放开可能会产生“火气”，影响城市环境，破坏市容市貌，说明“面子”指的是城市外在，是城市的形象，由此可概括出“面子”的含义：“面子”是一座城市的名片，是外在环境，是市容市貌，关乎城市形象。（2）阅读段4中的“法规中对设摊经营不再‘一禁了之’”可知，法规不再只是注重外在环境，更考虑人的需求，体现法规设立人性化；阅读段10中的“夜市星光灿烂，运营和管理成本却不低。一场夜市的背后，除了组织方的精心策划，还涉及多部门的联合行动”，段11中的“摆摊不能‘一禁了之’，但也绝非‘一放了之’”“这都需要更精细的管理体系作为支撑”，进一步指出了对于摆摊要疏堵结合，不能“一禁了之”，也不能“一放了之”，要精细化管理，并加强部门合作，明确权责。总结以上内容，可提炼出兼顾“面子”和“里子”的对策观点：兼顾“面子”与“里子”需要政府疏堵结合，法规设立人性化，管理体系精细化，部门之间加强联动，明确权责。（3）整体阅读并分析资料4可知，对于城市建设而言，“面子”和“里子”两个缺一不可，城市建设既需要干净、整洁的外在环境，也需要安全、包容、有气度，关心群众的诉求内在烟火气，只有这样才能让城市宜居、安全，由此可提炼出“面子”和“里子”的关系观点：“面子”与“里子”看似对立实则统一，是城市建设的一体两面，缺一不可。“面子”“里子”共同构筑幸福、宜居、安全的城市。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">根据第一步的审题、第二步的阅读，确立文章框架
+标题：【体现“面子、里子”这一主题】兼顾里子与面子  留住灵气与暖意
+开头：结合资料阐释城市发展的重要性，如何兼顾“面子”和“里子”促进城市发展等。
+观点1：【资料4中通过路边摊的例子介绍了面子和里子的含义及其重要性，指出了“面子”是外部环境，是城市的外部风貌；“里子”涉及到对群众的服务、对民生的关切，体现城市对市民的“良心”，可整理得到观点1】“面子”是城市的风貌，“里子”则是城市的良心。“面子”是一座城市的名片，是外在环境，是市容市貌，关乎城市形象；“里子”是城市的气度、灵气、烟火气，是看不见，却涉及城市安全和群众利益的服务、民生诉求等，关乎生活品质。【具体论述层次可考虑：（1）城市“面子”的重要性；（2）生活在城市中的人对城市的期望等。】
+观点2：【资料4中通过路边摊的例子介绍了面子和里子的关系，可整理得到观点2】“面子”与“里子”看似对立实则统一，是城市建设的一体两面，缺一不可。“面子”“里子”共同构筑幸福、宜居、安全的城市。【具体论述层次可考虑：（1）城市只重视“面子”或“里子”的危害；（2）如何平衡“面子”和“里子”等。】
+观点3：【资料4中通过路边摊的例子介绍了如何平衡好面子和里子，才能更好管理城市，可整理得到观点3】兼顾“面子”与“里子”需要政府疏堵结合，法规设立人性化，管理体系精细化，部门之间加强联动，明确权责。【具体论述层次可考虑：（1）城市的重要性；（2）如何建设城市等。】
+结尾：回扣主题，适当总结、升华。</div></div><div class="ref" data-m2r='{"141":3,"158":3,"140":4,"159":4,"142":3,"143":3,"144":3,"145":3,"146":3,"147":3,"148":3,"149":3,"150":3,"151":3,"152":3,"153":3,"154":3,"155":3,"156":3,"157":3}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item nomk">兼顾里子与面子 留住灵气与暖意</div><div class="item nomk">一座城市的发展，承载着市民对美好生活的向往，向往的既有城市外在的美丽与繁华，也有内在的温暖与归属。只有二者兼顾，以人为本，才能留住城市的人间烟火气，让民众感受到城市的灵气与暖意。</div><div class="item nomk">“面子”是城市的风貌，“里子”则是城市的良心。“面子”是一座城市的名片，是外在环境，是市容市貌，关乎城市形象；“里子”是城市的气度、灵气、烟火气，是看不见，却涉及城市安全和群众利益的服务、民生诉求等，关乎生活品质。随着生活水平的提升，民众对于城市环境的要求越来越高，优美的景色、完善的硬件、特色的建筑等，也是城市魅力与品味的象征，是市民自信心与归属感的来源。但如果过分追求“面子”，忽视“里子”则会降低市民的幸福感和获得感。因为居于其中，我们更希望一座城市有优质的服务、厚重的人文、便利的生活……</div><div class="item" data-mk="141,158,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157">“面子”与“里子”看似对立实则统一，是城市建设的一体两面，缺一不可。“面子”“里子”共同构筑幸福、宜居、安全的城市。当前，一些城市重金打造城市地标、对夜市摊点“一禁了之”、忽视地下管网建设导致“城市看海”等等，不仅造成国家财力和社会资源的浪费，还损害民众的切身利益，面子有了，却丢了里子。但若在重视“里子”的同时，未做好管理工作，也会让民众心生不满，如夜市开放后，满地散乱的垃圾、难以清理的油垢同样会有损城市的“面子”。所以城市建设不可厚此薄彼，只有内外兼修，城市才是一座健康的生命有机体！</div><div class="item" data-mk="140,141,159,158">兼顾“面子”与“里子”需要政府疏堵结合，法规设立人性化，管理体系精细化，部门之间加强联动，明确权责。游人如织的夜市中，人与人之间有了亲密的交流，城市不再是钢筋水泥的森林，而是成了寄托乡愁，释放压力的归处。但狂欢之时的噪音扰民，狂欢之后的卫生难题，也饱受诟病。如何平衡就要考量政府治理的智慧。一方面政府要以人为本，出台制度，立法疏导。如对于设摊经营、占道经营等行为由以往的全面禁止变为“重点区域禁止”，不再“一禁了之”。当然也不能“一放了之”，所以另一方面，管理者也要不断提升管理水平，统筹规划，建立更加精细化的管理体系，协调各部门通力合作、密切配合。这样才不会让城市的“烟火气”变成“火气”。</div><div class="item nomk">既把“面子”做靓，又要把“里子”做实。只有“面子”“里子”一起抓，才能真正提升城市质感，彰显城市温度，让民众在“光鲜亮丽”中感受城市的活力与美好。</div><div class="item nomk">文章分析</div><div class="item nomk">兼顾里子与面子 留住灵气与暖意</div><div class="item nomk">【标题的优点：首先，范文的标题突出了“面子、里子”这一主题。其次，形式上，文字简洁明快。】</div><div class="item nomk">一座城市的发展，承载着市民对美好生活的向往，向往的既有城市外在的美丽与繁华，也有内在的温暖与归属。只有二者兼顾，以人为本，才能留住城市的人间烟火气，让民众感受到城市的灵气与暖意。</div><div class="item nomk">【开头的优点：★内容方面：范文的开头是紧扣“面子、里子”这一主题展开的。首先指出了城市发展对市民诉求的关系；然后指出了兼顾“面子”和“里子”让城市充满灵气。★文字表达方面：长短句配合使用，使语言表达有节奏感。】</div><div class="item nomk">“面子”是城市的风貌，“里子”则是城市的良心。“面子”是一座城市的名片，是外在环境，是市容市貌，关乎城市形象；“里子”是城市的气度、灵气、烟火气，是看不见，却涉及城市安全和群众利益的服务、民生诉求等，关乎生活品质。随着生活水平的提升，（1）民众对于城市环境的要求越来越高，优美的景色、完善的硬件、特色的建筑等，也是城市魅力与品味的象征，是市民自信心与归属感的来源。（2）但如果过分追求“面子”，忽视“里子”则会降低市民的幸福感和获得感。因为居于其中，我们更希望一座城市有优质的服务、厚重的人文、便利的生活……</div><div class="item nomk">【论述段1的优点：★观点句：范文的观点句是紧扣“面子、里子”这一文章主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出他是围绕“面子”“里子”的含义展开。★论述内容：（1）首先介绍了城市环境（面子）的重要性；（2）介绍了过分追求“面子”带来的危害；（3）介绍了生活在城市的人，对城市的期望——既有面子，又有里子。注意：以上三个方面的内容都是紧扣“‘面子’是城市的风貌，‘里子’则是城市的良心。‘面子’是一座城市的名片，是外在环境，是市容市貌，关乎城市形象；‘里子’是城市的气度、灵气、烟火气，是看不见，却涉及城市安全和群众利益的服务、民生诉求等，关乎生活品质”这个观点句论述的，论述的针对性强，内容层次丰富。在论述方法上采用了讲道理、举例子相结合，做到了丰富多样。】</div><div class="item" data-mk="141,158">“面子”与“里子”看似对立实则统一，是城市建设的一体两面，缺一不可。“面子”“里子”共同构筑幸福、宜居、安全的城市。当前，（1）一些城市重金打造城市地标、对夜市摊点“一禁了之”、忽视地下管网建设导致“城市看海”等等，不仅造成国家财力和社会资源的浪费，还损害民众的切身利益，面子有了，却丢了里子。（2）但若在重视“里子”的同时，未做好管理工作，也会让民众心生不满，如夜市开放后，满地散乱的垃圾、难以清理的油垢同样会有损城市的“面子”。（3）所以城市建设不可厚此薄彼，只有内外兼修，城市才是一座健康的生命有机体！</div><div class="item nomk">【论述段2的优点：★观点句：范文的观点句是紧扣“面子、里子”这一文章主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出他是围绕“面子”与“里子”的关系展开。★论述内容：（1）首先介绍了城市建设只注重“面子”带来的危害；（2）其次介绍了城市建设不重视“面子”带来的危害；（3）最后指出城市建设要内外兼修，平衡“里子”与“面子”。注意：以上三个方面的内容都是紧扣“‘面子’与‘里子’看似对立实则统一，是城市建设的一体两面，缺一不可。‘面子’‘里子’共同构筑幸福、宜居、安全的城市”这个观点句论述的，论述的针对性强，内容层次丰富。在论述方法上采用了讲道理、举例子相结合，做到了丰富多样。】</div><div class="item" data-mk="140,141,159,158">兼顾“面子”与“里子”需要政府疏堵结合，法规设立人性化，管理体系精细化，部门之间加强联动，明确权责。（1）游人如织的夜市中，人与人之间有了亲密的交流，城市不再是钢筋水泥的森林，而是成了寄托乡愁，释放压力的归处。但狂欢之时的噪音扰民，狂欢之后的卫生难题，也饱受诟病。如何平衡就要考量政府治理的智慧。（2）一方面政府要以人为本，出台制度，立法疏导。如对于设摊经营、占道经营等行为由以往的全面禁止变为“重点区域禁止”，不再“一禁了之”。（3）当然也不能“一放了之”，所以另一方面，管理者也要不断提升管理水平，统筹规划，建立更加精细化的管理体系，协调各部门通力合作、密切配合。这样才不会让城市的“烟火气”变成“火气”。</div><div class="item" data-mk="159">【论述段3的优点：★观点句：范文的观点句是紧扣“面子、里子”这一文章主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出他是围绕“如何兼顾‘面子’与‘里子’”展开。★论述内容：（1）城市作用；（2）如何建设城市——以人为本，出台制度；（3）如何建设城市——统筹规划，精细化管理。注意：以上三个方面的内容都是紧扣“兼顾‘面子’与‘里子’需要政府疏堵结合，法规设立人性化，管理体系精细化，部门之间加强联动，明确权责”这个观点句论述的，论述的针对性强，内容层次丰富。在论述方法上采用了讲道理、举例子相结合，做到了丰富多样。】</div><div class="item nomk">既把“面子”做靓，又要把“里子”做实。只有“面子”“里子”一起抓，才能真正提升城市质感，彰显城市温度，让民众在“光鲜亮丽”中感受城市的活力与美好。</div><div class="item nomk">【结尾的优点：范文的结尾回扣了“面子、里子”这个主题，并且进行了总结提升。】</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">本题的主题为“面子、里子”，可进行拓展的内容有：
+一、与主题相关的名言金句
+1.观于城中，众流贯州，吐吸震泽，小浜别派，旁夹路衢，盖不如是，无以泄积潦安居民也。
+——朱长文《吴郡图经续记》
+2.要提高城市治理水平，推动治理手段、治理模式、治理理念创新，加快建设智慧城市，率先构建经济治理、社会治理、城市治理统筹推进和有机衔接的治理体系。
+——2020年11月12日，习近平在浦东开发开放30周年庆祝大会上的讲话
+3.言非法度不出于口，行非公道不萌于心。
+——杨炯杜袁州墓志铭
+4.不论处在什么发展水平上，制度都是社会公平正义的重要保证。
+——党的第十六届六中全会
+5.取之有度，用之有节,则常足。取之无度，用之不节，则常不足。
+——司马光《资治通鉴》
+二、与主题相关的典型事例
+1.唐代：详细规定，保护环境
+唐朝的统治者十分重视国土的开发利用与环境的整治问题。官员们事无巨细地将山林川泽、打猎、城市绿化、污水排放等都纳入政府职责的管理范围内，甚至还通过设置“自然环境保护区”的方式来保护生态资源与自然环境。除此之外，唐朝甚至还用法律的形式规定了保护环境的措施以及对环境破坏者的惩戒。这些措施不仅保护了祖国的大好河山，还为大唐盛世的繁荣打下坚实的基础，而这种超前的自然生态思想一直沿用至今，对后世的绿色发展理念产生了深远影响
+2.江苏：加强城市基础设施安全防护工作
+2021年夏天，台风“烟花”来势汹汹。面对严峻的防汛抗台形势，江苏政府与群众团结一心，众志成城，共同抗灾。执行部门将所有基建设施通过调试都达到最佳状态，加强对水利工程基建的精准指挥调度，同时确保了道路抢险应急设备充足，防止城市内涝，并且迅速开展地铁安全自查与整改，严格落实地铁安全防范工作，从根本上提高地铁运行安全管理水平，确保城市重要基础设施安全可靠。</div></div></div></div>
+</div>
+<div id="nav">
+  <button type="button" id="prev">← 上一题</button>
+  <button type="button" id="next">下一题 →</button>
+</div>
+<script>
+(function(){
+  var fatal = function(m){
+    var d = document.getElementById('fatal');
+    if(d){ d.hidden = false; d.textContent = '页面脚本出错：' + m; }
+  };
+  window.onerror = function(m){ fatal(m); };
+
+  // ---------- 题号切换 ----------
+  var cur = 0;
+  var qbtns = Array.prototype.slice.call(document.querySelectorAll('#qs button'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.qwrap'));
+
+  function show(i){
+    if(i < 0 || i >= cards.length) return;
+    cur = i;
+    cards.forEach(function(c, k){ c.hidden = (k !== i); });
+    qbtns.forEach(function(b, k){ b.classList.toggle('on', k === i); });
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+    if(prev) prev.disabled = (i === 0);
+    if(next) next.disabled = (i === cards.length - 1);
+    try{ localStorage.setItem('sl_reader_q', String(i)); }catch(e){}
+    window.scrollTo(0, 0);
+    var L = document.getElementById('left'), R = document.getElementById('right');
+    if(L) L.scrollTop = 0;
+    if(R) R.scrollTop = 0;
+  }
+  qbtns.forEach(function(b, k){ b.onclick = function(){ show(k); }; });
+  var p = document.getElementById('prev'), n = document.getElementById('next');
+  if(p) p.onclick = function(){ show(cur - 1); };
+  if(n) n.onclick = function(){ show(cur + 1); };
+
+  // ---------- 划线 ↔ 要点 双向联动 ----------
+  function flash(el){
+    if(!el) return;
+    el.classList.add('on');
+    setTimeout(function(){ el.classList.remove('on'); }, 1600);
+  }
+  function scrollToEl(el, box){
+    if(!el || !box) return;
+    var top = el.offsetTop - box.offsetTop - 90;
+    if(box === document.body || box === document.documentElement){
+      window.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }else{
+      box.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }
+  }
+
+  var L = document.getElementById('left'), R = document.getElementById('right');
+  var wide = function(){ return window.matchMedia('(min-width:700px)').matches; };
+
+  // 点材料划线 → 高亮所有以它为来源的答案要点
+  document.addEventListener('click', function(e){
+    var mk = e.target.closest ? e.target.closest('mark.hl') : null;
+    if(mk){
+      var id = mk.getAttribute('data-m');
+      var box = mk.closest('.qwrap') || document;
+      // 优先用当前可见题
+      var vis = document.querySelector('.qwrap:not([hidden])');
+      var refBox = vis ? vis.querySelector('.ref') : null;
+      var first = null;
+      var found = 0;
+      if(refBox){
+        refBox.querySelectorAll('.item[data-mk]').forEach(function(el){
+          var ids = (el.getAttribute('data-mk') || '').split(',');
+          if(ids.indexOf(id) >= 0){ flash(el); if(!first) first = el; found++; }
+        });
+        // 兜底：用反向索引 mark2ref
+        if(found === 0){
+          var m2r = {};
+          try{ m2r = JSON.parse(refBox.getAttribute('data-m2r') || '{}'); }catch(_){}
+          var ri = m2r[id];
+          if(ri !== undefined && ri !== null){
+            var items = refBox.querySelectorAll('.item');
+            if(items[ri]){ flash(items[ri]); first = items[ri]; found = 1; }
+          }
+        }
+      }
+      if(first) scrollToEl(first, wide() ? R : document.documentElement);
+      return;
+    }
+    // 点答案要点 → 材料里所有来源划线一起闪
+    var it = e.target.closest ? e.target.closest('.ref .item') : null;
+    if(it){
+      var list = (it.getAttribute('data-mk') || '').split(',').filter(Boolean);
+      if(!list.length) return;
+      var firstMk = null;
+      list.forEach(function(mid){
+        var t2 = document.querySelector('mark.hl[data-m="' + mid + '"]');
+        if(t2){ flash(t2); if(!firstMk) firstMk = t2; }
+      });
+      if(firstMk) scrollToEl(firstMk, wide() ? L : document.documentElement);
+    }
+  });
+
+  // ---------- 记忆上次题号 ----------
+  try{
+    var s = localStorage.getItem('sl_reader_q');
+    if(s !== null) show(parseInt(s, 10) || 0); else show(0);
+  }catch(e){ show(0); }
+})();
+</script>
+</body>
+</html>

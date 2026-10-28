@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f3">
+<title>2026 · 省考（网友回忆版）</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:#f5f5f3;color:#1f2937;
+  font:16px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+a{color:#2563eb}
+
+/* ---------- 吸顶条 ---------- */
+#bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;
+  padding:8px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#bar .nm{font-weight:700;font-size:14px;flex:1;min-width:110px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#bar a.back{font-size:13px;text-decoration:none;color:#6b7280;flex:0 0 auto}
+#qs{display:flex;gap:5px;overflow-x:auto;flex:0 0 auto}
+#qs button{border:1px solid #d1d5db;background:#fff;border-radius:8px;
+  padding:5px 11px;font-size:13px;color:#374151;cursor:pointer;white-space:nowrap}
+#qs button.on{background:#2563eb;border-color:#2563eb;color:#fff;font-weight:700}
+
+/* ---------- 主体 ---------- */
+#wrap{display:block;max-width:1500px;margin:0 auto}
+#left,#right{padding:14px 16px 90px}
+
+/* ---------- 题目卡 ---------- */
+.qcard{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.qcard .meta{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 9px}
+.tag{font-size:12px;padding:2px 9px;border-radius:99px;font-weight:700}
+.tag.sc{background:#fef3c7;color:#92400e}
+.tag.wd{background:#dbeafe;color:#1e40af}
+.tag.kp{background:#dcfce7;color:#166534}
+.qcard .stem{font-size:16px;font-weight:600;line-height:1.8;margin:0 0 8px}
+.qcard .req{font-size:14px;color:#6b7280;margin:0}
+
+/* ---------- 材料 ---------- */
+h3.sec{font-size:13px;color:#6b7280;font-weight:700;letter-spacing:.5px;
+  margin:18px 0 8px;padding-left:8px;border-left:3px solid #2563eb}
+.matbox{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.matbox h4{font-size:13px;color:#2563eb;margin:0 0 10px;font-weight:700}
+p.mt{margin:0 0 11px;text-align:justify;font-size:16.5px;line-height:1.95;
+  text-indent:2em}
+mark.hl{background:#fff3bf;border-bottom:2px solid #f0b429;
+  padding:1px 1px;border-radius:2px;cursor:pointer;transition:background .25s}
+mark.hl.on{background:#ffd43b;box-shadow:0 0 0 2px #fab005}
+mark.hl:after{content:attr(data-m);font-size:9px;color:#b45309;
+  vertical-align:super;margin-left:1px;font-weight:700}
+
+/* ---------- 详解 ---------- */
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.step h4{margin:0 0 10px;font-size:14.5px;color:#1f2937;font-weight:700;
+  display:flex;align-items:center;gap:7px}
+.step h4 .n{display:inline-flex;width:22px;height:22px;border-radius:50%;
+  background:#2563eb;color:#fff;font-size:12px;align-items:center;
+  justify-content:center;flex:0 0 auto}
+.step .body{font-size:15.5px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+.step.s1{border-left:4px solid #2563eb}
+.step.s2{border-left:4px solid #10b981}
+.step.s3{border-left:4px solid #f59e0b}
+.step.s4{border-left:4px solid #ef4444}
+.step.s5{border-left:4px solid #8b5cf6}
+
+/* 逐段讲解 */
+.blk{border:1px solid #e5e7eb;border-radius:10px;margin:0 0 10px;
+  overflow:hidden}
+.blk .h{background:#f9fafb;padding:8px 12px;font-size:13px;font-weight:700;
+  color:#374151;border-bottom:1px solid #e5e7eb}
+.blk .c{padding:10px 12px;font-size:15px;line-height:1.9;color:#4b5563}
+.blk .c.topic{padding-top:0;font-size:14.5px;color:#6b7280;
+  border-top:1px dashed #e5e7eb;margin-top:0}
+.blk .bind{background:#f0fdf4;border-top:1px solid #bbf7d0;
+  padding:9px 12px;font-size:14.5px;color:#166534;font-weight:600}
+
+/* 审题要点列表 */
+ul.key{margin:0;padding-left:20px}
+ul.key li{margin:0 0 7px;font-size:15px;line-height:1.9;color:#374151}
+p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
+
+.ref{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ref .item{padding:9px 0;border-bottom:1px dashed #e5e7eb;font-size:15.5px;
+  line-height:1.9;cursor:pointer}
+.ref .item:last-child{border:0}
+.ref .item.on{background:#fff3bf;border-radius:6px;padding-left:8px;
+  margin-left:-8px}
+
+.warn{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;
+  padding:11px 14px;font-size:14px;color:#991b1b;margin:0 0 12px}
+
+/* ---------- 底部翻页 ---------- */
+#nav{position:fixed;bottom:0;left:0;right:0;z-index:40;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(8px);
+  border-top:1px solid #e5e7eb;padding:8px 12px;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom));
+  display:flex;gap:8px}
+#nav button{flex:1;border:1px solid #d1d5db;background:#fff;border-radius:10px;
+  padding:10px;font-size:14px;font-weight:600;color:#374151;cursor:pointer}
+#nav button:disabled{opacity:.4}
+
+/* ---------- 平板 / 桌面：左右分栏 ---------- */
+@media(min-width:700px){
+  #wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;
+    height:calc(100vh - 52px)}
+  #left,#right{overflow-y:auto;height:100%;padding:18px 20px 90px}
+  #left{border-right:1px solid #e5e7eb}
+  body{font-size:16.5px}
+  p.mt{font-size:17px}
+  #nav{max-width:1500px;margin:0 auto}
+}
+@media(min-width:1200px){
+  #wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+}
+/* ---------- 打印 ---------- */
+@media print{
+  #bar,#nav,#tocBtn{display:none}
+  #wrap{display:block;height:auto}
+  #left,#right{overflow:visible;height:auto}
+  mark.hl{background:#fff3bf}
+}
+/* ---------- 白屏兜底 ---------- */
+#fatal{position:fixed;top:0;left:0;right:0;z-index:999;background:#dc2626;
+  color:#fff;padding:10px 14px;font-size:13px}
+
+/* ==================== AI 批注 ==================== */
+.aihint{background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0284c7;
+  border-radius:10px;padding:11px 14px;margin:16px 0 12px;
+  font-size:13.5px;line-height:1.85;color:#075985}
+.aihint b{color:#0369a1}
+.ai{background:#fbfaff;border:1px solid #e0dbff;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ai.extra{background:#fffbf5;border-color:#ffe0b2}
+.ai h4{margin:0 0 11px;font-size:14.5px;color:#4c1d95;font-weight:700;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ai.extra h4{color:#9a3412}
+.ai h4 .an{display:inline-flex;height:19px;padding:0 7px;border-radius:5px;
+  background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;
+  font-size:10.5px;font-weight:800;align-items:center;letter-spacing:.5px}
+.ai.extra h4 .an{background:linear-gradient(135deg,#ea580c,#f59e0b)}
+.ai h4 .sub{font-size:11.5px;color:#9ca3af;font-weight:400;letter-spacing:0}
+
+/* 通用正文 */
+.ai .prose{font-size:15px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+
+/* 表格通用 */
+.ai table{width:100%;border-collapse:collapse;font-size:13.5px;
+  background:#fff;border-radius:8px;overflow:hidden;
+  table-layout:fixed}
+.ai table th{background:#f3f0ff;color:#5b21b6;font-weight:700;
+  text-align:left;padding:8px 10px;border-bottom:1px solid #ddd6fe;
+  font-size:12.5px;white-space:normal;word-break:break-word}
+.ai table td{padding:9px 10px;border-bottom:1px solid #f1f0f7;
+  vertical-align:top;line-height:1.8;color:#4b5563;
+  word-break:break-word;white-space:normal;overflow-wrap:anywhere}
+.ai table tr:last-child td{border-bottom:0}
+.tstem td.w{font-weight:700;color:#1f2937;font-size:14px;word-break:break-all}
+.tstem td.act{color:#065f46;background:#f0fdf4}
+.tstem .ty{display:inline-block;padding:1px 7px;border-radius:99px;
+  font-size:11px;font-weight:700;background:#ede9fe;color:#5b21b6;
+  word-break:break-word}
+.ttrace td.pt{font-weight:600;color:#1f2937}
+.ttrace td.src{white-space:normal}
+.ttrace code{display:inline-block;background:#f3f4f6;border-radius:4px;
+  padding:1px 5px;font-size:11.5px;color:#6d28d9;margin:0 3px 2px 0;
+  font-family:inherit}
+
+/* 列宽（用 colgroup 不好控制，直接给 th 定宽） */
+.tstem th:nth-child(1){width:17%}
+.tstem th:nth-child(2){width:16%}
+.tstem th:nth-child(3){width:36%}
+.tstem th:nth-child(4){width:31%}
+.ttrace th:nth-child(1){width:27%}
+.ttrace th:nth-child(2){width:18%}
+.ttrace th:nth-child(3){width:55%}
+
+/* 材料结构图 */
+.mmwrap{display:flex;flex-direction:column;gap:8px}
+.mm{border:1px solid #e5e7eb;border-radius:9px;overflow:hidden;background:#fff}
+.mm.pt{border-left:4px solid #10b981}
+.mm.no{border-left:4px solid #d1d5db;opacity:.85}
+.mmh{display:flex;align-items:center;gap:8px;padding:7px 11px;
+  background:#fafafa;border-bottom:1px solid #f1f0f7;flex-wrap:wrap}
+.mmh b{font-size:13px;color:#1f2937}
+.mmb{font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px}
+.mm.pt .mmb{background:#d1fae5;color:#065f46}
+.mm.no .mmb{background:#f3f4f6;color:#6b7280}
+.mmr{padding:7px 11px 2px;font-size:13px;color:#374151;font-weight:600}
+.mmw{padding:0 11px 9px;font-size:13.5px;color:#6b7280;line-height:1.8}
+
+/* 找点六步 */
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{position:relative;padding:0 0 12px 30px;
+  border-left:2px dashed #ddd6fe;margin-left:9px}
+.steps li:last-child{border-left:0;padding-bottom:0}
+.steps li:before{counter-increment:s;content:counter(s);
+  position:absolute;left:-10px;top:0;width:19px;height:19px;
+  border-radius:50%;background:#7c3aed;color:#fff;font-size:11px;
+  font-weight:700;display:flex;align-items:center;justify-content:center}
+.sh{font-size:14px;font-weight:700;color:#5b21b6;margin:0 0 5px}
+.st,.ss{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ss{color:#6b7280}
+.lb{display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;
+  border-radius:4px;background:#ede9fe;color:#6d28d9;margin-right:6px}
+.ss .lb{background:#f3f4f6;color:#6b7280}
+
+/* 陷阱 */
+.traps{display:flex;flex-direction:column;gap:9px}
+.trap{background:#fff;border:1px solid #fecaca;border-radius:9px;
+  padding:10px 12px}
+.th{font-size:13.5px;font-weight:700;color:#991b1b;margin:0 0 6px;
+  line-height:1.7}
+.tw2,.ta{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ta{color:#065f46}
+.tw2 .lb{background:#fee2e2;color:#991b1b}
+.ta .lb{background:#d1fae5;color:#065f46}
+
+@media(max-width:520px){
+  .ai{padding:12px 12px}
+  .ai table{font-size:12.5px}
+  .ai table th,.ai table td{padding:7px 8px}
+  .ttrace td.pt{width:auto}
+  .ttrace td.src{width:auto}
+}
+</style>
+</head>
+<body>
+<div id="fatal" hidden></div>
+<div id="bar">
+  <a class="back" href="./index.html">←</a>
+  <span class="nm">2026 · 省考（网友回忆版）</span>
+  <div id="qs"><button type="button">第1题</button><button type="button">第2题</button><button type="button">第3题</button><button type="button">第4题</button></div>
+</div>
+<div id="wrap">
+  <div id="left"><h3 class="sec">材料原文 · 划线为粉笔标注的答案来源句</h3><div class="matbox"><h4>材料 1</h4><p class="mt">1.走进P市D区繁华商圈，一抹亮眼的“市监蓝”格外醒目——这是<mark class="hl" data-m="1" data-seq="1" data-q="1">全省首创的“食安小站</mark>”。2022年，D区市场监管局<mark class="hl" data-m="2" data-seq="2" data-q="1">在商圈集中区域设立了2个</mark>“<mark class="hl" data-m="3" data-seq="3" data-q="1">零距离</mark>”<mark class="hl" data-m="4" data-seq="4" data-q="1">监管服务站</mark>，<mark class="hl" data-m="5" data-seq="5" data-q="1">开启了</mark>“<mark class="hl" data-m="6" data-seq="6" data-q="1">微小所</mark>”<mark class="hl" data-m="7" data-seq="7" data-q="1">进驻综合商业体的</mark>“<mark class="hl" data-m="8" data-seq="8" data-q="1">智慧监管</mark>”<mark class="hl" data-m="9" data-seq="9" data-q="1">新模式</mark>。备案办证、投诉举报、科普咨询……<mark class="hl" data-m="10" data-seq="10" data-q="1">群众办事</mark>“<mark class="hl" data-m="11" data-seq="11" data-q="1">零跑腿</mark>”，<mark class="hl" data-m="12" data-seq="12" data-q="1">商户难题</mark>“<mark class="hl" data-m="13" data-seq="13" data-q="1">一站解</mark>”。小站外墙的“<mark class="hl" data-m="14" data-seq="14" data-q="1">智慧监管窗口”更显科技范儿</mark>：<mark class="hl" data-m="15" data-seq="15" data-q="1">后厨操作实时直播</mark>、<mark class="hl" data-m="16" data-seq="16" data-q="1">违规行为智能抓拍</mark>、<mark class="hl" data-m="17" data-seq="17" data-q="1">远程喊话即时纠正</mark>，让食品安全隐患无处遁形。这里不仅是监管前哨，还是知识产权服务点、普法课堂和党群活动阵地。</p><p class="mt">D区市场监管局<mark class="hl" data-m="18" data-seq="18" data-q="1">制定出台了</mark>《<mark class="hl" data-m="19" data-seq="19" data-q="1">保健食品沙盒监管基本规则</mark>》<mark class="hl" data-m="20" data-seq="20" data-q="1">等17项配套制度</mark>，<mark class="hl" data-m="21" data-seq="21" data-q="1">形成</mark>“备案-检查-处置-反馈”<mark class="hl" data-m="22" data-seq="22" data-q="1">管理闭环机制</mark>。截至2025年9月，累计识别违规线索127条，立案查处7起，罚没款9.62万元，行业发案率显著下降。针对老年人关注的保健品乱象，D区<mark class="hl" data-m="23" data-seq="23" data-q="1">建立起</mark>事先“装进粗沙”、事中“选出细沙”、事后“留住精沙”的<mark class="hl" data-m="24" data-seq="24" data-q="1">保健食品</mark>“<mark class="hl" data-m="25" data-seq="25" data-q="1">沙盒监管</mark>”<mark class="hl" data-m="26" data-seq="26" data-q="1">机制</mark>，有效遏制了保健食品行业“劣币驱逐良币”的乱象。</p><p class="mt">2.来到P市Q县罗城镇的一家点心小作坊，干净整洁的生产环境让人眼前一亮。老板张女士正忙着检查刚刚制作好的牛轧糖。她感慨道：“之前小店刚尝试线上销售时，卫生、包装等方面都做得不到位，销量一直上不去，还经常收到差评。后来<mark class="hl" data-m="27" data-seq="27" data-q="1">参加了县里组织的培训并认真整改</mark>，还把店内环境通过平台展示出来，现在好评越来越多，销量也明显提高了。”</p><p class="mt">近年来，针对全县食品小作坊分布广、规模小、基础弱的现状，Q县市场监管局<mark class="hl" data-m="28" data-seq="28" data-q="1">建立</mark>“<mark class="hl" data-m="29" data-seq="29" data-q="1">一坊一策</mark>”<mark class="hl" data-m="30" data-seq="30" data-q="1">精准帮扶机制</mark>，通过<mark class="hl" data-m="31" data-seq="31" data-q="1">分批开展法规培训</mark>、<mark class="hl" data-m="32" data-seq="32" data-q="1">分层实施技术指导和分类制定改造标准</mark>，<mark class="hl" data-m="33" data-seq="33" data-q="1">推动小作坊向标准化</mark>、<mark class="hl" data-m="34" data-seq="34" data-q="1">规范化转型</mark>。同时，Q县市场监管局还<mark class="hl" data-m="35" data-seq="35" data-q="1">联合食品行业协会组建专家服务团</mark>，<mark class="hl" data-m="36" data-seq="36" data-q="1">深入作坊生产一线开展“体检式”帮扶</mark>，重点围绕功能区布局优化、生产设备升级、卫生管理规范等关键环节，指导业主落实“三区分离”（生产区、生活区、仓储区独立设置），配置消毒灭菌设备，完善原料溯源体系。截至目前，全县已完成146家小作坊的提档升级，改造后作坊生产环境达标率实现100%。</p><p class="mt">3.位于P市经开区的电子科技学院食堂内，“<mark class="hl" data-m="37" data-seq="37" data-q="1">消费维权服务岗”的标牌格外显眼</mark>。市场监管所罗所长定期带着服务岗团队“打卡”后厨——食材票据逐项核对、留样冰箱温度精准监测等样样较真。监管所<mark class="hl" data-m="38" data-seq="38" data-q="1">设立的</mark>“<mark class="hl" data-m="39" data-seq="39" data-q="1">投诉直通车</mark>”，只需一通电话、一次来访，维权诉求就可当天受理、三天内反馈。曾有学生反映菜品口味异常，服务岗立即启动“回头看”，从原料检测到烹饪流程全程复盘，最终用详尽的检测报告消除了疑虑。</p><p class="mt">P市还<mark class="hl" data-m="40" data-seq="40" data-q="1">活跃着一支2000余人的食品安全义务监督员队伍</mark>，<mark class="hl" data-m="41" data-seq="41" data-q="1">涵盖人大代表</mark>、<mark class="hl" data-m="42" data-seq="42" data-q="1">政协委员</mark>、<mark class="hl" data-m="43" data-seq="43" data-q="1">外卖骑手</mark>、<mark class="hl" data-m="44" data-seq="44" data-q="1">食品生产经营从业者等多元群体</mark>。早餐摊的油品来源是否合规，火锅店的餐具消毒是否到位……这些问题都逃不过他们的“火眼金睛”。“以前总觉得监管是政府的事，现在自己也成了守护食品安全的‘啄木鸟’！”经营便利店的义务监督员王大姐笑着说。</p><p class="mt">P市经开区<mark class="hl" data-m="45" data-seq="45" data-q="1">依托该市餐饮协会建立“1+N”传帮带机制</mark>，<mark class="hl" data-m="46" data-seq="46" data-q="1">构建</mark>“<mark class="hl" data-m="47" data-seq="47" data-q="1">协会</mark>+<mark class="hl" data-m="48" data-seq="48" data-q="1">标杆餐饮服务单位</mark>+<mark class="hl" data-m="49" data-seq="49" data-q="1">街区餐饮服务单位</mark>”<mark class="hl" data-m="50" data-seq="50" data-q="1">的指导模式</mark>。他们联合开展人员培训、实地指导业务，还组织普通餐饮企业到标杆企业现场学习。标杆餐饮店化身“导师”，带着街区商户学规范、练技能。商户老李笑道：“以前总怕检查，现在跟着标杆店学，咱自己也成了‘优等生’！”如今，街区餐饮单位风险评级已全部达标，食客们吃得放心，商家更添底气。</p><p class="mt">4.P市L区市场监管局指挥中心的电子大屏上，实时跳动着食品安全执法数据，工作人员轻点鼠标，案件卷宗即可自动生成。通过<mark class="hl" data-m="51" data-seq="51" data-q="1">前端监管数据自动分析预警</mark>、<mark class="hl" data-m="52" data-seq="52" data-q="1">执法全流程自动跟踪预警</mark>、<mark class="hl" data-m="53" data-seq="53" data-q="1">案件趋势自动分析预警推送</mark>等方法，L区已<mark class="hl" data-m="54" data-seq="54" data-q="1">实现市场监管与食品安全行政执法无缝对接闭环</mark>。某餐饮店监控捕捉到操作人员未佩戴口罩，系统即刻触发预警，执法人员的平板电脑同步弹出任务提示。“从发现到处置，全程不超过2小时。”执法人员指着屏幕上实时更新的数据介绍，经营主体信息、监管执法信息、区域经济发展信息等多维度数据汇总入库，形成区域经济发展、经营主体培育、市场监管执法“三维立体画像”，清晰呈现于大屏之上。</p><p class="mt">凌晨5点，位于L区的农产品中心批发市场灯火通明，商户老张将一筐青椒搬上电子秤，智能终端随即“吐”出一张带有<mark class="hl" data-m="55" data-seq="55" data-q="1">二维码的溯源单</mark>。“<mark class="hl" data-m="56" data-seq="56" data-q="1">扫一扫</mark>，<mark class="hl" data-m="57" data-seq="57" data-q="1">生产基地</mark>、<mark class="hl" data-m="58" data-seq="58" data-q="1">检测报告全都看得见</mark>！”他熟练地向采购商展示。在这个西南最大的“菜篮子”，<mark class="hl" data-m="59" data-seq="59" data-q="1">每棵蔬菜都拥有</mark>“<mark class="hl" data-m="60" data-seq="60" data-q="1">数字身份证</mark>”。“以前买菜靠经验，现在手机一扫，连施肥记录都能查到，买得明白、吃得安心。”市民李阿姨边扫码边说。</p></div><div class="matbox"><h4>材料 2</h4><p class="mt">1.峨眉山不只是一座山。这里还坐落着报国寺、万年寺等293处不可移动文物，珍藏着贝叶经、上古佛牙等5051件可移动文物，传承着峨眉武术等84项非物质文化遗产。1996年12月，峨眉山被列入《世界自然与文化遗产名录》，成为全人类共同的瑰宝。<br>2021年，峨眉山市检察院组建起一支特殊“战队”——“益·峨眉”文旅检察办案团队（以下简称办案团队），由副检察长牵头，汇聚公益诉讼骨干、刑事办案“老兵”、行政检察能手，还从法院民事审判庭引进“新兵”，再配上懂技术的无人机飞手……他们像一支“司法特种部队”，持续守护峨眉山的万物生灵、历史古迹与游人安全。<br>办案团队从行政机关聘请文物、文化、安全等领域的多名专家担任特约检察官助理，吸纳38名网格员兼任文旅检察观察员，借助无人机航拍、三维影像建模、食品药品快速检测等科技手段，大幅提升办案精度与效率，创新推出“随手拍”扫码举报平台，让每一位游客都成为世界遗产的守护者。<br>2025年3月，“随手拍”收到一条群众举报线索：“大庙飞来殿梁柱下沉，瓦片松动”。办案团队立即联系特约检察官助理、文物专家老戴赶到现场查看，发现这座古建筑因雨水侵蚀，已出现椽木糟朽、檐口变形等严重安全隐患。类似问题也出现在双峨客栈、普兴祝家大院、灵岩寺牌坊……“这些破损都是不可逆的，再不维修就真的没了。”老戴语气中充满担忧。经深入调查，4月11日，峨眉山市检察院向相关部门及乡镇发出检察建议，督促其履行保护职责。与此同时，办案团队还专门给他们讲解文物保护法，厘清职责、明确标准，帮助其依法整改，并推动峨眉山景区管委会文物保护管理局制定《峨眉山古建筑群保护规划》。<br>2.2020年冬天，农民孙某在自家院坝发现一只“和家鹅打架”的大鸟，将其捕杀食用，还用羽毛装饰土墙。后来他才知道，那是国家一级保护野生动物黑颈鹤，评估价值为8万元。因孙某涉嫌非法捕杀国家重点保护的珍贵、濒危野生动物，破坏了野生动物资源，损害了社会公共利益，峨眉山市检察院依法对其提起公诉，同时提起刑事附带民事公益诉讼。<br>审查期间，办案团队得知，孙某家境贫困，妻子患病，母亲年迈卧床，根本无力承担民事赔偿责任，若机械执法，这个家可能就垮了。经多次走访孙某所在乡镇、村社及派出所和司法所，全面开展社会调查，办案检察官了解到，孙某平时表现良好，此次纯属无知误犯。结合实际情况，峨眉山市检察院建议以危害珍贵、濒危野生动物罪判处孙某有罪，适用缓刑，获法院采纳。办案团队通过检索类案，比对公益性岗位劳务收益，并与镇政府反复沟通，最终制定出一份“劳务代偿”方案，孙某以劳动折算抵扣赔偿。<br>2021年以来，办案团队办理环境资源保护刑事案件36件，提起刑事附带民事公益诉讼10余件，持续开展古树名木和特有物种保护专项监督活动，完善534株古树长效保护机制，以检察履职护航景区全年禁猎。办案团队穿行于密林深涧，实地勘查、采集样本，悉心跟踪监测山溪鲵的游迹、桢楠树的年轮，邀约专家科学评估生态修复的每一寸进展……<br>3.2024年，办案团队将目光投向了盲道，这些盲道有的被窨井粗暴截断，有的被临时停车位占据，还有的被水泥补丁覆盖。“这关系视障游客的出行安全，每处隐患都可能是一次事故的起点。”办案团队成员说。他们迅速开展现场勘验，固定盲道铺设不规范、破损毁坏、修复不规范等证据，及时协调住房和城乡建设局、相关乡镇（街道）等，明确监管职责，同时报请检察院，于2024年7月依法对相关部门提起行政公益诉讼并发出检察建议。如今，这些盲道如同一条条纽带，让视障游客也能安心触摸峨眉的山水之美。<br>针对游客住宿和消防安全问题，办案团队督促景区内300余家民宿酒店完成安全风险自查，推动多部门联合整治“树线矛盾”，整改输配电线路隐患122处，推动安装小微火源监测监控设备，建成古建筑智慧用电安全监测预警系统。办案团队还推动出台《关于进一步加强流通环节散装食品监管的通知》，建立散装食品质量监管长效机制，并监督相关部门开展虚假宣传、食品储存不规范等专项整治。<br>世界环境日、宪法宣传日等重要节点，团队成员还活跃于游客较多的地方，通过互动小游戏，让游客在趣味问答中学习文物保护、动植物保护、食品安全等法律知识。办案团队与峨眉山博物馆联合打造全省首个检馆共建的“文物和文化遗产法治教育示范基地”，成为“普法+科普”融合的创新典范。2024年5月17日，“检察官的博物馆奇妙日·云游峨眉山博物馆”全网直播活动成功举办，创下逾70万次的单场观看纪录。</p></div><div class="matbox"><h4>材料 3</h4><p class="mt">1.社区矫正，是让符合法定条件的罪犯在社会环境中执行刑罚，由司法行政机关牵头，多部门合作，社会组织、志愿者等多方参与，对社区矫正对象进行监督、管理、教育和帮扶，帮助其矫正行为、融入社会，最大限度减少刑罚对其正常生活的冲击。<br>根据《中华人民共和国社区矫正法》，被判处管制、被宣告死刑、被裁定假释、被决定暂予监外执行的四类犯罪人员适用社区矫正，其中90%以上都是缓刑犯，这部分人一般都属于初犯、偶犯、过失犯，犯罪情节较轻，也有悔罪表现……<br>2.W市J区司法局相关负责人老吴感叹，矫正法实施五年来初见成效，但推进不易。档案不健全的问题彻底解决，原来对未成年社区矫正对象的监管、教育并没有与成年人区分开，产生了诸多问题，现在基本做到了分类教育。<br>W市J区目前共有社区矫正对象近600人，区司法局社区矫正中心负责社区矫正工作，并委托乡镇（街道）司法所承担相关工作。现有社区矫正工作人员不到50人，严重不足。“人手紧张是一个方面，另一方面是我们工作人员的专业知识相对薄弱，从事社区矫正很需要法律、心理学、社会工作等专业知识。尽管大家都很努力，尽力通过自学提升专业能力，但是遇到复杂问题还是难以应对。”老吴说。<br>小王和小倪是一起盗窃案的同案犯，二人都未成年。入矫以后，小王在父母的督促下，严格遵守法律规定，配合司法行政机关的管理，生活、学习有条不紊；而小倪的父母长年在外务工，与小倪一起生活的爷爷奶奶年迈体衰，无力管教他，小倪一直是老样子。爷爷奶奶见不到他，司法所工作人员联系不到他，多次违反法律规定之后被撤销缓刑并收监执行。“这个对比，家庭的支持作用在社区矫正中可见一斑。”资深社区矫正工作人员老张说，“但是现实中，小倪这样的家庭无力支持，甚至还有家庭不仅不提供支持，还认为社区矫正对象给家里抹黑，对外藏着掖着……”<br>针对未成年人矫正工作，J区社区矫正中心长期与X协会合作，共同组织未成年矫正对象参与学雷锋活动、接受爱国主义教育、学习法律和职业技能等，试图通过每两个月一次的此类活动帮助未成年矫正对象学习技能，树立正确的三观。<br>“其实这类活动应该把所有矫正对象都纳入进来，但是本地这类专业的社会组织太少，加之我们经费有限，即使只针对未成年矫正对象，活动也不够丰富，几次以后，他们也不太愿意参加了。”社区矫正中心朱科长说。<br>“现实中的‘白眼’很难避免。”老吴说，不少社区居民刻意疏远社区矫正对象，甚至指指点点：“都被判刑了，为啥不关起来！”重返社会的第一步——就业，往往是最难的一步。社区矫正对象杨某靠开网约车维生，起初收入不错，但一年后遭平台封号，理由是被判刑了。后来他辗转多个网约车平台，如今只能在特定时间段接单。临近高考，电视台发起“爱心送考”活动，杨某通过热线主动说明愿意免费接送考生，并坦陈自己的过往。接线员说请示下领导再回复，杨某等来的是委婉拒绝。不过他说：“很感谢接线员没有当场拒绝，也很感谢她把拒绝的话说得委婉，我感受到自己被在意了。我愿意也应该给社会多一点时间来接受我。”<br>3.为高质量推进社区矫正工作，J区司法局举行了一场座谈会，参会人员发言摘录如下：<br>镇司法所干部老丁：我们镇社区矫正对象参加公益活动由村干部组织，有时候社区矫正对象说去参加过公益活动了，但仔细询问所属村才知道他根本没参加。如果司法所与村之间有完善的沟通渠道，可以很大程度上避免这样的问题，否则很可能出现社区矫正对象“脱管”。<br>志愿者小严：作为社区矫正工作志愿者，我很想为他们提供一些帮助。但是不知道自己该做什么、能做什么，也不知道怎样才是对他们更好，大多情况下只能配合司法所做一些简单的工作。<br>天安机械厂黄厂长：之前社区矫正中心领导找到我们，希望给予社区矫正对象就业支持，我们还是有所顾虑。当时正好缺几个技术好的电焊工，就勉强接收了三个，没想到还真解决了我们的大问题。他们其中一个是从业多年技术精湛的老电焊工，另外两个在职业技术学院的培训基地接受过专业培训，还获得了结业证书，他们都很珍惜这份工作。当然，要问我们有没有担心，其实也还是有的。希望社区矫正工作人员能加强回访、随访，在后期工作中我们也会加强管理。<br>社区矫正中心工作人员小唐：帮助社区矫正对象树立自信并获得社会接纳，非常重要。不少地方有很好的探索。比如，A县搞了“种”下新生希望的活动，组织社区矫正对象参与生态修复，在海拔3000米的高原上种下一棵棵树苗；Z市的“向善新生·益路同行”社区矫正人员劳务代偿创新行动，鼓励社区矫正对象成为志愿者，累计志愿服务达到一定时长，还能获得相应“星级”志愿者证书。</p></div><div class="matbox"><h4>材料 4</h4><p class="mt">1.“道歉有什么用！”监狱民警走访慰问受害者家庭表明上门访问的意图时，毫不意外地遭到了拒绝。<br>郑某因交通肇事罪在监狱服刑，他深知自己对受害者家庭造成了不可逆的损伤，整日郁郁寡欢。本着治本攻心的教育原则，民警联系当地团委、法院以及社会工作服务指导中心等部门，组成“蓝风铃”小队，先后走访了受害者家庭、罪犯家庭。“我真的知道错了，我在积极地赎罪，希望你们可以原谅我……”视频中，郑某声泪俱下。<br>经多次走访了解情况，帮助受害者家庭申请司法救助金，邀请心理咨询师对其家庭成员进行创伤疗愈，帮助解决受害者子女就学就业问题……一系列的帮助让受害者家庭逐渐放下芥蒂。郑某和他的家人也向受害者家属表示将持续弥补对其家庭的伤害。“他在真诚赎罪，我们就不追究了。”简简单单的一句话，从受害者家属口中说出却十分不容易。当郑某得知受害者家属原谅他时，如释重负，此后安心接受改造。<br>罪犯被判处刑罚入监服刑后，施害方与受害方之间的矛盾并不会自然消失，随着罪犯刑满释放，这些矛盾还有可能被激化，引发新的社会问题。为破解此难题，近年来，当地监狱系统开展了“蓝风铃”恢复性司法活动。搭建沟通与赔偿的桥梁，罪犯作为系铃人努力解开深埋于受害人心中的“结”，修复被犯罪行为伤害的社会关系，从源头化解矛盾纠纷，还社会一片和谐安定的蔚蓝晴空。<br>2.一场厕所革命之后，龙桥村的柴大爷和武大爷产生了纠纷。2021年9月，龙桥村村干部武某将全村的改厕补贴领回，后因事外出，委托其父将补贴转交村民。同年10月，柴大爷找到武大爷索要补贴款，武大爷表示钱之前已亲手交给柴大爷。<br>没有证人、证据，双方各执一词，争论不休，最后找村委会评理。“同个村那么多人的钱我都给了，不可能单赖了你的那一份。”“但是我就是没收到钱呀，我还差那点钱？没给就是没给。”……村委会多次调解未果，千把元钱的纠纷拖了两年多。<br>2024年5月，赵法官到乡里开展辖区调解员培训，选中此案进行示范调解。两位老人都年过古稀，记忆力有所下降，都存在遗忘和记错的可能。凭借多年办案经验，赵法官知道，这种小额钱款纠纷，双方大多是争口气。<br>赵法官跟柴大爷说：“老人家，您一直没起诉，应该是不想邻里间闹得太难看。您的本意也是愿意退一步的，对不？”柴大爷点了点头，没说话。“武老爷子，村里的补贴是你家儿子签字领的，但给没给到柴大爷手里，你们拿不出证据。法庭是一个讲证据的地方，一旦起诉，你们输官司的概率很大。”赵法官又对武大爷说。“今天这么多乡亲在，大家都晓得两位老爷子重诚信，没人认为武大爷故意赖账，也没人认为柴大爷故意讹钱。不过为了千把元钱，两年多不说话，倒是有点小气了。”调解员们也在一旁劝说。“是啊，打官司讲证据，我确实拿不出来，这钱我认，等我回去取了来当众给。”武大爷说。“不要了，不要了，也有可能就是我记错了，话说开就行了。”柴大爷不断摆着手。两位老人心里的疙瘩解开了。调解结束后，武大爷用他的三轮车将走路不太利索的柴大爷送回了家。<br>望着他们远去的身影，赵法官说：“处理这样的纠纷，‘动心动情’比‘用劲用力’更有效果，‘打开心结’比‘案件执结’更加重要。法律框架内可能的最佳处理方式，大概要做到断了是非、结了案，还能维持关系和情感。”<br>3.2025年1月21日下午，四川省十四届人大四次会议举行第二次全体会议，听取了省高级人民法院工作报告。报告里提到的“一只猴”案例，引起代表委员关注。<br>王某等人非法猎捕、运输、出售、收购国家二级保护动物野生猕猴，法院以危害珍贵、濒危野生动物罪判处其刑罚，并判令承担生态损害赔偿等费用339.52万元。违法者服刑受罚，生态环境损害犹在，案件的审理面临着一个重大难题——如何处置涉案野生动物。<br>成都铁路运输中级法院首创“野归”恢复性司法执行方式处置涉案的野生猕猴。野化放归是通过“食物转化-种群重建-行为训练”方式，帮助因犯罪行为脱离原栖息地的涉案猕猴恢复野外生存能力。经野化训练，涉案猕猴饮食结构由精饲料转化为自主采食天然食物，野外适应能力得到提升。之后，涉案猕猴分两批在石棉县栗子坪国家级自然保护区实施放归。一年后，专家组对猕猴恢复性执行项目的具体实施情况和成果给予了充分肯定，认为野化放归项目达到了野生猕猴回归自然的效果。一位数十年战斗在一线的法治工作者说：“法治工作不仅仅是个案的定分止争，更肩负着引领社会发展、推动法治进步的重要职责。我们要以法理和常情常理为经纬，去织补去修复，才能‘避免埋钉子、留尾巴’，才能实现真正的长治久安。”</p></div></div>
+  <div id="right"><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">15 分</span><span class="tag wd">≤200 字</span><span class="tag kp">概括措施类</span></div><p class="stem">请根据“给定资料1”，概括P市为做好食品安全工作采取的主要措施。（15分）</p><p class="req">要求：全面、准确、有条理，不超过200字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键点，明确题型，题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>出现“根据”一词，提示我们只需阅读资料1</li><li>由“概括……主要措施”可知，本题是单一题，需围绕“P市做好食品安全工作”这一主题，重点作答“措施”，即“对策”这一要素。阅读资料时，可重点关注标志性动词所在的句子、段落，从中提炼出答案要点</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">段1主要介绍P市设立监管服务站。（1）阅读“全省首创的‘食安小站’”“在商圈集中区域设立了2个‘零距离’监管服务站，开启了‘微小所’进驻综合商业体的‘智慧监管’新模式”，其中“设立”“开启”等动词引导的句子提示对策，指出P市开启新的智慧监管模式，在商圈开设监管服务站，可摘抄、概括出要点：创新监管模式，在商圈设立监管服务站。（2）阅读“群众办事‘零跑腿’，商户难题‘一站解’”“‘智慧监管窗口’更显科技范儿：后厨操作实时直播、违规行为智能抓拍、远程喊话即时纠正”可知，群众办事、商户难题都可以在监管服务站一站式解决，小站还可以通过智能手段实时监管食品安全，可摘抄、概括出要点：提供一站式服务，实时智慧监管。</div><div class="bind">✓ 要点：创新监管模式，在商圈设立监管服务站</div></div><div class="blk"><div class="h">段 2</div><div class="c">段2主要介绍P市建立保健食品沙盒监管机制。阅读“制定出台了《保健食品沙盒监管基本规则》等17项配套制度”“形成……管理闭环机制”“建立起……保健食品‘沙盒监管’机制”，其中“出台”“形成”“建立”等动词引导的句子提示P市在落实保健食品沙盒监管方面的举措，表述规范，可摘抄出要点：出台配套制度，建立沙盒监管机制，形成管理闭环。</div><div class="bind">✓ 要点：出台配套制度，建立沙盒监管机制，形成管理闭环</div></div><div class="blk"><div class="h">段 4</div><div class="c">段3-4主要介绍P市帮助食品小作坊升级，可合并阅读。（1）阅读段3中的“参加了县里组织的培训并认真整改”、段4中的“建立‘一坊一策’精准帮扶机制，通过分批开展法规培训、分层实施技术指导和分类制定改造标准，推动小作坊向标准化、规范化转型”，其中“建立”“开展”等动词引导的句子提示对策，指出P市通过分批法规培训、分层技术指导等方式精准帮扶小作坊，可摘抄、概括出要点：帮扶小作坊升级，建立一坊一策精准帮扶机制，分批、分层、分类施策。（2）阅读段4中的“联合食品行业协会组建专家服务团，深入作坊生产一线开展‘体检式’帮扶”，其中“组建”“开展”等动词引导的句子提示P市在体检式帮扶方面的做法，表述规范，可摘抄出要点：组建专家服务团，开展体检式帮扶。</div><div class="bind">✓ 要点：帮扶小作坊升级，建立一坊一策精准帮扶机制，分批、分层、分类施策</div></div><div class="blk"><div class="h">段 5</div><div class="c">段5主要介绍P市在食品消费维权方面的做法。阅读“‘消费维权服务岗’的标牌格外显眼”“设立的‘投诉直通车’”可知，P市设立消费维权服务岗和投诉直通车，可摘抄、概括出要点：设立消费维权服务岗和投诉直通车。</div><div class="bind">✓ 要点：设立消费维权服务岗和投诉直通车</div></div><div class="blk"><div class="h">段 6</div><div class="c">段6主要介绍P市打造食品安全义务监督员队伍。阅读“活跃着一支2000余人的食品安全义务监督员队伍，涵盖人大代表、政协委员、外卖骑手、食品生产经营从业者等多元群体”可知，P市发动人大代表、外卖骑手等多元群体参与食品安全监督，壮大义务监督员队伍，可概括出要点：发动多元群体壮大监督员队伍。</div><div class="bind">✓ 要点：发动多元群体壮大监督员队伍</div></div><div class="blk"><div class="h">段 7</div><div class="c">段7主要介绍P市依托餐饮协会建立传帮带机制。阅读“依托该市餐饮协会建立‘1+N’传帮带机制，构建‘协会+标杆餐饮服务单位+街区餐饮服务单位’的指导模式”，其中动词“建立”“构建”引导的句子提示对策，指出P市建立“1+N”传帮带机制，通过标杆餐饮单位带动街区餐饮服务单位学习，表述规范，可摘抄出要点：建立“1+N”传帮带机制。注意，“构建……指导模式”及后文是对要点“‘1+N’传帮带机制”的展开说明，考虑字数有限，可不用出点。</div><div class="bind">✓ 要点：建立“1+N”传帮带机制</div></div><div class="blk"><div class="h">段 8</div><div class="c">段8主要介绍P市运用电子数据赋能食品安全监管。阅读“前端监管数据自动分析预警、执法全流程自动跟踪预警、案件趋势自动分析预警推送等方法”“实现市场监管与食品安全行政执法无缝对接闭环”可知，P市依托电子数据自动分析预警，实现监管与执法无缝对接，可摘抄、概括出要点：通过数据自动分析预警，监管与执法无缝对接。</div><div class="bind">✓ 要点：通过数据自动分析预警，监管与执法无缝对接</div></div><div class="blk"><div class="h">段 9</div><div class="c">段9主要介绍P市运用农产品数字身份证赋能食品安全监管。阅读“二维码的溯源单”“扫一扫，生产基地、检测报告全都看得见”“每棵蔬菜都拥有‘数字身份证’”可知，P市推行农产品数字身份证，通过扫码实现农产品全程溯源，可概括出要点：推行农产品数字身份证，全程溯源。</div><div class="bind">✓ 要点：推行农产品数字身份证，全程溯源</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">组织答案
+【梳理资料发现，要点围绕“创新监管模式”“帮扶小作坊升级”“推动多元共治”“科技赋能监管”四个方面展开，属于“并列”逻辑，可依据资料逻辑顺序分条撰写。】
+1.创新监管模式。在商圈设立监管服务站，提供一站式服务，实时智慧监管；出台配套制度，建立沙盒监管机制，形成管理闭环。
+2.帮扶小作坊升级。建立一坊一策精准帮扶机制，分批、分层、分类施策；组建专家服务团，开展体检式帮扶。
+3.推动多元共治。设立消费维权服务岗和投诉直通车，发动多元群体壮大监督员队伍，建立“1+N”传帮带机制。
+4.科技赋能监管。通过数据自动分析预警，监管与执法无缝对接；推行农产品数字身份证，全程溯源。
+参考答案说明：本参考答案从“创新监管模式”“帮扶小作坊升级”“推动多元共治”“科技赋能监管”4个方面进行了分条撰写，各条答案要点之间在内容上相互并列，没有交叉。</div></div><div class="ref" data-m2r='{"4":0,"8":0,"14":0,"19":0,"20":0,"22":0,"25":0,"35":1,"36":1,"30":1,"29":1,"45":2,"37":2,"39":2,"40":2,"44":2,"51":3,"53":3,"54":3,"60":3,"1":0,"2":0,"3":0,"5":0,"6":0,"7":0,"9":0,"10":0,"11":0,"12":0,"13":0,"15":0,"16":0,"17":0,"18":0,"21":0,"23":0,"24":0,"26":0,"27":0,"28":0,"31":1,"32":1,"33":1,"34":1,"38":2,"41":2,"42":2,"43":2,"46":2,"47":2,"48":2,"49":2,"50":2,"52":3,"55":3,"56":3,"57":3,"58":3,"59":3}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="4,8,14,19,20,22,25,1,2,3,5,6,7,9,10,11,12,13,15,16,17,18,21,23,24,26,27,28">1.创新监管模式。在商圈设立监管服务站，提供一站式服务，实时智慧监管；出台配套制度，建立沙盒监管机制，形成管理闭环。</div><div class="item" data-mk="35,36,30,29,31,32,33,34">2.帮扶小作坊升级。建立一坊一策精准帮扶机制，分批、分层、分类帮扶；组建专家服务团，开展体检式帮扶。</div><div class="item" data-mk="45,37,39,40,44,38,41,42,43,46,47,48,49,50">3.推动多元共治。设立消费维权服务岗和投诉直通车，发动多元群体壮大监督员队伍，建立“1+N”传帮带机制。</div><div class="item" data-mk="51,53,54,60,52,55,56,57,58,59">4.科技赋能监管。通过数据自动分析预警，监管与执法无缝对接；推行农产品数字身份证，全程溯源。</div></div><div class="aihint">下面是 <b>AI 批注</b>：题干逐词拆解、材料结构、找点动作、答案溯源、出题人的坑。<b>这部分不是粉笔原话</b>，是逐句分析材料得出的判断，和上面的粉笔讲解互为补充。</div><div class="ai"><h4><span class="an">AI</span>① 题干逐词拆解<span class="sub">每个字都在告诉你该干什么</span></h4><div class="tw"><table class="tstem"><thead><tr><th>题干词</th><th>类型</th><th>它到底在说什么</th><th>你该做什么</th></tr></thead><tbody><tr><td class='w'>根据</td><td><span class='ty ty-范围信号'>范围信号</span></td><td>「根据」= 只用资料1，不许引申到资料2-4，也不许用常识补</td><td class='act'>动笔前先在资料1的边界上划线，读到资料2立刻停</td></tr><tr><td class='w'>概括</td><td><span class='ty ty-题型信号'>题型信号</span></td><td>「概括」= 材料里有现成的，你只做提取和压缩，不许自己发明对策</td><td class='act'>凡是材料里找不到动词支撑的，一律不写</td></tr><tr><td class='w'>P市</td><td><span class='ty ty-主体限定'>主体限定</span></td><td>主体必须是 P 市，不是「某地」「各地」</td><td class='act'>答案开头不要写「政府应…」，要写「P市…」或直接写做法</td></tr><tr><td class='w'>做好食品安全工作</td><td><span class='ty ty-主题限定'>主题限定</span></td><td>只写食品安全领域，材料里如果提到别的工作（如知识产权服务点）要过滤</td><td class='act'>每写一条自问：这跟食品安全有没有直接关系</td></tr><tr><td class='w'>采取的主要措施</td><td><span class='ty ty-要素信号 = 对策'>要素信号 = 对策</span></td><td>要的是「做法/措施」，即动词性内容；不是问题、不是成效、不是原因</td><td class='act'>答案的骨架必须是「动词 + 宾语」，成效数据一律不写</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>② 为什么是这个题型<span class="sub">判断链，不是结论</span></h4><div class="prose">判断链：① 题干动词是「概括」，不是「提出」「分析」「评述」→ 单一概括题，不是对策题；② 要素是「措施」→ 只找动词句；③ 只有一个要素 → 单一题，不需要分段成「问题+对策」；④ 有字数限制 200 字、分值 15 分 → 15 分 / 200 字意味着 4–5 条要点、每条 40–50 字，多了写不完、少了丢分。
+
+⚠️ 最容易错判的地方：看到「措施」就以为要「提对策」。「概括措施」是<b>材料里已经做了的</b>，「提出对策」是<b>材料有问题、你来想</b>。本题 P 市已经做完了，你只是复述。</div></div><div class="ai"><h4><span class="an">AI</span>③ 材料结构图<span class="sub">哪段有用、哪段是干扰，为什么</span></h4><div class="mmwrap"><div class="mm pt"><div class="mmh"><b>句1-5</b><span class="mmb">出 1 点</span></div><div class="mmr">案例一：D区食安小站（背景 + 做法）</div><div class="mmw">句1是场景描写（「一抹亮眼的市监蓝」），句3是效果（「零跑腿」「一站解」），句5是附加功能（知识产权服务点、普法课堂）——这三句都不是「措施」，真正的动词在句2「设立了」「开启了」和句4「实时直播、智能抓拍、即时纠正」。</div></div><div class="mm pt"><div class="mmh"><b>句6-8</b><span class="mmb">出 1 点</span></div><div class="mmr">案例一续：沙盒监管制度</div><div class="mmw">句7全是数据（127条、7起、9.62万），是<b>成效</b>不是措施，抄进去白占字数；句6「制定出台」「形成」和句8「建立起」才是措施。</div></div><div class="mm no"><div class="mmh"><b>句9-12</b><span class="mmb">不出点</span></div><div class="mmr">案例二铺垫：小作坊老板的感受</div><div class="mmw">纯故事（张女士、牛轧糖、差评变好评），作用是引出下文的做法。这类「人物感慨」段在申论里 99% 不出点，是<b>干扰项</b>。</div></div><div class="mm pt"><div class="mmh"><b>句13-15</b><span class="mmb">出 1 点</span></div><div class="mmr">案例二：一坊一策帮扶</div><div class="mmw">句13「建立」「开展」「制定」「推动」四个动词密集，是标准出点句；句15的「146家」「100%」又是成效，不抄。</div></div><div class="mm pt"><div class="mmh"><b>句16-19</b><span class="mmb">出 1 点</span></div><div class="mmr">案例三：消费维权服务岗</div><div class="mmw">句17「核对」「监测」、句18「设立」、句19「启动回头看」都是做法；注意句16只是场景（「标牌格外显眼」），不出点。</div></div><div class="mm pt"><div class="mmh"><b>句20-23</b><span class="mmb">出 1 点</span></div><div class="mmr">案例三续：义务监督员队伍</div><div class="mmw">句20「活跃着…队伍」+「涵盖…多元群体」是做法（发动群众）；句22-23是监督员的话，属于<b>引语</b>，用来佐证，不单独出点。</div></div><div class="mm pt"><div class="mmh"><b>句24-28</b><span class="mmb">出 1 点</span></div><div class="mmr">案例三续：1+N 传帮带</div><div class="mmw">句24「建立」「构建」是核心；句25-27是展开说明（培训、现场学习、商户感受），在字数紧张时<b>可以合并</b>进句24，不必单列。</div></div><div class="mm pt"><div class="mmh"><b>句29-33</b><span class="mmb">出 1 点</span></div><div class="mmr">案例四：数据预警</div><div class="mmw">句30「通过…等方法」「实现…闭环」是标准的做法句；句31-32是举例（未戴口罩、2小时），句33是数据画像，都属于<b>例证</b>。</div></div><div class="mm pt"><div class="mmh"><b>句34-39</b><span class="mmb">出 1 点</span></div><div class="mmr">案例四续：农产品溯源</div><div class="mmw">句37「每棵蔬菜都拥有数字身份证」是概括性做法；句34-36、38-39是场景和市民感受，不抄。</div></div></div></div><div class="ai"><h4><span class="an">AI</span>④ 我该怎么找答案<span class="sub">六步动作，照做就行</span></h4><ol class="steps"><li><div class="sh">第 1 步 · 先划材料边界</div><div class="st"><span class="lb">看哪</span>资料1 全部 39 句</div><div class="ss"><span class="lb">凭什么</span>题干「根据给定资料1」→ 资料2 的峨眉山、资料3 的社区矫正一律不看</div></li><li><div class="sh">第 2 步 · 扫段落首句，判断这段讲哪件事</div><div class="st"><span class="lb">看哪</span>句1、句9、句16、句29</div><div class="ss"><span class="lb">凭什么</span>这四句都以「1.」「2.」「3.」「4.」开头，是材料自带的<b>四个案例分界</b>。申论材料常这样分段，段首编号就是天然的层次提示</div></li><li><div class="sh">第 3 步 · 在每个案例里只抓动词</div><div class="st"><span class="lb">看哪</span>设立、开启、制定、出台、形成、建立、开展、组建、推动、推行</div><div class="ss"><span class="lb">凭什么</span>「动词 + 了/着」= 已完成的动作 = 措施。这是「概括措施题」唯一的硬信号</div></li><li><div class="sh">第 4 步 · 把动词句里的「具体修饰」删掉，只留骨架</div><div class="st"><span class="lb">看哪</span>句2 → 「设立监管服务站」；句13 → 「建立一坊一策帮扶机制」</div><div class="ss"><span class="lb">凭什么</span>「2个」「零距离」「微小所」这些是修饰，删了不影响意思，但占字数。200 字题必须删</div></li><li><div class="sh">第 5 步 · 给每组动词配一个总括词</div><div class="st"><span class="lb">看哪</span>创新监管模式 / 帮扶小作坊升级 / 推动多元共治 / 科技赋能监管</div><div class="ss"><span class="lb">凭什么</span>总括词不是自己想，是从材料里<b>已有的概括性表述</b>变来的：句2「新模式」→「创新…模式」；句13「帮扶」→「帮扶…升级」</div></li><li><div class="sh">第 6 步 · 数条数、配字数</div><div class="st"><span class="lb">看哪</span>4 条 × 45 字 ≈ 180 字</div><div class="ss"><span class="lb">凭什么</span>15 分题一般 4–5 条。少于 3 条说明漏点，多于 6 条说明没合并</div></li></ol></div><div class="ai"><h4><span class="an">AI</span>⑤ 每条答案从哪来<span class="sub">点句子编号可对照左边材料</span></h4><div class="tw"><table class="ttrace"><thead><tr><th>答案要点</th><th>来源句</th><th>怎么变成答案的</th></tr></thead><tbody><tr><td class='pt'>创新监管模式</td><td class='src'><code>句2</code> <code>句4</code> <code>句6</code> <code>句8</code></td><td>句2「设立了…监管服务站」「开启了…新模式」→ 总括词「创新监管模式」；句4「实时直播、智能抓拍、即时纠正」→「实时智慧监管」；句3「零跑腿、一站解」→「一站式服务」；句6「制定出台…配套制度」「形成…闭环」+ 句8「建立起…沙盒监管机制」→「出台配套制度，建立沙盒监管机制，形成管理闭环」</td></tr><tr><td class='pt'>帮扶小作坊升级</td><td class='src'><code>句13</code> <code>句14</code></td><td>句13「建立一坊一策精准帮扶机制」+「分批开展法规培训、分层实施技术指导、分类制定改造标准」→ 压缩成「分批、分层、分类帮扶」（12 字替掉 27 字）；句14「联合…组建专家服务团」「开展体检式帮扶」→「组建专家服务团，开展体检式帮扶」</td></tr><tr><td class='pt'>推动多元共治</td><td class='src'><code>句18</code> <code>句20</code> <code>句24</code></td><td>句18「设立投诉直通车」+ 句17 的「消费维权服务岗」→ 合并成一句；句20「2000余人的义务监督员队伍」「涵盖…多元群体」→ 概括为「发动多元群体壮大监督员队伍」（「2000余人」是数据，删）；句24「建立1+N传帮带机制」直接摘抄</td></tr><tr><td class='pt'>科技赋能监管</td><td class='src'><code>句30</code> <code>句37</code></td><td>句30「通过前端监管数据自动分析预警…等方法」「实现…无缝对接闭环」→「通过数据自动分析预警，监管与执法无缝对接」；句37「每棵蔬菜都拥有数字身份证」→「推行农产品数字身份证，全程溯源」</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>⑥ 出题人埋的坑<span class="sub">这些地方专门骗新手</span></h4><div class="traps"><div class="trap"><div class="th">⚠ 句7 的「127条线索、7起立案、9.62万元」</div><div class="tw2"><span class="lb">为什么错</span>这些数字看起来很有说服力，新手最爱抄。但它们是<b>成效</b>，不是措施。题干问「采取的措施」，抄成效 = 答非所问，一分不给</div><div class="ta"><span class="lb">怎么躲</span>看到纯数字句，先问「这是做了什么，还是做成了什么」。做成了 → 不写</div></div><div class="trap"><div class="th">⚠ 句5「知识产权服务点、普法课堂、党群活动阵地」</div><div class="tw2"><span class="lb">为什么错</span>这些确实是小站的「做法」，但跟<b>食品安全</b>无关。题干限定「做好食品安全工作」</div><div class="ta"><span class="lb">怎么躲</span>主题词是过滤器：跟「食品安全」无关的做法，再具体也不写</div></div><div class="trap"><div class="th">⚠ 句22-23、句27 的人物引语</div><div class="tw2"><span class="lb">为什么错</span>「以前总觉得监管是政府的事」「咱自己也成了优等生」——这些是<b>群众感受</b>，用来证明效果好，本身不是措施</div><div class="ta"><span class="lb">怎么躲</span>引语里出现「我觉得」「以前…现在…」的，一律跳过</div></div><div class="trap"><div class="th">⚠ 四个案例平均用力</div><div class="tw2"><span class="lb">为什么错</span>材料给了 4 个案例，看起来每个都重要。但案例一（食安小站）占了句1-8 共 8 句，信息量最大，如果只写一句就亏了</div><div class="ta"><span class="lb">怎么躲</span>按<b>句子数量</b>分配笔墨：8 句的案例给 2 个子要点，3 句的案例给 1 个</div></div></div></div><div class="ai"><h4><span class="an">AI</span>⑦ 答案为什么长这样<span class="sub">骨架、字数、用词</span></h4><div class="prose">看参考答案的结构：
+1.创新监管模式。<b>在商圈设立监管服务站，提供一站式服务，实时智慧监管</b>；<b>出台配套制度，建立沙盒监管机制，形成管理闭环</b>。
+
+每一段都是「总括词。子要点A；子要点B。」
+—— 这是「概括措施题」的标准骨架：<b>总括词前置 + 分号分列子要点</b>。
+
+为什么要总括词？因为阅卷是<b>按点给分</b>，总括词让阅卷人 3 秒内知道你答的是哪个方面。
+为什么用分号不用句号？因为同属一个方面的子要点，用分号表示「并列从属」，用句号会被当成两个独立要点，可能被判重复。
+
+字数账：4 条 × 45 字 ≈ 180 字，留 20 字余量。如果写到 220 字，超出部分<b>不阅卷</b>，还挤掉后面题的时间。</div></div><div class="ai extra"><h4><span class="an">AI</span>⑧ 粉笔没讲透的地方<span class="sub">我的补充判断</span></h4><div class="prose">粉笔这道题的演示我读过，它讲得对，但有个地方没点透：
+<b>它没有告诉你「为什么是 4 条而不是 5 条」。</b>
+
+我的判断：材料有 4 个编号案例（1./2./3./4.），每个案例对应一条。这是<b>材料自己给的层次</b>，不是巧合。
+出题人写材料时就按「四个方面」组织，答案自然是 4 条。
+
+所以做这类题的通用动作：<b>先数材料里有几个编号段落</b>，编号数 ≈ 答案条数。这比事后猜要可靠得多。
+
+另外一处：案例三（句16-28）其实包含「消费维权岗」「义务监督员」「1+N传帮带」三件事，粉笔把它们合并成「推动多元共治」一条。如果你把它们拆成三条，会变成 6 条，字数不够且层次混乱。
+<b>合并的依据</b>：这三件事的共同点是「都不是政府单独干，而是拉别人一起干」（消费者、监督员、行业协会）—— 这就是「多元共治」的字面意思。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">20 分</span><span class="tag wd">≤300 字</span><span class="tag kp">总结类</span></div><p class="stem">假如你是“益·峨眉”文旅检察办案团队成员，请根据“给定资料2”，就办案团队开展工作的情况，拟写一份工作简报。（20分）</p><p class="req">要求：紧扣资料，简明扼要，语言流畅；不超过300字。</p></div><div class="warn">⚠️ 粉笔未提供本题的答题演示，只有参考答案。下面直接给答案，不做逐句讲解。</div><div class="ref" data-m2r='{}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item nomk">关于“益·峨眉”文旅检察办案团队的工作简报</div><div class="item nomk">2021年，峨眉山市检察院组建“益·峨眉”文旅检察办案团队。自成立以来，团队重点开展了以下工作：</div><div class="item nomk">一、守护历史古迹。团队借助专家、网格员和科技手段，提升办案精度和效率，还推出“随手拍”平台，让群众参与举报；针对古建隐患及时建议，督促履责整改，推动制定保护规划。</div><div class="item nomk">二、守护万物生灵。针对无知误犯的违法行为，通过劳务代偿抵扣赔偿，展现司法温情，还持续开展专项监督，完善长效保护机制，护航全年禁猎，跟进生态修复进展。</div><div class="item nomk">三、守护游客安全。团队既推动了盲道隐患整改，也督促整治住宿、消防安全和食品安全问题，更创新“普法+科普”模式，寓教于乐，提升公众法治认知。</div></div><div class="aihint">下面是 <b>AI 批注</b>：题干逐词拆解、材料结构、找点动作、答案溯源、出题人的坑。<b>这部分不是粉笔原话</b>，是逐句分析材料得出的判断，和上面的粉笔讲解互为补充。</div><div class="ai"><h4><span class="an">AI</span>① 题干逐词拆解<span class="sub">每个字都在告诉你该干什么</span></h4><div class="tw"><table class="tstem"><thead><tr><th>题干词</th><th>类型</th><th>它到底在说什么</th><th>你该做什么</th></tr></thead><tbody><tr><td class='w'>假如你是</td><td><span class='ty ty-身份设定'>身份设定</span></td><td>给你一个虚拟身份，决定了<b>语气和视角</b>。你是办案团队成员，所以写的是「我们团队做了什么」，不是「他们检察院做了什么」</td><td class='act'>行文用第三人称「团队」，但立场是内部汇报，不要写成新闻稿</td></tr><tr><td class='w'>益·峨眉文旅检察办案团队成员</td><td><span class='ty ty-具体身份'>具体身份</span></td><td>限定你了解的信息范围 = 团队自己的工作，不包括别的部门</td><td class='act'>材料2里如果是别的单位做的事（如景区管委会制定规划），要写成「推动/督促」而非「我们制定」</td></tr><tr><td class='w'>根据给定资料2</td><td><span class='ty ty-范围信号'>范围信号</span></td><td>只用资料2，不许引用资料1/3/4，也不许用材料外的知识补充。注意「根据」和「结合」不同：「根据」是严格限定，「结合」可以适当引申</td><td class='act'>读完题干先在心里划死边界：只有资料2 的 30 句是我的弹药库</td></tr><tr><td class='w'>就办案团队开展工作的情况</td><td><span class='ty ty-内容限定 = 工作成效'>内容限定 = 工作成效</span></td><td>要的是「开展了哪些工作」，即做法 + 成效，不是问题、不是建议</td><td class='act'>骨架是「做了什么 + 取得了什么效果」</td></tr><tr><td class='w'>拟写一份工作简报</td><td><span class='ty ty-文种 = 简报'>文种 = 简报</span></td><td>简报是<b>上行/平行公文</b>，特点是：有标题、有正文、分条陈述、不加请示语、不加「特此报告」以外的结束语</td><td class='act'>必须写标题。简报标题格式：「关于……的工作简报」或「……工作简报」</td></tr><tr><td class='w'>20分</td><td><span class='ty ty-分值'>分值</span></td><td>20 分在公文题里属于中等，通常格式 3–4 分 + 内容 16–17 分</td><td class='act'>格式分不能丢：标题 + 分段 + 条理</td></tr><tr><td class='w'>紧扣资料，简明扼要，语言流畅</td><td><span class='ty ty-语言要求'>语言要求</span></td><td>「紧扣资料」= 不许引申；「简明扼要」= 不写空话套话；「语言流畅」= 不能是关键词堆砌，要成句</td><td class='act'>每条要点写成完整句，不要「一、加强领导。二、完善机制。」这种干词</td></tr><tr><td class='w'>不超过300字</td><td><span class='ty ty-字数硬约束'>字数硬约束</span></td><td>300 字要装下：标题(约15字) + 开头(约40字) + 3条主体(各约70字)</td><td class='act'>标题+开头必须压到 55 字内，否则主体写不完</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>② 为什么是这个题型<span class="sub">判断链，不是结论</span></h4><div class="prose">判断链：① 题干有「假如你是…」+「拟写一份…」→ 这是<b>公文写作题</b>，不是概括题；② 文种是「工作简报」→ 属于<b>事务性文书</b>，格式要求：标题 + 正文（可分条）；③ 内容是「开展工作的情况」→ 主体写做法+成效，不写问题不写建议；④ 300 字 + 20 分 → 篇幅很短，只能写 3 条左右。
+
+⚠️ 公文题和概括题的根本区别：<b>公文有格式分</b>。很多人内容写得很好但没写标题，直接扣 2–4 分。
+
+⚠️ 另一个坑：「简报」不是「报告」，不需要「特此报告」，也不需要发文机关署名和日期（题干没给具体日期，硬写反而错）。</div></div><div class="ai"><h4><span class="an">AI</span>③ 材料结构图<span class="sub">哪段有用、哪段是干扰，为什么</span></h4><div class="mmwrap"><div class="mm no"><div class="mmh"><b>句1-3</b><span class="mmb">不出点</span></div><div class="mmr">背景：峨眉山的世界遗产地位</div><div class="mmw">这三句是<b>为什么要保护</b>的理由（293处文物、5051件文物、84项非遗、世界遗产名录），属于背景铺垫。简报开头可以用一句话概括，但不单独成条。</div></div><div class="mm pt"><div class="mmh"><b>句4</b><span class="mmb">出 1 点</span></div><div class="mmr">团队成立</div><div class="mmw">「2021年…组建起…办案团队」「由副检察长牵头，汇聚…」——这是<b>成立情况</b>，是简报开头必须交代的（谁、什么时候、什么队伍）。</div></div><div class="mm pt"><div class="mmh"><b>句5</b><span class="mmb">出 1 点</span></div><div class="mmr">能力建设：专家+网格员+科技+随手拍</div><div class="mmw">「聘请…专家」「吸纳38名网格员」「借助…科技手段」「创新推出随手拍」——四个动词并列，这是团队<b>怎么提升能力</b>的做法。</div></div><div class="mm pt"><div class="mmh"><b>句6-11</b><span class="mmb">出 1 点</span></div><div class="mmr">工作一：守护历史古迹</div><div class="mmw">句6-9是案例（飞来殿隐患），句10「发出检察建议，督促履职」，句11「讲解文物保护法、厘清职责、帮助整改、推动制定保护规划」——句10-11 是做法，句6-9 是案例经过（可压缩成一句「针对古建隐患及时建议」）。</div></div><div class="mm pt"><div class="mmh"><b>句12-18</b><span class="mmb">出 1 点</span></div><div class="mmr">工作二：守护万物生灵（黑颈鹤案）</div><div class="mmw">句14「提起公诉+刑事附带民事公益诉讼」是做法；句16「开展社会调查」；句17「建议适用缓刑」；句18「制定劳务代偿方案」——核心是「劳务代偿」这个创新点，必须写。</div></div><div class="mm pt"><div class="mmh"><b>句19-20</b><span class="mmb">出 1 点</span></div><div class="mmr">工作二续：专项监督与生态修复</div><div class="mmw">「办理刑事案件36件」「完善534株古树长效保护机制」「护航全年禁猎」「跟踪监测、科学评估生态修复」——这是<b>持续性工作</b>，跟上面的个案区分开。</div></div><div class="mm pt"><div class="mmh"><b>句21-25</b><span class="mmb">出 1 点</span></div><div class="mmr">工作三：守护游客安全（盲道）</div><div class="mmw">句23「现场勘验、固定证据、协调住建局、明确监管职责、提起行政公益诉讼、发出检察建议」——动词密集，是核心做法句。</div></div><div class="mm pt"><div class="mmh"><b>句26-27</b><span class="mmb">出 1 点</span></div><div class="mmr">工作三续：住宿消防+食品安全</div><div class="mmw">「督促300余家民宿自查」「整改隐患122处」「推动出台散装食品监管通知」——这块内容多，但 300 字装不下，必须高度压缩成一句。</div></div><div class="mm pt"><div class="mmh"><b>句28-30</b><span class="mmb">出 1 点</span></div><div class="mmr">工作四：普法宣传</div><div class="mmw">「互动小游戏」「检馆共建示范基地」「全网直播70万次观看」——这是<b>普法创新</b>，是亮点，要写。</div></div></div></div><div class="ai"><h4><span class="an">AI</span>④ 我该怎么找答案<span class="sub">六步动作，照做就行</span></h4><ol class="steps"><li><div class="sh">第 1 步 · 先定格式骨架</div><div class="st"><span class="lb">看哪</span>标题 + 开头(团队成立) + 主体(几条工作) + 结尾(可省)</div><div class="ss"><span class="lb">凭什么</span>「工作简报」的格式是固定的，先搭架子再填内容。很多人先找内容，最后发现没地方放标题</div></li><li><div class="sh">第 2 步 · 找「团队成立」的信息</div><div class="st"><span class="lb">看哪</span>句4</div><div class="ss"><span class="lb">凭什么</span>公文开头必须交代「谁、何时、什么队伍」。找「组建」「成立」「由…牵头」这类词</div></li><li><div class="sh">第 3 步 · 按材料的小标题分工作板块</div><div class="st"><span class="lb">看哪</span>句5(能力) / 句6-11(古迹) / 句12-20(生灵) / 句21-27(游客) / 句28-30(普法)</div><div class="ss"><span class="lb">凭什么</span>材料2的段号是 1./2./3.，但<b>每条内部又按主题换了话题</b>。要靠「句6的飞来殿」「句12的孙某」「句21的盲道」这些<b>新案例的出现</b>来判断板块切换</div></li><li><div class="sh">第 4 步 · 每个板块提炼「动词串」</div><div class="st"><span class="lb">看哪</span>句10-11 / 句14-18 / 句23 / 句26-27 / 句28-30</div><div class="ss"><span class="lb">凭什么</span>一个板块里动词最密集的那 1–2 句，就是这个板块的核心</div></li><li><div class="sh">第 5 步 · 给每个板块起 4–6 字小标题</div><div class="st"><span class="lb">看哪</span>守护历史古迹 / 守护万物生灵 / 守护游客安全 / 普法创新</div><div class="ss"><span class="lb">凭什么</span>⚠️ 这里有个巧合：材料句4 说团队「持续守护峨眉山的<b>万物生灵、历史古迹与游人安全</b>」—— 出题人已经把三个工作方向写在材料里了！直接拿来当小标题</div></li><li><div class="sh">第 6 步 · 压缩案例为一句</div><div class="st"><span class="lb">看哪</span>飞来殿、黑颈鹤、盲道、民宿</div><div class="ss"><span class="lb">凭什么</span>案例只保留「对象 + 问题 + 我们的动作」，删掉人物、对话、数据</div></li></ol></div><div class="ai"><h4><span class="an">AI</span>⑤ 每条答案从哪来<span class="sub">点句子编号可对照左边材料</span></h4><div class="tw"><table class="ttrace"><thead><tr><th>答案要点</th><th>来源句</th><th>怎么变成答案的</th></tr></thead><tbody><tr><td class='pt'>标题：关于「益·峨眉」文旅检察办案团队的工作简报</td><td class='src'><code>句4</code></td><td>从句4 提取团队名，套简报标题格式</td></tr><tr><td class='pt'>开头：2021年，峨眉山市检察院组建该团队，重点开展以下工作</td><td class='src'><code>句4</code></td><td>句4 压缩：删掉「副检察长牵头、公益诉讼骨干、刑事老兵、行政能手、无人机飞手」这些人员构成细节，只留「2021年组建」</td></tr><tr><td class='pt'>一、守护历史古迹</td><td class='src'><code>句5</code> <code>句10</code> <code>句11</code></td><td>句5「专家+网格员+科技+随手拍」→「借助专家、网格员和科技手段，提升办案精度和效率，还推出随手拍平台，让群众参与举报」；句10-11 →「针对古建隐患及时建议，督促履责整改，推动制定保护规划」</td></tr><tr><td class='pt'>二、守护万物生灵</td><td class='src'><code>句14</code> <code>句17</code> <code>句18</code> <code>句19</code> <code>句20</code></td><td>句14「提起公诉+公益诉讼」→「针对无知误犯的违法行为」；句17-18「建议缓刑+劳务代偿」→「通过劳务代偿抵扣赔偿，展现司法温情」；句19-20 →「持续开展专项监督，完善长效保护机制，护航全年禁猎，跟进生态修复进展」</td></tr><tr><td class='pt'>三、守护游客安全</td><td class='src'><code>句23</code> <code>句26</code> <code>句27</code></td><td>句23 →「推动盲道隐患整改」；句26-27 →「督促整治住宿、消防安全和食品安全问题」（把 300余家、122处 这些数据全删）</td></tr><tr><td class='pt'>四、普法创新（并入第三条或单列）</td><td class='src'><code>句28</code> <code>句29</code> <code>句30</code></td><td>「创新普法+科普模式，寓教于乐，提升公众法治认知」；「70万次直播观看」是成效数据，300字题可删</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>⑥ 出题人埋的坑<span class="sub">这些地方专门骗新手</span></h4><div class="traps"><div class="trap"><div class="th">⚠ 不写标题</div><div class="tw2"><span class="lb">为什么错</span>「工作简报」是公文，标题是格式分的硬要求。不写直接扣 2–4 分</div><div class="ta"><span class="lb">怎么躲</span>动笔第一行就写标题，格式：关于……的工作简报</div></div><div class="trap"><div class="th">⚠ 把三个「守护」拆成十几个小点</div><div class="tw2"><span class="lb">为什么错</span>材料2 信息量很大（30 句），如果每件事都单列，会变成 8–10 条，300 字根本写不完</div><div class="ta"><span class="lb">怎么躲</span>300 字只能装 3–4 条。按「历史古迹 / 万物生灵 / 游客安全」三大块合并</div></div><div class="trap"><div class="th">⚠ 抄数据（293处、5051件、38名、534株、122处、70万次）</div><div class="tw2"><span class="lb">为什么错</span>简报是「简明扼要」，数据堆砌违反要求；而且这些数据占字数不占分</div><div class="ta"><span class="lb">怎么躲</span>只保留能体现「工作量大」的 1–2 个数据，其余全删</div></div><div class="trap"><div class="th">⚠ 写成新闻稿（「他们像一支司法特种部队…」）</div><div class="tw2"><span class="lb">为什么错</span>材料句4 有文学化表述，直接抄会显得不专业，且浪费字数</div><div class="ta"><span class="lb">怎么躲</span>公文体要平实：主语+动词+宾语，不用比喻</div></div><div class="trap"><div class="th">⚠ 漏掉「劳务代偿」</div><div class="tw2"><span class="lb">为什么错</span>这是全篇最有辨识度的创新做法，是采分重点。很多人写「依法处理」就带过了</div><div class="ta"><span class="lb">怎么躲</span>凡是材料里带引号的专有做法（随手拍、劳务代偿、三区分离、1+N），都是必写点</div></div></div></div><div class="ai"><h4><span class="an">AI</span>⑦ 答案为什么长这样<span class="sub">骨架、字数、用词</span></h4><div class="prose">参考答案的结构：
+<b>标题</b>：关于「益·峨眉」文旅检察办案团队的工作简报
+<b>开头</b>：2021年，峨眉山市检察院组建…团队。自成立以来，团队重点开展了以下工作：
+<b>主体</b>：一、守护历史古迹。…  二、守护万物生灵。…  三、守护游客安全。…
+
+注意三个细节：
+① <b>开头用「自成立以来，团队重点开展了以下工作：」收尾</b>——这是公文的过渡句，告诉阅卷人「下面是主体」，是格式分的一部分。
+② <b>主体用「一、二、三、」而不是「1.2.3.」</b>——公文层次序数规范：一级用「一、」，二级用「（一）」，三级用「1.」，四级用「（1）」。
+③ <b>每条都是「小标题 + 句号 + 具体内容」</b>，和概括题一样是总括词前置。
+
+字数账：标题 20 字 + 开头 35 字 + 3 条 × 80 字 = 295 字，刚好卡在 300 内。
+所以开头必须极简，不能写「峨眉山是世界遗产，有293处文物…」这种背景。</div></div><div class="ai extra"><h4><span class="an">AI</span>⑧ 粉笔没讲透的地方<span class="sub">我的补充判断</span></h4><div class="prose">这题粉笔没给演示，我自己拆的关键判断：
+
+<b>最关键的一步</b>：材料句4 里藏着一句话——「持续守护峨眉山的<b>万物生灵、历史古迹与游人安全</b>」。
+这三个词，正好就是参考答案的三个小标题（守护历史古迹 / 守护万物生灵 / 守护游客安全）。
+
+这不是巧合，是<b>出题人给的免费提示</b>。申论材料里，凡是出现「三个方面」「既要…又要…还要…」「A、B与C」这种并列结构，几乎一定是答案的层次。
+<b>做公文题、概括题时，先去材料里找这种「并列枚举句」</b>，比事后归纳可靠得多。
+
+第二个判断：为什么参考答案把「普法宣传」（句28-30）没有单列成第四条？
+我的分析：因为普法属于「怎么守护」的辅助手段，不是独立的守护对象。而且 300 字装 4 条太挤。<b>这体现了公文的「合并同类项」原则</b>——
+宁可 3 条写透，不要 4 条都蜻蜓点水。
+
+第三个判断：句5 的「聘请专家、吸纳网格员、借助科技、推出随手拍」这四件事，参考答案把它们塞进了「一、守护历史古迹」里。
+严格说这是<b>能力建设</b>，不属于「守护古迹」。但因为它出现在句5（古迹案例之前），且字数紧张，就顺势并入了。
+<b>这说明</b>：答案的层次不是绝对逻辑，而是「逻辑 + 字数」的折中。你考试时也要做这种取舍，不要追求完美分类。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">25 分</span><span class="tag wd">≤500 字</span><span class="tag kp">提出对策类</span></div><p class="stem">假如你是J区司法局社区矫正中心工作人员，请根据“给定资料3”，梳理社区矫正工作面临的问题，并提出对策建议。（25分）</p><p class="req">要求：（1）先梳理完所有问题，再提出建议；
+（2）问题梳理全面准确，建议具体可行，有针对性；
+（3）不超过500字。</p></div><div class="warn">⚠️ 粉笔未提供本题的答题演示，只有参考答案。下面直接给答案，不做逐句讲解。</div><div class="ref" data-m2r='{}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item nomk">一、问题：</div><div class="item nomk">1.队伍力量薄弱。工作人员不足，专业知识薄弱，志愿者职责不清，缺乏指导，仅能配合简单工作。</div><div class="item nomk">2.家庭支持缺位。家长监护不到位，无力管教，有排斥心理。</div><div class="item nomk">3.社会支持不足。专业社会组织少，经费有限，活动不丰富，覆盖范围有限。</div><div class="item nomk">4.社会接纳度低。居民有偏见，就业遭受歧视，社会融入难。</div><div class="item nomk">5.监管沟通不畅。司法所与村缺乏完善的沟通渠道，存在脱管风险。</div><div class="item nomk">二、建议：</div><div class="item nomk">1.充实队伍力量。加强工作人员引进和招聘，发动志愿者和兼职人员参与，定期组织法律、心理学、社会工作等培训，提升专业能力；优化工作人员与志愿者协作，明确职责分工。</div><div class="item nomk">2.强化家庭支持。建立家庭定期联系制度，开展家庭教育指导，督促履行监护责任，帮助转变观念，促进信息互通，提供正向支持。</div><div class="item nomk">3.加强社会支持。培育和引进专业社会组织，加大资金投入，创新活动形式和内容，扩大覆盖范围，提升参与积极性。</div><div class="item nomk">4.推动社会接纳。开展宣传教育，引导正确认知，鼓励矫正对象参加公益志愿活动；主动联系企业，争取就业支持，并做好回访、随访，共同加强管理，减少歧视，促进社会融入。</div><div class="item nomk">5.畅通监管沟通。司法所与村建立畅通的沟通渠道，定期线上线下联络，加强部门协同，压实责任，推动信息共享。</div></div><div class="aihint">下面是 <b>AI 批注</b>：题干逐词拆解、材料结构、找点动作、答案溯源、出题人的坑。<b>这部分不是粉笔原话</b>，是逐句分析材料得出的判断，和上面的粉笔讲解互为补充。</div><div class="ai"><h4><span class="an">AI</span>① 题干逐词拆解<span class="sub">每个字都在告诉你该干什么</span></h4><div class="tw"><table class="tstem"><thead><tr><th>题干词</th><th>类型</th><th>它到底在说什么</th><th>你该做什么</th></tr></thead><tbody><tr><td class='w'>假如你是</td><td><span class='ty ty-身份设定'>身份设定</span></td><td>你是 J区司法局社区矫正中心工作人员 —— 内部人，不是外部专家</td><td class='act'>提对策要落在「我们中心能做的事」上，不能写「国家应立法」这种超出权限的</td></tr><tr><td class='w'>J区司法局社区矫正中心工作人员</td><td><span class='ty ty-权限边界'>权限边界</span></td><td>你的权限：招人、培训、建制度、协调部门、联系家庭、对接社会组织。你没有的权限：修改法律、改变居民观念（只能引导）</td><td class='act'>每条对策自检：我这个岗位能不能推动？不能就换个说法</td></tr><tr><td class='w'>根据给定资料3</td><td><span class='ty ty-范围信号'>范围信号</span></td><td>只用资料3，不许引用资料1/2/4。资料3 是「问题型材料」，通篇讲困难，没有现成的对策段落——这一点必须先意识到</td><td class='act'>先通读资料3，判断它是「做法型」还是「问题型」。问题型材料的对策要靠反推，不能指望直接抄</td></tr><tr><td class='w'>梳理社区矫正工作面临的问题</td><td><span class='ty ty-要素一 = 问题'>要素一 = 问题</span></td><td>要「问题」，不是「困难」「现状」。问题 = 负面表述（不足、缺乏、难、低）</td><td class='act'>找负面词：不足、薄弱、缺位、有限、难、偏见、不畅</td></tr><tr><td class='w'>并提出对策建议</td><td><span class='ty ty-要素二 = 对策'>要素二 = 对策</span></td><td>对策必须是<b>针对上面问题</b>的，一对一或一对多</td><td class='act'>每条对策后面能说出「解决第几个问题」，说不出的就是废话</td></tr><tr><td class='w'>先梳理完所有问题，再提出建议</td><td><span class='ty ty-顺序硬要求'>顺序硬要求</span></td><td>结构必须是「一、问题（全部列完）二、建议」</td><td class='act'>⚠️ 不能「问题1+对策1、问题2+对策2」这样交错写，会扣分</td></tr><tr><td class='w'>问题梳理全面准确，建议具体可行，有针对性</td><td><span class='ty ty-评分标准'>评分标准</span></td><td>「全面」= 不漏点；「准确」= 用材料原词；「具体可行」= 有动作、有主体；「有针对性」= 一对一</td><td class='act'>「加强领导」「提高认识」这种空话一律不写，写了也不给分</td></tr><tr><td class='w'>不超过500字</td><td><span class='ty ty-字数'>字数</span></td><td>500 字能装 5 组问题+对策，每组约 90 字</td><td class='act'>问题部分约 180 字，对策部分约 300 字，标题字数约 20</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>② 为什么是这个题型<span class="sub">判断链，不是结论</span></h4><div class="prose">判断链：① 题干有两个动词「梳理」和「提出」→ <b>两问</b>，必须分两部分答；② 要素是「问题 + 对策」→ 这是「复合要素题」，比单一题多一倍工作量；③ 明确要求「先梳理完所有问题，再提出建议」→ 结构固定，不能交错；④ 25 分 / 500 字 → 分值高、容量大，问题和对策各 5 条左右。
+
+⚠️ 最大的坑：<b>对策从哪来</b>。
+材料3 是「问题型材料」，通篇在讲困难，没有「政府采取了什么措施」的段落。
+所以对策必须靠三种方式生成：
+  ① <b>问题反推</b>：问题说「人手不足」→ 对策「充实队伍力量」（加人、招聘、发动志愿者）
+  ② <b>材料暗示</b>：句34 黄厂长说「希望加强回访随访」→ 对策「建立回访制度」
+  ③ <b>材料里的外地经验</b>：句37-38 A县「生态修复」、Z市「劳务代偿+星级证书」→ 对策「借鉴推广这类创新做法」
+
+⚠️ 特别注意：材料3 句37-38 是<b>唯一给了正面做法的地方</b>，这两句不是「问题」，是对策的素材库，很多人当背景读过去了。</div></div><div class="ai"><h4><span class="an">AI</span>③ 材料结构图<span class="sub">哪段有用、哪段是干扰，为什么</span></h4><div class="mmwrap"><div class="mm no"><div class="mmh"><b>句1-2</b><span class="mmb">不出点</span></div><div class="mmr">概念定义：什么是社区矫正</div><div class="mmw">纯定义（法定条件、四类人员、90%是缓刑犯），是背景知识，不出点。但可以用一句话理解「矫正对象是轻罪犯人，目的是帮其融入社会」——这决定了后面对策的基调。</div></div><div class="mm no"><div class="mmh"><b>句3-4</b><span class="mmb">不出点</span></div><div class="mmr">成效 + 已解决的问题</div><div class="mmw">「档案不健全的问题彻底解决」「基本做到了分类教育」——这是<b>已解决</b>的，不是现存问题。新手容易误当问题抄。</div></div><div class="mm pt"><div class="mmh"><b>句5-8</b><span class="mmb">出 1 点</span></div><div class="mmr">问题一：队伍力量薄弱</div><div class="mmw">句6「不到50人，严重不足」= 人手；句7「专业知识相对薄弱」「很需要法律、心理学、社会工作等专业知识」= 专业性。两个子问题。</div></div><div class="mm pt"><div class="mmh"><b>句9-14</b><span class="mmb">出 1 点</span></div><div class="mmr">问题二：家庭支持缺位</div><div class="mmw">句11-12 小倪案例（父母务工、爷奶年迈无力管教、失联、收监）= 家庭无力支持；句14「认为给家里抹黑，对外藏着掖着」= 家庭排斥。注意句13 是过渡句，不算点。</div></div><div class="mm pt"><div class="mmh"><b>句15-16</b><span class="mmb">出 1 点</span></div><div class="mmr">问题三：社会支持不足</div><div class="mmw">句15「专业的社会组织太少」「经费有限」「活动不够丰富」「矫正对象不愿参加」—— 四个子问题挤在一句里，要拆开读。</div></div><div class="mm pt"><div class="mmh"><b>句17-25</b><span class="mmb">出 1 点</span></div><div class="mmr">问题四：社会接纳度低</div><div class="mmw">句18「社区居民刻意疏远、指指点点」= 偏见；句19-21 杨某网约车被封号 = 就业歧视；句22-23 爱心送考被拒 = 社会排斥。句24-25 是杨某的话（态度积极），不是问题。</div></div><div class="mm pt"><div class="mmh"><b>句26-27</b><span class="mmb">出 1 点</span></div><div class="mmr">问题五：监管沟通不畅</div><div class="mmw">句26 老丁说「说去参加过公益活动，但实际没参加」= 信息不实；句27「如果司法所与村之间有完善的沟通渠道…否则很可能脱管」= 直接点明沟通不畅。<b>句27 是材料里唯一明写「问题+后果」的句子，是必抄点。</b></div></div><div class="mm pt"><div class="mmh"><b>句28-29</b><span class="mmb">出 1 点</span></div><div class="mmr">问题补充：志愿者职责不清</div><div class="mmw">句29「不知道自己该做什么、能做什么」「只能配合司法所做一些简单的工作」= 志愿者缺乏指导和定位。这条容易被漏，因为它藏在「志愿者小严」的发言里。</div></div><div class="mm no"><div class="mmh"><b>句30-34</b><span class="mmb">不出点</span></div><div class="mmr">对策素材：企业接收的顾虑</div><div class="mmw">黄厂长的话不是问题，是<b>对策线索</b>：企业愿意接收但有顾虑，「希望加强回访随访」→ 对策：建立回访制度、加强与企业沟通、给企业政策支持。</div></div><div class="mm no"><div class="mmh"><b>句35-38</b><span class="mmb">不出点</span></div><div class="mmr">对策素材：外地创新经验</div><div class="mmw">小唐介绍 A县「生态修复」、Z市「劳务代偿+星级证书」—— 这是<b>正面做法</b>，是对策的现成模板，要写成「借鉴推广」。这是本题最大的采分点之一，但很多人当背景跳过了。</div></div></div></div><div class="ai"><h4><span class="an">AI</span>④ 我该怎么找答案<span class="sub">六步动作，照做就行</span></h4><ol class="steps"><li><div class="sh">第 1 步 · 先看要求，定结构</div><div class="st"><span class="lb">看哪</span>「先梳理完所有问题，再提出建议」</div><div class="ss"><span class="lb">凭什么</span>直接决定：答案分两大块，标题写「一、问题」「二、建议」。不要交错，不要合并</div></li><li><div class="sh">第 2 步 · 扫全文找负面词，标出所有问题</div><div class="st"><span class="lb">看哪</span>不足、薄弱、缺、少、有限、难、偏见、疏远、不畅、顾虑、不清</div><div class="ss"><span class="lb">凭什么</span>问题型材料里，<b>每个负面词都是一个潜在采分点</b>。先把负面词全部圈出来，再合并同类</div></li><li><div class="sh">第 3 步 · 把负面词按「谁的问题」归类</div><div class="st"><span class="lb">看哪</span>队伍 / 家庭 / 社会组织 / 社会观念 / 部门协作</div><div class="ss"><span class="lb">凭什么</span>归类依据是<b>主体</b>：是工作人员的问题、家属的问题、社会的问题、还是部门之间的问题。主体不同，对策的负责方也不同</div></li><li><div class="sh">第 4 步 · 给每组问题起总括词</div><div class="st"><span class="lb">看哪</span>队伍力量薄弱 / 家庭支持缺位 / 社会支持不足 / 社会接纳度低 / 监管沟通不畅</div><div class="ss"><span class="lb">凭什么</span>总括词用「主体 + 状态」结构。注意参考答案用的是「薄弱/缺位/不足/低/不畅」五个不同的负面词，避免重复</div></li><li><div class="sh">第 5 步 · 对策逐条反推 + 找材料暗示</div><div class="st"><span class="lb">看哪</span>问题1→充实队伍；问题2→强化家庭支持；问题3→引入社会组织；问题4→促进社会接纳；问题5→畅通沟通渠道</div><div class="ss"><span class="lb">凭什么</span>反推公式：<b>问题里的负面词换成正面动词</b>。「人手不足」→「充实力量」；「支持缺位」→「强化支持」；「沟通不畅」→「畅通渠道」。这是最稳的对策生成法</div></li><li><div class="sh">第 6 步 · 把材料里的正面做法接进对策</div><div class="st"><span class="lb">看哪</span>句34（回访随访）、句37（生态修复）、句38（劳务代偿+星级证书）</div><div class="ss"><span class="lb">凭什么</span>这三处是材料给的「标准答案片段」，对策里必须出现「回访」「生态修复」「劳务代偿」「星级证书」这些原词</div></li></ol></div><div class="ai"><h4><span class="an">AI</span>⑤ 每条答案从哪来<span class="sub">点句子编号可对照左边材料</span></h4><div class="tw"><table class="ttrace"><thead><tr><th>答案要点</th><th>来源句</th><th>怎么变成答案的</th></tr></thead><tbody><tr><td class='pt'>问题1 队伍力量薄弱</td><td class='src'><code>句6</code> <code>句7</code></td><td>句6「不到50人，严重不足」→「工作人员不足」；句7「专业知识相对薄弱」→「专业知识薄弱」；再补一句从句29 来的「志愿者职责不清，缺乏指导，仅能配合简单工作」</td></tr><tr><td class='pt'>问题2 家庭支持缺位</td><td class='src'><code>句11</code> <code>句14</code></td><td>句11「父母长年在外务工」「爷爷奶奶年迈体衰，无力管教」→「家长监护不到位，无力管教」；句14「认为给家里抹黑，对外藏着掖着」→「有排斥心理」</td></tr><tr><td class='pt'>问题3 社会支持不足</td><td class='src'><code>句15</code></td><td>一句拆四点：社会组织太少 / 经费有限 / 活动不丰富 / 覆盖范围有限（只针对未成年）</td></tr><tr><td class='pt'>问题4 社会接纳度低</td><td class='src'><code>句18</code> <code>句20</code> <code>句23</code></td><td>句18「刻意疏远、指指点点」→「居民有偏见」；句20「遭平台封号」→「就业遭受歧视」；句23「委婉拒绝」→「社会融入难」</td></tr><tr><td class='pt'>问题5 监管沟通不畅</td><td class='src'><code>句27</code></td><td>句27 直接摘抄：「如果司法所与村之间有完善的沟通渠道，可以很大程度上避免这样的问题，否则很可能出现社区矫正对象脱管」→ 压缩为「司法所与村缺乏完善的沟通渠道，存在脱管风险」</td></tr><tr><td class='pt'>建议1 充实队伍力量</td><td class='src'><code>句6</code> <code>句7</code> <code>句29</code></td><td>针对问题1：加人（引进招聘）+ 发动志愿者兼职 + 培训（法律、心理学、社会工作）+ 明确职责分工。四个动作对应四个子问题</td></tr><tr><td class='pt'>建议2 强化家庭支持</td><td class='src'><code>句11</code> <code>句14</code></td><td>针对问题2：建立家庭定期联系制度 + 开展家庭教育指导 + 心理疏导（化解排斥心理）</td></tr><tr><td class='pt'>建议3 引入社会力量</td><td class='src'><code>句15</code> <code>句37</code> <code>句38</code></td><td>针对问题3：培育/引入专业社会组织 + 争取经费 + 丰富活动形式 + 借鉴 A县生态修复、Z市劳务代偿和星级证书等创新做法</td></tr><tr><td class='pt'>建议4 促进社会接纳</td><td class='src'><code>句18</code> <code>句20</code> <code>句23</code></td><td>针对问题4：加强宣传引导（消除偏见）+ 联合企业提供就业岗位 + 树立矫正对象正面典型</td></tr><tr><td class='pt'>建议5 畅通沟通渠道</td><td class='src'><code>句27</code> <code>句34</code></td><td>针对问题5：建立司法所与村（社区）的信息互通机制 + 加强回访随访（句34 黄厂长的建议）</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>⑥ 出题人埋的坑<span class="sub">这些地方专门骗新手</span></h4><div class="traps"><div class="trap"><div class="th">⚠ 只答问题，不答对策（或反过来）</div><div class="tw2"><span class="lb">为什么错</span>题干有「并提出对策建议」，两问两答。只答一半，25 分最多拿 10 分</div><div class="ta"><span class="lb">怎么躲</span>动笔前先写「一、问题」「二、建议」两个标题，物理上保证两部分都有</div></div><div class="trap"><div class="th">⚠ 问题和对策交错写（问题1+对策1+问题2+对策2）</div><div class="tw2"><span class="lb">为什么错</span>题干明确「先梳理完所有问题，再提出建议」，交错写违反要求</div><div class="ta"><span class="lb">怎么躲</span>严格两大块。问题全写完，再写建议</div></div><div class="trap"><div class="th">⚠ 把「已解决的问题」当问题抄</div><div class="tw2"><span class="lb">为什么错</span>句4「档案不健全的问题彻底解决」「基本做到了分类教育」——这是<b>成效</b>，已经解决了，不是现存问题</div><div class="ta"><span class="lb">怎么躲</span>看到「彻底解决」「基本做到」「初见成效」这类词，说明是成效不是问题</div></div><div class="trap"><div class="th">⚠ 对策写空话（加强领导、提高认识、完善机制）</div><div class="tw2"><span class="lb">为什么错</span>评分标准明写「具体可行」。空话不给分</div><div class="ta"><span class="lb">怎么躲</span>每条对策必须有<b>具体动作 + 具体内容</b>。「完善机制」不行，「建立司法所与村的信息互通机制」才行</div></div><div class="trap"><div class="th">⚠ 漏掉句37-38 的外地经验</div><div class="tw2"><span class="lb">为什么错</span>这是材料里唯一的正面做法，是对策的现成素材。漏了等于丢掉最容易拿的分</div><div class="ta"><span class="lb">怎么躲</span>通读时标记所有「比如」「例如」「不少地方有…探索」——这些后面一定是对策素材</div></div><div class="trap"><div class="th">⚠ 问题和对策数量不对齐</div><div class="tw2"><span class="lb">为什么错</span>5 个问题配 4 条对策，阅卷会觉得你漏了；配 8 条对策，会显得啰嗦且字数超</div><div class="ta"><span class="lb">怎么躲</span>一对一或一对二。参考答案是 5 问题 : 5 建议，整齐对应</div></div></div></div><div class="ai"><h4><span class="an">AI</span>⑦ 答案为什么长这样<span class="sub">骨架、字数、用词</span></h4><div class="prose">参考答案结构：
+<b>一、问题：</b>
+1.队伍力量薄弱。工作人员不足，专业知识薄弱，志愿者职责不清，缺乏指导，仅能配合简单工作。
+2.家庭支持缺位。家长监护不到位，无力管教，有排斥心理。
+3.社会支持不足。专业社会组织少，经费有限，活动不丰富，覆盖范围有限。
+4.社会接纳度低。居民有偏见，就业遭受歧视，社会融入难。
+5.监管沟通不畅。司法所与村缺乏完善的沟通渠道，存在脱管风险。
+
+<b>二、建议：</b>
+1.充实队伍力量。加强工作人员引进和招聘，发动志愿者和兼职人员参与，定期组织法律、心理学、社会工作等培训，提升专业能力；优化工作人员与志愿者协作，明确职责分工。
+2.强化家庭支持。…
+
+<b>关键观察：问题和对策严格一一对应，连编号都对齐（1对1、2对2…）。</b>
+这是复合要素题最稳的结构：<b>编号对齐 = 阅卷人一眼看出你有针对性</b>。
+
+<b>用词观察</b>：问题的总括词是负面词（薄弱/缺位/不足/低/不畅），对策的总括词是正面动词（充实/强化/引入/促进/畅通）。
+这是刻意设计的<b>对仗</b>，让阅卷人看到「问题→对策」的映射关系。
+
+字数账：问题 5 条 × 35 字 = 175 字；建议 5 条 × 60 字 = 300 字；标题 20 字 = 495 字。
+刚好 500 字。所以<b>问题部分必须极简</b>（只列负面事实，不解释），建议部分才能展开（有动作、有内容）。</div></div><div class="ai extra"><h4><span class="an">AI</span>⑧ 粉笔没讲透的地方<span class="sub">我的补充判断</span></h4><div class="prose">这题粉笔没给演示，我自己拆出三个关键判断：
+
+<b>判断一：为什么问题只有 5 条，而材料里的负面表述有十几个？</b>
+材料3 的负面信息非常密集：人手不足、专业薄弱、志愿者不清、家庭无力、家庭排斥、社会组织少、经费有限、活动不丰富、居民偏见、就业歧视、爱心送考被拒、沟通不畅、脱管风险、企业有顾虑……数下来 14 处。
+参考答案合并成 5 条，<b>依据是「责任主体」</b>：
+  队伍（内部）→ 家庭 → 社会组织 → 社会观念 → 部门协作
+这个分类轴是<b>从近到远</b>：自己 → 家属 → 社会力量 → 社会观念 → 跨部门。
+<b>所以合并问题的通用方法：先问「这是谁的责任」，同责任的合并。</b>
+
+<b>判断二：对策为什么能写得这么具体？</b>
+因为材料里埋了三处「标准答案片段」：
+  · 句34 黄厂长「希望加强回访、随访」→ 直接变成对策「加强回访随访」
+  · 句37 A县「组织参与生态修复，种树苗」→ 变成「借鉴生态修复做法」
+  · 句38 Z市「劳务代偿+星级志愿者证书」→ 变成「推广劳务代偿和星级激励」
+这三处是<b>出题人给的免费答案</b>。
+<b>规律：材料里凡是出现「比如」「不少地方有…探索」「希望…」的，都是对策素材。</b>
+这是「问题型材料」里藏对策的标准手法。
+
+<b>判断三：为什么参考答案的建议部分字数是对策的两倍？</b>
+因为评分标准写「建议具体可行」——<b>具体 = 字数</b>。
+问题只要点出来（10 字够），对策要写清「谁、做什么、怎么做」（60 字）。
+所以 500 字里，问题占 1/3，对策占 2/3。这个比例不是随便定的，是评分标准倒推的。
+
+<b>一个容易忽略的细节</b>：参考答案问题 1 里写了「志愿者职责不清，缺乏指导，仅能配合简单工作」，但材料句29 是<b>志愿者小严的发言</b>，位置在「座谈会」部分（句26 之后），离句6-7 的「队伍薄弱」很远。
+<b>这说明</b>：合并问题不能只看材料顺序，要<b>按主题跨段落归并</b>。句6-7（人手/专业）和句29（志愿者）虽然隔了 20 句，但都是「队伍」问题，必须合并。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">40 分</span><span class="tag kp">文章写作题</span></div><p class="stem">“给定资料4”中提到：“我们要以法理和常情常理为经纬，去织补去修复，才能‘避免埋钉子、留尾巴’，才能实现真正的长治久安。”请你深入思考这句话，参考给定资料，联系实际，自选角度，自拟题目，撰写一篇文章。（40分）</p><p class="req">要求：（1）观点明确，见解深刻；
+（2）参考给定资料，但不拘泥于给定资料；
+（3）思路清晰，语言流畅；
+（4）限800-1000字。</p></div><div class="warn">⚠️ 粉笔未提供本题的答题演示，只有参考答案。下面直接给答案，不做逐句讲解。</div><div class="ref" data-m2r='{}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item nomk">法治安天下，情理润人心</div><div class="item nomk">基层法治关系着人民安居乐业、社会安定有序、国家长治久安。法治从不是冰冷的条文，而是兼具刚性底线与人文温度的治理方法。法理是刚性的规则与正义，常情常理是柔性的伦理与人心。二者相辅相成、刚柔并济，方能根除矛盾隐患、弥合社会裂痕，实现标本兼治。</div><div class="item nomk">法理与常情常理是辩证统一的关系。法理代表了法律执行的准则，是基层治理的根基，而常情常理代表了社会公众普遍认同的道德观念、伦理规范和人情事理，是基层治理的土壤。两者相互依存、相辅相成，是基层法治的一体两面，缺一不可。若没有了法理，情理和常理易陷入无序的混乱状态，损害法治的权威与尊严；若没有了常情常理，法理也显得冰冷生硬。惟有两手抓、两手硬，方能让法律定底线，情理暖人心，真正实现长治久安。</div><div class="item nomk">以法理为经，坚守法治底线，筑牢法治根基。“法者，治之端也。”法理是社会运行的刚性准则，是化解纠纷、惩治违法的根本依据，任何治理实践都不能逾越法治框架。无论是交通肇事人员依法入狱服刑，还是非法猎捕野生动物被依法判刑、承担生态赔偿，亦或是对违法排污企业的严肃查处……司法机关始终以法律为准绳，精准惩戒违法行为，方能维护社会公平。基层法治工作人员要自觉尊法、用法、护法，坚守法理底线，严格依法办事，让违法者付出应有代价，让公众感受到公平正义，才能为社会治理筑牢根基，杜绝徇私枉法、是非模糊的治理乱象。</div><div class="item nomk">以情理为纬，修复人心裂痕，彰显治理温度。“法律不是冷冰冰的条文，背后有情有义。”法理若脱离人情温度，极易出现“埋钉子、留尾巴”的问题，留下矛盾隐患。在执法实践中，适度柔性、讲清常情常理，并不会损害法治的权威，反而能让每一次执法行为都变成一堂生动的“法治课”。“蓝风铃”恢复性司法活动，不局限于对罪犯的刑罚惩戒，主动帮扶受害家庭、疏导心理创伤、搭建和解桥梁，让罪犯真心悔过、受害者放下芥蒂，彻底化解施害与受害双方的深层矛盾。法律是严肃的，但群众都是有血有肉有感情的人，让情理赋能司法，让治理跳出“结案即了事”的浅层思维，方能真正根除矛盾根源。</div><div class="item nomk">人民满意是一条走不完的路，群众工作是一本翻不完的书。法治的真谛，在于刚柔并济、情理兼顾，广大司法工作者当以法理为骨、以情理为魂，严守法治底线，用心织补社会裂痕、用情化解群众心结，让法治既有雷霆万钧的力度，亦有春风化雨的温度，更好守护社会长治久安。</div></div><div class="aihint">下面是 <b>AI 批注</b>：题干逐词拆解、材料结构、找点动作、答案溯源、出题人的坑。<b>这部分不是粉笔原话</b>，是逐句分析材料得出的判断，和上面的粉笔讲解互为补充。</div><div class="ai"><h4><span class="an">AI</span>① 题干逐词拆解<span class="sub">每个字都在告诉你该干什么</span></h4><div class="tw"><table class="tstem"><thead><tr><th>题干词</th><th>类型</th><th>它到底在说什么</th><th>你该做什么</th></tr></thead><tbody><tr><td class='w'>给定资料4中提到</td><td><span class='ty ty-句子来源'>句子来源</span></td><td>这句话出自材料4 句51，是全文的<b>文眼</b></td><td class='act'>先回到句51 的上下文（句50-51），看这句话是谁说的、在什么语境下说的</td></tr><tr><td class='w'>我们要以法理和常情常理为经纬</td><td><span class='ty ty-核心比喻'>核心比喻</span></td><td>「经纬」= 织布的纵线和横线，比喻<b>两个维度交织</b>。法理 = 纵（刚性规则）；常情常理 = 横（柔性人情）。「为经纬」= 两者缺一不可，要交织使用</td><td class='act'>必须写成「二者结合」，不能只写「要讲法治」或只写「要讲人情」</td></tr><tr><td class='w'>去织补去修复</td><td><span class='ty ty-动作'>动作</span></td><td>「织补」「修复」= 治理不是推倒重来，是<b>修补已有裂痕</b>。隐含前提：社会关系已经破损（矛盾、纠纷、伤害）</td><td class='act'>分论点要落到「修复什么」：修复受害者创伤、修复邻里关系、修复生态、修复社会信任</td></tr><tr><td class='w'>避免埋钉子、留尾巴</td><td><span class='ty ty-后果警示'>后果警示</span></td><td>「埋钉子」= 留下隐患，日后爆发；「留尾巴」= 处理不彻底，遗留问题。都是<b>短期看似解决、长期必反弹</b></td><td class='act'>这是反面论证的素材：只讲法理不讲情理 → 埋钉子；只讲情理不讲法理 → 留尾巴</td></tr><tr><td class='w'>实现真正的长治久安</td><td><span class='ty ty-终极目标'>终极目标</span></td><td>「真正的」三个字是题眼 —— 暗示「表面的稳定」不够，要「根本的稳定」</td><td class='act'>结尾必须回到「长治久安」，且要体现「真正」二字的分量</td></tr><tr><td class='w'>深入思考这句话</td><td><span class='ty ty-思维要求'>思维要求</span></td><td>不能只解释句子，要有自己的<b>观点和论证</b></td><td class='act'>中心论点必须是一句判断句，不能是「这句话告诉我们…」这种复述</td></tr><tr><td class='w'>参考给定资料，联系实际</td><td><span class='ty ty-素材要求'>素材要求</span></td><td>「参考」= 可以用材料案例；「联系实际」= 必须有材料外的内容（社会现象、时政）</td><td class='act'>分论点里至少一个用材料案例（蓝风铃/厕所革命/野归），一个用材料外案例</td></tr><tr><td class='w'>自选角度，自拟题目</td><td><span class='ty ty-自由度'>自由度</span></td><td>角度自由，但<b>不能偏离「法理+情理」这个核心</b></td><td class='act'>标题必须同时体现两个维度，只写一个会偏题</td></tr><tr><td class='w'>观点明确，见解深刻</td><td><span class='ty ty-评分标准一'>评分标准一</span></td><td>「明确」= 中心论点一句话说清；「深刻」= 不停留在「要结合」，要讲清<b>为什么</b>要结合、<b>怎么</b>结合</td><td class='act'>开头段必须出现一句完整判断句作为中心论点</td></tr><tr><td class='w'>思路清晰，语言流畅</td><td><span class='ty ty-评分标准二'>评分标准二</span></td><td>结构完整（总-分-总），分论点之间有逻辑关系</td><td class='act'>三个分论点不能并列罗列，要有递进或并列的内在逻辑</td></tr><tr><td class='w'>限800-1000字</td><td><span class='ty ty-字数'>字数</span></td><td>少于 800 扣分，超过 1000 也扣分。<b>900 字最稳</b></td><td class='act'>结构分配：开头 150 + 分论点一 220 + 分论点二 220 + 分论点三 220 + 结尾 120 ≈ 930</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>② 为什么是这个题型<span class="sub">判断链，不是结论</span></h4><div class="prose">判断链：① 题干给一句话让你「深入思考」→ 这是<b>句子理解型大作文</b>（不是命题作文、不是话题作文）；② 句子有比喻（经纬、织补、埋钉子）→ 第一步必须<b>翻译比喻</b>；③ 句子有两个核心概念（法理、常情常理）→ 这是<b>关系型主题</b>，标准写法是「二者辩证统一」；④ 40 分 / 800-1000 字 → 五段式（开头+3分论点+结尾）。
+
+⚠️ 最容易犯的错：<b>只写一个维度</b>。
+看到「法理」就通篇讲依法治国，或者看到「常情常理」就通篇讲人性化执法 —— 都偏题。题干用了「和」「经纬」这种并列词，就是要你写<b>两者关系</b>。
+
+⚠️ 第二容易犯的错：<b>把大作文写成加长版概括题</b>。
+大作文要有「论点+论证」，不是「要点罗列」。分论点后面必须有分析、有例证、有回扣。
+
+主题判断：材料4 三个案例（蓝风铃恢复性司法、厕所革命邻里纠纷、野归生态修复）全部是「法律框架内的柔性处理」—— 这正是「法理+情理」的具象化。所以主题可以定为「基层治理中法理与情理的辩证统一」。</div></div><div class="ai"><h4><span class="an">AI</span>③ 材料结构图<span class="sub">哪段有用、哪段是干扰，为什么</span></h4><div class="mmwrap"><div class="mm pt"><div class="mmh"><b>句1-13</b><span class="mmb">出 1 点</span></div><div class="mmr">案例一：蓝风铃恢复性司法</div><div class="mmw">郑某交通肇事案。关键在句4「组成蓝风铃小队」、句6「申请司法救助金、心理疗愈、解决子女就学就业」、句12「开展恢复性司法活动」、句13「修复被犯罪行为伤害的社会关系」。<b>这个案例是「法理+情理」的完美例证</b>：判刑是法理，走访帮扶是情理。</div></div><div class="mm pt"><div class="mmh"><b>句14-40</b><span class="mmb">出 1 点</span></div><div class="mmr">案例二：厕所革命邻里纠纷</div><div class="mmw">柴大爷与武大爷千元补贴纠纷。关键在句39「动心动情比用劲用力更有效果，打开心结比案件执结更加重要」、句40「断了是非、结了案，还能维持关系和情感」。<b>这是「情理优先」的例证</b>：用调解而非判决化解矛盾。</div></div><div class="mm pt"><div class="mmh"><b>句41-49</b><span class="mmb">出 1 点</span></div><div class="mmr">案例三：野归生态修复</div><div class="mmw">野生猕猴案。句43「判刑+赔偿339.52万」是法理，句45-48「野化放归」是情理（对生命的尊重）。<b>这是「法理之后还要修复」的例证</b>。</div></div><div class="mm pt"><div class="mmh"><b>句50-51</b><span class="mmb">出 1 点</span></div><div class="mmr">文眼句：法治工作者的升华</div><div class="mmw">句50「法治工作不仅仅是个案的定分止争，更肩负着引领社会发展、推动法治进步的重要职责」= 法治的层次论；句51 是题干引用的句子，是<b>全文中心论点所在</b>。</div></div></div></div><div class="ai"><h4><span class="an">AI</span>④ 我该怎么找答案<span class="sub">六步动作，照做就行</span></h4><ol class="steps"><li><div class="sh">第 1 步 · 回到句子出处，看上下文</div><div class="st"><span class="lb">看哪</span>句50-51</div><div class="ss"><span class="lb">凭什么</span>句50 是铺垫（法治工作的职责），句51 是结论。<b>看谁说这句话</b>：一位数十年战斗在一线的法治工作者 —— 这是「权威观点」，可以直接作为中心论点的依据</div></li><li><div class="sh">第 2 步 · 逐词翻译比喻，得到三个关键词</div><div class="st"><span class="lb">看哪</span>经纬 → 交织/结合；织补修复 → 修补裂痕；埋钉子留尾巴 → 短期解决长期反弹</div><div class="ss"><span class="lb">凭什么</span>比喻必须落地。「经纬」翻译成「两个维度缺一不可」，这是分论点结构的来源</div></li><li><div class="sh">第 3 步 · 确定中心论点（一句话判断句）</div><div class="st"><span class="lb">看哪</span>基层治理必须法理与情理并用，才能实现真正的长治久安</div><div class="ss"><span class="lb">凭什么</span>中心论点公式：<b>在什么领域 + 必须怎么做 + 才能达到什么结果</b>。不能写成「这句话说明了…」</div></li><li><div class="sh">第 4 步 · 把三个案例对应到三个分论点</div><div class="st"><span class="lb">看哪</span>蓝风铃→法理为基、情理为用；厕所革命→情理优先化解矛盾；野归→法理之后还要修复</div><div class="ss"><span class="lb">凭什么</span>材料给三个案例，正好对应三个分论点。<b>这是出题人安排的</b>，不是巧合</div></li><li><div class="sh">第 5 步 · 设计分论点的逻辑关系</div><div class="st"><span class="lb">看哪</span>分论点一：法理是底线（刚性）；分论点二：情理是温度（柔性）；分论点三：二者融合才能长治久安（升华）</div><div class="ss"><span class="lb">凭什么</span>「是什么—为什么—怎么办」或「底线—温度—融合」的递进。不能三个分论点平行罗列同一层次</div></li><li><div class="sh">第 6 步 · 给每个分论点找材料外例证</div><div class="st"><span class="lb">看哪</span>「枫桥经验」、「六尺巷」调解、认罪认罚从宽、未成年人附条件不起诉</div><div class="ss"><span class="lb">凭什么</span>题干要求「联系实际」，必须有材料外内容。用一个时政/经典案例 + 一句分析，约 80 字</div></li></ol></div><div class="ai"><h4><span class="an">AI</span>⑤ 每条答案从哪来<span class="sub">点句子编号可对照左边材料</span></h4><div class="tw"><table class="ttrace"><thead><tr><th>答案要点</th><th>来源句</th><th>怎么变成答案的</th></tr></thead><tbody><tr><td class='pt'>标题：法治安天下，情理润人心</td><td class='src'><code>句51</code></td><td>对仗式标题，上半句「法治安天下」对应法理，下半句「情理润人心」对应常情常理。<b>标题必须同时体现两个维度</b>，这是不偏题的保险</td></tr><tr><td class='pt'>开头段：中心论点</td><td class='src'><code>句50</code> <code>句51</code></td><td>从「基层法治关系人民安居乐业、国家长治久安」切入 → 点出「法治不是冰冷条文，而是刚性底线+人文温度」→ 提出中心论点「法理与常情常理相辅相成、刚柔并济，方能标本兼治」</td></tr><tr><td class='pt'>分论点一：法理与情理是辩证统一的关系</td><td class='src'><code>句51</code></td><td>先讲「为什么必须结合」：法理是根基（准则），情理是土壤（道德伦理）；二者相互依存。反面论证：没有法理→混乱无序；没有情理→冰冷生硬。<b>这是「关系型主题」的标准第一段：先厘清概念关系</b></td></tr><tr><td class='pt'>分论点二：法理为基，守住公平正义底线</td><td class='src'><code>句43</code> <code>句45</code></td><td>用野归案例：王某非法猎捕猕猴，法院判刑 + 判赔 339.52 万 —— <b>违法必究是法理的刚性体现</b>。分析：如果只讲情理不追责，就是「留尾巴」</td></tr><tr><td class='pt'>分论点三：情理为用，让法治有温度</td><td class='src'><code>句4</code> <code>句6</code> <code>句39</code> <code>句40</code></td><td>用蓝风铃案例：判刑之后还走访受害者家庭、申请司法救助、心理疗愈 —— <b>这是情理</b>。再用厕所革命案例：赵法官「动心动情比用劲用力更有效果」—— <b>打开心结比案件执结更重要</b>。分析：只讲法理不讲情理，就是「埋钉子」</td></tr><tr><td class='pt'>结尾段：升华到长治久安</td><td class='src'><code>句51</code></td><td>回扣「以法理和常情常理为经纬，去织补去修复」→ 落到「避免埋钉子留尾巴」「实现真正的长治久安」。<b>结尾必须回扣题干原句</b>，这是大作文的格式要求</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>⑥ 出题人埋的坑<span class="sub">这些地方专门骗新手</span></h4><div class="traps"><div class="trap"><div class="th">⚠ 只写「法治」或只写「人情」</div><div class="tw2"><span class="lb">为什么错</span>题干用「和」「经纬」明确要求两者关系。只写一个维度，属于<b>偏题</b>，40 分最多给 20 分</div><div class="ta"><span class="lb">怎么躲</span>标题、开头、结尾都必须出现两个维度。三个分论点至少两个各讲一个维度，第三个讲融合</div></div><div class="trap"><div class="th">⚠ 把大作文写成加长概括题</div><div class="tw2"><span class="lb">为什么错</span>分论点下面只罗列材料要点，没有分析论证，属于「文体不符」</div><div class="ta"><span class="lb">怎么躲</span>每个分论点按「提出观点 → 分析原因/意义 → 举例 → 回扣观点」四步写，不能只有例子</div></div><div class="trap"><div class="th">⚠ 通篇用材料案例，没有材料外内容</div><div class="tw2"><span class="lb">为什么错</span>题干要求「联系实际」，全用材料属于「拘泥于给定资料」，扣分</div><div class="ta"><span class="lb">怎么躲</span>至少一个分论点用材料外案例（枫桥经验、六尺巷、认罪认罚从宽等）</div></div><div class="trap"><div class="th">⚠ 标题只写一个维度（如「论法治精神」）</div><div class="tw2"><span class="lb">为什么错</span>标题是阅卷人第一眼看到的东西，标题偏题直接影响定档</div><div class="ta"><span class="lb">怎么躲</span>标题用对仗式：「法治安天下，情理润人心」「法理为纲，情理为纬」</div></div><div class="trap"><div class="th">⚠ 字数不足 800 或超过 1000</div><div class="tw2"><span class="lb">为什么错</span>少于 800 直接降档；超过 1000 超出部分不阅卷，且显得不守规则</div><div class="ta"><span class="lb">怎么躲</span>写到 900 字左右最稳。考前用方格纸练 3 篇，形成字数感</div></div><div class="trap"><div class="th">⚠ 分论点三个平行，没有逻辑递进</div><div class="tw2"><span class="lb">为什么错</span>「思路清晰」要求分论点之间有逻辑关系。三个并列的「要…要…要…」显得单薄</div><div class="ta"><span class="lb">怎么躲</span>用递进：是什么（关系）→ 为什么（法理为基）→ 怎么办（情理为用+融合）</div></div></div></div><div class="ai"><h4><span class="an">AI</span>⑦ 答案为什么长这样<span class="sub">骨架、字数、用词</span></h4><div class="prose">范文结构（约 950 字）：
+<b>标题</b>：法治安天下，情理润人心
+
+<b>开头（约 150 字）</b>：
+基层法治关系着人民安居乐业、社会安定有序、国家长治久安。法治从不是冰冷的条文，而是兼具刚性底线与人文温度的治理方法。法理是刚性的规则与正义，常情常理是柔性的伦理与人心。二者相辅相成、刚柔并济，方能根除矛盾隐患、弥合社会裂痕，实现标本兼治。
+→ 结构：<b>背景 → 破题（法治不是冰冷条文）→ 定义两个概念 → 中心论点</b>
+
+<b>分论点一（约 200 字）</b>：法理与常情常理是辩证统一的关系。
+→ 先厘清关系：法理是根基/准则，情理是土壤/道德；相互依存。
+→ 反面论证：没有法理→无序混乱；没有情理→冰冷生硬。
+→ 回扣：惟有两手抓。
+
+<b>分论点二（约 220 字）</b>：法理为基（用野归案例）。
+<b>分论点三（约 220 字）</b>：情理为用（用蓝风铃+厕所革命案例）。
+<b>结尾（约 120 字）</b>：回扣「经纬」「织补修复」「长治久安」。
+
+<b>关键观察一</b>：范文的分论点一是「关系论」，不是「分论点」。
+它先花一整段讲清「两者是什么关系」，再进入具体论证。
+这是<b>关系型主题大作文的标准写法</b> —— 不先定义关系，后面两个分论点就没有落脚点。
+
+<b>关键观察二</b>：范文用了「若没有了法理…若没有了常情常理…」的<b>假设反面论证</b>。
+这是议论文最有力的论证方式之一，比正面举例更显思辨深度。
+建议每篇大作文至少用一次「如果没有…就会…」的句式。
+
+<b>关键观察三</b>：结尾没有喊口号，而是回到「经纬」「织补」「长治久安」这些题干原词。
+这是<b>扣题</b>的显性标记，阅卷人会因此确认你没有偏题。</div></div><div class="ai extra"><h4><span class="an">AI</span>⑧ 粉笔没讲透的地方<span class="sub">我的补充判断</span></h4><div class="prose">这题粉笔只给范文没给演示。我自己拆出四个关键判断：
+
+<b>判断一：这道题的「隐藏结构」是材料给的。</b>
+材料4 三个案例，其实各自对应一种「法理与情理」的组合方式：
+  · 蓝风铃（句1-13）：判刑（法理）+ 走访帮扶（情理）→ <b>二者并用</b>
+  · 厕所革命（句14-40）：不打官司，用调解（情理优先）→ <b>情理化解</b>
+  · 野归（句41-49）：判刑赔偿（法理）+ 野化放归（对生命的情理）→ <b>法理后修复</b>
+三个案例 = 三种组合模式 = 三个分论点的天然素材。
+<b>所以大作文的素材不用自己找，材料已经按论点排好了顺序。</b>
+这是句子理解型大作文的普遍规律：材料案例的顺序 ≈ 分论点的顺序。
+
+<b>判断二：为什么「真正的长治久安」的「真正」二字这么重要？</b>
+因为它划出了<b>两个层次</b>：
+  · 表面的稳定 = 判了案、结了案（案件执结）
+  · 真正的稳定 = 心结打开、关系修复、不再复发（打开心结）
+材料句39 赵法官那句「打开心结比案件执结更加重要」，就是「真正」二字的注脚。
+<b>如果你的大作文只写到「依法办案、维护稳定」，就没有触及「真正」二字，属于浅层。</b>
+必须写到「修复关系、消除隐患、防止反弹」才算深刻。
+
+<b>判断三：「埋钉子」和「留尾巴」是两个不同的反面，不能混用。</b>
+  · 埋钉子 = 只讲法理不讲情理 → 案子判了，但当事人心里不服，隐患埋下（日后爆发）
+  · 留尾巴 = 只讲情理不讲法理 → 和稀泥、无原则让步，问题没真正解决（遗留问题）
+这两个词分别对应「法理缺失」和「情理缺失」的后果，<b>正好可以用来做分论点的反面论证</b>。
+很多人只把这两个词当成同义的「后患」，浪费了这个精准的对照结构。
+
+<b>判断四：为什么范文的分论点一是「关系论」而不是「分论点」？</b>
+因为「法理」和「常情常理」是两个抽象概念，如果不先定义清楚，后面说「法理为基」时阅卷人不知道你说的「法理」是什么。
+所以关系型主题的<b>第一段必须是概念辨析</b>：
+  法理 = 什么（法律执行的准则/刚性规则/底线）
+  情理 = 什么（社会公众认同的道德观念/伦理规范/柔性）
+  关系 = 相互依存/一体两面/缺一不可
+这三步写完，后面的论证才有基础。
+<b>这是关系型大作文和普通议论文最大的区别。</b></div></div></div></div>
+</div>
+<div id="nav">
+  <button type="button" id="prev">← 上一题</button>
+  <button type="button" id="next">下一题 →</button>
+</div>
+<script>
+(function(){
+  var fatal = function(m){
+    var d = document.getElementById('fatal');
+    if(d){ d.hidden = false; d.textContent = '页面脚本出错：' + m; }
+  };
+  window.onerror = function(m){ fatal(m); };
+
+  // ---------- 题号切换 ----------
+  var cur = 0;
+  var qbtns = Array.prototype.slice.call(document.querySelectorAll('#qs button'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.qwrap'));
+
+  function show(i){
+    if(i < 0 || i >= cards.length) return;
+    cur = i;
+    cards.forEach(function(c, k){ c.hidden = (k !== i); });
+    qbtns.forEach(function(b, k){ b.classList.toggle('on', k === i); });
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+    if(prev) prev.disabled = (i === 0);
+    if(next) next.disabled = (i === cards.length - 1);
+    try{ localStorage.setItem('sl_reader_q', String(i)); }catch(e){}
+    window.scrollTo(0, 0);
+    var L = document.getElementById('left'), R = document.getElementById('right');
+    if(L) L.scrollTop = 0;
+    if(R) R.scrollTop = 0;
+  }
+  qbtns.forEach(function(b, k){ b.onclick = function(){ show(k); }; });
+  var p = document.getElementById('prev'), n = document.getElementById('next');
+  if(p) p.onclick = function(){ show(cur - 1); };
+  if(n) n.onclick = function(){ show(cur + 1); };
+
+  // ---------- 划线 ↔ 要点 双向联动 ----------
+  function flash(el){
+    if(!el) return;
+    el.classList.add('on');
+    setTimeout(function(){ el.classList.remove('on'); }, 1600);
+  }
+  function scrollToEl(el, box){
+    if(!el || !box) return;
+    var top = el.offsetTop - box.offsetTop - 90;
+    if(box === document.body || box === document.documentElement){
+      window.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }else{
+      box.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }
+  }
+
+  var L = document.getElementById('left'), R = document.getElementById('right');
+  var wide = function(){ return window.matchMedia('(min-width:700px)').matches; };
+
+  // 点材料划线 → 高亮所有以它为来源的答案要点
+  document.addEventListener('click', function(e){
+    var mk = e.target.closest ? e.target.closest('mark.hl') : null;
+    if(mk){
+      var id = mk.getAttribute('data-m');
+      var box = mk.closest('.qwrap') || document;
+      // 优先用当前可见题
+      var vis = document.querySelector('.qwrap:not([hidden])');
+      var refBox = vis ? vis.querySelector('.ref') : null;
+      var first = null;
+      var found = 0;
+      if(refBox){
+        refBox.querySelectorAll('.item[data-mk]').forEach(function(el){
+          var ids = (el.getAttribute('data-mk') || '').split(',');
+          if(ids.indexOf(id) >= 0){ flash(el); if(!first) first = el; found++; }
+        });
+        // 兜底：用反向索引 mark2ref
+        if(found === 0){
+          var m2r = {};
+          try{ m2r = JSON.parse(refBox.getAttribute('data-m2r') || '{}'); }catch(_){}
+          var ri = m2r[id];
+          if(ri !== undefined && ri !== null){
+            var items = refBox.querySelectorAll('.item');
+            if(items[ri]){ flash(items[ri]); first = items[ri]; found = 1; }
+          }
+        }
+      }
+      if(first) scrollToEl(first, wide() ? R : document.documentElement);
+      return;
+    }
+    // 点答案要点 → 材料里所有来源划线一起闪
+    var it = e.target.closest ? e.target.closest('.ref .item') : null;
+    if(it){
+      var list = (it.getAttribute('data-mk') || '').split(',').filter(Boolean);
+      if(!list.length) return;
+      var firstMk = null;
+      list.forEach(function(mid){
+        var t2 = document.querySelector('mark.hl[data-m="' + mid + '"]');
+        if(t2){ flash(t2); if(!firstMk) firstMk = t2; }
+      });
+      if(firstMk) scrollToEl(firstMk, wide() ? L : document.documentElement);
+    }
+  });
+
+  // ---------- 记忆上次题号 ----------
+  try{
+    var s = localStorage.getItem('sl_reader_q');
+    if(s !== null) show(parseInt(s, 10) || 0); else show(0);
+  }catch(e){ show(0); }
+})();
+</script>
+</body>
+</html>

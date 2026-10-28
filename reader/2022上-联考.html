@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f3">
+<title>2022 上半年 · 多省联考</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:#f5f5f3;color:#1f2937;
+  font:16px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+a{color:#2563eb}
+
+/* ---------- 吸顶条 ---------- */
+#bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;
+  padding:8px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#bar .nm{font-weight:700;font-size:14px;flex:1;min-width:110px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#bar a.back{font-size:13px;text-decoration:none;color:#6b7280;flex:0 0 auto}
+#qs{display:flex;gap:5px;overflow-x:auto;flex:0 0 auto}
+#qs button{border:1px solid #d1d5db;background:#fff;border-radius:8px;
+  padding:5px 11px;font-size:13px;color:#374151;cursor:pointer;white-space:nowrap}
+#qs button.on{background:#2563eb;border-color:#2563eb;color:#fff;font-weight:700}
+
+/* ---------- 主体 ---------- */
+#wrap{display:block;max-width:1500px;margin:0 auto}
+#left,#right{padding:14px 16px 90px}
+
+/* ---------- 题目卡 ---------- */
+.qcard{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.qcard .meta{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 9px}
+.tag{font-size:12px;padding:2px 9px;border-radius:99px;font-weight:700}
+.tag.sc{background:#fef3c7;color:#92400e}
+.tag.wd{background:#dbeafe;color:#1e40af}
+.tag.kp{background:#dcfce7;color:#166534}
+.qcard .stem{font-size:16px;font-weight:600;line-height:1.8;margin:0 0 8px}
+.qcard .req{font-size:14px;color:#6b7280;margin:0}
+
+/* ---------- 材料 ---------- */
+h3.sec{font-size:13px;color:#6b7280;font-weight:700;letter-spacing:.5px;
+  margin:18px 0 8px;padding-left:8px;border-left:3px solid #2563eb}
+.matbox{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.matbox h4{font-size:13px;color:#2563eb;margin:0 0 10px;font-weight:700}
+p.mt{margin:0 0 11px;text-align:justify;font-size:16.5px;line-height:1.95;
+  text-indent:2em}
+mark.hl{background:#fff3bf;border-bottom:2px solid #f0b429;
+  padding:1px 1px;border-radius:2px;cursor:pointer;transition:background .25s}
+mark.hl.on{background:#ffd43b;box-shadow:0 0 0 2px #fab005}
+mark.hl:after{content:attr(data-m);font-size:9px;color:#b45309;
+  vertical-align:super;margin-left:1px;font-weight:700}
+
+/* ---------- 详解 ---------- */
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.step h4{margin:0 0 10px;font-size:14.5px;color:#1f2937;font-weight:700;
+  display:flex;align-items:center;gap:7px}
+.step h4 .n{display:inline-flex;width:22px;height:22px;border-radius:50%;
+  background:#2563eb;color:#fff;font-size:12px;align-items:center;
+  justify-content:center;flex:0 0 auto}
+.step .body{font-size:15.5px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+.step.s1{border-left:4px solid #2563eb}
+.step.s2{border-left:4px solid #10b981}
+.step.s3{border-left:4px solid #f59e0b}
+.step.s4{border-left:4px solid #ef4444}
+.step.s5{border-left:4px solid #8b5cf6}
+
+/* 逐段讲解 */
+.blk{border:1px solid #e5e7eb;border-radius:10px;margin:0 0 10px;
+  overflow:hidden}
+.blk .h{background:#f9fafb;padding:8px 12px;font-size:13px;font-weight:700;
+  color:#374151;border-bottom:1px solid #e5e7eb}
+.blk .c{padding:10px 12px;font-size:15px;line-height:1.9;color:#4b5563}
+.blk .c.topic{padding-top:0;font-size:14.5px;color:#6b7280;
+  border-top:1px dashed #e5e7eb;margin-top:0}
+.blk .bind{background:#f0fdf4;border-top:1px solid #bbf7d0;
+  padding:9px 12px;font-size:14.5px;color:#166534;font-weight:600}
+
+/* 审题要点列表 */
+ul.key{margin:0;padding-left:20px}
+ul.key li{margin:0 0 7px;font-size:15px;line-height:1.9;color:#374151}
+p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
+
+.ref{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ref .item{padding:9px 0;border-bottom:1px dashed #e5e7eb;font-size:15.5px;
+  line-height:1.9;cursor:pointer}
+.ref .item:last-child{border:0}
+.ref .item.on{background:#fff3bf;border-radius:6px;padding-left:8px;
+  margin-left:-8px}
+
+.warn{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;
+  padding:11px 14px;font-size:14px;color:#991b1b;margin:0 0 12px}
+
+/* ---------- 底部翻页 ---------- */
+#nav{position:fixed;bottom:0;left:0;right:0;z-index:40;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(8px);
+  border-top:1px solid #e5e7eb;padding:8px 12px;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom));
+  display:flex;gap:8px}
+#nav button{flex:1;border:1px solid #d1d5db;background:#fff;border-radius:10px;
+  padding:10px;font-size:14px;font-weight:600;color:#374151;cursor:pointer}
+#nav button:disabled{opacity:.4}
+
+/* ---------- 平板 / 桌面：左右分栏 ---------- */
+@media(min-width:700px){
+  #wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;
+    height:calc(100vh - 52px)}
+  #left,#right{overflow-y:auto;height:100%;padding:18px 20px 90px}
+  #left{border-right:1px solid #e5e7eb}
+  body{font-size:16.5px}
+  p.mt{font-size:17px}
+  #nav{max-width:1500px;margin:0 auto}
+}
+@media(min-width:1200px){
+  #wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+}
+/* ---------- 打印 ---------- */
+@media print{
+  #bar,#nav,#tocBtn{display:none}
+  #wrap{display:block;height:auto}
+  #left,#right{overflow:visible;height:auto}
+  mark.hl{background:#fff3bf}
+}
+/* ---------- 白屏兜底 ---------- */
+#fatal{position:fixed;top:0;left:0;right:0;z-index:999;background:#dc2626;
+  color:#fff;padding:10px 14px;font-size:13px}
+
+/* ==================== AI 批注 ==================== */
+.aihint{background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0284c7;
+  border-radius:10px;padding:11px 14px;margin:16px 0 12px;
+  font-size:13.5px;line-height:1.85;color:#075985}
+.aihint b{color:#0369a1}
+.ai{background:#fbfaff;border:1px solid #e0dbff;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ai.extra{background:#fffbf5;border-color:#ffe0b2}
+.ai h4{margin:0 0 11px;font-size:14.5px;color:#4c1d95;font-weight:700;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ai.extra h4{color:#9a3412}
+.ai h4 .an{display:inline-flex;height:19px;padding:0 7px;border-radius:5px;
+  background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;
+  font-size:10.5px;font-weight:800;align-items:center;letter-spacing:.5px}
+.ai.extra h4 .an{background:linear-gradient(135deg,#ea580c,#f59e0b)}
+.ai h4 .sub{font-size:11.5px;color:#9ca3af;font-weight:400;letter-spacing:0}
+
+/* 通用正文 */
+.ai .prose{font-size:15px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+
+/* 表格通用 */
+.ai table{width:100%;border-collapse:collapse;font-size:13.5px;
+  background:#fff;border-radius:8px;overflow:hidden;
+  table-layout:fixed}
+.ai table th{background:#f3f0ff;color:#5b21b6;font-weight:700;
+  text-align:left;padding:8px 10px;border-bottom:1px solid #ddd6fe;
+  font-size:12.5px;white-space:normal;word-break:break-word}
+.ai table td{padding:9px 10px;border-bottom:1px solid #f1f0f7;
+  vertical-align:top;line-height:1.8;color:#4b5563;
+  word-break:break-word;white-space:normal;overflow-wrap:anywhere}
+.ai table tr:last-child td{border-bottom:0}
+.tstem td.w{font-weight:700;color:#1f2937;font-size:14px;word-break:break-all}
+.tstem td.act{color:#065f46;background:#f0fdf4}
+.tstem .ty{display:inline-block;padding:1px 7px;border-radius:99px;
+  font-size:11px;font-weight:700;background:#ede9fe;color:#5b21b6;
+  word-break:break-word}
+.ttrace td.pt{font-weight:600;color:#1f2937}
+.ttrace td.src{white-space:normal}
+.ttrace code{display:inline-block;background:#f3f4f6;border-radius:4px;
+  padding:1px 5px;font-size:11.5px;color:#6d28d9;margin:0 3px 2px 0;
+  font-family:inherit}
+
+/* 列宽（用 colgroup 不好控制，直接给 th 定宽） */
+.tstem th:nth-child(1){width:17%}
+.tstem th:nth-child(2){width:16%}
+.tstem th:nth-child(3){width:36%}
+.tstem th:nth-child(4){width:31%}
+.ttrace th:nth-child(1){width:27%}
+.ttrace th:nth-child(2){width:18%}
+.ttrace th:nth-child(3){width:55%}
+
+/* 材料结构图 */
+.mmwrap{display:flex;flex-direction:column;gap:8px}
+.mm{border:1px solid #e5e7eb;border-radius:9px;overflow:hidden;background:#fff}
+.mm.pt{border-left:4px solid #10b981}
+.mm.no{border-left:4px solid #d1d5db;opacity:.85}
+.mmh{display:flex;align-items:center;gap:8px;padding:7px 11px;
+  background:#fafafa;border-bottom:1px solid #f1f0f7;flex-wrap:wrap}
+.mmh b{font-size:13px;color:#1f2937}
+.mmb{font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px}
+.mm.pt .mmb{background:#d1fae5;color:#065f46}
+.mm.no .mmb{background:#f3f4f6;color:#6b7280}
+.mmr{padding:7px 11px 2px;font-size:13px;color:#374151;font-weight:600}
+.mmw{padding:0 11px 9px;font-size:13.5px;color:#6b7280;line-height:1.8}
+
+/* 找点六步 */
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{position:relative;padding:0 0 12px 30px;
+  border-left:2px dashed #ddd6fe;margin-left:9px}
+.steps li:last-child{border-left:0;padding-bottom:0}
+.steps li:before{counter-increment:s;content:counter(s);
+  position:absolute;left:-10px;top:0;width:19px;height:19px;
+  border-radius:50%;background:#7c3aed;color:#fff;font-size:11px;
+  font-weight:700;display:flex;align-items:center;justify-content:center}
+.sh{font-size:14px;font-weight:700;color:#5b21b6;margin:0 0 5px}
+.st,.ss{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ss{color:#6b7280}
+.lb{display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;
+  border-radius:4px;background:#ede9fe;color:#6d28d9;margin-right:6px}
+.ss .lb{background:#f3f4f6;color:#6b7280}
+
+/* 陷阱 */
+.traps{display:flex;flex-direction:column;gap:9px}
+.trap{background:#fff;border:1px solid #fecaca;border-radius:9px;
+  padding:10px 12px}
+.th{font-size:13.5px;font-weight:700;color:#991b1b;margin:0 0 6px;
+  line-height:1.7}
+.tw2,.ta{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ta{color:#065f46}
+.tw2 .lb{background:#fee2e2;color:#991b1b}
+.ta .lb{background:#d1fae5;color:#065f46}
+
+@media(max-width:520px){
+  .ai{padding:12px 12px}
+  .ai table{font-size:12.5px}
+  .ai table th,.ai table td{padding:7px 8px}
+  .ttrace td.pt{width:auto}
+  .ttrace td.src{width:auto}
+}
+</style>
+</head>
+<body>
+<div id="fatal" hidden></div>
+<div id="bar">
+  <a class="back" href="./index.html">←</a>
+  <span class="nm">2022 上半年 · 多省联考</span>
+  <div id="qs"><button type="button">第1题</button><button type="button">第2题</button><button type="button">第3题</button><button type="button">第4题</button></div>
+</div>
+<div id="wrap">
+  <div id="left"><h3 class="sec">材料原文 · 划线为粉笔标注的答案来源句</h3><div class="matbox"><h4>材料 1</h4><p class="mt">实验表明，当汽车以每小时48公里的速度行驶时，碰撞会使体重8公斤的儿童产生300公斤向前冲击的力量，儿童会像子弹一样飞出去。如果使用汽车儿童安全座椅，则可以将碰撞产生的冲击力分散，有效保护儿童头、颈、胸等脆弱部位。2021年6月1日，新修订的《中华人民共和国未成年人保护法》正式实施。其中第十八条明确规定，未成年人的父母或者其他监护人应当采取配备儿童安全座椅、教育未成年人遵守交通规则等措施，防止未成年人受到交通事故的伤害。这是我国首次将儿童安全座椅的使用纳入全国性立法。</p><p class="mt">近日，<mark class="hl" data-m="1" data-seq="1" data-q="1">B市市场监督管理局开展了一次儿童安全座椅专项执法检查</mark>。检查覆盖市内24家生产、销售儿童安全座椅的企业，主要检查儿童安全座椅是否取得国家强制性产品认证证书并贴出认证标志，是否存在零部件及装配不合格等情况。检查发现，部分产品未贴认证标志，部分生产企业采购的零部件不符合质量标准。<mark class="hl" data-m="2" data-seq="2" data-q="1">执法人员当即要求商家下架不合格产品</mark>，<mark class="hl" data-m="3" data-seq="3" data-q="1">责令相关企业限期整改</mark>。</p><p class="mt">“坐上就哭闹！”提起儿童安全座椅，市民张女士说出了一些家长的烦恼与无奈。她的孩子今年3岁，刚上幼儿园。“几千块钱买的安全座椅，孩子却‘不买账’，孩子坐着哭闹不止，于是我就把它卸了。”<mark class="hl" data-m="4" data-seq="4" data-q="1">新修订的《中华人民共和国未成年人保护法》实施后</mark>，<mark class="hl" data-m="5" data-seq="5" data-q="1">B市修订了《B市未成年人保护条例</mark>》，其中<mark class="hl" data-m="6" data-seq="6" data-q="1">对搭乘12岁及以下儿童未配备或使用儿童安全座椅的非营运车辆作出了处罚规定</mark>。</p><p class="mt"><mark class="hl" data-m="7" data-seq="7" data-q="1">B市电视台的一则新闻报道显示</mark>，市民郭先生紧握着婴儿提篮与妻子一同走出妇幼保健院驾车回家，<mark class="hl" data-m="8" data-seq="8" data-q="1">提篮式安全座椅被安装在汽车后排</mark>，他们刚出生5天的孩子在提篮里一路安睡。<mark class="hl" data-m="9" data-seq="9" data-q="1">这对新晋父母的做法得到了B市妇幼保健院秦院长的点赞</mark>。她对记者说：“我们的<mark class="hl" data-m="10" data-seq="10" data-q="1">医护人员都会提醒家长使用儿童安全座椅</mark>，<mark class="hl" data-m="11" data-seq="11" data-q="1">相关知识和安装技巧我们都会写在产妇出院的温馨提示上</mark>。”妇幼保健院临床心理科李医生对记者说：“越早开始使用儿童安全座椅，孩子越容易适应。购买儿童安全座椅后，可以先将其放在家里当作玩具，让孩子逐渐接受。如果行车时孩子哭闹不愿坐安全座椅，可视情况停车，接纳孩子的情绪，但必须坚持安全的原则。孩子习惯了就好了，安全是第一位的。”</p><p class="mt">根据《中华人民共和国道路交通安全法》和新修订的《B市未成年人保护条例》的相关规定，<mark class="hl" data-m="12" data-seq="12" data-q="1">B市交警部门于幼儿园</mark>、<mark class="hl" data-m="13" data-seq="13" data-q="1">小学新学期开学第一周集中开展儿童安全座椅专项执法</mark>、<mark class="hl" data-m="14" data-seq="14" data-q="1">普法活动</mark>。每到家长集中接送孩子上下学的时候，就会<mark class="hl" data-m="15" data-seq="15" data-q="1">有交警在学校周边路段专门检查车内是否配备并使用儿童安全座椅</mark>，<mark class="hl" data-m="16" data-seq="16" data-q="1">并对未配备或使用儿童安全座椅的驾驶员开出罚单</mark>。有些<mark class="hl" data-m="17" data-seq="17" data-q="1">小学还和交警部门提前对接</mark>，<mark class="hl" data-m="18" data-seq="18" data-q="1">将开学第一周作为交通安全宣传教育周</mark>，邀请交警到学校向学生们讲授使用儿童安全座椅的重要性，并播放专门制作的动画片和视频剪辑材料，<mark class="hl" data-m="19" data-seq="19" data-q="1">引导学生回家劝说父母为其配备儿童安全座椅</mark>。此外，<mark class="hl" data-m="20" data-seq="20" data-q="1">B市司法局还组织专门人员</mark>，<mark class="hl" data-m="21" data-seq="21" data-q="1">深入街道</mark>、<mark class="hl" data-m="22" data-seq="22" data-q="1">社区</mark>、<mark class="hl" data-m="23" data-seq="23" data-q="1">企事业单位开展儿童安全座椅规范使用的宣传活动</mark>，<mark class="hl" data-m="24" data-seq="24" data-q="1">让广大市民充分了解未规范使用儿童安全座椅的安全风险和法律风险</mark>。此前无奈的张女士受到宣传活动的影响，回家在车上重新安装上了安全座椅，并表示一定想办法让孩子习惯使用。</p><p class="mt">近日，B市市民发现，<mark class="hl" data-m="25" data-seq="25" data-q="1">在沿途幼儿园</mark>、<mark class="hl" data-m="26" data-seq="26" data-q="1">中小学比较集中的公交线路上</mark>，<mark class="hl" data-m="27" data-seq="27" data-q="1">公交车里都安装了儿童安全座椅</mark>。<mark class="hl" data-m="28" data-seq="28" data-q="1">公交司机</mark>只要发现有乘客带着年龄明显小于12岁的儿童上车的，就会通过车内话筒<mark class="hl" data-m="29" data-seq="29" data-q="1">提醒乘客让儿童尽量坐在安全座椅上并系好安全带</mark>。这一改变让经常带着孩子乘坐公交车的家长倍感安心。除了公交车，<mark class="hl" data-m="30" data-seq="30" data-q="1">B市交管部门还要求出租车公司和部分网约车平台专门提供“宝贝”服务</mark>。<mark class="hl" data-m="31" data-seq="31" data-q="1">在一定数量的营运车辆上准备儿童安全座椅</mark>，只要有携带儿童的乘客上车，必须提供<mark class="hl" data-m="32" data-seq="32" data-q="1">并协助使用儿童安全座椅</mark>。同时，<mark class="hl" data-m="33" data-seq="33" data-q="1">交管部门还就校车配备安全座椅提出了相关要求</mark>。B市某律师事务所黄律师说：“随着立法执法推动社会重视程度的提升，使用儿童安全座椅的社会意识会很快普及。”</p><p class="mt">最近，<mark class="hl" data-m="34" data-seq="34" data-q="1">B市未成年人保护研究中心举办了一次如何普及规范使用儿童安全座椅的专题研讨会</mark>。<mark class="hl" data-m="35" data-seq="35" data-q="1">会上</mark>，<mark class="hl" data-m="36" data-seq="36" data-q="1">法律专家提出</mark>：“<mark class="hl" data-m="37" data-seq="37" data-q="1">相关的法律风险要向家长科普到位</mark>，法律既定，家长就有义务为孩子安装安全座椅，如果因未安装出了事，家长也需承担一定的民事责任。”<mark class="hl" data-m="38" data-seq="38" data-q="1">交管部门相关负责人说</mark>：“<mark class="hl" data-m="39" data-seq="39" data-q="1">我们现在正在协调商业保险机构</mark>，<mark class="hl" data-m="40" data-seq="40" data-q="1">在车上人员保险条款中针对儿童座椅的使用进行特殊约定</mark>，儿童安全座椅作为能够降低乘车儿童风险的工具，可以成为商业保险机构规避赔偿风险的手段，通过商业保险倒逼来普及儿童安全座椅的使用。”<mark class="hl" data-m="41" data-seq="41" data-q="1">生产企业代表指出</mark>：“国家层面的立法和地方的实施细则固然重要，但儿童安全座椅从生产到消费使用，<mark class="hl" data-m="42" data-seq="42" data-q="1">每一个环节都需要多部门协同</mark>、<mark class="hl" data-m="43" data-seq="43" data-q="1">全社会参与才能做好</mark>，真正让儿童安全座椅‘叫好又叫座’。”</p></div><div class="matbox"><h4>材料 2</h4><p class="mt">2021年，<mark class="hl" data-m="44" data-seq="1" data-q="2">M省应急管理厅评选了5名年度先进人物和3个年度先进集体</mark>，他们的主要先进事迹如下：</p><p class="mt"><mark class="hl" data-m="45" data-seq="2" data-q="2">余某</mark>，M省河口县<mark class="hl" data-m="46" data-seq="3" data-q="2">消防救援大队政治教导员</mark>。7月22日，河口县石圩防洪大堤被洪水撕开了20米宽的决口，7500名村民被洪水围困。已<mark class="hl" data-m="47" data-seq="4" data-q="2">在抗洪一线奋战了几个昼夜</mark>的他，再次集结队伍投入救援。由他“打头阵”的1号艇突遇3米多的水位落差侧翻，他<mark class="hl" data-m="48" data-seq="5" data-q="2">被卷入汹涌湍急的洪流中英勇牺牲</mark>，年仅35岁。余教导员牺牲前，<mark class="hl" data-m="49" data-seq="6" data-q="2">连续奋战了96个小时</mark>，救出了2600多人。</p><p class="mt"><mark class="hl" data-m="50" data-seq="7" data-q="2">陈某</mark>，M省<mark class="hl" data-m="51" data-seq="8" data-q="2">森林消防总队枣垭市大队大队长</mark>。<mark class="hl" data-m="52" data-seq="9" data-q="2">他坚守全省最大的高原林海18年</mark>，先后参与灭火战斗130余次，举办防火讲座100多场，培训护林员2万余人，参与重大抢险救援90多起，<mark class="hl" data-m="53" data-seq="10" data-q="2">挽救了20余名群众的生命</mark>，<mark class="hl" data-m="54" data-seq="11" data-q="2">抢救群众财产400余万元</mark>……进山多年，<mark class="hl" data-m="55" data-seq="12" data-q="2">他没有和家人过一个团圆年</mark>，<mark class="hl" data-m="56" data-seq="13" data-q="2">没有休一次完整假</mark>。</p><p class="mt"><mark class="hl" data-m="57" data-seq="14" data-q="2">向某</mark>，M省<mark class="hl" data-m="58" data-seq="15" data-q="2">森林消防总队特种车辆维修技师</mark>。他不仅擅长驾驶特种车灭火，还擅长专治各种特种车毛病。20多年来，<mark class="hl" data-m="59" data-seq="16" data-q="2">他刻苦钻研</mark>，<mark class="hl" data-m="60" data-seq="17" data-q="2">从一名只有初中文化水平的青年成长为具有过硬专业技术的专家</mark>。累计培训驾驶维修技术骨干1000余人；检修车辆1300余台次，节约经费近600万元；技术革新20余次，极大提升了车辆维修效率和灭火作战效能。</p><p class="mt"><mark class="hl" data-m="61" data-seq="18" data-q="2">张某</mark>，M省应急管理厅<mark class="hl" data-m="62" data-seq="19" data-q="2">应急指挥中心副主任</mark>。在同事眼里，他是那个<mark class="hl" data-m="63" data-seq="20" data-q="2">最敢于建言献策的人</mark>。2020年1月底，疫情之下，地面运输受限，M省各地防疫物资告急。<mark class="hl" data-m="64" data-seq="21" data-q="2">张副主任提出建议</mark>，<mark class="hl" data-m="65" data-seq="22" data-q="2">利用航空应急救援力量</mark>，<mark class="hl" data-m="66" data-seq="23" data-q="2">向各地输送防疫物资</mark>。提议被批准后，他迅速协商甄选6家通航企业调配20名飞行员、40名机务及地面保障人员、各机型直升机10架，运送紧急防疫物资213架次、91.25吨，<mark class="hl" data-m="67" data-seq="24" data-q="2">极大缓解了重点医疗防疫物资缺乏的燃眉之急</mark>。</p><p class="mt"><mark class="hl" data-m="68" data-seq="25" data-q="2">韦某</mark>，M省<mark class="hl" data-m="69" data-seq="26" data-q="2">煤矿安监局江东分局干部</mark>。战“疫”紧要关头，<mark class="hl" data-m="70" data-seq="27" data-q="2">切不能让生产安全事故“添乱</mark>”。<mark class="hl" data-m="71" data-seq="28" data-q="2">大年初一一早</mark>，<mark class="hl" data-m="72" data-seq="29" data-q="2">他就奔赴工作岗位</mark>。此后整整一个月，<mark class="hl" data-m="73" data-seq="30" data-q="2">他都坚守在分局疫情防控与安全监察工作一线</mark>。勇挑重任、敢啃硬骨头，是他的工作作风。自2011年进入煤矿安监系统以来，辖区90%以上煤矿都有过他忙碌的身影，参与对煤矿和有关责任人行政处罚上百次，深入井下一线监察400余次，发现风险隐患2000余处。他说：“多去煤矿多下井，遏制事故靠践行。”</p><p class="mt">M省<mark class="hl" data-m="74" data-seq="31" data-q="2">东州市上街口消防救援站</mark>，守护上街口历史文化街区30年。作为东州历史之源、文化之根的上街口历史文化街，耐火等级低，火灾防控压力大，消防救援站把“不起火就是最好的赴汤蹈火”作为他们的坚定信念，采取联防联治、防火巡查、宣传培训、实战演练等一系列措施，<mark class="hl" data-m="75" data-seq="32" data-q="2">探索出适合老街古巷实际的灭火法</mark>，<mark class="hl" data-m="76" data-seq="33" data-q="2">保持上街口连续8年“零火灾</mark>”、<mark class="hl" data-m="77" data-seq="34" data-q="2">30年无重大火情</mark>。</p><p class="mt">M省<mark class="hl" data-m="78" data-seq="35" data-q="2">地震局西山基准台</mark>，地处偏僻，距离县城59公里，到最近的村子也要5公里，交通和生活十分不便。但<mark class="hl" data-m="79" data-seq="36" data-q="2">一代代地震工作者守初心</mark>、<mark class="hl" data-m="80" data-seq="37" data-q="2">克难关</mark>、<mark class="hl" data-m="81" data-seq="38" data-q="2">精业务</mark>、<mark class="hl" data-m="82" data-seq="39" data-q="2">讲奉献</mark>，<mark class="hl" data-m="83" data-seq="40" data-q="2">一个个“第一”在这里诞生</mark>，一个个新辉煌在这里续写。2005年，西山基准台率先开展大地电磁测深观测，面对没有现成中文操作说明书的MT、ELF等进口仪器，他们边摸索边学习边实践，最终熟练地将仪器运用于电磁测深观测，形成了适用于本行业的完整操作规程；2012年，M省唯一的GNSS核心站在这里建成……目前，西山基准台已发展成为下辖11个子台，承担地震监测预测、地震应急等多项任务的开放式、国际性、现代化综合地震台站。</p><p class="mt">M省<mark class="hl" data-m="84" data-seq="41" data-q="2">石黄县应急管理局</mark>在下设1个综合性应急救援队和4个应急救援中队的同时，完善各类专项预案、处置方案，并将173项应急预案录入信息平台，依托全县593名网格员，开展灾情信息普查和上报工作，<mark class="hl" data-m="85" data-seq="42" data-q="2">打造“一张网”应急指挥系统</mark>，<mark class="hl" data-m="86" data-seq="43" data-q="2">全力提高基层防灾减灾能力</mark>。2020年6月5日晚，一场罕见强对流天气“袭击”石黄县，多个乡镇受灾严重。石黄县应急管理局迅速响应，将帐篷、棉被、照明灯等物资第一时间送往一线；700余人的救灾队伍赶赴一线，营救被困群众12人，挽回财产损失600余万元；593名村级灾情信息员对网格内受灾群众迅速开展灾情普查，及时上报，为受灾群众申请救助资金。救灾行动顺利进行，靠的是当地筑牢事故灾害防范的县、乡、村三道“堤坝”。</p></div><div class="matbox"><h4>材料 3</h4><p class="mt">“小饭桌”，指的是在学校周边家庭住宅里开设的为中小学生提供餐饮、休息、临时托管的场所，自兴起以来一直饱受争议。为进一步加强“小饭桌”治理，近期G市政府办组织召开了一次座谈会，听取各方意见建议。以下是会议发言摘录：</p><p class="mt">市政协委员黄某：应该坚决取缔。我们曾暗访了一个“小饭桌”，是<mark class="hl" data-m="87" data-seq="1" data-q="3">一座老式居民楼中的两室一厅普通民居</mark>，<mark class="hl" data-m="88" data-seq="2" data-q="3">弯弯绕绕的楼道很隐蔽</mark>，<mark class="hl" data-m="89" data-seq="3" data-q="3">装修简陋</mark>，厨房很小，孩子们的午餐是每人一碗小米粥、凉拌黄瓜和一盘饺子，<mark class="hl" data-m="90" data-seq="4" data-q="3">房间也没有悬挂营业执照和卫生许可证</mark>。而<mark class="hl" data-m="91" data-seq="5" data-q="3">像这样的“小饭桌”不在少数</mark>，<mark class="hl" data-m="92" data-seq="6" data-q="3">很多开在学校附近居民楼内</mark>，<mark class="hl" data-m="93" data-seq="7" data-q="3">且不说食品安全</mark>，<mark class="hl" data-m="94" data-seq="8" data-q="3">一旦出现火灾等突发情况</mark>，<mark class="hl" data-m="95" data-seq="9" data-q="3">后果不敢想象</mark>。还有就是<mark class="hl" data-m="96" data-seq="10" data-q="3">疫情防控的问题</mark>，去年B市有5起确诊病例都是在“小饭桌”聚集引发的，相关部门需要加以高度重视。</p><p class="mt">学生家长段某：肯定不能取缔，就算学校提供午饭，中午两小时空闲时间，吃完饭就只能在椅子上休息，对很多孩子来讲很难熬。附近的“小饭桌”，除了吃饭，还可以休息。<mark class="hl" data-m="97" data-seq="11" data-q="3">不过收费挺乱的</mark>，<mark class="hl" data-m="98" data-seq="12" data-q="3">还经常涨价</mark>，<mark class="hl" data-m="99" data-seq="13" data-q="3">就这样还</mark>“<mark class="hl" data-m="100" data-seq="14" data-q="3">僧多粥少</mark>”，为了孩子，还不是只有咬牙交，<mark class="hl" data-m="101" data-seq="15" data-q="3">政府还是要管管</mark>。</p><p class="mt">学生家长李某：学校没食堂，我们家孩子换了好多家“小饭桌”，<mark class="hl" data-m="102" data-seq="16" data-q="3">说实话靠谱的不多</mark>，但是我们上班族中午接孩子吃饭根本不现实，我们班很多家长现在是把要求降得很低了，饭菜看着干净就行，赌运气咯，还能怎么办？<mark class="hl" data-m="103" data-seq="17" data-q="3">希望政府能够对</mark>“小饭桌”<mark class="hl" data-m="104" data-seq="18" data-q="3">备案登记</mark>，不然哪家靠谱哪家不靠谱我们心里真没有底。</p><p class="mt">街道办副主任玉某：“小饭桌”<mark class="hl" data-m="105" data-seq="19" data-q="3">门槛太低</mark>，<mark class="hl" data-m="106" data-seq="20" data-q="3">人员流动又大</mark>，<mark class="hl" data-m="107" data-seq="21" data-q="3">底数很难摸清楚</mark>，<mark class="hl" data-m="108" data-seq="22" data-q="3">管理难度很大</mark>，所以多年来<mark class="hl" data-m="109" data-seq="23" data-q="3">始终治标不治本</mark>。我们<mark class="hl" data-m="110" data-seq="24" data-q="3">街道现在倒还有些闲置资源</mark>，如托老中心等，<mark class="hl" data-m="111" data-seq="25" data-q="3">可采取综合改造</mark>、<mark class="hl" data-m="112" data-seq="26" data-q="3">错峰使用等方式</mark>，<mark class="hl" data-m="113" data-seq="27" data-q="3">鼓励社区自建或和第三方社会服务组织合作建立托管中心</mark>，为学生托管提供更多选择。</p><p class="mt">某小学副校长黎某：我们希望<mark class="hl" data-m="114" data-seq="28" data-q="3">主管部门尽快拿出有针对性的政策</mark>，<mark class="hl" data-m="115" data-seq="29" data-q="3">加大资金投入</mark>，<mark class="hl" data-m="116" data-seq="30" data-q="3">支持有条件的学校加快食堂建设</mark>。同时<mark class="hl" data-m="117" data-seq="31" data-q="3">引入社会力量参与设立校内托管中心</mark>，<mark class="hl" data-m="118" data-seq="32" data-q="3">将其置于校方的监管之下</mark>。</p><p class="mt">市人大代表张某：饭桌虽小，牵扯各方。大家都对孩子的健康问题分外关注，<mark class="hl" data-m="119" data-seq="33" data-q="3">应该将学校食堂建设纳入中小学校建设整体规划</mark>，通过学校办好食堂，解决学生就餐问题。<mark class="hl" data-m="120" data-seq="34" data-q="3">建议出台针对中小学校外托管场所管理的专项制度</mark>，<mark class="hl" data-m="121" data-seq="35" data-q="3">加强管理</mark>。可以在<mark class="hl" data-m="122" data-seq="36" data-q="3">明确经营主体</mark>、<mark class="hl" data-m="123" data-seq="37" data-q="3">标准和责任</mark>的基础上，<mark class="hl" data-m="124" data-seq="38" data-q="3">由政府牵头建设托管中心</mark>，<mark class="hl" data-m="125" data-seq="39" data-q="3">将运营服务外包</mark>，<mark class="hl" data-m="126" data-seq="40" data-q="3">这样的托管中心更规范</mark>。</p><p class="mt">G市日报记者小林：有些距离学校远一点的“小饭桌”，一般会开着面包车去附近几个学校接学生。而其中<mark class="hl" data-m="127" data-seq="41" data-q="3">餐饮卫生属于市场监督部门监管</mark>，<mark class="hl" data-m="128" data-seq="42" data-q="3">接送车辆的安全问题属于交通部门管理</mark>，<mark class="hl" data-m="129" data-seq="43" data-q="3">有的违规补课</mark>，这个<mark class="hl" data-m="130" data-seq="44" data-q="3">又该是教育部门管理</mark>，<mark class="hl" data-m="131" data-seq="45" data-q="3">每项服务都有具体的监管部门</mark>，<mark class="hl" data-m="132" data-seq="46" data-q="3">但各部门的监管却又都不到位</mark>。</p><p class="mt">教育局副局长马某：我们也要求学校<mark class="hl" data-m="133" data-seq="47" data-q="3">对学生加强食品安全知识宣传</mark>，<mark class="hl" data-m="134" data-seq="48" data-q="3">引导学生和家长到具备合法手续的餐饮服务单位就餐</mark>，我们目前也正在研究如何<mark class="hl" data-m="135" data-seq="49" data-q="3">利用社会各方资源解决学生午间休息</mark>、<mark class="hl" data-m="136" data-seq="50" data-q="3">用餐</mark>、<mark class="hl" data-m="137" data-seq="51" data-q="3">托管的问题</mark>。去年，我们还<mark class="hl" data-m="138" data-seq="52" data-q="3">开展了学校教师私设</mark>“<mark class="hl" data-m="139" data-seq="53" data-q="3">小饭桌</mark>”<mark class="hl" data-m="140" data-seq="54" data-q="3">的专项整治工作</mark>，也取得了一定成效。</p><p class="mt">“小饭桌”经营者任某：我们在光明小学附近开办了“小饭桌”，前来登记交费的家长络绎不绝，完全超出了我们的接待能力。为了保证“小饭桌”的质量，我们只在能力范围之内接待了20名学生。家长<mark class="hl" data-m="141" data-seq="55" data-q="3">对我们的卫生和安全状况都很满意</mark>，希望<mark class="hl" data-m="142" data-seq="56" data-q="3">政府对我们这种口碑还不错的“小饭桌”进行等级评定</mark>，如果能够<mark class="hl" data-m="143" data-seq="57" data-q="3">拿着等级评定的结果和光明小学进行合作</mark>，我们就能<mark class="hl" data-m="144" data-seq="58" data-q="3">服务更多的学生</mark>。</p><p class="mt"><mark class="hl" data-m="145" data-seq="59" data-q="3">市场监督管理局</mark>副局长刘某：很多“小饭桌”都藏身居民楼中，由于受到执法权限的限制，给执法带来很大难度。我们今年<mark class="hl" data-m="146" data-seq="60" data-q="3">准备联合公安等部门</mark>，<mark class="hl" data-m="147" data-seq="61" data-q="3">坚持不留死角的原则</mark>，<mark class="hl" data-m="148" data-seq="62" data-q="3">在全市范围内开展地毯式的摸底排查</mark>，<mark class="hl" data-m="149" data-seq="63" data-q="3">摸清底数和问题</mark>，<mark class="hl" data-m="150" data-seq="64" data-q="3">加强针对性的监管</mark>。</p><p class="mt">某大学教授陈某：学生的托管服务，既不能由学校大包大揽，也不能完全游离在校外野蛮生长，而是需要精准定位托管服务的属性，避免走极端。“小饭桌”考验着政府的治理能力和智慧。</p></div><div class="matbox"><h4>材料 4</h4><p class="mt">2020年10月27日，80多名消费者来到A市花湖区某游泳馆所在的商场维权，现场群情激愤。原来，商场内一家幼儿游泳馆收取了消费者预存费用并办理了会员卡，约定会员可以在一定期间内按次数带幼儿游泳、洗浴。然而，消费者预存费用还没用完，游泳馆的经营者就偷偷撤了场。“在维权现场，消费者拉起横幅，情绪非常激动，担心预存的费用不能退回。”当时赶来处理纠纷的花湖区建北东路社区法律顾问老吕记忆犹新。</p><p class="mt">“我们了解情况后，帮消费者厘清争议焦点，就维权方式和渠道给出了建议，同时联系该幼儿游泳馆实际经营者，告知其解决争议的合法途径和逃避解决的法律后果。”10月28日晚10点，经过律师、民警、社区工作人员反复协调，游泳馆实际经营者当天晚上就把预存费用退还给了消费者。</p><p class="mt">“这只是我们社区法治工作中，法律顾问开展法律服务工作的一个案例。”法治花湖建设工作专班崔副组长说，“现在<mark class="hl" data-m="151" data-seq="1" data-q="4">社区群众的法治观念越来越强</mark>，<mark class="hl" data-m="152" data-seq="2" data-q="4">办事依法、遇事找法、解决问题用法、化解矛盾靠法在花湖已蔚然成风</mark>。”</p><p class="mt">花湖区司法局律师工作科陈科长说：“<mark class="hl" data-m="153" data-seq="3" data-q="4">传统的法律服务</mark>，普遍是当事人找上门后，由法律服务机构被动提供，这往往导致<mark class="hl" data-m="154" data-seq="4" data-q="4">法律服务与群众的需求脱节</mark>。如何<mark class="hl" data-m="155" data-seq="5" data-q="4">为广大社区群众提供专业的法律服务</mark>，成为全社会面临的一个新课题。”<mark class="hl" data-m="156" data-seq="6" data-q="4">为解决这一难题</mark>，<mark class="hl" data-m="157" data-seq="7" data-q="4">打通基层法律服务的“最后一公里</mark>”，花湖区自2019年以来<mark class="hl" data-m="158" data-seq="8" data-q="4">创新推出了一系列举措</mark>。</p><p class="mt"><mark class="hl" data-m="159" data-seq="9" data-q="4">每个社区选派一名社区法律顾问</mark>，小汪就是当年从500名律师中遴选出来的131位社区法律顾问之一。<mark class="hl" data-m="160" data-seq="10" data-q="4">每周五下午</mark>，她都会<mark class="hl" data-m="161" data-seq="11" data-q="4">准时来到大雷社区</mark>，<mark class="hl" data-m="162" data-seq="12" data-q="4">开展法治日值守</mark>，<mark class="hl" data-m="163" data-seq="13" data-q="4">提供“1对N”的公共法律服务</mark>，<mark class="hl" data-m="164" data-seq="14" data-q="4">为社区群众答疑解惑</mark>。</p><p class="mt">“进社区后，除了开展法治宣传、提供法律咨询，我们还会<mark class="hl" data-m="165" data-seq="15" data-q="4">主动走访了解社情民意</mark>，<mark class="hl" data-m="166" data-seq="16" data-q="4">对于群众无法自行解决的矛盾纠纷</mark>，<mark class="hl" data-m="167" data-seq="17" data-q="4">主动参与化解</mark>。”一聊到自己熟悉的工作，小汪侃侃而谈，“<mark class="hl" data-m="168" data-seq="18" data-q="4">社区法律顾问有一整套标准化服务管理机制</mark>。<mark class="hl" data-m="169" data-seq="19" data-q="4">选聘、人员调整、请假、值班都有规定</mark>，<mark class="hl" data-m="170" data-seq="20" data-q="4">人员考核、信息公开、监督指导、沟通协调也都通过制度明确下来</mark>。”</p><p class="mt">为了<mark class="hl" data-m="171" data-seq="21" data-q="4">保障服务的效率和质量</mark>，花湖区通过<mark class="hl" data-m="172" data-seq="22" data-q="4">政府购买服务</mark>，以每次200元的标准<mark class="hl" data-m="173" data-seq="23" data-q="4">对社区法律顾问给予补贴</mark>，并<mark class="hl" data-m="174" data-seq="24" data-q="4">由财政、民政、司法行政部门共同监督发放</mark>；<mark class="hl" data-m="175" data-seq="25" data-q="4">社区每月对入驻律师工作实绩进行评估</mark>，<mark class="hl" data-m="176" data-seq="26" data-q="4">区司法局与街道司法所“点对点”监督指导</mark>，<mark class="hl" data-m="177" data-seq="27" data-q="4">协调解决困难</mark>，<mark class="hl" data-m="178" data-seq="28" data-q="4">提出改进意见</mark>。</p><p class="mt">大雷社区党委李书记认为：“<mark class="hl" data-m="179" data-seq="29" data-q="4">社区法律顾问作用</mark>明显，既是<mark class="hl" data-m="180" data-seq="30" data-q="4">普法宣传员、矛盾纠纷调解员</mark>，又是<mark class="hl" data-m="181" data-seq="31" data-q="4">特殊群体指导员和弱势群体的引导员</mark>。<mark class="hl" data-m="182" data-seq="32" data-q="4">在这几年</mark>，和我们一道<mark class="hl" data-m="183" data-seq="33" data-q="4">将群众各类矛盾纠纷化解在基层</mark>，<mark class="hl" data-m="184" data-seq="34" data-q="4">使得社区秩序越来越好</mark>，同群众关系也更加密切。”</p><p class="mt">在花湖区的各个社区，<mark class="hl" data-m="185" data-seq="35" data-q="4">法律顾问以其专业化的服务深度参与到社区治理工作中</mark>，工作内容已扩展到社区治理各个方面。“<mark class="hl" data-m="186" data-seq="36" data-q="4">以前</mark>，<mark class="hl" data-m="187" data-seq="37" data-q="4">工作中涉及专业法律问题找律师</mark>，得通过关系、熟人，<mark class="hl" data-m="188" data-seq="38" data-q="4">如今律师已经成为我们的‘同事</mark>’，<mark class="hl" data-m="189" data-seq="39" data-q="4">成了社区重要的一分子</mark>。”澄溪社区党委周书记感触颇深，他说，法律顾问不仅为居民提供高效便捷优质的法律服务，还有利于推进社区依法治理。<mark class="hl" data-m="190" data-seq="40" data-q="4">作为好参谋、好助手</mark>，<mark class="hl" data-m="191" data-seq="41" data-q="4">法律顾问为社区管理事务提供法律意见、为社区调解委员会提供法律咨询</mark>，社区的大事小情都参与，<mark class="hl" data-m="192" data-seq="42" data-q="4">可以说基层法律服务已经融入到社区治理的方方面面</mark>。</p><p class="mt">“社区法律顾问还有一个至关重要的作用，那就是<mark class="hl" data-m="193" data-seq="43" data-q="4">对社区干部开展法律培训</mark>，帮助社区干部<mark class="hl" data-m="194" data-seq="44" data-q="4">走出了处理重大疑难问题的法律盲区</mark>，<mark class="hl" data-m="195" data-seq="45" data-q="4">依法行政水平明显提高</mark>，社区依法治理有了‘清障机’。”周书记说，“比如建筑工伤纠纷因为涉及法律关系多且复杂，开发商、发包方、承包方相互推诿扯皮比较多，一些社区干部<mark class="hl" data-m="196" data-seq="46" data-q="4">以往遇到这类纠纷更多就是协调控制事态蔓延</mark>，<mark class="hl" data-m="197" data-seq="47" data-q="4">不敢深入开展工作</mark>。可自从有了社区法律顾问，<mark class="hl" data-m="198" data-seq="48" data-q="4">社区干部依法办事的意识和能力都得到了提升</mark>，也<mark class="hl" data-m="199" data-seq="49" data-q="4">更敢干事了</mark>，<mark class="hl" data-m="200" data-seq="50" data-q="4">他们都觉得心里更有底气了</mark>。”</p><p class="mt">A市花湖区<mark class="hl" data-m="201" data-seq="51" data-q="4">创新社区法治工作模式</mark>以来，<mark class="hl" data-m="202" data-seq="52" data-q="4">累计提供法律咨询服务2.8万余次</mark>，开展普法宣传活动1.3万余次，组织培训讲座6689次，开展社区干部法律培训2100人次，<mark class="hl" data-m="203" data-seq="53" data-q="4">化解矛盾纠纷5056件</mark>，<mark class="hl" data-m="204" data-seq="54" data-q="4">帮助刑释人员1281人次</mark>，<mark class="hl" data-m="205" data-seq="55" data-q="4">指导社矫人员857人次</mark>。</p><p class="mt">2021年7月31日，<mark class="hl" data-m="206" data-seq="56" data-q="4">A市花湖区被授予“全国法治政府建设示范区</mark>”。</p></div></div>
+  <div id="right"><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">20 分</span><span class="tag wd">≤300 字</span><span class="tag kp">概括措施类</span></div><p class="stem">请根据“给定资料1”，概括B市在让儿童安全座椅“叫好又叫座”方面做了哪些努力。（20分）</p><p class="req">要求：全面、准确、有条理。不超过300字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型、题目的主题、答题要素、资料范围和要求等。</div><ul class="key"><li>出现“根据”一词，提示我们只需阅读资料1</li><li>“概括……做了哪些努力”提示本题为单一题，做的“努力”一般以做法的形式呈现，另外，“叫好又叫座”可理解为评价好、卖得出去，让消费者愿意接受，因此本题需作答B市采取了哪些做法让市民接受、购买儿童安全座椅，阅读资料时可重点关注标志性动词所引导的句子、段落，从中提炼要点</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">段1主要介绍了儿童安全座椅的作用及儿童安全座椅的使用被纳入全国性立法，尚未提到B市的相关做法，略读。</div></div><div class="blk"><div class="h">段 2</div><div class="c">本段主要围绕专项执法检查展开。其中：“B市市场监督管理局开展了一次儿童安全座椅专项执法检查”“执法人员当即要求商家下架不合格产品，责令相关企业限期整改”提示B市采取的做法，表述规范，可摘抄得出：监督管理局开展专项检查，下架不合格产品，责令企业限期整改。</div><div class="bind">✓ 要点：监督管理局开展专项检查，下架不合格产品，责令企业限期整改</div></div><div class="blk"><div class="h">段 3</div><div class="c">本段主要围绕完善法律法规展开。其中：“新修订的《中华人民共和国未成年人保护法》实施后，B市修订了《B市未成年人保护条例》”“对搭乘12岁及以下儿童未配备或使用儿童安全座椅的非营运车辆作出了处罚规定”提示B市根据国家新出台的法律修订了地方条例，可概括得出要点：紧跟新法修订地方条例，明确未配备、未使用座椅的非营运车辆处罚规定。</div><div class="bind">✓ 要点：紧跟新法修订地方条例，明确未配备、未使用座椅的非营运车辆处罚规定</div></div><div class="blk"><div class="h">段 4</div><div class="c">本段主要围绕宣传引导市民使用儿童安全座椅展开。其中：（1）“B市电视台的一则新闻报道显示”“提篮式安全座椅被安装在汽车后排”“这对新晋父母的做法得到了B市妇幼保健院秦院长的点赞”提示通过媒体宣传正面典型来引导广大市民正确使用儿童安全座椅，可概括得出要点：媒体宣传典型，引领示范。（2）“医护人员都会提醒家长使用儿童安全座椅，相关知识和安装技巧我们都会写在产妇出院的温馨提示上”提示医院会提醒家长如何使用儿童安全座椅，可概括得出要点：医院提醒使用，普及相关知识、技巧。</div><div class="bind">✓ 要点：媒体宣传典型，引领示范</div></div><div class="blk"><div class="h">段 5</div><div class="c">本段主要围绕宣传引导及执法处罚展开。其中：（1）“B市交警部门于幼儿园、小学新学期开学第一周集中开展儿童安全座椅专项执法、普法活动”“小学还和交警部门提前对接，将开学第一周作为交通安全宣传教育周”“引导学生回家劝说父母为其配备儿童安全座椅”提示B市交警进入校园开展安全宣传，通过学生来带动家长学习儿童安全座椅的相关知识，可概括得出要点：交警入校宣传，引导学生劝说家长。（2）“有交警在学校周边路段专门检查车内是否配备并使用儿童安全座椅，并对未配备或使用儿童安全座椅的驾驶员开出罚单”提示交警会在学校周围开展儿童安全座椅的配备及使用检查，对违规车辆进行处罚，可概括得出要点：交警在学校周边检查配备使用情况，处罚违规车辆。（3）段尾处的“B市司法局还组织专门人员，深入街道、社区、企事业单位开展儿童安全座椅规范使用的宣传活动，让广大市民充分了解未规范使用儿童安全座椅的安全风险和法律风险”提示B市司法局深入基层，向市民宣传不规范使用儿童安全座椅的风险隐患，可概括得出要点：司法部门组织人员深入基层，宣传安全、法律风险。</div><div class="bind">✓ 要点：交警入校宣传，引导学生劝说家长</div></div><div class="blk"><div class="h">段 6</div><div class="c">本段主要围绕公交系统配置儿童安全座椅展开。其中：（1）“在沿途幼儿园、中小学比较集中的公交线路上，公交车里都安装了儿童安全座椅”“公交司机……提醒乘客让儿童尽量坐在安全座椅上并系好安全带”提示学校沿途的公交车安装了儿童安全座椅，并且司机也会及时提醒乘客使用安全座椅，可概括得出要点：学校沿途公交车普及安装，提醒儿童使用。（2）“B市交管部门还要求出租车公司和部分网约车平台专门提供‘宝贝’服务”“在一定数量的营运车辆上准备儿童安全座椅……并协助使用儿童安全座椅”提示B市要求出租车和网约车按照比例准备儿童安全座椅，并且协助乘客使用，可概括得出要点：规定出租车、网约车安装比例，并要求协助使用。（3）“交管部门还就校车配备安全座椅提出了相关要求”提示B市明确了校车配置安全座椅的相关要求，可概括得出要点：明确校车的配备要求。</div><div class="bind">✓ 要点：学校沿途公交车普及安装，提醒儿童使用</div></div><div class="blk"><div class="h">段 7</div><div class="c">本段主要围绕开展专题研讨会展开。其中：“B市未成年人保护研究中心举办了一次如何普及规范使用儿童安全座椅的专题研讨会”“会上，法律专家提出：‘相关的法律风险要向家长科普到位’”“交管部门相关负责人说：‘我们现在正在协调商业保险机构，在车上人员保险条款中针对儿童座椅的使用进行特殊约定’”“生产企业代表指出”“每一个环节都需要多部门协同、全社会参与才能做好”提示B市开展了专题研讨会，邀请了职能部门、专家及企业代表参与，大家就普及和规范使用儿童安全座椅进行了充分的讨论、发言，可概括得出要点：开展专题研讨。邀请职能部门、法律专家、企业代表等群体参与，充分讨论，献计献策，共同研究普及规范使用的方式。</div><div class="bind">✓ 要点：开展专题研讨</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">组织答案
+【梳理资料发现，要点围绕“加大执法力度”“完善法律法规”“广泛开展宣传”“深入公交系统”“开展专题研讨”这五个方面展开，属于“并列”逻辑，可依据资料顺序分条撰写。】
+1.加大执法力度。监督管理局开展专项检查，下架不合格产品，责令企业限期整改；交警在学校周边检查配备使用情况，处罚违规车辆。
+2.完善法律法规。紧跟新法修订地方条例，明确未配备、未使用座椅的非营运车辆处罚规定。
+3.广泛开展宣传。媒体宣传典型，引领示范；医院提醒使用，普及相关知识、技巧；交警入校宣传，引导学生劝说家长；司法部门组织人员深入基层，宣传安全、法律风险。
+4.深入公交系统。学校沿途公交车普及安装，提醒儿童使用；规定出租车、网约车安装比例，并要求协助使用；明确校车的配备要求。
+5.开展专题研讨。邀请职能部门、法律专家、企业代表等群体参与，充分讨论，献计献策，共同研究普及规范使用的方式。</div></div><div class="ref" data-m2r='{"1":0,"2":0,"15":0,"3":0,"6":1,"31":1,"11":2,"19":2,"24":2,"37":2,"32":3,"34":4,"23":4,"36":4,"41":4,"4":0,"5":0,"7":1,"8":1,"9":1,"10":1,"12":2,"13":2,"14":2,"16":0,"17":0,"18":0,"20":2,"21":2,"22":2,"25":2,"26":2,"27":2,"28":2,"29":2,"30":2,"33":3,"35":4,"38":2,"39":2,"40":2,"42":4,"43":4}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="1,2,15,3,4,5,16,17,18">1.加大执法力度。监督管理局开展专项检查，下架不合格产品，责令企业限期整改；交警在学校周边检查配备使用情况，处罚违规车辆。</div><div class="item" data-mk="6,31,7,8,9,10">2.完善法律法规。紧跟新法修订地方条例，明确未配备、未使用座椅的非营运车辆处罚规定。</div><div class="item" data-mk="11,19,24,37,12,13,14,20,21,22,25,26,27,28,29,30,38,39,40">3.广泛开展宣传。媒体宣传典型，引领示范；医院提醒使用，普及相关知识、技巧；交警入校宣传，引导学生劝说家长；司法部门组织人员深入基层，宣传安全、法律风险。</div><div class="item" data-mk="32,33">4.深入公交系统。学校沿途公交车普及安装，提醒儿童使用；规定出租车、网约车安装比例，并要求协助使用；明确校车的配备要求。</div><div class="item" data-mk="34,23,24,36,41,35,42,43">5.开展专题研讨。邀请职能部门、法律专家、企业代表等群体参与，充分讨论，献计献策，共同研究普及规范使用的方式。</div><div class="item" data-mk="34">参考答案说明：本参考答案从“加大执法力度”“完善法律法规”“广泛开展宣传”“深入公交系统”“开展专题研讨”五个方面展开，各条答案要点之间在内容上相互并列，没有交叉。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">一、资料中出现的规范词
+1.专项检查：通常指围绕某个特定事项开展的监督检查活动。表述规范，可直接摘抄，注意积累。
+2.限期整改：通常指行政主体责令违法行为人停止和纠正违法行为，即责令改正或者限期改正违法行为。表述规范，可直接摘抄，注意积累。
+二、在资料中概括出的规范词
+1.深入基层：指领导干部来到群众身边，走近群众，也指某个项目、某项活动走进农村一线，贴近群众需要。比如：资料中出现“B市司法局还组织专门人员，深入街道、社区、企事业单位开展儿童安全座椅规范使用的宣传活动”，提示B市司法局深入基层开展宣传活动。此类情况可以考虑用此词或类似的词进行概括。
+2.职能部门：指组织中对下属单位具有计划、组织、指挥权力的部门，即负责某方面具体管理事务的部门。比如：资料中出现“交管部门相关负责人说：‘我们现在正在协调商业保险机构，在车上人员保险条款中针对儿童座椅的使用进行特殊约定’”，提示出现了交管这一职能部门。此类情况可以考虑用此词或类似的词进行概括。
+3.地方条例：指遵照国家法律法规的基础上，根据当地的实际情况制定的规章。比如：资料中出现“新修订的《中华人民共和国未成年人保护法》实施后，B市修订了《B市未成年人保护条例》”，提示B市根据国家新出台的法律修订了地方条例。此类情况可以考虑用此词或类似的词进行概括。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">20 分</span><span class="tag wd">≤300 字</span><span class="tag kp">总结类</span></div><p class="stem">M省日报准备根据“给定资料2”中先进人物、先进集体的事迹，刊发一篇专题通讯，请你为该通讯撰写一则“编者按”。（20分）</p><p class="req">要求：全面、准确、简明扼要。不超过300字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型，题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>出现“根据”一词，提示我们只需阅读资料2</li><li>①由“一则+编者按”可知本题为公文题，需注意格式，“编者按”的一般格式为：标题+正文。②标题一般直接写为“编者按”，位置比较自由，可写在文前，用【</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">“M省应急管理厅评选了5名年度先进人物和3个年度先进集体”提示出了先进人物、集体的评选部门，指出了M省日报刊发此篇专题通讯的背景，可概括得到要点：我省应急管理厅评选出一批先进典型。</div><div class="bind">✓ 要点：我省应急管理厅评选出一批先进典型</div></div><div class="blk"><div class="h">段 2</div><div class="c">阅读“余某，M省河口县消防救援大队政治教导员”“在抗洪一线奋战了几个昼夜”“被卷入汹涌湍急的洪流中英勇牺牲”“连续奋战了96个小时”，介绍了消防救援教导员余某连续在抗洪一线奋战，最后英勇牺牲的事迹，可概括得到要点：消防救援大队教导员余某，连续四昼夜奋战在抗洪一线，英勇牺牲。</div><div class="bind">✓ 要点：消防救援大队教导员余某，连续四昼夜奋战在抗洪一线，英勇牺牲</div></div><div class="blk"><div class="h">段 3</div><div class="c">阅读“陈某，M省森林消防总队枣垭市大队大队长。他坚守全省最大的高原林海18年”“挽救了20余名群众的生命，抢救群众财产400余万元”“他没有和家人过一个团圆年，没有休一次完整假”，介绍了森林消防队长陈某坚守高原林海，为保护人民群众的生命财产安全，舍弃自己“小家”的事迹，可概括得到要点：森林消防大队长陈某，坚守高原林海18年，舍小家为大家。</div><div class="bind">✓ 要点：森林消防大队长陈某，坚守高原林海18年，舍小家为大家</div></div><div class="blk"><div class="h">段 4</div><div class="c">阅读“向某，M省森林消防总队特种车辆维修技师”“他刻苦钻研，从一名只有初中文化水平的青年成长为具有过硬专业技术的专家”，介绍了森林消防总队车辆维修师向某，通过长期刻苦钻研，使自己从一名只有初中学历的青年成长为技术专家的事迹，可概括得到要点：森林消防总队技师向某，刻苦钻研，从初中学历成长为技术专家。</div><div class="bind">✓ 要点：森林消防总队技师向某，刻苦钻研，从初中学历成长为技术专家</div></div><div class="blk"><div class="h">段 5</div><div class="c">阅读“张某，M省应急管理厅应急指挥中心副主任”“最敢于建言献策的人”“张副主任提出建议，利用航空应急救援力量，向各地输送防疫物资”“极大缓解了重点医疗防疫物资缺乏的燃眉之急”，介绍了应急指挥中心副主任张某敢于建言献策，提出合理建议，缓解了防疫物资短缺的燃眉之急的事迹，可概括得到要点：应急指挥中心副主任张某，敢于建言献策，缓解防疫物资短缺难题。</div><div class="bind">✓ 要点：应急指挥中心副主任张某，敢于建言献策，缓解防疫物资短缺难题</div></div><div class="blk"><div class="h">段 6</div><div class="c">阅读“韦某，M省煤矿安监局江东分局干部。战‘疫’紧要关头，切不能让生产安全事故‘添乱’”“大年初一一早，他就奔赴工作岗位”“他都坚守在分局疫情防控与安全监察工作一线”，介绍了安监局分局干部韦某坚守抗疫与安全监察工作一线，确保生产安全的事迹，可概括得到要点：安监局干部韦某，坚守疫情防控与安全监察一线，确保生产安全。</div><div class="bind">✓ 要点：安监局干部韦某，坚守疫情防控与安全监察一线，确保生产安全</div></div><div class="blk"><div class="h">段 7</div><div class="c">阅读“M省东州市上街口消防救援站”“探索出适合老街古巷实际的灭火法，保持上街口连续8年‘零火灾’、30年无重大火情”，介绍了东州市上街口消防救援站，探索出适合老街古巷的灭火法，取得火灾防控优异成绩的事迹，表述规范，可摘抄得到要点：东州市上街口消防救援站，探索古巷灭火法，实现8年零火灾，30年无重大火情。</div><div class="bind">✓ 要点：东州市上街口消防救援站，探索古巷灭火法，实现8年零火灾，30年无重大火情</div></div><div class="blk"><div class="h">段 8</div><div class="c">阅读“M省地震局西山基准台”“一代代地震工作者守初心、克难关、精业务、讲奉献，一个个‘第一’在这里诞生”，介绍了地震局西山基准台的工作者，不忘初心，创造奉献的事迹，表述规范，可摘抄得到要点：地震局西山基准台，一代代工作者守初心、克难关、精业务、讲奉献，创造多个“第一”。</div><div class="bind">✓ 要点：地震局西山基准台，一代代工作者守初心、克难关、精业务、讲奉献，创造多个“第一”</div></div><div class="blk"><div class="h">段 9</div><div class="c">阅读“M省石黄县应急管理局”“打造‘一张网’应急指挥系统，全力提高基层防灾减灾能力”，介绍了石黄县应急管理局，完善应急指挥系统，提高基层防灾减灾能力的事迹，表述规范，可摘抄得到要点：石黄县应急管理局，打造“一张网”应急指挥系统，提高防灾减灾能力。</div><div class="bind">✓ 要点：石黄县应急管理局，打造“一张网”应急指挥系统，提高防灾减灾能力</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">整合要点，根据答题思路，组织答案。
+【本题要求撰写“一则‘编者按’”，可按照“标题+正文：开头（介绍此次刊发专题通讯的背景）+主体（介绍先进人物、先进集体的典型事迹）+结尾（如果字数允许，可以进行总结）”的答题思路整理要点，适当添加逻辑连接词，形成答案。】
+标题
+【标题直接写为“编者按”，可写在正文前，用“：”与正文间隔即可】编者按：
+正文
+开头
+【段1介绍了刊发先进事迹专题通讯的背景，可作为编者按的开头】我省应急管理厅评选出一批先进典型。
+主体
+【段2介绍了消防救援大队教导员余某的先进事迹】消防救援大队教导员余某，连续四昼夜奋战在抗洪一线，英勇牺牲；
+【段3介绍了森林消防大队长陈某的先进事迹】森林消防大队长陈某，坚守高原林海18年，舍小家为大家；
+【段4介绍了森林消防总队技师向某的先进事迹】森林消防总队技师向某，刻苦钻研，从初中学历成长为技术专家；
+【段5介绍了应急指挥中心副主任张某的先进事迹】应急指挥中心副主任张某，敢于建言献策，缓解防疫物资短缺难题；
+【段6介绍了安监局分局干部韦某的先进事迹】安监局干部韦某，坚守疫情防控与安全监察一线，确保生产安全；
+【段7介绍了东州市上街口消防救援站的先进事迹】东州市上街口消防救援站，探索古巷灭火法，实现8年零火灾，30年无重大火情；
+【段8介绍了地震局西山基准台的先进事迹】地震局西山基准台，一代代工作者守初心、克难关、精业务、讲奉献，创造多个“第一”；
+【段9介绍了石黄县应急管理局的先进事迹】石黄县应急管理局，打造“一张网”应急指挥系统，提高防灾减灾能力；
+结尾
+【可适当添加结尾，表达出弘扬先进事迹的意思，使答案更加完整】特发此通讯，弘扬表彰。</div></div><div class="ref" data-m2r='{"74":0,"85":0,"62":0,"73":0,"44":0,"77":0,"78":0,"84":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"75":0,"76":0,"79":0,"80":0,"81":0,"82":0,"83":0,"86":0}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="74,85,62,73,44,77,78,84,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,63,64,65,66,67,68,69,70,71,72,75,76,79,80,81,82,83,86">编者按：我省应急管理厅评选出一批先进典型。有先进人物：消防救援大队教导员余某，连续四昼夜奋战在抗洪一线，英勇牺牲；森林消防大队长陈某，坚守高原林海18年，舍小家为大家；森林消防总队技师向某，刻苦钻研，从初中学历成长为技术专家；应急指挥中心副主任张某，敢于建言献策，缓解防疫物资短缺难题；安监局干部韦某，坚守疫情防控与安全监察一线，确保生产安全。有先进集体：东州市上街口消防救援站，探索古巷灭火法，实现8年零火灾，30年无重大火情；地震局西山基准台，一代代工作者守初心、克难关、精业务、讲奉献，创造多个“第一”；石黄县应急管理局，打造“一张网”应急指挥系统，提高防灾减灾能力。特发此通讯，弘扬表彰。</div><div class="item" data-mk="44">参考答案说明：（1）格式方面，本参考答案写到了“标题”“正文”两个部分。（2）正文部分，一方面从内容上来看，本参考答案的开头先写到了“此次专题通讯的背景”；主体部分从“先进人物”和“先进集体”两个方面介绍了典型事迹；最后进行了总结。另一方面，形式上，本参考答案做到了分层撰写，条理较为清晰。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">一、资料中出现的规范词
+1.先进人物：是指在道德、思想、教育等方面表现优秀，并且具有一定感染力、号召力的个人，是广大干部和群众的优秀代表。表述规范，可直接摘抄，注意积累。
+2.先进集体：是在工作和学习等方面成绩突出，名列前茅，堪称楷模的集体的统称。表述规范，可直接摘抄，注意积累。
+3.建言献策：指陈述主张或意见，通过口头或文章提出的有益的意见，出谋划策，进献计策。表述规范，可直接摘抄，注意积累。
+4.防灾减灾：指通过向群众、单位等主体宣传知识、教授技能等途径，起到防止灾害和减少灾害的作用。表述规范，可直接摘抄，注意积累。
+二、在资料中概括出的规范词
+舍小家为大家：主要指为了国家、集体或大众的利益，牺牲个人、家庭的利益，即为了顾全大局而舍弃小部分。比如：资料中的“陈某”“坚守全省最大的高原林海18年”“挽救了20余名群众的生命，抢救群众财产400余万元”“他没有和家人过一个团圆年，没有休一次完整假”，提示陈某坚守高原林海，为保护人民群众的生命财产安全，舍弃自己“小家”。此类情况可以考虑用此词或类似的词进行概括。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">25 分</span><span class="tag wd">≤400 字</span><span class="tag kp">提出对策类</span></div><p class="stem">假如你是G市政府办工作人员，请根据“给定资料3”，就做好“小饭桌”管理工作提出建议，供领导参阅。（25分）</p><p class="req">要求：内容全面、条理清晰，针对性强，切实可行。不超过400字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键点，明确题型，题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>出现“根据”一词，提示我们只需阅读资料3</li><li>由“提出建议”可知本题是单一题，作答要素为“建议”，即对策。寻找答案要点时：一方面，可以重点关注资料中的标志性动词引导的句子，从中提炼出对策；另一方面，也可以关注资料中的负面表述，由问题推导出对策</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">本段主要介绍“小饭桌”的含义，并引出“小饭桌”治理这一主题，未涉及具体要点，略读即可。</div></div><div class="blk"><div class="h">段 2</div><div class="c">段2主要介绍市政协委员反映的“小饭桌”存在的问题。阅读“一座老式居民楼中的两室一厅普通民居，弯弯绕绕的楼道很隐蔽，装修简陋”“房间也没有悬挂营业执照和卫生许可证”以及“像这样的‘小饭桌’不在少数，很多开在学校附近居民楼内，且不说食品安全，一旦出现火灾等突发情况，后果不敢想象”“疫情防控的问题”，可知很多“小饭桌”存在违规经营的问题，基础设施简陋，缺少证照，食品安全、防火、卫生防疫等不到位。</div></div><div class="blk"><div class="h">段 4</div><div class="c">段3-4主要介绍学生家长反映的“小饭桌”存在的问题及建议，可合并阅读。（1）阅读段3中的“不过收费挺乱的，还经常涨价，就这样还‘僧多粥少’”以及段4中的“说实话靠谱的不多”，可知当前“小饭桌”存在乱收费、数量少且质量普遍不高的问题。（2）阅读段3段尾处的“政府还是要管管”以及段4中的“希望政府能够对‘小饭桌’备案登记”，可知政府要加强对“小饭桌”的审核评定，对其进行备案登记，由此可概括出要点：对小饭桌登记备案。</div><div class="bind">✓ 要点：对小饭桌登记备案</div></div><div class="blk"><div class="h">段 5</div><div class="c">段5主要介绍街道办副主任反映的“小饭桌”存在的问题及建议。（1）阅读段首处的“门槛太低，人员流动又大，底数很难摸清楚，管理难度很大”“治标不治本”，可知当前“小饭桌”存在门槛低、人员流动大、管理难的问题。（2）阅读“街道现在倒还有些闲置资源”“可采取综合改造、错峰使用等方式，鼓励社区自建或和第三方社会服务组织合作建立托管中心”，可知政府可以从资源供给的角度入手，积极盘活闲置资源，鼓励社区等建立托管中心，由此可概括出要点：增加资源供给，盘活闲置资源，鼓励社区建立托管中心。</div><div class="bind">✓ 要点：增加资源供给，盘活闲置资源，鼓励社区建立托管中心</div></div><div class="blk"><div class="h">段 6</div><div class="c">段6主要介绍黎校长的建议。“主管部门尽快拿出有针对性的政策，加大资金投入，支持有条件的学校加快食堂建设”“引入社会力量参与设立校内托管中心，将其置于校方的监管之下”提示对策，表述规范，可摘抄出要点：投入资金，支持有条件的学校加快食堂建设；引入社会力量参与设立校内托管中心，并由校方监管。</div><div class="bind">✓ 要点：投入资金，支持有条件的学校加快食堂建设</div></div><div class="blk"><div class="h">段 7</div><div class="c">段7主要介绍市人大代表的建议。（1）“应该将学校食堂建设纳入中小学校建设整体规划”“建议出台针对中小学校外托管场所管理的专项制度，加强管理”“明确经营主体、标准和责任”提示对策，表述规范，可摘抄出要点：将食堂建设纳入中小学校建设整体规划；出台校外托管场所管理专项制度，明确经营主体、标准和责任。（2）段尾句“由政府牵头建设托管中心，将运营服务外包，这样的托管中心更规范”提示可通过政府牵头，推进托管中心规范化运营，由此可概括出要点：推进规范化运营。</div><div class="bind">✓ 要点：将食堂建设纳入中小学校建设整体规划</div></div><div class="blk"><div class="h">段 8</div><div class="c">段8主要介绍报社记者反映的小饭桌存在的问题。阅读“餐饮卫生属于市场监督部门监管”“接送车辆的安全问题属于交通部门管理”“有的违规补课，这个又该是教育部门管理，每项服务都有具体的监管部门，但各部门的监管却又都不到位”，可知“小饭桌”的管理涉及多个部门，但相关部门的监管不到位。</div></div><div class="blk"><div class="h">段 9</div><div class="c">段9主要介绍教育局副局长的建议。（1）“对学生加强食品安全知识宣传，引导学生和家长到具备合法手续的餐饮服务单位就餐”提示对策，表述规范，可摘抄出要点：加强食品安全知识宣传，引导学生和家长到手续合法的单位就餐。（2）“利用社会各方资源解决学生午间休息、用餐、托管的问题”说明可以引入社会力量参与，与前文要点重复，此处不用重复出点。（3）段尾句“开展了学校教师私设‘小饭桌’的专项整治工作”说明针对违规经营的行为可以开展专项整治，由此可概括出要点：整顿违规经营行为。</div><div class="bind">✓ 要点：加强食品安全知识宣传，引导学生和家长到手续合法的单位就餐</div></div><div class="blk"><div class="h">段 10</div><div class="c">段10主要介绍“小饭桌”经营者的建议。阅读“家长对我们的卫生和安全状况都很满意，希望政府对我们这种口碑还不错的‘小饭桌’进行等级评定”“如果能够拿着等级评定的结果和光明小学进行合作，我们就能服务更多的学生”，可知政府可以针对口碑较好的“小饭桌”开展卫生、安全等方面的等级评定，让优秀的“小饭桌”服务更多学生。由此可概括出要点：选取口碑好的小饭桌，围绕安全、卫生等情况，进行等级评定并出具结果，帮助其服务更多学生。</div><div class="bind">✓ 要点：选取口碑好的小饭桌，围绕安全、卫生等情况，进行等级评定并出具结果，帮助其服务更多学生</div></div><div class="blk"><div class="h">段 11</div><div class="c">市场监督管理局刘局长先指出了“小饭桌”监管执法的难度，紧接着“准备联合公安等部门，坚持不留死角的原则，在全市范围内开展地毯式的摸底排查，摸清底数和问题，加强针对性的监管”则阐释了相应的对策，即要多部门联动，协同执法，进行全面排查，摸清问题，进行针对性监管。由此可概括出要点：多部门联动，联合执法，坚持不留死角原则，全面开展摸底排查，针对存在的问题，加强针对性监管。</div><div class="bind">✓ 要点：多部门联动，联合执法，坚持不留死角原则，全面开展摸底排查，针对存在的问题，加强针对性监管</div></div><div class="blk"><div class="h">段 12</div><div class="c">本段对前文内容进行了总结，未涉及具体问题或对策，略读即可。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">整合问题，推导对策，并结合已给出对策，形成答案框架
+【梳理资料发现，要点围绕“制度建设”“资源供给”“宣传教育”“等级评定”“监管执法”五个方面展开。其中，资料梳理过程中已提炼出的对策，可按照这五个方面进行罗列。此外，还可以由“小饭桌”存在的问题分析推导出对策，并分条撰写。】
+【段7介绍了“制度建设”方面的对策，可单独写为一条】一、完善制度建设。将食堂建设纳入中小学校建设整体规划；出台校外托管场所管理专项制度，明确经营主体、标准和责任，推进规范化运营。
+【段5中的对策“增加资源供给，盘活闲置资源，鼓励社区建立托管中心”，以及段6中的对策“投入资金，支持有条件的学校加快食堂建设；引入社会力量参与设立校内托管中心，并由校方监管”，都属于“资源供给”方面的对策，可合并写为一条，并将概括性较强的“增加资源供给”作为总括句前置】二、增加资源供给。投入资金，支持有条件的学校加快食堂建设；引入社会力量参与设立校内托管中心，并由校方监管；盘活闲置资源，鼓励社区建立托管中心。
+【段9中的“加强食品安全知识宣传，引导学生和家长到手续合法的单位就餐”属于“宣传教育”方面的对策。此外，针对段2中的“小饭桌”存在的“食品安全、防火、卫生防疫等不到位”的问题，也可以考虑从“宣传教育”的角度分析推导出对策，比如加大卫生防疫等法律法规的普及力度，提升经营者的意识等。将上述对策进行整合，并概括出“加强宣传教育”作为总括句前置】三、加强宣传教育。加强食品安全知识宣传，引导学生和家长到手续合法的单位就餐；加大卫生防疫、食品安全等法律法规的普及力度，提升经营者意识。
+【段3-4中的对策“对小饭桌登记备案”，以及段10中的对策“选取口碑好的小饭桌，围绕安全、卫生等情况，进行等级评定并出具结果，帮助其服务更多学生”都涉及“小饭桌”的评定，可进行整合，并概括出“开展等级评定”作为总括句前置】四、开展等级评定。对小饭桌登记备案，选取口碑好的小饭桌，围绕安全、卫生等情况，进行等级评定并出具结果，帮助其服务更多学生。
+【段9中的对策“整顿违规经营行为”，以及段11中的对策“多部门联动，联合执法，坚持不留死角原则，全面开展摸底排查，针对存在的问题，加强针对性监管”，都属于“监管执法”方面的对策，可整合为一条，概括出“严格监管执法”作为总括句前置。此外，针对段2-5以及段8中提炼出的“小饭桌”存在的问题，除上述对策外，也可以从处罚违法、违规的角度分析推导出对策，如处罚违规经营】五、严格监管执法。多部门联动，联合执法，坚持不留死角原则，全面开展摸底排查；针对存在的问题，加强针对性监管，处罚、整顿违规经营行为。</div></div><div class="ref" data-m2r='{"119":0,"120":0,"122":0,"123":0,"116":0,"117":1,"113":1,"110":1,"124":1,"126":1,"133":2,"134":2,"93":2,"142":3,"91":3,"143":3,"144":3,"147":4,"150":4,"148":4,"87":3,"88":3,"89":3,"90":3,"92":3,"94":2,"95":2,"96":2,"97":2,"98":2,"99":2,"100":2,"101":2,"102":2,"103":2,"104":2,"105":2,"106":2,"107":2,"108":2,"109":2,"111":1,"112":1,"114":1,"115":1,"118":1,"121":0,"125":1,"127":1,"128":1,"129":1,"130":1,"131":1,"132":1,"135":2,"136":2,"137":2,"138":2,"139":2,"140":2,"141":2,"145":3,"146":3,"149":4}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="119,120,122,123,116,121">一、完善制度建设。将食堂建设纳入中小学校建设整体规划；出台校外托管场所管理专项制度，明确经营主体、标准和责任，推进规范化运营。</div><div class="item" data-mk="117,116,113,110,119,124,126,111,112,114,115,118,125,127,128,129,130,131,132">二、增加资源供给。投入资金，支持有条件的学校加快食堂建设；引入社会力量参与设立校内托管中心，并由校方监管；盘活闲置资源，鼓励社区建立托管中心。</div><div class="item" data-mk="133,134,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,135,136,137,138,139,140,141">三、加强宣传教育。加强食品安全知识宣传，引导学生和家长到手续合法的单位就餐；加大卫生防疫、食品安全等法律法规的普及力度，提升经营者意识。</div><div class="item" data-mk="142,91,143,144,87,88,89,90,92,145,146">四、开展等级评定。对小饭桌登记备案，选取口碑好的小饭桌，围绕安全、卫生等情况，进行等级评定并出具结果，帮助其服务更多学生。</div><div class="item" data-mk="147,150,148,149">五、严格监管执法。多部门联动，联合执法，坚持不留死角原则，全面开展摸底排查；针对存在的问题，加强针对性监管，处罚、整顿违规经营行为。</div><div class="item" data-mk="142,143">参考答案说明：本参考答案从“完善制度建设”“增加资源供给”“加强宣传教育”“开展等级评定”“严格监管执法”五个方面进行了分条撰写。各条要点之间在内容上相互并列，没有交叉。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">一、资料中出现的规范词
+1.经营主体：是指以营利为目的，从事商品生产经营和服务活动的经济实体。可以是个体经营者，也可以是合伙、企业法人和公司，还可以是投资者、生产制造商、销售商、中介组织等。表述规范，可直接摘抄，注意积累。
+2.社会力量：指能够参与、作用于社会发展的基本单元，包括自然人、法人（社会组织、党政机关事业单位、非政府组织、党群社团、非营利机构、企业等）。表述规范，可直接摘抄，注意积累。
+3.闲置资源：是指暂时没有使用起来的资源，可以是有形的，也可以是无形的。表述规范，可直接摘抄，注意积累。
+二、在资料中概括出的规范词
+1.制度建设：是国家机关、社会团体、企事业单位，为了维护正常的工作、劳动、学习、生活的秩序，保证国家各项政策的顺利执行和各项工作的正常开展，依照法律、法令、政策而制订的具有法规性或指导性与约束力的应用文，是各种行政法规、章程、制度、公约的总称。比如：资料中的“将学校食堂建设纳入中小学校建设整体规划”“出台针对中小学校外托管场所管理的专项制度”说明从制度建设的角度采取了措施，此类情况可以考虑用此词或类似的词进行概括。
+2.部门联动：就是各个部门工作相互协调配合的意思。比如：资料中出现“市场监督管理局”“联合公安等部门”，提示多部门联动。此类情况可以考虑用此词或类似的词进行概括。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">35 分</span><span class="tag wd">≤800 字</span><span class="tag kp">总结类</span></div><p class="stem">A市要召开打通基层法律服务“最后一公里”座谈会，假如你是花湖区政府办工作人员，请根据“给定资料4”，撰写一篇经验交流材料。（35分）</p><p class="req">要求：内容全面，准确简明，条理清晰。不超过800字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键点，明确题型、题目的主题、答题要素、资料范围和要求等。</div><ul class="key"><li>①由“根据……资料4”可知，只需要阅读资料4。②由“座谈会”“一篇……材料”可知，本题为总结类公文题，需要在座谈会上就“打通基层法律服务‘最后一公里’”这一主题发表与经验相关的讲话，文种为讲话稿。③讲话稿的格式为：标题+称谓+正文（开头+主体+结尾）。可初步构思正文思路：开头（介绍与花湖区基层法律服务相关的背景，如问题、主要举措、工作成绩等）+主体（具体介绍花湖区在打通基层法律服务“最后一公里”工作方面的经验，一般表现为措施与积极影响）+结尾（可适当对全文进行总结）。需要注意的是，以上行文思路，工作经验应当占据讲话稿的主要篇幅，具体内容还要结合资料进一步确证</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 3</div><div class="c">段1-段3以花湖区某游泳馆侵权案件为例，介绍了社区法律顾问在基层法律服务工作中发挥的作用。阅读段3中的“现在社区群众的法治观念越来越强，办事依法、遇事找法、解决问题用法、化解矛盾靠法在花湖已蔚然成风”可知，作为打通基层法律服务“最后一公里”的关键一环，社区法律顾问发挥着重要的作用，由此可概括出：提高了群众的法治观念，让办事依法、遇事找法、解决问题用法、化解矛盾靠法在我区蔚然成风。</div><div class="bind">✓ 要点：提高了群众的法治观念，让办事依法、遇事找法、解决问题用法、化解矛盾靠法在我区蔚然成风</div></div><div class="blk"><div class="h">段 4</div><div class="c">段4介绍了花湖区打通基层法律服务“最后一公里”的有关背景。（1）阅读“传统的法律服务，普遍是当事人找上门后，由法律服务机构被动提供，这往往导致法律服务与群众的需求脱节”可知，传统法律服务的缺点是法律服务机构被动，与群众需求脱节，由此可概括出：传统法律服务中，法律服务机构被动，导致与群众需求脱节。（2）阅读“如何为广大社区群众提供专业的法律服务”“为解决这一难题，打通基层法律服务的‘最后一公里’，花湖区自2019年以来创新推出了一系列举措”可知，花湖区之所以要打通基层法律服务“最后一公里”，是为了给群众提供更加专业的法律服务，并且由前文可知，“创新推出一系列举措”是指花湖区通过推出社区法律顾问，开展了一系列的法律服务工作，由此可概括出：为了给群众提供专业法律服务，花湖区创新社区法治举措——社区法律顾问，打通基层法律服务的“最后一公里”。</div><div class="bind">✓ 要点：传统法律服务中，法律服务机构被动，导致与群众需求脱节</div></div><div class="blk"><div class="h">段 6</div><div class="c">段5-段6主要介绍了社区法律顾问的服务管理机制，可合并阅读。（1）首先，由段5中的“每个社区选派一名社区法律顾问”可知，政府为每个社区都配备了一名法律顾问，确保了基层法律服务的人才力量，资料表述规范，可摘抄出：为每个社区选派一名法律顾问。接着阅读段5中的“每周五下午，她都会准时来到大雷社区，开展法治日值守，提供‘1对N’的公共法律服务，为社区群众答疑解惑”与段6中的“我们还会主动走访了解社情民意，对于群众无法自行解决的矛盾纠纷，主动参与化解”可知法律顾问在社区提供的具体服务，如在固定的时间值守社区，开展宣传工作，了解社情民意，为群众提供法律咨询服务，调解矛盾纠纷，由此可概括出：每周值守一次，开展法治宣传，提供法律咨询，并主动走访了解社情民意，化解群众矛盾。（2）阅读段6中的“社区法律顾问有一整套标准化服务管理机制。选聘、人员调整、请假、值班都有规定，人员考核、信息公开、监督指导、沟通协调也都通过制度明确下来”可知，社区法律顾问有着一套标准化的服务管理机制，有明确的人员选聘、调整等人事规定，也有严格的监督指导等制度，由此可概括出：制定标准化服务管理机制，明确法律顾问的选聘、人员调整等人事规定，以及考核、监督指导等制度。</div><div class="bind">✓ 要点：为每个社区选派一名法律顾问</div></div><div class="blk"><div class="h">段 7</div><div class="c">段7主要围绕着社区法律顾问提升法律服务效率与质量展开。（1）首先，阅读“为了保障服务的效率和质量，花湖区通过政府购买服务”可知，为了提升基层法律服务的效率与质量，政府采取购买专业服务的方式。接着阅读“以每次200元的标准对社区法律顾问给予补贴，并由财政、民政、司法行政部门共同监督发放”可知，政府购买服务，体现在通过政府部门的联合监督，共同发放给社区法律顾问经费补贴。总结以上内容，可概括出：切实保障服务效率质量。政府购买服务，对社区法律顾问按次给予补贴，由财政、民政、司法行政部门共同监督发放。（2）阅读“社区每月对入驻律师工作实绩进行评估，区司法局与街道司法所‘点对点’监督指导，协调解决困难，提出改进意见”可知，为了提高服务效率与质量，一方面，社区对法律顾问开展了客观的评估工作，另一方面，区政府与街道联合监督指导，协助群众解决困难，且为社区法律服务工作提出专业意见。总结以上内容，资料表述简洁规范，可摘抄出：社区按月评估入驻律师工作实绩，由司法部门“点对点”监督指导，协调解决困难，提出改进意见。</div><div class="bind">✓ 要点：切实保障服务效率质量</div></div><div class="blk"><div class="h">段 8</div><div class="c">段8整体介绍了社区法律顾问的积极影响。一方面，阅读“社区法律顾问作用明显，既是普法宣传员、矛盾纠纷调解员，又是特殊群体指导员和弱势群体的引导员”可知，社区法律顾问扮演着多重服务角色，为弱势群体提供了有效帮助；另一方面，阅读“在这几年，和我们一道将群众各类矛盾纠纷化解在基层，使得社区秩序越来越好”可知，法律顾问及时调解各类纠纷，为社区有序运转创造了良好的条件。总结以上内容，资料表述简洁规范，可摘抄出：社区法律顾问既是普法宣传员、矛盾纠纷调解员，又是特殊群体指导员和弱势群体引导员。这几年，把各类矛盾纠纷化解在基层，维护了社区的秩序。</div><div class="bind">✓ 要点：社区法律顾问既是普法宣传员、矛盾纠纷调解员，又是特殊群体指导员和弱势群体引导员</div></div><div class="blk"><div class="h">段 9</div><div class="c">段9主要介绍了社区法律顾问参与社区治理工作。（1）阅读“法律顾问以其专业化的服务深度参与到社区治理工作中”可知，社区法律顾问参与社区治理，为基层治理添砖加瓦，由此可摘抄出：深度参与社区治理工作。（2）对比阅读“以前，工作中涉及专业法律问题找律师，得通过关系、熟人”与“如今律师已经成为我们的‘同事’，成了社区重要的一分子”可知，如今社区工作如果涉及到专业的法律问题，可由法律顾问予以解决，由此可概括出：法律顾问能够解决社区工作中的专业法律问题。（3）阅读“作为好参谋、好助手，法律顾问为社区管理事务提供法律意见、为社区调解委员会提供法律咨询”“可以说基层法律服务已经融入到社区治理的方方面面”可知，社区法律顾问是基层治理的重要参谋与帮手，体现在参与到了社区治理的各个方面，提供各类法律意见与咨询服务，由此可概括出：为社区管理事务提供法律意见、为社区调解委员会提供法律咨询，将基层法律服务融入到方方面面，是社区治理的好参谋、好助手。</div><div class="bind">✓ 要点：深度参与社区治理工作</div></div><div class="blk"><div class="h">段 10</div><div class="c">段10主要介绍了通过社区法律顾问提升基层干部依法办事的能力。（1）阅读“社区法律顾问……对社区干部开展法律培训，帮助社区干部走出了处理重大疑难问题的法律盲区，依法行政水平明显提高”可知，法律顾问能够为社区干部提供专业的法律培训，提升其依法行政的能力，由此可概括出：法律顾问对社区干部开展法律培训，帮其走出处理重大疑难问题的法律盲区，提高其依法行政水平。（2）对比阅读“一些社区干部以往遇到这类纠纷更多就是协调控制事态蔓延，不敢深入开展工作”与“自从有了社区法律顾问，社区干部依法办事的意识和能力都得到了提升，也更敢干事了，他们都觉得心里更有底气了”可知，法律顾问出现在社区前后，基层干部依法办事的能力发生了很大转变，工作态度上杜绝和稀泥、表面化，干事信心与底气也都增强了，由此可概括出：提升干部依法办事能力，杜绝了复杂纠纷处理中和稀泥、工作表面化等问题，增强社区干部工作的信心和底气。</div><div class="bind">✓ 要点：法律顾问对社区干部开展法律培训，帮其走出处理重大疑难问题的法律盲区，提高其依法行政水平</div></div><div class="blk"><div class="h">段 12</div><div class="c">段11-12整体介绍了花湖区创新法治工作模式所取得的成果，可合并阅读。阅读段11中的“A市花湖区创新社区法治工作模式以来，累计提供法律咨询服务2.8万余次”“化解矛盾纠纷5056件，帮助刑释人员1281人次，指导社矫人员857人次”以及段12中的“A市花湖区被授予‘全国法治政府建设示范区’”等可知，花湖区推出社区法律顾问，创新基层法治模式，成效显著，可从中概括出：我区创新社区法治工作模式，获得积极成效，被授予“全国法治政府建设示范区”。</div><div class="bind">✓ 要点：我区创新社区法治工作模式，获得积极成效，被授予“全国法治政府建设示范区”</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">按照答题框架，组织答案
+【本题要求撰写一篇讲话稿，其一般格式为：标题+称谓+正文。其中，结合本题，正文的作答思路可为：开头（介绍花湖区基层法治工作以往问题、打通基层法律服务“最后一公里”的必要性、主要举措及成绩）+主体（具体介绍花湖区打通基层法律服务“最后一公里”的相关经验，一般表现为措施与积极影响）+结尾（整体总结工作成绩）整理要点，适当调整语序，添加引导语、关联词，形成答案】
+标题：
+【一方面，要突出讲话稿主题；另一方面，可突出打通基层法律服务“最后一公里”的主要举措——社区法律顾问】社区法律顾问，打通基层法律服务“最后一公里”
+称谓：
+【结合题目可写出称谓】各位领导、各位同仁
+开头：
+【段4、段11-12介绍了相关背景，如过去存在的问题、打通基层法律服务“最后一公里”的必要性和主要举措、工作成绩等，可适当整理，并添加衔接语】传统法律服务中，法律服务机构被动，导致与群众需求脱节，为解决这一难题，我区创新社区法治工作模式——社区法律顾问，为群众提供专业法律服务，打通基层法律服务的“最后一公里”，并获得积极成效，被授予“全国法治政府建设示范区”。现将主要经验与各位分享。
+主体：
+【段5-段6介绍了制定社区法律顾问的标准化服务管理机制的相关工作经验，可将概括性较强的“制定标准化服务管理机制”作为总括句前置】制定标准化服务管理机制。明确法律顾问的选聘、人员调整等人事规定，以及考核、监督指导等制度；为每个社区选派一名法律顾问，每周值守一次，开展法治宣传，提供法律咨询，并主动走访了解社情民意，化解群众矛盾。
+【段7介绍了通过社区法律顾问提升社区法律服务的效率与质量的相关经验，可将概括性较强的“切实保障服务效率质量”作为总括句前置】切实保障服务效率质量。政府购买服务，对社区法律顾问按次给予补贴，由财政、民政、司法行政部门共同监督发放；社区按月评估入驻律师工作实绩，由司法部门“点对点”监督指导，协调解决困难，提出改进意见。
+【段9介绍了社区法律顾问参与社区治理的相关经验，可将概括性较强的“深度参与社区治理工作”作为总括句前置】深度参与社区治理工作。法律顾问能够解决社区工作中的专业法律问题，如为社区管理事务提供法律意见、为社区调解委员会提供法律咨询，将基层法律服务融入到方方面面，是社区治理的好参谋、好助手。
+【段10介绍了通过社区法律顾问提升干部依法办事能力的相关经验，可将概括性较强的“提升干部依法办事能力”作为总括句前置】提升干部依法办事能力。法律顾问对社区干部开展法律培训，帮其走出处理重大疑难问题的法律盲区，提高其依法行政水平，杜绝了复杂纠纷处理中和稀泥、工作表面化等问题，增强社区干部工作的信心和底气。
+结尾：
+【段1-3、段8指出了花湖区推出社区法律顾问之后所取得的工作成效，可适当整理，写在结尾，总结全文】社区法律顾问既是普法宣传员、矛盾纠纷调解员，又是特殊群体指导员和弱势群体引导员。这几年，把各类矛盾纠纷化解在基层，不但维护了社区秩序，还提高了群众的法治观念，让办事依法、遇事找法、解决问题用法、化解矛盾靠法在我区蔚然成风。</div></div><div class="ref" data-m2r='{"157":0,"159":0,"168":0,"173":0,"179":0,"192":0,"153":0,"154":0,"206":2,"201":2,"156":2,"155":2,"165":3,"169":3,"191":3,"202":3,"162":3,"170":3,"174":4,"175":4,"176":4,"172":4,"177":4,"185":5,"187":5,"190":5,"194":6,"193":6,"195":6,"198":6,"152":7,"180":7,"181":7,"183":7,"151":7,"158":0,"160":0,"161":0,"163":3,"164":3,"166":3,"167":3,"171":3,"178":4,"182":7,"184":7,"186":5,"188":5,"189":5,"196":6,"197":6,"199":6,"200":6,"203":3,"204":3,"205":3}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="157,159,168,173,179,192,153,154,158,160,161">社区法律顾问，打通基层法律服务“最后一公里”</div><div class="item nomk">各位领导、各位同仁：</div><div class="item" data-mk="157,206,201,156,155,159,168,173">传统法律服务中，法律服务机构被动，导致与群众需求脱节，为解决这一难题，我区创新社区法治工作模式——社区法律顾问，为群众提供专业法律服务，打通基层法律服务的“最后一公里”，并获得积极成效，被授予“全国法治政府建设示范区”。现将主要经验与各位分享。</div><div class="item" data-mk="165,168,159,169,191,202,162,170,163,164,166,167,171,203,204,205">一、制定标准化服务管理机制。明确法律顾问的选聘、人员调整等人事规定，以及考核、监督指导等制度；为每个社区选派一名法律顾问，每周值守一次，开展法治宣传，提供法律咨询，并主动走访了解社情民意，化解群众矛盾。</div><div class="item" data-mk="174,175,173,176,159,168,172,177,178">二、切实保障服务效率质量。政府购买服务，对社区法律顾问按次给予补贴，由财政、民政、司法行政部门共同监督发放；社区按月评估入驻律师工作实绩，由司法部门“点对点”监督指导，协调解决困难，提出改进意见。</div><div class="item" data-mk="191,157,185,187,190,192,202,153,186,188,189">三、深度参与社区治理工作。法律顾问能够解决社区工作中的专业法律问题，如为社区管理事务提供法律意见、为社区调解委员会提供法律咨询，将基层法律服务融入到方方面面，是社区治理的好参谋、好助手。</div><div class="item" data-mk="194,193,195,198,159,168,173,179,196,197,199,200">四、提升干部依法办事能力。法律顾问对社区干部开展法律培训，帮其走出处理重大疑难问题的法律盲区，提高其依法行政水平，杜绝了复杂纠纷处理中和稀泥、工作表面化等问题，增强社区干部工作的信心和底气。</div><div class="item" data-mk="152,180,181,183,151,159,168,173,182,184">总之，社区法律顾问既是普法宣传员、矛盾纠纷调解员，又是特殊群体指导员和弱势群体引导员。这几年，把各类矛盾纠纷化解在基层，不但维护了社区秩序，还提高了群众的法治观念，让办事依法、遇事找法、解决问题用法、化解矛盾靠法在我区蔚然成风。</div><div class="item" data-mk="168,157,185,192,198,152,153,154">参考答案说明：（1）格式方面，本参考答案写到了“标题”“称谓”“正文”三个部分。（2）正文部分，围绕“打通基层法律服务‘最后一公里’”这一主题，开头介绍了过去的问题、解决问题的必要性与主要举措、工作成绩；主体从“制定标准化服务管理机制”“切实保障服务效率质量”“深度参与社区治理工作”“提升干部依法办事能力”等四个方面介绍了具体工作经验；结尾整体介绍了工作成效。另一方面，形式上，本参考答案做到了分段、分条撰写，整体上条理颇为清晰。</div></div></div></div>
+</div>
+<div id="nav">
+  <button type="button" id="prev">← 上一题</button>
+  <button type="button" id="next">下一题 →</button>
+</div>
+<script>
+(function(){
+  var fatal = function(m){
+    var d = document.getElementById('fatal');
+    if(d){ d.hidden = false; d.textContent = '页面脚本出错：' + m; }
+  };
+  window.onerror = function(m){ fatal(m); };
+
+  // ---------- 题号切换 ----------
+  var cur = 0;
+  var qbtns = Array.prototype.slice.call(document.querySelectorAll('#qs button'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.qwrap'));
+
+  function show(i){
+    if(i < 0 || i >= cards.length) return;
+    cur = i;
+    cards.forEach(function(c, k){ c.hidden = (k !== i); });
+    qbtns.forEach(function(b, k){ b.classList.toggle('on', k === i); });
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+    if(prev) prev.disabled = (i === 0);
+    if(next) next.disabled = (i === cards.length - 1);
+    try{ localStorage.setItem('sl_reader_q', String(i)); }catch(e){}
+    window.scrollTo(0, 0);
+    var L = document.getElementById('left'), R = document.getElementById('right');
+    if(L) L.scrollTop = 0;
+    if(R) R.scrollTop = 0;
+  }
+  qbtns.forEach(function(b, k){ b.onclick = function(){ show(k); }; });
+  var p = document.getElementById('prev'), n = document.getElementById('next');
+  if(p) p.onclick = function(){ show(cur - 1); };
+  if(n) n.onclick = function(){ show(cur + 1); };
+
+  // ---------- 划线 ↔ 要点 双向联动 ----------
+  function flash(el){
+    if(!el) return;
+    el.classList.add('on');
+    setTimeout(function(){ el.classList.remove('on'); }, 1600);
+  }
+  function scrollToEl(el, box){
+    if(!el || !box) return;
+    var top = el.offsetTop - box.offsetTop - 90;
+    if(box === document.body || box === document.documentElement){
+      window.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }else{
+      box.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }
+  }
+
+  var L = document.getElementById('left'), R = document.getElementById('right');
+  var wide = function(){ return window.matchMedia('(min-width:700px)').matches; };
+
+  // 点材料划线 → 高亮所有以它为来源的答案要点
+  document.addEventListener('click', function(e){
+    var mk = e.target.closest ? e.target.closest('mark.hl') : null;
+    if(mk){
+      var id = mk.getAttribute('data-m');
+      var box = mk.closest('.qwrap') || document;
+      // 优先用当前可见题
+      var vis = document.querySelector('.qwrap:not([hidden])');
+      var refBox = vis ? vis.querySelector('.ref') : null;
+      var first = null;
+      var found = 0;
+      if(refBox){
+        refBox.querySelectorAll('.item[data-mk]').forEach(function(el){
+          var ids = (el.getAttribute('data-mk') || '').split(',');
+          if(ids.indexOf(id) >= 0){ flash(el); if(!first) first = el; found++; }
+        });
+        // 兜底：用反向索引 mark2ref
+        if(found === 0){
+          var m2r = {};
+          try{ m2r = JSON.parse(refBox.getAttribute('data-m2r') || '{}'); }catch(_){}
+          var ri = m2r[id];
+          if(ri !== undefined && ri !== null){
+            var items = refBox.querySelectorAll('.item');
+            if(items[ri]){ flash(items[ri]); first = items[ri]; found = 1; }
+          }
+        }
+      }
+      if(first) scrollToEl(first, wide() ? R : document.documentElement);
+      return;
+    }
+    // 点答案要点 → 材料里所有来源划线一起闪
+    var it = e.target.closest ? e.target.closest('.ref .item') : null;
+    if(it){
+      var list = (it.getAttribute('data-mk') || '').split(',').filter(Boolean);
+      if(!list.length) return;
+      var firstMk = null;
+      list.forEach(function(mid){
+        var t2 = document.querySelector('mark.hl[data-m="' + mid + '"]');
+        if(t2){ flash(t2); if(!firstMk) firstMk = t2; }
+      });
+      if(firstMk) scrollToEl(firstMk, wide() ? L : document.documentElement);
+    }
+  });
+
+  // ---------- 记忆上次题号 ----------
+  try{
+    var s = localStorage.getItem('sl_reader_q');
+    if(s !== null) show(parseInt(s, 10) || 0); else show(0);
+  }catch(e){ show(0); }
+})();
+</script>
+</body>
+</html>

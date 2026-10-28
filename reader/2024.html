@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f3">
+<title>2024 · 省考</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:#f5f5f3;color:#1f2937;
+  font:16px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+a{color:#2563eb}
+
+/* ---------- 吸顶条 ---------- */
+#bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;
+  padding:8px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#bar .nm{font-weight:700;font-size:14px;flex:1;min-width:110px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#bar a.back{font-size:13px;text-decoration:none;color:#6b7280;flex:0 0 auto}
+#qs{display:flex;gap:5px;overflow-x:auto;flex:0 0 auto}
+#qs button{border:1px solid #d1d5db;background:#fff;border-radius:8px;
+  padding:5px 11px;font-size:13px;color:#374151;cursor:pointer;white-space:nowrap}
+#qs button.on{background:#2563eb;border-color:#2563eb;color:#fff;font-weight:700}
+
+/* ---------- 主体 ---------- */
+#wrap{display:block;max-width:1500px;margin:0 auto}
+#left,#right{padding:14px 16px 90px}
+
+/* ---------- 题目卡 ---------- */
+.qcard{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.qcard .meta{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 9px}
+.tag{font-size:12px;padding:2px 9px;border-radius:99px;font-weight:700}
+.tag.sc{background:#fef3c7;color:#92400e}
+.tag.wd{background:#dbeafe;color:#1e40af}
+.tag.kp{background:#dcfce7;color:#166534}
+.qcard .stem{font-size:16px;font-weight:600;line-height:1.8;margin:0 0 8px}
+.qcard .req{font-size:14px;color:#6b7280;margin:0}
+
+/* ---------- 材料 ---------- */
+h3.sec{font-size:13px;color:#6b7280;font-weight:700;letter-spacing:.5px;
+  margin:18px 0 8px;padding-left:8px;border-left:3px solid #2563eb}
+.matbox{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 14px}
+.matbox h4{font-size:13px;color:#2563eb;margin:0 0 10px;font-weight:700}
+p.mt{margin:0 0 11px;text-align:justify;font-size:16.5px;line-height:1.95;
+  text-indent:2em}
+mark.hl{background:#fff3bf;border-bottom:2px solid #f0b429;
+  padding:1px 1px;border-radius:2px;cursor:pointer;transition:background .25s}
+mark.hl.on{background:#ffd43b;box-shadow:0 0 0 2px #fab005}
+mark.hl:after{content:attr(data-m);font-size:9px;color:#b45309;
+  vertical-align:super;margin-left:1px;font-weight:700}
+
+/* ---------- 详解 ---------- */
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.step h4{margin:0 0 10px;font-size:14.5px;color:#1f2937;font-weight:700;
+  display:flex;align-items:center;gap:7px}
+.step h4 .n{display:inline-flex;width:22px;height:22px;border-radius:50%;
+  background:#2563eb;color:#fff;font-size:12px;align-items:center;
+  justify-content:center;flex:0 0 auto}
+.step .body{font-size:15.5px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+.step.s1{border-left:4px solid #2563eb}
+.step.s2{border-left:4px solid #10b981}
+.step.s3{border-left:4px solid #f59e0b}
+.step.s4{border-left:4px solid #ef4444}
+.step.s5{border-left:4px solid #8b5cf6}
+
+/* 逐段讲解 */
+.blk{border:1px solid #e5e7eb;border-radius:10px;margin:0 0 10px;
+  overflow:hidden}
+.blk .h{background:#f9fafb;padding:8px 12px;font-size:13px;font-weight:700;
+  color:#374151;border-bottom:1px solid #e5e7eb}
+.blk .c{padding:10px 12px;font-size:15px;line-height:1.9;color:#4b5563}
+.blk .c.topic{padding-top:0;font-size:14.5px;color:#6b7280;
+  border-top:1px dashed #e5e7eb;margin-top:0}
+.blk .bind{background:#f0fdf4;border-top:1px solid #bbf7d0;
+  padding:9px 12px;font-size:14.5px;color:#166534;font-weight:600}
+
+/* 审题要点列表 */
+ul.key{margin:0;padding-left:20px}
+ul.key li{margin:0 0 7px;font-size:15px;line-height:1.9;color:#374151}
+p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
+
+.ref{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ref .item{padding:9px 0;border-bottom:1px dashed #e5e7eb;font-size:15.5px;
+  line-height:1.9;cursor:pointer}
+.ref .item:last-child{border:0}
+.ref .item.on{background:#fff3bf;border-radius:6px;padding-left:8px;
+  margin-left:-8px}
+
+.warn{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;
+  padding:11px 14px;font-size:14px;color:#991b1b;margin:0 0 12px}
+
+/* ---------- 底部翻页 ---------- */
+#nav{position:fixed;bottom:0;left:0;right:0;z-index:40;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(8px);
+  border-top:1px solid #e5e7eb;padding:8px 12px;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom));
+  display:flex;gap:8px}
+#nav button{flex:1;border:1px solid #d1d5db;background:#fff;border-radius:10px;
+  padding:10px;font-size:14px;font-weight:600;color:#374151;cursor:pointer}
+#nav button:disabled{opacity:.4}
+
+/* ---------- 平板 / 桌面：左右分栏 ---------- */
+@media(min-width:700px){
+  #wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;
+    height:calc(100vh - 52px)}
+  #left,#right{overflow-y:auto;height:100%;padding:18px 20px 90px}
+  #left{border-right:1px solid #e5e7eb}
+  body{font-size:16.5px}
+  p.mt{font-size:17px}
+  #nav{max-width:1500px;margin:0 auto}
+}
+@media(min-width:1200px){
+  #wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+}
+/* ---------- 打印 ---------- */
+@media print{
+  #bar,#nav,#tocBtn{display:none}
+  #wrap{display:block;height:auto}
+  #left,#right{overflow:visible;height:auto}
+  mark.hl{background:#fff3bf}
+}
+/* ---------- 白屏兜底 ---------- */
+#fatal{position:fixed;top:0;left:0;right:0;z-index:999;background:#dc2626;
+  color:#fff;padding:10px 14px;font-size:13px}
+
+/* ==================== AI 批注 ==================== */
+.aihint{background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0284c7;
+  border-radius:10px;padding:11px 14px;margin:16px 0 12px;
+  font-size:13.5px;line-height:1.85;color:#075985}
+.aihint b{color:#0369a1}
+.ai{background:#fbfaff;border:1px solid #e0dbff;border-radius:12px;
+  padding:14px 16px;margin:0 0 12px}
+.ai.extra{background:#fffbf5;border-color:#ffe0b2}
+.ai h4{margin:0 0 11px;font-size:14.5px;color:#4c1d95;font-weight:700;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ai.extra h4{color:#9a3412}
+.ai h4 .an{display:inline-flex;height:19px;padding:0 7px;border-radius:5px;
+  background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;
+  font-size:10.5px;font-weight:800;align-items:center;letter-spacing:.5px}
+.ai.extra h4 .an{background:linear-gradient(135deg,#ea580c,#f59e0b)}
+.ai h4 .sub{font-size:11.5px;color:#9ca3af;font-weight:400;letter-spacing:0}
+
+/* 通用正文 */
+.ai .prose{font-size:15px;line-height:1.95;color:#374151;
+  white-space:pre-wrap;word-break:break-word}
+
+/* 表格通用 */
+.ai table{width:100%;border-collapse:collapse;font-size:13.5px;
+  background:#fff;border-radius:8px;overflow:hidden;
+  table-layout:fixed}
+.ai table th{background:#f3f0ff;color:#5b21b6;font-weight:700;
+  text-align:left;padding:8px 10px;border-bottom:1px solid #ddd6fe;
+  font-size:12.5px;white-space:normal;word-break:break-word}
+.ai table td{padding:9px 10px;border-bottom:1px solid #f1f0f7;
+  vertical-align:top;line-height:1.8;color:#4b5563;
+  word-break:break-word;white-space:normal;overflow-wrap:anywhere}
+.ai table tr:last-child td{border-bottom:0}
+.tstem td.w{font-weight:700;color:#1f2937;font-size:14px;word-break:break-all}
+.tstem td.act{color:#065f46;background:#f0fdf4}
+.tstem .ty{display:inline-block;padding:1px 7px;border-radius:99px;
+  font-size:11px;font-weight:700;background:#ede9fe;color:#5b21b6;
+  word-break:break-word}
+.ttrace td.pt{font-weight:600;color:#1f2937}
+.ttrace td.src{white-space:normal}
+.ttrace code{display:inline-block;background:#f3f4f6;border-radius:4px;
+  padding:1px 5px;font-size:11.5px;color:#6d28d9;margin:0 3px 2px 0;
+  font-family:inherit}
+
+/* 列宽（用 colgroup 不好控制，直接给 th 定宽） */
+.tstem th:nth-child(1){width:17%}
+.tstem th:nth-child(2){width:16%}
+.tstem th:nth-child(3){width:36%}
+.tstem th:nth-child(4){width:31%}
+.ttrace th:nth-child(1){width:27%}
+.ttrace th:nth-child(2){width:18%}
+.ttrace th:nth-child(3){width:55%}
+
+/* 材料结构图 */
+.mmwrap{display:flex;flex-direction:column;gap:8px}
+.mm{border:1px solid #e5e7eb;border-radius:9px;overflow:hidden;background:#fff}
+.mm.pt{border-left:4px solid #10b981}
+.mm.no{border-left:4px solid #d1d5db;opacity:.85}
+.mmh{display:flex;align-items:center;gap:8px;padding:7px 11px;
+  background:#fafafa;border-bottom:1px solid #f1f0f7;flex-wrap:wrap}
+.mmh b{font-size:13px;color:#1f2937}
+.mmb{font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px}
+.mm.pt .mmb{background:#d1fae5;color:#065f46}
+.mm.no .mmb{background:#f3f4f6;color:#6b7280}
+.mmr{padding:7px 11px 2px;font-size:13px;color:#374151;font-weight:600}
+.mmw{padding:0 11px 9px;font-size:13.5px;color:#6b7280;line-height:1.8}
+
+/* 找点六步 */
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{position:relative;padding:0 0 12px 30px;
+  border-left:2px dashed #ddd6fe;margin-left:9px}
+.steps li:last-child{border-left:0;padding-bottom:0}
+.steps li:before{counter-increment:s;content:counter(s);
+  position:absolute;left:-10px;top:0;width:19px;height:19px;
+  border-radius:50%;background:#7c3aed;color:#fff;font-size:11px;
+  font-weight:700;display:flex;align-items:center;justify-content:center}
+.sh{font-size:14px;font-weight:700;color:#5b21b6;margin:0 0 5px}
+.st,.ss{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ss{color:#6b7280}
+.lb{display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;
+  border-radius:4px;background:#ede9fe;color:#6d28d9;margin-right:6px}
+.ss .lb{background:#f3f4f6;color:#6b7280}
+
+/* 陷阱 */
+.traps{display:flex;flex-direction:column;gap:9px}
+.trap{background:#fff;border:1px solid #fecaca;border-radius:9px;
+  padding:10px 12px}
+.th{font-size:13.5px;font-weight:700;color:#991b1b;margin:0 0 6px;
+  line-height:1.7}
+.tw2,.ta{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
+.ta{color:#065f46}
+.tw2 .lb{background:#fee2e2;color:#991b1b}
+.ta .lb{background:#d1fae5;color:#065f46}
+
+@media(max-width:520px){
+  .ai{padding:12px 12px}
+  .ai table{font-size:12.5px}
+  .ai table th,.ai table td{padding:7px 8px}
+  .ttrace td.pt{width:auto}
+  .ttrace td.src{width:auto}
+}
+</style>
+</head>
+<body>
+<div id="fatal" hidden></div>
+<div id="bar">
+  <a class="back" href="./index.html">←</a>
+  <span class="nm">2024 · 省考</span>
+  <div id="qs"><button type="button">第1题</button><button type="button">第2题</button><button type="button">第3题</button><button type="button">第4题</button></div>
+</div>
+<div id="wrap">
+  <div id="left"><h3 class="sec">材料原文 · 划线为粉笔标注的答案来源句</h3><div class="matbox"><h4>材料 1</h4><p class="mt">近年来，K省多地纷纷开展服务型行政执法工作，下面是几则有关通讯报道的摘录：</p><p class="mt">1.“我天天在楼道里给电瓶车充电，啥事也没有，为啥今天就不行啦？”先雁社区一位居民责问正在这里<mark class="hl" data-m="1" data-seq="1" data-q="1">进行消防安全检查的D市公安局堰口派出所赵警官</mark>。“电瓶车在楼道里充电非常危险，容易引发火灾，火灾无情啊！会严重威胁居民们的生命财产安全，已经有许多血的教训……”赵警官耐心劝说着，直到这位居民心服口服地推走电瓶车。</p><p class="mt">这是近日堰口派出所会同辖区消防中队<mark class="hl" data-m="2" data-seq="2" data-q="1">对老旧小区开展消防检查指导工作</mark>的一个缩影。检查中还发现灭火器配置数量不足、好多人不会使用、消防安全制度不健全等问题。于是，他们举一反三，联合街道办事处、物业公司等对其他居民小区开展拉网式集中清查，<mark class="hl" data-m="3" data-seq="3" data-q="1">聚焦发现的隐患</mark>，<mark class="hl" data-m="4" data-seq="4" data-q="1">教育、督促大家时时绷紧安全这根弦</mark>。</p><p class="mt">“一提：提起灭火器之后上下颠倒摇晃使干粉松动；二拔：拔保险销；三对：对准火焰根部；四喷：往下按压阀，对准火源喷射。”消防员手提干粉灭火器，边示范边讲解。观众兴致勃勃地观摩着，争先恐后上台亲手操作演练……在D市安全示范小区清月苑的广场，堰口派出所、消防中队组织各社区业主代表、物业公司负责人参加的消防工作现场会正在有序进行。</p><p class="mt">演练结束后，大家实地参观、交流体会、对标找差，每人还领到一摞准备带回去张贴的消防宣传漫画。最后，所、队领导有针对性地强调了做好火灾预防工作的意见，责成相关物业公司自查自纠，配齐配足消防用品，完善消防制度，做到防患未然。</p><p class="mt">几天后，派出所、消防中队<mark class="hl" data-m="5" data-seq="5" data-q="1">跟踪检查</mark>发现，整改情况良好，唯有仙鹤社区一辆废弃面包车占据消防通道的问题仍未解决。</p><p class="mt">“这个车主比较横，我们说过多次要求挪开车子，他当耳边风。”物业人员很委屈。<mark class="hl" data-m="6" data-seq="6" data-q="1">检查人员立刻约谈车主</mark>，<mark class="hl" data-m="7" data-seq="7" data-q="1">责令改正</mark>，<mark class="hl" data-m="8" data-seq="8" data-q="1">并下达整改指导意见书</mark>。次日，回访跟进、督促落实，车主答应尽快拖车，但表示一时找不到合适的工具，<mark class="hl" data-m="9" data-seq="9" data-q="1">检查人员当场联系车辆拖移</mark>，居民们拍手称赞。</p><p class="mt">2.K省生态环境监控中心6月11日预警日报显示，L县龙盛建材科技有限公司当日废气排放日均值超标，二氧化硫超0.85倍，氮氧化物超0.71倍。</p><p class="mt">6月12日，<mark class="hl" data-m="10" data-seq="10" data-q="1">L县生态环境局</mark>现场查实：6月10日20点48分突然停电，至6月11日零点23分来电，来电后脱硫除尘设施需重新启动，导致11分钟在线数据超标。污染防治设施正常运行后数据恢复正常。</p><p class="mt">“我们一定配合处理，但有些委屈。”公司经理欲言又止。</p><p class="mt">最终，<mark class="hl" data-m="11" data-seq="11" data-q="1">L县生态环境局依法决定对该公司</mark>不予行政处罚。随后，<mark class="hl" data-m="12" data-seq="12" data-q="1">深入企业进一步调研</mark>，<mark class="hl" data-m="13" data-seq="13" data-q="1">探求“治未病”的处方</mark>，公司鼎力配合，<mark class="hl" data-m="14" data-seq="14" data-q="1">会商制定了断电等应急处突预案</mark>。</p><p class="mt">3.“宏宇公司不肯与我们签订劳动合同，想辞退便辞退，随意性大，动不动就延长工作时间，请为我们做主。”几位农民工情绪激动。这天，<mark class="hl" data-m="15" data-seq="15" data-q="1">Z市劳动保障监察支队</mark>接待了他们。</p><p class="mt">经过调查核实，支队依法依规进行了处理。随后，专门向宏宇公司<mark class="hl" data-m="16" data-seq="16" data-q="1">赠送《劳动保障法律法规规章政策汇编</mark>》，<mark class="hl" data-m="17" data-seq="17" data-q="1">多次与公司负责人沟通交流</mark>，<mark class="hl" data-m="18" data-seq="18" data-q="1">对其人力资源部同志进行专题培训</mark>。在此基础上，<mark class="hl" data-m="19" data-seq="19" data-q="1">共同研定《宏宇公司劳动合同管理实施细则》《宏宇公司职工招用、辞退办法》《宏宇公司劳动时间与休息休假规定》等规章制度</mark>，<mark class="hl" data-m="20" data-seq="20" data-q="1">跟踪检查落实情况</mark>，该公司劳资纠纷大幅下降。</p><p class="mt">4.7月28日15时30分许，<mark class="hl" data-m="21" data-seq="21" data-q="1">H县</mark>葛官乡亭美大道刘村路口处发生一起交通事故。刘某亮驾驶小型轿车失控，撞翻李某祟驾驶的二轮摩托车，造成李某祟受伤，两车不同程度损坏。交警现场调查取证后，将伤者送医治疗，恢复交通秩序。</p><p class="mt">次日下午，李某祟的家属从医院来到<mark class="hl" data-m="22" data-seq="22" data-q="1">县公安交警大队</mark>事故中队，咨询后期赔偿的问题。中队鉴于肇事司机刘某亮负事故全责，在<mark class="hl" data-m="23" data-seq="23" data-q="1">知悉伤者诉求</mark>后，<mark class="hl" data-m="24" data-seq="24" data-q="1">安排调解室凌警官主动介入</mark>。凌警官了解到，李某祟伤情虽不严重，但家庭经济窘迫，希望尽快理赔，一旦痊愈即外出打工。于是，中队竭力<mark class="hl" data-m="25" data-seq="25" data-q="1">搭建平等协商平台</mark>，推动事故双方互谅互让，并与肇事车辆所投的保险公司充分沟通协商，<mark class="hl" data-m="26" data-seq="26" data-q="1">简化工作程序</mark>。</p><p class="mt">县公安交警大队主动出具《交通事故赔偿建议清单》，协调涉事各方尽快到场签字。最终，<mark class="hl" data-m="27" data-seq="27" data-q="1">交强险、商业险公司最大限度进行了赔付</mark>，<mark class="hl" data-m="28" data-seq="28" data-q="1">保障了伤者的切身利益</mark>。</p><p class="mt">李某祟全家非常感激，专门将一面绣着“不辞辛劳善调处 一心为民好警官”闪光大字的锦旗送到交警大队。</p><p class="mt">5.某日，一辆运载西瓜的货车经过S县城西收费站，因超重3公斤被处罚款，否则不予通行。司机说：“错了，我错了，不过真不是故意违法，只超3公斤算是轻微吧，我取俩西瓜下来行不行，能不能麻烦您高抬贵手……”执法人员并不理会司机的恳求。司机激动之下想回到驾驶室开车冲卡，被执法人员拽住重重摔在地上。</p><p class="mt">事件曝光后，<mark class="hl" data-m="29" data-seq="29" data-q="1">S县交通执法部门</mark>十分重视，<mark class="hl" data-m="30" data-seq="30" data-q="1">对执法人员进行了严肃的批评教育</mark>，交通运输局粟<mark class="hl" data-m="31" data-seq="31" data-q="1">局长还专门带队到货车所属的力拓运输公司道歉</mark>，并<mark class="hl" data-m="32" data-seq="32" data-q="1">聘请公司负责人担任他们的行风监督员</mark>。之后还<mark class="hl" data-m="33" data-seq="33" data-q="1">建立了定期让执法人员和营运车辆驾驶员进行“角色互换”体验的制度</mark>，<mark class="hl" data-m="34" data-seq="34" data-q="1">促进执法更加人性化</mark>。</p><p class="mt">交通运输执法支队还在超限检测站<mark class="hl" data-m="35" data-seq="35" data-q="1">设立“司机之家”“便民服务箱</mark>”，经常“开门评执法”。力拓运输公司受其影响，更加注重遵章守纪、合法经营，去年被评为全市“诚信守法示范企业”，企业利税翻了一番。</p></div><div class="matbox"><h4>材料 2</h4><p class="mt">B县综合行政执法局接到举报：台庄乡某片区隔三差五晚上有人偷挖私建地下室，希望认真调查一下。</p><p class="mt">执法局高度重视，专门安排摸查工作。台庄乡综合行政执法中队经过几天几夜的巡逻、伏守，终于将其抓个正着并依法处置。这件事带给执法局刘局长很多思考：应如何有效防范此类问题？他着手“解剖麻雀”，深入调研。</p><p class="mt">台庄乡综合行政执法中队辖区面积约4.3平方公里，常住人口7万多人，执法队员24人。<mark class="hl" data-m="36" data-seq="1" data-q="2">在当前要求高质量执法的背景下</mark>，不仅每人要承担跨领域执法工作，而且质量要求高，许多业务一时半会难以熟悉，各类案件应接不暇，同时缺乏系统性、常态化巡查及量化数据分析，中队每天都得安排10多人进行网格巡查，整天忙得脚不沾地，仍常常收到群众投诉。如果对全区域都夜以继日巡查、守候、执法，必然难以为继。</p><p class="mt">考虑到其他中队也都有类似情况，经过研究，<mark class="hl" data-m="37" data-seq="2" data-q="2">B县综合行政执法局决定建立健全信息管控平台</mark>，<mark class="hl" data-m="38" data-seq="3" data-q="2">实施</mark>“<mark class="hl" data-m="39" data-seq="4" data-q="2">智慧治理</mark>”。该局依托政府共享的1：500城市地形图、2.5维地理数据和三维实景地理数据，建立由综合地理数据库、执法人员信息数据库、社会主体数据库等多类数据库组成的底层大数据，<mark class="hl" data-m="40" data-seq="5" data-q="2">创建</mark>“<mark class="hl" data-m="41" data-seq="6" data-q="2">执法基础信息管控平台</mark>”，通过一系列“三色预警”模式，将基础信息管控平台变为执法服务工作的利器，呈现出崭新的工作场景。</p><p class="mt">场景一：“我们公司一直是绿色哦。”旺达公司负责人骄傲地说。原来，B县综合行政执法局<mark class="hl" data-m="42" data-seq="7" data-q="2">将全县</mark>各领域、各业态20900余个<mark class="hl" data-m="43" data-seq="8" data-q="2">社会主体的情况全部录入基础信息管控平台</mark>，<mark class="hl" data-m="44" data-seq="9" data-q="2">根据违法行为发生频率和程度</mark>，<mark class="hl" data-m="45" data-seq="10" data-q="2">将所有执法项分为着重</mark>、<mark class="hl" data-m="46" data-seq="11" data-q="2">侧重</mark>、<mark class="hl" data-m="47" data-seq="12" data-q="2">放心三个档次</mark>。据此，实时<mark class="hl" data-m="48" data-seq="13" data-q="2">实施</mark>“<mark class="hl" data-m="49" data-seq="14" data-q="2">社会主体动态转换三色预警</mark>”，对社会主体出现严重违法行为或多次违法的，<mark class="hl" data-m="50" data-seq="15" data-q="2">执行红色预警</mark>；对出现较轻违法行为的，<mark class="hl" data-m="51" data-seq="16" data-q="2">执行黄色预警</mark>；对没有违法行为、且始终对执法工作积极配合的，<mark class="hl" data-m="52" data-seq="17" data-q="2">执行绿色预警</mark>。执法人员分别<mark class="hl" data-m="53" data-seq="18" data-q="2">按照重点</mark>、<mark class="hl" data-m="54" data-seq="19" data-q="2">严格和正常标准进行执法检查</mark>，提供相应服务。从预警显示来看，<mark class="hl" data-m="55" data-seq="20" data-q="2">实施这项工作以来</mark>，<mark class="hl" data-m="56" data-seq="21" data-q="2">大多数社会主体与旺达公司一样</mark>，<mark class="hl" data-m="57" data-seq="22" data-q="2">始终保持着绿色</mark>。</p><p class="mt">场景二：“关于XX小区违章搭建的投诉件，办理到什么程度啦？”电话里县政府督查室工作人员话音未落，县综合行政执法局值班人员立刻反馈：“马上就报办结情况。”这种效率<mark class="hl" data-m="58" data-seq="23" data-q="2">得益于</mark>“<mark class="hl" data-m="59" data-seq="24" data-q="2">跟踪督办件梯次转办三级预警</mark>”<mark class="hl" data-m="60" data-seq="25" data-q="2">系统</mark>。</p><p class="mt">该局<mark class="hl" data-m="61" data-seq="26" data-q="2">将上级领导批示件</mark>、<mark class="hl" data-m="62" data-seq="27" data-q="2">部门转办函</mark>、<mark class="hl" data-m="63" data-seq="28" data-q="2">群众投诉件</mark>、<mark class="hl" data-m="64" data-seq="29" data-q="2">巡查发现的违法行为以及急需为群众解决的重点难点问题</mark>，<mark class="hl" data-m="65" data-seq="30" data-q="2">全部纳入基础信息管控平台跟踪督办</mark>，<mark class="hl" data-m="66" data-seq="31" data-q="2">明确办理时限和办理标准</mark>，<mark class="hl" data-m="67" data-seq="32" data-q="2">实行</mark>“绿、黄、红”<mark class="hl" data-m="68" data-seq="33" data-q="2">梯次转办三色预警</mark>，<mark class="hl" data-m="69" data-seq="34" data-q="2">分别对应分队</mark>、<mark class="hl" data-m="70" data-seq="35" data-q="2">中队</mark>、<mark class="hl" data-m="71" data-seq="36" data-q="2">局业务科室的三级管辖权限</mark>，适时流转。跟踪督办事项初始阶段为绿色预警，<mark class="hl" data-m="72" data-seq="37" data-q="2">由网格责任分队负责办理</mark>；在规定时间内没有办结的，系统自动升级为黄色预警，<mark class="hl" data-m="73" data-seq="38" data-q="2">由辖区责任中队负责办理</mark>；对限定时间内依然没有办结的，系统自动升级为红色预警，<mark class="hl" data-m="74" data-seq="39" data-q="2">由局相关业务科室直接办理</mark>。</p><p class="mt">“环环紧扣，精密衔接，<mark class="hl" data-m="75" data-seq="40" data-q="2">将执法服务效果的评价</mark>、<mark class="hl" data-m="76" data-seq="41" data-q="2">问责机制</mark>，<mark class="hl" data-m="77" data-seq="42" data-q="2">同步贯穿跟踪督办始终</mark>。这是对我们每一个工作人员的挑战和考验。”刘局长从容地说，“大家都是好样的，交出了一份份令人满意的答卷。”</p><p class="mt">场景三：B县东部中央商务区，一架无人机正在凌空飞翔，忽而拉升俯瞰，忽而低空盘旋。商务区规划占地7.34平方公里，正常情况下，如果依靠人工全面巡查一遍，最少需要2天时间，<mark class="hl" data-m="78" data-seq="43" data-q="2">利用无人机的高性能</mark>，<mark class="hl" data-m="79" data-seq="44" data-q="2">只需2个小时就可高标准完成全域巡查</mark>。</p><p class="mt">县综合行政执法局<mark class="hl" data-m="80" data-seq="45" data-q="2">将无人机无缝接入基础信息管控平台</mark>，<mark class="hl" data-m="81" data-seq="46" data-q="2">实现</mark>“<mark class="hl" data-m="82" data-seq="47" data-q="2">无死角</mark>”<mark class="hl" data-m="83" data-seq="48" data-q="2">巡勘</mark>。充分发挥无人机的高机动性，在完成地理信息基准图拍摄的基础上，将实时航拍图片与之合成比对图斑，<mark class="hl" data-m="84" data-seq="49" data-q="2">数据系统自动识别同一地点不同时间的变化情况</mark>，图标闪亮显示增加的物体。一经发现苗头，<mark class="hl" data-m="85" data-seq="50" data-q="2">及早干预</mark>，<mark class="hl" data-m="86" data-seq="51" data-q="2">指导提前</mark>，<mark class="hl" data-m="87" data-seq="52" data-q="2">服务提前</mark>，<mark class="hl" data-m="88" data-seq="53" data-q="2">警示提前</mark>，防患未然。<mark class="hl" data-m="89" data-seq="54" data-q="2">确认违法事实后</mark>，<mark class="hl" data-m="90" data-seq="55" data-q="2">可直接作为证据</mark>，<mark class="hl" data-m="91" data-seq="56" data-q="2">督促自查自纠</mark>，<mark class="hl" data-m="92" data-seq="57" data-q="2">直至立案查处</mark>。</p></div><div class="matbox"><h4>材料 3</h4><p class="mt">2023年10月，N市税务局对全市税务稽查工作开展了明察暗访专项行动。下面是明察暗访了解到的部分情况：</p><p class="mt">1.市税务局的稽查局小微企业处检查一科办公室。凤翅公司何会计语气恳切：“月初，我们由于电脑操作失误，未能按期申报去年的个人所得税，今天你们下达了责令限期改正通知书，要求立即申报并缴纳罚款，我一刻也没敢耽搁就赶过来补报了。<mark class="hl" data-m="93" data-seq="1" data-q="3">如果在昨天截止日前你们打个电话提醒一下多好啊</mark>，我们绝不是恶意不报。<mark class="hl" data-m="94" data-seq="2" data-q="3">能不能通融通融不罚款呀</mark>？<mark class="hl" data-m="95" data-seq="3" data-q="3">罚款对企业信誉的影响非常不好哦</mark>！”</p><p class="mt">“<mark class="hl" data-m="96" data-seq="4" data-q="3">我们没有义务提前通知你</mark>。我们人手很紧，天天忙得焦头烂额，如对那么多家企业一一提醒通知，怎么忙得过来呢？”税务稽查员<mark class="hl" data-m="97" data-seq="5" data-q="3">略带抱怨地</mark>说，“<mark class="hl" data-m="98" data-seq="6" data-q="3">既然被查出来了</mark>，<mark class="hl" data-m="99" data-seq="7" data-q="3">你就得认罚</mark>。”</p><p class="mt">何会计仍不甘心，执意要找领导。</p><p class="mt">“<mark class="hl" data-m="100" data-seq="8" data-q="3">领导也很忙</mark>，<mark class="hl" data-m="101" data-seq="9" data-q="3">哪有空见你</mark>！”税务稽查员<mark class="hl" data-m="102" data-seq="10" data-q="3">说完转头就走</mark>。</p><p class="mt">2.“您好，是稽查大队吗？你们稽查局综合处让我把电话打过来的。我原来开的一个小公司歇业了，但厂房在出租，今年7月我一次性收到租户一年的租金共60万元，据说这种情况可以按月平摊收入，分摊后月租金收入只要不超过一定数额，就可以免征增值税。<mark class="hl" data-m="103" data-seq="11" data-q="3">请问是不是呀</mark>？<mark class="hl" data-m="104" data-seq="12" data-q="3">这个收入限额是多少呢</mark>？<mark class="hl" data-m="105" data-seq="13" data-q="3">我需要缴纳增值税吗</mark>？<mark class="hl" data-m="106" data-seq="14" data-q="3">如不缴</mark>，<mark class="hl" data-m="107" data-seq="15" data-q="3">你们不会来稽查我吧</mark>？”一位男士电话咨询。</p><p class="mt">“这个、这个……我是今年才进稽查局的，<mark class="hl" data-m="108" data-seq="16" data-q="3">我去找老同志们问问</mark>，<mark class="hl" data-m="109" data-seq="17" data-q="3">你等会儿再打过来</mark>。”稽查局一位年轻人回应。</p><p class="mt">几分钟后，这个电话再次响起，“税官，请问行不行呀？”</p><p class="mt">“哪里？哦，原来是你。刚才我问过了，好像是有这个规定的，<mark class="hl" data-m="110" data-seq="18" data-q="3">但税务条款太多</mark>，<mark class="hl" data-m="111" data-seq="19" data-q="3">我们也不可能条条都记得</mark>，请你多理解。好在条规都是公开的，<mark class="hl" data-m="112" data-seq="20" data-q="3">你只要上网查一查不就全都知道了嘛</mark>。至于你问会不会去稽查，如果偷税漏税，那就会查。”</p><p class="mt">“<mark class="hl" data-m="113" data-seq="21" data-q="3">你这算什么回答啊</mark>？刚才究竟<mark class="hl" data-m="114" data-seq="22" data-q="3">有没有帮我去问呀</mark>？我要投诉你。”</p><p class="mt">“别别……我真的替你问过了，<mark class="hl" data-m="115" data-seq="23" data-q="3">但大家工作太忙没空回答</mark>，<mark class="hl" data-m="116" data-seq="24" data-q="3">抽空回答的又觉得情况比较复杂</mark>，不好随便说，<mark class="hl" data-m="117" data-seq="25" data-q="3">否则容易被追责</mark>。请多谅解和包涵！<mark class="hl" data-m="118" data-seq="26" data-q="3">要么你打其他电话问问</mark>，你最好聘请一位税务师……”</p><p class="mt">3.明察暗访小组工作人员小张来到稽查局办公楼，楼道醒目的位置<mark class="hl" data-m="119" data-seq="27" data-q="3">标示着稽查局工作人员的在岗情况和去向</mark>。<mark class="hl" data-m="120" data-seq="28" data-q="3">一间办公室传出声音“这件衣服超赞</mark>！”</p><p class="mt">“你看看这件呢，流行色、爆款！”</p><p class="mt">“来来来，小刘你过来，帮我们参谋一下哪件好看。”</p><p class="mt">……</p><p class="mt">小张走进办公室：“请问稽查员胡xx在吗？”</p><p class="mt"><mark class="hl" data-m="121" data-seq="29" data-q="3">拿着手机选看衣服的两位工作人员抬起头</mark>，其中一位说：“他不在，你有什么事？”</p><p class="mt">“应他的要求，上次我补了材料过来，但后来一直没动静，今天来看看是不是还有其他什么问题。”</p><p class="mt">“你明天来吧，他今天有事先走了，不回来了。”</p><p class="mt">“外面不是写的他‘在岗’吗？”</p><p class="mt">“是在岗啊，<mark class="hl" data-m="122" data-seq="30" data-q="3">人家也没请假</mark>，<mark class="hl" data-m="123" data-seq="31" data-q="3">这不还有二十分钟就下班了吗</mark>？”</p><p class="mt">……</p><p class="mt">4.夜幕下，<mark class="hl" data-m="124" data-seq="32" data-q="3">丰枢农资公司食堂灯火通明</mark>，<mark class="hl" data-m="125" data-seq="33" data-q="3">觥筹交错</mark>。“<mark class="hl" data-m="126" data-seq="34" data-q="3">我作为东道主</mark>，<mark class="hl" data-m="127" data-seq="35" data-q="3">欢迎你们深入到我们公司稽查税务问题</mark>，辛苦哦！<mark class="hl" data-m="128" data-seq="36" data-q="3">请多关照</mark>，我先干为敬。”</p><p class="mt">话音刚落，<mark class="hl" data-m="129" data-seq="37" data-q="3">两位着税务制服者一饮而尽</mark>，“<mark class="hl" data-m="130" data-seq="38" data-q="3">放心</mark>，<mark class="hl" data-m="131" data-seq="39" data-q="3">放心</mark>。”</p><p class="mt">……</p><p class="mt">“从明察暗访的情况来看，尽管问题集中在少数税务稽查人员身上，但是触目惊心，不容小觑！我们一定动真碰硬，严肃查处。”市税务局梁局长在随后召开的局党组专题会议上指出，“我们必须高度重视，出实招、下硬功，打造一支政治过硬、素质优良的税务稽查队伍。”</p></div><div class="matbox"><h4>材料 4</h4><p class="mt">1.小秦等20余人因工资、经济补偿等问题，与公司产生纠纷。当得知C市劳动纠纷一站式多元化解联处中心可以为他们提供帮助后，小秦和同事们立即向中心提交了劳动纠纷调解申请。申请很快被C市W区联处中心受理，并<mark class="hl" data-m="140" data-seq="1" data-q="4">立即启动多元化解联动处置机制</mark>，劳动监察、劳动仲裁、人民调解委员会、<mark class="hl" data-m="141" data-seq="2" data-q="4">人民法院等部门迅速介入</mark>。与此同时，受聘的调解人才库专家——某企业人力资源管理人员也积极参与其中，切实维护了当事人的合法权益。</p><p class="mt"><mark class="hl" data-m="142" data-seq="3" data-q="4">C市劳动纠纷一站式多元化解联处中心</mark>设置了案件登记、法律咨询、法律援助、司法确认、人民调解等功能区，在24个区（市、县）设置了调解中心，实现本市全域覆盖，<mark class="hl" data-m="143" data-seq="4" data-q="4">通过集成建立调处平台</mark>，<mark class="hl" data-m="144" data-seq="5" data-q="4">衔接融合调处资源</mark>，<mark class="hl" data-m="145" data-seq="6" data-q="4">实现闭环处置纠纷案件</mark>。</p><p class="mt">2.T社区有一群广场舞爱好者，因噪声问题与当地居民产生了一系列矛盾纠纷。如何从根源上化解二者之间的矛盾？T社区党委在工作中逐渐意识到“解铃还须系铃人”，广场噪声来自于广场舞爱好者们，何不尝试<mark class="hl" data-m="146" data-seq="7" data-q="4">让他们自己管理自己</mark>？<mark class="hl" data-m="147" data-seq="8" data-q="4">社区“两委”把社区23支文体队伍召集起来进行民主选举</mark>，<mark class="hl" data-m="148" data-seq="9" data-q="4">成立T社区文体协会</mark>，在法律顾问的指导之下，<mark class="hl" data-m="149" data-seq="10" data-q="4">制定《T社区广场公约</mark>》，<mark class="hl" data-m="150" data-seq="11" data-q="4">由文体协会的成员们加强日常监督管理和劝导</mark>。<mark class="hl" data-m="151" data-seq="12" data-q="4">文体协会还时常邀请有关部门执法人员办讲座</mark>，学习相关法律知识，思考如何合法合理地使用广场。自此，T社区因扰民问题产生的矛盾纠纷数量急剧减少。</p><p class="mt">3.M村因“外嫁女”的相关问题引起了很多纠纷。原来的村规民约规定结婚的妇女被称为“外嫁女”，结婚后三个月内户口必须迁出，如不迁出，也不享有任何待遇；如要保留待遇，必须每人交4、5、10万元不等的安家费或入股费。<mark class="hl" data-m="152" data-seq="13" data-q="4">新任村支书何书记下定决心要修订村规民约</mark>，但一提出就遭到了大多数村民的反对。<mark class="hl" data-m="153" data-seq="14" data-q="4">何书记慢慢做工作</mark>，他说，如果我们把精力都用来不断地提高集体收入，把集体的蛋糕做大，不好吗？谁家能保证世世代代都生儿子呢？现在离开村子的年轻人，女性比男性多，一个留不住女性的地方，你们觉得有啥未来呢？如果我们实行男女平等的分配，家家户户都可以可持续地受益。</p><p class="mt">4.习近平总书记指出，古人说：“消未起之患，治未病之疾，医之于无事之前。”<mark class="hl" data-m="132" data-seq="15" data-q="4">法治建设既要抓末端、治已病，更要抓前端、治未病</mark>。我国国情决定了我们不能成为“诉讼大国”。我国有14亿人口，大大小小的事情都要打官司，那必然不堪重负！<mark class="hl" data-m="133" data-seq="16" data-q="4">要推动更多法治力量向引导和疏导端用力</mark>，<mark class="hl" data-m="134" data-seq="17" data-q="4">完善预防性法律制度</mark>，坚持和发展新时代“枫桥经验”，<mark class="hl" data-m="135" data-seq="18" data-q="4">完善社会矛盾纠纷多元预防调处化解综合机制</mark>，更加<mark class="hl" data-m="136" data-seq="19" data-q="4">重视基层基础工作</mark>，<mark class="hl" data-m="137" data-seq="20" data-q="4">充分发挥共建共治共享在基层的作用</mark>，<mark class="hl" data-m="138" data-seq="21" data-q="4">推进市域社会治理现代化</mark>，<mark class="hl" data-m="139" data-seq="22" data-q="4">促进社会和谐稳定</mark>。</p></div></div>
+  <div id="right"><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">15 分</span><span class="tag wd">≤200 字</span><span class="tag kp">概括措施类</span></div><p class="stem">请根据“给定资料1”，归纳概括K省各地服务型行政执法工作的具体做法。（15分）</p><p class="req">要求：全面、准确、有条理；不超过200字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型，题目的主题、答题要素、材料范围和作答要求等。</div><ul class="key"><li>出现“根据”一词，提示我们只需阅读资料1</li><li>①由“归纳概括……做法”可知本题是单一题，需围绕“服务型行政执法”这一主题，寻找“做法”，即“对策”要素。阅读资料时可以重点关注标志性动词所在的句子，从中提炼答案要点。②“归纳概括”提示作答时要将做法进行分类总结，结合“K省各地”，提示可能是按照K省的不同地区进行分类撰写。③“服务型行政执法”提示在执法工作中能将管理与服务相结合，强化服务意识，不同于强制性、常规性的执法工作</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">资料1段1</div><div class="c">段1指出K省多地开展服务型行政执法工作，未涉及相关做法，无要点，可略读。</div></div><div class="blk"><div class="h">资料1段2-3</div><div class="c">段2-3主要介绍D市派出所开展消防检查指导工作方面的内容，可合并阅读。（1）段2“正在这里进行消防安全检查的D市公安局堰口派出所赵警官”提示消防检查的执法主体是D市公安局堰口派出所，可摘抄出要点：D市公安局堰口派出所。（2）段3中的“这是近日堰口派出所会同辖区消防中队对老旧小区开展消防检查指导工作的一个缩影”“聚焦发现的隐患，教育、督促大家时时绷紧安全这根弦”提示对策，说明当地派出所能够针对小区隐患，教育、督促群众提高安全意识，由此可概括、摘抄出要点：聚焦小区消防隐患，教育、督促民众。其中，“联合街道办事处、物业公司等对其他居民小区开展拉网式集中清查”属于常规型的行政执法工作，与主题不符，故不出点。</div><div class="c topic">段2-3话题梳理： 段2-3围绕“D市公安局堰口派出所”这一执法主体展开，介绍了其通过聚焦隐患，教育督促民众等做法开展服务型执法工作，可将“D市公安局堰口派出所”作为总括词前置，具体内容可依照资料的描述展开。</div><div class="bind">✓ 要点：D市公安局堰口派出所：聚焦小区消防隐患，教育、督促民众。</div></div><div class="blk"><div class="h">资料1段4-5</div><div class="c">段4-5主要介绍D市开展消防工作现场会的情景，属于常规型的消防演习，与主题不符，故不出点。</div></div><div class="blk"><div class="h">资料1段6-7</div><div class="c">段6-7主要介绍D市执法队伍在后续跟踪检查时的相关做法，可合并阅读。（1）段6中的“派出所、消防中队跟踪检查发现”，指出了消防演习后，执法人员能够进行后续跟踪检查，可摘抄出要点：跟踪检查。（2）段7中的“检查人员立刻约谈车主，责令改正，并下达整改指导意见书”“检查人员当场联系车辆拖移”，指出了执法人员在发现问题后能够现场处理、及时落实，由此可概括出要点：现场落实。</div><div class="c topic">段6-7话题梳理： 段6-7继续围绕“D市公安局堰口派出所”这一执法主体展开，介绍了其通过跟踪检查、现场落实等做法开展服务型执法工作，具体内容可依照资料的描述展开。</div><div class="bind">✓ 要点：D市公安局堰口派出所：跟踪检查、现场落实。</div></div><div class="blk"><div class="h">资料1段8</div><div class="c">段8介绍了L县某公司废气排放日均值超标，未涉及相关做法，引出下文。</div></div><div class="blk"><div class="h">资料1段9-11</div><div class="c">段9-11主要介绍L县执法部门解决企业超排方面的内容，可合并阅读。（1）段9中的“L县生态环境局现场查实”提示执法主体是L县生态环境局，可摘抄出要点：L县生态环境局。（2）段11中的“L县生态环境局依法决定对该公司不予行政处罚”提示对策，说明L县执法部门对此次意外事故不予处罚，由此可概括出要点：对意外事故免予处罚。（3）段11中的“深入企业进一步调研，探求‘治未病’的处方……会商制定了断电等应急处突预案”提示对策，说明L县执法部门深入企业调研，探索对于突发情况的预防及应急处突预案，由此可摘抄、概括出要点：深入企业调研，探求突发情况预防、应急处理预案。</div><div class="c topic">段9-11话题梳理： 段9-11围绕“L县生态环境局”这一执法主体展开，介绍了其通过对意外事故免罚并制定应急预案等做法开展服务型执法工作，可将“L县生态环境局”作为总括词前置，具体内容可依照资料的描述展开。</div><div class="bind">✓ 要点：L县生态环境局：对意外事故免予处罚，深入企业调研，探求突发情况预防、应急处理预案。</div></div><div class="blk"><div class="h">资料1段12-13</div><div class="c">段12-13主要介绍Z市执法部门解决农民工上访问题方面的内容，可合并阅读。（1）段12中的“Z市劳动保障监察支队接待了他们”提示此次事件的执法主体是Z市劳动保障监察支队，可摘抄出要点：Z市劳动保障监察支队。（2）段13中的“赠送《劳动保障法律法规规章政策汇编》，多次与公司负责人沟通交流，对其人力资源部同志进行专题培训”提示对策，说明支队通过赠送法律汇编、与负责人沟通、专题培训等措施向违法公司普法送法，由此可概括出要点：向违法公司普法。（3）“共同研定《宏宇公司劳动合同管理实施细则》……等规章制度，跟踪检查落实情况”提示对策，表述规范，可摘抄出要点：共同研定规章制度，跟踪检查落实情况。其中，“经过调查核实，支队依法依规进行了处理”属于常规型的行政执法工作，与主题不符，故不出点。</div><div class="c topic">段12-13话题梳理： 段12-13围绕“Z市劳动保障监察支队”这一执法主体展开，介绍了其通过向违法公司普法，共研规章制度等措施解决农民工上访问题，可将“Z市劳动保障监察支队”作为总括词前置，具体内容可依照资料的描述展开。</div><div class="bind">✓ 要点：Z市劳动保障监察支队：向违法公司普法，共同研定规章制度，跟踪检查落实情况。</div></div><div class="blk"><div class="h">资料1段14-16</div><div class="c">段14-16主要介绍H县执法部门处理交通事故方面的内容，可合并阅读。（1）段14中的“H县葛官乡亭美大道刘村路口处发生一起交通事故”以及段15中的“李某祟的家属从医院来到县公安交警大队事故中队”提示本次事件的执法主体是H县公安交警大队，可摘抄出要点：H县公安交警大队。（2）段15中的“在知悉伤者诉求后，安排调解室凌警官主动介入”“中队竭力搭建平等协商平台……简化工作程序”提示对策，说明交警大队能够积极倾听伤者诉求，并主动搭建调解平台，精简工作流程，由此可概括、摘抄出要点：了解伤者诉求，搭建协商平台，简化保险程序。（3）段16中的“交强险、商业险公司最大限度进行了赔付，保障了伤者的切身利益”说明交警大队能够为伤者积极争取最大赔付，保障其权益，由此可概括出要点：争取最大赔付。</div><div class="c topic">段14-16话题梳理： 段14-16围绕“H县公安交警大队”这一执法主体展开，介绍了其搭建协商平台，简化保险程序，为伤者争取最大赔付方面的做法，可将“H县公安交警大队”作为总括词前置，具体内容可依照资料的描述展开。</div><div class="bind">✓ 要点：H县公安交警大队：了解伤者诉求，搭建协商平台，简化保险程序，争取最大赔付。</div></div><div class="blk"><div class="h">资料1段17</div><div class="c">段17描述了伤者感谢交警大队的场景，未涉及相关做法，无要点，可略读。</div></div><div class="blk"><div class="h">资料1段18</div><div class="c">段18介绍了S县执法人员实施暴力执法、不当执法的行为，未涉及与“服务型行政执法”相关的做法，无要点，可略读。</div></div><div class="blk"><div class="h">资料1段19-20</div><div class="c">段19-20主要介绍S县执法部门纠正人员暴力执法方面的内容，可合并阅读。（1）段19中的“S县交通执法部门十分重视”提示本次事件的执法主体是S县交通执法部门，可摘抄出要点：S县交通执法部门。（2）段19中的“聘请公司负责人担任他们的行风监督员”“建立了定期让执法人员和营运车辆驾驶员进行‘角色互换’体验的制度，促进执法更加人性化”以及段20中的“设立‘司机之家’‘便民服务箱’，经常‘开门评执法’”提示对策，指出了S县执法部门通过设置行风监督员、互换制度、司机之家等监督服务制度来促进人性化执法，表述冗长，精简语言，由此可概括、摘抄出要点：设置行风监督员、司机之家等监督服务制度，促进人性化执法。其中，“对执法人员进行了严肃的批评教育，交通运输局粟局长还专门带队到货车所属的力拓运输公司道歉”属于常规型的行政执法工作，与主题不符，故不出点。</div><div class="c topic">段19-20话题梳理： 段19-20围绕“S县交通执法部门”这一执法主体展开，介绍了其通过设置行风监督员、司机之家等服务制度，推进人性化执法，可将“S县交通执法部门”作为总括词前置，具体内容可依照资料的描述展开。</div><div class="bind">✓ 要点：S县交通执法部门：设置行风监督员、司机之家等监督服务制度，促进人性化执法。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">组织答案
+【梳理资料发现，要点围绕“D市公安局堰口派出所”“L县生态环境局”“Z市劳动保障监察支队”“H县公安交警大队”“S县交通执法部门”这五个主体的做法展开，属于“并列”逻辑，可以将要点按照这五个层次进行分条撰写。】
+【段2-3、段6-7介绍了“D市公安局堰口派出所”的做法，可合并为一条】1.D市公安局堰口派出所：聚焦小区消防隐患，教育、督促民众，跟踪检查、现场落实。
+【段9-11介绍了“L县生态环境局”的做法，可合并为一条】2.L县生态环境局：对意外事故免予处罚，深入企业调研，探求突发情况预防、应急处理预案。
+【段12-13介绍了“Z市劳动保障监察支队”的做法，可合并为一条】3.Z市劳动保障监察支队：向违法公司普法，共同研定规章制度，跟踪检查落实情况。
+【段14-16介绍了“H县公安交警大队”的做法，可合并为一条】4.H县公安交警大队：了解伤者诉求，搭建协商平台，简化保险程序，争取最大赔付。
+【段19-20介绍了“S县交通执法部门”的做法，可合并为一条】5.S县交通执法部门：设置行风监督员、司机之家等监督服务制度，促进人性化执法。</div></div><div class="ref" data-m2r='{"1":0,"4":0,"5":0,"20":0,"10":1,"11":1,"12":1,"15":2,"16":2,"19":2,"22":3,"23":3,"25":3,"29":4,"32":4,"35":4,"2":0,"3":0,"6":0,"7":0,"8":0,"9":0,"13":1,"14":1,"17":2,"18":2,"21":0,"24":3,"26":3,"27":3,"28":3,"30":4,"31":4,"33":4,"34":4}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="1,4,5,20,2,3,6,7,8,9,21">1.D市公安局堰口派出所：聚焦小区消防隐患，教育、督促民众，跟踪检查、现场落实。</div><div class="item" data-mk="10,11,12,13,14">2.L县生态环境局：对意外事故免予处罚，深入企业调研，探求突发情况预防、应急处理预案。</div><div class="item" data-mk="15,20,5,16,19,17,18">3.Z市劳动保障监察支队：向违法公司普法，共同研定规章制度，跟踪检查落实情况。</div><div class="item" data-mk="22,23,25,24,26,27,28">4.H县公安交警大队：了解伤者诉求，搭建协商平台，简化保险程序，争取最大赔付。</div><div class="item" data-mk="29,32,35,30,31,33,34">5.S县交通执法部门：设置行风监督员、司机之家等监督服务制度，促进人性化执法。</div><div class="item" data-mk="1,15,29,10,11,22,16">参考答案说明：本参考答案从“D市公安局堰口派出所”“L县生态环境局”“Z市劳动保障监察支队”“H县公安交警大队”“S县交通执法部门”这五个方面进行了分条撰写。各条答案要点之间在内容上相互并列，没有交叉。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">一、资料中出现的规范词
+1.人性化执法：是指执法人员在执法过程中严格遵守法律法规，在充分尊重当事人合法权利的前提下，将人性尊严的理念融入执法过程中，依据法定程序进行理性化、非歧视性的执法活动。表述规范，可直接摘抄，注意积累。
+2.应急处理预案：是指为依法、迅速、科学、有序应对突发事件，最大程度减少突发事件及其造成的损害而预先制定的工作方案。
+3.跟踪检查：是指通过各种途径，对各个事项实行全程的跟踪管理，及时发现和纠正问题的发生。表述规范，可直接摘抄，注意积累。
+4.行风监督员：是指由政府机关、企事业单位或社会组织聘任的，负责对特定行业或部门的工作作风、履职行为进行外部监督的社会人士。表述规范，可直接摘抄，注意积累。
+二、在资料中概括出的规范词
+最大赔付：是指在一个保险合同项下保险公司承担赔偿或给付保险金责任的最高限额。比如：资料中出现“交强险、商业险公司最大限度进行了赔付”，此类情况可以考虑用此词或类似的词进行概括。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">20 分</span><span class="tag wd">≤400 字</span><span class="tag kp">总结类</span></div><p class="stem">B县综合行政执法局创建的“执法基础信息管控平台”，引起社会广泛关注。请根据“给定资料2”，撰写一份关于平台运行情况的工作简报。（20分）</p><p class="req">要求：内容全面，重点突出，结构完整，语言流畅；不超过400字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型、题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>出现“根据”一词，提示我们只需阅读资料2</li><li>“一份+工作简报”提示本题为公文题，需注意格式，工作简报的一般格式为：报头（标题、编发单位、印发日期）+正文。①标题一般为“关于+主题词+的+文种”，也可以采用灵活写法，突出主题即可，由题干可知主题为“执法基础信息管控平台运行情况”，因此可将标题写为：关于执法基础信息管控平台运行情况的工作简报；题干提示“B县综合行政执法局”创建了执法基础信息管控平台，故编发单位可写为：B县综合行政执法局；题干及资料中没有明确的印发日期，可直接写为：XXXX年XX月XX日。注意：“编发单位”与“印发日期”应写在标题的下一行，分别置于行首与行尾。②正文部分可写为：开头（简单介绍背景等，并添加相应的过渡句引出下文）+主体（可能涉及执法基础信息管控平台运行的做法等）+结尾（总结评价，视资料内容或字数而定）。具体撰写内容要进一步结合给定资料判定</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">资料2段1-2</div><div class="c">段1-2通过处置偷挖私建地下室的案例引出B县综合行政执法局对执法工作的思考，未涉及“执法基础信息管控平台”的相关内容，无要点，可略读。</div></div><div class="blk"><div class="h">资料2段3</div><div class="c">本段介绍了台庄乡综合行政执法局的执法现状。“在当前要求高质量执法的背景下”提示执法局的执法目标，表述规范，可摘抄出要点：实现高质量执法。之后的内容都在介绍该执法中队目前无法做到高质量执法，与“执法基础信息管控平台”关联较小，可不写入答案。</div><div class="bind">✓ 要点：实现高质量执法。</div></div><div class="blk"><div class="h">资料2段4</div><div class="c">本段介绍了B县综合行政执法局创建“执法基础信息管控平台”。阅读段首句“B县综合行政执法局决定建立健全信息管控平台，实施‘智慧治理’”以及“创建‘执法基础信息管控平台’”可知，该执法局实施“智慧治理”，表述规范，可摘抄出要点：实施智慧治理，创建“执法基础信息管控平台”。注意：其中“该局依托政府共享的……”及“通过一系列‘三色预警’模式……”等内容，是在说明如何创建执法基础信息管控平台，不是具体的运行情况，故不作为要点。</div><div class="bind">✓ 要点：实施智慧治理，创建“执法基础信息管控平台”。</div></div><div class="blk"><div class="h">资料2段3-4</div><div class="c topic">资料2段3-4话题梳理： 段3介绍了B县综合行政执法局的执法目标，段4介绍了该执法局为实现这一目标创建了“执法基础信息管控平台”，以上内容适当整合，调整表述，可作为背景写入工作简报的开头。</div><div class="bind">✓ 要点：背景：B县综合行政执法局为实现高质量执法，实施智慧治理，创建“执法基础信息管控平台”，运行情况如下。</div></div><div class="blk"><div class="h">资料2段5</div><div class="c">本段介绍了实施“社会主体动态转换三色预警”的情况。（1）阅读“将全县……社会主体的情况全部录入基础信息管控平台，根据违法行为发生频率和程度，将所有执法项分为着重、侧重、放心三个档次”“实施‘社会主体动态转换三色预警’……执行红色预警……执行黄色预警……执行绿色预警”“按照重点、严格和正常标准进行执法检查”可知，B县综合行政执法局实施“社会主体动态转换三色预警”，根据违法频率和程度，分为三档分别执行红、黄、绿三色预警，进行相应的执法检查，从中可摘抄、概括出要点：实施社会主体动态转换三色预警，将全县社会主体情况录入平台，根据违法频率和程度，将执法项分为着重、侧重、放心三档，分别执行红、黄、绿三色预警，按照重点、严格和正常标准执法检查。（2）阅读“实施这项工作以来，大多数社会主体与旺达公司一样，始终保持着绿色”可知，大多数社会主体没有违法行为、且始终对执法工作积极配合，说明违法情况减少，可概括出要点：有效减少违法情况。</div><div class="c topic">段5话题梳理： 段5介绍了B县将全县社会主体情况录入平台，按照着重、侧重、放心三档进行三色预警，由此进行不同程度的执法检查，提示本段围绕核心话题“实施社会主体动态转换三色预警”展开，可作为总括句并前置，具体要点可按照资料的逻辑顺序进行罗列。</div><div class="bind">✓ 要点：做法：实施社会主体动态转换三色预警。将全县社会主体情况录入平台，根据违法频率和程度，将执法项分为着重、侧重、放心三档，分别执行红、黄、绿三色预警，按照重点、严格和正常标准执法检查，有效减少违法情况。</div></div><div class="blk"><div class="h">资料2段6</div><div class="c">本段介绍了实行“跟踪督办件梯次转办三级预警”的情况。段尾句“得益于‘跟踪督办件梯次转办三级预警’系统”可知，执法局实施“跟踪督办件梯次转办三级预警”系统，表述规范，可摘抄出要点：实行跟踪督办件梯次转办三级预警。</div><div class="bind">✓ 要点：实行跟踪督办件梯次转办三级预警。</div></div><div class="blk"><div class="h">资料2段7</div><div class="c">本段承接段6，展开介绍“跟踪督办件梯次转办三级预警”系统的运行情况。（1）阅读“将上级领导批示件、部门转办函、群众投诉件、巡查发现的违法行为以及急需为群众解决的重点难点问题，全部纳入基础信息管控平台跟踪督办”可知，该执法局将各种踪督办件全部纳入管控平台，可概括出要点：将跟踪督办件全部纳入平台。（2）“明确办理时限和办理标准，实行‘绿、黄、红’梯次转办三色预警，分别对应分队、中队、局业务科室的三级管辖权限……由网格责任分队负责办理……由辖区责任中队负责办理……由局相关业务科室直接办理”提示该执法局如何进行督办，即根据办理时限和标准，实行三色预警，分别交由网格分队、辖区中队、局业务科室进行办理，从中可摘抄、概括出要点：明确办理时限和标准，实行“绿、黄、红”梯次转办，分别由网格分队、辖区中队和局业务科室办理。</div><div class="bind">✓ 要点：将跟踪督办件全部纳入平台。 明确办理时限和标准，实行“绿、黄、红”梯次转办，分别由网格分队、辖区中队和局业务科室办理。</div></div><div class="blk"><div class="h">资料2段8</div><div class="c">本段承接上文，继续介绍“跟踪督办件梯次转办三级预警”系统的运行情况。阅读“将执法服务效果的评价、问责机制，同步贯穿跟踪督办始终”可知，跟踪督办件梯次转办三级预警系统将效果评价、问责机制贯穿始终，表述规范，可摘抄出要点：将执法服务评价、问责机制，同步贯穿跟踪督办始终。</div><div class="bind">✓ 要点：将执法服务评价、问责机制，同步贯穿跟踪督办始终。</div></div><div class="blk"><div class="h">资料2段6-8</div><div class="c topic">资料2段6-8话题梳理： 段6-8呈“总-分”关系，段6先总地指出B县综合行政执法局实行跟踪督办件梯次转办三级预警，段7-8再展开说明这一系统是将跟踪督办件全部纳入平台，实行“绿、黄、红”梯次交由三个部门办理，并贯穿效果评价、问责机制，提示这三段围绕核心话题“实施社会主体动态转换三色预警”展开，可作为总括句并前置，具体要点可按照资料的逻辑顺序进行罗列。</div><div class="bind">✓ 要点：做法：实行跟踪督办件梯次转办三级预警。将跟踪督办件全部纳入平台，明确办理时限和标准，实行“绿、黄、红”梯次转办，分别由网格分队、辖区中队和局业务科室办理，将执法服务评价、问责机制，同步贯穿跟踪督办始终。</div></div><div class="blk"><div class="h">资料2段9-10</div><div class="c">段9-10均介绍了无人机全域巡查的情况，可合并阅读。（1）阅读段9中的“利用无人机的高性能，只需2个小时就可高标准完成全域巡查”以及段10首句“将无人机无缝接入基础信息管控平台，实现‘无死角’巡勘”可知，B县综合行政执法局将高性能的无人机接入平台，在短时间内高标准完成全域巡查，可概括、摘抄出要点：无人机快速高标准全域巡查，将无人机无缝接入平台，实现“无死角”巡勘。（2）阅读段10中的“数据系统自动识别同一地点不同时间的变化情况……及早干预，指导提前，服务提前，警示提前”可知，无人机可以自动给识别变化情况，由此进行相应的干预活动，表述规范，可摘抄出要点：数据系统自动识别变化情况，及早干预，提前指导、服务、警示。（3）段10尾句“确认违法事实后，可直接作为证据，督促自查自纠，直至立案查处”提示确认违法实事后的追责行为，表述规范，可摘抄出要点：确认违法事实后，可作为证据，督促自查自纠，直至立案查处。</div><div class="c topic">段9-10话题梳理： 段9-10介绍了B县综合行政执法局将高性能的无人机接入平台，实现快速标准全域巡查，通过无人机的拍摄对比，自动识别出变化情况并进行干预，一旦确认违法后可以此为证据进行追责，提示这两段围绕核心话题“无人机快速高标准全域巡查”展开，可作为总括句并前置，具体要点可按照资料的逻辑顺序进行分层罗列。</div><div class="bind">✓ 要点：做法：无人机快速高标准全域巡查。将无人机无缝接入平台，实现“无死角”巡勘；数据系统自动识别变化情况，及早干预，提前指导、服务、警示；确认违法事实后，可作为证据，督促自查自纠，直至立案查处。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">整合要点，按照答题框架，组织答案
+【本题要求写“一份工作简报”，其一般格式为：报头（标题、编发单位、印发日期等）+正文。其中，结合本题，正文的作答思路为：开头（介绍B县综合行政执法局创建“执法基础信息管控平台”的背景）+主体部分（重点介绍“执法基础信息管控平台”的运行情况）+结尾（资料未涉及且字数有限，可省略），整理要点时，适当添加引导语、逻辑关联词，形成答案。】
+报头
+标题
+【标题的一般写法为：关于+主题词+的+文种，由题干可知主题为“执法基础信息管控平台运行情况”，因此可将标题写为：关于执法基础信息管控平台运行情况的工作简报】关于执法基础信息管控平台运行情况的工作简报
+编发单位
+【题干提示“B县综合行政执法局”创建了执法基础信息管控平台，故编发单位可写为：B县综合行政执法局】B县综合行政执法局
+印发日期
+【题目及资料中没有明确的印发日期，可直接写为：XXXX年XX月XX日】XXXX年XX月XX日
+正文
+开头
+【段3-4介绍了B县综合行政执法局为实现高质量执法，创建了“执法基础信息管控平台”，优化表述，添加引导语，可作为背景放在开头】B县综合行政执法局为实现高质量执法，实施智慧治理，创建“执法基础信息管控平台”，运行情况如下。
+主体
+【段5围绕“实施社会主体动态转换三色预警”展开，可合并写为一条】一、实施社会主体动态转换三色预警。将全县社会主体情况录入平台，根据违法频率和程度，将执法项分为着重、侧重、放心三档，分别执行红、黄、绿三色预警，按照重点、严格和正常标准执法检查，有效减少违法情况。
+【段6-8围绕“实行跟踪督办件梯次转办三级预警”展开，可合并写为一条】二、实行跟踪督办件梯次转办三级预警。将跟踪督办件全部纳入平台，明确办理时限和标准，实行“绿、黄、红”梯次转办，分别由网格分队、辖区中队和局业务科室办理，将执法服务评价、问责机制，同步贯穿跟踪督办始终。
+【段9-10围绕“无人机快速高标准全域巡查”展开，可合并写为一条】三、无人机快速高标准全域巡查。将无人机无缝接入平台，实现“无死角”巡勘；数据系统自动识别变化情况，及早干预，提前指导、服务、警示；确认违法事实后，可作为证据，督促自查自纠，直至立案查处。</div></div><div class="ref" data-m2r='{"41":0,"43":0,"65":0,"80":0,"37":0,"36":2,"39":2,"49":3,"45":3,"54":3,"44":3,"53":3,"56":3,"68":3,"59":4,"77":4,"66":4,"71":4,"75":4,"74":4,"84":5,"89":5,"91":5,"92":5,"79":5,"85":5,"90":5,"38":0,"40":2,"42":0,"46":3,"47":3,"48":3,"50":3,"51":3,"52":3,"55":3,"57":3,"58":3,"60":4,"61":4,"62":4,"63":4,"64":4,"67":4,"69":3,"70":3,"72":4,"73":4,"76":4,"78":4,"81":0,"82":0,"83":0,"86":5,"87":5,"88":5}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item" data-mk="41,43,65,80,37,38,42,81,82,83">关于执法基础信息管控平台运行情况的工作简报</div><div class="item" data-mk="37">B县综合行政执法局 XXXX年XX月XX日</div><div class="item" data-mk="41,37,43,65,80,36,39,40">B县综合行政执法局为实现高质量执法，实施智慧治理，创建“执法基础信息管控平台”，运行情况如下。</div><div class="item" data-mk="49,45,54,44,43,53,56,68,46,47,48,50,51,52,55,57,58,69,70">一、实施社会主体动态转换三色预警。将全县社会主体情况录入平台，根据违法频率和程度，将执法项分为着重、侧重、放心三档，分别执行红、黄、绿三色预警，按照重点、严格和正常标准执法检查，有效减少违法情况。</div><div class="item" data-mk="59,77,66,68,71,75,65,74,60,61,62,63,64,67,72,73,76,78">二、实行跟踪督办件梯次转办三级预警。将跟踪督办件全部纳入平台，明确办理时限和标准，实行“绿、黄、红”梯次转办，分别由网格分队、辖区中队和局业务科室办理，将执法服务评价、问责机制，同步贯穿跟踪督办始终。</div><div class="item" data-mk="80,84,89,91,92,79,85,90,86,87,88">三、无人机快速高标准全域巡查。将无人机无缝接入平台，实现“无死角”巡勘；数据系统自动识别变化情况，及早干预，提前指导、服务、警示；确认违法事实后，可作为证据，督促自查自纠，直至立案查处。</div><div class="item" data-mk="59,49,41,43,65,80,37,68">参考答案说明：（1）格式方面，本参考答案写到了“报头”“正文”两部分，“报头”包括标题、编发单位、印发日期。（2）正文部分，一方面从内容上来看，围绕“执法基础信息管控平台运行情况”这一主题，本参考答案的开头介绍执法基础信息管控平台运行情况的背景；主体部分从“实施社会主体动态转换三色预警”“实行跟踪督办件梯次转办三级预警”“无人机快速高标准全域巡查”三个方面具体介绍。另一方面，形式上，本参考答案做到了分段、分条撰写，整体上条理较为清晰。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">资料中出现的规范词
+高质量：通常指的是产品或工作在多个方面均达到优秀或卓越的标准。表述规范，可直接摘抄，注意积累。
+预警：指在灾害或灾难以及其他需要提防的危险发生之前，根据以往的总结的规律或观测得到的可能性前兆，向相关部门发出紧急信号，报告危险情况，以避免危害在不知情或准备不足的情况下发生，从而最大程度的减轻危害所造成的损失的行为。表述规范，可直接摘抄，注意积累。
+社会主体：指处在一定社会关系中从事实践活动的人及其群体。表述规范，可直接摘抄，注意积累。
+问责机制：指问责主体对其管辖范围内各级组织和成员承担职责和义务的履行情况，实施并要求其承担否定性后果的一种责任追究制度。表述规范，可直接摘抄，注意积累。
+自查自纠：指个人或组织自行检查自身存在的问题并加以纠正。表述规范，可直接摘抄，注意积累。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">25 分</span><span class="tag wd">≤500 字</span><span class="tag kp">提出对策类</span></div><p class="stem">请根据“给定资料3”，指出市税务稽查队伍存在的问题，并提出加强队伍建设的建议。（25分）</p><p class="req">要求：（1）梳理完所有问题后再提出建议；
+（2）问题梳理全面、准确，建议具体可行，有针对性；
+（3）不超过500字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型，题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>出现“根据”一词，提示本题只需阅读资料3</li><li>“指出……问题，并提出……建议”提示本题为单一题，需围绕“市税务稽查队伍”这一主题作答“问题”和“建议”两个要素。作答“问题”时，可重点关注资料中与主题有关的负面表述，从中提炼答案要点；作答“建议”，即“对策”时，一方面可重点关注资料中标志性动词所引导的句子，从中提炼答案要点；另一方面也可考虑通过问题分析推导出对策</li><li>撰写答案时，需注意将“问题”和“建议”分开作答</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">资料3段1</div><div class="c">本段主要介绍N市税务局开展明察暗访专项行动，属于背景性内容，略读即可。</div></div><div class="blk"><div class="h">资料3段2-5</div><div class="c">段2-5主要围绕稽查员无视何会计的请求展开，可合并阅读。（1）段2中的“如果在昨天截止日前你们打个电话提醒一下多好啊”“能不能通融通融不罚款呀？罚款对企业信誉的影响非常不好哦”和段3中的“我们没有义务提前通知你”“既然被查出来了，你就得认罚”，提示面对企业会计提出的没有电话提醒的疑问，以及免于处罚的通融请求，稽查员均没有给予详细的解释和回应，可概括得到要点：面对企业的疑问和诉求，不予解释、回应。（2）段4中的“执意要找领导”和段5中的“领导也很忙，哪有空见你”提示稽查员拒绝了企业会计要找领导申诉的要求，可概括得到要点：拒绝企业申诉要求。（3）通过段3中的“税务稽查员略带抱怨地说”和段5中的“税务稽查员说完转头就走”，可知稽查员在与企业会计的沟通过程中，态度较为恶劣，可概括得到要点：沟通态度恶劣。注意：段2中税务稽查部门没有打电话提醒企业的问题，属于税务制度层面的内容，不属于税务稽查队伍存在的问题，因此不作为答案。</div><div class="c topic">段2-5话题梳理： 段2-5主要介绍了税务稽查人员在与企业人员沟通时，态度比较恶劣的问题，可将概括性较强的“沟通态度恶劣”作为总括词前置，具体内容可按照资料的描述进行整理罗列。</div><div class="bind">✓ 要点：沟通态度恶劣。面对企业的疑问和诉求，不予解释、回应，并拒绝申诉要求。</div></div><div class="blk"><div class="h">资料3段6-11</div><div class="c">段6-11主要围绕稽查员无法答复来电企业的咨询展开，可合并阅读。（1）段6中的“请问是不是呀？这个收入限额是多少呢？我需要缴纳增值税吗？如不缴，你们不会来稽查我吧”，段7中的“我去找老同志们问问，你等会儿再打过来”，段9中的“但税务条款太多，我们也不可能条条都记得”“你只要上网查一查不就全都知道了嘛”和段10中的“你这算什么回答啊”，提示稽查员在面对企业关于增值税业务方面的电话咨询时，业务能力严重欠缺，没有掌握相关的专业知识，不能准确回答企业咨询的业务问题，可概括得到要点：业务能力欠缺，知识储备不足，不能准确解答业务问题。（2）段10中的“有没有帮我去问呀”和段11中的“但大家工作太忙没空回答，抽空回答的又觉得情况比较复杂，不好随便说，否则容易被追责”“要么你打其他电话问问”，提示稽查员将问题往其他同事和咨询者身上推，反映出稽查队伍没有落实首问责任制的问题，可概括得到要点：未落实首问责任制。注意：段11中的“否则容易被追责”属于税务稽查机制层面的问题，不属于稽查队伍存在的问题，因此不作为答案。</div><div class="c topic">段6-11话题梳理： 段6-11主要介绍了税务稽查人员在处理企业电话咨询时，业务能力不足的问题，可将概括性较强的“业务能力欠缺”作为总括词前置，具体内容可按照资料的描述进行罗列。</div><div class="bind">✓ 要点：业务能力欠缺。知识储备不足，不能准确解答业务问题，未落实首问责任制。</div></div><div class="blk"><div class="h">资料3段12-16</div><div class="c">段12-16主要围绕稽查人员工作时间网购展开，可合并阅读。段12中的“标示着稽查局工作人员的在岗情况和去向”“一间办公室传出声音‘这件衣服超赞’，段13中的“你看看这件呢，流行色、爆款”，段14中的“小刘你过来，帮我们参谋一下哪件好看”和段16中的“拿着手机选看衣服的两位工作人员抬起头”，提示稽查人员在工作时间且在岗在位情况下，多人闲聊、看手机和网购，可概括得到要点：工作时间集体闲聊、看手机、网购。</div><div class="bind">✓ 要点：工作时间集体闲聊、看手机、网购。</div></div><div class="blk"><div class="h">资料3段17-20</div><div class="c">段17-20主要围绕稽查员未请假早退展开，可合并阅读。段18中的“他今天有事先走了，不回来了”，段19中的“外面不是写的他‘在岗’吗”和段20中的“人家也没请假，这不还有二十分钟就下班了吗”，提示稽查员在未请假的情况下脱离岗位且早退，可概括得到要点：未请假脱岗、早退。注意：段17中的“上次我补了材料过来，但后来一直没动静”等内容，无法判断出稽查人员是否存在问题，因此不作为答案。</div><div class="bind">✓ 要点：未请假脱岗、早退。</div></div><div class="blk"><div class="h">资料3段12-20</div><div class="c topic">段12-20主要介绍了税务稽查人员在工作时间，存在集体网购、聊天和脱岗早退等违反工作纪律的问题，可提炼出“不遵守工作纪律”作为总括词前置，具体内容可按照资料的描述进行罗列。</div><div class="bind">✓ 要点：不遵守工作纪律。工作时间集体闲聊、看手机、网购，未请假脱岗、早退。</div></div><div class="blk"><div class="h">资料3段21-22</div><div class="c">段21-22主要围绕稽查员违规参与稽查企业宴请展开，可合并阅读。段21中的“丰枢农资公司食堂灯火通明，觥筹交错”“我作为东道主，欢迎你们深入到我们公司稽查税务问题……请多关照”和段22中的“两位着税务制服者一饮而尽，‘放心，放心’”，提示稽查人员违规参与稽查对象的宴请，同时“放心、放心”也侧面反映出稽查人员会给其一定照顾，影响了执法工作的公平公正，可概括得到要点：违规接受稽查对象宴请，严重影响稽查执法工作公正执行。</div><div class="c topic">段21-22话题梳理： 段21-22主要介绍了税务稽查人员存在违规参加稽查对象宴请，影响执法公平等廉洁自律方面的问题，可提炼出“廉洁自律意识弱”作为总括词前置，具体内容可按照资料的描述进行罗列。</div><div class="bind">✓ 要点：廉洁自律意识弱。违规接受稽查对象宴请，严重影响稽查执法工作公正执行。</div></div><div class="blk"><div class="h">资料3段23</div><div class="c">段23主要介绍税务局局长召开专题会议，要查处整治稽查人员存在的问题，未出现具体建议，略读即可。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">整合问题，推导对策，形成答案框架
+【梳理资料发现，要点主要围绕“沟通态度恶劣”“业务能力欠缺”“不遵守工作纪律”和“廉洁自律意识弱”四个方面的问题展开，属于“并列”逻辑，可依据资料顺序分条撰写。同时需要根据问题分析推导出相应的建议。】
+问题
+【段2-5介绍了“沟通态度恶劣”方面的问题，可单独写为一条】1.沟通态度恶劣。面对企业的疑问和诉求，不予解释、回应，并拒绝申诉要求。
+【段6-11介绍了“业务能力欠缺”方面的问题，可单独写为一条】2.业务能力欠缺。知识储备不足，不能准确解答业务问题，未落实首问责任制。
+【段12-20介绍了“不遵守工作纪律”方面的问题，可单独写为一条】3.不遵守工作纪律。工作时间集体闲聊、看手机、网购，未请假脱岗、早退。
+【段21-22介绍了“廉洁自律意识弱”方面的问题，可单独写为一条】4.廉洁自律意识弱。违规接受稽查对象宴请，严重影响稽查执法工作公正执行。
+建议
+【针对“沟通态度恶劣”的问题，可考虑从“优化工作沟通方式”的角度提出建议。具体来说，解决“面对企业的疑问和诉求，不予解释、回应，并拒绝申诉要求”等问题，一方面可以考虑明确稽查人员的工作要求，稽查员在与来访者沟通中需要充分释法明理，对来访者讲清执法的理由、依据，提高稽查执法的公信力；另一方面可以考虑建立办结事项的评价制度，同时畅通投诉渠道，以此倒逼稽查工作人员改善沟通态度】1.优化工作沟通方式。明确工作要求，在沟通中要充分释法明理，说明稽查执法的理由、依据，提高稽查执法的公信力；建立办结事项评价制度，畅通投诉渠道，倒逼工作人员改变沟通态度。
+【针对“业务能力欠缺”的问题，可考虑从“加强业务能力培训”的角度提出建议。具体来说，解决“知识储备不足，不能准确解答业务问题”这一问题，可以考虑建立老带新传帮带机制，定期组织新人稽查员进行业务能力培训和考核，并制定奖惩制度，确保工作人员精通业务；解决“未落实首问责任制”这一问题，可以考虑落实首问责任制，避免工作中出现推诿情况】2.加强业务能力培训。建立老带新传帮带机制，定期组织新人业务能力培训和考试，并根据成绩制定奖惩制度，确保工作人员业务精通；严格落实首问责任制，避免工作中出现推诿情况。
+【针对“不遵守工作纪律”的问题，可考虑从“严格在岗工作纪律”的角度提出建议。具体来说，解决“工作时间集体闲聊、看手机、网购”这一问题，可以考虑强调税务稽查工作纪律、岗位职责，明确要求稽查人员在工作时间不得扎堆闲聊、非必要不使用手机；针对“未请假脱岗、早退”这一问题，可以考虑稽查队伍严格执行考勤制度，离岗必须申报，不得迟到早退；同时，对违纪者要严肃批评教育，屡教不改者给予记过等处分】3.严格在岗工作纪律。强调工作纪律、岗位职责，明确要求工作时间不得扎堆闲聊、非必要不使用手机；严格执行考勤制度，离岗必申报，不得迟到早退；对违纪者严肃批评教育，屡教不改者给予记过处分。
+【针对“廉洁自律意识弱”的问题，可考虑从“坚决落实廉洁规定”的角度提出建议。具体来说，解决“违规接受稽查对象宴请，严重影响稽查执法工作公正执行”等问题，一是从思想方面可以考虑加强廉洁教育，提升稽查人员思想认识；二是从监管方面可以考虑纪检监察部门切实履职，加强对稽查队伍的日常监督；三是从法律方面可以考虑对违纪者按规定从严处理，如果造成税款流失损失，要移送司法机关追究其刑事责任】4.坚决落实廉洁规定。在内部加强廉洁教育，提升稽查人员思想认识；纪检监察部门切实履职，加强日常监督；对违反者按规定从严处理；造成税款流失损失者，移送司法机关追究其刑事责任。</div></div><div class="ref" data-m2r='{"119":6,"121":6,"93":6,"94":6,"95":6,"96":6,"97":6,"98":6,"99":6,"100":6,"101":6,"102":6,"103":6,"104":6,"105":6,"106":6,"107":6,"108":6,"109":6,"110":6,"111":6,"112":6,"113":6,"114":6,"115":6,"116":6,"117":6,"118":6,"120":6,"122":6,"123":6,"124":6,"125":6,"126":6,"127":6,"128":6,"129":6,"130":6,"131":6}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item nomk">问题：</div><div class="item nomk">1.沟通态度恶劣。面对企业的疑问和诉求，不予解释、回应，并拒绝申诉要求。</div><div class="item nomk">2.业务能力欠缺。知识储备不足，不能准确解答业务问题，未落实首问责任制。</div><div class="item nomk">3.不遵守工作纪律。工作时间集体闲聊、看手机、网购，未请假脱岗、早退。</div><div class="item nomk">4.廉洁自律意识弱。违规接受稽查对象宴请，严重影响稽查执法工作公正执行。</div><div class="item nomk">建议：</div><div class="item" data-mk="119,121,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,120,122,123,124,125,126,127,128,129,130,131">1.优化工作沟通方式。明确工作要求，在沟通中要充分释法明理，说明稽查执法的理由、依据，提高稽查执法的公信力；建立办结事项评价制度，畅通投诉渠道，倒逼工作人员改变沟通态度。</div><div class="item" data-mk="119,121">2.加强业务能力培训。建立老带新传帮带机制，定期组织新人业务能力培训和考试，并根据成绩制定奖惩制度，确保工作人员业务精通；严格落实首问责任制，避免工作中出现推诿情况。</div><div class="item nomk">3.严格在岗工作纪律。强调工作纪律、岗位职责，明确要求工作时间不得扎堆闲聊、非必要不使用手机；严格执行考勤制度，离岗必申报，不得迟到早退；对违纪者严肃批评教育，屡教不改者给予记过处分。</div><div class="item nomk">4.坚决落实廉洁规定。在内部加强廉洁教育，提升稽查人员思想认识；纪检监察部门切实履职，加强日常监督；对违反者按规定从严处理；造成税款流失损失者，移送司法机关追究其刑事责任。</div><div class="item nomk">参考答案说明：本参考答案整体分为“问题”和“建议”两个部分。其中“问题”部分从“沟通态度恶劣”“业务能力欠缺”“不遵守工作纪律”和“廉洁自律意识弱”这四个方面展开；“建议”部分从“优化工作沟通方式”“加强业务能力培训”“严格在岗工作纪律”和“坚决落实廉洁规定”这四个方面展开。各条答案要点之间在内容上相互并列，没有交叉。</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">一、在资料中概括出的规范词
+1.业务能力：是指个人或组织在解决、处理本专业或本领域内业务问题时所展现出的能力。‌它包括实现业务目标所需的知识、技能及行为能力的总和，是判断个人或组织是否称职或能否有效达成业务目标的关键。比如：资料中出现“我去找老同志们问问，你等会儿再打过来”“但税务条款太多，我们也不可能条条都记得”等，提示稽查员在面对企业的电话咨询时，业务能力严重欠缺。此类情况可以考虑用此词或类似的词进行概括。‌
+2.脱岗：在工作时间内擅自离开所在的岗位、暂时脱离工作岗位。本题指前者。比如：资料中出现“你明天来吧，他今天有事先走了，不回来了”“外面不是写的他‘在岗’吗”“是在岗啊，人家也没请假，这不还有二十分钟就下班了吗”，提示稽查工作人员在工作时间擅自离开工作岗位。此类情况可以考虑用此词或类似的词进行概括。
+3.早退：是指在工作、学习或参加会议时，未到规定时间提前离开的行为。比如：资料中出现“你明天来吧，他今天有事先走了，不回来了”“人家也没请假，这不还有二十分钟就下班了吗”，提示稽查工作人员未到规定下班时间，提前离开工作岗位。此类情况可以考虑用此词或类似的词进行概括。
+4.首问责任制：是指服务对象到行政机关或向社会提供服务项目的部门咨询或办理相关事项时，首位接待或受理的工作人员要认真解答、负责办理或引荐到相关部门的制度。比如：资料中出现“我去找老同志们问问”“大家工作太忙没空回答，抽空回答的又觉得情况比较复杂，不好随便说”“要么你打其他电话问问”等，提示作为首个接受咨询的稽查人员，没有认真回复解决提问者的业务问题，即没有履行首问责任制。此类情况可以考虑用此词或类似的词进行概括。
+二、根据资料，推导拓展出的规范词
+传帮带：是指前辈对晚辈/老手对新手等在工作或（和）学习中对文化知识、技术技能、经验经历等给予亲自传授的通俗说法。比如：资料中出现“我是今年才进稽查局的，我去找老同志们问问”，提示新入职的工作人员知识储备不足，不能准确解答业务问题，此时可以考虑通过老带新传帮带的机制，让老员工对新手进行经验传授和指导。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">40 分</span><span class="tag kp">文章写作题</span></div><p class="stem">给定资料4中提到“法治建设既要抓末端、治已病，更要抓前端、治未病”，请结合对这句话的理解，联系实际，自拟题目，写一篇文章。（40分）</p><p class="req">要求：（1）观点明确，认识深刻；
+（2）结构完整，思路清晰；
+（3）语言流畅，字数800-1000字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾划题目的关键信息，去找出文章的主题及其写作角度（即：文章写作的主要话题及切入点）以及材料范围，写作要求等。</div><ul class="key"><li>本题要优先重点阅读资料4，为确保全面，同时要兼顾其他材料</li><li>①通过勾画关键词可知，本题的主题是“法治建设”，要注意紧扣这一主题来写文章，不能偏题。②结合题干给定句子，“治已病”是指对已发生的疾病进行治疗,“治未病”则强调提早干预潜在的问题或隐患，法治建设更强调后者，由此可初步判断可能的写作角度：第一，法治建设“治未病”的内涵；第二，为什么要“治未病”，可以从正面分析重要性、意义等，还可以从反面分析“治未病”的必要性等；第三，在法治建设过程中“治未病”的具体措施等方面。以上行文思路，具体还要结合资料来进一步确证</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 5</div><div class="c">本段为题干给定句子所在的段落。（1）“要推动更多法治力量向引导和疏导端用力，完善预防性法律制度”“完善社会矛盾纠纷多元预防调处化解综合机制”提示，“治未病”的重点在于通过完善预防性法律制度和纠纷调处机制，提前疏导潜在的社会矛盾，由此可提炼出观点：建立预防性法律制度和处置机制，加强引导和疏导。（2）“重视基层基础工作，充分发挥共建共治共享在基层的作用，推进市域社会治理现代化，促进社会和谐稳定”提示构建共建共治共享的格局，助力和谐社会，由此可提炼出观点：构建共治共建共享的格局，促进社会和谐。</div><div class="bind">✓ 要点：建立预防性法律制度和处置机制，加强引导和疏导</div></div><div class="blk"><div class="h">段 2</div><div class="c">段1-2介绍了C市劳动纠纷一站式多元化解联处中心调节劳动纠纷的案例，可合并阅读。段1中的“立即启动多元化解联动处置机制……人民法院等部门迅速介入”以及段2中的“C市劳动纠纷一站式多元化解联处中心”“通过集成建立调处平台，衔接融合调处资源，实现闭环处置纠纷案件”提示，通过启动纠纷化解处置机制，执法部门等能够先期介入纠纷事件，进行有效干预，避免潜在矛盾激化。由此可提炼出观点：对潜在社会矛盾和问题的提前介入与有效干预。</div><div class="bind">✓ 要点：对潜在社会矛盾和问题的提前介入与有效干预</div></div><div class="blk"><div class="h">段 4</div><div class="c">段3-4介绍了借助公民规约解决基层纠纷的案例。阅读段3中的“让他们自己管理自己”“社区‘两委’把社区23支文体队伍召集起来进行民主选举，成立T社区文体协会”“制定《T社区广场公约》，由文体协会的成员们加强日常监督管理和劝导”“文体协会还时常邀请有关部门执法人员办讲座”以及段4中的“新任村支书何书记下定决心要修订村规民约”“何书记慢慢做工作”可知，充分调动基层党组织、基层政府、群众等不同主体的力量，参与到基层治理中来，能够帮助提前化解矛盾纠纷，促进基层和谐，由此可提炼出观点：调动和发挥不同主体在基层治理中的作用。</div><div class="bind">✓ 要点：调动和发挥不同主体在基层治理中的作用</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">根据第一步的审题、第二步的阅读，确立文章框架
+标题：【突出“法治建设”这一主题】法治固本防未病，前瞻布局筑安宁
+开头：结合资料4等，可考虑分析法治的重要性，“治已病”与“治未病”的关系，“治未病”的意义等，引出文章观点。
+观点1：【资料4段1-2以及段5主要介绍了建立预防性法律制度和处置机制，及时遏制潜在矛盾发生，这正是“治未病”理念的核心体现，可优化语言、整理得出观点1】建立预防性法律制度和处置机制，对潜在社会矛盾和问题的提前介入与有效干预，是“治未病”理念在法治建设中的核心体现。【具体论述层次可考虑：（1）如何建立预防性法律制度和处置机制；（2）建立预防性法律制度和处置机制的意义等。】
+观点2：【资料4段3-4以及段5主要介绍了构建共治共建共享的格局，各主体共同参与基层社会治理，为实践“治未病”理念铺平道路，可优化语言、整理得出观点1】构建共治共建共享的格局，调动和发挥不同主体在基层治理中的作用，是“治未病”理念在社会治理中的实践路径。【具体论述层次可考虑：（1）共治共建共享的格局的内涵；（2）如何调动不同主体参与基层治理；（3）基层自治的意义等。】
+观点3：【资料1-3主要介绍了优化执法工作方式，开展服务型行政执法工作，将“治未病”理念应用到行政执法领域，可优化语言、整理得出观点3】优化执法工作方式，开展高水平、全方位、数字化的服务型行政执法工作，是“治未病”理念在行政执法领域的具体运用。【具体论述层次可考虑：（1）开展服务型执法工作的意义；（2）科技赋能行政执法的表现；（3）如何提升执法队伍的水平等。】
+结尾：回扣主题，适当总结、升华。</div></div><div class="ref" data-m2r='{"132":1,"139":1,"142":3,"134":3,"140":3,"144":3,"135":3,"143":3,"137":4,"138":4,"141":3,"145":3,"146":3,"147":3,"148":3,"149":3,"150":3,"151":3,"152":3,"153":3,"133":1,"136":3}'><h4 style="margin:0 0 8px;font-size:14.5px">参考答案</h4><p class="hint">点任意一条答案 → 左边材料自动滚到它的来源句；点材料里的黄色划线 → 右边对应答案会闪一下。</p><div class="item nomk">法治固本防未病，前瞻布局筑安宁</div><div class="item" data-mk="132,139,133">古人云：“上医治未病，中医治欲病，下医治已病。”不仅揭示了医疗之道的精髓，更为法治建设提供了深刻的启示。法治，作为社会和谐的基石，既要严惩违法行为，即“治已病”，更要注重预防与疏导，即“治未病”。两者相辅相成，共同构筑起法治的坚固防线。</div><div class="item" data-mk="132">“治已病”，是对违法行为的严厉惩治，是法治威严的体现。它如同法治之剑，锋芒毕露，对违法犯罪行为形成强大的震慑力。然而，仅凭“治已病”难以根治复杂多变的社会问题，甚至可能因处理不当而加剧矛盾。因此，法治建设不能止步于“治已病”，更需向前迈进，探索“治未病”之道。</div><div class="item" data-mk="142,134,140,144,132,135,143,141,145,146,147,148,149,150,151,152,153,136">建立预防性法律制度和处置机制，对潜在社会矛盾和问题的提前介入与有效干预，是“治未病”理念在法治建设中的核心体现。通过预防性制度，可以预防轻微矛盾升级为严重违法犯罪，从而降低社会成本，提升法治效率，并增强公众对法治的信任。C市劳动纠纷一站式多元化解联处中心，通过整合调处资源，搭建高效调处平台，实现了劳动纠纷的闭环处理。这种创新机制不仅有效预防和化解了劳动纠纷，还避免了纠纷进一步恶化，展现了法治建设中提前干预、源头治理的巨大价值。</div><div class="item" data-mk="135,137,138">构建共治共建共享的格局，调动和发挥不同主体在基层治理中的作用，是“治未病”理念在社会治理中的实践路径。基层既是产生利益冲突和社会矛盾的“源头”，也是协调利益关系和疏导社会矛盾的“茬口”。将治理“关口前移”，能不断提升基层治理水平，提高群众满意度和幸福感。在实践过程中，要坚持和发展新时代“枫桥经验”，充分调动和发挥群众在社会治理中的主体作用，配合政府、社会组织在基层的工作，形成合力，防患于未然。</div><div class="item nomk">优化执法工作方式，开展高水平、全方位、数字化的服务型行政执法工作，是“治未病”理念在行政执法领域的具体运用。这不仅要求执法者自身能力过硬，具备服务意识，始终牢记为人民服务的宗旨，实现执法与服务的深度融合，防范、化解潜在的风险和矛盾，更需借助全方位、数字化的手段，更好地提升“治未病”的效果。部分地方通过建立执法基础信息管控平台，灵活运用无人机等现代科技工具，对违法行为进行监控、早期预警与精准干预，将问题解决于萌芽之时。这种“治未病”式的执法方式，为法治社会建设注入新的活力。</div><div class="item" data-mk="132">法治建设“治已病”与“治未病”的结合，构建了一个公正、和谐、有序的社会环境，让法治的阳光普照大地，照亮前行的道路。</div><div class="item nomk">文章分析</div><div class="item nomk">法治固本防未病，前瞻布局筑安宁</div><div class="item nomk">【标题的优点：首先，标题中含有主题词，使文章主题更突出、清晰。其次，形式上采用对称式结构，使标题更加完整、饱满。】</div><div class="item" data-mk="132,139">（1）古人云：“上医治未病，中医治欲病，下医治已病。”不仅揭示了医疗之道的精髓，更为法治建设提供了深刻的启示。（2）法治，作为社会和谐的基石，既要严惩违法行为，即“治已病”，更要注重预防与疏导，即“治未病”。两者相辅相成，共同构筑起法治的坚固防线。</div><div class="item" data-mk="132">【开头的优点：★内容方面。范文的开头是紧扣题目给定的“法治建设”这一主题展开的。首先，开头点出主题，做到了主题明确。其次，对“法治建设”这一主题进行了分析阐述，指出了：（1）“治未病”理念的重要性；（2）“治已病”“治未病”二者的关系，并引出主题。★文字表达方面。使用了“更”等连接词，使语言表达有逻辑性；长短句配合使用，使语言表达有节奏感。】</div><div class="item" data-mk="132">“治已病”，是对违法行为的严厉惩治，是法治威严的体现。它如同法治之剑，锋芒毕露，对违法犯罪行为形成强大的震慑力。然而，仅凭“治已病”难以根治复杂多变的社会问题，甚至可能因处理不当而加剧矛盾。因此，法治建设不能止步于“治已病”，更需向前迈进，探索“治未病”之道。</div><div class="item" data-mk="132">【过渡段的优点：范文过渡段分析了“治已病”的内涵、局限性等，注意过渡段末尾的“法治建设不能止步于‘治已病’，更需向前迈进，探索‘治未病’之道”是用来引起下文的过渡句。】</div><div class="item" data-mk="142,134,140,144,132,135,143">建立预防性法律制度和处置机制，对潜在社会矛盾和问题的提前介入与有效干预，是“治未病”理念在法治建设中的核心体现。（1）通过预防性制度，可以预防轻微矛盾升级为严重违法犯罪，从而降低社会成本，提升法治效率，并增强公众对法治的信任。（2）C市劳动纠纷一站式多元化解联处中心，通过整合调处资源，搭建高效调处平台，实现了劳动纠纷的闭环处理。这种创新机制不仅有效预防和化解了劳动纠纷，还避免了纠纷进一步恶化，展现了法治建设中提前干预、源头治理的巨大价值。</div><div class="item" data-mk="142,134,140,132,135">【论述段1的优点：★观点句：范文的观点句是紧扣“法治建设”这一文章主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出主要从“建立预防性法律制度和处置机制”的角度展开论述。★论述内容：（1）建立预防性制度的好处；（2）介绍C市劳动纠纷一站式多元化解联处中心。注意：以上几个方面的内容都是紧扣“建立预防性法律制度和处置机制，对潜在社会矛盾和问题的提前介入与有效干预，是‘治未病’理念在法治建设中的核心体现”这个观点句进行分析论述的，论述的针对性强，内容层次丰富。在论述方法上主要采用了讲道理与举例子相结合的方式，论述清晰透彻。】</div><div class="item" data-mk="135,137,138">构建共治共建共享的格局，调动和发挥不同主体在基层治理中的作用，是“治未病”理念在社会治理中的实践路径。（1）基层既是产生利益冲突和社会矛盾的“源头”，也是协调利益关系和疏导社会矛盾的“茬口”。将治理“关口前移”，能不断提升基层治理水平，提高群众满意度和幸福感。（2）在实践过程中，要坚持和发展新时代“枫桥经验”，充分调动和发挥群众在社会治理中的主体作用，配合政府、社会组织在基层的工作，形成合力，防患于未然。</div><div class="item" data-mk="132,137,138">【论述段2的优点：★观点句：范文的观点句是紧扣“法治建设”这一文章主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出主要从“构建共治共建共享的格局”的角度展开论述。★论述内容：（1）基层治理隐患于未然的意义；（2）调动不同主体参与基层治理的措施。注意：以上几个方面的内容都是紧扣“构建共治共建共享的格局，调动和发挥不同主体在基层治理中的作用，是‘治未病’理念在社会治理中的实践路径”这个观点句进行分析论述的，论述的针对性强，内容层次丰富。在论述方法上主要采用了讲道理的方式，论述内容清晰深刻。】</div><div class="item nomk">优化执法工作方式，开展高水平、全方位、数字化的服务型行政执法工作，是“治未病”理念在行政执法领域的具体运用。（1）这不仅要求执法者自身能力过硬，具备服务意识，始终牢记为人民服务的宗旨，实现执法与服务的深度融合，防范、化解潜在的风险和矛盾，更需借助全方位、数字化的手段，更好地提升“治未病”的效果。（2）部分地方通过建立执法基础信息管控平台，灵活运用无人机等现代科技工具，对违法行为进行监控、早期预警与精准干预，将问题解决于萌芽之时。这种“治未病”式的执法方式，为法治社会建设注入新的活力。</div><div class="item" data-mk="132">【论述段3的优点：★观点句：范文的观点句是紧扣“法治建设”这一文章主题提出的。形式上，它在段首处直接写出，位置突出，容易发现。内容上，关键词突出，内容要点明确，可以明显看出主要从“开展服务型行政执法工作”的角度展开论述。★论述内容：（1）开展服务性执法工作的措施；（2）介绍执法基础信息管控平台。注意：以上几个方面的内容都是紧扣“优化执法工作方式，开展高水平、全方位、数字化的服务型行政执法工作，是‘治未病’理念在行政执法领域的具体运用”这个观点句进行分析论述的，论述的针对性强，内容层次丰富。在论述方法上主要采用了讲道理与举例子相结合的方式，论述清晰透彻。】</div><div class="item" data-mk="134,132,137,138,140">【论述段之间的关系：★内容的内在逻辑：论述段1先写了“建立预防性法律制度和处置机制”，是“治未病”理念在法治建设中的核心体现；论述段2再写了“构建共治共建共享的格局”，是“治未病”理念在社会治理中的实践路径；论述段3接着写了“开展服务型行政执法工作”，是“治未病”理念在行政执法领域的具体运用。三个论述段层层递进，逻辑清晰。】</div><div class="item" data-mk="132">法治建设“治已病”与“治未病”的结合，构建了一个公正、和谐、有序的社会环境，让法治的阳光普照大地，照亮前行的道路。</div><div class="item" data-mk="132">【结尾的优点：范文的结尾回扣了“法治建设”这个主题，并且进行了总结提升。】</div></div><div class="step s5"><h4><span class="n">+</span>资料规范词 / 知识拓展</h4><div class="body">本题的主题为“法治建设”，可进行拓展的内容有：
+一、与主题相关的名言金句
+1.要加强和创新基层社会治理，使每个社会细胞都健康活跃，将矛盾纠纷化解在基层，将和谐稳定创建在基层。——习近平
+2.善于运用法治思维和法治方式解决涉及群众切身利益的矛盾和问题。——习近平
+3.消未起之患、治未病之疾，医之于无事之前。——孙思邈·《千金要方》
+4.且夫国无常治，又无常乱，法令行则国治，法令弛则国乱；法无常行，亦无常弛，君敬法则法行，君慢法则法弛。——东汉王符·《潜夫论·述赦》
+二、与主题相关的典型事例
+1.洋县市场监管局：轻微违法容错纠错不予处罚
+2023年8月，汉中洋县市场监管局执法人员发现，辖区刘某在未办理《营业执照》《食品经营许可证》的情况下，经营两台现磨咖啡智能售卖机，咖啡豆等原料从四川某食品经营企业采购，水源来自附近某单位直饮水机，截至调查时销售金额700余元。鉴于当事人违法行为轻微，并未造成危害后果，市场监管部门没有采取查封扣押等强制措施，而是对新业态容错纠错，下发了《责令改正通知书》，积极落实服务型执法要求，现场指导协助当事人办理合法证照，保障了公众食品安全，维护了正常的市场秩序，实现多赢局面。
+2.二密法庭：大山巡回法庭绽放法治之花
+吉林省通化县地处长白山南麓，村落分散，群众出行不便。为解决辖区偏远村屯交通困难、弱势群体维权能力不强等问题，二密法庭按照“窗口前移、服务延伸”工作要求，动员村干、网格员、能人等开展普法教育和法治宣传活动，对苗头性问题研判并及时制止，同时，打造巡回法庭，实现立案到乡镇、开庭在村屯、调解进家门，坚持以案释法、疏导矛盾，将庭审变成生动的法治课。二密法庭用热情和汗水为基层群众筑起司法服务网，为司法服务乡村治理能力现代化找准落脚点。</div></div></div></div>
+</div>
+<div id="nav">
+  <button type="button" id="prev">← 上一题</button>
+  <button type="button" id="next">下一题 →</button>
+</div>
+<script>
+(function(){
+  var fatal = function(m){
+    var d = document.getElementById('fatal');
+    if(d){ d.hidden = false; d.textContent = '页面脚本出错：' + m; }
+  };
+  window.onerror = function(m){ fatal(m); };
+
+  // ---------- 题号切换 ----------
+  var cur = 0;
+  var qbtns = Array.prototype.slice.call(document.querySelectorAll('#qs button'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.qwrap'));
+
+  function show(i){
+    if(i < 0 || i >= cards.length) return;
+    cur = i;
+    cards.forEach(function(c, k){ c.hidden = (k !== i); });
+    qbtns.forEach(function(b, k){ b.classList.toggle('on', k === i); });
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+    if(prev) prev.disabled = (i === 0);
+    if(next) next.disabled = (i === cards.length - 1);
+    try{ localStorage.setItem('sl_reader_q', String(i)); }catch(e){}
+    window.scrollTo(0, 0);
+    var L = document.getElementById('left'), R = document.getElementById('right');
+    if(L) L.scrollTop = 0;
+    if(R) R.scrollTop = 0;
+  }
+  qbtns.forEach(function(b, k){ b.onclick = function(){ show(k); }; });
+  var p = document.getElementById('prev'), n = document.getElementById('next');
+  if(p) p.onclick = function(){ show(cur - 1); };
+  if(n) n.onclick = function(){ show(cur + 1); };
+
+  // ---------- 划线 ↔ 要点 双向联动 ----------
+  function flash(el){
+    if(!el) return;
+    el.classList.add('on');
+    setTimeout(function(){ el.classList.remove('on'); }, 1600);
+  }
+  function scrollToEl(el, box){
+    if(!el || !box) return;
+    var top = el.offsetTop - box.offsetTop - 90;
+    if(box === document.body || box === document.documentElement){
+      window.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }else{
+      box.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }
+  }
+
+  var L = document.getElementById('left'), R = document.getElementById('right');
+  var wide = function(){ return window.matchMedia('(min-width:700px)').matches; };
+
+  // 点材料划线 → 高亮所有以它为来源的答案要点
+  document.addEventListener('click', function(e){
+    var mk = e.target.closest ? e.target.closest('mark.hl') : null;
+    if(mk){
+      var id = mk.getAttribute('data-m');
+      var box = mk.closest('.qwrap') || document;
+      // 优先用当前可见题
+      var vis = document.querySelector('.qwrap:not([hidden])');
+      var refBox = vis ? vis.querySelector('.ref') : null;
+      var first = null;
+      var found = 0;
+      if(refBox){
+        refBox.querySelectorAll('.item[data-mk]').forEach(function(el){
+          var ids = (el.getAttribute('data-mk') || '').split(',');
+          if(ids.indexOf(id) >= 0){ flash(el); if(!first) first = el; found++; }
+        });
+        // 兜底：用反向索引 mark2ref
+        if(found === 0){
+          var m2r = {};
+          try{ m2r = JSON.parse(refBox.getAttribute('data-m2r') || '{}'); }catch(_){}
+          var ri = m2r[id];
+          if(ri !== undefined && ri !== null){
+            var items = refBox.querySelectorAll('.item');
+            if(items[ri]){ flash(items[ri]); first = items[ri]; found = 1; }
+          }
+        }
+      }
+      if(first) scrollToEl(first, wide() ? R : document.documentElement);
+      return;
+    }
+    // 点答案要点 → 材料里所有来源划线一起闪
+    var it = e.target.closest ? e.target.closest('.ref .item') : null;
+    if(it){
+      var list = (it.getAttribute('data-mk') || '').split(',').filter(Boolean);
+      if(!list.length) return;
+      var firstMk = null;
+      list.forEach(function(mid){
+        var t2 = document.querySelector('mark.hl[data-m="' + mid + '"]');
+        if(t2){ flash(t2); if(!firstMk) firstMk = t2; }
+      });
+      if(firstMk) scrollToEl(firstMk, wide() ? L : document.documentElement);
+    }
+  });
+
+  // ---------- 记忆上次题号 ----------
+  try{
+    var s = localStorage.getItem('sl_reader_q');
+    if(s !== null) show(parseInt(s, 10) || 0); else show(0);
+  }catch(e){ show(0); }
+})();
+</script>
+</body>
+</html>

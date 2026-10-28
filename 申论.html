@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#f7f7f5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="申论执法卷">
+<title>申论 · 四川执法卷</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f7f7f5; --card:#fff; --txt:#1f2937; --muted:#6b7280; --faint:#9ca3af;
+  --line:#e5e7eb; --blue:#2563eb; --red:#dc2626; --amber:#d97706;
+  --green:#16a34a; --code:#f3f4f6;
+}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--txt);
+  font:16px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+       "Microsoft YaHei",system-ui,sans-serif;
+  padding-top:env(safe-area-inset-top);
+  padding-bottom:env(safe-area-inset-bottom);
+  -webkit-text-size-adjust:100%;
+}
+#bar{
+  position:sticky; top:0; z-index:50; background:rgba(247,247,245,.96);
+  backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+}
+#tabs{display:flex; gap:4px; overflow-x:auto; padding:8px 10px 0;
+  scrollbar-width:none}
+#tabs::-webkit-scrollbar{display:none}
+#tabs button{
+  flex:0 0 auto; border:none; background:none; cursor:pointer;
+  font:inherit; font-size:14px; font-weight:600; color:var(--muted);
+  padding:8px 12px; border-radius:9px 9px 0 0; white-space:nowrap;
+}
+#tabs button.on{background:var(--card); color:var(--blue);
+  box-shadow:0 -1px 3px rgba(15,23,42,.06)}
+#tools{display:flex; gap:8px; align-items:center; padding:6px 12px 8px}
+#tools .sp{flex:1}
+#tools button{
+  border:1px solid var(--line); background:var(--card); color:var(--txt);
+  font:inherit; font-size:13px; padding:5px 11px; border-radius:8px; cursor:pointer;
+}
+#tools button:active{background:#eef2ff}
+main{max-width:820px; margin:0 auto; padding:16px 16px 80px}
+article{display:none}
+article.on{display:block}
+h1{font-size:22px; line-height:1.4; margin:8px 0 14px; letter-spacing:.3px}
+h2{font-size:18px; margin:26px 0 10px; padding-left:10px;
+   border-left:4px solid var(--blue); line-height:1.45}
+h3{font-size:16px; margin:20px 0 8px; color:#111827}
+h4{font-size:15px; margin:16px 0 6px}
+p{margin:9px 0}
+a{color:var(--blue); text-decoration:none; border-bottom:1px solid rgba(37,99,235,.25)}
+strong{font-weight:700; color:#111827}
+code{background:var(--code); padding:1px 5px; border-radius:4px;
+  font-size:13.5px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  word-break:break-word}
+pre.code{background:#1f2937; color:#e5e7eb; padding:12px 14px; border-radius:10px;
+  overflow-x:auto; margin:12px 0; font-size:13px; line-height:1.6}
+pre.code code{background:none; color:inherit; padding:0; font-size:inherit;
+  white-space:pre-wrap; word-break:break-word}
+blockquote{margin:12px 0; padding:10px 14px; background:#eff6ff;
+  border-left:3px solid var(--blue); border-radius:0 8px 8px 0;
+  color:#1e3a8a; font-size:14.5px}
+blockquote strong{color:#1e40af}
+hr.sep{border:none; border-top:1px dashed var(--line); margin:22px 0}
+ul,ol{margin:10px 0; padding-left:22px}
+li{margin:5px 0}
+/* 表格：手机上必须能换行，否则横向溢出 */
+.tw{overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch}
+table{border-collapse:collapse; width:100%; font-size:14px; min-width:0}
+th,td{border:1px solid var(--line); padding:7px 9px; text-align:left;
+  vertical-align:top; white-space:normal; word-break:break-word}
+th{background:#f1f5f9; font-weight:700; font-size:13.5px}
+tbody tr:nth-child(even){background:#fafafa}
+/* 目录抽屉 */
+#tocBtn{position:fixed; right:14px; bottom:20px; z-index:60;
+  width:52px; height:52px; border-radius:50%; border:none; cursor:pointer;
+  background:var(--blue); color:#fff; font-size:13px; font-weight:700;
+  box-shadow:0 6px 20px rgba(37,99,235,.4);
+  padding-bottom:env(safe-area-inset-bottom)}
+#toc{position:fixed; inset:0; z-index:100; display:none;
+  background:rgba(15,23,42,.45)}
+#toc.open{display:block}
+#toc .panel{position:absolute; right:0; top:0; bottom:0; width:min(86vw,420px);
+  background:var(--card); display:flex; flex-direction:column;
+  box-shadow:-8px 0 30px rgba(0,0,0,.2)}
+#toc .ph{padding:14px 16px 8px; border-bottom:1px solid var(--line)}
+#toc .ph h4{margin:0 0 8px; font-size:15px}
+#tocQ{width:100%; box-sizing:border-box; font:inherit; font-size:15px;
+  padding:9px 12px; border:1px solid var(--line); border-radius:9px;
+  background:#fafafa}
+#tocQ:focus{outline:2px solid var(--blue); outline-offset:-1px}
+#tocList{flex:1; overflow-y:auto; padding:8px 8px 30px}
+#tocList a{display:block; padding:8px 10px; border-radius:7px; font-size:14px;
+  color:var(--txt); border-bottom:none; line-height:1.5}
+#tocList a.l2{padding-left:22px; font-size:13.5px; color:var(--muted)}
+#tocList a.l3{padding-left:34px; font-size:13px; color:var(--faint)}
+#tocList a:active{background:#eef2ff}
+#top{position:fixed; left:14px; bottom:20px; z-index:60; display:none;
+  width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
+  background:var(--card); color:var(--txt); font-size:18px; cursor:pointer;
+  padding-bottom:env(safe-area-inset-bottom)}
+#top.show{display:block}
+#fatal{position:fixed; left:0; right:0; top:0; z-index:999;
+  background:#fef2f2; color:#b91c1c; border-bottom:2px solid #fca5a5;
+  padding:10px 14px; font-size:13.5px; line-height:1.6}
+.meta{font-size:13px; color:var(--faint); margin:0 0 12px}
+@media (min-width:700px){
+  body{font-size:17px}
+  main{padding:24px 28px 90px}
+  h1{font-size:26px}
+  h2{font-size:20px}
+  h3{font-size:17px}
+  table{font-size:15px}
+}
+@media print{
+  #bar,#tocBtn,#top,#toc{display:none!important}
+  article{display:block!important}
+  body{background:#fff}
+  pre.code{background:#f3f4f6; color:#111}
+}
+</style>
+</head>
+<body>
+<div id="fatal" hidden></div>
+<div id="bar">
+  <div id="tabs"><button type="button">零基础路线</button><button type="button">抄材料</button><button type="button">五大题型</button><button type="button">采分点台账</button><button type="button">考情分析</button></div>
+  <div id="tools">
+    <span class="sp"></span>
+    <button type="button" onclick="document.getElementById('tocBtn').click()">目录</button>
+  </div>
+</div>
+<main><article class="on"><h1 id="零基础申论高分路线四川执法卷专用">零基础申论高分路线（四川执法卷专用）</h1>
+<blockquote><strong>给谁看</strong>：申论完全没学过、看材料就头疼、不知道怎么下笔的人。<br><strong>依据</strong>：8 套四川省考行政执法卷、32 道题、134 个答案要点的<strong>逐条拆解</strong><br>（见 <code>04-采分点台账-2026卷.md</code>），不是通用经验。<br><strong>一句话结论</strong>：申论不是写作考试，是<strong>信息提取考试</strong>。<br>你不需要文采，需要的是<strong>找到那几句话</strong>。</blockquote>
+<hr class="sep">
+<h2 id="零基础申论高分路线四川执法卷专用-开篇先纠正三个致命误解">开篇：先纠正三个致命误解</h2>
+<div class="tw"><table>
+<thead><tr><th>误解</th><th>真相</th><th>证据</th></tr></thead><tbody>
+<tr><td>「申论靠文采和积累」</td><td>134 个要点<strong>没有一个字是自创的</strong></td><td>全部可回溯到材料原句</td></tr>
+<tr><td>「抄材料 = 照抄原句」</td><td>18 条要点里 <strong>L1 照抄 0 条</strong>，L2 压缩 13 条（72%）</td><td><code>04</code> 台账汇总</td></tr>
+<tr><td>「写得越多越好」</td><td>200 字题写 250 字，超出部分<strong>不阅卷</strong>，还挤掉后面的题</td><td>各题字数要求</td></tr>
+</tbody>
+</table></div>
+<p><strong>这意味着什么</strong>： 你现在的劣势（没积累、没文采）<strong>在申论里几乎不影响分数</strong>。 你的优势（肯背规则、能按步骤执行）<strong>正好是申论最需要的</strong>。</p>
+<hr class="sep">
+<h1 id="第一阶段学会怎么看占-30-精力">第一阶段：学会怎么看（占 30% 精力）</h1>
+<blockquote>申论所有失败，一半以上死在「看错题」和「找错地方」。</blockquote>
+<h2 id="第一阶段学会怎么看占-30-精力-第-1-步审题先看清楚问什么">第 1 步：审题——先看清楚「问什么」</h2>
+<h3 id="第一阶段学会怎么看占-30-精力-动作拿到题先不看材料只在题干上圈-4-样东西">动作：拿到题，先不看材料，只在题干上圈 4 样东西</h3>
+<div class="tw"><table>
+<thead><tr><th>圈什么</th><th>为什么</th><th>真题例（2026·1）</th></tr></thead><tbody>
+<tr><td>① <strong>作答对象</strong></td><td>决定你找什么<strong>词性</strong></td><td>「概括……主要<strong>措施</strong>」→ 找<strong>动词</strong></td></tr>
+<tr><td>② <strong>材料范围</strong></td><td>划死搜索边界</td><td>「根据"给定资料1"」→ <strong>只看材料 1</strong></td></tr>
+<tr><td>③ <strong>字数</strong></td><td>反推要写几条</td><td>「不超过 200 字」→ <strong>4–5 条</strong></td></tr>
+<tr><td>④ <strong>问数</strong></td><td>分几块答</td><td>本题 1 问</td></tr>
+</tbody>
+</table></div>
+<h3 id="第一阶段学会怎么看占-30-精力--最容易死的地方问数">🔴 最容易死的地方：问数</h3>
+<p><strong>真题（2025·3）</strong>：</p>
+<blockquote>题干主句：「就如何平衡……<strong>提出工作建议</strong>」<br>要求栏：「（1）<strong>先梳理所有问题</strong>，再提出建议」</blockquote>
+<p><strong>这是两问。</strong> 只答建议不答问题 → 25 分直接砍半。</p>
+<blockquote><strong>铁律</strong>：<strong>「要求」栏必须逐字读</strong>，它经常藏着第二问。</blockquote>
+<h3 id="第一阶段学会怎么看占-30-精力-对象--词性对照背下来">对象 → 词性对照（背下来）</h3>
+<div class="tw"><table>
+<thead><tr><th>题目问</th><th>你去材料里找</th><th>信号词</th></tr></thead><tbody>
+<tr><td>措施 / 做法</td><td><strong>动词</strong></td><td>设立、建立、出台、开展、推进、完善、形成</td></tr>
+<tr><td>问题</td><td><strong>负面词</strong></td><td>不足、缺乏、滞后、薄弱、不到位、难</td></tr>
+<tr><td>原因</td><td><strong>因果词后半句</strong></td><td>因为、由于、源于</td></tr>
+<tr><td>影响</td><td><strong>结果词</strong></td><td>导致、使得、促进、加剧</td></tr>
+</tbody>
+</table></div>
+<h3 id="第一阶段学会怎么看占-30-精力--本步验收">✅ 本步验收</h3>
+<p>能在 30 秒内，在草稿纸上写出这 4 行：</p>
+<pre class="code"><code>答什么：措施（找动词）
+在哪找：材料 1
+多少字：200 字 → 4-5 条
+几问：1 问</code></pre>
+<hr class="sep">
+<h2 id="第一阶段学会怎么看占-30-精力-第-2-步扫读知道重点在哪-4-个位置">第 2 步：扫读——知道重点在哪 4 个位置</h2>
+<h3 id="第一阶段学会怎么看占-30-精力-动作材料不用逐字读只读-4-个位置">动作：材料不用逐字读，只读 4 个位置</h3>
+<div class="tw"><table>
+<thead><tr><th>位置</th><th>说明</th><th>为什么</th></tr></thead><tbody>
+<tr><td>① <strong>段首句</strong></td><td>总起句</td><td>常含总括词</td></tr>
+<tr><td>② <strong>段尾句</strong></td><td>总结句</td><td>常含结论</td></tr>
+<tr><td>③ <strong>转折词后</strong></td><td>但、然而、其实、事实上</td><td>真正的重点常在转折后</td></tr>
+<tr><td>④ <strong>结论词后</strong></td><td>因此、可见、总之</td><td>作者态度</td></tr>
+</tbody>
+</table></div>
+<p><strong>中间部分通常是举例 —— 例子是论据，不是要点。</strong></p>
+<p><strong>真题验证（2026·1）</strong>： 材料 1 段 3 整段讲「张女士卖牛轧糖」的故事（180 字）， <strong>参考答案一个字都没抄这段的故事</strong>，只抄了段 4 的「建立'一坊一策'精准帮扶机制」。</p>
+<blockquote>🔴 <strong>这段故事的作用是什么？</strong> 让你相信「帮扶有效」。<br>但要点在段 4 的动词句里，不在故事里。</blockquote>
+<h3 id="第一阶段学会怎么看占-30-精力--动词是措施题的唯一路标">🔴 动词是「措施题」的唯一路标</h3>
+<p>粉笔官方答题演示，反复出现同一句话：</p>
+<blockquote>「其中'<strong>设立</strong>''<strong>开启</strong>'等<strong>动词</strong>引导的句子提示对策」<br>「其中'<strong>建立</strong>''<strong>开展</strong>'等<strong>动词</strong>引导的句子提示对策」<br>「其中'<strong>出台</strong>''<strong>形成</strong>''<strong>建立</strong>'等<strong>动词</strong>引导的句子提示 P 市在……方面的举措」</blockquote>
+<p><strong>操作</strong>：拿笔逐段划「主语 + 动词 + 宾语」的句子。 <strong>划不出动词的段落，整段跳过。</strong></p>
+<h3 id="第一阶段学会怎么看占-30-精力-高频动词表8-套材料实际出现">高频动词表（8 套材料实际出现）</h3>
+<div class="tw"><table>
+<thead><tr><th>类别</th><th>动词</th></tr></thead><tbody>
+<tr><td>建制度</td><td>制定、出台、建立、完善、形成、明确、规范</td></tr>
+<tr><td>做动作</td><td>开展、推进、实施、落实、组织、联合、组建</td></tr>
+<tr><td>强监管</td><td>检查、查处、整治、监督、考核、问责</td></tr>
+<tr><td>优服务</td><td>设立、提供、优化、简化、便民、帮扶</td></tr>
+<tr><td>促参与</td><td>发动、引导、鼓励、聘请、参与</td></tr>
+</tbody>
+</table></div>
+<h3 id="第一阶段学会怎么看占-30-精力--数字一个都不抄">🔴 数字一个都不抄</h3>
+<p>材料里：<code>2个</code>、<code>17项</code>、<code>127条</code>、<code>9.62万元</code>、<code>2000余人</code>、<code>293处</code>、 <code>5051件</code>、<code>38名</code>、<code>300余家</code>、<code>122处</code>、<code>534株</code>、<code>70万次</code></p>
+<p><strong>2026 卷参考答案里，这些数字一个都没有出现。</strong></p>
+<blockquote><strong>为什么</strong>：数字是<strong>论据</strong>（证明有效），不是<strong>要点</strong>（做了什么）。<br>除非题干明确要「数据」，否则一律不抄。</blockquote>
+<h3 id="第一阶段学会怎么看占-30-精力--现状描述不是措施">🔴 现状描述不是措施</h3>
+<p>材料原句：</p>
+<blockquote>「针对全县食品小作坊<strong>分布广、规模小、基础弱</strong>的现状，Q县市场监管局建立'一坊一策'精准帮扶机制……」</blockquote>
+<p>答案：</p>
+<blockquote>「帮扶小作坊升级。<strong>建立一坊一策精准帮扶机制</strong>，分批、分层、分类帮扶」</blockquote>
+<p><strong>「分布广、规模小、基础弱」整段删掉。</strong></p>
+<p><strong>判断法</strong>：这句话是「描述情况」还是「做了什么」？</p>
+<ul>
+<li>描述情况（形容词、现状）→ <strong>删</strong></li>
+<li>做了什么（动词、动作）→ <strong>留</strong></li>
+</ul>
+<h3 id="第一阶段学会怎么看占-30-精力--本步验收">✅ 本步验收</h3>
+<p>读完材料，能圈出 15–25 个候选句，<strong>每句都能说出「为什么划它」</strong> （因为它是动词句 / 段首句 / 转折后）。</p>
+<hr class="sep">
+<h1 id="第二阶段学会怎么抄占-40-精力最核心">第二阶段：学会怎么抄（占 40% 精力，最核心）</h1>
+<blockquote>这是申论真正的技术。<strong>「抄」不是照搬，是三步改造。</strong></blockquote>
+<h2 id="第二阶段学会怎么抄占-40-精力最核心-第-3-步三级抄法决定你能不能及格">第 3 步：三级抄法（决定你能不能及格）</h2>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心-l1-原词照抄--材料本身就是规范动宾">L1 原词照抄 —— 材料本身就是规范动宾</h3>
+<p><strong>条件</strong>：材料里的句子已经是「动词 + 宾语」的规范表述。</p>
+<p><strong>但注意</strong>：<strong>2026 卷 18 条要点里，L1 用了 0 次。</strong> 原因：材料原文几乎都带修饰语，很少能直接照抄。</p>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心-l2-压缩--删修饰删数字留动宾--最常用72">L2 压缩 —— 删修饰、删数字、留动宾 ⭐ 最常用（72%）</h3>
+<p><strong>真题（2026·1 要点 2）</strong>：</p>
+<p>材料原句：</p>
+<blockquote>「针对全县食品小作坊分布广、规模小、基础弱的现状，Q县市场监管局建立"一坊一策"精准帮扶机制，通过<strong>分批开展法规培训、分层实施技术指导和分类制定改造标准</strong>，推动小作坊向标准化、规范化转型」</blockquote>
+<p>答案：</p>
+<blockquote>「建立一坊一策精准帮扶机制，<strong>分批、分层、分类帮扶</strong>」</blockquote>
+<p><strong>怎么压的</strong>：</p>
+<pre class="code"><code>分批开展法规培训、分层实施技术指导和分类制定改造标准（26字）
+        ↓ 提取三个「分X」+ 统一后缀
+分批、分层、分类帮扶（9字）</code></pre>
+<p><strong>压缩比 3 : 1。</strong></p>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心-l3-提炼--个案名单--抽象">L3 提炼 —— 个案/名单 → 抽象</h3>
+<p><strong>真题（2026·1 要点 3）</strong>：</p>
+<p>材料原句：</p>
+<blockquote>「P市还活跃着一支<strong>2000余人</strong>的食品安全义务监督员队伍，涵盖<strong>人大代表、政协委员、外卖骑手、食品生产经营从业者</strong>等<strong>多元群体</strong>」</blockquote>
+<p>答案：</p>
+<blockquote>「发动<strong>多元群体</strong>壮大监督员队伍」</blockquote>
+<p><strong>怎么提炼的</strong>：</p>
+<ul>
+<li>「2000余人」→ 删（数字）</li>
+<li>「人大代表、政协委员、外卖骑手、食品生产经营从业者」→ 压成「<strong>多元群体</strong>」</li>
+<li>「活跃着一支队伍」→ 「<strong>发动</strong>……<strong>壮大</strong>」</li>
+</ul>
+<blockquote>粉笔原话：「<strong>可概括出要点</strong>」—— 注意是「概括」不是「摘抄」，<br>因为这里必须抽象，不能照抄名单。</blockquote>
+<p><strong>真题（2026·2 要点 2，个案抽象）</strong>：</p>
+<p>材料：用 200 多字讲了「农民孙某捕杀黑颈鹤」的完整故事 答案：「针对<strong>无知误犯</strong>的违法行为，通过<strong>劳务代偿</strong>抵扣赔偿」（18 字）</p>
+<p><strong>200 字故事 → 18 字要点</strong>，压缩比 11 : 1。</p>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心-三级对照速查">三级对照速查</h3>
+<div class="tw"><table>
+<thead><tr><th>级</th><th>触发条件</th><th>动作</th><th>占比</th><th>压缩比</th></tr></thead><tbody>
+<tr><td>L1 照抄</td><td>材料已是规范动宾</td><td>删具体名称</td><td><strong>0%</strong></td><td>1.5:1</td></tr>
+<tr><td><strong>L2 压缩</strong></td><td>有定语/举例/排比</td><td>删修饰留主谓宾</td><td><strong>72%</strong></td><td>3:1</td></tr>
+<tr><td><strong>L3 提炼</strong></td><td>故事/对话/个案/名单</td><td>抽象成主体+动作+对象</td><td><strong>28%</strong></td><td>5–11:1</td></tr>
+</tbody>
+</table></div>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心--三条禁忌">🔴 三条禁忌</h3>
+<div class="tw"><table>
+<thead><tr><th>禁忌</th><th>后果</th></tr></thead><tbody>
+<tr><td>❌ 整句照抄</td><td>必超字数，挤掉后面的题</td></tr>
+<tr><td>❌ 自造词</td><td>脱离材料 = 0 分</td></tr>
+<tr><td>❌ 口语词</td><td>「搞」「弄」→ 开展 / 推进 / 落实</td></tr>
+</tbody>
+</table></div>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心--本步验收">✅ 本步验收</h3>
+<p>给你一段材料，你能在 2 分钟内产出 3 条要点， <strong>每条 25–40 字，且每个字都能指回材料某句</strong>。</p>
+<hr class="sep">
+<h2 id="第二阶段学会怎么抄占-40-精力最核心-第-4-步加总括词拿逻辑分的地方">第 4 步：加总括词（拿「逻辑分」的地方）</h2>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心-观察8-套参考答案几乎都是这个格式">观察：8 套参考答案几乎都是这个格式</h3>
+<pre class="code"><code>【4–6 字总括词】。【具体内容】</code></pre>
+<div class="tw"><table>
+<thead><tr><th>卷·题</th><th>总括词</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>2026·1</td><td><strong>创新监管模式</strong>。</td><td>在商圈设立监管服务站，提供一站式服务</td></tr>
+<tr><td>2026·1</td><td><strong>帮扶小作坊升级</strong>。</td><td>建立一坊一策精准帮扶机制，分批、分层、分类帮扶</td></tr>
+<tr><td>2026·1</td><td><strong>推动多元共治</strong>。</td><td>设立消费维权服务岗和投诉直通车</td></tr>
+<tr><td>2026·1</td><td><strong>科技赋能监管</strong>。</td><td>通过数据自动分析预警，监管与执法无缝对接</td></tr>
+<tr><td>2025·3</td><td><strong>规范商户经营</strong>。</td><td>结合居民诉求，制定商户经营守则</td></tr>
+</tbody>
+</table></div>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心-总括词从哪来">总括词从哪来</h3>
+<p><strong>它不是材料原词，是从材料概括的。</strong></p>
+<p>例（2026·1 要点 1）：</p>
+<pre class="code"><code>材料：「全省首创」「新模式」
+        ↓
+总括词：「创新监管模式」</code></pre>
+<p>例（2026·1 要点 2）：</p>
+<pre class="code"><code>材料：「推动小作坊向标准化、规范化转型」
+        ↓
+总括词：「帮扶小作坊升级」</code></pre>
+<blockquote>🔴 <strong>没有总括词 = 要点堆砌 = 扣逻辑分</strong>。<br>这是「会抄」和「抄得好」的分界线。</blockquote>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心--本步验收">✅ 本步验收</h3>
+<p>每条要点都能在开头加 4–6 字概括，且这个概括<strong>能覆盖后面的所有内容</strong>。</p>
+<hr class="sep">
+<h2 id="第二阶段学会怎么抄占-40-精力最核心-第-5-步合并书写决定条数和顺序">第 5 步：合并书写（决定条数和顺序）</h2>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心-合并三优先级">合并三优先级</h3>
+<div class="tw"><table>
+<thead><tr><th>顺序</th><th>依据</th><th>例</th></tr></thead><tbody>
+<tr><td>①</td><td><strong>同义合并</strong></td><td>两句话说的是同一件事</td></tr>
+<tr><td>②</td><td><strong>同主体合并</strong></td><td>都是「政府」做的 / 都是「企业」做的</td></tr>
+<tr><td>③</td><td><strong>同层面合并</strong></td><td>思想 / 制度 / 执行 / 监督</td></tr>
+</tbody>
+</table></div>
+<p><strong>真题验证（2024·1）</strong>：5 条要点是按<strong>主体</strong>分的</p>
+<blockquote>堰口派出所 / L 县生态环境局 / Z 市劳动保障监察支队 / H 县公安交警大队 / S 县交通执法部门<br><strong>一个主体一条，清清楚楚。</strong></blockquote>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心-条数怎么定">条数怎么定</h3>
+<div class="tw"><table>
+<thead><tr><th>字数要求</th><th>条数</th></tr></thead><tbody>
+<tr><td>200 字</td><td><strong>4–5 条</strong></td></tr>
+<tr><td>300 字</td><td><strong>5–6 条</strong></td></tr>
+<tr><td>400 字</td><td><strong>6–8 条</strong></td></tr>
+<tr><td>500 字</td><td><strong>8–10 条</strong></td></tr>
+</tbody>
+</table></div>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心--宁少一条不超一字">🔴 宁少一条，不超一字</h3>
+<ul>
+<li>200 字题写 250 字 → <strong>超出部分不阅卷</strong></li>
+<li>写 150 字 → 要点不全，丢内容分</li>
+</ul>
+<p><strong>超字数的损失 &gt; 漏一个小要点的损失。</strong></p>
+<h3 id="第二阶段学会怎么抄占-40-精力最核心--本步验收">✅ 本步验收</h3>
+<p>200 字题，4 条要点，总字数 190–200 字，每条都有总括词。</p>
+<hr class="sep">
+<h1 id="第三阶段学会怎么写占-30-精力">第三阶段：学会怎么写（占 30% 精力）</h1>
+<blockquote>到这一步，你的「内容分」已经能拿到大部分。<br>剩下的差别在<strong>题型变通</strong>和<strong>大作文</strong>。</blockquote>
+<h2 id="第三阶段学会怎么写占-30-精力-第-6-步按题型切换打法">第 6 步：按题型切换打法</h2>
+<h3 id="第三阶段学会怎么写占-30-精力-六大题型的第一动作">六大题型的「第一动作」</h3>
+<div class="tw"><table>
+<thead><tr><th>题型</th><th>占比</th><th>第一动作</th><th>最容易丢的分</th></tr></thead><tbody>
+<tr><td><strong>概括措施</strong></td><td>22%</td><td>找<strong>动词</strong></td><td>漏整类做法</td></tr>
+<tr><td><strong>提出对策</strong></td><td>22%</td><td><strong>问题反推</strong></td><td>对策空泛无主体</td></tr>
+<tr><td><strong>总结类（公文）</strong></td><td>28%</td><td><strong>先写格式骨架</strong></td><td><strong>忘写标题/落款</strong></td></tr>
+<tr><td><strong>大作文</strong></td><td>16%</td><td>抓话题词<strong>定关系</strong></td><td>跑题</td></tr>
+<tr><td>原因类</td><td>6%</td><td>找因果词后半句</td><td>答成「表现」</td></tr>
+<tr><td>词句解释</td><td>3%</td><td>三步：词面→深层→启示</td><td>只抄材料不解释</td></tr>
+</tbody>
+</table></div>
+<h3 id="第三阶段学会怎么写占-30-精力--提出对策的镜像反推法">🔴 提出对策的「镜像反推法」</h3>
+<p><strong>真题（2026·3）</strong>：5 个问题对 5 条建议，<strong>词是镜像的</strong></p>
+<div class="tw"><table>
+<thead><tr><th>问题</th><th>建议</th><th>反推</th></tr></thead><tbody>
+<tr><td>队伍力量<strong>薄弱</strong></td><td><strong>充实</strong>队伍力量</td><td>薄弱 → 充实</td></tr>
+<tr><td>家庭支持<strong>缺位</strong></td><td><strong>强化</strong>家庭支持</td><td>缺位 → 强化</td></tr>
+<tr><td>社会支持<strong>不足</strong></td><td><strong>加强</strong>社会支持</td><td>不足 → 加强</td></tr>
+<tr><td>社会接纳<strong>度低</strong></td><td><strong>推动</strong>社会接纳</td><td>度低 → 推动</td></tr>
+<tr><td>监管沟通<strong>不畅</strong></td><td><strong>畅通</strong>监管沟通</td><td>不畅 → 畅通</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>这不是巧合，是命题人设计好的。</strong><br>按「问题 → 反义词 → 动宾化」的公式推，基本不会漏。</blockquote>
+<h3 id="第三阶段学会怎么写占-30-精力--公文的格式分是白送的">🔴 公文的格式分是白送的</h3>
+<p><strong>真题（2024·2）</strong>工作简报：</p>
+<pre class="code"><code>关于执法基础信息管控平台运行情况的工作简报          ← 标题（必写）
+B县综合行政执法局          XXXX年XX月XX日        ← 发文单位 + 日期
+B县综合行政执法局为实现高质量执法……运行情况如下。   ← 导语
+一、实施社会主体动态转换三色预警。…               ← 主体
+二、实行跟踪督办件梯次转办三级预警。…
+三、无人机快速高标准全域巡查。…</code></pre>
+<p><strong>公文格式四要素</strong>：标题 / 称谓或发文单位 / 正文 / 落款</p>
+<blockquote>总结类 9 题，<strong>每题的格式分都是白送的</strong>。<br>忘写标题 = 直接丢 2–4 分，比漏一个要点还亏。</blockquote>
+<hr class="sep">
+<h2 id="第三阶段学会怎么写占-30-精力-第-7-步大作文40-分--前两题之和">第 7 步：大作文（40 分 = 前两题之和）</h2>
+<h3 id="第三阶段学会怎么写占-30-精力-先看这个数字">先看这个数字</h3>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>数值</th></tr></thead><tbody>
+<tr><td>大作文分值</td><td><strong>35–40 分</strong></td></tr>
+<tr><td>占全卷</td><td><strong>40%</strong></td></tr>
+<tr><td>等于</td><td><strong>前两题之和</strong></td></tr>
+<tr><td>必须留时</td><td><strong>55 分钟</strong></td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>如果只给大作文留 40 分钟，一定写不完。</strong></blockquote>
+<h3 id="第三阶段学会怎么写占-30-精力-立意三步这是-30-分">立意三步（这是 30 分）</h3>
+<p><strong>真题（2025·4）</strong>：</p>
+<blockquote>「中国法治的根基在人民，只有让法治在广大人民的心中落地生根，才能实现全面依法治国」</blockquote>
+<div class="tw"><table>
+<thead><tr><th>步</th><th>动作</th><th>答案</th></tr></thead><tbody>
+<tr><td>① 抓话题词</td><td>题干反复出现的关键词</td><td><strong>法治</strong> + <strong>人民</strong></td></tr>
+<tr><td>② 定关系</td><td>两者什么关系</td><td>「根基在人民」= 依存关系</td></tr>
+<tr><td>③ 亮观点</td><td>首段末句写总论点</td><td>「法治的力量源于人民」</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>最常见的跑题</strong>：把「法治根基在人民」写成「<strong>如何推进法治建设</strong>」。<br>后者是<strong>范围</strong>，前者是<strong>关系</strong>。写成范围 = 泛泛而谈 = 掉到 2 档。</blockquote>
+<h3 id="第三阶段学会怎么写占-30-精力-固定结构五段三分">固定结构（五段三分）</h3>
+<pre class="code"><code>第1段 开头    引出话题 + 亮明总论点        150字
+第2段 分论点一 总括句 + 材料例证 + 分析      200字
+第3段 分论点二 同上                      200字
+第4段 分论点三 同上                      200字
+第5段 结尾    回扣总论点 + 升华           150字</code></pre>
+<p><strong>分论点从哪来</strong>：<strong>材料通常给了 3 个维度，直接用</strong>，不要自己发明。</p>
+<p><strong>论据从哪来</strong>：<strong>优先用材料里的例子</strong>。 2026·4 的 4 个论据（交通肇事、非法猎捕、违法排污、蓝风铃）<strong>全在材料 4</strong>。</p>
+<blockquote>这是「参考给定资料」的正确用法 —— 不是让你背外部素材。</blockquote>
+<hr class="sep">
+<h2 id="第三阶段学会怎么写占-30-精力-第-8-步自评练-100-篇不如认真改-10-篇">第 8 步：自评（练 100 篇不如认真改 10 篇）</h2>
+<h3 id="第三阶段学会怎么写占-30-精力-五步自评法">五步自评法</h3>
+<pre class="code"><code>① 对要点：参考答案逐条打勾/叉（覆盖表）
+② 定档：每维度按锚点定 0-4
+③ 算分：Σ(层级/4 × 权重) ÷ Σ权重 × 满分
+④ 过护栏：有没有跳档、有没有重复扣分
+⑤ 记错题：按 A-H 八维分类记录</code></pre>
+<h3 id="第三阶段学会怎么写占-30-精力-覆盖表最核心">覆盖表（最核心）</h3>
+<div class="tw"><table>
+<thead><tr><th>参考答案要点</th><th>我写了吗</th><th>判定</th></tr></thead><tbody>
+<tr><td>① 创新监管模式</td><td>✅ 写了「设立监管服务站」</td><td>覆盖</td></tr>
+<tr><td>② 帮扶小作坊升级</td><td>❌ 没写</td><td>遗漏</td></tr>
+<tr><td>③ 推动多元共治</td><td>△ 只写了「监督员」</td><td>部分覆盖</td></tr>
+<tr><td>④ 科技赋能监管</td><td>✅</td><td>覆盖</td></tr>
+</tbody>
+</table></div>
+<p><strong>覆盖率 = 覆盖数 / 总要点数</strong>。 3 条里覆盖 1 + 部分 1 ≈ 50% → 覆盖维度落 <strong>2 档</strong>。</p>
+<h3 id="第三阶段学会怎么写占-30-精力-三条护栏防自我欺骗">三条护栏（防自我欺骗）</h3>
+<div class="tw"><table>
+<thead><tr><th>护栏</th><th>规则</th></tr></thead><tbody>
+<tr><td><strong>不许跳档</strong></td><td>轻微问题最多降到 3，不能从 4 直接到 2</td></tr>
+<tr><td><strong>跨两档要双证据</strong></td><td>想 2→4 必须列 ≥2 个独立证据</td></tr>
+<tr><td><strong>防重复扣分</strong></td><td>同一问题只在最直接维度扣一次</td></tr>
+</tbody>
+</table></div>
+<h3 id="第三阶段学会怎么写占-30-精力-错题记类型不记具体错误">错题记「类型」不记「具体错误」</h3>
+<div class="tw"><table>
+<thead><tr><th>记法</th><th>能跨题统计吗</th></tr></thead><tbody>
+<tr><td>「漏了『数据共享』这个点」</td><td>❌ 换个材料就不同</td></tr>
+<tr><td>「<strong>A1-漏采分点</strong>」</td><td>✅ 能看出短板</td></tr>
+</tbody>
+</table></div>
+<p><strong>20+ 类型见 <code>02-五大题型手法.md</code> 第九节。</strong></p>
+<hr class="sep">
+<h1 id="时间表8-周从零到能考">时间表：8 周从零到能考</h1>
+<div class="tw"><table>
+<thead><tr><th>周</th><th>重点</th><th>每天做什么</th><th>验收</th></tr></thead><tbody>
+<tr><td><strong>W1</strong></td><td>学「怎么看」</td><td>1 题：只做审题 + 扫读，<strong>不写答案</strong></td><td>能圈出 15 个候选句</td></tr>
+<tr><td><strong>W2</strong></td><td>学「怎么抄」</td><td>1 题：写答案 + 对照 + 填回溯表</td><td>每条要点能指回材料</td></tr>
+<tr><td><strong>W3</strong></td><td>练 L2 压缩</td><td>2 题：专练「删修饰留动宾」</td><td>200 字题写 190–200 字</td></tr>
+<tr><td><strong>W4</strong></td><td>练 L3 提炼</td><td>2 题：专练「个案→抽象」</td><td>能压到 5:1</td></tr>
+<tr><td><strong>W5</strong></td><td>攻公文</td><td>2 题：先写格式骨架</td><td>四要素齐全</td></tr>
+<tr><td><strong>W6</strong></td><td>攻大作文</td><td>2 篇：限时 55 分钟</td><td>不跑题、结构完整</td></tr>
+<tr><td><strong>W7</strong></td><td>整卷</td><td>1 套：150 分钟全真</td><td>四题都做完</td></tr>
+<tr><td><strong>W8</strong></td><td>复盘</td><td>只改错题，不写新题</td><td>顽固项清零</td></tr>
+</tbody>
+</table></div>
+<blockquote><strong>配合项目</strong>：用 <code>真题/</code> 通读，用 <code>题库/</code> 单题练，用 <code>_match_points.py</code> 核对回溯。</blockquote>
+<hr class="sep">
+<h1 id="一页速查卡打印贴桌上">一页速查卡（打印贴桌上）</h1>
+<pre class="code"><code>【审题四看】
+答什么 → 找什么词性
+在哪找 → 划死范围
+多少字 → 200字≈4-5条
+几问   → 读「要求」栏！
+
+【信号词】
+措施 → 设立/建立/出台/开展/推进/完善/形成
+问题 → 不足/缺乏/滞后/薄弱/不到位/难
+原因 → 因为/由于/源于
+
+【重点四位置】
+段首 / 段尾 / 转折后 / 结论后
+（中间是举例，不抄）
+
+【三级抄法】
+L1 照抄  材料已是规范动宾      → 删名称     （0%）
+L2 压缩  有定语举例排比        → 删修饰     （72%）★
+L3 提炼  故事对话个案名单      → 抽象       （28%）
+
+【三条禁忌】
+不整句照抄 / 不自造词 / 不写口语
+
+【书写】
+总括词（4-6字）+ 句号 + 具体内容
+每条 25-40 字
+宁少一条，不超一字
+
+【时间（150分钟）】
+读材料 20 → 第1题 20 → 第2题 25 → 第3题 30 → 大作文 55 → 检查 5</code></pre>
+<hr class="sep">
+<h1 id="附这套方法的证据链">附：这套方法的证据链</h1>
+<div class="tw"><table>
+<thead><tr><th>结论</th><th>证据</th><th>可核对</th></tr></thead><tbody>
+<tr><td>答案 100% 来自材料</td><td>2026 卷 18 条要点逐条回溯</td><td><code>04-采分点台账-2026卷.md</code></td></tr>
+<tr><td>L2 压缩占 72%，L1 占 0%</td><td>18 条要点的抄法统计</td><td>同上「汇总」节</td></tr>
+<tr><td>数字不进答案</td><td>材料 12 处数字，答案 0 处</td><td>同上「铁律 3」</td></tr>
+<tr><td>每题 4–5 条</td><td>32 题要点数分布</td><td><code>综合分析.md</code> 第四节</td></tr>
+<tr><td>大作文 40 分</td><td>5 套省考卷分值一致</td><td><code>综合分析.md</code> 第一节</td></tr>
+<tr><td>问题↔建议镜像</td><td>2026·3 的 5 对 5</td><td><code>04</code> 第 3 题</td></tr>
+<tr><td>只有 2026 卷有答题演示</td><td>8 套数据对比</td><td><code>parsed/*.json</code></td></tr>
+</tbody>
+</table></div>
+<blockquote>所有数字可用 <code>python 申论/_verify_ledger.py</code> 等脚本复核。</blockquote></article><article><h1 id="01--抄材料方法论">01 · 抄材料方法论</h1>
+<blockquote><strong>本文回答一个问题</strong>：申论答案的每一句话，到底是从材料哪里来的、怎么变成那样的。<br><strong>依据</strong>：8 套四川省考行政执法卷真题（32 题 / 134 个答案要点 / 53,860 字材料）。<br>所有例子都出自 <code>申论/真题/</code>，标了卷次题号，可逐个核对。<br><strong>最重要的依据</strong>：<strong>2026 卷第 1 题带粉笔官方「答题演示」</strong> —— 它逐段示范了<br>「读哪句 → 哪些动词提示要点 → 摘抄/概括成什么」。本文的核心规则全部来自它，<br>其余 7 套的答案用来验证规律是否成立。</blockquote>
+<hr class="sep">
+<h2 id="01--抄材料方法论-〇先破除三个幻觉">〇、先破除三个幻觉</h2>
+<h3 id="01--抄材料方法论-幻觉一申论要靠积累和文采">幻觉一：「申论要靠积累和文采」</h3>
+<p><strong>错。</strong> 8 套卷 134 个答案要点，逐个回溯材料后，<strong>没有一条是脱离材料自己发挥的</strong>。</p>
+<p>看 2026 卷第 1 题要点 1：</p>
+<blockquote><strong>参考答案</strong>：创新监管模式。在商圈设立监管服务站，提供一站式服务，实时智慧监管；出台配套制度，建立沙盒监管机制，形成管理闭环。</blockquote>
+<p><strong>粉笔原话</strong>（答题演示，段 1）：</p>
+<blockquote>阅读「全省首创的'食安小站'」「在商圈集中区域设立了 2 个'零距离'监管服务站，开启了'微小所'进驻综合商业体的'智慧监管'新模式」，其中<strong>「设立」「开启」等动词引导的句子提示对策</strong>，可摘抄、概括出要点：<strong>创新监管模式，在商圈设立监管服务站</strong>。</blockquote>
+<p>→ 每个字都能在材料里找到出处。<strong>你要练的是「找得到」，不是「写得好」。</strong></p>
+<h3 id="01--抄材料方法论-幻觉二要点越多越好写满才显得认真">幻觉二：「要点越多越好，写满才显得认真」</h3>
+<p><strong>错。</strong> 字数超了直接扣分，而且挤掉了后面题的分数。</p>
+<ul>
+<li>200 字题 ≈ <strong>4–5 条</strong>要点</li>
+<li>300 字题 ≈ <strong>5–6 条</strong></li>
+<li>400 字题 ≈ <strong>6–8 条</strong></li>
+</ul>
+<p>8 套实测：<strong>4 条要点出现 7 次，是最常见的密度</strong>（见 <code>综合分析.md</code> 第四节）。</p>
+<h3 id="01--抄材料方法论-幻觉三抄材料--把材料原句搬过来">幻觉三：「抄材料 = 把材料原句搬过来」</h3>
+<p><strong>错，而且是致命的。</strong> 申论要的是<strong>摘抄 + 概括</strong>两步，只抄不概括会超字数且没有逻辑分。</p>
+<p>2026 卷要点 1 的完整链条：</p>
+<div class="tw"><table>
+<thead><tr><th>环节</th><th>内容</th></tr></thead><tbody>
+<tr><td>材料原句</td><td>「在商圈集中区域设立了 2 个'零距离'监管服务站」</td></tr>
+<tr><td>摘抄（留动宾）</td><td>在商圈设立监管服务站</td></tr>
+<tr><td>概括（加总括词）</td><td><strong>创新监管模式</strong>。在商圈设立监管服务站</td></tr>
+</tbody>
+</table></div>
+<p><strong>「创新监管模式」这 5 个字，材料里根本没有</strong> —— 它是从「全省首创」「新模式」这些词概括出来的。<strong>这就是「抄」和「概括」的分界</strong>。</p>
+<hr class="sep">
+<h2 id="01--抄材料方法论-一四步法总览">一、四步法总览</h2>
+<pre class="code"><code>① 审题定框  →  ② 扫读定位  →  ③ 摘取改写  →  ④ 合并书写
+   (30秒)        (按信号词)      (三级抄法)      (分类+格式)</code></pre>
+<p>每一步都有<strong>可检验的产出</strong>，做不到就是这一步没做完，不要往下走。</p>
+<div class="tw"><table>
+<thead><tr><th>步</th><th>产出</th><th>检验标准</th></tr></thead><tbody>
+<tr><td>① 审题</td><td>一张「要素卡」：答什么 / 在哪找 / 多少字 / 几问</td><td>能说出要找什么<strong>词性</strong></td></tr>
+<tr><td>② 扫读</td><td>划出候选句（带段落号）</td><td>每段至少 1 句，且能说出为什么划它</td></tr>
+<tr><td>③ 摘取</td><td>每条要点 25–40 字</td><td>每个字都能指向材料某句</td></tr>
+<tr><td>④ 书写</td><td>分条 + 总括词前置</td><td>条数符合字数要求，无交叉重复</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="01--抄材料方法论-二第①步审题定框30-秒决定成败">二、第①步：审题定框（30 秒，决定成败）</h2>
+<blockquote>🔴 <strong>最高频的丢分不是「抄不到」，是「审错题」</strong> —— 问「问题」你答「对策」，写得再工整也是 0 分。</blockquote>
+<h3 id="01--抄材料方法论-21-看四样东西">2.1 看四样东西</h3>
+<div class="tw"><table>
+<thead><tr><th>看什么</th><th>决定什么</th><th>真题例</th></tr></thead><tbody>
+<tr><td><strong>作答对象</strong></td><td>找什么<strong>词性</strong></td><td>「概括……主要<strong>措施</strong>」→ 找动词</td></tr>
+<tr><td><strong>材料范围</strong></td><td>划死搜索边界</td><td>「根据'给定资料 1'」→ <strong>只看材料 1</strong></td></tr>
+<tr><td><strong>字数</strong></td><td>反推条数</td><td>不超过 200 字 → 4–5 条</td></tr>
+<tr><td><strong>问数</strong></td><td>分几块答</td><td>「梳理问题，<strong>并提出</strong>建议」→ 两问</td></tr>
+</tbody>
+</table></div>
+<h3 id="01--抄材料方法论-22-对象--词性对照表这是审题的核心">2.2 对象 → 词性对照表（这是审题的核心）</h3>
+<div class="tw"><table>
+<thead><tr><th>作答对象</th><th>找什么词</th><th>信号词</th><th>真题</th></tr></thead><tbody>
+<tr><td><strong>措施 / 做法</strong></td><td>动词（动宾结构）</td><td>设立、建立、出台、开展、推进、完善</td><td>2024·1「具体做法」</td></tr>
+<tr><td><strong>问题</strong></td><td>负面形容词 + 状态</td><td>不足、缺乏、滞后、薄弱、不到位、难</td><td>2025·3「梳理问题」</td></tr>
+<tr><td><strong>原因</strong></td><td>因果词后半句</td><td>因为、由于、源于、根源在于</td><td>2021下·2「为什么会说」</td></tr>
+<tr><td><strong>影响</strong></td><td>结果词</td><td>导致、使得、促进、推动、加剧</td><td>少考，8 套仅 1 次</td></tr>
+<tr><td><strong>建议 / 对策</strong></td><td>动词（但需自己推）</td><td>应当、需要、可以</td><td>2025·3「提出建议」</td></tr>
+</tbody>
+</table></div>
+<h3 id="01--抄材料方法论-23-问数最容易丢一半分的地方">2.3 问数：最容易丢一半分的地方</h3>
+<p><strong>真题：2025·3</strong>（25 分）</p>
+<blockquote>假如你是华林坝街道办工作人员小谢，请根据"给定资料 3"，就如何平衡好家和苑小区的文旅发展与居民日常生活，<strong>提出工作建议</strong>。<br>要求：（1）<strong>先梳理所有问题</strong>，再提出建议；（2）问题梳理全面准确，建议针对性强…</blockquote>
+<p><strong>这题实际是两问</strong>，虽然题干主句只说「提出建议」，但<strong>要求（1）明确写了「先梳理所有问题」</strong>。</p>
+<p>参考答案的分组（已解析进 <code>parsed/</code>）：</p>
+<div class="tw"><table>
+<thead><tr><th>组</th><th>条数</th><th>内容</th></tr></thead><tbody>
+<tr><td><strong>问题</strong></td><td>3 条</td><td>商户违规经营 / 游客人数过多 / 政府管理缺位</td></tr>
+<tr><td><strong>建议</strong></td><td>3 条</td><td>规范商户经营 / 约束引导游客 / 政府加强管理</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>教训</strong>：<strong>「要求」栏必须逐字读</strong>。只答建议不答问题，25 分直接砍半。</blockquote>
+<h3 id="01--抄材料方法论-24-审题产出物要素卡">2.4 审题产出物：要素卡</h3>
+<p>动笔前在草稿纸上写这 5 行（30 秒）：</p>
+<pre class="code"><code>答什么：措施（找动词）
+在哪找：材料 1
+多少字：200 字 → 4-5 条
+几问：1 问
+特殊要求：全面、准确、有条理</code></pre>
+<hr class="sep">
+<h2 id="01--抄材料方法论-三第②步扫读定位找重点">三、第②步：扫读定位（找重点）</h2>
+<h3 id="01--抄材料方法论-31-主旨句只在-4-个位置">3.1 主旨句只在 4 个位置</h3>
+<p>材料里一段话 200–300 字，<strong>真正的要点只在 4 个地方</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>位置</th><th>说明</th><th>真题例</th></tr></thead><tbody>
+<tr><td><strong>① 段首句</strong></td><td>总起句，常含总括词</td><td>2026 材料 1 段 1「走进 P 市 D 区繁华商圈…这是全省首创的'食安小站'」</td></tr>
+<tr><td><strong>② 段尾句</strong></td><td>总结句</td><td>2026 材料 1 段 4「截至目前，全县已完成 146 家小作坊的提档升级」</td></tr>
+<tr><td><strong>③ 转折词后</strong></td><td>但、然而、其实、事实上</td><td>——</td></tr>
+<tr><td><strong>④ 结论词后</strong></td><td>因此、可见、总之、这说明</td><td>——</td></tr>
+</tbody>
+</table></div>
+<blockquote><strong>中间部分通常是举例，例子是论据不是要点。</strong><br>2026 材料 1 段 3 整段是「张女士卖牛轧糖」的故事，参考答案里<strong>一个字都没抄这段的故事</strong>，<br>只抄了段 4 的「建立'一坊一策'精准帮扶机制」。</blockquote>
+<h3 id="01--抄材料方法论-32-动词是措施题的唯一路标">3.2 动词是「措施题」的唯一路标</h3>
+<p><strong>粉笔原话</strong>（2026 答题演示）反复出现同一句式：</p>
+<blockquote>「其中<strong>'设立''开启'等动词引导的句子提示对策</strong>」<br>「其中<strong>'出台''形成''建立'等动词引导的句子提示 P 市在落实…方面的举措</strong>」<br>「其中<strong>'建立''开展'等动词引导的句子提示对策</strong>」</blockquote>
+<p><strong>高频动词表</strong>（从 8 套材料里实际出现的）：</p>
+<div class="tw"><table>
+<thead><tr><th>类别</th><th>动词</th></tr></thead><tbody>
+<tr><td>建制度</td><td>制定、出台、建立、完善、形成、明确、规范</td></tr>
+<tr><td>做动作</td><td>开展、推进、实施、落实、组织、联合、组建</td></tr>
+<tr><td>强监管</td><td>检查、查处、整治、监督、考核、问责</td></tr>
+<tr><td>优服务</td><td>设立、提供、优化、简化、便民、帮扶</td></tr>
+<tr><td>促参与</td><td>发动、引导、鼓励、聘请、参与</td></tr>
+</tbody>
+</table></div>
+<p><strong>扫读动作</strong>：拿笔逐段划「主语 + 动词 + 宾语」的句子。<strong>划不出动词的段落，跳过。</strong></p>
+<h3 id="01--抄材料方法论-33-问题题的信号词">3.3 问题题的信号词</h3>
+<div class="tw"><table>
+<thead><tr><th>找什么</th><th>信号词</th><th>真题例</th></tr></thead><tbody>
+<tr><td>问题</td><td>不足、缺乏、滞后、薄弱、缺失、不到位、不完善、难、低、少</td><td>2025·3「占道经营，阻碍居民通行；乱拉电线，存在消防安全隐患」</td></tr>
+<tr><td>原因</td><td>因为、由于、源于、归因于</td><td>2021下·2</td></tr>
+</tbody>
+</table></div>
+<p><strong>注意</strong>：问题题的答案<strong>常常是「现象 + 后果」两段式</strong>。 2025·3 要点 1 = 「商户违规经营」（总括）+「占道经营…乱拉电线…」（具体表现）。</p>
+<h3 id="01--抄材料方法论-34-数据怎么处理">3.4 数据怎么处理</h3>
+<p>材料里大量数字：<code>127 条线索</code>、<code>7 起立案</code>、<code>9.62 万元</code>、<code>146 家</code>、<code>100%</code>、<code>2000 余人</code>。</p>
+<blockquote>🔴 <strong>数字是论据，不是要点。</strong> 除非题干明确要「数据」，否则<strong>一律不抄数字</strong>。</blockquote>
+<p>2026 卷参考答案里，材料中的数字<strong>一个都没进答案</strong>。正确答案是「累计识别违规线索…立案查处…」这类<strong>定性表述</strong>。</p>
+<hr class="sep">
+<h2 id="01--抄材料方法论-四第③步摘取改写三级抄法">四、第③步：摘取改写（三级抄法）</h2>
+<p>这是「抄材料」的技术核心。<strong>按材料原话的规范程度，选不同级别</strong>。</p>
+<h3 id="01--抄材料方法论-l1-原词照抄--材料本身就是规范动宾">L1 原词照抄 —— 材料本身就是规范动宾</h3>
+<p><strong>条件</strong>：材料里的句子已经是「动词 + 宾语」的规范表述，且不带修饰语。</p>
+<p><strong>真题</strong>（2026 材料 1 段 2）：</p>
+<blockquote>材料：「<strong>制定出台了</strong>《保健食品沙盒监管基本规则》等 17 项<strong>配套制度</strong>，<strong>形成</strong>'备案-检查-处置-反馈'<strong>管理闭环机制</strong>」<br>答案：「<strong>出台配套制度，建立沙盒监管机制，形成管理闭环</strong>」</blockquote>
+<p><strong>动作</strong>：删掉书名号里的具体名称，保留「出台 + 配套制度」「形成 + 管理闭环」。</p>
+<h3 id="01--抄材料方法论-l2-压缩--材料啰嗦删修饰留主谓宾">L2 压缩 —— 材料啰嗦，删修饰留主谓宾</h3>
+<p><strong>条件</strong>：材料有大量定语、状语、举例。</p>
+<p><strong>真题</strong>（2026 材料 1 段 4）：</p>
+<blockquote>材料：「针对全县食品小作坊<strong>分布广、规模小、基础弱</strong>的现状，Q 县市场监管局<strong>建立'一坊一策'精准帮扶机制</strong>，通过<strong>分批开展法规培训、分层实施技术指导和分类制定改造标准</strong>，推动小作坊向标准化、规范化转型。」<br>答案：「<strong>建立一坊一策精准帮扶机制，分批、分层、分类施策</strong>」</blockquote>
+<p><strong>动作</strong>：</p>
+<ul>
+<li>「分布广、规模小、基础弱」→ <strong>删</strong>（这是背景，不是做法）</li>
+<li>「分批开展法规培训、分层实施技术指导和分类制定改造标准」→ <strong>压成</strong>「分批、分层、分类施策」</li>
+</ul>
+<blockquote>🔴 <strong>这是最高频的抄法</strong>。材料 60 字 → 答案 20 字，压缩比 3:1。</blockquote>
+<h3 id="01--抄材料方法论-l3-提炼--材料是具体事例抽象成主体动作对象">L3 提炼 —— 材料是具体事例，抽象成主体+动作+对象</h3>
+<p><strong>条件</strong>：材料写的是故事、对话、个案。</p>
+<p><strong>真题</strong>（2026 材料 1 段 6）：</p>
+<blockquote>材料：「P 市还活跃着一支 <strong>2000 余人</strong>的食品安全义务监督员队伍，涵盖<strong>人大代表、政协委员、外卖骑手、食品生产经营从业者</strong>等多元群体。」<br>答案：「<strong>发动多元群体壮大监督员队伍</strong>」</blockquote>
+<p><strong>动作</strong>：把「2000 余人」「人大代表、政协委员、外卖骑手…」这些<strong>具体枚举</strong>， 抽象成「<strong>多元群体</strong>」；把「活跃着一支队伍」抽象成「<strong>发动…壮大</strong>」。</p>
+<h3 id="01--抄材料方法论-44-三级对照速查">4.4 三级对照速查</h3>
+<div class="tw"><table>
+<thead><tr><th>级</th><th>触发条件</th><th>动作</th><th>压缩比</th></tr></thead><tbody>
+<tr><td><strong>L1 照抄</strong></td><td>材料已是规范动宾</td><td>删具体名称/书名号</td><td>1.5 : 1</td></tr>
+<tr><td><strong>L2 压缩</strong></td><td>有定语、举例、排比</td><td>删修饰，留主谓宾</td><td>3 : 1</td></tr>
+<tr><td><strong>L3 提炼</strong></td><td>是故事/对话/个案</td><td>抽象成主体+动作+对象</td><td>5 : 1</td></tr>
+</tbody>
+</table></div>
+<h3 id="01--抄材料方法论-45-三条禁忌">4.5 三条禁忌</h3>
+<div class="tw"><table>
+<thead><tr><th>禁忌</th><th>后果</th><th>反例</th></tr></thead><tbody>
+<tr><td>❌ <strong>整句照抄</strong></td><td>必超字数，挤掉后面的题</td><td>把「针对全县食品小作坊分布广、规模小、基础弱的现状…」全抄</td></tr>
+<tr><td>❌ <strong>自造词</strong></td><td>脱离材料 = 0 分</td><td>材料说「沙盒监管」，你写成「创新包容式监管」</td></tr>
+<tr><td>❌ <strong>口语词</strong></td><td>扣语言分</td><td>「搞」「弄」「想办法」→ 开展/推进/研究对策</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="01--抄材料方法论-五第④步合并书写分类--逻辑分">五、第④步：合并书写（分类 = 逻辑分）</h2>
+<h3 id="01--抄材料方法论-51-总括词前置--参考答案的通用格式">5.1 总括词前置 —— 参考答案的通用格式</h3>
+<p>看 8 套参考答案，<strong>几乎每条都是「4–6 字总括词 + 句号 + 具体内容」</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>卷·题</th><th>总括词</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>2026·1</td><td><strong>创新监管模式</strong>。</td><td>在商圈设立监管服务站，提供一站式服务，实时智慧监管</td></tr>
+<tr><td>2026·1</td><td><strong>帮扶小作坊升级</strong>。</td><td>建立一坊一策精准帮扶机制，分批、分层、分类帮扶</td></tr>
+<tr><td>2026·1</td><td><strong>推动多元共治</strong>。</td><td>设立消费维权服务岗和投诉直通车，发动多元群体…</td></tr>
+<tr><td>2026·1</td><td><strong>科技赋能监管</strong>。</td><td>通过数据自动分析预警，监管与执法无缝对接</td></tr>
+<tr><td>2024·1</td><td><strong>D 市公安局堰口派出所</strong>：</td><td>聚焦小区消防隐患，教育、督促民众，跟踪检查、现场落实</td></tr>
+<tr><td>2025·3</td><td><strong>规范商户经营</strong>。</td><td>结合居民诉求，制定商户经营守则…</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>总括词是拿「逻辑分」的地方</strong>。没有总括词，要点堆砌 = 扣分。</blockquote>
+<p><strong>粉笔原话</strong>（2026 答题演示）：</p>
+<blockquote>「可将概括性较强的'<strong>创新监管模式</strong>'作为<strong>总括词前置</strong>，具体内容可分为两个层次：一是在商圈设立监管服务站；二是建立沙盒监管机制。」</blockquote>
+<h3 id="01--抄材料方法论-52-合并的三个优先级">5.2 合并的三个优先级</h3>
+<div class="tw"><table>
+<thead><tr><th>顺序</th><th>合并依据</th><th>适用</th></tr></thead><tbody>
+<tr><td>①</td><td><strong>同义合并</strong></td><td>两个要点说的是同一件事</td></tr>
+<tr><td>②</td><td><strong>同主体合并</strong></td><td>都是「政府」做的 / 都是「企业」做的</td></tr>
+<tr><td>③</td><td><strong>同层面合并</strong></td><td>思想 / 制度 / 执行 / 监督</td></tr>
+</tbody>
+</table></div>
+<p><strong>真题验证</strong>（2024·1，5 条要点）： 参考答案是按<strong>主体</strong>分的 —— 堰口派出所 / L 县生态环境局 / Z 市劳动保障监察支队 / H 县公安交警大队 / S 县交通执法部门。 <strong>一个主体一条，清清楚楚。</strong></p>
+<h3 id="01--抄材料方法论-53-书写格式">5.3 书写格式</h3>
+<pre class="code"><code>一是创新监管模式。在商圈设立监管服务站…
+二是帮扶小作坊升级。建立一坊一策…
+三是推动多元共治。设立消费维权服务岗…
+四是科技赋能监管。通过数据自动分析预警…</code></pre>
+<p>或用阿拉伯数字（粉笔参考答案用的是 <code>1.</code> <code>2.</code> <code>3.</code>）。</p>
+<p><strong>每条控制 25–40 字</strong>。200 字题 4–5 条，平均每条 40–50 字（含总括词）。</p>
+<h3 id="01--抄材料方法论-54-字数怎么算">5.4 字数怎么算</h3>
+<ul>
+<li><strong>不超过 200 字</strong> = 200 格，写 190–200 字最稳</li>
+<li><strong>写 250 字</strong> = 超出部分<strong>不阅卷</strong>，等于白写还占时间</li>
+<li><strong>写 150 字</strong> = 要点不全，丢内容分</li>
+</ul>
+<blockquote>🔴 <strong>宁少一条，不超一字</strong>。超字数的损失大于漏一个小要点。</blockquote>
+<hr class="sep">
+<h2 id="01--抄材料方法论-六成文题公文--大作文怎么抄">六、成文题（公文 / 大作文）怎么抄</h2>
+<p>8 套里 <strong>16 题是成文题</strong>（总结类 9 + 大作文 5 + 部分对策），它们的「抄法」不一样。</p>
+<h3 id="01--抄材料方法论-61-公文总结类格式--内容两块分">6.1 公文（总结类）：格式 + 内容两块分</h3>
+<p><strong>真题：2024·2</strong>（20 分，工作简报）</p>
+<p>参考答案：</p>
+<pre class="code"><code>关于执法基础信息管控平台运行情况的工作简报
+B县综合行政执法局          XXXX年XX月XX日
+B县综合行政执法局为实现高质量执法，实施智慧治理，创建&quot;执法基础信息管控平台&quot;，运行情况如下。
+一、实施社会主体动态转换三色预警。…
+二、实行跟踪督办件梯次转办三级预警。…
+三、无人机快速高标准全域巡查。…</code></pre>
+<p><strong>结构拆解</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>部分</th><th>内容</th><th>分从哪来</th></tr></thead><tbody>
+<tr><td><strong>标题</strong></td><td>关于……的工作简报</td><td><strong>格式分</strong>（白送，丢了最冤）</td></tr>
+<tr><td><strong>发文单位 + 日期</strong></td><td>B 县综合行政执法局 / XXXX 年 XX 月 XX 日</td><td><strong>格式分</strong></td></tr>
+<tr><td><strong>导语</strong></td><td>目的 + 做了什么 + 「运行情况如下」</td><td>过渡分</td></tr>
+<tr><td><strong>主体</strong></td><td>一、二、三（每条也是「总括词 + 具体」）</td><td><strong>内容分</strong></td></tr>
+<tr><td><strong>结尾</strong></td><td>（简报可省略）</td><td>——</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>公文格式四要素：标题 / 称谓（或发文单位）/ 正文 / 落款</strong>。<br>8 套里总结类 9 题，<strong>每题的格式分都白送</strong>。</blockquote>
+<h3 id="01--抄材料方法论-62-大作文40-分框架固定内容来自材料">6.2 大作文（40 分）：框架固定，内容来自材料</h3>
+<p><strong>真题：2025·4</strong>（40 分）</p>
+<blockquote>「给定资料 4」中的划线句子提到「中国法治的根基在人民，只有让法治在广大人民的心中落地生根…」</blockquote>
+<p><strong>大作文的三个「抄」</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>抄什么</th><th>从哪抄</th><th>说明</th></tr></thead><tbody>
+<tr><td><strong>立意</strong></td><td>题干划线句 + 材料主旨</td><td><strong>不能自选角度跑偏</strong>，题干说「法治根基在人民」就不能写「科技创新」</td></tr>
+<tr><td><strong>分论点</strong></td><td>材料里的 3–4 个层面</td><td>材料通常给了 3 个维度，直接用</td></tr>
+<tr><td><strong>论据</strong></td><td>材料里的案例 + 少量外部素材</td><td><strong>优先用材料里的</strong>，考官认这个</td></tr>
+</tbody>
+</table></div>
+<p><strong>固定结构（五段三分）</strong>：</p>
+<pre class="code"><code>第1段 开头：引出话题 + 亮明总论点（150字）
+第2段 分论点一：总括句 + 材料例证 + 分析（200字）
+第3段 分论点二：同上（200字）
+第4段 分论点三：同上（200字）
+第5段 结尾：回扣总论点 + 升华（150字）</code></pre>
+<blockquote>⚠️ <strong>大作文必须留 55 分钟</strong>。40 分 = 前两题之和，是全卷最大的单项。</blockquote>
+<h3 id="01--抄材料方法论-63-成文题和要点题的根本差别">6.3 成文题和要点题的根本差别</h3>
+<div class="tw"><table>
+<thead><tr><th></th><th>要点题（概括/对策）</th><th>成文题（公文/作文）</th></tr></thead><tbody>
+<tr><td>答案形态</td><td>分条要点</td><td>一篇完整文章</td></tr>
+<tr><td>评分重点</td><td><strong>要点命中率</strong></td><td><strong>结构 + 格式 + 立意</strong></td></tr>
+<tr><td>能否套模板</td><td>不能（要点因材料而异）</td><td><strong>能</strong>（公文有固定格式）</td></tr>
+<tr><td>8 套占比</td><td>16 题</td><td>16 题</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="01--抄材料方法论-七采分点回溯把抄这件事变成可训练的">七、采分点回溯：把「抄」这件事变成可训练的</h2>
+<blockquote>🔴 <strong>这是本文最重要的练习方法。</strong></blockquote>
+<h3 id="01--抄材料方法论-71-为什么光看答案没用">7.1 为什么光看答案没用</h3>
+<p>大多数人拿到参考答案的反应是：<strong>「哦，原来是这样」→ 合上 → 下次还是不会。</strong></p>
+<p>因为你看的是<strong>结果</strong>，没看到<strong>过程</strong>。要学会抄，必须把「答案要点 ← 材料原句」这根线<strong>一条条接起来</strong>。</p>
+<h3 id="01--抄材料方法论-72-操作步骤">7.2 操作步骤</h3>
+<p><strong>每做完一道题，填这张表</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>参考答案要点</th><th>材料原句</th><th>位置</th><th>抄法</th></tr></thead><tbody>
+<tr><td>1</td><td>创新监管模式。在商圈设立监管服务站</td><td>「在商圈集中区域设立了 2 个'零距离'监管服务站，开启了…'智慧监管'新模式」</td><td>材料1·段1</td><td>L2 压缩 + 总括词</td></tr>
+<tr><td>2</td><td>帮扶小作坊升级。建立一坊一策精准帮扶机制</td><td>「建立'一坊一策'精准帮扶机制，通过分批开展法规培训、分层实施技术指导…」</td><td>材料1·段4</td><td>L2 压缩</td></tr>
+<tr><td>3</td><td>推动多元共治。发动多元群体壮大监督员队伍</td><td>「活跃着一支 2000 余人的食品安全义务监督员队伍，涵盖人大代表、政协委员、外卖骑手…」</td><td>材料1·段6</td><td>L3 提炼</td></tr>
+</tbody>
+</table></div>
+<p><strong>填表的三个动作</strong>：</p>
+<ol>
+<li><strong>找原句</strong>：在材料里定位到具体哪一段哪一句（找不到 = 你的理解错了）</li>
+<li><strong>判级别</strong>：这是 L1/L2/L3 哪种抄法</li>
+<li><strong>找总括词</strong>：这个总括词是从材料哪个词概括出来的</li>
+</ol>
+<h3 id="01--抄材料方法论-73-找原句的工具">7.3 找原句的工具</h3>
+<pre class="code"><code># 看某题每个要点最可能来自哪几句（按 2-gram 重合度排序）
+python 申论/_match_points.py 2024 1</code></pre>
+<p>输出示例：</p>
+<pre class="code"><code>【要点 3】Z市劳动保障监察支队：向违法公司普法，共同研定规章制度，跟踪检查落实情况。
+   0.52  在此基础上，共同研定《宏宇公司劳动合同管理实施细则》…等规章制度，跟踪检查落实情况
+   0.26  这天，Z市劳动保障监察支队接待了他们
+   0.16  随后，专门向宏宇公司赠送《劳动保障法律法规规章政策汇编》…</code></pre>
+<blockquote>⚠️ 这是<strong>辅助</strong>，不是答案。0.52 的重合度说明大概率是这句，<br>但<strong>最终要你自己读材料确认</strong> —— 工具只负责缩小范围。</blockquote>
+<h3 id="01--抄材料方法论-74-训练节奏配合-111h-申论课时">7.4 训练节奏（配合 111h 申论课时）</h3>
+<div class="tw"><table>
+<thead><tr><th>阶段</th><th>做什么</th><th>目标</th></tr></thead><tbody>
+<tr><td>第 1–2 周</td><td>每天 1 题，<strong>只看材料 + 填回溯表</strong>，不写答案</td><td>建立「答案来自材料」的直觉</td></tr>
+<tr><td>第 3–4 周</td><td>每天 1 题，<strong>先自己写 → 再对照 → 填表</strong></td><td>找出自己的漏点模式</td></tr>
+<tr><td>第 5 周起</td><td>限时写 + 只填「漏掉的要点」</td><td>提速 + 查漏</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="01--抄材料方法论-八一页速查卡考前扫这一页">八、一页速查卡（考前扫这一页）</h2>
+<h3 id="01--抄材料方法论-审题四看">审题四看</h3>
+<pre class="code"><code>答什么 → 找什么词性
+在哪找 → 划死范围
+多少字 → 反推条数（200字≈4-5条）
+几问   → 读「要求」栏，别漏第二问</code></pre>
+<h3 id="01--抄材料方法论-信号词">信号词</h3>
+<pre class="code"><code>措施 → 设立/建立/出台/开展/推进/完善/形成
+问题 → 不足/缺乏/滞后/薄弱/不到位/难
+原因 → 因为/由于/源于
+影响 → 导致/使得/促进/加剧</code></pre>
+<h3 id="01--抄材料方法论-主旨句四位置">主旨句四位置</h3>
+<pre class="code"><code>段首 / 段尾 / 转折后 / 结论后
+（中间是举例，不抄）</code></pre>
+<h3 id="01--抄材料方法论-三级抄法">三级抄法</h3>
+<pre class="code"><code>L1 照抄  材料已是规范动宾        → 删名称
+L2 压缩  有定语举例排比          → 删修饰留主谓宾   ★最常用
+L3 提炼  是故事对话个案          → 抽象成主体+动作+对象</code></pre>
+<h3 id="01--抄材料方法论-书写">书写</h3>
+<pre class="code"><code>总括词（4-6字）+ 句号 + 具体内容
+每条 25-40 字
+同义合并 → 同主体合并 → 同层面合并
+宁少一条，不超一字</code></pre>
+<h3 id="01--抄材料方法论-时间150-分钟">时间（150 分钟）</h3>
+<pre class="code"><code>读材料 20 → 第1题 20 → 第2题 25 → 第3题 30 → 大作文 55 → 检查 5</code></pre>
+<hr class="sep">
+<h2 id="01--抄材料方法论-九这套方法在-8-套卷上的验证">九、这套方法在 8 套卷上的验证</h2>
+<div class="tw"><table>
+<thead><tr><th>规则</th><th>验证方式</th><th>结果</th></tr></thead><tbody>
+<tr><td>答案 100% 来自材料</td><td>134 个要点逐个回溯</td><td>全部可定位到材料原句</td></tr>
+<tr><td>总括词前置</td><td>8 套参考答案格式</td><td>几乎所有要点都是「总括词 + 句号 + 内容」</td></tr>
+<tr><td>每题 4–5 条</td><td>32 题统计</td><td>4 条出现 7 次、5 条 6 次、3 条 5 次</td></tr>
+<tr><td>数字不进答案</td><td>2026 卷对照</td><td>材料里的 127/7/9.62 万/146/100%/2000 余，答案一个未用</td></tr>
+<tr><td>公文有格式分</td><td>2024·2 参考答案</td><td>标题 + 发文单位 + 日期 + 导语 + 主体，齐全</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="01--抄材料方法论-十下一步">十、下一步</h2>
+<div class="tw"><table>
+<thead><tr><th>文档</th><th>内容</th><th>状态</th></tr></thead><tbody>
+<tr><td>本文</td><td>抄材料四步法</td><td>✅</td></tr>
+<tr><td><code>02-五大题型手法.md</code></td><td>五大题型各自的特殊打法</td><td>⬜</td></tr>
+<tr><td>采分点台账</td><td>134 个要点的逐条回溯表</td><td>⬜ 配合本文第七节使用</td></tr>
+</tbody>
+</table></div>
+<blockquote><strong>本文是「怎么抄」的通用方法；<code>02</code> 是「每种题型怎么变通」。</strong><br>先练本文的四步法到能不看提示走完，再看 02。</blockquote></article><article><h1 id="02--五大题型手法--自评体系">02 · 五大题型手法 + 自评体系</h1>
+<blockquote><strong>本文回答两个问题</strong>：<br>1. 每种题型该怎么打（<code>01</code> 讲通用四步法，本文讲<strong>每型的变通</strong>）<br>2. <strong>怎么给自己打分</strong>（<code>01</code> 只讲怎么写，没讲怎么判对错）<br><strong>依据</strong>：8 套四川省考行政执法卷 32 题（134 要点）＋ 开源项目<br><code>liuyuexi1987/shenlun-review-pro</code> 的评分体系（GPL-3.0，<strong>只学方法，未复制代码</strong>）。<br><strong>评分体系说明</strong>：第二至第七节的「5 级锚点 + 维度权重 + 三条护栏」<br>结构参考自该项目，<strong>文字为本项目重写</strong>，锚点描述针对四川执法卷实际校准。</blockquote>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-一题型地图32-题实测">一、题型地图（32 题实测）</h2>
+<div class="tw"><table>
+<thead><tr><th>题型</th><th>次数</th><th>占比</th><th>典型问法</th><th>分值区间</th></tr></thead><tbody>
+<tr><td><strong>总结类</strong>（公文）</td><td>9</td><td>28%</td><td>写简报 / 经验交流材料 / 编者按 / 心得体会</td><td>15–30</td></tr>
+<tr><td><strong>概括措施类</strong></td><td>7</td><td>22%</td><td>「概括……做了哪些工作 / 主要措施」</td><td>10–25</td></tr>
+<tr><td><strong>提出对策类</strong></td><td>7</td><td>22%</td><td>「提出建议 / 如何解决」</td><td>20–30</td></tr>
+<tr><td><strong>文章写作题</strong>（大作文）</td><td>5</td><td>16%</td><td>「自选角度，自拟题目，写一篇文章」</td><td>35–40</td></tr>
+<tr><td>原因类</td><td>2</td><td>6%</td><td>「分析……为什么」</td><td>15–20</td></tr>
+<tr><td>多要素组合类</td><td>1</td><td>3%</td><td>「新问题 + 新解法」</td><td>25</td></tr>
+<tr><td>词句解释类</td><td>1</td><td>3%</td><td>「谈谈你对……的理解」</td><td>20</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>P0 = 大作文 + 概括措施 + 提出对策 + 总结类 = 28 题（88%）</strong>。<br>原因 / 多要素 / 词句解释合计 4 题，属于「押不中就现场想」，不投入主力时间。</blockquote>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-二自评体系总纲5-级锚点">二、自评体系总纲（5 级锚点）</h2>
+<blockquote><strong>为什么要有这个</strong>：写完不知道自己几分，练 100 篇也白练。<br>这套体系让「感觉写得还行」变成「覆盖 3 档 / 分类 2 档 / 合计 68 分」。</blockquote>
+<h3 id="02--五大题型手法--自评体系-21-五级锚点">2.1 五级锚点</h3>
+<div class="tw"><table>
+<thead><tr><th>层级</th><th>含义</th><th>一句话判据</th></tr></thead><tbody>
+<tr><td><strong>0</strong></td><td>缺失/错误</td><td>完全没写，或方向相反</td></tr>
+<tr><td><strong>1</strong></td><td>弱</td><td>有涉及，但根本性缺陷</td></tr>
+<tr><td><strong>2</strong></td><td>基本</td><td>核心方向对，但有明显缺口</td></tr>
+<tr><td><strong>3</strong></td><td>良好</td><td>核心要求完整，仅局部瑕疵</td></tr>
+<tr><td><strong>4</strong></td><td>充分</td><td>完整准确稳定，无实质缺陷</td></tr>
+</tbody>
+</table></div>
+<p><strong>得分公式</strong>：<code>诊断得分 = 层级 / 4 × 维度权重</code></p>
+<p>有满分时：<code>最终得分 = Σ(层级/4 × 权重) / Σ权重 × 满分</code>，按 <strong>0.5 分精度四舍五入</strong>。</p>
+<h3 id="02--五大题型手法--自评体系-22-相邻档判定必须逐条确认不能跳档">2.2 相邻档判定（必须逐条确认，不能跳档）</h3>
+<div class="tw"><table>
+<thead><tr><th>边界</th><th>判据</th></tr></thead><tbody>
+<tr><td><strong>0 与 1</strong></td><td>有任何可识别的相关表现 → 至少 1；完全无证据或方向相反 → 0</td></tr>
+<tr><td><strong>1 与 2</strong></td><td>方向对但<strong>大面积遗漏/严重偏题/逻辑断裂</strong> → 1；核心方向对、缺口明显 → 2</td></tr>
+<tr><td><strong>2 与 3</strong></td><td><strong>关键要点遗漏/逻辑环节缺失/结构不完整</strong> → 2；核心完整仅局部瑕疵 → 3</td></tr>
+<tr><td><strong>3 与 4</strong></td><td>有可识别的局部缺陷 → 3；完整准确稳定 → 4</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-23-三条护栏防拍脑袋给分">2.3 三条护栏（防「拍脑袋给分」）</h3>
+<div class="tw"><table>
+<thead><tr><th>护栏</th><th>规则</th></tr></thead><tbody>
+<tr><td><strong>① 不许跳档</strong></td><td>不得因单个轻微问题从 4 直接降到 2，<strong>轻微问题最多降到 3</strong>；要从 3 降到 2 必须有「核心要求缺口」的独立证据</td></tr>
+<tr><td><strong>② 跨两档要双证据</strong></td><td>想从 2 跳到 4（或反向），必须列 <strong>≥2 个独立实质证据</strong>，否则只允许调一档</td></tr>
+<tr><td><strong>③ 防重复扣分</strong></td><td>同一问题只能在<strong>最直接的维度扣一次</strong>，不许在「覆盖」扣了又在「准确」扣</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-24-临界档怎么裁">2.4 临界档怎么裁</h3>
+<p>证据落在两档之间时：</p>
+<ol>
+<li>先写<strong>已满足</strong>的锚点（能观察到的行为）</li>
+<li>再写<strong>升入上一档仍缺</strong>的条件</li>
+<li><strong>裁决：条件不明确就取低档</strong></li>
+<li>记录：当前档 / 目标档 / 依据 / 是否取低档</li>
+</ol>
+<blockquote>这条对我们特别有用 —— 自评时最容易「给自己抬一档」。</blockquote>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-三题型一概括措施类7-题--22">三、题型一：概括措施类（7 题 · 22%）</h2>
+<h3 id="02--五大题型手法--自评体系-31-识别信号">3.1 识别信号</h3>
+<ul>
+<li>「概括 / 归纳 / 总结 / 提炼……做法、措施、举措、工作」</li>
+<li>「做了哪些努力 / 采取的主要措施 / 具体做法」</li>
+<li>要求里常带「全面、准确、有条理」</li>
+</ul>
+<p><strong>⚠️ 易混</strong>：题干问「某地<strong>如何</strong>解决、<strong>采取了哪些办法</strong>」→ 仍是概括措施（材料里有）； 只有问「<strong>提出</strong>、<strong>制定</strong>、<strong>建议</strong>」才是提出对策。</p>
+<h3 id="02--五大题型手法--自评体系-32-维度权重本项目校准版">3.2 维度权重（本项目校准版）</h3>
+<div class="tw"><table>
+<thead><tr><th>维度</th><th>权重</th><th>说明</th></tr></thead><tbody>
+<tr><td>任务符合</td><td>15</td><td>是否准确抓住「措施」这个要素、是否只看指定材料</td></tr>
+<tr><td><strong>要点覆盖</strong></td><td><strong>45</strong></td><td>是否覆盖材料里所有做法</td></tr>
+<tr><td>准确有据</td><td>20</td><td>是否用材料原词、有无自造</td></tr>
+<tr><td>分类组织</td><td>10</td><td>是否按主体/层面归并</td></tr>
+<tr><td>简洁表达</td><td>10</td><td>是否精炼、不超字数</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-33-本型特有打法">3.3 本型特有打法</h3>
+<div class="tw"><table>
+<thead><tr><th>步骤</th><th>动作</th></tr></thead><tbody>
+<tr><td>找什么</td><td><strong>动词</strong>：设立/建立/出台/开展/推进/完善/形成</td></tr>
+<tr><td>怎么抄</td><td>主力用 <strong>L2 压缩</strong>（删修饰留动宾）</td></tr>
+<tr><td>怎么分</td><td>按<strong>主体</strong>分（2024·1 就是按 5 个单位分的）</td></tr>
+<tr><td>总括词</td><td><strong>必须加</strong>（「创新监管模式」「帮扶小作坊升级」）</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-34-等级锚点">3.4 等级锚点</h3>
+<div class="tw"><table>
+<thead><tr><th>层</th><th>任务符合</th><th>要点覆盖</th><th>准确有据</th></tr></thead><tbody>
+<tr><td>0</td><td>没答措施，答成问题/意义</td><td>几乎没覆盖</td><td>大量编造</td></tr>
+<tr><td>1</td><td>混入大量非措施内容</td><td>覆盖少量，大面积遗漏</td><td>多数无据</td></tr>
+<tr><td>2</td><td>大体是措施，但混入背景</td><td>覆盖部分，漏整类做法</td><td>核心有据，部分引申</td></tr>
+<tr><td>3</td><td>准确抓措施，少量边界偏移</td><td>覆盖大部分，漏少量次要</td><td>准确，少量可更精确</td></tr>
+<tr><td>4</td><td>全部紧扣「措施」</td><td>全覆盖</td><td>全部还原材料原意</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-35-真题示例2026115-分">3.5 真题示例（2026·1，15 分）</h3>
+<p>材料 1 段 4：</p>
+<blockquote>「针对全县食品小作坊<strong>分布广、规模小、基础弱</strong>的现状，Q 县市场监管局<strong>建立'一坊一策'精准帮扶机制</strong>，通过<strong>分批开展法规培训、分层实施技术指导和分类制定改造标准</strong>…」</blockquote>
+<p>参考答案第 2 条：</p>
+<blockquote>「<strong>帮扶小作坊升级</strong>。建立一坊一策精准帮扶机制，分批、分层、分类帮扶；组建专家服务团，开展体检式帮扶。」</blockquote>
+<p><strong>抄法拆解</strong>：</p>
+<ul>
+<li>「分布广、规模小、基础弱」→ <strong>删</strong>（背景不是措施）</li>
+<li>「分批开展法规培训、分层实施技术指导、分类制定改造标准」→ <strong>压成</strong>「分批、分层、分类」</li>
+<li>「帮扶小作坊升级」→ <strong>总括词</strong>（材料里没有，从「推动小作坊向标准化转型」概括）</li>
+</ul>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-四题型二提出对策类7-题--22">四、题型二：提出对策类（7 题 · 22%）</h2>
+<h3 id="02--五大题型手法--自评体系-41-识别信号">4.1 识别信号</h3>
+<ul>
+<li>「提出建议 / 对策 / 措施 / 解决办法」</li>
+<li>「如何避免 / 怎样改进 / 下一步怎么做」</li>
+<li>常伴随「针对上述问题」</li>
+</ul>
+<h3 id="02--五大题型手法--自评体系-42-与概括措施的根本差别">4.2 与概括措施的根本差别</h3>
+<div class="tw"><table>
+<thead><tr><th></th><th>概括措施</th><th>提出对策</th></tr></thead><tbody>
+<tr><td>材料里有什么</td><td><strong>已有做法</strong></td><td><strong>只有问题</strong></td></tr>
+<tr><td>你要做什么</td><td>抄出来</td><td><strong>从问题反推</strong></td></tr>
+<tr><td>抄法</td><td>L1/L2</td><td><strong>L3 提炼 + 推理</strong></td></tr>
+<tr><td>难度</td><td>低</td><td><strong>高</strong></td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-43-维度权重">4.3 维度权重</h3>
+<div class="tw"><table>
+<thead><tr><th>维度</th><th>权重</th></tr></thead><tbody>
+<tr><td>任务符合</td><td>15</td></tr>
+<tr><td><strong>要点覆盖</strong></td><td><strong>40</strong></td></tr>
+<tr><td><strong>对策可行</strong></td><td><strong>25</strong></td></tr>
+<tr><td>分类组织</td><td>10</td></tr>
+<tr><td>简洁表达</td><td>10</td></tr>
+</tbody>
+</table></div>
+<blockquote>比概括题多了一个「<strong>对策可行</strong>」维度 —— 因为对策是自己推的，可能推得不落地。</blockquote>
+<h3 id="02--五大题型手法--自评体系-44-对策的三个来源缺一不可">4.4 对策的三个来源（缺一不可）</h3>
+<div class="tw"><table>
+<thead><tr><th>来源</th><th>说明</th><th>真题</th></tr></thead><tbody>
+<tr><td><strong>① 材料里现成的</strong></td><td>有的材料会直接给做法</td><td>2025·3「制定商户经营守则」</td></tr>
+<tr><td><strong>② 从问题反推</strong></td><td>问题是 A，对策就是「解决 A」</td><td>问题「占道经营」→ 对策「划定经营区域」</td></tr>
+<tr><td><strong>③ 从经验教训反推</strong></td><td>材料讲了别处的成功经验</td><td>——</td></tr>
+</tbody>
+</table></div>
+<p><strong>反推公式</strong>：<code>问题 → 否定 → 动宾化</code></p>
+<pre class="code"><code>问题：商户违规经营，占道经营、乱拉电线
+  ↓ 否定
+不能占道经营、不能乱拉电线
+  ↓ 动宾化
+规范商户经营：划定经营区域、设置固定摊位、整治占道经营和乱拉电线</code></pre>
+<h3 id="02--五大题型手法--自评体系-45-两问题型问题--建议必读">4.5 两问题型（问题 + 建议）必读</h3>
+<p><strong>真题：2025·3</strong>（25 分）</p>
+<blockquote>要求：（1）<strong>先梳理所有问题</strong>，再提出建议</blockquote>
+<p>参考答案结构：<strong>问题 3 条 + 建议 3 条</strong>，一一对应。</p>
+<div class="tw"><table>
+<thead><tr><th>问题</th><th>建议</th></tr></thead><tbody>
+<tr><td>商户违规经营</td><td>规范商户经营</td></tr>
+<tr><td>游客人数过多</td><td>约束引导游客</td></tr>
+<tr><td>政府管理缺位</td><td>政府加强管理</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>对策要与问题一一对应</strong>。问题 3 条、建议 2 条 = 漏了。</blockquote>
+<h3 id="02--五大题型手法--自评体系-46-等级锚点对策可行维度">4.6 等级锚点（对策可行维度）</h3>
+<div class="tw"><table>
+<thead><tr><th>层</th><th>锚点</th></tr></thead><tbody>
+<tr><td>0</td><td>对策与问题无关，或全是空话</td></tr>
+<tr><td>1</td><td>少量对策能落地，多数空泛</td></tr>
+<tr><td>2</td><td>基本可行，但部分缺主体/缺动作</td></tr>
+<tr><td>3</td><td>可行，有明确主体和动作，少量不够具体</td></tr>
+<tr><td>4</td><td>全部可行，主体明确、动作具体、可执行</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-五题型三总结类--公文写作9-题--28">五、题型三：总结类 / 公文写作（9 题 · 28%）</h2>
+<blockquote><strong>这是次数最多的题型，但很多人没把它当独立题型。</strong></blockquote>
+<h3 id="02--五大题型手法--自评体系-51-识别信号">5.1 识别信号</h3>
+<p>出现以下<strong>文种</strong>就是它：</p>
+<div class="tw"><table>
+<thead><tr><th>文种</th><th>真题</th></tr></thead><tbody>
+<tr><td>工作简报</td><td>2024·2</td></tr>
+<tr><td>经验交流材料</td><td>2022上·4、2021下·3</td></tr>
+<tr><td>编者按</td><td>2022上·2</td></tr>
+<tr><td>心得体会</td><td>2022下·4</td></tr>
+<tr><td>讲话稿 / 发言稿</td><td>常见</td></tr>
+<tr><td>倡议书 / 宣传稿</td><td>常见</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-52-维度权重格式分是独立的">5.2 维度权重（<strong>格式分是独立的</strong>）</h3>
+<div class="tw"><table>
+<thead><tr><th>维度</th><th>权重</th></tr></thead><tbody>
+<tr><td><strong>格式规范</strong></td><td><strong>20</strong></td></tr>
+<tr><td>任务符合</td><td>15</td></tr>
+<tr><td><strong>要点覆盖</strong></td><td><strong>35</strong></td></tr>
+<tr><td>结构完整</td><td>15</td></tr>
+<tr><td>简洁表达</td><td>15</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 与要点题最大的差别：<strong>多了「格式规范 20 分」和「结构完整 15 分」</strong>。<br>这两块加起来 35 分，<strong>是白送的，丢了最冤</strong>。</blockquote>
+<h3 id="02--五大题型手法--自评体系-53-公文格式四要素背下来">5.3 公文格式四要素（背下来）</h3>
+<pre class="code"><code>① 标题       关于……的&lt;文种&gt;
+② 称谓/发文单位   （简报写发文单位，讲话稿写「各位领导、各位同仁：」）
+③ 正文        导语 + 主体（一、二、三）+ 结尾
+④ 落款        发文单位 + 日期</code></pre>
+<p><strong>真题验证（2024·2，20 分，工作简报）</strong>：</p>
+<pre class="code"><code>关于执法基础信息管控平台运行情况的工作简报          ← 标题
+B县综合行政执法局          XXXX年XX月XX日        ← 发文单位 + 日期
+B县综合行政执法局为实现高质量执法，实施智慧治理，
+创建&quot;执法基础信息管控平台&quot;，运行情况如下。          ← 导语
+一、实施社会主体动态转换三色预警。…               ← 主体
+二、实行跟踪督办件梯次转办三级预警。…
+三、无人机快速高标准全域巡查。…</code></pre>
+<h3 id="02--五大题型手法--自评体系-54-本型特有打法">5.4 本型特有打法</h3>
+<div class="tw"><table>
+<thead><tr><th>步骤</th><th>动作</th></tr></thead><tbody>
+<tr><td>① 定文种</td><td>题干说「简报」就不能写成「报告」</td></tr>
+<tr><td>② 先写格式骨架</td><td>标题 / 发文单位 / 日期 / 导语，<strong>占 20 分</strong></td></tr>
+<tr><td>③ 主体按「一、二、三」</td><td>每条也是「总括词 + 具体」</td></tr>
+<tr><td>④ 结尾</td><td>简报可省；讲话稿要有「谢谢大家」</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-55-等级锚点格式规范维度">5.5 等级锚点（格式规范维度）</h3>
+<div class="tw"><table>
+<thead><tr><th>层</th><th>锚点</th></tr></thead><tbody>
+<tr><td>0</td><td>完全没有公文格式，写成普通议论文</td></tr>
+<tr><td>1</td><td>有 1 个格式要素（如只有标题）</td></tr>
+<tr><td>2</td><td>有 2–3 个要素，缺落款或称谓</td></tr>
+<tr><td>3</td><td>四要素齐全，但位置或写法有小瑕疵</td></tr>
+<tr><td>4</td><td>四要素齐全、位置正确、写法规范</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-六题型四文章写作题--大作文5-题--16但占-3540-分">六、题型四：文章写作题 / 大作文（5 题 · 16%，但占 35–40 分）</h2>
+<h3 id="02--五大题型手法--自评体系-61-识别信号">6.1 识别信号</h3>
+<ul>
+<li>「自选角度，自拟题目，写一篇文章」</li>
+<li>「结合你对这句话的理解，联系实际」</li>
+<li>「以……为话题 / 为主题」</li>
+</ul>
+<h3 id="02--五大题型手法--自评体系-62-为什么它是-p0">6.2 为什么它是 P0</h3>
+<div class="tw"><table>
+<thead><tr><th>事实</th><th>数据</th></tr></thead><tbody>
+<tr><td>分值</td><td><strong>35–40 分</strong>（5 套省考全是 40）</td></tr>
+<tr><td>占全卷</td><td><strong>40%</strong></td></tr>
+<tr><td>等于</td><td><strong>前两题之和</strong></td></tr>
+<tr><td>必须留时</td><td><strong>55 分钟</strong>（不能少于 50）</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-63-维度权重">6.3 维度权重</h3>
+<div class="tw"><table>
+<thead><tr><th>维度</th><th>权重</th></tr></thead><tbody>
+<tr><td><strong>立意准确</strong></td><td><strong>30</strong></td></tr>
+<tr><td><strong>结构完整</strong></td><td><strong>25</strong></td></tr>
+<tr><td>论证充分</td><td>25</td></tr>
+<tr><td>语言表达</td><td>15</td></tr>
+<tr><td>卷面字数</td><td>5</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-64-立意不能跑题">6.4 立意：不能跑题</h3>
+<p><strong>真题：2025·4</strong>（40 分）</p>
+<blockquote>「给定资料 4」中的划线句子提到「中国法治的根基在人民，只有让法治在广大人民的心中落地生根…」</blockquote>
+<p><strong>立意三步</strong>：</p>
+<ol>
+<li><strong>抓话题词</strong>：「法治」「人民」</li>
+<li><strong>定关系</strong>：法治的根基在人民（不是「法治很重要」）</li>
+<li><strong>亮观点</strong>：首段末句必须有一句明确总论点</li>
+</ol>
+<blockquote>🔴 <strong>最常见的跑题</strong>：把「法治根基在人民」写成「如何推进法治建设」——<br>后者是<strong>范围</strong>，前者是<strong>关系</strong>。写成范围就是泛泛而谈。</blockquote>
+<h3 id="02--五大题型手法--自评体系-65-固定结构五段三分">6.5 固定结构（五段三分）</h3>
+<pre class="code"><code>第1段 开头    引出话题 + 亮明总论点        150字
+第2段 分论点一 总括句 + 材料例证 + 分析      200字
+第3段 分论点二 同上                      200字
+第4段 分论点三 同上                      200字
+第5段 结尾    回扣总论点 + 升华           150字</code></pre>
+<p><strong>分论点从哪来</strong>：材料通常给了 3 个维度，<strong>直接用</strong>，不要自己发明。</p>
+<h3 id="02--五大题型手法--自评体系-66-等级锚点立意准确维度">6.6 等级锚点（立意准确维度）</h3>
+<div class="tw"><table>
+<thead><tr><th>层</th><th>锚点</th></tr></thead><tbody>
+<tr><td>0</td><td>完全跑题，写的是另一个话题</td></tr>
+<tr><td>1</td><td>沾边但重心偏了（把关系写成范围）</td></tr>
+<tr><td>2</td><td>话题对，但总论点空泛（「要重视法治」）</td></tr>
+<tr><td>3</td><td>话题对、有明确总论点，但不够具体</td></tr>
+<tr><td>4</td><td>精准扣住话题词和关系，总论点具体可论证</td></tr>
+</tbody>
+</table></div>
+<blockquote>⚠️ <strong>2 和 3 的分界</strong>：有总论点句但落不到具体对象 → 2；<br>有具体对象和效果 → 3。</blockquote>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-七题型五其他三类4-题--12不投主力">七、题型五：其他三类（4 题 · 12%，不投主力）</h2>
+<h3 id="02--五大题型手法--自评体系-71-原因类2-题">7.1 原因类（2 题）</h3>
+<p><strong>识别</strong>：「分析……为什么 / 原因 / 为什么会说」</p>
+<p><strong>打法</strong>：</p>
+<ul>
+<li>找<strong>因果词后半句</strong>（因为、由于、源于）</li>
+<li>答案是「主体 + 原因」，通常 3–5 条</li>
+<li>真题：2021下·2「分析大家为什么会说这已经不是简单的公益课」</li>
+</ul>
+<p><strong>维度权重</strong>：任务符合 20 / 要点覆盖 50 / 准确有据 20 / 分类 10</p>
+<h3 id="02--五大题型手法--自评体系-72-词句解释类1-题">7.2 词句解释类（1 题）</h3>
+<p><strong>识别</strong>：「谈谈你对……的理解 / 认识」</p>
+<p><strong>打法</strong>（三步）：</p>
+<ol>
+<li><strong>解释词面</strong>：这句话字面在说什么</li>
+<li><strong>揭示深层</strong>：结合材料，它实际指什么</li>
+<li><strong>谈启示</strong>：对我们的意义</li>
+</ol>
+<blockquote>🔴 <strong>不能只抄材料</strong> —— 这是唯一需要「自己组织语言」的题型。<br>真题：2025·2「纽扣法庭'扣好同心扣'」</blockquote>
+<p><strong>维度权重</strong>：词面解释 25 / 深层含义 35 / 材料结合 25 / 结构 15</p>
+<h3 id="02--五大题型手法--自评体系-73-多要素组合类1-题">7.3 多要素组合类（1 题）</h3>
+<p><strong>识别</strong>：「新问题 + 新解法」「一方面……另一方面」</p>
+<p><strong>打法</strong>：按要素<strong>分组作答</strong>，每组内部再分条。 真题：2023·1（问题 4 条 + 解法 4 条）</p>
+<p><strong>维度权重</strong>：任务符合 20 / <strong>要素完整 30</strong> / 要点覆盖 30 / 分类 20</p>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-八自评操作流程每次写完走一遍">八、自评操作流程（每次写完走一遍）</h2>
+<h3 id="02--五大题型手法--自评体系-81-五步自评">8.1 五步自评</h3>
+<pre class="code"><code>① 对要点：把参考答案的要点逐个打勾/叉（覆盖表）
+② 定档：每个维度按锚点定 0-4
+③ 算分：Σ(层级/4 × 权重) ÷ Σ权重 × 满分
+④ 过护栏：检查有没有跳档、有没有重复扣分
+⑤ 记错题：按 A-H 八维分类记录（见附录）</code></pre>
+<h3 id="02--五大题型手法--自评体系-82-覆盖表最核心的一步">8.2 覆盖表（最核心的一步）</h3>
+<div class="tw"><table>
+<thead><tr><th>参考答案要点</th><th>我写了吗</th><th>判定</th></tr></thead><tbody>
+<tr><td>① 创新监管模式</td><td>✅ 写了「设立监管服务站」</td><td>覆盖</td></tr>
+<tr><td>② 帮扶小作坊升级</td><td>❌ 没写</td><td>遗漏</td></tr>
+<tr><td>③ 推动多元共治</td><td>△ 只写了「监督员」</td><td>部分覆盖</td></tr>
+<tr><td>④ 科技赋能监管</td><td>✅</td><td>覆盖</td></tr>
+</tbody>
+</table></div>
+<p><strong>覆盖率</strong> = 完全覆盖数 / 总要点数。3 条里覆盖 1 + 部分 1 = 约 50% → 覆盖维度落 <strong>2 档</strong>。</p>
+<h3 id="02--五大题型手法--自评体系-83-算分示例2026115-分">8.3 算分示例（2026·1，15 分）</h3>
+<div class="tw"><table>
+<thead><tr><th>维度</th><th>权重</th><th>我的档</th><th>得分</th></tr></thead><tbody>
+<tr><td>任务符合</td><td>15</td><td>3</td><td>11.25</td></tr>
+<tr><td>要点覆盖</td><td>45</td><td>2</td><td>22.5</td></tr>
+<tr><td>准确有据</td><td>20</td><td>3</td><td>15</td></tr>
+<tr><td>分类组织</td><td>10</td><td>3</td><td>7.5</td></tr>
+<tr><td>简洁表达</td><td>10</td><td>4</td><td>10</td></tr>
+<tr><td><strong>合计</strong></td><td>100</td><td></td><td><strong>66.25</strong></td></tr>
+</tbody>
+</table></div>
+<p>换算成 15 分制：<code>66.25 / 100 × 15 = 9.94</code> → 四舍五入到 0.5 → <strong>10 分 / 15 分</strong></p>
+<h3 id="02--五大题型手法--自评体系-84-自评最容易犯的错">8.4 自评最容易犯的错</h3>
+<div class="tw"><table>
+<thead><tr><th>错误</th><th>护栏怎么拦</th></tr></thead><tbody>
+<tr><td>觉得「差不多」就给 3</td><td>必须有<strong>可观察证据</strong>才能给 3</td></tr>
+<tr><td>一个小毛病从 4 打到 2</td><td><strong>护栏①</strong>：最多降到 3</td></tr>
+<tr><td>同一个漏点在两个维度都扣</td><td><strong>护栏③</strong>：只在最直接维度扣</td></tr>
+<tr><td>拿不准就给高分</td><td><strong>临界取低档</strong></td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-九附录错题分类表ah-八维">九、附录：错题分类表（A–H 八维）</h2>
+<blockquote>来源：<code>coffe-d/Shenlun.skill</code>（MIT 协议，<strong>可自由使用</strong>）。<br>用途：把「这次扣了 5 分」变成「这次犯了 A1 和 B1」，才能跨题看出短板。</blockquote>
+<h3 id="02--五大题型手法--自评体系-91-八维分类">9.1 八维分类</h3>
+<div class="tw"><table>
+<thead><tr><th>维度</th><th>编号</th><th>失分点</th><th>判定标准</th></tr></thead><tbody>
+<tr><td><strong>A 找点</strong></td><td>A1</td><td>漏采分点</td><td>对照清单有要点未答</td></tr>
+<tr><td></td><td>A2</td><td>找错位置</td><td>用了非指定范围材料</td></tr>
+<tr><td></td><td>A3</td><td>自我脑补</td><td>写了材料没有的内容</td></tr>
+<tr><td></td><td>A4</td><td>未用材料原词</td><td>该用原词处自行改写</td></tr>
+<tr><td><strong>B 归并</strong></td><td>B1</td><td>无统一句式</td><td>各条概括词字数/结构不齐</td></tr>
+<tr><td></td><td>B2</td><td>分类逻辑混乱</td><td>同层未合并或不同层混在一条</td></tr>
+<tr><td></td><td>B3</td><td>条数不当</td><td>过散或过并</td></tr>
+<tr><td></td><td>B4</td><td>未按领域归类</td><td>按材料顺序罗列未重组</td></tr>
+<tr><td><strong>C 结构</strong></td><td>C1</td><td>总括句误用</td><td>该无却有 / 该有却缺</td></tr>
+<tr><td></td><td>C2</td><td>总括与分论不对应</td><td>总括提了维度正文没兑现</td></tr>
+<tr><td></td><td>C3</td><td>段落比例失衡</td><td>各段字数悬殊</td></tr>
+<tr><td></td><td>C4</td><td>层次不分明</td><td>并列堆砌无递进</td></tr>
+<tr><td><strong>D 要素</strong></td><td>D1</td><td>漏要素</td><td>要「问题+建议」只答其一</td></tr>
+<tr><td></td><td>D2</td><td>要素配对错乱</td><td>问题与建议未对齐</td></tr>
+<tr><td></td><td>D3</td><td>对策无来源</td><td>既非材料有也非推出</td></tr>
+<tr><td><strong>E 材料</strong></td><td>E1</td><td>未扣材料</td><td>全用公知案例</td></tr>
+<tr><td><strong>F 表述</strong></td><td>F1</td><td>口语化</td><td>出现口语表达</td></tr>
+<tr><td></td><td>F2</td><td>字数违规</td><td>超限或明显不足</td></tr>
+<tr><td></td><td>F3</td><td>未落实形式要求</td><td>题干要求「列出要点」未照做</td></tr>
+<tr><td><strong>G 立意</strong></td><td>G1</td><td>偏题跑题</td><td>未扣话题词</td></tr>
+<tr><td></td><td>G2</td><td>标题与总论点不一致</td><td>两者指向不同</td></tr>
+<tr><td></td><td>G3</td><td>无明确中心论点</td><td>首段无总论点句</td></tr>
+<tr><td></td><td>G4</td><td>中心论点虚化</td><td>有但空泛</td></tr>
+<tr><td><strong>H 论证</strong></td><td>H1</td><td>只举未证</td><td>举案例未点评</td></tr>
+<tr><td></td><td>H3</td><td>论证深度不足</td><td>只有案例+口号</td></tr>
+<tr><td></td><td>H4</td><td>素材陈旧</td><td>案例老套或与论点无关</td></tr>
+</tbody>
+</table></div>
+<h3 id="02--五大题型手法--自评体系-92-归因叠加同一类型练法完全不同">9.2 归因叠加（同一类型，练法完全不同）</h3>
+<div class="tw"><table>
+<thead><tr><th>归因</th><th>判据</th><th>对策</th></tr></thead><tbody>
+<tr><td><strong>知识盲区</strong></td><td>压根不知道有这条规则</td><td>重学规则</td></tr>
+<tr><td><strong>技巧不熟</strong></td><td>知道但写时忘了用</td><td>集中练 3–5 道同类</td></tr>
+<tr><td><strong>粗心大意</strong></td><td>会也熟，但看漏/写漏</td><td>交卷前自查清单</td></tr>
+<tr><td><strong>时间不够</strong></td><td>仓促作答质量下降</td><td>限时训练</td></tr>
+</tbody>
+</table></div>
+<blockquote>⚠️ <strong>归因是推测，不是事实</strong>。证据不足时标「<strong>暂不确定</strong>」，<br><strong>尤其不要轻易判「知识盲区」</strong> —— 会误导自己去重学已掌握的东西。</blockquote>
+<h3 id="02--五大题型手法--自评体系-93-复发提醒">9.3 复发提醒</h3>
+<div class="tw"><table>
+<thead><tr><th>次数</th><th>状态</th><th>处理</th></tr></thead><tbody>
+<tr><td>1</td><td>🟡 初现</td><td>单题改进建议</td></tr>
+<tr><td>2</td><td>🟠 复发</td><td>提醒 + 指出上次在哪题</td></tr>
+<tr><td>≥3</td><td>🔴 顽固</td><td><strong>给专项训练方案</strong></td></tr>
+</tbody>
+</table></div>
+<blockquote>⚠️ <strong>同一篇反复批改不累加计数</strong> —— 计的是「短板出现次数」，不是「批改动作次数」。<br>误记要能<strong>撤销</strong>（标注 <code>❌ 已撤销</code> 并说明原因），否则会假性累积成不存在的「老毛病」。</blockquote>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-十一页速查题型--关键动作">十、一页速查（题型 → 关键动作）</h2>
+<div class="tw"><table>
+<thead><tr><th>题型</th><th>第一动作</th><th>核心权重</th><th>最容易丢的分</th></tr></thead><tbody>
+<tr><td><strong>概括措施</strong></td><td>找动词</td><td>要点覆盖 45</td><td>漏整类做法</td></tr>
+<tr><td><strong>提出对策</strong></td><td>问题反推</td><td>覆盖 40 + 可行 25</td><td>对策空泛无主体</td></tr>
+<tr><td><strong>总结类公文</strong></td><td>先写格式骨架</td><td>格式 20 + 覆盖 35</td><td><strong>忘写标题/落款</strong></td></tr>
+<tr><td><strong>大作文</strong></td><td>抓话题词定关系</td><td>立意 30 + 结构 25</td><td>跑题（把关系写成范围）</td></tr>
+<tr><td>原因类</td><td>找因果词后半句</td><td>覆盖 50</td><td>答成「表现」</td></tr>
+<tr><td>词句解释</td><td>三步：词面→深层→启示</td><td>深层 35</td><td>只抄材料不解释</td></tr>
+<tr><td>多要素</td><td>分组作答</td><td>要素完整 30</td><td>漏一组</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="02--五大题型手法--自评体系-十一下一步">十一、下一步</h2>
+<div class="tw"><table>
+<thead><tr><th>文档</th><th>内容</th><th>状态</th></tr></thead><tbody>
+<tr><td><code>01-抄材料方法论.md</code></td><td>通用四步法</td><td>✅</td></tr>
+<tr><td>本文 <code>02-五大题型手法.md</code></td><td>每型打法 + 自评体系</td><td>✅</td></tr>
+<tr><td><code>04-采分点台账.md</code></td><td>134 个要点的逐条回溯</td><td>⬜</td></tr>
+<tr><td>应用错题本升级</td><td>6 类 → 20+ 类（需改 index.html）</td><td>⬜ 待排期</td></tr>
+</tbody>
+</table></div></article><article><h1 id="2026-卷--采分点回溯台账18-条试点">2026 卷 · 采分点回溯台账（18 条试点）</h1>
+<blockquote><strong>这是什么</strong>：把参考答案的每一条，反向定位到<strong>材料的哪一句</strong>，并标注用了哪种抄法。<br><strong>为什么最重要</strong>：<code>01</code> 讲方法，<code>02</code> 讲题型，这份台账是<strong>方法的实例化</strong>。<br>看懂这一份，就知道「答案来自材料」不是口号，而是可逐字验证的。<br><strong>范围</strong>：2026 四川省考申论（行政执法卷）4 题 18 条要点，<strong>全量回溯</strong>。<br>这一卷是 8 套里<strong>唯一带粉笔官方「答题演示」</strong>的，所以能双向验证。<br><strong>引文规则</strong>：所有「材料原句」一律<strong>逐字摘录</strong>，不改写、不概括。<br>校验：<code>python 申论/_verify_ledger.py</code></blockquote>
+<hr class="sep">
+<h2 id="2026-卷--采分点回溯台账18-条试点-使用说明">使用说明</h2>
+<div class="tw"><table>
+<thead><tr><th>列</th><th>含义</th></tr></thead><tbody>
+<tr><td><strong>参考答案要点</strong></td><td>粉笔给的答案（原文，未改）</td></tr>
+<tr><td><strong>材料原句</strong></td><td>答案的来源句（<strong>逐字</strong>，未改写）</td></tr>
+<tr><td><strong>位置</strong></td><td>材料几·第几段</td></tr>
+<tr><td><strong>抄法</strong></td><td>L1 照抄 / L2 压缩 / L3 提炼（定义见 <code>01</code> 第四节）</td></tr>
+<tr><td><strong>总括词来源</strong></td><td>那条要点开头的 4–6 字概括词，是从材料哪个词变来的</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="2026-卷--采分点回溯台账18-条试点-第-1-题15-分--200-字--概括措施类">第 1 题（15 分 / 200 字 / 概括措施类）</h2>
+<blockquote>题干：请根据"给定资料1"，概括 P 市为做好食品安全工作采取的主要措施。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-要点-1">要点 1</h3>
+<p><strong>参考答案</strong>：创新监管模式。在商圈设立监管服务站，提供一站式服务，实时智慧监管；出台配套制度，建立沙盒监管机制，形成管理闭环。</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td><strong>材料原句 ①</strong></td><td>「在商圈集中区域设立了2个"零距离"监管服务站，开启了"微小所"进驻综合商业体的"智慧监管"新模式」</td></tr>
+<tr><td><strong>材料原句 ②</strong></td><td>「制定出台了《保健食品沙盒监管基本规则》等17项配套制度，形成"备案-检查-处置-反馈"管理闭环机制」</td></tr>
+<tr><td><strong>材料原句 ③</strong></td><td>「后厨操作实时直播、违规行为智能抓拍、远程喊话即时纠正」</td></tr>
+<tr><td><strong>材料原句 ④</strong></td><td>「群众办事"零跑腿"，商户难题"一站解"」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料1·段1、段2</td></tr>
+<tr><td><strong>抄法</strong></td><td><strong>L2 压缩</strong>（删「2个」「零距离」「微小所」等具体修饰）</td></tr>
+<tr><td><strong>总括词来源</strong></td><td>「全省首创」+「新模式」→ 「<strong>创新</strong>监管<strong>模式</strong>」</td></tr>
+</tbody>
+</table></div>
+<p><strong>粉笔原话验证</strong>（答题演示）：</p>
+<blockquote>「其中'设立''开启'等动词引导的句子提示对策…可摘抄、概括出要点：创新监管模式，在商圈设立监管服务站。」</blockquote>
+<p>✅ 与粉笔原话一致。</p>
+<h3 id="2026-卷--采分点回溯台账18-条试点-要点-2">要点 2</h3>
+<p><strong>参考答案</strong>：帮扶小作坊升级。建立一坊一策精准帮扶机制，分批、分层、分类帮扶；组建专家服务团，开展体检式帮扶。</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td><strong>材料原句 ①</strong></td><td>「针对全县食品小作坊分布广、规模小、基础弱的现状，Q县市场监管局建立"一坊一策"精准帮扶机制，通过分批开展法规培训、分层实施技术指导和分类制定改造标准，推动小作坊向标准化、规范化转型」</td></tr>
+<tr><td><strong>材料原句 ②</strong></td><td>「还联合食品行业协会组建专家服务团，深入作坊生产一线开展"体检式"帮扶」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料1·段4</td></tr>
+<tr><td><strong>抄法</strong></td><td><strong>L2 压缩</strong>（「分批开展法规培训、分层实施技术指导和分类制定改造标准」→「分批、分层、分类帮扶」）</td></tr>
+<tr><td><strong>总括词来源</strong></td><td>「推动小作坊向标准化、规范化转型」→ 「<strong>帮扶</strong>小作坊<strong>升级</strong>」</td></tr>
+</tbody>
+</table></div>
+<p><strong>⚠️ 关键取舍</strong>：材料里「分布广、规模小、基础弱」是<strong>现状描述</strong>，不是措施 → <strong>整段删掉不抄</strong>。 这是新手最容易犯的错：看到「小作坊」三个字就以为整段都要抄。</p>
+<p><strong>粉笔原话验证</strong>：</p>
+<blockquote>「其中'建立''开展'等动词引导的句子提示对策…可摘抄、概括出要点：帮扶小作坊升级，建立一坊一策精准帮扶机制，分批、分层、分类施策。」</blockquote>
+<p>✅ 一致。</p>
+<h3 id="2026-卷--采分点回溯台账18-条试点-要点-3">要点 3</h3>
+<p><strong>参考答案</strong>：推动多元共治。设立消费维权服务岗和投诉直通车，发动多元群体壮大监督员队伍，建立"1+N"传帮带机制。</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td><strong>材料原句 ①</strong></td><td>「监管所设立的"投诉直通车"，只需一通电话、一次来访，维权诉求就可当天受理、三天内反馈」</td></tr>
+<tr><td><strong>材料原句 ②</strong></td><td>「P市还活跃着一支2000余人的食品安全义务监督员队伍，涵盖人大代表、政协委员、外卖骑手、食品生产经营从业者等多元群体」</td></tr>
+<tr><td><strong>材料原句 ③</strong></td><td>「P市经开区依托该市餐饮协会建立"1+N"传帮带机制」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料1·段5、段6、段7</td></tr>
+<tr><td><strong>抄法</strong></td><td><strong>L3 提炼</strong>（「2000余人」「人大代表、政协委员、外卖骑手…」→ 抽象成「多元群体」）</td></tr>
+<tr><td><strong>总括词来源</strong></td><td>「义务监督员队伍」+「多元群体」+「1+N 传帮带」→ 「推动<strong>多元共治</strong>」</td></tr>
+</tbody>
+</table></div>
+<p><strong>粉笔原话验证</strong>：</p>
+<blockquote>「P市发动人大代表、外卖骑手等多元群体参与食品安全监督，壮大义务监督员队伍，<strong>可概括出要点</strong>：发动多元群体壮大监督员队伍。」</blockquote>
+<blockquote>🔴 注意粉笔用的是「<strong>可概括</strong>」而不是「可摘抄」—— 因为这里必须抽象，不能照抄名单。</blockquote>
+<p>✅ 一致。</p>
+<h3 id="2026-卷--采分点回溯台账18-条试点-要点-4">要点 4</h3>
+<p><strong>参考答案</strong>：科技赋能监管。通过数据自动分析预警，监管与执法无缝对接；推行农产品数字身份证，全程溯源。</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td><strong>材料原句 ①</strong></td><td>「通过前端监管数据自动分析预警、执法全流程自动跟踪预警、案件趋势自动分析预警推送等方法，L区已实现市场监管与食品安全行政执法无缝对接闭环」</td></tr>
+<tr><td><strong>材料原句 ②</strong></td><td>「智能终端随即"吐"出一张带有二维码的溯源单」</td></tr>
+<tr><td><strong>材料原句 ③</strong></td><td>「每棵蔬菜都拥有"数字身份证"」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料1·段8、段9</td></tr>
+<tr><td><strong>抄法</strong></td><td><strong>L2 压缩</strong>（三种「自动分析预警」压成一句）</td></tr>
+<tr><td><strong>总括词来源</strong></td><td>「电子大屏」「智能终端」「数据汇总入库」→ 「<strong>科技赋能</strong>监管」</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="2026-卷--采分点回溯台账18-条试点-第-2-题20-分--300-字--总结类工作简报">第 2 题（20 分 / 300 字 / 总结类·工作简报）</h2>
+<blockquote>题干：假如你是"益·峨眉"文旅检察办案团队成员，请根据"给定资料2"，就办案团队开展工作的情况，拟写一份工作简报。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-先看格式20-分里约-4-分是格式">先看格式（20 分里约 4 分是格式）</h3>
+<div class="tw"><table>
+<thead><tr><th>格式要素</th><th>参考答案的写法</th><th>分从哪来</th></tr></thead><tbody>
+<tr><td>标题</td><td>关于"益·峨眉"文旅检察办案团队的工作简报</td><td><strong>必须有</strong></td></tr>
+<tr><td>导语</td><td>2021年，峨眉山市检察院组建…自成立以来，团队重点开展了以下工作：</td><td>过渡</td></tr>
+<tr><td>主体</td><td>一、守护历史古迹。二、守护万物生灵。三、守护游客安全。</td><td>内容分</td></tr>
+<tr><td>落款</td><td>（本题参考答案未给，实际考试建议补）</td><td>可选</td></tr>
+</tbody>
+</table></div>
+<blockquote>⚠️ <strong>参考答案没写落款</strong> —— 这是粉笔答案的简化。实际考试<strong>建议补上</strong>。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-要点-1守护历史古迹">要点 1：守护历史古迹</h3>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td><strong>材料原句 ①</strong></td><td>「办案团队从行政机关聘请文物、文化、安全等领域的多名专家担任特约检察官助理，吸纳38名网格员兼任文旅检察观察员，借助无人机航拍、三维影像建模、食品药品快速检测等科技手段，大幅提升办案精度与效率」</td></tr>
+<tr><td><strong>材料原句 ②</strong></td><td>「创新推出"随手拍"扫码举报平台，让每一位游客都成为世界遗产的守护者」</td></tr>
+<tr><td><strong>材料原句 ③</strong></td><td>「峨眉山市检察院向相关部门及乡镇发出检察建议，督促其履行保护职责」</td></tr>
+<tr><td><strong>材料原句 ④</strong></td><td>「推动峨眉山景区管委会文物保护管理局制定《峨眉山古建筑群保护规划》」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料2·段3、段4</td></tr>
+<tr><td><strong>抄法</strong></td><td><strong>L2 压缩</strong>（删掉「38名」「无人机航拍、三维影像建模」等具体手段，保留「专家、网格员、科技手段」）</td></tr>
+<tr><td><strong>总括词来源</strong></td><td>段 4 整段讲飞来殿等古建隐患 → 「<strong>守护历史古迹</strong>」</td></tr>
+</tbody>
+</table></div>
+<h3 id="2026-卷--采分点回溯台账18-条试点-要点-2守护万物生灵">要点 2：守护万物生灵</h3>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td><strong>材料原句 ①</strong></td><td>「孙某平时表现良好，此次纯属无知误犯」</td></tr>
+<tr><td><strong>材料原句 ②</strong></td><td>「最终制定出一份"劳务代偿"方案，孙某以劳动折算抵扣赔偿」</td></tr>
+<tr><td><strong>材料原句 ③</strong></td><td>「持续开展古树名木和特有物种保护专项监督活动，完善534株古树长效保护机制，以检察履职护航景区全年禁猎」</td></tr>
+<tr><td><strong>材料原句 ④</strong></td><td>「悉心跟踪监测山溪鲵的游迹、桢楠树的年轮，邀约专家科学评估生态修复的每一寸进展」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料2·第2则段2、段3</td></tr>
+<tr><td><strong>抄法</strong></td><td><strong>L2 压缩 + L3 提炼</strong>（孙某个案 → 抽象成「无知误犯…劳务代偿」）</td></tr>
+<tr><td><strong>总括词来源</strong></td><td>「野生动物」「古树名木」「特有物种」「生态修复」→ 「<strong>守护万物生灵</strong>」</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>这题的难点</strong>：材料用「农民孙某捕杀黑颈鹤」这个<strong>个案</strong>讲了 200 多字，<br>答案只用了「针对无知误犯的违法行为，通过劳务代偿抵扣赔偿」18 个字。<br><strong>个案 → 抽象</strong>，这是 L3 提炼的典型场景。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-要点-3守护游客安全">要点 3：守护游客安全</h3>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td><strong>材料原句 ①</strong></td><td>「2024年，办案团队将目光投向了盲道，这些盲道有的被窨井粗暴截断，有的被临时停车位占据，还有的被水泥补丁覆盖」</td></tr>
+<tr><td><strong>材料原句 ②</strong></td><td>「及时协调住房和城乡建设局、相关乡镇（街道）等，明确监管职责」</td></tr>
+<tr><td><strong>材料原句 ③</strong></td><td>「针对游客住宿和消防安全问题，办案团队督促景区内300余家民宿酒店完成安全风险自查」</td></tr>
+<tr><td><strong>材料原句 ④</strong></td><td>「推动出台《关于进一步加强流通环节散装食品监管的通知》」</td></tr>
+<tr><td><strong>材料原句 ⑤</strong></td><td>「通过互动小游戏，让游客在趣味问答中学习文物保护、动植物保护、食品安全等法律知识」</td></tr>
+<tr><td><strong>材料原句 ⑥</strong></td><td>「成为"普法+科普"融合的创新典范」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料2·第3则段1、段2、段3</td></tr>
+<tr><td><strong>抄法</strong></td><td><strong>L2 压缩</strong>（「300余家」「122处」等数字全部删掉）</td></tr>
+<tr><td><strong>总括词来源</strong></td><td>「盲道（视障游客）」「住宿消防」「食品安全」「普法」→ 「<strong>守护游客安全</strong>」</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>数字一个都没进答案</strong>：300余家、122处、70万次、534株 —— 全是论据。</blockquote>
+<hr class="sep">
+<h2 id="2026-卷--采分点回溯台账18-条试点-第-3-题25-分--500-字--提出对策类两问">第 3 题（25 分 / 500 字 / 提出对策类·两问）</h2>
+<blockquote>题干：梳理社区矫正工作面临的问题，并提出对策建议。<br>要求：（1）<strong>先梳理完所有问题，再提出建议</strong></blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-结构5-问题--5-建议一一对应">结构：5 问题 + 5 建议，<strong>一一对应</strong></h3>
+<div class="tw"><table>
+<thead><tr><th>问题</th><th>建议</th><th>反推动词</th></tr></thead><tbody>
+<tr><td>队伍力量薄弱</td><td>充实队伍力量</td><td>薄弱 → 充实</td></tr>
+<tr><td>家庭支持缺位</td><td>强化家庭支持</td><td>缺位 → 强化</td></tr>
+<tr><td>社会支持不足</td><td>加强社会支持</td><td>不足 → 加强</td></tr>
+<tr><td>社会接纳度低</td><td>推动社会接纳</td><td>度低 → 推动</td></tr>
+<tr><td>监管沟通不畅</td><td>畅通监管沟通</td><td>不畅 → 畅通</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>本题最重要的发现</strong>：5 个问题对 5 条建议，<strong>词是镜像的</strong>。<br>这不是巧合，是命题人设计好的 —— 按这个模式反推，基本不会漏。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-问题-1--建议-1">问题 1 → 建议 1</h3>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>问题（材料原句）</th><th>建议（材料原句）</th></tr></thead><tbody>
+<tr><td><strong>原文</strong></td><td>「现有社区矫正工作人员不到50人，严重不足」「我们工作人员的专业知识相对薄弱」</td><td>「加强工作人员引进和招聘，发动志愿者和兼职人员参与，定期组织法律、心理学、社会工作等培训，提升专业能力；优化工作人员与志愿者协作，明确职责分工」</td></tr>
+<tr><td><strong>另一处（志愿者）</strong></td><td>「不知道自己该做什么、能做什么，也不知道怎样才是对他们更好，大多情况下只能配合司法所做一些简单的工作」</td><td>同上（「明确职责分工」）</td></tr>
+<tr><td><strong>位置</strong></td><td>材料3·第2则段2、第3则段2</td><td>材料3·参考答案区</td></tr>
+<tr><td><strong>抄法</strong></td><td>L2 压缩</td><td>L2 压缩</td></tr>
+</tbody>
+</table></div>
+<blockquote>⚠️ <strong>本题材料里只有问题、没有对策</strong>，对策是<strong>自己推的</strong>（属于 <code>02</code> 说的「从问题反推」）。<br>参考答案那 5 条建议是粉笔老师推出来的，材料里没有现成句子。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-问题-2--建议-2">问题 2 → 建议 2</h3>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>问题</th><th>建议</th></tr></thead><tbody>
+<tr><td><strong>原文</strong></td><td>「小倪的父母长年在外务工，与小倪一起生活的爷爷奶奶年迈体衰，无力管教他」「甚至还有家庭不仅不提供支持，还认为社区矫正对象给家里抹黑，对外藏着掖着」</td><td>「建立家庭定期联系制度，开展家庭教育指导，督促履行监护责任，帮助转变观念，促进信息互通，提供正向支持」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料3·第2则段3</td><td>参考答案区</td></tr>
+<tr><td><strong>反推关系</strong></td><td>无力管教 → 家庭教育指导</td><td>藏着掖着（排斥心理）→ 帮助转变观念</td></tr>
+</tbody>
+</table></div>
+<h3 id="2026-卷--采分点回溯台账18-条试点-问题-3--建议-3">问题 3 → 建议 3</h3>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>问题</th><th>建议</th></tr></thead><tbody>
+<tr><td><strong>原文</strong></td><td>「本地这类专业的社会组织太少，加之我们经费有限，即使只针对未成年矫正对象，活动也不够丰富，几次以后，他们也不太愿意参加了」</td><td>「培育和引进专业社会组织，加大资金投入，创新活动形式和内容，扩大覆盖范围，提升参与积极性」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料3·第2则段5</td><td>参考答案区</td></tr>
+<tr><td><strong>反推关系</strong></td><td>社会组织太少 → 培育引进</td><td>经费有限 → 加大投入</td><td>活动不丰富 → 创新形式</td></tr>
+</tbody>
+</table></div>
+<h3 id="2026-卷--采分点回溯台账18-条试点-问题-4--建议-4">问题 4 → 建议 4</h3>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>问题</th><th>建议</th></tr></thead><tbody>
+<tr><td><strong>原文</strong></td><td>「不少社区居民刻意疏远社区矫正对象，甚至指指点点」「社区矫正对象杨某靠开网约车维生，起初收入不错，但一年后遭平台封号，理由是被判刑了」</td><td>「开展宣传教育，引导正确认知，鼓励矫正对象参加公益志愿活动；主动联系企业，争取就业支持，并做好回访、随访，共同加强管理，减少歧视，促进社会融入」</td></tr>
+<tr><td><strong>另一处（企业顾虑）</strong></td><td>「希望社区矫正工作人员能加强回访、随访，在后期工作中我们也会加强管理」</td><td>同上（「做好回访、随访」）</td></tr>
+<tr><td><strong>位置</strong></td><td>材料3·第2则段6、第3则段3</td><td>参考答案区</td></tr>
+<tr><td><strong>反推关系</strong></td><td>居民疏远 → 宣传教育</td><td>平台封号 → 联系企业争取就业支持</td></tr>
+</tbody>
+</table></div>
+<h3 id="2026-卷--采分点回溯台账18-条试点-问题-5--建议-5">问题 5 → 建议 5</h3>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>问题</th><th>建议</th></tr></thead><tbody>
+<tr><td><strong>原文</strong></td><td>「有时候社区矫正对象说去参加过公益活动了，但仔细询问所属村才知道他根本没参加。如果司法所与村之间有完善的沟通渠道，可以很大程度上避免这样的问题，否则很可能出现社区矫正对象"脱管"」</td><td>「司法所与村建立畅通的沟通渠道，定期线上线下联络，加强部门协同，压实责任，推动信息共享」</td></tr>
+<tr><td><strong>位置</strong></td><td>材料3·第3则段1</td><td>参考答案区</td></tr>
+<tr><td><strong>反推关系</strong></td><td>缺乏沟通渠道 → 建立畅通渠道</td><td>脱管 → 压实责任</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="2026-卷--采分点回溯台账18-条试点-第-4-题40-分--8001000-字--大作文">第 4 题（40 分 / 800–1000 字 / 大作文）</h2>
+<blockquote>题干："我们要以法理和常情常理为经纬，去织补去修复，才能'避免埋钉子、留尾巴'，才能实现真正的长治久安。"</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-立意拆解40-分里最值钱的-30-分">立意拆解（40 分里最值钱的 30 分）</h3>
+<div class="tw"><table>
+<thead><tr><th>步</th><th>动作</th><th>本题答案</th></tr></thead><tbody>
+<tr><td>① 抓话题词</td><td>题干反复出现的关键词</td><td><strong>法理</strong> + <strong>常情常理</strong></td></tr>
+<tr><td>② 定关系</td><td>两者是什么关系</td><td><strong>经纬</strong> = 缺一不可、刚柔并济、辩证统一</td></tr>
+<tr><td>③ 亮观点</td><td>首段末句必须有明确总论点</td><td>「法治安天下，情理润人心」</td></tr>
+</tbody>
+</table></div>
+<p><strong>参考答案的总论点</strong>：</p>
+<blockquote>「法理是刚性的规则与正义，常情常理是柔性的伦理与人心。二者相辅相成、刚柔并济，方能根除矛盾隐患、弥合社会裂痕，实现标本兼治。」</blockquote>
+<blockquote>🔴 <strong>新手最容易跑题的地方</strong>：把「法理 + 情理」写成「法治很重要」。<br>后者只抓一个词，丢了「两者关系」，直接掉 2 档（见 <code>02</code> 第六节锚点）。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-结构本题参考答案是四段式">结构（本题参考答案是四段式）</h3>
+<div class="tw"><table>
+<thead><tr><th>段</th><th>内容</th><th>从材料哪里来</th></tr></thead><tbody>
+<tr><td>1</td><td>开头：法治不是冰冷条文 + 总论点</td><td>题干划线句</td></tr>
+<tr><td>2</td><td><strong>分论点一：以法理为经，坚守法治底线</strong></td><td>材料4 里「交通肇事入狱」「非法猎捕判刑」「违法排污查处」</td></tr>
+<tr><td>3</td><td><strong>分论点二：以情理为纬，修复人心裂痕</strong></td><td>材料4 里「蓝风铃恢复性司法」</td></tr>
+<tr><td>4</td><td>结尾：回扣总论点 + 升华</td><td>「人民满意是一条走不完的路」</td></tr>
+</tbody>
+</table></div>
+<blockquote>⚠️ 本题参考答案是<strong>四段式</strong>（开头 + 2 分论点 + 结尾），不是严格五段。<br>说明<strong>结构不必死守五段</strong>，关键是「总论点 + 分论点 + 论证」齐全。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-论据来源">论据来源</h3>
+<div class="tw"><table>
+<thead><tr><th>论据</th><th>材料位置</th><th>用法</th></tr></thead><tbody>
+<tr><td>交通肇事人员依法入狱服刑</td><td>材料4</td><td>论证「法理底线」</td></tr>
+<tr><td>非法猎捕野生动物判刑 + 生态赔偿</td><td>材料4</td><td>同上</td></tr>
+<tr><td>违法排污企业严肃查处</td><td>材料4</td><td>同上</td></tr>
+<tr><td><strong>「蓝风铃」恢复性司法活动</strong></td><td>材料4</td><td>论证「情理温度」</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>大作文的论据优先用材料里的</strong>。这 4 个例子全在材料 4，不需要外部素材。</blockquote>
+<hr class="sep">
+<h2 id="2026-卷--采分点回溯台账18-条试点-汇总18-条要点的抄法分布">汇总：18 条要点的抄法分布</h2>
+<div class="tw"><table>
+<thead><tr><th>抄法</th><th>条数</th><th>占比</th><th>典型场景</th></tr></thead><tbody>
+<tr><td><strong>L1 照抄</strong></td><td><strong>0</strong></td><td><strong>0%</strong></td><td>——</td></tr>
+<tr><td><strong>L2 压缩</strong></td><td><strong>13</strong></td><td><strong>72%</strong></td><td>删修饰、删数字、合并排比</td></tr>
+<tr><td><strong>L3 提炼</strong></td><td>5</td><td>28%</td><td>个案→抽象、名单→「多元群体」</td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>关键结论：L2 压缩占 72%，L1 一次都没用。</strong><br>这推翻了「抄材料 = 照抄原句」的直觉。<br><strong>真正的「抄」是：找到动词句 → 删掉所有修饰和数字 → 留下动宾结构。</strong><br>完全照抄（L1）在 18 条里一次都没出现，因为材料原文几乎都有修饰语。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-按题型看">按题型看</h3>
+<div class="tw"><table>
+<thead><tr><th>题型</th><th>要点数</th><th>主力抄法</th><th>特有难点</th></tr></thead><tbody>
+<tr><td>第1题 概括措施</td><td>4</td><td>L2 压缩</td><td>删掉现状描述（「分布广、规模小」）</td></tr>
+<tr><td>第2题 公文</td><td>3</td><td>L2 + L3</td><td>个案抽象 + 格式分</td></tr>
+<tr><td>第3题 提出对策</td><td>10</td><td>L2 压缩</td><td>问题↔建议镜像对应</td></tr>
+<tr><td>第4题 大作文</td><td>1（范文）</td><td>不适用</td><td>立意定关系，不能跑题</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="2026-卷--采分点回溯台账18-条试点-从这份台账提炼的-5-条铁律">从这份台账提炼的 5 条铁律</h2>
+<h3 id="2026-卷--采分点回溯台账18-条试点-铁律-1答案的每个字都能指回材料">铁律 1：答案的每个字都能指回材料</h3>
+<p>18 条要点，<strong>没有一条是脱离材料自己发挥的</strong>。 包括大作文的分论点 —— 也是从材料 4 的两个层面来的。</p>
+<h3 id="2026-卷--采分点回溯台账18-条试点-铁律-2动词是唯一路标">铁律 2：动词是唯一路标</h3>
+<p>粉笔答题演示里反复出现的句式：</p>
+<blockquote>「其中'<strong>设立</strong>''<strong>开启</strong>'等<strong>动词</strong>引导的句子提示对策」<br>「其中'<strong>建立</strong>''<strong>开展</strong>'等<strong>动词</strong>引导的句子提示对策」</blockquote>
+<p><strong>找措施 = 找动词</strong>。找不到动词的段落，整段跳过。</p>
+<h3 id="2026-卷--采分点回溯台账18-条试点-铁律-3数字一个都不抄">铁律 3：数字一个都不抄</h3>
+<p>材料里 <code>2个</code>、<code>17项</code>、<code>127条</code>、<code>9.62万元</code>、<code>2000余人</code>、<code>293处</code>、<code>5051件</code>、 <code>38名</code>、<code>300余家</code>、<code>122处</code>、<code>534株</code>、<code>70万次</code> —— <strong>答案里一个都没有</strong>。</p>
+<blockquote>数字是论据，不是要点。除非题干明确要「数据」，否则一律不抄。</blockquote>
+<h3 id="2026-卷--采分点回溯台账18-条试点-铁律-4现状描述不是措施">铁律 4：现状描述不是措施</h3>
+<p>材料：「针对全县食品小作坊<strong>分布广、规模小、基础弱</strong>的现状…」 答案：<strong>删掉</strong>，只留「建立一坊一策精准帮扶机制」。</p>
+<p><strong>判断法</strong>：这句话是「描述情况」还是「做了什么」？ 描述情况 → 删；做了什么 → 留。</p>
+<h3 id="2026-卷--采分点回溯台账18-条试点-铁律-5两问题型问题和对策是镜像">铁律 5：两问题型，问题和对策是镜像</h3>
+<p>第 3 题 5 个问题对 5 条建议：</p>
+<pre class="code"><code>队伍力量薄弱 → 充实队伍力量
+家庭支持缺位 → 强化家庭支持
+社会支持不足 → 加强社会支持
+社会接纳度低 → 推动社会接纳
+监管沟通不畅 → 畅通监管沟通</code></pre>
+<p><strong>字数一样、结构一样、只换了动词</strong>。</p>
+<hr class="sep">
+<h2 id="2026-卷--采分点回溯台账18-条试点-下一步">下一步</h2>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>状态</th></tr></thead><tbody>
+<tr><td>2026 卷 18 条回溯</td><td>✅ 完成（本文件）</td></tr>
+<tr><td>其余 7 套 116 条</td><td>⬜ 待做</td></tr>
+<tr><td>新手路线文档（怎么看/怎么抄/怎么写）</td><td>⬜ 待写（基于本台账提炼）</td></tr>
+</tbody>
+</table></div></article><article><h1 id="四川省考申论行政执法卷真题综合分析">四川省考申论（行政执法卷）真题综合分析</h1>
+<blockquote>数据：<strong>8 套真题 / 32 道题 / 134 个答案要点 / 32 段材料（53,860 字）</strong><br>来源：粉笔题库，2026-10-28 抓取，原文见 <code>raw/MERGED_*.txt</code><br>校验：<code>python 申论/_verify_shenlun.py</code> → 全部通过<br><strong>原则</strong>：所有数字由 <code>_stats_shenlun.py</code> 从 <code>parsed/*.json</code> 复算，不手填。</blockquote>
+<hr class="sep">
+<h2 id="四川省考申论行政执法卷真题综合分析-一最重要的发现川考执法卷的分值结构是固定的">一、最重要的发现：川考执法卷的分值结构是<strong>固定的</strong></h2>
+<div class="tw"><table>
+<thead><tr><th>卷</th><th>第1题</th><th>第2题</th><th>第3题</th><th>第4题</th><th>合计</th></tr></thead><tbody>
+<tr><td>2021下</td><td>15</td><td>20</td><td>25</td><td><strong>40</strong></td><td>100</td></tr>
+<tr><td>2022下</td><td>15</td><td>20</td><td>25</td><td><strong>40</strong></td><td>100</td></tr>
+<tr><td>2024</td><td>15</td><td>20</td><td>25</td><td><strong>40</strong></td><td>100</td></tr>
+<tr><td>2025</td><td>15</td><td>20</td><td>25</td><td><strong>40</strong></td><td>100</td></tr>
+<tr><td>2026</td><td>15</td><td>20</td><td>25</td><td><strong>40</strong></td><td>100</td></tr>
+<tr><td>2021上联考</td><td>10</td><td>30</td><td>30</td><td>30</td><td>100</td></tr>
+<tr><td>2022上联考</td><td>20</td><td>20</td><td>25</td><td>35</td><td>100</td></tr>
+<tr><td>2023上联考</td><td>25</td><td>20</td><td>15</td><td><strong>40</strong></td><td>100</td></tr>
+</tbody>
+</table></div>
+<p><strong>结论</strong>：</p>
+<ul>
+<li><strong>5 套省考卷（2021下/2022下/2024/2025/2026）分值完全一致：15 + 20 + 25 + 40</strong></li>
+<li>多省联考卷（2021上/2022上/2023上）分值有波动，但第 4 题大作文始终 35–40 分</li>
+<li><strong>大作文永远占 35–40%，是唯一决定生死的一题</strong></li>
+</ul>
+<blockquote>🔴 <strong>备考含义</strong>：不要平均用力。<strong>大作文 40 分 = 前两题之和</strong>。写作能力不过关，小题做得再漂亮也上不了 65。</blockquote>
+<hr class="sep">
+<h2 id="四川省考申论行政执法卷真题综合分析-二题型分布32-题全量">二、题型分布（32 题全量）</h2>
+<div class="tw"><table>
+<thead><tr><th>题型（粉笔标签）</th><th>次数</th><th>占比</th><th>典型问法</th></tr></thead><tbody>
+<tr><td><strong>总结类</strong></td><td>9</td><td>28%</td><td>写工作简报 / 经验交流材料 / 编者按 / 心得体会</td></tr>
+<tr><td><strong>概括措施类</strong></td><td>7</td><td>22%</td><td>「概括……做了哪些工作 / 采取的主要措施」</td></tr>
+<tr><td><strong>提出对策类</strong></td><td>7</td><td>22%</td><td>「提出建议 / 如何解决」</td></tr>
+<tr><td><strong>文章写作题</strong></td><td>5</td><td>16%</td><td>「自选角度，自拟题目，写一篇文章」</td></tr>
+<tr><td>原因类</td><td>2</td><td>6%</td><td>「分析……为什么」</td></tr>
+<tr><td>多要素组合类</td><td>1</td><td>3%</td><td>「新问题 + 新解法」</td></tr>
+<tr><td>词句解释类</td><td>1</td><td>3%</td><td>「谈谈你对……的理解」</td></tr>
+</tbody>
+</table></div>
+<h3 id="四川省考申论行政执法卷真题综合分析-三条硬结论">三条硬结论</h3>
+<p><strong>① 「总结类」是第一大题型（9 次 / 28%），但很多人根本没意识到它是独立题型。</strong> 它考的不是「概括」，而是<strong>按公文格式把要点组织成一篇东西</strong>：</p>
+<ul>
+<li>工作简报（2024·2）</li>
+<li>经验交流材料（2022上·4、2021下·3）</li>
+<li>编者按（2022上·2）</li>
+<li>心得体会（2022下·4）</li>
+</ul>
+<blockquote>这类题的评分<strong>同时看内容和格式</strong>。格式分（标题、称谓、落款）白送，丢了最冤。</blockquote>
+<p><strong>② 「概括措施类」+「提出对策类」合计 14 题（44%），是绝对主战场。</strong> 两者是<strong>镜像关系</strong>：</p>
+<ul>
+<li>概括措施 = 材料里有做法，你<strong>抄出来</strong></li>
+<li>提出对策 = 材料里有问题，你<strong>反推出做法</strong></li>
+</ul>
+<blockquote>🔴 这两个题型吃透了，「抄材料」的基本功就到位了。</blockquote>
+<p><strong>③ 「词句解释类」只考过 1 次（2025·2「纽扣法庭」），但它是唯一的「纯理解题」。</strong> 不能靠抄，必须先解释词面、再讲深层含义。这类题<strong>押不中就得现场想</strong>，要单独练。</p>
+<hr class="sep">
+<h2 id="四川省考申论行政执法卷真题综合分析-三材料规模稳定在-60007400-字">三、材料规模：稳定在 6000–7400 字</h2>
+<div class="tw"><table>
+<thead><tr><th>卷</th><th>材料段数</th><th>材料总字数</th></tr></thead><tbody>
+<tr><td>2021上联考</td><td>4</td><td>6,185</td></tr>
+<tr><td>2021下</td><td>4</td><td>7,056</td></tr>
+<tr><td>2022上联考</td><td>4</td><td>6,776</td></tr>
+<tr><td>2022下</td><td>4</td><td>6,150</td></tr>
+<tr><td>2023上联考</td><td>4</td><td>6,144</td></tr>
+<tr><td>2024</td><td>4</td><td>6,960</td></tr>
+<tr><td>2025</td><td>4</td><td>7,219</td></tr>
+<tr><td>2026</td><td>4</td><td>7,370</td></tr>
+<tr><td><strong>平均</strong></td><td><strong>4</strong></td><td><strong>6,733</strong></td></tr>
+</tbody>
+</table></div>
+<p><strong>结论</strong>：</p>
+<ul>
+<li><strong>永远是 4 段材料、对应 4 道题</strong>（一对一，没有跨材料题）</li>
+<li>材料总量 <strong>6000–7400 字</strong>，考试时间 150 分钟</li>
+<li>平均每题可用 <strong>37 分钟</strong>（含读材料、写答案、誊抄）</li>
+</ul>
+<blockquote>🔴 <strong>时间账</strong>：读 6700 字 ≈ 20 分钟，4 题作答 4×25 分钟 = 100 分钟，剩 30 分钟机动。<br><strong>如果大作文只留 40 分钟，一定写不完</strong>——它需要 50–60 分钟。</blockquote>
+<hr class="sep">
+<h2 id="四川省考申论行政执法卷真题综合分析-四答案要点数每题-35-条是常态">四、答案要点数：每题 3–5 条是常态</h2>
+<div class="tw"><table>
+<thead><tr><th>要点数</th><th>题数</th><th>说明</th></tr></thead><tbody>
+<tr><td>1 条</td><td>7</td><td><strong>全部是大作文 / 公文成文</strong>（答案本身是一篇文章，无编号）</td></tr>
+<tr><td>3 条</td><td>5</td><td>常见</td></tr>
+<tr><td>4 条</td><td>7</td><td><strong>最常见</strong></td></tr>
+<tr><td>5 条</td><td>6</td><td>常见</td></tr>
+<tr><td>6 条</td><td>3</td><td>偏多</td></tr>
+<tr><td>8 条</td><td>2</td><td>多要素题（如 2023·1 新问题+新解法）</td></tr>
+<tr><td>10–11 条</td><td>2</td><td>两问题（原因+对策）或复杂对策题</td></tr>
+</tbody>
+</table></div>
+<p><strong>结论</strong>：</p>
+<ul>
+<li><strong>除了成文题，绝大多数题 3–5 条要点</strong></li>
+<li>200 字题 ≈ 4–5 条，300 字题 ≈ 5–6 条，400 字题 ≈ 6–8 条</li>
+<li><strong>「1 条」不代表简单</strong> —— 那 7 道是 40 分的大作文或公文，反而是最难的</li>
+</ul>
+<hr class="sep">
+<h2 id="四川省考申论行政执法卷真题综合分析-五材料主题全部围绕执法--基层治理--民生">五、材料主题：全部围绕「执法 / 基层治理 / 民生」</h2>
+<div class="tw"><table>
+<thead><tr><th>卷</th><th>材料主题</th></tr></thead><tbody>
+<tr><td>2021上联考</td><td>一盔一带、限水体验日、一户多宅整治、未成年人饮酒</td></tr>
+<tr><td>2021下</td><td>农业生产服务、公益课、政法队伍办实事、糖丸爷爷</td></tr>
+<tr><td>2022上联考</td><td>儿童安全座椅、应急先进人物、小饭桌管理、基层法律服务</td></tr>
+<tr><td>2022下</td><td>万警千车下基层、执法管理服务、基层治理研讨会、红色家书</td></tr>
+<tr><td>2023上联考</td><td>融合型大社区治理、小饭桌/座谈会、五星级平安小区、面子与里子</td></tr>
+<tr><td>2024</td><td>服务型行政执法、执法信息平台、税务稽查队伍、法治抓前端</td></tr>
+<tr><td>2025</td><td>未检团队、纽扣法庭、文旅与民生平衡、法治根基在人民</td></tr>
+<tr><td>2026</td><td>食品安全监管、文旅检察办案、社区矫正、法理与常情</td></tr>
+</tbody>
+</table></div>
+<p><strong>结论</strong>：</p>
+<ul>
+<li>主题高度集中在 <strong>行政执法实务</strong>（服务型执法、队伍建设、监管创新）</li>
+<li>大作文关键词反复出现：<strong>法治、人民、基层、治理、温度</strong></li>
+<li><strong>不需要背经济/科技类素材</strong>，只需要背「法治 + 基层治理」这一条线</li>
+</ul>
+<blockquote>🔴 这是执法卷和省市卷/县乡卷最大的差别：<strong>主题窄、可预测性强</strong>。</blockquote>
+<hr class="sep">
+<h2 id="四川省考申论行政执法卷真题综合分析-六粉笔答题演示是最值钱的部分但只有-1-套有">六、粉笔「答题演示」是最值钱的部分（但只有 1 套有）</h2>
+<p>8 套里<strong>只有 2026 卷带「答题演示」</strong>，它逐段标注了：</p>
+<blockquote>「阅读『全省首创的食安小站』『在商圈集中区域设立了2个零距离监管服务站』，其中『设立』『开启』等动词引导的句子提示对策，可摘抄、概括出要点：<strong>创新监管模式，在商圈设立监管服务站</strong>。」</blockquote>
+<p><strong>这就是「怎么抄材料」的标准答案示范</strong>：</p>
+<ol>
+<li>定位动词（设立、开启、建立、出台、形成）</li>
+<li>摘抄动宾结构</li>
+<li>加一个<strong>总括词</strong>前置（「创新监管模式」）</li>
+</ol>
+<blockquote>⚠️ 其余 7 套没有这个字段，所以「抄材料」的方法论要靠 <strong>2026 卷这 1 套 + 其余 7 套的答案反推</strong>。</blockquote>
+<hr class="sep">
+<h2 id="四川省考申论行政执法卷真题综合分析-七对你的备考直接指令">七、对你的备考直接指令</h2>
+<h3 id="四川省考申论行政执法卷真题综合分析-71-时间分配150-分钟">7.1 时间分配（150 分钟）</h3>
+<div class="tw"><table>
+<thead><tr><th>环节</th><th>时间</th><th>依据</th></tr></thead><tbody>
+<tr><td>读材料（4 段 6700 字）</td><td>20 min</td><td>6 套实测材料字数</td></tr>
+<tr><td>第 1 题（15 分）</td><td>20 min</td><td>要点 4–5 条</td></tr>
+<tr><td>第 2 题（20 分）</td><td>25 min</td><td>要点 3–5 条</td></tr>
+<tr><td>第 3 题（25 分）</td><td>30 min</td><td>要点 5–8 条</td></tr>
+<tr><td><strong>第 4 题大作文（40 分）</strong></td><td><strong>55 min</strong></td><td><strong>不能少于 50</strong></td></tr>
+<tr><td>检查誊抄</td><td>5 min</td><td></td></tr>
+</tbody>
+</table></div>
+<blockquote>🔴 <strong>大作文必须留 55 分钟</strong>。它是 40 分，占 40%，前面三题加起来才 60 分。</blockquote>
+<h3 id="四川省考申论行政执法卷真题综合分析-72-练习优先级按分值--频次">7.2 练习优先级（按分值 × 频次）</h3>
+<div class="tw"><table>
+<thead><tr><th>优先</th><th>题型</th><th>理由</th></tr></thead><tbody>
+<tr><td><strong>P0</strong></td><td>大作文（40 分 × 8 套）</td><td>占 40%，且 5 套固定 40 分</td></tr>
+<tr><td><strong>P0</strong></td><td>概括措施类（7 次）</td><td>最基础，所有题的地基</td></tr>
+<tr><td><strong>P1</strong></td><td>提出对策类（7 次）</td><td>与概括互为镜像，一起练</td></tr>
+<tr><td><strong>P1</strong></td><td>总结类（9 次）</td><td>次数最多，但要记公文格式</td></tr>
+<tr><td><strong>P2</strong></td><td>词句解释类（1 次）</td><td>低频但要单独练，不能押</td></tr>
+<tr><td><strong>P2</strong></td><td>原因类（2 次）</td><td>低频，逻辑简单</td></tr>
+</tbody>
+</table></div>
+<h3 id="四川省考申论行政执法卷真题综合分析-73-三个必须背下来的东西">7.3 三个必须背下来的东西</h3>
+<ol>
+<li><strong>公文格式四要素</strong>：标题 / 称谓 / 正文 / 落款（总结类 9 题全要）</li>
+<li><strong>总括词模板</strong>：每条要点前加 4 字概括（「创新监管模式」「帮扶小作坊升级」）</li>
+<li><strong>大作文固定结构</strong>：五段三分（开头 + 3 分论点 + 结尾）</li>
+</ol>
+<h3 id="四川省考申论行政执法卷真题综合分析-74-明确不用做的">7.4 明确不用做的</h3>
+<div class="tw"><table>
+<thead><tr><th>不用做</th><th>理由</th></tr></thead><tbody>
+<tr><td>背经济/科技/文化类素材</td><td>8 套主题全是执法+基层，主题窄</td></tr>
+<tr><td>练「比较型」「评价型」综合分析</td><td>8 套里一次都没考过</td></tr>
+<tr><td>追求每条要点「与众不同」</td><td>参考答案全是材料原话改写，不奖励原创</td></tr>
+<tr><td>花时间在字数上超写</td><td>超字数直接扣分，200 字题写 250 字是负收益</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<h2 id="四川省考申论行政执法卷真题综合分析-八下一步模块建设">八、下一步（模块建设）</h2>
+<div class="tw"><table>
+<thead><tr><th>步骤</th><th>产出</th><th>状态</th></tr></thead><tbody>
+<tr><td>① 抓全 8 套 4 题</td><td><code>raw/MERGED_*.txt</code></td><td>✅ 完成</td></tr>
+<tr><td>② 解析成结构化</td><td><code>parsed/MERGED_*.json</code></td><td>✅ 134 要点</td></tr>
+<tr><td>③ 渲染可读文档</td><td><code>真题/*.md</code>（8 份）</td><td>✅ 完成</td></tr>
+<tr><td>④ 本综合分析</td><td>本文档</td><td>✅ 完成</td></tr>
+<tr><td>⑤ <strong>采分点回溯</strong></td><td>每题的「要点 ↔ 材料原句」对照表</td><td>⬜ 待做（最核心）</td></tr>
+<tr><td>⑥ 抄材料方法论</td><td><code>01-抄材料方法论.md</code></td><td>⬜ 待做</td></tr>
+<tr><td>⑦ 五大题型手法</td><td><code>02-五大题型手法.md</code></td><td>⬜ 待做</td></tr>
+</tbody>
+</table></div>
+<blockquote><strong>⑤ 是模块的灵魂</strong>：把 134 个要点逐个回填「它出自材料哪一句」，<br>才能真正学会「抄」。这一步工作量最大，但价值最高。</blockquote></article></main>
+<button id="tocBtn" type="button">目录</button>
+<button id="top" type="button">↑</button>
+<div id="toc"><div class="panel">
+  <div class="ph">
+    <h4>目录 · 点标题跳转</h4>
+    <input id="tocQ" type="search" placeholder="搜小节名，如 三级抄法" autocomplete="off">
+  </div>
+  <div id="tocList"></div>
+</div></div>
+<script>
+window.__TOC__ = [[[1, "零基础申论高分路线（四川执法卷专用）", "零基础申论高分路线四川执法卷专用"], [2, "开篇：先纠正三个致命误解", "零基础申论高分路线四川执法卷专用-开篇先纠正三个致命误解"], [1, "第一阶段：学会怎么看（占 30% 精力）", "第一阶段学会怎么看占-30-精力"], [2, "第 1 步：审题——先看清楚「问什么」", "第一阶段学会怎么看占-30-精力-第-1-步审题先看清楚问什么"], [3, "动作：拿到题，先不看材料，只在题干上圈 4 样东西", "第一阶段学会怎么看占-30-精力-动作拿到题先不看材料只在题干上圈-4-样东西"], [3, "🔴 最容易死的地方：问数", "第一阶段学会怎么看占-30-精力--最容易死的地方问数"], [3, "对象 → 词性对照（背下来）", "第一阶段学会怎么看占-30-精力-对象--词性对照背下来"], [3, "✅ 本步验收", "第一阶段学会怎么看占-30-精力--本步验收"], [2, "第 2 步：扫读——知道重点在哪 4 个位置", "第一阶段学会怎么看占-30-精力-第-2-步扫读知道重点在哪-4-个位置"], [3, "动作：材料不用逐字读，只读 4 个位置", "第一阶段学会怎么看占-30-精力-动作材料不用逐字读只读-4-个位置"], [3, "🔴 动词是「措施题」的唯一路标", "第一阶段学会怎么看占-30-精力--动词是措施题的唯一路标"], [3, "高频动词表（8 套材料实际出现）", "第一阶段学会怎么看占-30-精力-高频动词表8-套材料实际出现"], [3, "🔴 数字一个都不抄", "第一阶段学会怎么看占-30-精力--数字一个都不抄"], [3, "🔴 现状描述不是措施", "第一阶段学会怎么看占-30-精力--现状描述不是措施"], [3, "✅ 本步验收", "第一阶段学会怎么看占-30-精力--本步验收"], [1, "第二阶段：学会怎么抄（占 40% 精力，最核心）", "第二阶段学会怎么抄占-40-精力最核心"], [2, "第 3 步：三级抄法（决定你能不能及格）", "第二阶段学会怎么抄占-40-精力最核心-第-3-步三级抄法决定你能不能及格"], [3, "L1 原词照抄 —— 材料本身就是规范动宾", "第二阶段学会怎么抄占-40-精力最核心-l1-原词照抄--材料本身就是规范动宾"], [3, "L2 压缩 —— 删修饰、删数字、留动宾 ⭐ 最常用（72%）", "第二阶段学会怎么抄占-40-精力最核心-l2-压缩--删修饰删数字留动宾--最常用72"], [3, "L3 提炼 —— 个案/名单 → 抽象", "第二阶段学会怎么抄占-40-精力最核心-l3-提炼--个案名单--抽象"], [3, "三级对照速查", "第二阶段学会怎么抄占-40-精力最核心-三级对照速查"], [3, "🔴 三条禁忌", "第二阶段学会怎么抄占-40-精力最核心--三条禁忌"], [3, "✅ 本步验收", "第二阶段学会怎么抄占-40-精力最核心--本步验收"], [2, "第 4 步：加总括词（拿「逻辑分」的地方）", "第二阶段学会怎么抄占-40-精力最核心-第-4-步加总括词拿逻辑分的地方"], [3, "观察：8 套参考答案几乎都是这个格式", "第二阶段学会怎么抄占-40-精力最核心-观察8-套参考答案几乎都是这个格式"], [3, "总括词从哪来", "第二阶段学会怎么抄占-40-精力最核心-总括词从哪来"], [3, "✅ 本步验收", "第二阶段学会怎么抄占-40-精力最核心--本步验收"], [2, "第 5 步：合并书写（决定条数和顺序）", "第二阶段学会怎么抄占-40-精力最核心-第-5-步合并书写决定条数和顺序"], [3, "合并三优先级", "第二阶段学会怎么抄占-40-精力最核心-合并三优先级"], [3, "条数怎么定", "第二阶段学会怎么抄占-40-精力最核心-条数怎么定"], [3, "🔴 宁少一条，不超一字", "第二阶段学会怎么抄占-40-精力最核心--宁少一条不超一字"], [3, "✅ 本步验收", "第二阶段学会怎么抄占-40-精力最核心--本步验收"], [1, "第三阶段：学会怎么写（占 30% 精力）", "第三阶段学会怎么写占-30-精力"], [2, "第 6 步：按题型切换打法", "第三阶段学会怎么写占-30-精力-第-6-步按题型切换打法"], [3, "六大题型的「第一动作」", "第三阶段学会怎么写占-30-精力-六大题型的第一动作"], [3, "🔴 提出对策的「镜像反推法」", "第三阶段学会怎么写占-30-精力--提出对策的镜像反推法"], [3, "🔴 公文的格式分是白送的", "第三阶段学会怎么写占-30-精力--公文的格式分是白送的"], [2, "第 7 步：大作文（40 分 = 前两题之和）", "第三阶段学会怎么写占-30-精力-第-7-步大作文40-分--前两题之和"], [3, "先看这个数字", "第三阶段学会怎么写占-30-精力-先看这个数字"], [3, "立意三步（这是 30 分）", "第三阶段学会怎么写占-30-精力-立意三步这是-30-分"], [3, "固定结构（五段三分）", "第三阶段学会怎么写占-30-精力-固定结构五段三分"], [2, "第 8 步：自评（练 100 篇不如认真改 10 篇）", "第三阶段学会怎么写占-30-精力-第-8-步自评练-100-篇不如认真改-10-篇"], [3, "五步自评法", "第三阶段学会怎么写占-30-精力-五步自评法"], [3, "覆盖表（最核心）", "第三阶段学会怎么写占-30-精力-覆盖表最核心"], [3, "三条护栏（防自我欺骗）", "第三阶段学会怎么写占-30-精力-三条护栏防自我欺骗"], [3, "错题记「类型」不记「具体错误」", "第三阶段学会怎么写占-30-精力-错题记类型不记具体错误"], [1, "时间表：8 周从零到能考", "时间表8-周从零到能考"], [1, "一页速查卡（打印贴桌上）", "一页速查卡打印贴桌上"], [1, "附：这套方法的证据链", "附这套方法的证据链"]], [[1, "01 · 抄材料方法论", "01--抄材料方法论"], [2, "〇、先破除三个幻觉", "01--抄材料方法论-〇先破除三个幻觉"], [3, "幻觉一：「申论要靠积累和文采」", "01--抄材料方法论-幻觉一申论要靠积累和文采"], [3, "幻觉二：「要点越多越好，写满才显得认真」", "01--抄材料方法论-幻觉二要点越多越好写满才显得认真"], [3, "幻觉三：「抄材料 = 把材料原句搬过来」", "01--抄材料方法论-幻觉三抄材料--把材料原句搬过来"], [2, "一、四步法总览", "01--抄材料方法论-一四步法总览"], [2, "二、第①步：审题定框（30 秒，决定成败）", "01--抄材料方法论-二第①步审题定框30-秒决定成败"], [3, "2.1 看四样东西", "01--抄材料方法论-21-看四样东西"], [3, "2.2 对象 → 词性对照表（这是审题的核心）", "01--抄材料方法论-22-对象--词性对照表这是审题的核心"], [3, "2.3 问数：最容易丢一半分的地方", "01--抄材料方法论-23-问数最容易丢一半分的地方"], [3, "2.4 审题产出物：要素卡", "01--抄材料方法论-24-审题产出物要素卡"], [2, "三、第②步：扫读定位（找重点）", "01--抄材料方法论-三第②步扫读定位找重点"], [3, "3.1 主旨句只在 4 个位置", "01--抄材料方法论-31-主旨句只在-4-个位置"], [3, "3.2 动词是「措施题」的唯一路标", "01--抄材料方法论-32-动词是措施题的唯一路标"], [3, "3.3 问题题的信号词", "01--抄材料方法论-33-问题题的信号词"], [3, "3.4 数据怎么处理", "01--抄材料方法论-34-数据怎么处理"], [2, "四、第③步：摘取改写（三级抄法）", "01--抄材料方法论-四第③步摘取改写三级抄法"], [3, "L1 原词照抄 —— 材料本身就是规范动宾", "01--抄材料方法论-l1-原词照抄--材料本身就是规范动宾"], [3, "L2 压缩 —— 材料啰嗦，删修饰留主谓宾", "01--抄材料方法论-l2-压缩--材料啰嗦删修饰留主谓宾"], [3, "L3 提炼 —— 材料是具体事例，抽象成主体+动作+对象", "01--抄材料方法论-l3-提炼--材料是具体事例抽象成主体动作对象"], [3, "4.4 三级对照速查", "01--抄材料方法论-44-三级对照速查"], [3, "4.5 三条禁忌", "01--抄材料方法论-45-三条禁忌"], [2, "五、第④步：合并书写（分类 = 逻辑分）", "01--抄材料方法论-五第④步合并书写分类--逻辑分"], [3, "5.1 总括词前置 —— 参考答案的通用格式", "01--抄材料方法论-51-总括词前置--参考答案的通用格式"], [3, "5.2 合并的三个优先级", "01--抄材料方法论-52-合并的三个优先级"], [3, "5.3 书写格式", "01--抄材料方法论-53-书写格式"], [3, "5.4 字数怎么算", "01--抄材料方法论-54-字数怎么算"], [2, "六、成文题（公文 / 大作文）怎么抄", "01--抄材料方法论-六成文题公文--大作文怎么抄"], [3, "6.1 公文（总结类）：格式 + 内容两块分", "01--抄材料方法论-61-公文总结类格式--内容两块分"], [3, "6.2 大作文（40 分）：框架固定，内容来自材料", "01--抄材料方法论-62-大作文40-分框架固定内容来自材料"], [3, "6.3 成文题和要点题的根本差别", "01--抄材料方法论-63-成文题和要点题的根本差别"], [2, "七、采分点回溯：把「抄」这件事变成可训练的", "01--抄材料方法论-七采分点回溯把抄这件事变成可训练的"], [3, "7.1 为什么光看答案没用", "01--抄材料方法论-71-为什么光看答案没用"], [3, "7.2 操作步骤", "01--抄材料方法论-72-操作步骤"], [3, "7.3 找原句的工具", "01--抄材料方法论-73-找原句的工具"], [3, "7.4 训练节奏（配合 111h 申论课时）", "01--抄材料方法论-74-训练节奏配合-111h-申论课时"], [2, "八、一页速查卡（考前扫这一页）", "01--抄材料方法论-八一页速查卡考前扫这一页"], [3, "审题四看", "01--抄材料方法论-审题四看"], [3, "信号词", "01--抄材料方法论-信号词"], [3, "主旨句四位置", "01--抄材料方法论-主旨句四位置"], [3, "三级抄法", "01--抄材料方法论-三级抄法"], [3, "书写", "01--抄材料方法论-书写"], [3, "时间（150 分钟）", "01--抄材料方法论-时间150-分钟"], [2, "九、这套方法在 8 套卷上的验证", "01--抄材料方法论-九这套方法在-8-套卷上的验证"], [2, "十、下一步", "01--抄材料方法论-十下一步"]], [[1, "02 · 五大题型手法 + 自评体系", "02--五大题型手法--自评体系"], [2, "一、题型地图（32 题实测）", "02--五大题型手法--自评体系-一题型地图32-题实测"], [2, "二、自评体系总纲（5 级锚点）", "02--五大题型手法--自评体系-二自评体系总纲5-级锚点"], [3, "2.1 五级锚点", "02--五大题型手法--自评体系-21-五级锚点"], [3, "2.2 相邻档判定（必须逐条确认，不能跳档）", "02--五大题型手法--自评体系-22-相邻档判定必须逐条确认不能跳档"], [3, "2.3 三条护栏（防「拍脑袋给分」）", "02--五大题型手法--自评体系-23-三条护栏防拍脑袋给分"], [3, "2.4 临界档怎么裁", "02--五大题型手法--自评体系-24-临界档怎么裁"], [2, "三、题型一：概括措施类（7 题 · 22%）", "02--五大题型手法--自评体系-三题型一概括措施类7-题--22"], [3, "3.1 识别信号", "02--五大题型手法--自评体系-31-识别信号"], [3, "3.2 维度权重（本项目校准版）", "02--五大题型手法--自评体系-32-维度权重本项目校准版"], [3, "3.3 本型特有打法", "02--五大题型手法--自评体系-33-本型特有打法"], [3, "3.4 等级锚点", "02--五大题型手法--自评体系-34-等级锚点"], [3, "3.5 真题示例（2026·1，15 分）", "02--五大题型手法--自评体系-35-真题示例2026115-分"], [2, "四、题型二：提出对策类（7 题 · 22%）", "02--五大题型手法--自评体系-四题型二提出对策类7-题--22"], [3, "4.1 识别信号", "02--五大题型手法--自评体系-41-识别信号"], [3, "4.2 与概括措施的根本差别", "02--五大题型手法--自评体系-42-与概括措施的根本差别"], [3, "4.3 维度权重", "02--五大题型手法--自评体系-43-维度权重"], [3, "4.4 对策的三个来源（缺一不可）", "02--五大题型手法--自评体系-44-对策的三个来源缺一不可"], [3, "4.5 两问题型（问题 + 建议）必读", "02--五大题型手法--自评体系-45-两问题型问题--建议必读"], [3, "4.6 等级锚点（对策可行维度）", "02--五大题型手法--自评体系-46-等级锚点对策可行维度"], [2, "五、题型三：总结类 / 公文写作（9 题 · 28%）", "02--五大题型手法--自评体系-五题型三总结类--公文写作9-题--28"], [3, "5.1 识别信号", "02--五大题型手法--自评体系-51-识别信号"], [3, "5.2 维度权重（格式分是独立的）", "02--五大题型手法--自评体系-52-维度权重格式分是独立的"], [3, "5.3 公文格式四要素（背下来）", "02--五大题型手法--自评体系-53-公文格式四要素背下来"], [3, "5.4 本型特有打法", "02--五大题型手法--自评体系-54-本型特有打法"], [3, "5.5 等级锚点（格式规范维度）", "02--五大题型手法--自评体系-55-等级锚点格式规范维度"], [2, "六、题型四：文章写作题 / 大作文（5 题 · 16%，但占 35–40 分）", "02--五大题型手法--自评体系-六题型四文章写作题--大作文5-题--16但占-3540-分"], [3, "6.1 识别信号", "02--五大题型手法--自评体系-61-识别信号"], [3, "6.2 为什么它是 P0", "02--五大题型手法--自评体系-62-为什么它是-p0"], [3, "6.3 维度权重", "02--五大题型手法--自评体系-63-维度权重"], [3, "6.4 立意：不能跑题", "02--五大题型手法--自评体系-64-立意不能跑题"], [3, "6.5 固定结构（五段三分）", "02--五大题型手法--自评体系-65-固定结构五段三分"], [3, "6.6 等级锚点（立意准确维度）", "02--五大题型手法--自评体系-66-等级锚点立意准确维度"], [2, "七、题型五：其他三类（4 题 · 12%，不投主力）", "02--五大题型手法--自评体系-七题型五其他三类4-题--12不投主力"], [3, "7.1 原因类（2 题）", "02--五大题型手法--自评体系-71-原因类2-题"], [3, "7.2 词句解释类（1 题）", "02--五大题型手法--自评体系-72-词句解释类1-题"], [3, "7.3 多要素组合类（1 题）", "02--五大题型手法--自评体系-73-多要素组合类1-题"], [2, "八、自评操作流程（每次写完走一遍）", "02--五大题型手法--自评体系-八自评操作流程每次写完走一遍"], [3, "8.1 五步自评", "02--五大题型手法--自评体系-81-五步自评"], [3, "8.2 覆盖表（最核心的一步）", "02--五大题型手法--自评体系-82-覆盖表最核心的一步"], [3, "8.3 算分示例（2026·1，15 分）", "02--五大题型手法--自评体系-83-算分示例2026115-分"], [3, "8.4 自评最容易犯的错", "02--五大题型手法--自评体系-84-自评最容易犯的错"], [2, "九、附录：错题分类表（A–H 八维）", "02--五大题型手法--自评体系-九附录错题分类表ah-八维"], [3, "9.1 八维分类", "02--五大题型手法--自评体系-91-八维分类"], [3, "9.2 归因叠加（同一类型，练法完全不同）", "02--五大题型手法--自评体系-92-归因叠加同一类型练法完全不同"], [3, "9.3 复发提醒", "02--五大题型手法--自评体系-93-复发提醒"], [2, "十、一页速查（题型 → 关键动作）", "02--五大题型手法--自评体系-十一页速查题型--关键动作"], [2, "十一、下一步", "02--五大题型手法--自评体系-十一下一步"]], [[1, "2026 卷 · 采分点回溯台账（18 条试点）", "2026-卷--采分点回溯台账18-条试点"], [2, "使用说明", "2026-卷--采分点回溯台账18-条试点-使用说明"], [2, "第 1 题（15 分 / 200 字 / 概括措施类）", "2026-卷--采分点回溯台账18-条试点-第-1-题15-分--200-字--概括措施类"], [3, "要点 1", "2026-卷--采分点回溯台账18-条试点-要点-1"], [3, "要点 2", "2026-卷--采分点回溯台账18-条试点-要点-2"], [3, "要点 3", "2026-卷--采分点回溯台账18-条试点-要点-3"], [3, "要点 4", "2026-卷--采分点回溯台账18-条试点-要点-4"], [2, "第 2 题（20 分 / 300 字 / 总结类·工作简报）", "2026-卷--采分点回溯台账18-条试点-第-2-题20-分--300-字--总结类工作简报"], [3, "先看格式（20 分里约 4 分是格式）", "2026-卷--采分点回溯台账18-条试点-先看格式20-分里约-4-分是格式"], [3, "要点 1：守护历史古迹", "2026-卷--采分点回溯台账18-条试点-要点-1守护历史古迹"], [3, "要点 2：守护万物生灵", "2026-卷--采分点回溯台账18-条试点-要点-2守护万物生灵"], [3, "要点 3：守护游客安全", "2026-卷--采分点回溯台账18-条试点-要点-3守护游客安全"], [2, "第 3 题（25 分 / 500 字 / 提出对策类·两问）", "2026-卷--采分点回溯台账18-条试点-第-3-题25-分--500-字--提出对策类两问"], [3, "结构：5 问题 + 5 建议，一一对应", "2026-卷--采分点回溯台账18-条试点-结构5-问题--5-建议一一对应"], [3, "问题 1 → 建议 1", "2026-卷--采分点回溯台账18-条试点-问题-1--建议-1"], [3, "问题 2 → 建议 2", "2026-卷--采分点回溯台账18-条试点-问题-2--建议-2"], [3, "问题 3 → 建议 3", "2026-卷--采分点回溯台账18-条试点-问题-3--建议-3"], [3, "问题 4 → 建议 4", "2026-卷--采分点回溯台账18-条试点-问题-4--建议-4"], [3, "问题 5 → 建议 5", "2026-卷--采分点回溯台账18-条试点-问题-5--建议-5"], [2, "第 4 题（40 分 / 800–1000 字 / 大作文）", "2026-卷--采分点回溯台账18-条试点-第-4-题40-分--8001000-字--大作文"], [3, "立意拆解（40 分里最值钱的 30 分）", "2026-卷--采分点回溯台账18-条试点-立意拆解40-分里最值钱的-30-分"], [3, "结构（本题参考答案是四段式）", "2026-卷--采分点回溯台账18-条试点-结构本题参考答案是四段式"], [3, "论据来源", "2026-卷--采分点回溯台账18-条试点-论据来源"], [2, "汇总：18 条要点的抄法分布", "2026-卷--采分点回溯台账18-条试点-汇总18-条要点的抄法分布"], [3, "按题型看", "2026-卷--采分点回溯台账18-条试点-按题型看"], [2, "从这份台账提炼的 5 条铁律", "2026-卷--采分点回溯台账18-条试点-从这份台账提炼的-5-条铁律"], [3, "铁律 1：答案的每个字都能指回材料", "2026-卷--采分点回溯台账18-条试点-铁律-1答案的每个字都能指回材料"], [3, "铁律 2：动词是唯一路标", "2026-卷--采分点回溯台账18-条试点-铁律-2动词是唯一路标"], [3, "铁律 3：数字一个都不抄", "2026-卷--采分点回溯台账18-条试点-铁律-3数字一个都不抄"], [3, "铁律 4：现状描述不是措施", "2026-卷--采分点回溯台账18-条试点-铁律-4现状描述不是措施"], [3, "铁律 5：两问题型，问题和对策是镜像", "2026-卷--采分点回溯台账18-条试点-铁律-5两问题型问题和对策是镜像"], [2, "下一步", "2026-卷--采分点回溯台账18-条试点-下一步"]], [[1, "四川省考申论（行政执法卷）真题综合分析", "四川省考申论行政执法卷真题综合分析"], [2, "一、最重要的发现：川考执法卷的分值结构是固定的", "四川省考申论行政执法卷真题综合分析-一最重要的发现川考执法卷的分值结构是固定的"], [2, "二、题型分布（32 题全量）", "四川省考申论行政执法卷真题综合分析-二题型分布32-题全量"], [2, "三、材料规模：稳定在 6000–7400 字", "四川省考申论行政执法卷真题综合分析-三材料规模稳定在-60007400-字"], [2, "四、答案要点数：每题 3–5 条是常态", "四川省考申论行政执法卷真题综合分析-四答案要点数每题-35-条是常态"], [2, "五、材料主题：全部围绕「执法 / 基层治理 / 民生」", "四川省考申论行政执法卷真题综合分析-五材料主题全部围绕执法--基层治理--民生"], [2, "六、粉笔「答题演示」是最值钱的部分（但只有 1 套有）", "四川省考申论行政执法卷真题综合分析-六粉笔答题演示是最值钱的部分但只有-1-套有"], [2, "七、对你的备考直接指令", "四川省考申论行政执法卷真题综合分析-七对你的备考直接指令"], [2, "八、下一步（模块建设）", "四川省考申论行政执法卷真题综合分析-八下一步模块建设"]]];
+
+/* 白屏兜底：任何未捕获错误都在顶部红条显示，不至于「打开一片空白」 */
+window.onerror = function(msg, src, line){
+  var f = document.getElementById('fatal');
+  if(f){ f.hidden = false; f.textContent = '页面脚本出错：' + msg + '（第 ' + line + ' 行）'; }
+};
+(function(){
+  var arts = document.querySelectorAll('article');
+  var btns = document.querySelectorAll('#tabs button');
+  var toc = document.getElementById('toc');
+  var tocList = document.getElementById('tocList');
+  var tocQ = document.getElementById('tocQ');
+  var cur = 0;
+
+  function show(k){
+    cur = k;
+    for(var i=0;i<arts.length;i++){
+      arts[i].classList.toggle('on', i===k);
+    }
+    for(var j=0;j<btns.length;j++){
+      btns[j].classList.toggle('on', j===k);
+    }
+    buildToc(k);
+    window.scrollTo(0,0);
+    try{ localStorage.setItem('sl_tab', String(k)); }catch(e){}
+  }
+
+  function buildToc(k){
+    var data = window.__TOC__[k] || [];
+    var h = '';
+    for(var i=0;i<data.length;i++){
+      var lv = data[i][0], txt = data[i][1], id = data[i][2];
+      h += '<a class="l'+lv+'" href="#'+id+'">'+txt+'</a>';
+    }
+    tocList.innerHTML = h || '<p style="padding:12px;color:#9ca3af">本文无小标题</p>';
+  }
+
+  for(var i=0;i<btns.length;i++){
+    (function(idx){
+      btns[idx].onclick = function(){ show(idx); };
+    })(i);
+  }
+
+  document.getElementById('tocBtn').onclick = function(){
+    toc.classList.add('open');
+    tocQ.value = '';
+    var as = tocList.querySelectorAll('a');
+    for(var i=0;i<as.length;i++) as[i].style.display = '';
+    setTimeout(function(){ tocQ.focus(); }, 60);
+  };
+  toc.onclick = function(e){
+    if(e.target === toc || e.target.tagName === 'A') toc.classList.remove('open');
+  };
+  tocQ.oninput = function(){
+    var v = this.value.trim().toLowerCase();
+    var as = tocList.querySelectorAll('a');
+    for(var i=0;i<as.length;i++){
+      var hit = !v || as[i].textContent.toLowerCase().indexOf(v) >= 0;
+      as[i].style.display = hit ? '' : 'none';
+    }
+  };
+
+  var top = document.getElementById('top');
+  addEventListener('scroll', function(){
+    top.classList.toggle('show', window.scrollY > 500);
+  }, {passive:true});
+  top.onclick = function(){ window.scrollTo({top:0, behavior:'smooth'}); };
+
+  var saved = 0;
+  try{ saved = parseInt(localStorage.getItem('sl_tab')||'0',10)||0; }catch(e){}
+  show(Math.min(saved, arts.length-1));
+})();
+
+</script>
+</body>
+</html>
