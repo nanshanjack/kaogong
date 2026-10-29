@@ -38,6 +38,11 @@ html[data-theme=dark]{
   --sh2:0 4px 12px rgba(0,0,0,.4);
   --sh3:0 12px 32px rgba(0,0,0,.5);
 }
+/* 🔴 必须显式声明 [hidden]：浏览器默认的 [hidden]{display:none} 只是 UA 样式，
+   任何作者的 display 声明都会覆盖它。本轮给真题页加了 display:flex，
+   结果 8 套卷的 hidden 全部失效、同时显示 → 点导航「没反应」（用户实测反馈）。 */
+[hidden]{display:none!important}
+
 html,body{height:100%}
 body{
   margin:0;background:var(--bg);color:var(--ink);
