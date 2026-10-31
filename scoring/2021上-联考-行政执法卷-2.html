@@ -1,0 +1,512 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f7f5"><title>2021上-联考-行政执法卷 · 第 2 题评分拆解卡 · 综合题·提出对策（30 分 / 400 字）</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f7f7f5; --card:#fff; --txt:#1f2937; --muted:#6b7280; --faint:#9ca3af;
+  --line:#e5e7eb; --blue:#2563eb; --red:#dc2626; --amber:#d97706;
+  --green:#16a34a; --code:#f3f4f6;
+}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--txt);
+  font:16px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+       "Microsoft YaHei",system-ui,sans-serif;
+  padding-top:env(safe-area-inset-top);
+  padding-bottom:env(safe-area-inset-bottom);
+  -webkit-text-size-adjust:100%;
+}
+#bar{
+  position:sticky; top:0; z-index:50; background:rgba(247,247,245,.96);
+  backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+}
+#tabs{display:flex; gap:4px; overflow-x:auto; padding:8px 10px 0;
+  scrollbar-width:none}
+#tabs::-webkit-scrollbar{display:none}
+#tabs button{
+  flex:0 0 auto; border:none; background:none; cursor:pointer;
+  font:inherit; font-size:14px; font-weight:600; color:var(--muted);
+  padding:8px 12px; border-radius:9px 9px 0 0; white-space:nowrap;
+}
+#tabs button.on{background:var(--card); color:var(--blue);
+  box-shadow:0 -1px 3px rgba(15,23,42,.06)}
+#tools{display:flex; gap:8px; align-items:center; padding:6px 12px 8px}
+#tools .sp{flex:1}
+#tools button{
+  border:1px solid var(--line); background:var(--card); color:var(--txt);
+  font:inherit; font-size:13px; padding:5px 11px; border-radius:8px; cursor:pointer;
+}
+#tools button:active{background:#eef2ff}
+main{max-width:820px; margin:0 auto; padding:16px 16px 80px}
+article{display:none}
+article.on{display:block}
+h1{font-size:22px; line-height:1.4; margin:8px 0 14px; letter-spacing:.3px}
+h2{font-size:18px; margin:26px 0 10px; padding-left:10px;
+   border-left:4px solid var(--blue); line-height:1.45}
+h3{font-size:16px; margin:20px 0 8px; color:#111827}
+h4{font-size:15px; margin:16px 0 6px}
+p{margin:9px 0}
+a{color:var(--blue); text-decoration:none; border-bottom:1px solid rgba(37,99,235,.25)}
+strong{font-weight:700; color:#111827}
+code{background:var(--code); padding:1px 5px; border-radius:4px;
+  font-size:13.5px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  word-break:break-word}
+pre.code{background:#1f2937; color:#e5e7eb; padding:12px 14px; border-radius:10px;
+  overflow-x:auto; margin:12px 0; font-size:13px; line-height:1.6}
+pre.code code{background:none; color:inherit; padding:0; font-size:inherit;
+  white-space:pre-wrap; word-break:break-word}
+blockquote{margin:12px 0; padding:10px 14px; background:#eff6ff;
+  border-left:3px solid var(--blue); border-radius:0 8px 8px 0;
+  color:#1e3a8a; font-size:14.5px}
+blockquote strong{color:#1e40af}
+hr.sep{border:none; border-top:1px dashed var(--line); margin:22px 0}
+ul,ol{margin:10px 0; padding-left:22px}
+li{margin:5px 0}
+/* 表格：手机上必须能换行，否则横向溢出 */
+.tw{overflow-x:auto; margin:12px 0; -webkit-overflow-scrolling:touch}
+table{border-collapse:collapse; width:100%; font-size:14px; min-width:0}
+th,td{border:1px solid var(--line); padding:7px 9px; text-align:left;
+  vertical-align:top; white-space:normal; word-break:break-word}
+th{background:#f1f5f9; font-weight:700; font-size:13.5px}
+tbody tr:nth-child(even){background:#fafafa}
+/* 目录抽屉 */
+#tocBtn{position:fixed; right:14px; bottom:20px; z-index:60;
+  width:52px; height:52px; border-radius:50%; border:none; cursor:pointer;
+  background:var(--blue); color:#fff; font-size:13px; font-weight:700;
+  box-shadow:0 6px 20px rgba(37,99,235,.4);
+  padding-bottom:env(safe-area-inset-bottom)}
+#toc{position:fixed; inset:0; z-index:100; display:none;
+  background:rgba(15,23,42,.45)}
+#toc.open{display:block}
+#toc .panel{position:absolute; right:0; top:0; bottom:0; width:min(86vw,420px);
+  background:var(--card); display:flex; flex-direction:column;
+  box-shadow:-8px 0 30px rgba(0,0,0,.2)}
+#toc .ph{padding:14px 16px 8px; border-bottom:1px solid var(--line)}
+#toc .ph h4{margin:0 0 8px; font-size:15px}
+#tocQ{width:100%; box-sizing:border-box; font:inherit; font-size:15px;
+  padding:9px 12px; border:1px solid var(--line); border-radius:9px;
+  background:#fafafa}
+#tocQ:focus{outline:2px solid var(--blue); outline-offset:-1px}
+#tocList{flex:1; overflow-y:auto; padding:8px 8px 30px}
+#tocList a{display:block; padding:8px 10px; border-radius:7px; font-size:14px;
+  color:var(--txt); border-bottom:none; line-height:1.5}
+#tocList a.l2{padding-left:22px; font-size:13.5px; color:var(--muted)}
+#tocList a.l3{padding-left:34px; font-size:13px; color:var(--faint)}
+#tocList a:active{background:#eef2ff}
+#top{position:fixed; left:14px; bottom:20px; z-index:60; display:none;
+  width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
+  background:var(--card); color:var(--txt); font-size:18px; cursor:pointer;
+  padding-bottom:env(safe-area-inset-bottom)}
+#top.show{display:block}
+#fatal{position:fixed; left:0; right:0; top:0; z-index:999;
+  background:#fef2f2; color:#b91c1c; border-bottom:2px solid #fca5a5;
+  padding:10px 14px; font-size:13.5px; line-height:1.6}
+.meta{font-size:13px; color:var(--faint); margin:0 0 12px}
+@media (min-width:700px){
+  body{font-size:17px}
+  main{padding:24px 28px 90px}
+  h1{font-size:26px}
+  h2{font-size:20px}
+  h3{font-size:17px}
+  table{font-size:15px}
+}
+@media print{
+  #bar,#tocBtn,#top,#toc{display:none!important}
+  article{display:block!important}
+  body{background:#fff}
+  pre.code{background:#f3f4f6; color:#111}
+}
+
+.top{position:sticky;top:0;z-index:9;background:rgba(247,247,245,.96);
+  border-bottom:1px solid #e5e7eb;padding:10px 16px;display:flex;gap:12px;
+  align-items:center;font-size:14px}
+.top a{color:#2563eb;text-decoration:none}
+.top span{color:#9ca3af;font-size:12.5px}
+.wrap{max-width:900px;margin:0 auto;padding:18px 16px 70px}
+</style></head><body>
+<div class="top"><a href="../index.html">← 返回工作台</a><span>评分拆解卡 · 只读 · 不设作答</span></div>
+<main class="wrap"><h1 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字">2021上-联考-行政执法卷 · 第 2 题评分拆解卡 · 综合题·提出对策（30 分 / 400 字）</h1>
+<blockquote><strong>一句话秒杀</strong>：定主体链，问题→反义词→动宾，5 组镜像。 本题：判断链：①题干有两个动词「梳理」和「谈谈」→两问，答案必须分两大块；②要素是「问题+对策」→复合要素题，工作量是单一题的两倍；③「避免类似情况发生」→对策要通用<br><strong>口径</strong>：材料/参考答案来自粉笔；评分结构、权重、扣分为项目自评口径。</blockquote>
+<h2 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-①-题型判定">① 题型判定</h2>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>题干信号</td><td>假如你是F市水利局的工作人员</td></tr>
+<tr><td>结论</td><td><strong>综合题·提出对策</strong></td></tr>
+<tr><td>第一动作</td><td>先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。</td></tr>
+</tbody>
+</table></div>
+<h2 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-②-材料结构图">② 材料结构图</h2>
+<div class="tw"><table>
+<thead><tr><th>材料/段/句</th><th>角色</th><th>出点</th></tr></thead><tbody>
+<tr><td>材料2·句1-4</td><td>背景：通知怎么发的（渠道单一）</td><td>要点 1</td></tr>
+<tr><td>材料2·句5-6</td><td>目的说明 + 停水范围</td><td>要点 6</td></tr>
+<tr><td>材料2·句7-8</td><td>活动沿革（第二年、改停水）</td><td>要点 5</td></tr>
+<tr><td>材料2·句9-11</td><td>问题一：停水时间过长、时段不合理</td><td>要点 6</td></tr>
+<tr><td>材料2·句12-14</td><td>问题二：通知不到位、市民不知情</td><td>要点 7</td></tr>
+<tr><td>材料2·句15-16</td><td>问题三：未事先征求市民意见</td><td>要点 3</td></tr>
+<tr><td>材料2·句17</td><td>问题补充：决策自上而下、执行层无反馈渠道</td><td>要点 8</td></tr>
+<tr><td>材料2·句18</td><td>数据：影响人口</td><td>要点 6</td></tr>
+<tr><td>材料2·句19-22</td><td>问题四：临时改变活动计划</td><td>要点 4</td></tr>
+<tr><td>材料2·句23</td><td>对策素材：市民建议改变形式</td><td>要点 5</td></tr>
+</tbody>
+</table></div>
+<h2 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-③-出题人埋的钩子聪明人设">③ 出题人埋的钩子（聪明人设）</h2>
+<blockquote><strong>聪明人设</strong>：先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。 本题：这题最值得说的是「避免类似情况」这五个字，粉笔的演示提了一句就没往下挖</blockquote>
+<p>这题最值得说的是「避免类似情况」这五个字，粉笔的演示提了一句就没往下挖。</p>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-钩子-1--问题按主体排">钩子 1 · 问题按主体排</h4>
+<ul>
+<li><strong>在哪</strong>：材料2·句1-4</li>
+<li><strong>聪明人设会怎么做</strong>：按队伍/家庭/社会/部门合并</li>
+<li><strong>普通人会怎么错</strong>：按段落顺序写</li>
+<li><strong>为什么这么设计</strong>：考主体归并。本题：这题最值得说的是「避免类似情况」这五个字，粉笔的演示提了一句就没往下挖</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-钩子-2--问题建议镜像">钩子 2 · 问题→建议镜像</h4>
+<ul>
+<li><strong>在哪</strong>：材料2·句5-6</li>
+<li><strong>聪明人设会怎么做</strong>：用反义词+动宾造句</li>
+<li><strong>普通人会怎么错</strong>：建议空泛/不对应</li>
+<li><strong>为什么这么设计</strong>：考推导。本题：它其实是一个「题型升维」信号</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-钩子-3--材料没有现成对策">钩子 3 · 材料没有现成对策</h4>
+<ul>
+<li><strong>在哪</strong>：材料2·句7-8</li>
+<li><strong>聪明人设会怎么做</strong>：从问题反推</li>
+<li><strong>普通人会怎么错</strong>：抄材料里的好做法</li>
+<li><strong>为什么这么设计</strong>：考针对性。本题：发现：材料2的23句里，市民发言占了9句（39%），但真正的问题只有5条</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-钩子-4--两问要分栏">钩子 4 · 两问要分栏</h4>
+<ul>
+<li><strong>在哪</strong>：材料2·句9-11</li>
+<li><strong>聪明人设会怎么做</strong>：一、问题；二、建议</li>
+<li><strong>普通人会怎么错</strong>：问题建议混写</li>
+<li><strong>为什么这么设计</strong>：考问数。本题：句17是全材料最容易被浪费的一句</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-钩子-5--座谈会段要合并">钩子 5 · 座谈会段要合并</h4>
+<ul>
+<li><strong>在哪</strong>：材料2·句12-14</li>
+<li><strong>聪明人设会怎么做</strong>：把发言按主体并入前几组</li>
+<li><strong>普通人会怎么错</strong>：把座谈会当新问题</li>
+<li><strong>为什么这么设计</strong>：考跨段合并。本题：句21和句22是一对反证</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-钩子-6--本题最特殊的结构">钩子 6 · 本题最特殊的结构</h4>
+<ul>
+<li><strong>在哪</strong>：我的判断</li>
+<li><strong>聪明人设会怎么做</strong>：按这个判断调整动作：这题最值得说的是「避免类似情况」这五个字，粉笔的演示提了一句就没往下挖</li>
+<li><strong>普通人会怎么错</strong>：按通用模板硬套</li>
+<li><strong>为什么这么设计</strong>：这题最值得说的是「避免类似情况」这五个字，粉笔的演示提了一句就没往下挖。</li>
+</ul>
+<h2 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-④-点数逻辑">④ 点数逻辑</h2>
+<p><strong>10 条。</strong> 判断链：①题干有两个动词「梳理」和「谈谈」→两问，答案必须分两大块；②要素是「问题+对策」→复合要素题，工作量是单一题的两倍；③「避免类似情况发生」→对策要通用化、机制化，不能只处理本次事件；④30分/400字→问题5条、对策5条，一一对应，每条问题约28字、每条对策约45字。⚠️这题容易被判成「概括题」，其实它是对策题。区别在于：「问题」这一半确实是概括（材料里有），但「如何避免」这一半材料里没有现成答案，要你自己生成。所以对策的原料必须从三个地方来：①问题反推：问题「停水11小时且在用水高峰」→对策「合理设置时长时段」；问题「仅在官网和晚报发布」→对策「多渠道发布」；问题「未征求意见」→对 → 本题 10 条。</p>
+<ul>
+<li>计数单位：<strong>条</strong></li>
+<li>适用边界：两问题型要分「问题/建议」；如果题干只问建议，不要写问题。</li>
+<li>反例：2022上-联考-行政执法卷 第 3 题 —— 2022上·3 是单问建议，不是两问；不要硬写问题块。</li>
+</ul>
+<h2 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-⑤-逐点分值表">⑤ 逐点分值表</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>总括词</th><th>权重</th><th>得分关键词（同义可替）</th><th>满分</th><th>一半</th><th>0 分</th></tr></thead><tbody>
+<tr><td>1</td><td>停水时间过长，且停水时段不合理，</td><td>2.4</td><td>停水时间过长，且停水时段不合理， / 停水时间过长 / 且停水时段不合理 / 影响范围大 / 停水时间 / 水时间过</td><td>2.4</td><td>1.2</td><td>0</td></tr>
+<tr><td>2</td><td>停水信息仅在报纸发布，公布渠道少</td><td>2.4</td><td>停水信息仅在报纸发布，公布渠道少 / 停水信息仅在报纸发布 / 公布渠道少 / 广度不够 / 通知不到位 / 市民不知情</td><td>2.4</td><td>1.2</td><td>0</td></tr>
+<tr><td>3</td><td>未事先征求市民意见；</td><td>2.4</td><td>未事先征求市民意见； / 未事先征求市民意见 / 未事先征 / 事先征求 / 先征求市 / 征求市民</td><td>2.4</td><td>1.2</td><td>0</td></tr>
+<tr><td>4</td><td>临时改变活动计划；</td><td>2.4</td><td>临时改变活动计划； / 临时改变活动计划 / 临时改变 / 时改变活 / 改变活动 / 变活动计</td><td>2.4</td><td>1.2</td><td>0</td></tr>
+<tr><td>5</td><td>活动形式单一、不合理</td><td>2.4</td><td>活动形式单一、不合理 / 活动形式单一 / 不合理 / 活动形式 / 动形式单 / 形式单一</td><td>2.4</td><td>1.2</td><td>0</td></tr>
+<tr><td>6</td><td>合理制定方案</td><td>3.6</td><td>合理制定方案 / 综合考虑各种因素 / 合理设置时长 / 时段 / 范围等 / 减少对群众生活的影响</td><td>3.6</td><td>1.8</td><td>0</td></tr>
+<tr><td>7</td><td>多元化宣传</td><td>3.6</td><td>多元化宣传 / 增加信息发布渠道 / 与基层配合 / 采用网络 / 电视 / 手机短信</td><td>3.6</td><td>1.8</td><td>0</td></tr>
+<tr><td>8</td><td>做好科学决策</td><td>3.6</td><td>做好科学决策 / 发动群众参与 / 充分听取各方意见 / 规范参与程序和途径 / 畅通反映诉求的通道 / 及时调整方案</td><td>3.6</td><td>1.8</td><td>0</td></tr>
+<tr><td>9</td><td>确保计划一步落实</td><td>3.6</td><td>确保计划一步落实 / 对已定计划严格执行 / 尽量避免突然变动 / 确保计划 / 保计划一 / 计划一步</td><td>3.6</td><td>1.8</td><td>0</td></tr>
+<tr><td>10</td><td>改变活动形式</td><td>3.6</td><td>改变活动形式 / 开展现场参观 / 体验日等活动 / 进行宣传教育 / 提高群众自觉性 / 积极性</td><td>3.6</td><td>1.8</td><td>0</td></tr>
+<tr><td></td><td><strong>内容合计</strong></td><td><strong>30</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td><strong>总分</strong></td><td><strong>30</strong></td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+</table></div>
+<blockquote>10 条合计 30.0 分；部分分按 50%。项目自评口径。</blockquote>
+<blockquote>得分关键词来自参考答案/材料；同义可替。</blockquote>
+<p><strong>字数账</strong>：10 条 × 40 字 ≈ 400 字，留余量。</p>
+<h3 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-满分答案长这样">满分答案长这样</h3>
+<blockquote><strong>742 字</strong>（400）。参考原文 742 字，超过本题 400 字上限；看结构、不照抄。</blockquote>
+<pre class="code"><code>问题：1.停水时间过长，且停水时段不合理，影响范围大；2.停水信息仅在报纸发布，公布渠道少、广度不够，通知不到位，市民不知情；3.未事先征求市民意见；4.临时改变活动计划；5.活动形式单一、不合理。
+ 对策：1.合理制定方案。综合考虑各种因素，合理设置时长、时段、范围等，减少对群众生活的影响；2.多元化宣传。增加信息发布渠道，与基层配合，采用网络、电视、手机短信、广播等多种信息发布相结合的方式，提前做好通知工作，满足群众的知情权；3.做好科学决策。决策前向社会公开征求意见，发动群众参与，充分听取各方意见，规范参与程序和途径，畅通反映诉求的通道，及时调整方案；4.确保计划一步落实。对已定计划严格执行，尽量避免突然变动；5.改变活动形式。开展现场参观、体验日等活动，进行宣传教育，提高群众自觉性、积极性。
+ 参考答案说明：本参考答案宏观上从“问题”和“对策”两个方面展开。在“问题”方面，又从“停水时间过长，且停水时段不合理，影响范围大”“停水信息仅在报纸发布，公布渠道少、广度不够，通知不到位，市民不知情”“未事先征求市民意见”“临时改变活动计划”“活动形式单一、不合理”等不同的方面进行分条撰写；在“对策”方面，针对“停水时间过长，且停水时段不合理，影响范围大”的问题，从“合理制定方案”这一方面提出对策；针对“停水信息仅在报纸发布，公布渠道少、广度不够，通知不到位，市民不知情”的问题，从“多元化宣传”这一方面提出对策；针对“未事先征求市民意见”的问题，从“做好科学决策”这一方面提出对策；针对“临时改变活动计划”的问题，从“确保计划一步落实”这一方面提出对策；针对“活动形式单一、不合理”的问题，从“改变活动形式”这一方面提出对策。各条要点之间在内容上相互并列，没有交叉。</code></pre>
+<h3 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-逐点细节">逐点细节</h3>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-1停水时间过长且停水时段不合理24-分">要点 1：停水时间过长，且停水时段不合理，（2.4 分）</h4>
+<p><strong>参考答案</strong>：停水时间过长，且停水时段不合理，影响范围大；</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>材料2·句1-4</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>停水时间过长，且停水时段不合理， / 停水时间过长 / 且停水时段不合理 / 影响范围大 / 停水时间 / 水时间过</td></tr>
+<tr><td>满分</td><td>2.4 —— 停水时间过长，且停水时段不合理， + 2-3 个负面事实</td></tr>
+<tr><td>一半</td><td>1.2 —— 只写 1 个负面事实</td></tr>
+<tr><td>0 分</td><td>0 —— 写成建议/空话</td></tr>
+<tr><td>秒杀动作</td><td>句3「上午09:30分至晚上08:30分，共计11个小时」+句9「用水高峰时段停水11个小时」→「停水时间过长，且停水时段不合理」；句6「市区内大部分的地方会停水」+句18「65万</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>通知还指出，“各县区活动实施范围为各县区政府驻地，活动时间和具体要求与市主城区相同，停水时间为当天的上午09：30分至晚上08：30分，共计11个小时。”</blockquote>
+<blockquote>同时还说明：“市区内大部分的地方会停水，但是学校、企业、医院和生产经营单位都会保障供水。”</blockquote>
+<blockquote>F市许多市民看到相关通知后表示，在用水高峰时段停水11个小时，确实有点儿“狠”，这个“限水体验日”应该叫“最狠体验日”。</blockquote>
+<blockquote>王女士表示停水一天时间太长，“孩子刚满2个月，洗洗涮涮的，很多地方都需要用水，停水一天肯定会很不方便。”</blockquote>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-2停水信息仅在报纸发布公布渠道少24-分">要点 2：停水信息仅在报纸发布，公布渠道少（2.4 分）</h4>
+<p><strong>参考答案</strong>：停水信息仅在报纸发布，公布渠道少、广度不够，通知不到位，市民不知情；</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>材料2·句1-4</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>停水信息仅在报纸发布，公布渠道少 / 停水信息仅在报纸发布 / 公布渠道少 / 广度不够 / 通知不到位 / 市民不知情</td></tr>
+<tr><td>满分</td><td>2.4 —— 停水信息仅在报纸发布，公布渠道少 + 2-3 个负面事实</td></tr>
+<tr><td>一半</td><td>1.2 —— 只写 1 个负面事实</td></tr>
+<tr><td>0 分</td><td>0 —— 写成建议/空话</td></tr>
+<tr><td>秒杀动作</td><td>问题→反义词→动宾</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>停水信息仅在报纸发布，公布渠道少、广度不够，通知不到位，市民不知情；</blockquote>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-3未事先征求市民意见24-分">要点 3：未事先征求市民意见；（2.4 分）</h4>
+<p><strong>参考答案</strong>：未事先征求市民意见；</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>材料2·句15-16</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>未事先征求市民意见； / 未事先征求市民意见 / 未事先征 / 事先征求 / 先征求市 / 征求市民</td></tr>
+<tr><td>满分</td><td>2.4 —— 未事先征求市民意见； + 2-3 个负面事实</td></tr>
+<tr><td>一半</td><td>1.2 —— 只写 1 个负面事实</td></tr>
+<tr><td>0 分</td><td>0 —— 写成建议/空话</td></tr>
+<tr><td>秒杀动作</td><td>句16「这么重大的事情应该事先征求市民意见」直接摘为问题；句17「接到通知时他们也感到诧异……向上级反馈了，但是结果如何他们也不好说」→ 深化为「决策未征求基层和市民意见，缺乏反馈</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>停水的初衷是好的，但这么重大的事情应该事先征求市民意见。”赵女士说。</blockquote>
+<blockquote>一位不愿意透露姓名的区水利局工作人员表示，接到通知时他们也感到诧异，担心市民会有意见，并向上级反馈了，但是结果如何他们也不好说，上面有要求，下面就得执行。</blockquote>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-4临时改变活动计划24-分">要点 4：临时改变活动计划；（2.4 分）</h4>
+<p><strong>参考答案</strong>：临时改变活动计划；</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>材料2·句19-22</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>临时改变活动计划； / 临时改变活动计划 / 临时改变 / 时改变活 / 改变活动 / 变活动计</td></tr>
+<tr><td>满分</td><td>2.4 —— 临时改变活动计划； + 2-3 个负面事实</td></tr>
+<tr><td>一半</td><td>1.2 —— 只写 1 个负面事实</td></tr>
+<tr><td>0 分</td><td>0 —— 写成建议/空话</td></tr>
+<tr><td>秒杀动作</td><td>句19「3月21日下午……发布了……调整的通知」+句20「决定3月22日停水活动调整为自愿节水活动」→「临时改变活动计划」；句22「接了的水太占地方只能倒掉，有点浪费」→ 变更的次</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>3月21日下午，F市水利局发布了《F市关于对“世界水日”限水活动进行调整的通知》。</blockquote>
+<blockquote>通知称，鉴于市民对限水体验活动的不同意见，经统筹研究，决定3月22日停水活动调整为自愿节水活动，希望能更好地营造全民节水氛围，鼓励全市市民为保护珍贵水资源，共创和谐家园贡献自己的力量，同时感谢广大市民对节水活动的关注，诚挚邀请社会各界对节水活动提出宝贵意见和建议。</blockquote>
+<blockquote>还有一些市民说，自己已经做好了停水准备，所以接了很多水备着，现在一下子又说不停水了，接了的水太占地方只能倒掉，有点浪费。</blockquote>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-5活动形式单一不合理24-分">要点 5：活动形式单一、不合理（2.4 分）</h4>
+<p><strong>参考答案</strong>：活动形式单一、不合理</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>材料2·句7-8</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>活动形式单一、不合理 / 活动形式单一 / 不合理 / 活动形式 / 动形式单 / 形式单一</td></tr>
+<tr><td>满分</td><td>2.4 —— 活动形式单一、不合理 + 2-3 个负面事实</td></tr>
+<tr><td>一半</td><td>1.2 —— 只写 1 个负面事实</td></tr>
+<tr><td>0 分</td><td>0 —— 写成建议/空话</td></tr>
+<tr><td>秒杀动作</td><td>句7「已经是该市第二年举办」+句8「去年采用的是“减压供水”，今年为了能更好地达到预期目的，改为了“实施停水”」→「活动形式单一」（两年只换停水方式）；句23「可以改变一下形式，比</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>记者还了解到，“限水体验日”活动已经是该市第二年举办。</blockquote>
+<blockquote>去年采用的是“减压供水”，今年为了能更好地达到预期目的，改为了“实施停水”。</blockquote>
+<blockquote>也有市民建议：“活动初衷不错，只不过以后可以改变一下形式，比如开展参观污水处理厂、自来水厂之类更加灵活多样的活动。”</blockquote>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-6合理制定方案36-分">要点 6：合理制定方案（3.6 分）</h4>
+<p><strong>参考答案</strong>：合理制定方案。综合考虑各种因素，合理设置时长、时段、范围等，减少对群众生活的影响；</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>材料2·句1-4</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>合理制定方案 / 综合考虑各种因素 / 合理设置时长 / 时段 / 范围等 / 减少对群众生活的影响</td></tr>
+<tr><td>满分</td><td>3.6 —— 合理制定方案 + 3-4 个动作</td></tr>
+<tr><td>一半</td><td>1.8 —— 只写 1-2 个动作</td></tr>
+<tr><td>0 分</td><td>0 —— 空话/不对应</td></tr>
+<tr><td>秒杀动作</td><td>问题→反义词→动宾</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>合理制定方案。综合考虑各种因素，合理设置时长、时段、范围等，减少对群众生活的影响；</blockquote>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-7多元化宣传36-分">要点 7：多元化宣传（3.6 分）</h4>
+<p><strong>参考答案</strong>：多元化宣传。增加信息发布渠道，与基层配合，采用网络、电视、手机短信、广播等多种信息发布相结合的方式，提前做好通知工作，满足群众的知情权；</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>材料2·句1-4</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>多元化宣传 / 增加信息发布渠道 / 与基层配合 / 采用网络 / 电视 / 手机短信</td></tr>
+<tr><td>满分</td><td>3.6 —— 多元化宣传 + 3-4 个动作</td></tr>
+<tr><td>一半</td><td>1.8 —— 只写 1-2 个动作</td></tr>
+<tr><td>0 分</td><td>0 —— 空话/不对应</td></tr>
+<tr><td>秒杀动作</td><td>问题→反义词→动宾</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>多元化宣传。增加信息发布渠道，与基层配合，采用网络、电视、手机短信、广播等多种信息发布相结合的方式，提前做好通知工作，满足群众的知情权；</blockquote>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-8做好科学决策36-分">要点 8：做好科学决策（3.6 分）</h4>
+<p><strong>参考答案</strong>：做好科学决策。决策前向社会公开征求意见，发动群众参与，充分听取各方意见，规范参与程序和途径，畅通反映诉求的通道，及时调整方案；</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>材料2·句1-4</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>做好科学决策 / 发动群众参与 / 充分听取各方意见 / 规范参与程序和途径 / 畅通反映诉求的通道 / 及时调整方案</td></tr>
+<tr><td>满分</td><td>3.6 —— 做好科学决策 + 3-4 个动作</td></tr>
+<tr><td>一半</td><td>1.8 —— 只写 1-2 个动作</td></tr>
+<tr><td>0 分</td><td>0 —— 空话/不对应</td></tr>
+<tr><td>秒杀动作</td><td>问题→反义词→动宾</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>做好科学决策。决策前向社会公开征求意见，发动群众参与，充分听取各方意见，规范参与程序和途径，畅通反映诉求的通道，及时调整方案；</blockquote>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-9确保计划一步落实36-分">要点 9：确保计划一步落实（3.6 分）</h4>
+<p><strong>参考答案</strong>：确保计划一步落实。对已定计划严格执行，尽量避免突然变动；</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>参考答案</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>确保计划一步落实 / 对已定计划严格执行 / 尽量避免突然变动 / 确保计划 / 保计划一 / 计划一步</td></tr>
+<tr><td>满分</td><td>3.6 —— 确保计划一步落实 + 3-4 个动作</td></tr>
+<tr><td>一半</td><td>1.8 —— 只写 1-2 个动作</td></tr>
+<tr><td>0 分</td><td>0 —— 空话/不对应</td></tr>
+<tr><td>秒杀动作</td><td>句19「3月21日下午……发布了……调整的通知」+句20「决定3月22日停水活动调整为自愿节水活动」→「临时改变活动计划」；句22「接了的水太占地方只能倒掉，有点浪费」→ 变更的次</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>确保计划一步落实。对已定计划严格执行，尽量避免突然变动；</blockquote>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-要点-10改变活动形式36-分">要点 10：改变活动形式（3.6 分）</h4>
+<p><strong>参考答案</strong>：改变活动形式。开展现场参观、体验日等活动，进行宣传教育，提高群众自觉性、积极性。</p>
+<div class="tw"><table>
+<thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>位置</td><td>材料2·句1-4</td></tr>
+<tr><td>抄法</td><td>问题反推</td></tr>
+<tr><td>得分关键词</td><td>改变活动形式 / 开展现场参观 / 体验日等活动 / 进行宣传教育 / 提高群众自觉性 / 积极性</td></tr>
+<tr><td>满分</td><td>3.6 —— 改变活动形式 + 3-4 个动作</td></tr>
+<tr><td>一半</td><td>1.8 —— 只写 1-2 个动作</td></tr>
+<tr><td>0 分</td><td>0 —— 空话/不对应</td></tr>
+<tr><td>秒杀动作</td><td>问题→反义词→动宾</td></tr>
+</tbody>
+</table></div>
+<p><strong>材料原句</strong>：</p>
+<blockquote>改变活动形式。开展现场参观、体验日等活动，进行宣传教育，提高群众自觉性、积极性。</blockquote>
+<h2 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-⑥-秒杀链">⑥ 秒杀链</h2>
+<div class="tw"><table>
+<thead><tr><th>步</th><th>触发</th><th>动作</th><th>停机</th><th>秒</th></tr></thead><tbody>
+<tr><td>1</td><td>审题</td><td>先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。</td><td>确定题型/范围/条数</td><td>5</td></tr>
+<tr><td>2</td><td>直接决定答案分两大块：先「一、问题」，再「二、对策」。绝不能「问题1+对策1」交错写，那样</td><td>先看要求定结构：题干「梳理……并谈谈如何……」+ 要求「条理清晰」</td><td>题干「梳理……并谈谈如何……」+ 要求「条理清晰」</td><td>12</td></tr>
+<tr><td>3</td><td>报道体材料的问题全在「市民说」里。发言人一共9句，其中6句是负面、2句是正面（句21、22</td><td>扫全文标出所有市民发言：句9、句11、句12、句13、句15、句16、句21、句22、句23</td><td>句9、句11、句12、句13、句15、句16、句21、句22、句23</td><td>12</td></tr>
+<tr><td>4</td><td>市民不会说「通知不到位」，只会说「我是听邻居说的」。翻译规则：情绪词去掉，留下他抱怨的</td><td>把情绪翻译成问题：句9「太狠了」→ 时间过长、时段不合理；句12「都不知道有这么一回事」→ 通知不到位；句14「非常不理解」→ 未征求意见</td><td>句9「太狠了」→ 时间过长、时段不合理；句12「都不知道有这么一回事」→ 通知不到位；句1</td><td>12</td></tr>
+<tr><td>5</td><td>五个问题正好卡在五个环节上，这不是巧合，是出题人的布点方式。流程链是最可靠的合并依据：同一</td><td>按「公共活动的流程链」给问题归类：方案设计（句3、6、9）→ 信息发布（句1、4、12）→ 决策程序（句16、17）→ 计划执行（句19、2</td><td>方案设计（句3、6、9）→ 信息发布（句1、4、12）→ 决策程序（句16、17）→ 计划</td><td>12</td></tr>
+<tr><td>6</td><td>写前检查</td><td>看条数/字数/数字/格式</td><td>全过</td><td>5</td></tr>
+</tbody>
+</table></div>
+<p><strong>总耗时：58 秒</strong>（不含书写）。</p>
+<h3 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-秒杀链详解">秒杀链（详解）</h3>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-第-1-步--审题定框5-秒">第 1 步 · 审题定框（5 秒）</h4>
+<ul>
+<li><strong>看哪里</strong>：审题</li>
+<li><strong>找什么</strong>：先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。</li>
+<li><strong>怎么判</strong>：确定题型/范围/条数</li>
+<li><strong>出题人考什么</strong>：定主体链，问题→反义词→动宾，5 组镜像。</li>
+<li><strong>聪明人设会怎么做</strong>：先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。</li>
+<li><strong>产出</strong>：确定题型/范围/条数</li>
+<li><strong>失败分支</strong>：按材料结构图回退，不硬套</li>
+<li><strong>本题实例</strong>：本题 10 条</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-第-2-步--直接决定答案分两大块先12-秒">第 2 步 · 直接决定答案分两大块：先（12 秒）</h4>
+<ul>
+<li><strong>看哪里</strong>：直接决定答案分两大块：先「一、问题」，再「二、对策」。绝不能「问题1+对策1」交错写，那样</li>
+<li><strong>找什么</strong>：先看要求定结构：题干「梳理……并谈谈如何……」+ 要求「条理清晰」</li>
+<li><strong>怎么判</strong>：题干「梳理……并谈谈如何……」+ 要求「条理清晰」</li>
+<li><strong>出题人考什么</strong>：定主体链，问题→反义词→动宾，5 组镜像。</li>
+<li><strong>聪明人设会怎么做</strong>：先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。</li>
+<li><strong>产出</strong>：题干「梳理……并谈谈如何……」+ 要求「条理清晰」</li>
+<li><strong>失败分支</strong>：按材料结构图回退，不硬套</li>
+<li><strong>本题实例</strong>：本题 10 条</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-第-3-步--报道体材料的问题全在市12-秒">第 3 步 · 报道体材料的问题全在「市（12 秒）</h4>
+<ul>
+<li><strong>看哪里</strong>：报道体材料的问题全在「市民说」里。发言人一共9句，其中6句是负面、2句是正面（句21、22</li>
+<li><strong>找什么</strong>：扫全文标出所有市民发言：句9、句11、句12、句13、句15、句16、句21、句22、句23</li>
+<li><strong>怎么判</strong>：句9、句11、句12、句13、句15、句16、句21、句22、句23</li>
+<li><strong>出题人考什么</strong>：定主体链，问题→反义词→动宾，5 组镜像。</li>
+<li><strong>聪明人设会怎么做</strong>：先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。</li>
+<li><strong>产出</strong>：句9、句11、句12、句13、句15、句16、句21、句22、句23</li>
+<li><strong>失败分支</strong>：按材料结构图回退，不硬套</li>
+<li><strong>本题实例</strong>：本题 10 条</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-第-4-步--市民不会说通知不到位12-秒">第 4 步 · 市民不会说「通知不到位」（12 秒）</h4>
+<ul>
+<li><strong>看哪里</strong>：市民不会说「通知不到位」，只会说「我是听邻居说的」。翻译规则：情绪词去掉，留下他抱怨的</li>
+<li><strong>找什么</strong>：把情绪翻译成问题：句9「太狠了」→ 时间过长、时段不合理；句12「都不知道有这么一回事」→ 通知不到位；句14「非常不理解」→ 未征求意见</li>
+<li><strong>怎么判</strong>：句9「太狠了」→ 时间过长、时段不合理；句12「都不知道有这么一回事」→ 通知不到位；句1</li>
+<li><strong>出题人考什么</strong>：定主体链，问题→反义词→动宾，5 组镜像。</li>
+<li><strong>聪明人设会怎么做</strong>：先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。</li>
+<li><strong>产出</strong>：句9「太狠了」→ 时间过长、时段不合理；句12「都不知道有这么一回事」→ 通知不到位；句1</li>
+<li><strong>失败分支</strong>：按材料结构图回退，不硬套</li>
+<li><strong>本题实例</strong>：本题 10 条</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-第-5-步--五个问题正好卡在五个环节12-秒">第 5 步 · 五个问题正好卡在五个环节（12 秒）</h4>
+<ul>
+<li><strong>看哪里</strong>：五个问题正好卡在五个环节上，这不是巧合，是出题人的布点方式。流程链是最可靠的合并依据：同一</li>
+<li><strong>找什么</strong>：按「公共活动的流程链」给问题归类：方案设计（句3、6、9）→ 信息发布（句1、4、12）→ 决策程序（句16、17）→ 计划执行（句19、2</li>
+<li><strong>怎么判</strong>：方案设计（句3、6、9）→ 信息发布（句1、4、12）→ 决策程序（句16、17）→ 计划</li>
+<li><strong>出题人考什么</strong>：定主体链，问题→反义词→动宾，5 组镜像。</li>
+<li><strong>聪明人设会怎么做</strong>：先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。</li>
+<li><strong>产出</strong>：方案设计（句3、6、9）→ 信息发布（句1、4、12）→ 决策程序（句16、17）→ 计划</li>
+<li><strong>失败分支</strong>：按材料结构图回退，不硬套</li>
+<li><strong>本题实例</strong>：本题 10 条</li>
+</ul>
+<h4 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-第-6-步--组装检查5-秒">第 6 步 · 组装检查（5 秒）</h4>
+<ul>
+<li><strong>看哪里</strong>：写前检查</li>
+<li><strong>找什么</strong>：看条数/字数/数字/格式</li>
+<li><strong>怎么判</strong>：全过</li>
+<li><strong>出题人考什么</strong>：定主体链，问题→反义词→动宾，5 组镜像。</li>
+<li><strong>聪明人设会怎么做</strong>：先按责任主体把问题排成链，再把每条问题翻成「反义词+动宾」；问题与建议一一对应。</li>
+<li><strong>产出</strong>：全过</li>
+<li><strong>失败分支</strong>：按材料结构图回退，不硬套</li>
+<li><strong>本题实例</strong>：本题 10 条</li>
+</ul>
+<h3 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-逐段走一遍">逐段走一遍</h3>
+<div class="tw"><table>
+<thead><tr><th>材料/段/句</th><th>首句信号</th><th>判断</th><th>动作</th><th>出点</th></tr></thead><tbody>
+<tr><td>材料2·句1-4</td><td>背景：通知怎么发的（渠道单一）</td><td>出点</td><td>按角色处理</td><td>要点 1</td></tr>
+<tr><td>材料2·句5-6</td><td>目的说明 + 停水范围</td><td>出点</td><td>按角色处理</td><td>要点 6</td></tr>
+<tr><td>材料2·句7-8</td><td>活动沿革（第二年、改停水）</td><td>出点</td><td>按角色处理</td><td>要点 5</td></tr>
+<tr><td>材料2·句9-11</td><td>问题一：停水时间过长、时段不合理</td><td>出点</td><td>按角色处理</td><td>要点 6</td></tr>
+<tr><td>材料2·句12-14</td><td>问题二：通知不到位、市民不知情</td><td>出点</td><td>按角色处理</td><td>要点 7</td></tr>
+<tr><td>材料2·句15-16</td><td>问题三：未事先征求市民意见</td><td>出点</td><td>按角色处理</td><td>要点 3</td></tr>
+<tr><td>材料2·句17</td><td>问题补充：决策自上而下、执行层无反馈渠道</td><td>出点</td><td>按角色处理</td><td>要点 8</td></tr>
+<tr><td>材料2·句18</td><td>数据：影响人口</td><td>出点</td><td>「在F市主城区就有65万人口，下属县区政府驻地还有近8万人口，如果停水，这部分人中的绝大多数都将受到影响」——这是「影响范围大」的量化证据，本身不是问题条目，只能用来支撑句6 的判断。单独成条会变成「</td><td>要点 6</td></tr>
+<tr><td>材料2·句19-22</td><td>问题四：临时改变活动计划</td><td>出点</td><td>按角色处理</td><td>要点 4</td></tr>
+<tr><td>材料2·句23</td><td>对策素材：市民建议改变形式</td><td>出点</td><td>按角色处理</td><td>要点 5</td></tr>
+</tbody>
+</table></div>
+<h2 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-⑦-失分地图">⑦ 失分地图</h2>
+<div class="tw"><table>
+<thead><tr><th>陷阱</th><th>扣分</th><th>为什么</th></tr></thead><tbody>
+<tr><td>把句20「决定3月22日停水活动调整为自愿节水活动」当成对策写</td><td>-2</td><td>这句话看起来像F市「及时纠错、回应民意」，很像一条漂亮的对策。但它正是「临时改变活动计划」这个问题本身——写进对策，等于建议「以后遇到反对就取消活动」，逻辑上是自相矛盾的</td></tr>
+<tr><td>把句5「本次活动的目的是通过限制用水……增强大家的节水意识」当问题或对策</td><td>-2</td><td>目的陈述既不是问题也不是对策，它是命题人给你的「活动定性」。抄进答案会变成「活动目的不明确」这种材料根本不支持的话</td></tr>
+<tr><td>把句11「孩子刚满2个月，洗洗涮涮的」整句抄进问题</td><td>-2</td><td>这是个案细节，占20字却只传达「不方便」一个信息。400字题里，20字等于半条对策的额度</td></tr>
+<tr><td>问题写200字、对策写150字</td><td>-2</td><td>这是对策题最常见的失衡。问题部分是「概括」，写起来顺手；对策部分是「生成」，写起来费劲。结果问题写了5条半，对策只写了3条，30分里丢6-8分</td></tr>
+<tr><td>写「加强宣传」「提高认识」这类无主体对策</td><td>-2</td><td>要求里「具有可行性」是硬指标。「加强宣传」四个字没有主体、没有渠道、没有时点，阅卷直接判空泛，不给分</td></tr>
+</tbody>
+</table></div>
+<h2 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-⑧-盲测不写答案只点-4-下">⑧ 盲测（不写答案，只点 4 下）</h2>
+<blockquote>先自己猜，再看后面的答案。</blockquote>
+<ul>
+<li><strong>这题是什么题型？</strong>　综合题·提出对策 / 综合题·提出对策 / 公文写作题·总结类 / 文章写作题·议论文　→ <strong>综合题·提出对策</strong></li>
+<li><strong>这题几条？</strong>　9 / 10 / 11　→ <strong>10</strong></li>
+<li><strong>第1条来自哪几段？</strong>　句1-4 / 句5-6　→ <strong>句1-4</strong></li>
+<li><strong>本题的关键约束是？</strong>　字数与条数 / 文采 / 外部素材　→ <strong>字数与条数</strong></li>
+</ul>
+<h2 id="2021上-联考-行政执法卷--第-2-题评分拆解卡--综合题提出对策30-分--400-字-⑨-同类题">⑨ 同类题</h2>
+<div class="tw"><table>
+<thead><tr><th>卷·题</th><th>为什么同类</th></tr></thead><tbody>
+<tr><td>2021上-联考-行政执法卷·4</td><td>同题型，可迁移</td></tr>
+<tr><td>2022上-联考-行政执法卷·3</td><td>同题型，可迁移</td></tr>
+<tr><td>2023上-联考-行政执法卷·2</td><td>同题型，可迁移</td></tr>
+</tbody>
+</table></div>
+<hr class="sep">
+<blockquote>本卡由 <code>scoring/2021上-联考-行政执法卷.json</code> 生成；不要手改。改 JSON 后重跑 <code>python _render_scoring_card.py</code>。</blockquote></main>
+</body></html>
