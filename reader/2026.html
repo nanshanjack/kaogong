@@ -3,9 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
-<meta name="theme-color" content="#F8F4EB">
+<meta name="theme-color" content="#E9E7E0">
 <title>2026 · 省考（网友回忆版）</title>
 <style>:root{
+  --bg:#E9E7E0; --bg2:#E2E0D8; --panel:#F1EFE9; --panel2:#EBE9E1;
+  --ink:#232323; --ink2:#3F3F3A; --ink3:#5C5C55; --ink4:#7A7A72;
+  --line:#D0CDC3; --line2:#DDDAD1;
+  --brand:#4E6A5D; --brand2:#6B8578; --brand-soft:#E3EAE4;
+  --mark:#D8D2C2; --mark2:#B9A96A;
+  --ok:#3F6B52; --ok-soft:#E6EEE7;
+  --warn:#8E6A2A; --warn-soft:#F2EADB;
+  --danger:#A64A45; --danger-soft:#F3E4E2;
+  --code-bg:#EDEAE2; --code-ink:#232323;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+html[data-theme="eink"]{
+  --bg:#E9E7E0; --bg2:#E2E0D8; --panel:#F1EFE9; --panel2:#EBE9E1;
+  --ink:#232323; --ink2:#3F3F3A; --ink3:#5C5C55; --ink4:#7A7A72;
+  --line:#D0CDC3; --line2:#DDDAD1;
+  --brand:#4E6A5D; --brand2:#6B8578; --brand-soft:#E3EAE4;
+  --mark:#D8D2C2; --mark2:#B9A96A;
+  --ok:#3F6B52; --ok-soft:#E6EEE7;
+  --warn:#8E6A2A; --warn-soft:#F2EADB;
+  --danger:#A64A45; --danger-soft:#F3E4E2;
+  --code-bg:#EDEAE2; --code-ink:#232323;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+html[data-theme="paper"]{
   --bg:#F8F4EB; --bg2:#F2EDE2; --panel:#FDFBF6; --panel2:#F8F3E8;
   --ink:#221E1A; --ink2:#3E3A33; --ink3:#5E574B; --ink4:#7A7264;
   --line:#E6DCCB; --line2:#EFE7D9;
@@ -175,6 +205,11 @@ p.hint{margin:0 0 11px;font-size:13.5px;color:var(--ink3)}
 /* ---------- 白屏兜底 ---------- */
 #fatal{position:fixed;top:0;left:0;right:0;z-index:999;background:var(--danger);
   color:#fff;padding:10px 14px;font-size:13px}
+
+body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size:140px 140px;mix-blend-mode:multiply}
+@media print{body::after{display:none}}
 
 /* ==================== AI 批注 ==================== */
 .aihint{background:var(--brand-soft);border:1px solid color-mix(in srgb,var(--brand) 30%,transparent);border-left:4px solid var(--brand);
