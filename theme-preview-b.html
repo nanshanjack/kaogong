@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#DED6C7">
+<title>P0 · 暖纸 A vs B（更浅档）</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:#DED6C7;color:#2A2823;
+    font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    padding:22px 16px 40px;
+  }
+  .head{max-width:1320px;margin:0 auto 16px}
+  .head h1{font-size:22px;line-height:1.35;margin:0 0 6px;letter-spacing:.2px}
+  .head p{font-size:13px;line-height:1.8;color:#5E574A;margin:0}
+  .head .badge{display:inline-block;background:#3F5D53;color:#fff;border-radius:99px;
+    padding:2px 9px;font-size:11px;font-weight:700;margin-right:8px;vertical-align:2px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1320px;margin:0 auto}
+  @media(max-width:1200px){.grid{grid-template-columns:1fr}}
+
+  .device{
+    --shadow:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.06);
+    --panel-border:var(--line);
+    background:var(--bg);color:var(--ink);
+    border:1px solid #C9BEAA;border-radius:16px;overflow:hidden;
+    box-shadow:0 12px 30px rgba(60,50,30,.13);
+  }
+  .preview-a{
+    --bg:#F4EFE4; --bg2:#EFE8D9; --panel:#FBF7ED; --panel2:#F7F1E3;
+    --ink:#2A2823; --ink2:#4A463D; --ink3:#6B6558; --ink4:#8A8374;
+    --line:#DED4C2; --line2:#E8DFCF;
+    --brand:#3F5D53; --brand2:#557568; --brand-soft:#E6EEE8;
+    --mark:#F2DFA0; --mark2:#C9A227;
+    --ok:#2F6B4F; --ok-soft:#E8F1E8;
+    --warn:#9A6A1F; --warn-soft:#F6ECD8;
+    --danger:#A33A3A; --danger-soft:#F6E3E0;
+    --code-bg:#EFE8D9; --code-ink:#2A2823;
+  }
+  .preview-b{
+    --bg:#F8F4EB; --bg2:#F2EDE2; --panel:#FDFBF6; --panel2:#F8F3E8;
+    --ink:#332F28; --ink2:#575145; --ink3:#746C5E; --ink4:#958C7C;
+    --line:#E6DCCB; --line2:#EFE7D9;
+    --brand:#5B7A6C; --brand2:#769487; --brand-soft:#EDF4EF;
+    --mark:#F7E8BA; --mark2:#D8B85C;
+    --ok:#3C7A5A; --ok-soft:#EAF4EE;
+    --warn:#A9792A; --warn-soft:#F8EFDC;
+    --danger:#B34A45; --danger-soft:#F8E7E5;
+    --code-bg:#F4EFE3; --code-ink:#332F28;
+  }
+
+  .devhead{display:flex;justify-content:space-between;align-items:center;gap:10px;
+    padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--line);
+    font-size:11.5px;color:var(--ink3);flex-wrap:wrap}
+  .devhead b{color:var(--ink);font-size:13px;font-weight:750}
+  .devhead span{font-variant-numeric:tabular-nums}
+
+  .app{display:grid;grid-template-columns:158px minmax(0,1fr);min-height:660px}
+  @media(max-width:900px){.app{grid-template-columns:1fr}.side{display:none}}
+  .side{background:var(--bg2);border-right:1px solid var(--line);padding:12px 10px}
+  .logo{font-size:13px;font-weight:800;color:var(--ink);margin:0 0 10px;letter-spacing:.2px}
+  .logo small{display:block;font-size:10px;color:var(--ink3);font-weight:400;letter-spacing:0;margin-top:2px}
+  .search{height:28px;border:1px solid var(--line);background:var(--panel);border-radius:8px;
+    color:var(--ink3);font-size:11px;display:flex;align-items:center;padding:0 9px;margin:0 0 12px}
+  .nt{font-size:9.5px;font-weight:800;letter-spacing:.8px;color:var(--ink3);
+    text-transform:uppercase;margin:12px 4px 5px}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:6px;
+    padding:6px 8px;border-radius:7px;font-size:11.5px;color:var(--ink2);margin:0 0 2px}
+  .nav.on{background:var(--brand);color:#fff;font-weight:650}
+  .nav .badge{font-size:9px;font-weight:800;padding:1px 5px;border-radius:99px;
+    background:var(--brand-soft);color:var(--brand)}
+  .nav.on .badge{background:rgba(255,255,255,.2);color:#fff}
+
+  .main{padding:14px 16px 20px;min-width:0}
+  .crumb{font-size:10.5px;color:var(--ink3);letter-spacing:.3px}
+  .h1{font-size:21px;line-height:1.2;margin:3px 0 10px;color:var(--ink);letter-spacing:-.2px}
+  .tabs{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 12px}
+  .tab{font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--line);
+    color:var(--ink2);background:var(--panel)}
+  .tab.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:650}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:11px;
+    padding:12px 13px;margin:0 0 11px;box-shadow:var(--shadow)}
+  .card h3{font-size:12.5px;line-height:1.5;margin:0 0 8px;color:var(--ink);font-weight:750}
+  .meta{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 8px}
+  .tag{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:99px;
+    background:var(--brand-soft);color:var(--brand);white-space:nowrap}
+  .tag.g{background:var(--ok-soft);color:var(--ok)}
+  .tag.w{background:var(--warn-soft);color:var(--warn)}
+  .p{font-size:12.5px;line-height:1.9;color:var(--ink2);margin:0 0 8px}
+  .p:last-child{margin-bottom:0}
+  .mark{background:var(--mark);color:var(--ink);padding:1px 2px;border-radius:2px;
+    box-shadow:inset 0 -2px 0 var(--mark2)}
+  a{color:var(--brand);text-decoration:none;border-bottom:1px solid var(--brand2)}
+  .quote{font-size:12px;line-height:1.8;color:var(--ink2);background:var(--brand-soft);
+    border-left:3px solid var(--brand);border-radius:6px;padding:7px 9px;margin:0 0 9px}
+  .quote b{color:var(--brand)}
+  .hook{font-size:11.5px;line-height:1.75;color:var(--ink2);border-bottom:1px dashed var(--line);
+    padding:0 0 7px;margin:0 0 7px}
+  .hook b{color:var(--ink)}
+  .hook:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+  .table{width:100%;border-collapse:collapse;font-size:10.5px;margin:2px 0 8px}
+  .table th,.table td{border:1px solid var(--line);padding:4px 5px;text-align:left;
+    white-space:normal;word-break:break-word;vertical-align:top}
+  .table th{background:var(--brand-soft);color:var(--brand);font-weight:750}
+  .loss{font-size:11px;line-height:1.7;color:var(--danger);background:var(--danger-soft);
+    border-radius:6px;padding:6px 8px;margin:0 0 7px}
+  .blind{font-size:11px;line-height:1.7;color:var(--warn);background:var(--warn-soft);
+    border-radius:6px;padding:6px 8px;margin:0 0 8px}
+  .row{display:flex;gap:6px;flex-wrap:wrap}
+  .btn{display:inline-block;font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:7px;
+    background:var(--brand);color:#fff;border:1px solid var(--brand)}
+  .btn.ghost{background:var(--panel);color:var(--brand);border-color:var(--line)}
+  .code{font-size:10.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word;
+    background:var(--code-bg);color:var(--code-ink);border:1px solid var(--line);
+    border-radius:7px;padding:8px 9px}
+
+  .palette{max-width:1320px;margin:20px auto 0;background:#FBF7ED;border:1px solid #C9BEAA;
+    border-radius:14px;padding:16px 16px 18px;box-shadow:0 10px 26px rgba(60,50,30,.10)}
+  .palette h2{font-size:16px;margin:0 0 4px;color:#2A2823}
+  .palette .sub{font-size:12px;color:#5E574A;margin:0 0 12px;line-height:1.8}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:7px}
+  .sw{border:1px solid #D8CCB6;border-radius:8px;overflow:hidden;font-size:10px}
+  .sw i{display:block;height:32px}
+  .sw span{display:block;padding:4px 7px;background:#FBF7ED;color:#2A2823}
+  .sw code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9.5px;color:#6B6558}
+  .tokens{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:12px}
+  .tokens th,.tokens td{border:1px solid #D8CCB6;padding:5px 7px;text-align:left}
+  .tokens th{background:#E6EEE8;color:#3F5D53}
+  .tokens .ok{color:#2F6B4F;font-weight:700}
+  .note{font-size:12px;line-height:1.85;color:#4A463D;margin:12px 0 0;
+    border-top:1px dashed #D8CCB6;padding-top:11px}
+  .note b{color:#2A2823}
+</style>
+</head>
+<body>
+<header class="head">
+  <h1><span class="badge">P0</span>暖纸 A vs B（更浅档）</h1>
+  <p>同一份 DOM，<b>只换纸色与强调色</b>。左：暖纸 A（原方案）；右：暖纸 B（整体再浅一档）。B 的墨绿为 4.57:1，刚好过 4.5；再浅链接会不够清楚。</p>
+</header>
+
+<div class="grid">
+  <section class="device preview-a">
+    <div class="devhead"><b>暖纸 A · 原方案</b><span>--bg #F4EFE4 ｜ --panel #FBF7ED</span></div>
+    <div class="app"></div>
+  </section>
+  <section class="device preview-b" id="panel-b">
+    <div class="devhead"><b>暖纸 B · 更浅档</b><span>--bg #F8F4EB ｜ --panel #FDFBF6</span></div>
+    <div class="app"></div>
+  </section>
+</div>
+
+<section class="palette">
+  <h2>A vs B：更浅一档的代价</h2>
+  <p class="sub">B 把纸底从 #F4EFE4 提到 #F8F4EB、纸面从 #FBF7ED 提到 #FDFBF6、墨绿从 #3F5D53 提到 #5B7A6C。正文/次要/弱化仍达标；墨绿 4.57:1 是“还能保持链接可读”的最浅一档。</p>
+  <div class="swatches">
+    <div class="sw"><i style="background:#F4EFE4"></i><span>A 纸底 <code>#F4EFE4</code></span></div>
+    <div class="sw"><i style="background:#F8F4EB"></i><span>B 纸底 <code>#F8F4EB</code></span></div>
+    <div class="sw"><i style="background:#FBF7ED"></i><span>A 纸面 <code>#FBF7ED</code></span></div>
+    <div class="sw"><i style="background:#FDFBF6"></i><span>B 纸面 <code>#FDFBF6</code></span></div>
+    <div class="sw"><i style="background:#2A2823"></i><span>A 正文 <code>#2A2823</code></span></div>
+    <div class="sw"><i style="background:#332F28"></i><span>B 正文 <code>#332F28</code></span></div>
+    <div class="sw"><i style="background:#3F5D53"></i><span>A 墨绿 <code>#3F5D53</code></span></div>
+    <div class="sw"><i style="background:#5B7A6C"></i><span>B 墨绿 <code>#5B7A6C</code></span></div>
+    <div class="sw"><i style="background:#F2DFA0"></i><span>A 划线 <code>#F2DFA0</code></span></div>
+    <div class="sw"><i style="background:#F7E8BA"></i><span>B 划线 <code>#F7E8BA</code></span></div>
+  </div>
+  <table class="tokens">
+    <tr><th>组合</th><th>暖纸 A</th><th>暖纸 B（更浅）</th><th>结论</th></tr>
+    <tr><td>正文 / 纸面</td><td>13.76:1</td><td>12.87:1</td><td class="ok">≥7:1 长读 AAA</td></tr>
+    <tr><td>次要 / 纸面</td><td>8.78:1</td><td>7.61:1</td><td class="ok">≥6:1</td></tr>
+    <tr><td>弱化 / 纸面</td><td>5.41:1</td><td>5.01:1</td><td class="ok">≥4.5:1</td></tr>
+    <tr><td>墨绿 / 纸面</td><td>6.76:1</td><td>4.57:1</td><td class="ok">刚好 ≥4.5:1</td></tr>
+    <tr><td>白字 / 墨绿底</td><td>7.24:1</td><td>4.72:1</td><td class="ok">按钮仍清楚</td></tr>
+    <tr><td>划线文字 / 划线底</td><td>11.10:1</td><td>10.90:1</td><td class="ok">高亮后仍清楚</td></tr>
+    <tr><td>纸面 / 纸底</td><td>1.07:1</td><td>1.06:1</td><td>靠边框+阴影分层</td></tr>
+  </table>
+  <div class="note">
+    <b>结论：</b>B 更轻、更接近“米白纸”，但墨绿 4.57:1 已经是可读边界；再浅一档，链接/小标题会低于 4.5。<br>
+    <b>建议：</b>若你要更轻的观感，选 B；若你要更稳的对比，选 A。两者都只改颜色 token，P1 统一接入。
+  </div>
+</section>
+
+<template id="demo">
+  <aside class="side">
+    <div class="logo">申论工作台<small>四川 · 行政执法卷</small></div>
+    <div class="search">搜索文档 / 题号</div>
+    <div class="nt">方法论</div>
+    <div class="nav">零基础路线</div>
+    <div class="nav">抄材料方法</div>
+    <div class="nav">七大题型</div>
+    <div class="nav on">评分拆解 <span class="badge">32</span></div>
+    <div class="nav">采分点台账</div>
+    <div class="nav">考情分析</div>
+    <div class="nt">真题 · 左右对照</div>
+    <div class="nav">2021 上 <span class="badge">卡</span></div>
+    <div class="nav">2021 下 <span class="badge">卡</span></div>
+    <div class="nav">2022 上 <span class="badge">卡</span></div>
+    <div class="nav">2026 <span class="badge">卡</span></div>
+  </aside>
+  <main class="main">
+    <div class="crumb">2026 · 省考（网友回忆版）</div>
+    <div class="h1">2026</div>
+    <div class="tabs">
+      <span class="tab on">第1题</span><span class="tab">第2题</span>
+      <span class="tab">第3题</span><span class="tab">第4题</span>
+    </div>
+
+    <div class="card">
+      <h3>材料原文 · 划线为粉笔标注的答案来源句</h3>
+      <div class="meta">
+        <span class="tag">15 分</span><span class="tag">≤200 字</span>
+        <span class="tag">概括措施类</span><span class="tag g">评分拆解卡 →</span>
+      </div>
+      <p class="p">1.走进P市D区繁华商圈，一抹亮眼的“市监蓝”格外醒目——这是<span class="mark">全省首创的“食安小站”</span>。2022年，D区市场监管局在商圈集中区域<span class="mark">设立了2个“零距离”监管服务站</span>，开启了<span class="mark">“智慧监管”新模式</span>。备案办证、投诉举报、科普咨询……群众办事<span class="mark">“零跑腿”</span>，商户难题<span class="mark">“一站解”</span>。</p>
+      <p class="p">D区市场监管局制定出台了《保健食品沙盒监管基本规则》等17项配套制度，形成<span class="mark">“备案-检查-处置-反馈”管理闭环机制</span>。</p>
+    </div>
+
+    <div class="card">
+      <h3>秒杀得分批注</h3>
+      <div class="quote"><b>一句话秒杀：</b>出题人要的不是 9 段摘抄，是 4 个治理维度；先删故事，再按维度打包。</div>
+      <div class="hook"><b>钩子 1 · 4 个编号 = 4 个治理维度</b><br>按监管/帮扶/共治/科技聚类，不按段落顺序；普通人会写成 9 条。</div>
+      <div class="hook"><b>钩子 2 · 段3 故事是论据</b><br>跳过不抄，只把它当“措施有效”的证据；普通人看到“小作坊”就整段抄。</div>
+      <table class="table">
+        <tr><th>#</th><th>总括词</th><th>权重</th><th>必写词</th></tr>
+        <tr><td>1</td><td>创新监管模式</td><td>4</td><td>监管服务站 / 一站式 / 沙盒</td></tr>
+        <tr><td>2</td><td>帮扶小作坊升级</td><td>4</td><td>一坊一策 / 分批分层分类</td></tr>
+        <tr><td>3</td><td>推动多元共治</td><td>4</td><td>服务岗 / 监督员 / 1+N</td></tr>
+        <tr><td>4</td><td>科技赋能监管</td><td>3</td><td>数据预警 / 数字身份证</td></tr>
+      </table>
+      <div class="loss"><b>失分地图：</b>抄段3故事 -4；抄数字 -1~-2；漏“沙盒” -1。</div>
+      <div class="blind"><b>盲测：</b>这题几条？ 3 / <b>4</b> / 5　｜　哪段不出点？ 段2 / <b>段3</b> / 段7</div>
+      <div class="row"><span class="btn">开始盲测</span><span class="btn ghost">看秒杀链</span></div>
+    </div>
+
+    <div class="card">
+      <h3>原文/答案块</h3>
+      <div class="code">关于“益·峨眉”文旅检察办案团队的工作简报
+2021年，峨眉山市检察院组建“益·峨眉”文旅检察办案团队。自成立以来，团队重点开展了以下工作：</div>
+    </div>
+  </main>
+</template>
+
+<script>
+  document.querySelectorAll('.app').forEach(function (el) {
+    el.appendChild(document.getElementById('demo').content.cloneNode(true));
+  });
+</script>
+</body>
+</html>
