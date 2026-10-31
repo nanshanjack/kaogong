@@ -1,23 +1,60 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="paper">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
-<meta name="theme-color" content="#f7f7f5">
+<meta name="theme-color" content="#F8F4EB">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="申论工作台">
 <title>申论工作台 · 四川执法卷</title>
-<style>
-*,*::before,*::after{box-sizing:border-box}
-:root{
-  --bg:#f7f7f5; --bg2:#fff; --panel:#fff;
+<style>:root{
+  --bg:#F8F4EB; --bg2:#F2EDE2; --panel:#FDFBF6; --panel2:#F8F3E8;
+  --ink:#332F28; --ink2:#575145; --ink3:#746C5E; --ink4:#958C7C;
+  --line:#E6DCCB; --line2:#EFE7D9;
+  --brand:#5B7A6C; --brand2:#769487; --brand-soft:#EDF4EF;
+  --mark:#F7E8BA; --mark2:#D8B85C;
+  --ok:#3C7A5A; --ok-soft:#EAF4EE;
+  --warn:#A9792A; --warn-soft:#F8EFDC;
+  --danger:#B34A45; --danger-soft:#F8E7E5;
+  --code-bg:#F4EFE3; --code-ink:#332F28;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+html[data-theme="cool"]{
+  --bg:#f7f7f5; --bg2:#ffffff; --panel:#ffffff; --panel2:#fafafa;
   --ink:#18181b; --ink2:#3f3f46; --ink3:#71717a; --ink4:#a1a1aa;
   --line:#e7e7e4; --line2:#f0f0ed;
   --brand:#4f46e5; --brand2:#6366f1; --brand-soft:#eef2ff;
+  --mark:#fff3bf; --mark2:#f0b429;
   --ok:#059669; --ok-soft:#ecfdf5;
   --warn:#d97706; --warn-soft:#fffbeb;
   --danger:#dc2626; --danger-soft:#fef2f2;
-  --mark:#fff3bf; --mark2:#f0b429;
+  --code-bg:#1f2937; --code-ink:#e5e7eb;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+html[data-theme="dark"]{
+  --bg:#1B1A17; --bg2:#161512; --panel:#23211D; --panel2:#2A2722;
+  --ink:#E9E2D4; --ink2:#C9C0B0; --ink3:#9B9283; --ink4:#756E61;
+  --line:#35312A; --line2:#2E2A24;
+  --brand:#8FB3A6; --brand2:#A8C7BA; --brand-soft:#24312B;
+  --mark:#4A3D18; --mark2:#C9A227;
+  --ok:#7FC49A; --ok-soft:#163027;
+  --warn:#E0B45C; --warn-soft:#33270E;
+  --danger:#F08A8A; --danger-soft:#3A1717;
+  --code-bg:#141310; --code-ink:#E9E2D4;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+:root{
   --sb-w:236px;
   --r:10px; --r2:14px;
   --sh:0 1px 2px rgba(16,24,40,.04),0 1px 3px rgba(16,24,40,.06);
@@ -26,14 +63,6 @@
   --ease:cubic-bezier(.4,0,.2,1);
 }
 html[data-theme=dark]{
-  --bg:#0f0f11; --bg2:#17171a; --panel:#18181b;
-  --ink:#f4f4f5; --ink2:#d4d4d8; --ink3:#a1a1aa; --ink4:#71717a;
-  --line:#27272a; --line2:#1f1f23;
-  --brand:#818cf8; --brand2:#a5b4fc; --brand-soft:#1e1b4b;
-  --ok:#34d399; --ok-soft:#052e26;
-  --warn:#fbbf24; --warn-soft:#302006;
-  --danger:#f87171; --danger-soft:#3f1313;
-  --mark:#4a3a10; --mark2:#d4a72c;
   --sh:0 1px 2px rgba(0,0,0,.3);
   --sh2:0 4px 12px rgba(0,0,0,.4);
   --sh3:0 12px 32px rgba(0,0,0,.5);
@@ -78,7 +107,7 @@ button{font-family:inherit;cursor:pointer}
 .sb-head{padding:16px 16px 12px;display:flex;align-items:center;gap:9px}
 .logo{
   width:28px;height:28px;border-radius:8px;flex:0 0 auto;
-  background:linear-gradient(135deg,var(--brand),#8b5cf6);
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
   display:flex;align-items:center;justify-content:center;
   color:#fff;font-size:13px;font-weight:800;letter-spacing:-.5px;
   box-shadow:0 2px 8px rgba(79,70,229,.3);
@@ -210,7 +239,7 @@ kbd{font:inherit;font-size:10.5px;background:var(--line2);border-radius:3px;
 
 /* ==================== 卷首卡片 ==================== */
 .hero{
-  background:linear-gradient(135deg,var(--brand) 0%,#7c3aed 55%,#a855f7 100%);
+  background:linear-gradient(135deg,var(--brand) 0%,var(--brand2) 55%,var(--brand2) 100%);
   border-radius:var(--r2);padding:30px 32px;color:#fff;margin:0 0 26px;
   position:relative;overflow:hidden;box-shadow:var(--sh3);
 }
@@ -343,7 +372,7 @@ mark.hl.on{background:#ffd43b;box-shadow:0 0 0 2px var(--mark2);
 .step.s2{border-left-color:var(--ok)}
 .step.s3{border-left-color:var(--warn)}
 .step.s4{border-left-color:var(--danger)}
-.step.s5{border-left-color:#8b5cf6}
+.step.s5{border-left-color:var(--brand2)}
 .step>h4{margin:0 0 10px;font-size:14.5px;color:var(--ink);font-weight:700;
   display:flex;align-items:center;gap:8px}
 .step>h4 .n{width:21px;height:21px;border-radius:50%;background:var(--brand);
@@ -351,7 +380,7 @@ mark.hl.on{background:#ffd43b;box-shadow:0 0 0 2px var(--mark2);
   justify-content:center;flex:0 0 auto}
 .step.s2>h4 .n{background:var(--ok)}
 .step.s3>h4 .n{background:var(--warn)}
-.step.s5>h4 .n{background:#8b5cf6}
+.step.s5>h4 .n{background:var(--brand2)}
 .step .body{font-size:15px;line-height:1.92;color:var(--ink2);
   white-space:pre-wrap;word-break:break-word}
 .hint{font-size:12.5px;color:var(--ink4);margin:0 0 10px;line-height:1.7}
@@ -402,7 +431,7 @@ ul.key li{margin:0 0 7px;font-size:14.5px;line-height:1.88;color:var(--ink2)}
   display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .ai.extra h4{color:var(--warn)}
 .ai h4 .an{height:18px;padding:0 7px;border-radius:4px;
-  background:linear-gradient(135deg,var(--brand),#8b5cf6);color:#fff;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;
   font-size:10px;font-weight:800;display:inline-flex;align-items:center;
   letter-spacing:.6px}
 .ai.extra h4 .an{background:linear-gradient(135deg,var(--warn),#f59e0b)}
@@ -578,7 +607,7 @@ ul.key li{margin:0 0 7px;font-size:14.5px;line-height:1.88;color:var(--ink2)}
       <button class="nav-item" data-go="#/paper/2021上-联考" data-label="2021 上" data-kind="真题" data-crumb="2021 上半年 · 多省联考"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="lbl">2021 上</span><span class="badge">AI</span></button><button class="nav-item" data-go="#/paper/2021下" data-label="2021 下" data-kind="真题" data-crumb="2021 下半年 · 省考"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="lbl">2021 下</span><span class="badge">AI</span></button><button class="nav-item" data-go="#/paper/2022上-联考" data-label="2022 上" data-kind="真题" data-crumb="2022 上半年 · 多省联考"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="lbl">2022 上</span><span class="badge">AI</span></button><button class="nav-item" data-go="#/paper/2022下" data-label="2022 下" data-kind="真题" data-crumb="2022 下半年 · 省考"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="lbl">2022 下</span><span class="badge">AI</span></button><button class="nav-item" data-go="#/paper/2023上-联考" data-label="2023 上" data-kind="真题" data-crumb="2023 上半年 · 多省联考"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="lbl">2023 上</span><span class="badge">AI</span></button><button class="nav-item" data-go="#/paper/2024" data-label="2024" data-kind="真题" data-crumb="2024 · 省考"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="lbl">2024</span><span class="badge">AI</span></button><button class="nav-item" data-go="#/paper/2025" data-label="2025" data-kind="真题" data-crumb="2025 · 省考"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="lbl">2025</span><span class="badge">AI</span></button><button class="nav-item" data-go="#/paper/2026" data-label="2026" data-kind="真题" data-crumb="2026 · 省考（网友回忆版）"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="lbl">2026</span><span class="badge">AI</span></button>
     </nav>
     <div class="sb-foot">
-      <button class="icon-btn" id="themeBtn" title="切换深色/浅色">
+      <button class="icon-btn" id="themeBtn" title="主题：纸感（点击切换）">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round"><circle cx="12" cy="12" r="4"/>
         <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -12579,18 +12608,27 @@ B县综合行政执法局 XXXX年XX月XX日
     if(localStorage.getItem("wb_sb") === "0") appEl.classList.add("collapsed");
   }catch(e){}
 
-  // 主题
+  // 主题：纸感 → 冷白 → 深色纸
   var root = document.documentElement;
+  var THEME_MODES = ["paper", "cool", "dark"];
+  var THEME_NAMES = {paper: "纸感", cool: "冷白", dark: "深色纸"};
+  function themeLabel(){
+    var cur = root.getAttribute("data-theme") || "paper";
+    var btn = document.getElementById("themeBtn");
+    if(btn) btn.title = "主题：" + (THEME_NAMES[cur] || cur) + "（点击切换）";
+  }
   try{
     var th = localStorage.getItem("wb_theme");
-    if(th) root.setAttribute("data-theme", th);
-    else if(matchMedia("(prefers-color-scheme:dark)").matches)
-      root.setAttribute("data-theme", "dark");
-  }catch(e){}
+    root.setAttribute("data-theme", THEME_MODES.indexOf(th) >= 0 ? th : "paper");
+  }catch(e){ root.setAttribute("data-theme", "paper"); }
+  themeLabel();
   document.getElementById("themeBtn").onclick = function(){
-    var cur2 = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", cur2);
-    try{ localStorage.setItem("wb_theme", cur2); }catch(e){}
+    var cur = root.getAttribute("data-theme") || "paper";
+    var i = THEME_MODES.indexOf(cur);
+    var next = THEME_MODES[(i + 1) % THEME_MODES.length];
+    root.setAttribute("data-theme", next);
+    try{ localStorage.setItem("wb_theme", next); }catch(e){}
+    themeLabel();
   };
 
   // 阅读进度

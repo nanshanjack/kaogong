@@ -3,108 +3,153 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
-<meta name="theme-color" content="#f5f5f3">
+<meta name="theme-color" content="#F8F4EB">
 <title>2022 下半年 · 省考</title>
-<style>
+<style>:root{
+  --bg:#F8F4EB; --bg2:#F2EDE2; --panel:#FDFBF6; --panel2:#F8F3E8;
+  --ink:#332F28; --ink2:#575145; --ink3:#746C5E; --ink4:#958C7C;
+  --line:#E6DCCB; --line2:#EFE7D9;
+  --brand:#5B7A6C; --brand2:#769487; --brand-soft:#EDF4EF;
+  --mark:#F7E8BA; --mark2:#D8B85C;
+  --ok:#3C7A5A; --ok-soft:#EAF4EE;
+  --warn:#A9792A; --warn-soft:#F8EFDC;
+  --danger:#B34A45; --danger-soft:#F8E7E5;
+  --code-bg:#F4EFE3; --code-ink:#332F28;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+html[data-theme="cool"]{
+  --bg:#f7f7f5; --bg2:#ffffff; --panel:#ffffff; --panel2:#fafafa;
+  --ink:#18181b; --ink2:#3f3f46; --ink3:#71717a; --ink4:#a1a1aa;
+  --line:#e7e7e4; --line2:#f0f0ed;
+  --brand:#4f46e5; --brand2:#6366f1; --brand-soft:#eef2ff;
+  --mark:#fff3bf; --mark2:#f0b429;
+  --ok:#059669; --ok-soft:#ecfdf5;
+  --warn:#d97706; --warn-soft:#fffbeb;
+  --danger:#dc2626; --danger-soft:#fef2f2;
+  --code-bg:#1f2937; --code-ink:#e5e7eb;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+html[data-theme="dark"]{
+  --bg:#1B1A17; --bg2:#161512; --panel:#23211D; --panel2:#2A2722;
+  --ink:#E9E2D4; --ink2:#C9C0B0; --ink3:#9B9283; --ink4:#756E61;
+  --line:#35312A; --line2:#2E2A24;
+  --brand:#8FB3A6; --brand2:#A8C7BA; --brand-soft:#24312B;
+  --mark:#4A3D18; --mark2:#C9A227;
+  --ok:#7FC49A; --ok-soft:#163027;
+  --warn:#E0B45C; --warn-soft:#33270E;
+  --danger:#F08A8A; --danger-soft:#3A1717;
+  --code-bg:#141310; --code-ink:#E9E2D4;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%}
-body{background:#f5f5f3;color:#1f2937;
+body{background:var(--bg);color:var(--ink);
   font:16px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-a{color:#2563eb}
+a{color:var(--brand)}
 
 /* ---------- 吸顶条 ---------- */
 #bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
-  backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
   padding:8px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 #bar .nm{font-weight:700;font-size:14px;flex:1;min-width:110px;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#bar a.back{font-size:13px;text-decoration:none;color:#6b7280;flex:0 0 auto}
+#bar a.back{font-size:13px;text-decoration:none;color:var(--ink3);flex:0 0 auto}
 #qs{display:flex;gap:5px;overflow-x:auto;flex:0 0 auto}
-#qs button{border:1px solid #d1d5db;background:#fff;border-radius:8px;
-  padding:5px 11px;font-size:13px;color:#374151;cursor:pointer;white-space:nowrap}
-#qs button.on{background:#2563eb;border-color:#2563eb;color:#fff;font-weight:700}
+#qs button{border:1px solid var(--line);background:var(--panel);border-radius:8px;
+  padding:5px 11px;font-size:13px;color:var(--ink2);cursor:pointer;white-space:nowrap}
+#qs button.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:700}
 
 /* ---------- 主体 ---------- */
 #wrap{display:block;max-width:1500px;margin:0 auto}
 #left,#right{padding:14px 16px 90px}
 
 /* ---------- 题目卡 ---------- */
-.qcard{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   padding:14px 16px;margin:0 0 14px}
 .qcard .meta{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 9px}
 .tag{font-size:12px;padding:2px 9px;border-radius:99px;font-weight:700}
-.tag.sc{background:#fef3c7;color:#92400e}
-.tag.wd{background:#dbeafe;color:#1e40af}
-.tag.kp{background:#dcfce7;color:#166534}
+.tag.sc{background:var(--warn-soft);color:var(--warn)}
+.tag.wd{background:var(--brand-soft);color:var(--brand)}
+.tag.kp{background:var(--ok-soft);color:var(--ok)}
 .qcard .stem{font-size:16px;font-weight:600;line-height:1.8;margin:0 0 8px}
-.qcard .req{font-size:14px;color:#6b7280;margin:0}
+.qcard .req{font-size:14px;color:var(--ink3);margin:0}
 
 /* ---------- 材料 ---------- */
-h3.sec{font-size:13px;color:#6b7280;font-weight:700;letter-spacing:.5px;
-  margin:18px 0 8px;padding-left:8px;border-left:3px solid #2563eb}
-.matbox{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+h3.sec{font-size:13px;color:var(--ink3);font-weight:700;letter-spacing:.5px;
+  margin:18px 0 8px;padding-left:8px;border-left:3px solid var(--brand)}
+.matbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   padding:14px 16px;margin:0 0 14px}
-.matbox h4{font-size:13px;color:#2563eb;margin:0 0 10px;font-weight:700}
+.matbox h4{font-size:13px;color:var(--brand);margin:0 0 10px;font-weight:700}
 p.mt{margin:0 0 11px;text-align:justify;font-size:16.5px;line-height:1.95;
   text-indent:2em}
-mark.hl{background:#fff3bf;border-bottom:2px solid #f0b429;
+mark.hl{background:var(--mark);border-bottom:2px solid var(--mark2);
   padding:1px 1px;border-radius:2px;cursor:pointer;transition:background .25s}
-mark.hl.on{background:#ffd43b;box-shadow:0 0 0 2px #fab005}
-mark.hl:after{content:attr(data-m);font-size:9px;color:#b45309;
+mark.hl.on{background:var(--mark2);box-shadow:0 0 0 2px var(--mark2)}
+mark.hl:after{content:attr(data-m);font-size:9px;color:var(--warn);
   vertical-align:super;margin-left:1px;font-weight:700}
 
 /* ---------- 详解 ---------- */
-.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+.step{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   padding:14px 16px;margin:0 0 12px}
-.step h4{margin:0 0 10px;font-size:14.5px;color:#1f2937;font-weight:700;
+.step h4{margin:0 0 10px;font-size:14.5px;color:var(--ink);font-weight:700;
   display:flex;align-items:center;gap:7px}
 .step h4 .n{display:inline-flex;width:22px;height:22px;border-radius:50%;
-  background:#2563eb;color:#fff;font-size:12px;align-items:center;
+  background:var(--brand);color:#fff;font-size:12px;align-items:center;
   justify-content:center;flex:0 0 auto}
-.step .body{font-size:15.5px;line-height:1.95;color:#374151;
+.step .body{font-size:15.5px;line-height:1.95;color:var(--ink2);
   white-space:pre-wrap;word-break:break-word}
-.step.s1{border-left:4px solid #2563eb}
-.step.s2{border-left:4px solid #10b981}
-.step.s3{border-left:4px solid #f59e0b}
-.step.s4{border-left:4px solid #ef4444}
-.step.s5{border-left:4px solid #8b5cf6}
+.step.s1{border-left:4px solid var(--brand)}
+.step.s2{border-left:4px solid var(--ok)}
+.step.s3{border-left:4px solid var(--warn)}
+.step.s4{border-left:4px solid var(--danger)}
+.step.s5{border-left:4px solid var(--brand2)}
 
 /* 逐段讲解 */
-.blk{border:1px solid #e5e7eb;border-radius:10px;margin:0 0 10px;
+.blk{border:1px solid var(--line);border-radius:10px;margin:0 0 10px;
   overflow:hidden}
-.blk .h{background:#f9fafb;padding:8px 12px;font-size:13px;font-weight:700;
-  color:#374151;border-bottom:1px solid #e5e7eb}
-.blk .c{padding:10px 12px;font-size:15px;line-height:1.9;color:#4b5563}
-.blk .c.topic{padding-top:0;font-size:14.5px;color:#6b7280;
-  border-top:1px dashed #e5e7eb;margin-top:0}
-.blk .bind{background:#f0fdf4;border-top:1px solid #bbf7d0;
-  padding:9px 12px;font-size:14.5px;color:#166534;font-weight:600}
+.blk .h{background:var(--bg);padding:8px 12px;font-size:13px;font-weight:700;
+  color:var(--ink2);border-bottom:1px solid var(--line)}
+.blk .c{padding:10px 12px;font-size:15px;line-height:1.9;color:var(--ink2)}
+.blk .c.topic{padding-top:0;font-size:14.5px;color:var(--ink3);
+  border-top:1px dashed var(--line);margin-top:0}
+.blk .bind{background:var(--ok-soft);border-top:1px solid color-mix(in srgb,var(--ok) 35%,transparent);
+  padding:9px 12px;font-size:14.5px;color:var(--ok);font-weight:600}
 
 /* 审题要点列表 */
 ul.key{margin:0;padding-left:20px}
-ul.key li{margin:0 0 7px;font-size:15px;line-height:1.9;color:#374151}
-p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
+ul.key li{margin:0 0 7px;font-size:15px;line-height:1.9;color:var(--ink2)}
+p.hint{margin:0 0 11px;font-size:13.5px;color:var(--ink3)}
 
-.ref{background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+.ref{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   padding:14px 16px;margin:0 0 12px}
-.ref .item{padding:9px 0;border-bottom:1px dashed #e5e7eb;font-size:15.5px;
+.ref .item{padding:9px 0;border-bottom:1px dashed var(--line);font-size:15.5px;
   line-height:1.9;cursor:pointer}
 .ref .item:last-child{border:0}
-.ref .item.on{background:#fff3bf;border-radius:6px;padding-left:8px;
+.ref .item.on{background:var(--mark);border-radius:6px;padding-left:8px;
   margin-left:-8px}
 
-.warn{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;
-  padding:11px 14px;font-size:14px;color:#991b1b;margin:0 0 12px}
+.warn{background:var(--danger-soft);border:1px solid color-mix(in srgb,var(--danger) 35%,transparent);border-radius:10px;
+  padding:11px 14px;font-size:14px;color:var(--danger);margin:0 0 12px}
 
 /* ---------- 底部翻页 ---------- */
 #nav{position:fixed;bottom:0;left:0;right:0;z-index:40;
   background:rgba(255,255,255,.97);backdrop-filter:blur(8px);
-  border-top:1px solid #e5e7eb;padding:8px 12px;
+  border-top:1px solid var(--line);padding:8px 12px;
   padding-bottom:calc(8px + env(safe-area-inset-bottom));
   display:flex;gap:8px}
-#nav button{flex:1;border:1px solid #d1d5db;background:#fff;border-radius:10px;
-  padding:10px;font-size:14px;font-weight:600;color:#374151;cursor:pointer}
+#nav button{flex:1;border:1px solid var(--line);background:var(--panel);border-radius:10px;
+  padding:10px;font-size:14px;font-weight:600;color:var(--ink2);cursor:pointer}
 #nav button:disabled{opacity:.4}
 
 /* ---------- 平板 / 桌面：左右分栏 ---------- */
@@ -112,7 +157,7 @@ p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
   #wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;
     height:calc(100vh - 52px)}
   #left,#right{overflow-y:auto;height:100%;padding:18px 20px 90px}
-  #left{border-right:1px solid #e5e7eb}
+  #left{border-right:1px solid var(--line)}
   body{font-size:16.5px}
   p.mt{font-size:17px}
   #nav{max-width:1500px;margin:0 auto}
@@ -125,53 +170,53 @@ p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
   #bar,#nav,#tocBtn{display:none}
   #wrap{display:block;height:auto}
   #left,#right{overflow:visible;height:auto}
-  mark.hl{background:#fff3bf}
+  mark.hl{background:var(--mark)}
 }
 /* ---------- 白屏兜底 ---------- */
-#fatal{position:fixed;top:0;left:0;right:0;z-index:999;background:#dc2626;
+#fatal{position:fixed;top:0;left:0;right:0;z-index:999;background:var(--danger);
   color:#fff;padding:10px 14px;font-size:13px}
 
 /* ==================== AI 批注 ==================== */
-.aihint{background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0284c7;
+.aihint{background:var(--brand-soft);border:1px solid color-mix(in srgb,var(--brand) 30%,transparent);border-left:4px solid var(--brand);
   border-radius:10px;padding:11px 14px;margin:16px 0 12px;
-  font-size:13.5px;line-height:1.85;color:#075985}
-.aihint b{color:#0369a1}
-.ai{background:#fbfaff;border:1px solid #e0dbff;border-radius:12px;
+  font-size:13.5px;line-height:1.85;color:var(--ink2)}
+.aihint b{color:var(--brand)}
+.ai{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   padding:14px 16px;margin:0 0 12px}
-.ai.extra{background:#fffbf5;border-color:#ffe0b2}
-.ai h4{margin:0 0 11px;font-size:14.5px;color:#4c1d95;font-weight:700;
+.ai.extra{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+.ai h4{margin:0 0 11px;font-size:14.5px;color:var(--brand);font-weight:700;
   display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.ai.extra h4{color:#9a3412}
+.ai.extra h4{color:var(--warn)}
 .ai h4 .an{display:inline-flex;height:19px;padding:0 7px;border-radius:5px;
-  background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;
   font-size:10.5px;font-weight:800;align-items:center;letter-spacing:.5px}
-.ai.extra h4 .an{background:linear-gradient(135deg,#ea580c,#f59e0b)}
-.ai h4 .sub{font-size:11.5px;color:#9ca3af;font-weight:400;letter-spacing:0}
+.ai.extra h4 .an{background:linear-gradient(135deg,var(--warn),var(--warn))}
+.ai h4 .sub{font-size:11.5px;color:var(--ink3);font-weight:400;letter-spacing:0}
 
 /* 通用正文 */
-.ai .prose{font-size:15px;line-height:1.95;color:#374151;
+.ai .prose{font-size:15px;line-height:1.95;color:var(--ink2);
   white-space:pre-wrap;word-break:break-word}
 
 /* 表格通用 */
 .ai table{width:100%;border-collapse:collapse;font-size:13.5px;
-  background:#fff;border-radius:8px;overflow:hidden;
+  background:var(--panel);border-radius:8px;overflow:hidden;
   table-layout:fixed}
-.ai table th{background:#f3f0ff;color:#5b21b6;font-weight:700;
-  text-align:left;padding:8px 10px;border-bottom:1px solid #ddd6fe;
+.ai table th{background:var(--brand-soft);color:var(--brand);font-weight:700;
+  text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);
   font-size:12.5px;white-space:normal;word-break:break-word}
-.ai table td{padding:9px 10px;border-bottom:1px solid #f1f0f7;
-  vertical-align:top;line-height:1.8;color:#4b5563;
+.ai table td{padding:9px 10px;border-bottom:1px solid var(--line2);
+  vertical-align:top;line-height:1.8;color:var(--ink2);
   word-break:break-word;white-space:normal;overflow-wrap:anywhere}
 .ai table tr:last-child td{border-bottom:0}
-.tstem td.w{font-weight:700;color:#1f2937;font-size:14px;word-break:break-all}
-.tstem td.act{color:#065f46;background:#f0fdf4}
+.tstem td.w{font-weight:700;color:var(--ink);font-size:14px;word-break:break-all}
+.tstem td.act{color:var(--ok);background:var(--ok-soft)}
 .tstem .ty{display:inline-block;padding:1px 7px;border-radius:99px;
-  font-size:11px;font-weight:700;background:#ede9fe;color:#5b21b6;
+  font-size:11px;font-weight:700;background:var(--brand-soft);color:var(--brand);
   word-break:break-word}
-.ttrace td.pt{font-weight:600;color:#1f2937}
+.ttrace td.pt{font-weight:600;color:var(--ink)}
 .ttrace td.src{white-space:normal}
-.ttrace code{display:inline-block;background:#f3f4f6;border-radius:4px;
-  padding:1px 5px;font-size:11.5px;color:#6d28d9;margin:0 3px 2px 0;
+.ttrace code{display:inline-block;background:var(--line2);border-radius:4px;
+  padding:1px 5px;font-size:11.5px;color:var(--brand);margin:0 3px 2px 0;
   font-family:inherit}
 
 /* 列宽（用 colgroup 不好控制，直接给 th 定宽） */
@@ -185,44 +230,44 @@ p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
 
 /* 材料结构图 */
 .mmwrap{display:flex;flex-direction:column;gap:8px}
-.mm{border:1px solid #e5e7eb;border-radius:9px;overflow:hidden;background:#fff}
-.mm.pt{border-left:4px solid #10b981}
-.mm.no{border-left:4px solid #d1d5db;opacity:.85}
+.mm{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--panel)}
+.mm.pt{border-left:4px solid var(--ok)}
+.mm.no{border-left:4px solid var(--line);opacity:.85}
 .mmh{display:flex;align-items:center;gap:8px;padding:7px 11px;
-  background:#fafafa;border-bottom:1px solid #f1f0f7;flex-wrap:wrap}
-.mmh b{font-size:13px;color:#1f2937}
+  background:var(--panel2);border-bottom:1px solid var(--line2);flex-wrap:wrap}
+.mmh b{font-size:13px;color:var(--ink)}
 .mmb{font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px}
-.mm.pt .mmb{background:#d1fae5;color:#065f46}
-.mm.no .mmb{background:#f3f4f6;color:#6b7280}
-.mmr{padding:7px 11px 2px;font-size:13px;color:#374151;font-weight:600}
-.mmw{padding:0 11px 9px;font-size:13.5px;color:#6b7280;line-height:1.8}
+.mm.pt .mmb{background:var(--ok-soft);color:var(--ok)}
+.mm.no .mmb{background:var(--line2);color:var(--ink3)}
+.mmr{padding:7px 11px 2px;font-size:13px;color:var(--ink2);font-weight:600}
+.mmw{padding:0 11px 9px;font-size:13.5px;color:var(--ink3);line-height:1.8}
 
 /* 找点六步 */
 .steps{margin:0;padding:0;list-style:none;counter-reset:s}
 .steps li{position:relative;padding:0 0 12px 30px;
-  border-left:2px dashed #ddd6fe;margin-left:9px}
+  border-left:2px dashed var(--line);margin-left:9px}
 .steps li:last-child{border-left:0;padding-bottom:0}
 .steps li:before{counter-increment:s;content:counter(s);
   position:absolute;left:-10px;top:0;width:19px;height:19px;
-  border-radius:50%;background:#7c3aed;color:#fff;font-size:11px;
+  border-radius:50%;background:var(--brand);color:#fff;font-size:11px;
   font-weight:700;display:flex;align-items:center;justify-content:center}
-.sh{font-size:14px;font-weight:700;color:#5b21b6;margin:0 0 5px}
-.st,.ss{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
-.ss{color:#6b7280}
+.sh{font-size:14px;font-weight:700;color:var(--brand);margin:0 0 5px}
+.st,.ss{font-size:13.5px;line-height:1.85;color:var(--ink2);margin:0 0 4px}
+.ss{color:var(--ink3)}
 .lb{display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;
-  border-radius:4px;background:#ede9fe;color:#6d28d9;margin-right:6px}
-.ss .lb{background:#f3f4f6;color:#6b7280}
+  border-radius:4px;background:var(--brand-soft);color:var(--brand);margin-right:6px}
+.ss .lb{background:var(--line2);color:var(--ink3)}
 
 /* 陷阱 */
 .traps{display:flex;flex-direction:column;gap:9px}
-.trap{background:#fff;border:1px solid #fecaca;border-radius:9px;
+.trap{background:var(--panel);border:1px solid color-mix(in srgb,var(--danger) 30%,transparent);border-radius:9px;
   padding:10px 12px}
-.th{font-size:13.5px;font-weight:700;color:#991b1b;margin:0 0 6px;
+.th{font-size:13.5px;font-weight:700;color:var(--danger);margin:0 0 6px;
   line-height:1.7}
-.tw2,.ta{font-size:13.5px;line-height:1.85;color:#4b5563;margin:0 0 4px}
-.ta{color:#065f46}
-.tw2 .lb{background:#fee2e2;color:#991b1b}
-.ta .lb{background:#d1fae5;color:#065f46}
+.tw2,.ta{font-size:13.5px;line-height:1.85;color:var(--ink2);margin:0 0 4px}
+.ta{color:var(--ok)}
+.tw2 .lb{background:var(--danger-soft);color:var(--danger)}
+.ta .lb{background:var(--ok-soft);color:var(--ok)}
 
 @media(max-width:520px){
   .ai{padding:12px 12px}
@@ -251,7 +296,28 @@ p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
 群众工作方法：指在党的组织领导下,通过亲切面对面、讲明实情、解决问题,直接向广大群众发动和引导，使群众有效参与政治、社会活动的工作方式。表述规范，可直接摘抄，注意积累。
 换位思考：是设身处地地为他人着想，即想人所想，理解至上的一种处理人际关系的思考方式。表述规范，可直接摘抄，注意积累。
 放下架子：比喻改掉自以为是或骄傲自大的毛病。表述规范，可直接摘抄，注意积累。
-虚心：不自满，能接受别人的意见。表述规范，可直接摘抄，注意积累。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">20 分</span><span class="tag wd">≤300 字</span><span class="tag kp">概括措施类</span></div><p class="stem">请根据“给定资料2”，概括H市提升行政执法管理服务水平的措施。（20分）</p><p class="req">要求：全面、准确、有条理，不超过300字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型，题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>由“根据”一词，可知本题只需要阅读资料2</li><li>由“概括……措施”可知本题是单一题，需围绕“H市提升行政执法管理服务水平”这一主题，作答“措施”，即“对策”这一要素，阅读资料时可以重点关注标志性动词所在的句子、段落，从中提炼出答案要点</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">本段主要介绍H市利用无人机排查排污口。阅读“利用”“借助”等标志性动词所在的句子“利用高分辨率的无人机……分辨疑似排污口”“借助无人机航拍，仅用半天时间就能识别出全部疑似排污口点位”，提示了H市执法部门借助无人机来分辨排污口点位，其中“仅用半天时间”强调了无人机的高效性，可摘抄和概括得到要点：借助无人机，高效分辨疑似排污口。</div><div class="bind">✓ 要点：借助无人机，高效分辨疑似排污口</div></div><div class="blk"><div class="h">段 2</div><div class="c">本段主要介绍H市利用APP进行现场排查。阅读王队长的话“现在的排查App可以现场办公”“让现场排查工作更高效、更规范”，提示做法且表述规范，可摘抄得到要点：使用排查App现场办公，工作更高效、规范。</div><div class="bind">✓ 要点：使用排查App现场办公，工作更高效、规范</div></div><div class="blk"><div class="h">段 3</div><div class="c">本段主要介绍H市利用声呐设备进行水下排查。阅读“一艘装载声呐的无人船下水探测，这艘无人船可以准确探测到深度80米、宽度100米范围内的暗管”，提示了H市排查人员利用声呐探测设备，来准确排查水下暗管，可摘抄和概括得到要点：利用声呐探测设备，准确探测水下暗管。</div><div class="bind">✓ 要点：利用声呐探测设备，准确探测水下暗管</div></div><div class="blk"><div class="h">段 4</div><div class="c">本段主要介绍H市开展常规检查。阅读“开展”“检查”等标志性动词所在的句子“每周都对县农贸市场摊点……开展常规检查，每月与多部门开展执法检查活动”“进行全方位、无死角监管检查”，提示了H市S县管理部门加强了对市场的监管检查，可摘抄和概括得到要点：加强监管检查，每周对农贸市场开展常规检查，每月与多部门开展执法检查活动。</div><div class="bind">✓ 要点：加强监管检查，每周对农贸市场开展常规检查，每月与多部门开展执法检查活动</div></div><div class="blk"><div class="h">段 5</div><div class="c">本段主要介绍H市开展不定期检查。阅读“维护”“开展”等标志性动词所在的句子“为维护全县食品药品及消费市场的安全，日前，S县以日常监督检查与执法打击相结合的方式，在辖区不定期开展执法检查活动”，提示做法且表述规范，可摘抄得到要点：日常监督与执法打击相结合，不定期开展执法检查活动，维护消费市场安全。</div><div class="bind">✓ 要点：日常监督与执法打击相结合，不定期开展执法检查活动，维护消费市场安全</div></div><div class="blk"><div class="h">段 6</div><div class="c">本段主要通过个体户的话，指出H市通过监管检查，维护了市场安全，前文已出点，此处不再重复。</div></div><div class="blk"><div class="h">段 7</div><div class="c">本段主要介绍H市联合执法力量，解决执法重难点。（1）阅读“成立”“推进”等标志性动词所在的句子“有效解决行政执法过程中的重点、难点问题，H市湖里区成立联合执法工作领导小组，推进执法队伍的执法力量融合、工作界面融合”，提示了H市通过成立领导小组、推进执法力量融合等联合执法措施，来解决执法重点、难点问题，可摘抄和概括得到要点：推进联合执法，解决重难点问题；成立领导小组，推进执法力量融合、工作界面融合。注意：“整合执法资源”与“执法力量融合”表意相近，不重复书写。（2）阅读“牵头”“开展”等标志性动词所在的句子“湖里区城管办牵头组织……等开展全面联合执法”，提示做法且表述规范，可摘抄得到要点：城管办牵头组织，开展全面联合执法。</div><div class="bind">✓ 要点：推进联合执法，解决重难点问题</div></div><div class="blk"><div class="h">段 9</div><div class="c">段8-9主要围绕城管办解决电动车充电问题展开，可合并阅读。阅读段8中的“将电动车违停在店门口，并牵线充电”和段9中的“为解决电动车充电问题，湖里区城管办积极协调街道推动电动车集中充电站建设”，提示了H市城管办协调解决电动车违停充电问题的做法，表述规范，可摘抄得到要点：积极协调，解决电动车违停充电问题。</div><div class="bind">✓ 要点：积极协调，解决电动车违停充电问题</div></div><div class="blk"><div class="h">段 10</div><div class="c">本段主要介绍H市南湖区利用监控视频进行精准执法。（1）阅读“整合”“装上”等标志性动词所在的句子“整合……路面视频监控终端……并在执法车上装上了移动探头，视频数据接入到了数字管理平台”“对市容管控的难点、乱点实现动态掌握”，提示做法且表述规范，可摘抄得到要点：整合路面视频监控终端，为执法车安装移动探头，接入数字管理平台，动态掌握市容管控难点、乱点。（2）尾句“第一时间调配力量进行管理，执法力量得到最有效配置，投放更精准”，提示H市可以快速且精准的调配、投放执法力量，可概括得到要点：快速、精准调配执法力量。</div><div class="bind">✓ 要点：整合路面视频监控终端，为执法车安装移动探头，接入数字管理平台，动态掌握市容管控难点、乱点</div></div><div class="blk"><div class="h">段 12</div><div class="c">段11-12主要通过具体事例介绍了H市通过监控视频，进行快速、精准的执法，该要点前文已出，此处不再重复。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">组织答案
+虚心：不自满，能接受别人的意见。表述规范，可直接摘抄，注意积累。</div></div><div class="aihint">下面是 <b>AI 批注</b>：题干逐词拆解、材料结构、找点动作、答案溯源、出题人的坑。<b>这部分不是粉笔原话</b>，是逐句分析材料得出的判断，和上面的粉笔讲解互为补充。</div><div class="ai"><h4><span class="an">AI</span>① 题干逐词拆解<span class="sub">每个字都在告诉你该干什么</span></h4><div class="tw"><table class="tstem"><thead><tr><th>题干词</th><th>类型</th><th>它到底在说什么</th><th>你该做什么</th></tr></thead><tbody><tr><td class='w'>根据</td><td><span class='ty ty-范围信号'>范围信号</span></td><td>「根据」是硬边界，答案的全部事实必须落在资料1的34句里，既不许往资料2的H市执法、资料3的联调中心引申，也不许用「优秀民警都该这样」的常识去补</td><td class='act'>先在句34后面画一条终止线，读到「材料2」三个字立刻停笔</td></tr><tr><td class='w'>谈谈</td><td><span class='ty ty-题型信号'>题型信号</span></td><td>「谈谈…为什么」是分析句式不是概括句式，它要求你讲出「凭什么」，而不是把材料里的动作按顺序复述一遍</td><td class='act'>每写完一条，回头加一句「所以大家才夸他」，接不上的那条就是做法不是原因</td></tr><tr><td class='w'>罗剑</td><td><span class='ty ty-主体限定'>主体限定</span></td><td>主角只有罗剑一个人，梁教导员、章所长、村民们都是<b>评价者</b>或<b>配角</b>，他们的动作不能算成罗剑的功劳</td><td class='act'>每条要点的主语只能是罗剑，出现「教导员帮…」的句子先划掉再想</td></tr><tr><td class='w'>为什么</td><td><span class='ty ty-要素信号 = 原因'>要素信号 = 原因</span></td><td>问的是因果关系：他做了什么事、这些事为什么值得叫好、背后是什么样的能力和心性在支撑，答案必须是「做法 + 支撑这个做法的品质」两层</td><td class='act'>每条写成「动词短语（做了什么）＋ 因为/源于（凭什么）」的结构，光有前半不算原因</td></tr><tr><td class='w'>能得到大家的好评</td><td><span class='ty ty-评价来源'>评价来源</span></td><td>「好评」是评价不是事实，「大家」是复数的评价主体；句34 已经把这个主体点明为「当地群众、同事」两类人，这是全题唯一的分层依据</td><td class='act'>先抄下句34，把它拆成「群众」和「同事」两栏，再把材料里的话往两栏里放</td></tr><tr><td class='w'>分析全面、深刻</td><td><span class='ty ty-评分标准'>评分标准</span></td><td>「全面」要求四类好评一条不漏；「深刻」要求不能停在「他学会了方言」这种事实层，要往下写到「面对困难没有退缩」这种心性层，这是15分题里唯一能拉开差距的地方</td><td class='act'>四条要点里至少有两条要带一个品质词：主动、体谅、虚心、热情</td></tr><tr><td class='w'>条理清晰</td><td><span class='ty ty-评分标准'>评分标准</span></td><td>要求分条并配总括词，让阅卷人一眼看出四条各自答的是哪个侧面，而不是写成一段200字的连续叙述</td><td class='act'>四条各起一个总括词并单独成句，总括词后打句号不打逗号</td></tr><tr><td class='w'>不超过200字</td><td><span class='ty ty-字数'>字数</span></td><td>200字是硬上限，超出部分不阅卷；4条要点意味着每条只有49字左右的额度，任何一句场景描写都会直接挤掉一个得分点</td><td class='act'>按4条、每条49字配额度，写完数一遍，超过195字就先砍修饰语再砍例子</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>② 为什么是这个题型<span class="sub">判断链，不是结论</span></h4><div class="prose">判断链：① 题干动词是「谈谈…为什么」，不是「概括」「概述」「梳理」→ 这是原因分析题，答案的落点是因果不是清单；② 被解释的对象是「得到大家的好评」，「好评」是一种<b>评价</b>，评价必有评价主体，所以答案必须回答「谁在夸、夸什么、凭什么夸」；③ 句34 已经把主体点明为「当地群众、同事」两类 → 分层轴天然存在；④ 15分 / 200字 → 4条要点、每条49字，与参考答案实测的 50/49/48/48 字正好吻合。
+
+⚠️ 最容易错判的地方，也是本卷最大的坑：把这道题答成「概括罗剑的做法」。两者的区别不在措辞，在<b>每条要点能不能回答「为什么」</b>。比如「他学会了梅山方言」是做法，只答这一句，阅卷人只能给一半分；补上「面对困难没有退缩，抓住一切机会向同事、村民请教」（句6）才是原因，因为它解释了「别人也会遇到语言不通，为什么他能过这一关」。判别口诀：做法回答「他做了什么」，原因回答「他凭什么做到、这一点为什么让人叫好」。另一处易错：把「好评」理解成「他表现优秀」，于是去写他的品质清单（勤奋、奉献、担当），但品质是<b>结论</b>，题干要的是<b>论据</b>——品质必须挂在具体动作上才有分。</div></div><div class="ai"><h4><span class="an">AI</span>③ 材料结构图<span class="sub">哪段有用、哪段是干扰，为什么</span></h4><div class="mmwrap"><div class="mm no"><div class="mmh"><b>句1-2</b><span class="mmb">不出点</span></div><div class="mmr">背景：全省「万警千车下基层」活动部署</div><div class="mmw">句1是活动启动，句2是全省层面的警力调配（1万名警力、1200余辆警车），两句的主语都是「F省公安厅」，罗剑还没出场。这段的功能是把罗剑的下派放进一个制度背景里，写进答案等于用40字交代「他是怎么来的」，而题干问的是「他为什么被夸」，一个字都不该占。</div></div><div class="mm no"><div class="mmh"><b>句3</b><span class="mmb">不出点</span></div><div class="mmr">人物出场：90后民警、首批下派、梅山乡派出所</div><div class="mmw">句3只交代身份和岗位（科技信息化总队→梅山乡派出所），是纯信息句。但它埋了一个关键反差：省厅技术岗 → 乡下派出所，这个落差是后面「能放下架子」（句30）和「角色转变是新挑战」（句18-19）的伏笔。伏笔本身不出点，可它是理解第4条要点的钥匙。</div></div><div class="mm pt"><div class="mmh"><b>句4-7</b><span class="mmb">出 1 点</span></div><div class="mmr">要点一：快速适应——地理、方言、群众工作方法</div><div class="mmw">句4的「一有空，就拿起辖区地图，走村访户，很快熟悉了乡村地理情况」、句6的「面对困难他没有退缩，抓住一切机会向同事、村民请教，学讲当地方言，学习群众工作方法」是两个完整动作链；句5（方言不通）是困难铺垫，句7（学会了梅山方言）是结果。注意句6前半「面对困难他没有退缩」这七个字，它就是「原因的原因」——同样人生地不熟，别人可能将就着干，他不将就，这才是被夸的理由。</div></div><div class="mm pt"><div class="mmh"><b>句8-14</b><span class="mmb">出 1 点</span></div><div class="mmr">要点二：主动承担重点工作——矛盾纠纷调解</div><div class="mmw">句8-9是章所长交代背景（矛盾纠纷警情占一半以上，是所里的重点工作），本身不出点；出点的是句10「罗剑主动参与到调解群众矛盾纠纷中去」的「主动」二字，以及句11「一定要站在当事人的角度去换位思考」和句14「仔细了解情况，多次耐心进行调解，运用法律知识分析利弊，做思想工作」。句12-13是袁某与付某的纠纷经过，属于案例细节，200字里只能压成「耐心调解、依法析理」六个字。</div></div><div class="mm no"><div class="mmh"><b>句15-17</b><span class="mmb">不出点</span></div><div class="mmr">易错段：代某家困难 + 教导员帮办低保 + 罗剑跟着走访</div><div class="mmw">这三句是全卷最典型的<b>主体错位陷阱</b>。真正办成事的是句16的梁教导员——「和镇政府、村委会联系，帮助协调办理了低保，申请了慰问金」，主语不是罗剑。罗剑在句17里只是「教导员带着他一起上门走访慰问」。如果写成「罗剑帮群众办低保、申请慰问金」，是把师傅的功劳记到徒弟头上，属于硬伤。这段唯一能用的信息是「上门走访慰问困难群众」，而句30「积极走访辖区群众」已经给了，重复不出点。</div></div><div class="mm no"><div class="mmh"><b>句18-19</b><span class="mmb">不出点</span></div><div class="mmr">罗剑自述：角色转变的困难</div><div class="mmw">「岗位、身份、职责等都变化很大」「如何转变角色…这些都是新挑战」是罗剑自己说的困难，不是他做的事，也不是别人对他的评价。它的作用是给句4-7的「快速适应」加一个反证——困难是真的，适应也是真的。这类「自陈困难」的句子在原因题里永远不出点，但它是判断「哪条要点更重要」的权重信号。</div></div><div class="mm no"><div class="mmh"><b>句20-24</b><span class="mmb">不出点</span></div><div class="mmr">高浓度干扰段：儿子生日、视频连线、妻子不理解</div><div class="mmw">这五句情绪最浓（「爸爸，今天是我生日，我想你了」「有点小遗憾」），占了全篇近六分之一，新手最爱整段抄。但一个要点都出不了：好评是群众和同事对<b>可见行为</b>的反应，而他在宿舍跟儿子视频、在电话里跟妻子解释，这两件事群众看不见、同事也看不见。换句话说，这段证明的是「他付出了什么代价」，不是「他为什么被夸」。真要沾边，只能作为「舍小家」的一句背景，200字里连一句都装不下。</div></div><div class="mm pt"><div class="mmh"><b>句25-27</b><span class="mmb">出 1 点</span></div><div class="mmr">要点三：帮同事分担——春节替班 + 体谅基层民警</div><div class="mmw">句25是梁教导员的原话「春节期间，罗剑主动要求留下来值班，让所里的老民警回家过年」，这是同事视角的第一手证据；句27是罗剑自述「我切身感受到基层民警的辛苦和不易，我要力所能及地多为他们做些事情」——这一句就是「为什么替班」的原因，把「替班」这个动作升级成「体谅」。两句一配，原因链就闭合了。</div></div><div class="mm pt"><div class="mmh"><b>句28-31</b><span class="mmb">出 1 点</span></div><div class="mmr">要点四：与群众打成一片 + 用专业特长为同事解难</div><div class="mmw">句28村民的评论「态度好和气」、句29「无论是接处警，还是接待群众咨询，罗剑都是热情和气」、句30章所长「能放下省厅干警的架子，虚心好学，积极走访辖区群众，经常下村里进行预防电信网络诈骗和疫情防控宣传，走村入户，与群众打成一片」，三句构成第4条要点；句31「他还利用自己的专业特长，为同事们解决科技信息化、警务通等方面遇到的问题」是第3条要点的第二个子项，位置在群众段里但对象是同事，必须挪回去。</div></div><div class="mm no"><div class="mmh"><b>句32-33</b><span class="mmb">不出点</span></div><div class="mmr">议论升华：人民满意是走不完的路</div><div class="mmw">「人民满意是一条走不完的路，群众工作是一本翻不完的书」「既要『键对键』，也要『面对面』，更要『心连心』」——这是作者跳出来发的议论，是文章的立意句，不是罗剑的事实。它写得很漂亮，正因如此特别诱人。原因题的答案必须是<b>事实性原因</b>，议论句抄进去等于用自己的话证明自己的话，零分。</div></div><div class="mm no"><div class="mmh"><b>句34</b><span class="mmb">不出点</span></div><div class="mmr">题干来源句：群众、同事的广泛好评</div><div class="mmw">「罗剑在新的平凡工作岗位上辛勤工作，无私奉献，得到当地群众、同事的广泛好评」就是题干那句话的出处，它本身不含任何新事实，一个字都不进答案。但它是全题最重要的一句——因为它把评价主体明确切成「群众」和「同事」两类，这四个字决定了答案该怎么分层。定位题干句，永远比急着抄要点更有价值。</div></div></div></div><div class="ai"><h4><span class="an">AI</span>④ 我该怎么找答案<span class="sub">六步动作，照做就行</span></h4><ol class="steps"><li><div class="sh">第 1 步 · 先划材料边界</div><div class="st"><span class="lb">看哪</span>资料1 全部 34 句，句1 到句34</div><div class="ss"><span class="lb">凭什么</span>题干「根据给定资料1」→ 资料2 的无人机排查、资料3 的联调中心一律不看，哪怕它们也在讲基层工作</div></li><li><div class="sh">第 2 步 · 先找「好评」的原话，不先找做法</div><div class="st"><span class="lb">看哪</span>句34「得到当地群众、同事的广泛好评」</div><div class="ss"><span class="lb">凭什么</span>原因题的入口是<b>被解释项</b>，不是材料。先把「好评」这四个字在材料里定位，你就同时拿到了两样东西：评价的事实（有人夸）和评价的主体（群众＋同事）。先扫做法的人，会漏掉主体这条分层轴</div></li><li><div class="sh">第 3 步 · 按评价主体把材料劈成两半</div><div class="st"><span class="lb">看哪</span>同事侧：句25、句27、句31；群众侧：句4-7、句10-14、句28-30</div><div class="ss"><span class="lb">凭什么</span>句34 只给了两类人，所以答案的骨架天然是「同事为什么夸他」＋「群众为什么夸他」。参考答案把「快速熟悉工作」「主动承担重点工作」「与群众打成一片」三条都归到群众侧，只把「帮同事分担」一条给同事侧，是 3:1 的配比，符合材料里群众段占多数的实际</div></li><li><div class="sh">第 4 步 · 抓「评价句 + 动作句」的配对</div><div class="st"><span class="lb">看哪</span>句28（村民评论）配句29-30；句25（教导员介绍）配句27（罗剑自述）</div><div class="ss"><span class="lb">凭什么</span>材料里凡是出现「村民们评论道」「章所长说」「梁教导员介绍道」的，后面跟的就是<b>评价</b>，评价前面那句才是<b>原因</b>。这种「评价—动作」的相邻结构，是原因题最可靠的出点信号</div></li><li><div class="sh">第 5 步 · 剔除三类伪原因</div><div class="st"><span class="lb">看哪</span>句1-2（背景）、句15-17（他人功劳）、句20-24（家庭牺牲）、句32-33（议论）</div><div class="ss"><span class="lb">凭什么</span>四类句子长得都像答案，但都不回答「为什么被夸」：背景答的是「他怎么来的」，他人功劳答的是「别人做了什么」，家庭牺牲答的是「他付出了什么」，议论答的是「作者怎么评价」。每删一类，就省下40字给真要点</div></li><li><div class="sh">第 6 步 · 给每条配「做法＋品质」双层，再卡字数</div><div class="st"><span class="lb">看哪</span>4 条 × 45 字 ≈ 180 字</div><div class="ss"><span class="lb">凭什么</span>参考答案每条都是「总括词（能力/态度）＋ 一个具体动作 ＋ 一个品质词」，例如「帮同事分担工作。体谅基层民警的辛苦不易，主动值班，让同事回家过年；利用专业特长，为同事解决问题」——「体谅」就是品质层。只写动作不写品质，是概括做法；只写品质不写动作，是空话。两层都要有</div></li></ol></div><div class="ai"><h4><span class="an">AI</span>⑤ 每条答案从哪来<span class="sub">点句子编号可对照左边材料</span></h4><div class="tw"><table class="ttrace"><thead><tr><th>答案要点</th><th>来源句</th><th>怎么变成答案的</th></tr></thead><tbody><tr><td class='pt'>能快速熟悉工作</td><td class='src'><code>句4</code> <code>句5</code> <code>句6</code> <code>句7</code></td><td>句4「一有空，就拿起辖区地图，走村访户，很快熟悉了乡村地理情况」→「很快熟悉乡村地理情况」（删掉「拿起地图」「走村访户」两个具体动作，只留结果）；句6「面对困难他没有退缩，抓住一切机会向同事、村民请教，学讲当地方言，学习群众工作方法」→「抓住一切机会学习当地方言和群众工作方法」（原句 37 字压到 18 字）；句5「语言不通，沟通不畅」和句7「学会了说梅山方言」是首尾两端，压成「初来时人生地不熟」这七个字做背景，不占独立要点</td></tr><tr><td class='pt'>主动承担重点工作</td><td class='src'><code>句8</code> <code>句10</code> <code>句11</code> <code>句14</code></td><td>句8「化解矛盾纠纷是所里的重点工作」→ 提供「重点工作」这个定性，是总括词里「重点工作」的来源；句10「罗剑主动参与到调解群众矛盾纠纷中去」→「参与调解群众矛盾纠纷」，「主动」二字必须留，它是原因层不是动作层；句11「一定要站在当事人的角度去换位思考」→「能换位思考」；句14「仔细了解情况，多次耐心进行调解，运用法律知识分析利弊，做思想工作」→「耐心调解，运用法律知识分析利弊，做好思想工作」（四个动作压成三个短语）；句12-13 袁某付某的纠纷细节全部舍弃，那是案例不是要点</td></tr><tr><td class='pt'>帮同事分担工作</td><td class='src'><code>句25</code> <code>句27</code> <code>句31</code></td><td>句25「春节期间，罗剑主动要求留下来值班，让所里的老民警回家过年」→「主动值班，让同事回家过年」（几乎直摘，只把「老民警」泛化成「同事」以对齐总括词）；句27「我切身感受到基层民警的辛苦和不易，我要力所能及地多为他们做些事情」→「体谅基层民警的辛苦不易」，这一句是把「替班」升级为「体谅」的关键，没有它，替班只是一个动作，有了它才是原因；句31「利用自己的专业特长，为同事们解决科技信息化、警务通等方面遇到的问题」→「利用专业特长，为同事解决问题」（「科技信息化、警务通」是举例，删）</td></tr><tr><td class='pt'>与群众打成一片</td><td class='src'><code>句17</code> <code>句28</code> <code>句29</code> <code>句30</code></td><td>句28「梅山所里来了一位省城下来的民警，态度好和气」→「对群众热情和气」（村民的原话最可信，直接用）；句29「无论是接处警，还是接待群众咨询，罗剑都是热情和气」→ 佐证上一条，不重复出点；句30「能放下省厅干警的架子，虚心好学，积极走访辖区群众，经常下村里进行预防电信网络诈骗和疫情防控宣传，走村入户，与群众打成一片」→「能放下架子，虚心好学，积极走访、慰问辖区群众，经常下村开展工作」（「预防电信网络诈骗和疫情防控宣传」是具体事项，压成「下村开展工作」）；句17「教导员带着他一起上门走访慰问」→ 只取「慰问辖区群众」四个字并入，绝不写成「帮群众办低保」</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>⑥ 出题人埋的坑<span class="sub">这些地方专门骗新手</span></h4><div class="traps"><div class="trap"><div class="th">⚠ 把整道题答成「概括罗剑的做法」——只写他学了方言、调解了纠纷、春节值班、走访了群众</div><div class="tw2"><span class="lb">为什么错</span>这是本卷第一大坑，也是最难自察的坑，因为写出来的答案读起来毫无破绽。但「做法」回答的是 what，「原因」回答的是 why：同样是「学会了方言」，作为做法它只是一个事实，作为原因它必须连上「面对困难没有退缩」（句6）才成立。参考答案每条都藏了一个品质词（主动、体谅、虚心、热情），那四个词才是「为什么被夸」的答案，很多人抄的时候把它们当形容词删掉了</div><div class="ta"><span class="lb">怎么躲</span>写完四条后做一次「反问测试」：逐条问「这一点为什么值得夸」，答得出来就留着，答不出来说明这条只是做法。补一句品质词再问一次</div></div><div class="trap"><div class="th">⚠ 句20-24 儿子生日、视频连线、妻子不理解这五句</div><div class="tw2"><span class="lb">为什么错</span>这五句是材料里情绪浓度最高的地方，占全篇近六分之一，「爸爸，今天是我生日，我想你了」这种句子看一眼就忘不掉。但好评是群众和同事对<b>可见行为</b>的反应，他在宿舍跟儿子视频这件事，群众看不见、同事也看不见，构不成「好评」的原因。抄进去不仅不得分，还会挤掉整整一条要点（49字）</div><div class="ta"><span class="lb">怎么躲</span>凡是想抄「家庭牺牲」类内容，先问一句「谁看见了」。没有人看见的付出，在原因题里不算原因，只能算背景</div></div><div class="trap"><div class="th">⚠ 句15-17 代某家困难、教导员帮办低保、罗剑跟着走访</div><div class="tw2"><span class="lb">为什么错</span>这段特别容易写错，因为「帮助协调办理了低保，申请了慰问金」这个动作太具体、太像答案。但它的主语是梁教导员，不是罗剑。罗剑在句17里的身份是「教导员带着他」的那个「他」。把师傅的功劳写成徒弟的，是硬伤，阅卷人一对照材料就能看出来</div><div class="ta"><span class="lb">怎么躲</span>抄任何动作句前，先圈主语。主语不是题干主体（罗剑）的，一律降级为背景，或者只取其中属于主角的那一小截（「上门走访慰问」）</div></div><div class="trap"><div class="th">⚠ 句32-33「人民满意是一条走不完的路」「既要『键对键』，也要『面对面』，更要『心连心』」</div><div class="tw2"><span class="lb">为什么错</span>这两句写得最漂亮，是整则材料的文眼，抄进答案会显得很有水平。但它们是<b>议论</b>，是作者替罗剑下的结论，不含任何新事实。200字里塞一句30字的议论，等于用一条要点的三分之二换零分。而且这两句正好是「好评」的同义反复，属于循环论证</div><div class="ta"><span class="lb">怎么躲</span>判别标准：这句话如果删掉，答案的信息量会不会减少？不会减少的就是议论，删</div></div><div class="trap"><div class="th">⚠ 句10「一周内化解矛盾纠纷多起」这类成效表述</div><div class="tw2"><span class="lb">为什么错</span>「一周内化解多起」看起来很能说明他能力强，但它是<b>成效</b>，不是原因。而且它还是个模糊表述（「多起」没有具体数字），信息量极低。真正的原因在句11和句14——他怎么调的（换位思考、依法析理、做思想工作）</div><div class="ta"><span class="lb">怎么躲</span>看到「多起」「显著」「明显」这类模糊成效词，一律跳过；要找的是它前面那句「他是怎么做到的」</div></div></div></div><div class="ai"><h4><span class="an">AI</span>⑦ 答案为什么长这样<span class="sub">骨架、字数、用词</span></h4><div class="prose">看参考答案的四条：
+「1.能快速熟悉工作。初来时人生地不熟，但能很快熟悉乡村地理情况，抓住一切机会学习当地方言和群众工作方法。」
+
+<b>总括词不是对仗的，而是四个维度。</b> 这是本题最反常识的地方。一般概括题的总括词要字数整齐（统筹生产保供/畅通保供渠道），但本题的四个总括词是「能快速熟悉工作」（8字）、「主动承担重点工作」（8字）、「帮同事分担工作」（7字）、「与群众打成一片」（7字）——长度不齐，句式也不同。因为它们各自回答的是不同的问题：<b>能不能干（能力）→ 肯不肯挑重担（担当）→ 对同事怎么样（利他）→ 对群众怎么样（亲和）</b>。这四个维度合起来，才是「好评」的完整解释。硬凑成对仗反而会丢维度。
+
+<b>每条内部是「总括词＋背景＋动作」三段。</b> 以第1条为例：「能快速熟悉工作」（总括）＋「初来时人生地不熟」（背景，交代困难）＋「很快熟悉乡村地理情况，抓住一切机会学习当地方言和群众工作方法」（动作）。为什么要交代困难？因为<b>没有困难就显不出能力</b>——「人生地不熟」这五个字是「能快速熟悉」这个「能」字的支点，删了它，能力就变成了陈述。
+
+<b>字数账</b>：实测四条分别是 50、49、48、48 字，合计 195 字，正好卡在 200 以内。四条几乎等长，这是刻意压出来的——多一个字就超，少一个字就浪费。省字的办法只有一个：句12-13 袁某与付某的纠纷经过（起因、拖鞋、亲戚、面子）一个字没写，只留「耐心调解、依法析理」六个字。<b>200 字题能不能过线，全看案例段舍不舍得砍。</b>
+
+<b>用词规律</b>：动词全部前置且带情态——「能」「主动」「帮」「与…打成一片」。这四个词不是随便选的，它们分别标记了能力、意愿、利他、关系四种性质。如果四条都写成「做好…」「加强…」，就退化成了工作汇报，原因的味道就没了。原因题的总括词，本质上是在给「他凭什么」分类，不是在给「他做了什么」分类。</div></div><div class="ai extra"><h4><span class="an">AI</span>⑧ 粉笔没讲透的地方<span class="sub">我的补充判断</span></h4><div class="prose">粉笔的答案说明里写「各条答案要点之间在内容上相互并列，没有交叉」。我认为这句话不准确，而且它掩盖了本题最有价值的东西。
+
+我的读法：四条不是并列，是<b>一条被接纳的时间线</b>。句4-7（先能干活，不被当成废物）→ 句8-14（再挑重担，证明有用）→ 句25-31（再帮同事、融入群众，证明好相处）→ 句34（最后拿到好评）。这是一个下派干部在基层被接纳的完整过程，顺序不能调换：先证明能力，再证明担当，最后才谈得上人情。如果把「与群众打成一片」放到第一条，逻辑就断了——一个刚来、连路都不认识的人，群众凭什么跟他打成一片？<b>并列可以任意调序，过程不能。</b>
+
+第二个发现，也是我认为比参考答案更有用的：<b>真正的分层轴藏在句34 的两个词里</b>。「当地群众、同事」——这是材料唯一一次把评价主体说清楚。按这个轴分，答案应该是「同事为什么夸（3条）」和「群众为什么夸（3条）」，但参考答案选了「工作逻辑」而不是「主体逻辑」，把三条给群众、一条给同事。两种分法都能得分，但主体逻辑更贴题干，因为题干问的就是「大家」——<b>「大家」是谁，答案就该按谁分</b>。这也是原因题的一个通用动作：先找评价主体，再定分层轴。
+
+第三个：句20-24 这五句是本题最贵的干扰段，占全篇 15%，情绪浓度最高，却一个要点都不出。原因值得记下来——<b>好评是对可见行为的反应</b>。他在宿舍跟儿子视频、在电话里跟妻子解释，群众看不见、同事也看不见，所以这段再感人也不构成「好评」的原因。这个判断能帮人在考场上省下整整一条要点的字数。反过来说，如果题干问的是「罗剑身上体现了什么样的职业精神」，这五句就是核心素材。<b>同一段材料，问「为什么被夸」时是垃圾，问「体现什么精神」时是黄金。</b>
+
+第四个：句17「爱心接力棒从师傅传到了徒弟手上」这句话，参考答案完全没用。我觉得可惜，但也认同它的取舍——200字装不下「师傅传帮带」这层。不过它提示了一个规律：材料1 里罗剑的成长不是孤立的，句16-17 说明他是在师傅带领下上手的。如果这题是 300 字，我会加一句「在师傅传帮带下快速上手」，让「快速熟悉工作」这条更实。<b>字数额度决定了原因的颗粒度</b>，这是同一道题在 200 字和 300 字下答案不同的原因。
+
+最后一条统计：材料1 共34句，真正出点的只有 12 句左右（4、6、10、11、14、25、27、28、29、30、31，加上提供定性的句8）。出点率不到 40%。原因题的出点率通常比概括题更低，因为它要塑造一个人而不是罗列一批工作——塑造人需要大量铺垫（背景、困难、家庭、议论），而这些铺垫几乎全部不出点。<b>读原因题时，大半时间是在排除，不是在提取。</b></div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">20 分</span><span class="tag wd">≤300 字</span><span class="tag kp">概括措施类</span></div><p class="stem">请根据“给定资料2”，概括H市提升行政执法管理服务水平的措施。（20分）</p><p class="req">要求：全面、准确、有条理，不超过300字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型，题目的主题、答题要素、资料范围和作答要求等。</div><ul class="key"><li>由“根据”一词，可知本题只需要阅读资料2</li><li>由“概括……措施”可知本题是单一题，需围绕“H市提升行政执法管理服务水平”这一主题，作答“措施”，即“对策”这一要素，阅读资料时可以重点关注标志性动词所在的句子、段落，从中提炼出答案要点</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">本段主要介绍H市利用无人机排查排污口。阅读“利用”“借助”等标志性动词所在的句子“利用高分辨率的无人机……分辨疑似排污口”“借助无人机航拍，仅用半天时间就能识别出全部疑似排污口点位”，提示了H市执法部门借助无人机来分辨排污口点位，其中“仅用半天时间”强调了无人机的高效性，可摘抄和概括得到要点：借助无人机，高效分辨疑似排污口。</div><div class="bind">✓ 要点：借助无人机，高效分辨疑似排污口</div></div><div class="blk"><div class="h">段 2</div><div class="c">本段主要介绍H市利用APP进行现场排查。阅读王队长的话“现在的排查App可以现场办公”“让现场排查工作更高效、更规范”，提示做法且表述规范，可摘抄得到要点：使用排查App现场办公，工作更高效、规范。</div><div class="bind">✓ 要点：使用排查App现场办公，工作更高效、规范</div></div><div class="blk"><div class="h">段 3</div><div class="c">本段主要介绍H市利用声呐设备进行水下排查。阅读“一艘装载声呐的无人船下水探测，这艘无人船可以准确探测到深度80米、宽度100米范围内的暗管”，提示了H市排查人员利用声呐探测设备，来准确排查水下暗管，可摘抄和概括得到要点：利用声呐探测设备，准确探测水下暗管。</div><div class="bind">✓ 要点：利用声呐探测设备，准确探测水下暗管</div></div><div class="blk"><div class="h">段 4</div><div class="c">本段主要介绍H市开展常规检查。阅读“开展”“检查”等标志性动词所在的句子“每周都对县农贸市场摊点……开展常规检查，每月与多部门开展执法检查活动”“进行全方位、无死角监管检查”，提示了H市S县管理部门加强了对市场的监管检查，可摘抄和概括得到要点：加强监管检查，每周对农贸市场开展常规检查，每月与多部门开展执法检查活动。</div><div class="bind">✓ 要点：加强监管检查，每周对农贸市场开展常规检查，每月与多部门开展执法检查活动</div></div><div class="blk"><div class="h">段 5</div><div class="c">本段主要介绍H市开展不定期检查。阅读“维护”“开展”等标志性动词所在的句子“为维护全县食品药品及消费市场的安全，日前，S县以日常监督检查与执法打击相结合的方式，在辖区不定期开展执法检查活动”，提示做法且表述规范，可摘抄得到要点：日常监督与执法打击相结合，不定期开展执法检查活动，维护消费市场安全。</div><div class="bind">✓ 要点：日常监督与执法打击相结合，不定期开展执法检查活动，维护消费市场安全</div></div><div class="blk"><div class="h">段 6</div><div class="c">本段主要通过个体户的话，指出H市通过监管检查，维护了市场安全，前文已出点，此处不再重复。</div></div><div class="blk"><div class="h">段 7</div><div class="c">本段主要介绍H市联合执法力量，解决执法重难点。（1）阅读“成立”“推进”等标志性动词所在的句子“有效解决行政执法过程中的重点、难点问题，H市湖里区成立联合执法工作领导小组，推进执法队伍的执法力量融合、工作界面融合”，提示了H市通过成立领导小组、推进执法力量融合等联合执法措施，来解决执法重点、难点问题，可摘抄和概括得到要点：推进联合执法，解决重难点问题；成立领导小组，推进执法力量融合、工作界面融合。注意：“整合执法资源”与“执法力量融合”表意相近，不重复书写。（2）阅读“牵头”“开展”等标志性动词所在的句子“湖里区城管办牵头组织……等开展全面联合执法”，提示做法且表述规范，可摘抄得到要点：城管办牵头组织，开展全面联合执法。</div><div class="bind">✓ 要点：推进联合执法，解决重难点问题</div></div><div class="blk"><div class="h">段 9</div><div class="c">段8-9主要围绕城管办解决电动车充电问题展开，可合并阅读。阅读段8中的“将电动车违停在店门口，并牵线充电”和段9中的“为解决电动车充电问题，湖里区城管办积极协调街道推动电动车集中充电站建设”，提示了H市城管办协调解决电动车违停充电问题的做法，表述规范，可摘抄得到要点：积极协调，解决电动车违停充电问题。</div><div class="bind">✓ 要点：积极协调，解决电动车违停充电问题</div></div><div class="blk"><div class="h">段 10</div><div class="c">本段主要介绍H市南湖区利用监控视频进行精准执法。（1）阅读“整合”“装上”等标志性动词所在的句子“整合……路面视频监控终端……并在执法车上装上了移动探头，视频数据接入到了数字管理平台”“对市容管控的难点、乱点实现动态掌握”，提示做法且表述规范，可摘抄得到要点：整合路面视频监控终端，为执法车安装移动探头，接入数字管理平台，动态掌握市容管控难点、乱点。（2）尾句“第一时间调配力量进行管理，执法力量得到最有效配置，投放更精准”，提示H市可以快速且精准的调配、投放执法力量，可概括得到要点：快速、精准调配执法力量。</div><div class="bind">✓ 要点：整合路面视频监控终端，为执法车安装移动探头，接入数字管理平台，动态掌握市容管控难点、乱点</div></div><div class="blk"><div class="h">段 12</div><div class="c">段11-12主要通过具体事例介绍了H市通过监控视频，进行快速、精准的执法，该要点前文已出，此处不再重复。</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">组织答案
 【梳理资料发现，要点围绕“利用科技手段，排查长江入河排污口”“加强监管检查，维护消费市场安全”“推进联合执法，解决重难点问题”和“利用监控设备，提升市容管控效率”这四个方面展开，属于“并列”逻辑，可依据资料顺序分条撰写。】
 一、利用科技手段，排查长江入河排污口。借助无人机，高效分辨疑似排污口；使用排查App现场办公，工作更高效、规范；利用声呐探测设备，准确探测水下暗管。
 二、加强监管检查，维护消费市场安全。每周对农贸市场开展常规检查，每月与多部门开展执法检查活动；日常监督与执法打击相结合，不定期开展执法检查活动。
@@ -261,7 +327,28 @@ p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
 2.现场办公：是指把办公地点搬到事件发生地或生产、工作场所，通常是由有关部门就某一特定问题进行调查、处理，在现场落实解决问题的一种工作形式。表述规范，可直接摘抄，注意积累。
 3.联合执法：是两个或两个以上的行政执法机关，按照各自的职责范围，在实施行政执法时进行的联合行动。表述规范，可直接摘抄，注意积累。
 4.消费市场：主要指消费品（包括劳务）的交换领域或场所。商品生产者和消费者要通过市场交换商品和劳务，才能满足自己各种物质和文化的需要。表述规范，可直接摘抄，注意积累。
-5.领导小组：是我国所特有的一种组织方式和工作机制，指针对某一特定项目而成立，由若干分工明确，定位不一的工作者组成，负责该项目的策划、管理、招募与实施，并在特定时期，拥有跨部门协调的权力。表述规范，可直接摘抄，注意积累。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">25 分</span><span class="tag wd">≤500 字</span><span class="tag kp">总结类</span></div><p class="stem">Q市拟召开“把脉基层治理现代化转型痛点”研讨会，宁川区社会矛盾纠纷联合调处中心将在大会交流发言。请根据“给定资料3”，撰写一份发言稿。（25分）</p><p class="req">要求：（1）内容全面，条理清晰；
+5.领导小组：是我国所特有的一种组织方式和工作机制，指针对某一特定项目而成立，由若干分工明确，定位不一的工作者组成，负责该项目的策划、管理、招募与实施，并在特定时期，拥有跨部门协调的权力。表述规范，可直接摘抄，注意积累。</div></div><div class="aihint">下面是 <b>AI 批注</b>：题干逐词拆解、材料结构、找点动作、答案溯源、出题人的坑。<b>这部分不是粉笔原话</b>，是逐句分析材料得出的判断，和上面的粉笔讲解互为补充。</div><div class="ai"><h4><span class="an">AI</span>① 题干逐词拆解<span class="sub">每个字都在告诉你该干什么</span></h4><div class="tw"><table class="tstem"><thead><tr><th>题干词</th><th>类型</th><th>它到底在说什么</th><th>你该做什么</th></tr></thead><tbody><tr><td class='w'>根据</td><td><span class='ty ty-范围信号'>范围信号</span></td><td>「根据」锁死资料2的37句，资料1的罗剑、资料3的联调中心、资料4的红色家书都不能借来当措施</td><td class='act'>读到句37「大大提高了管控效率」就收手，不要往材料3找补</td></tr><tr><td class='w'>概括</td><td><span class='ty ty-题型信号'>题型信号</span></td><td>「概括」只做提取和压缩，材料里H市已经做完的事你复述出来即可，不需要评价好坏、不需要提改进建议、更不需要设想下一步</td><td class='act'>凡是想写「应进一步…」「建议…」的句子，一律划掉</td></tr><tr><td class='w'>H市</td><td><span class='ty ty-主体限定'>主体限定</span></td><td>做事的主体是H市这一级，材料里出现的市环境行政执法支队、S县市场监管局、湖里区、南湖区都是H市的下属单位，写答案时要能统到「H市」这个口径上</td><td class='act'>总括词里不出现「S县」「湖里区」「南湖区」这些下级地名，只在展开时提</td></tr><tr><td class='w'>提升行政执法管理服务水平</td><td><span class='ty ty-主题限定'>主题限定</span></td><td>主题是三个词的合成：「行政执法」定领域，「管理」定日常，「服务」定落点；只写执法不写服务会漏掉「保障消费者权益」「保障居民需求」这层</td><td class='act'>每写一条自问：这条是在管，还是在服务？两条腿都要有</td></tr><tr><td class='w'>措施</td><td><span class='ty ty-要素信号 = 对策'>要素信号 = 对策</span></td><td>要的是「做法」，答案骨架必须是动词加宾语；成效、数据、群众评价、领导讲话都不属于措施本身，最多只能当补语</td><td class='act'>把每条的第一个词写成动词：利用、加强、推进、整合</td></tr><tr><td class='w'>全面、准确、有条理</td><td><span class='ty ty-评分标准'>评分标准</span></td><td>「全面」要求覆盖材料的四条执法线，漏一条丢一条的分；「准确」要求用词贴材料，不能自己发明说法；「有条理」要求分条配总括词，不能写成一大段</td><td class='act'>写完数一遍：材料有几条执法线，答案就有几条，一条不多一条不少</td></tr><tr><td class='w'>20分</td><td><span class='ty ty-分值'>分值</span></td><td>20分比第1题的15分高5分，多出来的分不在条数上（都是4条），而在<b>每条的子要点密度</b>上：15分题每条1-2个动作，20分题每条要2-3个</td><td class='act'>每条按「1个总括词＋2到3个分号隔开的子动作」配额度，别只写一个动作就收</td></tr><tr><td class='w'>不超过300字</td><td><span class='ty ty-字数'>字数</span></td><td>300字比200字宽裕50%，但4条要点意味着每条75字，这个额度刚好装得下3个子动作，装不下任何一句案例</td><td class='act'>按4条、每条74字配额度，写完数一遍，超过290字先删案例再删修饰</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>② 为什么是这个题型<span class="sub">判断链，不是结论</span></h4><div class="prose">判断链：① 题干动词是「概括」，不是「提出」「分析」→ 单一概括题，不提对策；② 要素是「措施」→ 只找动词句，成效和数据全部让位；③ 主体是「H市」，但材料给的是市支队、S县、湖里区、南湖区四个层级的做法 → 要向上归并到「H市提升执法水平」这个总口径，不能写成四份区县工作总结；④ 20分 / 300字 → 4条要点、每条74字、每条2-3个子动作。
+
+⚠️ 最容易错判的地方有三个。第一个是把材料按「技术」分条：无人机一条、App一条、声呐一条，再加上监管、联合执法、监控，变成六条，300字根本装不下，每条只能写45字，细节全丢。正确的合并轴是<b>执法对象</b>不是技术手段：无人机、App、声呐三种技术服务的都是同一件事——「排查长江入河排污口」，所以必须并成一条。第二个是把句1「坚持生态优先，绿色发展，对长江入河排污口『应查尽查』」当成第一条，它是全篇的帽子，既没有具体动作也没有具体对象，写进去等于用40字换零分。第三个是漏掉「服务」这一维——题干里「管理服务」是并列的，句16「有效保障了消费者的合法权益」、句27「保障居民需求」就是服务维度的落点。</div></div><div class="ai"><h4><span class="an">AI</span>③ 材料结构图<span class="sub">哪段有用、哪段是干扰，为什么</span></h4><div class="mmwrap"><div class="mm no"><div class="mmh"><b>句1</b><span class="mmb">不出点</span></div><div class="mmr">总起：生态优先 + 应查尽查 + 生态效益</div><div class="mmw">句1是标准的「帽子句」：有态度（生态优先、绿色发展）、有口号（应查尽查）、有成效（生态效益日益彰显），但没有任何具体动作和具体对象。这种三件套齐活的句子在申论里永远是背景，抄它等于用40字说一句没有信息量的话。不过「应查尽查」这四个字可以借来当第一条总括词的一半，因为它确实是这一段工作的定性。</div></div><div class="mm pt"><div class="mmh"><b>句2-4</b><span class="mmb">出 1 点</span></div><div class="mmr">子要点一：无人机航测分辨疑似排污口</div><div class="mmw">句2「利用高分辨率的无人机在需要排查的区域先飞一遍，然后开展图像解译，分辨疑似排污口」是标准做法句，「利用」「开展」「分辨」三个动词；句3「精度非常高，不到0.1米」是技术参数，属于修饰，删；句4「长18公里、宽5公里、面积90平方公里」「仅用半天时间」是成效数据，它证明的是「高效」这个效果，可以提炼成「高效」两个字进总括，但数字本身不写。注意：这三段（句2-4、句5-8、句9-12）各出1个<b>子要点</b>，合起来才是第一条大要点。</div></div><div class="mm pt"><div class="mmh"><b>句5-8</b><span class="mmb">出 1 点</span></div><div class="mmr">子要点二：排查App现场办公</div><div class="mmw">句5「一款手机App成为排查人员的好帮手」是引出，不出点；句6「以前每次现场巡查后，都要用文档写下现场情况，不仅费时而且可能还不规范」是<b>过去的问题</b>，它的作用是反衬，不出点；真正的做法在句7「现在的排查App可以现场办公，一张表格7项内容，简洁高效、重点突出，一键就可以完成定位、拍照、填报等一系列工作」，而且它自带评价词「更高效、更规范」——这是材料白送的效果词，直接用。句8「王队长说」是引语标记，不进答案。</div></div><div class="mm pt"><div class="mmh"><b>句9-12</b><span class="mmb">出 1 点</span></div><div class="mmr">子要点三：声呐探测水下暗管</div><div class="mmw">句9「对水下、码头下等隐蔽盲区，无人船搭载的声呐探测设备可谓是排查利器」是总起；句10「水库较深，再加上水的颜色浑浊，排查人员很难下水排查」是困难，不出点；句11「一艘装载声呐的无人船下水探测，这艘无人船可以准确探测到深度80米、宽度100米范围内的暗管」是做法，但「80米、100米」是参数要删；句12「20多分钟后，4根暗管清晰地显示在电脑屏幕上」是成效，只提炼「准确」二字。</div></div><div class="mm pt"><div class="mmh"><b>句13-18</b><span class="mmb">出 1 点</span></div><div class="mmr">要点二：S县常态化监管检查 + 日常监督与执法打击结合</div><div class="mmw">句13「每周都对…开展常规检查，每月与多部门开展执法检查活动」是做法，而且「每周」「每月」这两个频次词是硬信息，一个都不能删——它们就是「常态化」的具体所指；句16「以日常监督检查与执法打击相结合的方式，在辖区不定期开展执法检查活动」是第二个做法，「不定期」与前两个频次构成梯度（每周/每月/不定期），必须保留；句14-15是执法人员在餐具消毒中心检查时的现场对话，是场景，不出点；句17-18是个体户杨某的引语（「诚信经营、依法经营成为了我们个体户的自觉行为」），是成效不是措施，删。</div></div><div class="mm pt"><div class="mmh"><b>句19-27</b><span class="mmb">出 1 点</span></div><div class="mmr">要点三：湖里区联合执法 + 协调建集中充电站</div><div class="mmw">句19「成立联合执法工作领导小组，推进执法队伍的执法力量融合、工作界面融合」是组织层面的做法，「力量融合、工作界面融合」是材料原话，直接摘；句20「城管办牵头组织…开展全面联合执法」是运行层面的做法；句24「积极协调街道推动电动车集中充电站建设」是解决具体问题的做法，句25-26「多次召开推进会」「已制定《…充电消防安全准则》，在主要商业街、BRT、地铁站点设置充电点」是它的具体化，可以压成「制定准则、设置充电点」并入，不单列；句21-23（沿街商户违停、牵线充电、执法人员劝告）是场景和引语，不出点；句27「将从根本上减少私拉充电线的隐患，同时保障居民需求」是成效，但「保障居民需求」是服务维度的证据，可以留半句。</div></div><div class="mm pt"><div class="mmh"><b>句28-37</b><span class="mmb">出 1 点</span></div><div class="mmr">要点四：南湖区整合视频监控 + 数字平台精准调配</div><div class="mmw">句28「整合治安、交警、综合执法路面视频监控终端近4000个，并在执法车上装上了移动探头，视频数据接入到了数字管理平台」是本题动词最密的一句，三个动作缺一不可；句29「坐在指挥中心，就可以通过视频探头对各个路段的市容情况实时查看，对市容管控的难点、乱点实现动态掌握」是做法+效果；句30「第一时间发现问题，第一时间调配力量进行管理，执法力量得到最有效配置，投放更精准」是效果句，但「快速、精准调配执法力量」这个表述可以直接当要点用；句31-33（早点摊十点不收摊、劝导无效）是问题案例，句34-37（派单、自觉收摊、问题解决）是成效案例，全部压成一句话的佐证，不单列出点。</div></div></div></div><div class="ai"><h4><span class="an">AI</span>④ 我该怎么找答案<span class="sub">六步动作，照做就行</span></h4><ol class="steps"><li><div class="sh">第 1 步 · 先划材料边界</div><div class="st"><span class="lb">看哪</span>资料2 全部 37 句，句1 到句37</div><div class="ss"><span class="lb">凭什么</span>题干「根据给定资料2」→ 资料1 的罗剑、资料3 的联调中心、资料4 的家书一律不看</div></li><li><div class="sh">第 2 步 · 先看材料有几个「执法场景」，不先看有几个技术</div><div class="st"><span class="lb">看哪</span>排污口排查（句1-12）→ 市场检查（句13-18）→ 街面联合执法（句19-27）→ 市容管控（句28-37）</div><div class="ss"><span class="lb">凭什么</span>材料2 的分块信号是<b>对象换人</b>：句1讲长江排污口，句13突然跳到「县农贸市场摊点、副食店」，句19跳到「整合执法资源」，句28跳到「路面视频监控终端」。对象一换，块就换。四个场景就是四条要点，这是材料自己给的层次</div></li><li><div class="sh">第 3 步 · 判断合并轴：对象相同就并，技术不同不并</div><div class="st"><span class="lb">看哪</span>句2-4（无人机）＋句5-8（App）＋句9-12（声呐）→ 合成第一条</div><div class="ss"><span class="lb">凭什么</span>这三种技术毫不相干，但服务的对象是同一个——「长江入河排污口」。反过来，句28 的视频监控在技术上和无人机同属「科技手段」，但对象是「市容管控」，所以不能并进第一条。<b>合并看对象，不看手段</b>，这是本题最关键的一次判断</div></li><li><div class="sh">第 4 步 · 每条抓「手段＋效果」配对</div><div class="st"><span class="lb">看哪</span>句2配句4（无人机→高效）、句7自带「高效规范」、句11配句12（声呐→准确）、句28配句30（平台→快速精准）</div><div class="ss"><span class="lb">凭什么</span>材料2 有个规律：每个技术段都是「怎么干（句2）＋ 什么效果（句4）」的结构。效果词往往就是总括词的后半截——「高效」「准确」「快速精准」都是材料原话。措施题的总括词，一半来自手段，一半来自效果</div></li><li><div class="sh">第 5 步 · 剔除数据、引语、场景三类</div><div class="st"><span class="lb">看哪</span>句3、句4、句12、句14-15、句17-18、句21-23、句31-33、句35-37</div><div class="ss"><span class="lb">凭什么</span>这八处占了材料的三分之一，一个要点都不出：句3/4/12 是参数和成效数据，句14-15/21-23/31-33 是现场场景，句17-18/35-37 是群众和执法人员的引语。300字里塞进任何一个，就要砍掉一个子动作</div></li><li><div class="sh">第 6 步 · 给每条配总括词，卡字数</div><div class="st"><span class="lb">看哪</span>4 条 × 74 字 ≈ 295 字（实测 74/72/74/75）</div><div class="ss"><span class="lb">凭什么</span>总括词统一用「手段＋目的」两段式：利用科技手段＋排查排污口、加强监管检查＋维护市场安全、推进联合执法＋解决重难点问题、利用监控设备＋提升市容管控效率。四条全是这个格式，长度自然就齐了</div></li></ol></div><div class="ai"><h4><span class="an">AI</span>⑤ 每条答案从哪来<span class="sub">点句子编号可对照左边材料</span></h4><div class="tw"><table class="ttrace"><thead><tr><th>答案要点</th><th>来源句</th><th>怎么变成答案的</th></tr></thead><tbody><tr><td class='pt'>利用科技手段，排查长江入河排污口</td><td class='src'><code>句2</code> <code>句4</code> <code>句7</code> <code>句11</code> <code>句12</code></td><td>句2「利用高分辨率的无人机在需要排查的区域先飞一遍，然后开展图像解译，分辨疑似排污口」→「借助无人机，高效分辨疑似排污口」（「高分辨率」「先飞一遍」「图像解译」全删，「高效」来自句4「仅用半天时间」）；句7「现在的排查App可以现场办公，一张表格7项内容，简洁高效、重点突出，一键就可以完成定位、拍照、填报等一系列工作」→「使用排查App现场办公，工作更高效、规范」（「7项内容」「定位拍照填报」是细节，压成「现场办公」；「高效规范」直接摘材料原话）；句11「一艘装载声呐的无人船下水探测，这艘无人船可以准确探测到深度80米、宽度100米范围内的暗管」→「利用声呐探测设备，准确探测水下暗管」（两个参数全删，「准确」来自句12）</td></tr><tr><td class='pt'>加强监管检查，维护消费市场安全</td><td class='src'><code>句13</code> <code>句16</code></td><td>句13「每周都对县农贸市场摊点、副食店、超市、药品销售点、餐饮店等开展常规检查，每月与多部门开展执法检查活动」→「每周对农贸市场开展常规检查，每月与多部门开展执法检查活动」（五个业态名压成「农贸市场」一个，但「每周」「每月」两个频次必须留，它们是「常态化」的唯一证据）；句16「以日常监督检查与执法打击相结合的方式，在辖区不定期开展执法检查活动」→「日常监督与执法打击相结合，不定期开展执法检查活动」（几乎直摘）；「维护消费市场安全」这个总括词来自句16「为维护全县食品药品及消费市场的安全」和句13「全力维护市场秩序」，是材料白送的</td></tr><tr><td class='pt'>推进联合执法，解决重难点问题</td><td class='src'><code>句19</code> <code>句20</code> <code>句24</code> <code>句26</code></td><td>句19「为进一步整合执法资源，加大执法力度，有效解决行政执法过程中的重点、难点问题，H市湖里区成立联合执法工作领导小组，推进执法队伍的执法力量融合、工作界面融合」→「成立领导小组，推进执法力量融合、工作界面融合」（「整合执法资源」「加大执法力度」是目的，压进总括词的「解决重难点问题」里）；句20「湖里区城管办牵头组织湖里交警大队、湖里消防救援大队、湖里区市场监管局等开展全面联合执法」→「城管办牵头组织，开展全面联合执法」（三个部门名全删，只留「多部门」的意思）；句24「积极协调街道推动电动车集中充电站建设」＋句26「已制定《…充电消防安全准则》，在主要商业街、BRT、地铁站点设置充电点」→「积极协调，解决电动车违停充电问题」（「准则」「站点」压成「解决…问题」）</td></tr><tr><td class='pt'>利用监控设备，提升市容管控效率</td><td class='src'><code>句28</code> <code>句29</code> <code>句30</code></td><td>句28「整合治安、交警、综合执法路面视频监控终端近4000个，并在执法车上装上了移动探头，视频数据接入到了数字管理平台」→「整合路面视频监控终端，为执法车安装移动探头，接入数字管理平台」（「近4000个」删，三个动作全留，因为它们是三个不同的技术动作）；句29「通过视频探头对各个路段的市容情况实时查看，对市容管控的难点、乱点实现动态掌握」→「动态掌握市容管控难点、乱点」；句30「第一时间发现问题，第一时间调配力量进行管理，执法力量得到最有效配置，投放更精准」→「快速、精准调配执法力量」（两个「第一时间」压成「快速」，「最有效配置」「投放更精准」压成「精准」）</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>⑥ 出题人埋的坑<span class="sub">这些地方专门骗新手</span></h4><div class="traps"><div class="trap"><div class="th">⚠ 把句2-12 按技术拆成三条：无人机一条、App一条、声呐一条</div><div class="tw2"><span class="lb">为什么错</span>材料确实是这么写的，一段一个技术，看起来天然是三条。但加上监管、联合执法、监控就是六条，300字÷6条=每条45字，每条只能写一个动作，细节全丢，而且「排查长江入河排污口」这个统一的对象消失了——答案会从「四方面措施」退化成「六件技术产品的清单」</div><div class="ta"><span class="lb">怎么躲</span>当几个段落的技术手段不同、但<b>服务的对象是同一件事</b>时，必须并。判断方法：问一句「这三件事合起来是在干什么」，答得出同一件事就并</div></div><div class="trap"><div class="th">⚠ 句4「长18公里、宽5公里、面积90平方公里」「仅用半天时间」和句12「20多分钟后，4根暗管」</div><div class="tw2"><span class="lb">为什么错</span>这两处数字最有说服力，抄起来手感极好。但它们是<b>成效</b>不是措施，题干问「措施」，写成效属于答非所问。而且300字里塞进五个数字，等于用30字换0分，还挤掉一个子动作</div><div class="ta"><span class="lb">怎么躲</span>看到公里、平方公里、分钟、米这类计量单位，先停三秒，问「这是做了什么还是做成了什么」</div></div><div class="trap"><div class="th">⚠ 句17-18 个体户杨某「诚信经营、依法经营成为了我们个体户的自觉行为，他们的保驾护航让全县的消费市场变得更安全，物价更平稳」</div><div class="tw2"><span class="lb">为什么错</span>这是全篇最像「服务成效」的一段，而且题干里有「服务」二字，特别容易往这里靠。但它是<b>群众评价</b>，是成效的最高级形态，不是措施。「服务」这一维在答案里应该由「维护市场秩序」「保障消费者合法权益」这些<b>动作</b>来承担，而不是由群众的夸奖来承担</div><div class="ta"><span class="lb">怎么躲</span>引语里出现「有了他们」「他们的保驾护航」这种第三人称评价，一律跳过，因为措施题要的是第一人称的动作</div></div><div class="trap"><div class="th">⚠ 句1「坚持生态优先，绿色发展，对长江入河排污口『应查尽查』，生态效益日益彰显」</div><div class="tw2"><span class="lb">为什么错</span>这句话位置最靠前、气势最足，还有「应查尽查」这种四字短语，很多人拿它当第一条。但它是全篇的帽子：没有具体动作、没有具体对象、只有态度和成效，写进去用40字换0分，而且和后面四条全部重叠</div><div class="ta"><span class="lb">怎么躲</span>凡是「近年来」「坚持…，…发展」「效益日益彰显」三件套齐活的句子，一律判定为背景</div></div><div class="trap"><div class="th">⚠ 把句19「成立联合执法工作领导小组」单列成「加强组织领导」一条</div><div class="tw2"><span class="lb">为什么错</span>这是本卷最有意思的一个判断。同样一句「成立领导小组」，在概括措施题里必须并进「联合执法」这条，因为单列会占掉74字却只有一个动作，性价比极低；但如果这题是「经验交流材料」，它就必须单列成第一条，因为公文惯例是「先讲怎么组织推动，再讲干了什么」。同一段材料，文种不同，切法完全不同</div><div class="ta"><span class="lb">怎么躲</span>判断依据是文种：概括措施题按「动作密度」切，组织保障动作少就并；公文题按「工作逻辑」切，组织保障必须单列。别把两种题的切法混用</div></div></div></div><div class="ai"><h4><span class="an">AI</span>⑦ 答案为什么长这样<span class="sub">骨架、字数、用词</span></h4><div class="prose">看参考答案的四条，每条都是「总括词。子动作；子动作；子动作。」
+「一、利用科技手段，排查长江入河排污口。借助无人机，高效分辨疑似排污口；使用排查App现场办公，工作更高效、规范；利用声呐探测设备，准确探测水下暗管。」
+
+<b>总括词是「手段＋目的」两段式，这是措施题的最优格式。</b> 「利用科技手段」（怎么干）＋「排查长江入河排污口」（干什么），四条全是这个结构：加强监管检查＋维护消费市场安全、推进联合执法＋解决重难点问题、利用监控设备＋提升市容管控效率。为什么这个格式好？因为措施天然有「手段」和「对象」两截，把两截都写进总括词，阅卷人一眼就知道这条答的是「用什么办法解决什么问题」，比只写「加强监管」这种单截式信息量高一倍。
+
+<b>条内用分号不用句号，而且子动作的数量是3、2、3、4。</b> 第一条三个子动作（无人机、App、声呐），第二条两个（常规检查、日常监督与打击结合），第三条三个（领导小组、城管办牵头、协调充电站），第四条四个（整合终端、装探头、接平台、精准调配）。<b>不平均，按材料的动作数量分配</b>——这是300字题和200字题的一个区别：200字题每条只能1-2个动作，300字题可以给到3-4个，所以要敢写细。
+
+<b>字数账</b>：实测四条是 74、72、74、75 字，合计 295 字，离上限只剩 5 字。这个分布非常值得看：<b>四条几乎完全等长，误差不超过 3 字</b>。这说明作者是按 74 字一条预先配好额度的，不是写完再数。第四条（75字）最长，因为它要装四个技术动作（整合终端、装探头、接平台、精准调配）；第二条（72字）最短，因为它只有「检查」一个动作的两个频次变体。<b>等长不是目的，等长是「每条都有 2-3 个子动作」这个结构的自然结果。</b>如果哪条写到 50 字，说明那条只有 1 个子动作，是漏了东西。
+
+<b>用词规律</b>：子动作全部是「动词＋工具/方式＋效果」的三段式，「借助无人机，高效分辨疑似排污口」——借助（动词）无人机（工具）高效（效果）分辨（动作）。效果词全部来自材料原话（高效、规范、准确、快速、精准），一个都没有自造。这是「准确」这一项评分标准的落点：<b>效果词必须能在材料里找到出处</b>。</div></div><div class="ai extra"><h4><span class="an">AI</span>⑧ 粉笔没讲透的地方<span class="sub">我的补充判断</span></h4><div class="prose">参考答案的四条，粉笔说是「相互并列，没有交叉」。我认为顺序其实有讲究，而且这个讲究很有用。
+
+我的读法：四条对应行政执法的<b>四个环节</b>——发现（排查）→ 日常（监管）→ 协同（联合执法）→ 智能（管控）。这是一条从「看得见问题」到「管得住日常」到「叫得动人」到「调得准力量」的能力链。题干说的「提升行政执法管理服务水平」，提升的正是这四种能力。所以答案的顺序不是随手排的，它就是能力升级的顺序。这也解释了为什么句28 的视频监控不能并进第一条：它管的不是「发现问题」，是「调配力量」，在链条上处于最后一环。
+
+第二个判断，关于合并轴，我觉得比参考答案更有价值：<b>合并看对象，不看手段</b>。句2-12 的三种技术（无人机、App、声呐）风马牛不相及，但对象是同一个「长江入河排污口」，所以并；句28 的视频监控和无人机同属「科技手段」，但对象是「市容管控」，所以不并。如果按「技术相同就并」来切，第一条会变成「无人机＋声呐＋视频监控」，把「排查排污口」和「管控市容」混成一锅，逻辑立刻崩。<b>对象是措施的锚，手段只是措施的外壳。</b>
+
+第三个发现：材料2 藏着一组<b>频次梯度</b>，参考答案完整保留了，但没点出为什么。句13「每周」常规检查、句13「每月」多部门执法检查、句16「不定期」执法检查——每周（高频日常）→ 每月（中频协同）→ 不定期（低频突击），这三个时间词构成的是一条完整的监管频次设计。在措施题里，时间词、频次词、范围词都是<b>硬信息</b>，因为它们不可替代——「不定期」换成「定期」，突击检查的性质就没了。很多人抄措施时习惯性删掉这些「副词」，其实删掉的正是措施的精度。
+
+第四个：句17-18 个体户杨某那段引语，参考答案完全没用。但题干里有「服务」二字，而整则材料里唯一直接写「服务」效果的就是这句（「他们的保驾护航让全县的消费市场变得更安全，物价更平稳」）。我的判断是：参考答案是对的，但理由不是「引语不能抄」，而是<b>「服务」这一维应该由动作承担，不该由评价承担</b>。所以答案写「维护消费市场安全」「保障居民需求」，用动作把「服务」落地，而不是抄一句「群众很满意」。这是措施题和原因题的根本分野——第1题要的就是评价（好评），第2题要的恰恰是动作。
+
+最后一条：材料2 共37句，真正出点的只有 12 句（2、7、11、13、16、19、20、24、26、28、29、30），出点率 32%，比第1题还低。剩下 25 句全是参数、场景、引语、成效。这说明<b>20分题比15分题难，不是因为要点多，而是因为干扰层更厚</b>——要在同样的300字里，从37句里挑出12句，还得把它们压成4条。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">25 分</span><span class="tag wd">≤500 字</span><span class="tag kp">总结类</span></div><p class="stem">Q市拟召开“把脉基层治理现代化转型痛点”研讨会，宁川区社会矛盾纠纷联合调处中心将在大会交流发言。请根据“给定资料3”，撰写一份发言稿。（25分）</p><p class="req">要求：（1）内容全面，条理清晰；
 （2）简明扼要，格式规范；
 （3）不超过500字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题干关键词，明确题型、题目的主题、答题要素、资料范围和要求等。</div><ul class="key"><li>①出现“根据”一词，提示我们只需阅读资料3。②“一份+发言稿”提示本题为公文题，一般由格式和正文两部分构成。完整的格式包括：标题+称谓。其中：标题一般为“关于+主题词+的+文种”，结合本题主题“把脉基层治理现代化转型痛点”，可将标题写为：关于“把脉基层治理现代化转型痛点”的交流发言稿；称谓是发文的对象，结合本题“Q市拟召开”“研讨会”“在大会交流发言”，可知发文的对象应是参加此次大会的人员，因此称谓可写为：各位参会人员。正文部分包括：开头（简单阐述背景、目的等）+主体（可能包括问题、危害、意义、对策等相关要素，结合本题主题“把脉基层治理现代化转型痛点”，作答时可能涉及基层治理现代化转型过程中存在的问题、解决的对策等等，具体写什么需要根据资料而定）+结尾（一般为总结、呼吁、号召等）</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 1</div><div class="c">段1主要介绍了Q市宁川区福兴街道本地居民与租户之间的纠纷，引出了本题话题，无要点，可略读。</div></div><div class="blk"><div class="h">段 2</div><div class="c">段2主要介绍了当前Q市宁川区社会矛盾纠纷调处存在的问题。阅读负面表述“当前基层虽已建起……等多种社会矛盾纠纷调处渠道，但往往……不够顺畅，群众仍有……抱怨……”，提示当前虽有多种解决矛盾纠纷的渠道，但都不够顺畅，群众抱怨不满，说明调处效果差，由此可摘抄、概括出要点：当前，基层虽已建立多种社会矛盾纠纷调处渠道，但协作联动机制不够顺畅，群众不满意，效果并不好。</div><div class="bind">✓ 要点：当前，基层虽已建立多种社会矛盾纠纷调处渠道，但协作联动机制不够顺畅，群众不满意，效果并不好</div></div><div class="blk"><div class="h">段 3</div><div class="c">段3承接段2，从政府部门层面介绍了宁川区社会矛盾纠纷调处存在的问题。阅读“基层社会矛盾纠纷常需跨部门、跨领域协同才能及时有效调处”“‘谁都能管’就容易相互推诿，解决一个问题得跑多家单位，群众当然不满意”，提示解决基层纠纷需要多部门联动，但段2提到联动机制不畅，部门之间就容易相互推诿扯皮，群众解决问题就要多头跑，最终导致群众不满意，可摘抄、概括出要点：基层社会矛盾常需跨部门、跨领域协同，但协作联动机制不够顺畅，容易相互推诿，群众解决矛盾纠纷依然要多头跑。注意：“群众不满意”上文已出点，此处不重复出点。</div><div class="bind">✓ 要点：基层社会矛盾常需跨部门、跨领域协同，但协作联动机制不够顺畅，容易相互推诿，群众解决矛盾纠纷依然要多头跑</div></div><div class="blk"><div class="h">段 4</div><div class="c">段4从法院层面介绍了宁川区社会矛盾纠纷调处存在的问题。阅读负面表述“法院与其他部门、调解组织的诉前调解对接缺乏制度保障，导致大量……小矛盾小纠纷进入诉讼程序，基层有限的司法资源更加紧张”“宁川区法院受案数量逐年攀升……压力之大可想而知”，提示法院缺乏相应的制度保障，大量小纠纷浪费了基层司法资源，最终导致法院压力过大，可摘抄出要点：法院与其他部门、调解组织的诉前调解对接缺乏制度保障，大量小矛盾、小纠纷进入诉讼程序，浪费基层有限的司法资源，最终导致法院压力大。注意：尾句“调解程序简单、耗时较短的优势无法发挥，结案周期反倒更长”说明调处效果并不好，上文已出点，此处不重复出点。</div><div class="bind">✓ 要点：法院与其他部门、调解组织的诉前调解对接缺乏制度保障，大量小矛盾、小纠纷进入诉讼程序，浪费基层有限的司法资源，最终导致法院压力大</div></div><div class="blk"><div class="h">段 5</div><div class="c">段5主要介绍了解决基层矛盾纠纷调处问题的对策。（1）首句“针对群众解决矛盾纠纷多头跑、反复跑的问题”提示问题，其中群众多头跑上文已出点，此处不重复出点，由此可摘抄出要点：群众解决矛盾纠纷依然要反复跑。（2）阅读“共同组建宁川区社会矛盾纠纷联合调处中心”“联调中心将分散的众多矛盾调处机构整合成‘一站式’调处枢纽平台”“让群众解决烦心事……不再多头跑”，动词“组建”“整合”等提示对策，指出了解决宁川区基层矛盾纠纷调处问题的对策，表述规范，可摘抄出要点：宁川区组建社会矛盾纠纷联合调处中心，将分散的众多矛盾调处机构整合成“一站式”调处枢纽平台，让群众解决纠纷不再多头跑。注意：资料中“宁川区按照……等30余家机构”“集中统一办公……参与调解”等内容都是围绕宁川区成立社会矛盾纠纷联合调处中心展开，由于字数有限，写到“宁川区组建社会矛盾纠纷联合调处中心”即可。</div><div class="bind">✓ 要点：群众解决矛盾纠纷依然要反复跑</div></div><div class="blk"><div class="h">段 7</div><div class="c">段6-7都介绍了宁川区快速高效解决矛盾纠纷的事例，可合并阅读。（1）阅读段6“宁川区高新法庭研判这是一般诉求”“将该案移送宁川联调中心的物业纠纷调解委员会”“双方当事人当场签订调解协议书，交由整体入驻联调中心的高新法庭司法确认，形成法律约束力”“还节省了诉讼资源”，指出了宁川区法庭处理矛盾纠纷诉求、形成法律约束力等具体做法，解决了上文提到的法院方面存在的浪费司法资源等问题，可摘抄、概括出要点：法庭研判诉讼，确认为一般诉求后移送联调中心，调解书交由法庭司法确认，形成法律约束力，节省诉讼资源。（2）段6尾句“部门联动之下，纠纷排解得快”、段7“中心按照分类调处原则划定为复杂问题”“多个部门联动调处，该公司很快与员工签订了调解协议书……”，可以看出宁川区在处理纠纷时，先是按照分类调处原则，确定问题的类型，然后由相关部门联动处理，最终快速解决纠纷问题，这解决了上文提到的法院方面存在的大量小矛盾、小纠纷进入诉讼程序等问题，可摘抄、概括出要点：分类调处，划定问题类别，协调相关部门联动调处，快速排解纠纷。</div><div class="bind">✓ 要点：法庭研判诉讼，确认为一般诉求后移送联调中心，调解书交由法庭司法确认，形成法律约束力，节省诉讼资源</div></div><div class="blk"><div class="h">段 8</div><div class="c">阅读街道办主任的话“在联调中心完备规范的接诉即办、定时催办、超时督办、执行跟踪机制保障下，可确保‘件件有说法、事事有落实’”，说明要建立完备规范的各种机制，确保各种事件的落实，这解决了上文提到的政府方面存在的协作联动机制不顺畅、相互推诿等问题，可摘抄出要点：建立完备规范的接诉即办、定时催办、超时督办、执行跟踪机制，保障落实。</div><div class="bind">✓ 要点：建立完备规范的接诉即办、定时催办、超时督办、执行跟踪机制，保障落实</div></div><div class="blk"><div class="h">段 9</div><div class="c">段9主要介绍宁川区联调中心成立以来取得的成绩。阅读“运行以来，宁川区联调中心……推动民事一审新收案件环比下降6.8%，群众信访量环比下降13%，诉前调解成功率环比上升25%”“将矛盾纠纷减少在源头……”，通过一系列数据说明宁川区联调中心民事一审新收案件和群众信访量下降，调解成功率上升，从源头化解了矛盾纠纷，可摘抄出要点：中心成立以来，我区调解成功率大大提升，民事一审新收案件和群众信访量明显下降，将矛盾纠纷减少在源头。</div><div class="bind">✓ 要点：中心成立以来，我区调解成功率大大提升，民事一审新收案件和群众信访量明显下降，将矛盾纠纷减少在源头</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">按照答题思路整合要点，组织答案
 【本题要求撰写“一份+发言稿”，其一般作答思路为：标题+称谓+正文。其中，结合本题，正文的作答思路可为：开头（介绍宁川区在调处基层矛盾纠纷方面存在的总体问题）+主体（介绍造成问题的原因、解决问题的对策）+结尾（总结取得的成绩等）。】
@@ -283,7 +370,26 @@ p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
 4.一站式：让群众享受到一次性完成或一步到位的便捷服务，不再需要东奔西走，节省了时间，提高了效率。表述规范，可直接摘抄，注意积累。
 5.法律约束力：指人们应当按照法律规定的那样行为，必须服从。表述规范，可直接摘抄，注意积累。
 6.超时督办：指超过相应的时间就要监督执行。表述规范，可直接摘抄，注意积累。
-7.接诉即办：是指建立群众诉求快速响应机制。表述规范，可直接摘抄，注意积累。</div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">40 分</span><span class="tag kp">总结类</span></div><p class="stem">假如你参加了L市政法系统开展的“诵读红色家书，传承红色基因”主题活动，请根据“给定资料4”，联系实际，自选角度，自拟题目，写一篇心得体会。（40分）</p><p class="req">要求：（1）观点明确，认识深刻；
+7.接诉即办：是指建立群众诉求快速响应机制。表述规范，可直接摘抄，注意积累。</div></div><div class="aihint">下面是 <b>AI 批注</b>：题干逐词拆解、材料结构、找点动作、答案溯源、出题人的坑。<b>这部分不是粉笔原话</b>，是逐句分析材料得出的判断，和上面的粉笔讲解互为补充。</div><div class="ai"><h4><span class="an">AI</span>① 题干逐词拆解<span class="sub">每个字都在告诉你该干什么</span></h4><div class="tw"><table class="tstem"><thead><tr><th>题干词</th><th>类型</th><th>它到底在说什么</th><th>你该做什么</th></tr></thead><tbody><tr><td class='w'>Q市拟召开“把脉基层治理现代化转型痛点”研讨会</td><td><span class='ty ty-情境设定'>情境设定</span></td><td>会议主题是「把脉…痛点」，不是「总结成绩」；「把脉」是中医的诊断动作，意味着发言的重心在<b>诊断</b>（问题与成因），不在<b>表功</b>（做法与成效）</td><td class='act'>动笔前先算比例：痛点和解法各占多少字。痛点少于三成，就是跑题</td></tr><tr><td class='w'>宁川区社会矛盾纠纷联合调处中心</td><td><span class='ty ty-身份设定'>身份设定</span></td><td>发言主体是这个「中心」，不是宁川区政府、不是区委政法委；所以文中所有「我们」指的是联调中心这个机构，站位不能无限上提</td><td class='act'>通篇用「我们联调中心」或「我区」，绝不出现「我中心工作人员」「我个人认为」</td></tr><tr><td class='w'>将在大会交流发言</td><td><span class='ty ty-场合'>场合</span></td><td>「交流发言」意味着既要讲自己的诊断，也要讲自己的药方，而且要有「向同行介绍」的口吻——不能写成向上级汇报，也不能写成对群众宣讲</td><td class='act'>开头用「很高兴参加…交流」这类场合语，结尾用「谢谢」收，全程平视同行</td></tr><tr><td class='w'>根据“给定资料3”</td><td><span class='ty ty-范围信号'>范围信号</span></td><td>只能用资料3的30句，资料1的罗剑、资料2的H市执法、资料4的红色家书都不能借用</td><td class='act'>读到句30「只进一扇门、尽量少跑路、有呼必有应」就收手</td></tr><tr><td class='w'>撰写一份发言稿</td><td><span class='ty ty-文种'>文种</span></td><td>「发言稿」是成稿不是提纲，必须五件套齐全：标题、称谓、开头、主体、结束语；句子要完整、可念，不能是「一、总括词。做法；做法。」这种骨架</td><td class='act'>写完检查：有没有称谓冒号？有没有「谢谢」？有没有完整的主谓句？三样缺一即扣格式分</td></tr><tr><td class='w'>内容全面，条理清晰</td><td><span class='ty ty-评分标准'>评分标准</span></td><td>「全面」要求痛点（问题＋成因）和解法（做法＋成效）两头都覆盖；「条理清晰」要求分层，不能把原因和对策混在一段里</td><td class='act'>主体分两块：先「究其原因」讲痛点，再「具体工作中」讲解法，两块各有编号</td></tr><tr><td class='w'>简明扼要，格式规范</td><td><span class='ty ty-评分标准'>评分标准</span></td><td>「格式规范」是硬分项，标题和称谓是白送的分，缺一个直接扣一档；「简明扼要」要求500字内不说客套话，开场不超过两句</td><td class='act'>标题用「关于＋主题词＋的＋文种」公式，称谓用「各位参会人员：」，各占一行</td></tr><tr><td class='w'>不超过500字</td><td><span class='ty ty-字数'>字数</span></td><td>500字要装标题、称谓、开头、两层主体、结尾，主体部分只有380字左右，痛点155字、解法230字是比较稳的配比</td><td class='act'>按标题23+称谓7+开头41+痛点121+解法196+结尾72配额度，超了先砍案例</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>② 为什么是这个题型<span class="sub">判断链，不是结论</span></h4><div class="prose">判断链：① 题干动词是「撰写一份发言稿」→ 公文题，不是概括题，格式分和内容分各占一部分；② 文种是「发言稿」不是「发言提纲」也不是「经验交流材料」→ 必须写称谓、开场、结束语，句子完整；③ 会议主题是「把脉基层治理现代化转型痛点」→ 内容的<b>重心在诊断</b>，必须先把痛点讲透，再讲联调中心怎么治，这是「把脉」二字定死的；④ 发言主体是联调中心 → 口吻是「我们」，站位是一个机构不是一级政府；⑤ 25分 / 500字 → 五件套齐全，主体两块（成因＋对策），对策下分三条。
+
+⚠️ 最容易错判的地方，也是本题唯一的生死线：<b>把它写成经验交流材料</b>。材料3 从句14 开始几乎全是联调中心的成绩（整合7个平台、30余家机构、调解成功率上升25%），照着材料写，很自然就写成「我们做了三件事，效果很好」。但题干给的主题是「把脉痛点」，会议是「研讨会」——研讨会要的是<b>分析</b>，不是<b>汇报</b>。只写做法和成效，等于把「把脉」换成了「表功」，主题词直接落空。第二个坑：把「发言稿」写成「发言提纲」。提纲没有称谓、没有「谢谢」，而本题要求里明写「格式规范」，这是最便宜也最容易丢的两三分。</div></div><div class="ai"><h4><span class="an">AI</span>③ 材料结构图<span class="sub">哪段有用、哪段是干扰，为什么</span></h4><div class="mmwrap"><div class="mm no"><div class="mmh"><b>句1-5</b><span class="mmb">不出点</span></div><div class="mmr">案例引入：福兴街道私搭乱建纠纷 → 引出联调中心</div><div class="mmw">这五句是一个完整的纠纷故事：漆先生搭5间房出租（句2）、居民扔垃圾抗议（句3）、街道多次调解效果甚微（句4）、居民换地方「讨说法」（句5）。它的功能是把镜头推到联调中心门口，属于<b>引子</b>。500字里一个字都不该给它——但要注意句4「效果甚微」这四个字，它是后面「痛点」的第一个证据，写痛点时可以借它的意思，不能借它的篇幅。</div></div><div class="mm pt"><div class="mmh"><b>句6</b><span class="mmb">出 1 点</span></div><div class="mmr">总体痛点：渠道多但协作联动不畅、群众费时耗力</div><div class="mmw">「当前基层虽已建起调解、仲裁、信访、政务热线等多种社会矛盾纠纷调处渠道，但往往由于协作联动机制不够顺畅，群众仍有解决矛盾纠纷费时耗力的抱怨，小纠纷也可能拖成大矛盾」——这是全篇唯一一句<b>总体性问题</b>，而且自带「虽…但…」的转折结构，前半承认成绩（渠道多），后半点出病灶（联动不畅）。参考答案的开头段就是它的压缩版，一句顶一段。</div></div><div class="mm pt"><div class="mmh"><b>句7-10</b><span class="mmb">出 1 点</span></div><div class="mmr">痛点成因一：跨部门协同需求 vs 部门相互推诿</div><div class="mmw">句7「基层社会矛盾纠纷常需跨部门、跨领域协同才能及时有效调处」是<b>应然</b>，句8（噪声油烟，环保公安市场监管都有责任）是例证，句9「『谁都能管』就容易相互推诿，解决一个问题得跑多家单位，群众当然不满意」是<b>实然</b>。应然与实然的落差就是成因。注意句10「宁川区委政法委文副书记说」是引语标记，说明这条成因有官方背书，可以放心写。</div></div><div class="mm pt"><div class="mmh"><b>句11-13</b><span class="mmb">出 1 点</span></div><div class="mmr">痛点成因二：诉前调解对接无制度保障 → 司法资源被挤占</div><div class="mmw">句11「法院与其他部门、调解组织的诉前调解对接缺乏制度保障，导致大量事实清楚、金额或争议不大的小矛盾小纠纷进入诉讼程序，基层有限的司法资源更加紧张」是核心句，因果链完整（缺制度→小纠纷进诉讼→资源紧张）；句12「近5年受案数量逐年攀升，法官每年人均结案在300件以上」是数据佐证，写答案时只留「案多人少」的意思，数字删；句13「调解程序简单、耗时较短的优势无法发挥，结案周期反倒更长」是结果，可并入。</div></div><div class="mm pt"><div class="mmh"><b>句14-15</b><span class="mmb">出 1 点</span></div><div class="mmr">解法总起：组建联调中心，一站式枢纽</div><div class="mmw">句14是本题信息密度最高的一句：「按照『不增编制动机制、不变职能强功能』的思路，成建制整合社会治安综治中心、群众来访中心等7个平台，医疗、交通、消费等10个专业人民调解委员会，汇聚民商事审判庭、劳动争议仲裁庭、社会组织及行业协会等30余家机构」——三个数字（7、10、30余）在这里<b>是做法的一部分</b>（整合了多少家），不能像其他题那样删；「公安、司法等15个部门轮流接访群众并参与调解」是运行机制。句15「不仅是部门『物理整合』，更有功能『化学反应』」「让群众解决烦心事有了『主心骨』，不再多头跑」是定性句，可直接当总括词用。</div></div><div class="mm pt"><div class="mmh"><b>句16-20</b><span class="mmb">出 1 点</span></div><div class="mmr">解法一：确保效力——法庭研判、移送、调解、司法确认</div><div class="mmw">这五句是一个完整闭环：句16物业公司起诉（起因）→ 句17「高新法庭研判这是一般诉求，在征得原告同意后，将该案移送…物业纠纷调解委员会」（分流）→ 句18「调解人员经两小时调解…当场签订调解协议书，交由整体入驻联调中心的高新法庭司法确认，形成法律约束力」（闭环）→ 句19-20是法庭负责人的评价（「纠纷排解得快，还节省了诉讼资源」）。注意「司法确认」是本题最专业的一个词，也是「确保效力」这条的核心，它把「调解」从「和稀泥」升级成「有法律约束力」。</div></div><div class="mm pt"><div class="mmh"><b>句21-24</b><span class="mmb">出 1 点</span></div><div class="mmr">解法二：分类调处——欠薪案划为复杂问题，多部门联动</div><div class="mmw">句24「中心按照分类调处原则划定为复杂问题，经中心协调，劳动争议调委会等多个部门联动调处」是做法，而且「分类调处」四个字就是现成的总括词（材料白送）；句21-23（老丁「真没想到，10天就解决了」、19名员工78.5万元工资）是案例和引语，500字里只留「快速排解纠纷」的意思，数字全删。注意句16-20 和句21-24 是<b>两个不同类型的案子</b>（一般诉求 vs 复杂问题），这个对比本身就是「分类」的证据。</div></div><div class="mm pt"><div class="mmh"><b>句25-28</b><span class="mmb">出 1 点</span></div><div class="mmr">解法三：保障落实——接诉即办、定时催办、超时督办、执行跟踪</div><div class="mmw">句27是这一条的全部来源：「在联调中心完备规范的接诉即办、定时催办、超时督办、执行跟踪机制保障下，可确保『件件有说法、事事有落实』」——四个机制名连排，是材料给的最完整的一组机制表述，一个都不能删（删了就不知道「保障」保障的是什么）；句26「我们街道因私搭乱建引发的诸多纠纷是个老大难，解决问题涉及众多部门，单靠街道是不行的」是街道办主任的话，反证了「联动」的必要性，可作为痛点的补充；句25（王大姐「日子都红火了」）和句28（工业园区受优质企业青睐）是成效，删。</div></div><div class="mm pt"><div class="mmh"><b>句29-30</b><span class="mmb">出 1 点</span></div><div class="mmr">成效与收口：数据 + 「始发站+终点站」</div><div class="mmw">句29是数据句（6095人次、3666件、3561件、一审新收案件降6.8%、信访降13%、诉前调解成功率升25%），500字里最多留两个最关键的（诉前调解成功率上升、民事一审新收案件下降），其余全删；句30「成为当地矛盾纠纷调处的『始发站+终点站』，将矛盾纠纷减少在源头，让当地群众解决烦心事『只进一扇门、尽量少跑路、有呼必有应』」是完美的结尾句，三个短语连排，直接摘就能收尾。</div></div></div></div><div class="ai"><h4><span class="an">AI</span>④ 我该怎么找答案<span class="sub">六步动作，照做就行</span></h4><ol class="steps"><li><div class="sh">第 1 步 · 先认文种、定格式</div><div class="st"><span class="lb">看哪</span>「发言稿」→ 标题＋称谓＋开头＋主体＋结束语，五件套</div><div class="ss"><span class="lb">凭什么</span>「发言稿」和「发言提纲」只差一个字，格式差一整套：提纲是给自己看的骨架（无称谓、无过渡、无「谢谢」），发言稿是念出来的成稿（有称谓冒号、有完整句、有「谢谢」）。本题要求里明写「格式规范」，这就是格式分的判据</div></li><li><div class="sh">第 2 步 · 读会议主题，定内容重心</div><div class="st"><span class="lb">看哪</span>「把脉基层治理现代化转型痛点」——「把脉」是诊断动作</div><div class="ss"><span class="lb">凭什么</span>会议主题是公文题的<b>隐藏指令</b>，它决定内容配比。「把脉痛点」要求先诊后治，所以主体必须有两块：痛点（成因）＋解法。如果只写解法，就是把「研讨会」开成了「表彰会」。这一步做错，后面写得再漂亮也是三类文</div></li><li><div class="sh">第 3 步 · 先扫负面词，把痛点挖出来</div><div class="st"><span class="lb">看哪</span>句4「效果甚微」、句6「不够顺畅」「费时耗力」、句9「相互推诿」「多头跑」、句11「缺乏制度保障」「更加紧张」、句13「无法发挥」</div><div class="ss"><span class="lb">凭什么</span>痛点题的第一个动作是找<b>负面表述</b>，不是找做法。材料3 的负面词集中在句4-13，正好是全篇前三分之一——这个位置分布本身就在告诉你「先讲问题」</div></li><li><div class="sh">第 4 步 · 把痛点归成两层，不按句子数归</div><div class="st"><span class="lb">看哪</span>群众侧（多头跑、反复跑）＋ 司法侧（小纠纷进诉讼、资源挤占）</div><div class="ss"><span class="lb">凭什么</span>句7-9 讲的是「群众办事难」，句11-13 讲的是「法院案多人少」，这是两个不同的受害者。归成两层，痛点才有「把脉」的层次感；如果按句子平铺成四五条，就变成了问题清单，不是诊断</div></li><li><div class="sh">第 5 步 · 扫做法，按「机制—流程—效力」归并</div><div class="st"><span class="lb">看哪</span>组建中心（句14-15）→ 分类调处（句24）→ 保障落实（句27）→ 确保效力（句17-18）</div><div class="ss"><span class="lb">凭什么</span>联调中心的四组做法其实是一个制度设计的四个零件：有平台（中心）、有分类（调处原则）、有督办（四个机制）、有效力（司法确认）。缺任何一个，这个制度就不成立。所以对策是四条不是三条——参考答案把「组建中心」放在总起句里，只在「具体工作中」列了后三条</div></li><li><div class="sh">第 6 步 · 配字数、砍案例</div><div class="st"><span class="lb">看哪</span>标题23＋称谓7＋开头41＋痛点121＋解法196＋结尾72 ≈ 460 字</div><div class="ss"><span class="lb">凭什么</span>句1-5 的纠纷故事（五句）、句21-23 的欠薪案（三句）、句29 的六个数据，是本题三个最大的字数黑洞，全部只能压成一句话甚至几个字。500字题的铁律：案例让位给机制名</div></li></ol></div><div class="ai"><h4><span class="an">AI</span>⑤ 每条答案从哪来<span class="sub">点句子编号可对照左边材料</span></h4><div class="tw"><table class="ttrace"><thead><tr><th>答案要点</th><th>来源句</th><th>怎么变成答案的</th></tr></thead><tbody><tr><td class='pt'>开头·总体痛点：渠道多但效果不好，群众不满意</td><td class='src'><code>句6</code></td><td>句6「当前基层虽已建起调解、仲裁、信访、政务热线等多种社会矛盾纠纷调处渠道，但往往由于协作联动机制不够顺畅，群众仍有解决矛盾纠纷费时耗力的抱怨，小纠纷也可能拖成大矛盾」→参考答案压成「当前，基层虽已建立多种社会矛盾纠纷调处渠道，但效果并不好，群众不满意，法院压力大」（「调解、仲裁、信访、政务热线」四个渠道名压成「多种」；「费时耗力」压成「效果不好」；「法院压力大」是从句11-12 提前借来的，为了给下文的「原因二」埋伏笔）</td></tr><tr><td class='pt'>成因一：协作联动机制不畅，群众多头跑</td><td class='src'><code>句7</code> <code>句8</code> <code>句9</code></td><td>句7「基层社会矛盾纠纷常需跨部门、跨领域协同才能及时有效调处」→ 提供「跨部门、跨领域协同」这个前提；句9「『谁都能管』就容易相互推诿，解决一个问题得跑多家单位，群众当然不满意」→「容易相互推诿，群众解决矛盾纠纷依然要多头跑、反复跑」（「谁都能管」这个引号短语删掉，因为它在答案里没有上下文会看不懂；「跑多家单位」升级成「多头跑、反复跑」，更贴题干「痛点」的表述）；句8的噪声油烟例子整句舍弃，它是例证</td></tr><tr><td class='pt'>成因二：诉前调解对接缺乏制度保障，浪费司法资源</td><td class='src'><code>句11</code> <code>句12</code> <code>句13</code></td><td>句11「法院与其他部门、调解组织的诉前调解对接缺乏制度保障，导致大量事实清楚、金额或争议不大的小矛盾小纠纷进入诉讼程序，基层有限的司法资源更加紧张」→「法院与其他部门、调解组织的诉前调解对接缺乏制度保障，大量小矛盾、小纠纷进入诉讼程序，浪费基层有限的司法资源」（「事实清楚、金额或争议不大」压成「小」，因为下文已经说「小矛盾」）；句12「法官每年人均结案在300件以上」和句13「结案周期反倒更长」全部舍弃，它们是数据和对结果的补充，121字的痛点额度装不下</td></tr><tr><td class='pt'>解法总起：组建一站式联调中心</td><td class='src'><code>句14</code> <code>句15</code></td><td>句14「按照『不增编制动机制、不变职能强功能』的思路，成建制整合…7个平台，…10个专业人民调解委员会，汇聚…30余家机构，共同组建宁川区社会矛盾纠纷联合调处中心，集中统一办公」→「组建社会矛盾纠纷联合调处中心，将分散的众多矛盾调处机构整合成『一站式』调处枢纽平台」（7、10、30 三个数字全删，因为它们占了40字却只说明「规模大」，而「不增编制动机制」这个思路在500字里也没有空间展开）；句15「不仅是部门『物理整合』，更有功能『化学反应』，让群众解决烦心事有了『主心骨』，不再多头跑」→ 只取「让群众解决纠纷不再多头跑」一句收尾</td></tr><tr><td class='pt'>解法一二三：分类调处／保障落实／确保效力</td><td class='src'><code>句17</code> <code>句18</code> <code>句24</code> <code>句27</code></td><td>句24「中心按照分类调处原则划定为复杂问题，经中心协调，劳动争议调委会等多个部门联动调处」→「一、分类调处。划定问题类别，协调相关部门联动调处，快速排解纠纷」（「复杂问题」泛化成「问题类别」，因为答案里没有欠薪案的上下文）；句27「在联调中心完备规范的接诉即办、定时催办、超时督办、执行跟踪机制保障下，可确保『件件有说法、事事有落实』」→「二、保障落实。建立完备规范的接诉即办、定时催办、超时督办、执行跟踪机制」（四个机制名一个不删，这是本条的全部内容）；句17「高新法庭研判这是一般诉求，在征得原告同意后，将该案移送…调解委员会」＋句18「交由…高新法庭司法确认，形成法律约束力」→「三、确保效力。法庭研判诉讼，确认为一般诉求后移送联调中心，调解书交由法庭司法确认，形成法律约束力，节省诉讼资源」（这一条最专业，「司法确认」四个字是核心，不能换成「法院盖章」）</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>⑥ 出题人埋的坑<span class="sub">这些地方专门骗新手</span></h4><div class="traps"><div class="trap"><div class="th">⚠ 把发言稿写成经验交流材料——通篇只讲联调中心做了哪三件事、成效多好</div><div class="tw2"><span class="lb">为什么错</span>这是本题的生死线。材料3 从句14 起几乎全是成绩，顺着材料写必然是「我们做了三件事」。但会议主题是「把脉…痛点」，「把脉」是诊断，研讨会要的是分析不是汇报。只写做法和成效，主题词「痛点」直接落空，25分最多拿12分。而且格式上还会丢称谓、丢「谢谢」，两处一起扣</div><div class="ta"><span class="lb">怎么躲</span>写完数一下痛点的字数占比。低于全文25%就是跑题，必须回去补句6-13</div></div><div class="trap"><div class="th">⚠ 把「发言稿」写成「发言提纲」——没有称谓、没有开场、没有「谢谢」</div><div class="tw2"><span class="lb">为什么错</span>两者只差一个字，格式差一整套。提纲是骨架（「一、总括词。做法；做法。」），发言稿是成稿（「各位参会人员：」「很高兴参加…」「谢谢！」）。本题要求里明写「格式规范」，标题和称谓是白送的分，缺一个直接扣一档。很多人内容写得很好，就栽在这两行字上</div><div class="ta"><span class="lb">怎么躲</span>写完检查三样：标题有吗？称谓带冒号吗？结尾有「谢谢」吗？三样齐了，格式分就稳了</div></div><div class="trap"><div class="th">⚠ 句1-5 福兴街道私搭乱建的完整纠纷故事（漆先生、5间房、扔垃圾、冲突）</div><div class="tw2"><span class="lb">为什么错</span>这个故事有情节、有冲突、有转折（「后来，居民们换了个地方『讨说法』」），是材料里最好读的一段，新手会忍不住复述。但它占五句、近200字，而它要证明的只有一件事——「原来的渠道不管用」。500字里复述这个故事，等于把痛点和解法各砍掉一条</div><div class="ta"><span class="lb">怎么躲</span>开头段的判据是「能不能一句话交代完」。能压成「原有渠道调解效果甚微」，就压；压不动说明你在讲故事，不在写公文</div></div><div class="trap"><div class="th">⚠ 句29 的六个数据（6095人次、3666件、3561件、6.8%、13%、25%）</div><div class="tw2"><span class="lb">为什么错</span>这组数据是全篇最有说服力的地方，而且成组出现，抄起来特别顺手。但500字里塞六个数据要占60字，等于砍掉一整条对策。更重要的是：成效数据在「把脉痛点」的主题下，本来就不是重点——研讨会关心的是「你怎么诊断、怎么治」，不是「你治好了多少人」</div><div class="ta"><span class="lb">怎么躲</span>数据最多留两个，且必须是最能说明「机制有效」的（诉前调解成功率上升、民事一审新收案件下降），其余全删</div></div><div class="trap"><div class="th">⚠ 把「原因」和「对策」混在一段里写</div><div class="tw2"><span class="lb">为什么错</span>材料3 的结构是「问题（句6-13）→ 做法（句14-28）→ 成效（句29-30）」，看起来很顺，顺着写容易变成一大段。但要求里写「条理清晰」，而「条理」在公文题里的具体所指就是<b>分层加编号</b>。原因和对策混在一起，阅卷人找不到层次，条理分直接扣</div><div class="ta"><span class="lb">怎么躲</span>主体明确切成两块，各用一个引导句：「究其原因如下：一是…二是…」「具体工作中：一、…二、…三、…」。两块之间的转折词不能省</div></div></div></div><div class="ai"><h4><span class="an">AI</span>⑦ 答案为什么长这样<span class="sub">骨架、字数、用词</span></h4><div class="prose">看参考答案的五件套：
+<b>标题</b>「关于『把脉基层治理现代化转型痛点』的交流发言稿」——公式是「关于＋主题词＋的＋文种」，23字。主题词直接从题干抄，一个字不改，这是最稳的做法（自拟标题容易跑偏，而公文题的标题不承担文采分）。
+<b>称谓</b>「各位参会人员：」——7字加冒号。为什么不是「各位领导、各位同志」？因为题干说的是「研讨会」「大会交流发言」，参会者是同行和专家，不是上级，用「参会人员」最准确。称谓的选词依据是<b>会议性质</b>，不是客套习惯。
+<b>开头</b>41字：一句话讲总体痛点（「渠道多但效果不好，群众不满意，法院压力大」）。注意它一口气点了三个受害方——群众、法院，还有一个隐含的「基层」。这是「把脉」的写法：一搭手，先说脉象不对。<b>开头只有一句话</b>，没有任何「很高兴参加这次研讨会」的客套——500字的题，客套话一句就是 20 字，等于砍掉半个对策。
+<b>主体两块</b>：第一块「究其原因如下：一是…二是…」，121字，两条成因；第二块「为解决以上问题…具体工作中：一、…二、…三、…」，196字，三条对策。两块之间的过渡句「为解决以上问题」是必须的，它标记了「诊→治」的转换。
+<b>结尾</b>72字：「中心成立以来，我区调解成功率大大提升，民事一审新收案件和群众信访量明显下降，将矛盾纠纷减少在源头。未来，我们会继续助力基层治理现代化转型，谢谢！」——成效一句＋展望一句＋「谢谢」，三件套。<b>「谢谢」这两个字是发言稿的身份证</b>，提纲和材料都不写，只有发言稿写。注意结尾比开头长（72 vs 41）——开头求快（一句话切入），结尾求稳（成效＋展望＋致谢三件套齐活），这个不对称是刻意安排的。
+
+<b>字数账</b>：实测六块是 23（标题）＋7（称谓）＋41（开头）＋121（成因）＋196（解法）＋72（结尾）＝ 460 字，留 40 字余量。这个配比非常值得记：<b>痛点是 121 字，占 26%；解法是 196 字，占 43%；开头结尾合计 113 字，占 25%</b>。「痛点不少于两成、解法不超过一半」这条经验，就是从这组数字里反推出来的。注意标题 23 字、称谓 7 字，两行一共占掉 30 字（6.5%）——<b>格式分不是白给的，它先从你的字数里扣走。</b> 所以 500 字的题，实际可写的正文只有 430 字。
+
+<b>层次序数</b>：本题只用到一级「一、二、三」，用在第二块对策内部。第一块成因用「一是…二是…」的叙述式，不用「（一）（二）」，因为成因是分析不是条目。<b>同一篇公文里，分析和条目要用不同的序数形式</b>，这是「条理清晰」的隐性要求。</div></div><div class="ai extra"><h4><span class="an">AI</span>⑧ 粉笔没讲透的地方<span class="sub">我的补充判断</span></h4><div class="prose">参考答案里有一句话我觉得名不副实：「究其原因如下」。它下面列的两条——「协作联动机制不够顺畅」和「诉前调解对接缺乏制度保障」——严格说都不是「原因」，而是<b>痛点本身的两个侧面</b>。真正的因果链在材料里写得很清楚：句6（渠道多但分散）→ 句7-9（需要跨部门协同，但机制不畅，于是推诿）→ 群众多头跑 → 句11-13（小纠纷涌进法院，司法资源被挤占）。所以「原因」应该是「条块分割的治理结构」，而「多头跑」和「案多人少」是它的两个后果。参考答案把后果当原因写，逻辑上差一层，但阅卷时不会扣分——因为要点词都对。我提这一点是想说明：<b>申论答案的「正确」是得分点意义上的正确，不是逻辑学意义上的正确。</b>
+
+第二个判断，关于本题的题眼：「把脉」这两个字被大多数人忽略了。把脉有三个动作：<b>搭脉（接触）→ 辨症（分类）→ 开方（对策）</b>。参考答案的结构恰好就是这个三段：开头搭脉（总体痛点）、主体辨症（两条成因）、解法开方（三条对策）。这不是巧合，是出题人用「把脉」这个词给全文定的骨架。抓住这个比喻，结构就不用想了——它自己会浮出来。这也是我读这套卷最大的收获：<b>公文题的标题里如果有一个动词性的比喻（把脉、会诊、破题、答卷），那个比喻的动作序列就是文章的结构。</b>
+
+第三个，一个我觉得参考答案处理得不够准的地方：发言主体的口吻。题干说「宁川区社会矛盾纠纷联合调处中心将在大会交流发言」，主体是「中心」，但参考答案通篇用「我区」（「我区调解成功率大大提升」）。严格按题干，应该说「我们联调中心」或「我中心」。参考答案用「我区」是把主体上提了一级——这在实务中也常见（中心代表区里发言），但如果阅卷较真，「我区」会被认为主体错位。我的建议是折中：开头用「我们联调中心」，讲成效时用「我区」，这样既有机构身份，又有区域站位。
+
+第四个发现：句14 那三个数字（7个平台、10个专业委员会、30余家机构）在别的题里必须删，在本题里<b>可以留</b>。因为它们是「整合」这个动作的<b>宾语数量</b>——整合了几家，本身就是做法的一部分。这和「成效数据」（如6095人次）性质完全不同。判别方法：问一句「这个数字是动作的对象还是动作的结果」。是对象（整合了30家机构）→ 可留；是结果（解决了3561件）→ 删。这条规律在第2题也适用（「五个一」机制里的「五」是做法，「127条线索」是成效）。
+
+最后一条关于字数：500字是这套卷里最紧的额度。标题23＋称谓7＋开头41，光开头三件套就占了71字（14%），主体只剩400字出头。所以本题真正的技术难点不是「写什么」，是「砍什么」——句1-5 的纠纷故事（近200字）、句21-23 的欠薪案（近100字）、句29 的六个数据（60字），这三块加起来360字，全部要压成不到60字。<b>公文题的字数额度，本质上是给你一个「必须砍掉三分之二材料」的强制令。</b></div></div></div><div class="qwrap" hidden><div class="qcard"><div class="meta"><span class="tag sc">40 分</span><span class="tag kp">总结类</span></div><p class="stem">假如你参加了L市政法系统开展的“诵读红色家书，传承红色基因”主题活动，请根据“给定资料4”，联系实际，自选角度，自拟题目，写一篇心得体会。（40分）</p><p class="req">要求：（1）观点明确，认识深刻；
 （2）结构完整，思路清晰；
 （3）语言流畅，字数800-1000字。</p></div><div class="step s1"><h4><span class="n">1</span>出题人想考什么（审题）</h4><div class="body" style="margin-bottom:9px">通过勾画题目的关键信息，去找出文章的主题及其写作角度（即：文章写作的主要话题及切入点）以及资料范围，写作要求等。</div><ul class="key"><li>由“根据……资料4”“联系实际”可知，要优先且重点阅读资料4，同时可兼顾其他资料，从中提取有效信息</li><li>由“心得体会”可知，本题是一篇文章写作题。围绕“诵读红色家书，传承红色基因”这一主题，可初步构思本文写作思路：首先，“红色家书”有哪些，其折射的精神品质是什么；其次，为什么要开展“诵读红色家书，传承红色基因”的活动，意义何在；最后，如何从红色家书中，传承红色基因，应该怎么做，等等。以上写作思路，具体还要结合资料来进一步确定</li></ul></div><div class="step s2"><h4><span class="n">2</span>我怎么找答案（逐段拆解）</h4><p class="hint">每一块对应材料的一段或几段，看粉笔怎么从原文里抠出要点。</p><div class="blk"><div class="h">段 2</div><div class="c">段1-段2交代了L市政法系统开展“诵读红色家书，传承红色基因”主题活动的相关背景。其中，“第九个烈士纪念日”“L市政法系统开展‘诵读红色家书，传承红色基因’主题活动，大家一起重读烈士家书，缅怀革命先烈，传承红色基因”等内容，可在适当改编后，作为开头部分的内容，写入心得体会。</div></div><div class="blk"><div class="h">段 6</div><div class="c">段3-段6以夏明翰、左权、刘伯坚等三位烈士的家书为例，介绍了红色精神的具体表现。阅读段6尾处的“大家无不被革命先烈们对理想信念的执着追求、对党绝对忠诚的赤子之心、舍生取义的崇高气节和报国为民的炙热情怀所折服”可知，红色家书所折射的红色精神包括四个方面：（1）以夏明翰烈士为代表，他坚定的理想信念，认定了共产主义能够为人类翻身解放造幸福，这种坚毅的精神品质，值得每一位政法工作者崇尚与效仿，由此可提炼出观点：我感受到的，是革命先烈们对理想信念的执着追求。（2）以左权将军为代表，他报国为民，坚持与人民、与国家同生死共患难，值得当代政法工作者敬仰与学习，由此可提炼出观点：我感受到的，是革命先烈们报国为民的炙热情怀。（3）以刘伯坚烈士为代表，他舍小家为大义，将国家与人民的利益摆在至高无上的位置，这可贵的精神品质，值得政法工作者敬佩与牢记，由此可提炼出观点：我感受到的，是革命先烈们舍生取义的崇高气节。（4）“对党绝对忠诚的赤子之心”提示，作为政法系统的工作者，还要向全体英烈学习忠诚于党的高贵精神品质，由此可提炼出观点：我感受到的，是革命先烈们对党绝对忠诚的赤子之心。</div><div class="bind">✓ 要点：我感受到的，是革命先烈们对理想信念的执着追求</div></div><div class="blk"><div class="h">段 8</div><div class="c">段7-段8对资料进行了总结，可合并阅读。其中，段8中的“通过组织大家诵家书、学家书、悟家书，体会革命道路的曲折和胜利的来之不易，感受革命先烈崇高的精神境界和理想追求”提示，组织诵读家书活动的崇高意义，可提炼出观点：我不但体会到了革命道路的曲折和胜利的来之不易，更深刻感受到了革命先烈崇高的精神境界和理想追求。可写入开头部分，作为全篇心得体会的核心观点。</div><div class="bind">✓ 要点：我不但体会到了革命道路的曲折和胜利的来之不易，更深刻感受到了革命先烈崇高的精神境界和理想追求</div></div></div><div class="step s3"><h4><span class="n">3</span>为什么这么写（组织答案）</h4><div class="body">根据第一步的审题、第二步的阅读资料，确立文章框架
 标题：【突出“诵读红色家书，传承红色基因”这一主题】烈士英灵不朽 红色基因永存
@@ -306,7 +412,33 @@ p.hint{margin:0 0 11px;font-size:13.5px;color:#9ca3af}
 1.黄文秀：将青春奉献给脱贫攻坚一线
 基层干部黄文秀，2016年毕业于北京师范大学，她做出一个与众不同的选择，放弃大城市的工作机会，自愿回到百色革命老区工作，主动请缨到贫困村担任驻村第一书记，支援家乡建设。黄文秀总是乐观开朗、积极向上，从进村开始，她时刻牢记党的嘱托，自觉践行党的宗旨，把群众冷暖放在第一位。她积极促进村民发展电商产业，推动道路硬化和蓄水池修建等工程项目，帮助大多数贫困户顺利脱贫。2019年6月17日凌晨，黄文秀遭遇突发山洪不幸遇难，年仅30岁，被追授“全国脱贫攻坚模范”称号。
 2.张富清：英雄无言
-战斗英雄张富清，24岁参军，在解放战争的枪林弹雨中九死一生，曾立特等功一次，立一等功三次，立二等功一次，两次获“战斗英雄”称号。张富清1955年主动转业到湖北最艰苦的山区工作，为贫困山区奉献一生，他将赫赫战功深埋心底，从未向他人提起过自己的功绩，甚至连家人都不知情。在贫困县的这些年，无论在哪个岗位上都担当作为，竭尽所能，遇到工作中的困难，他不躲不绕，克服解决，在基层工作岗位上向党和人民交出满意答卷。直到2018年底，在退役军人信息采集中，张富清的事迹才被人们发现，张富清同志深藏功名60余年，始终践行共产主义崇高理想，是广大党员干部的学习榜样。</div></div></div></div>
+战斗英雄张富清，24岁参军，在解放战争的枪林弹雨中九死一生，曾立特等功一次，立一等功三次，立二等功一次，两次获“战斗英雄”称号。张富清1955年主动转业到湖北最艰苦的山区工作，为贫困山区奉献一生，他将赫赫战功深埋心底，从未向他人提起过自己的功绩，甚至连家人都不知情。在贫困县的这些年，无论在哪个岗位上都担当作为，竭尽所能，遇到工作中的困难，他不躲不绕，克服解决，在基层工作岗位上向党和人民交出满意答卷。直到2018年底，在退役军人信息采集中，张富清的事迹才被人们发现，张富清同志深藏功名60余年，始终践行共产主义崇高理想，是广大党员干部的学习榜样。</div></div><div class="aihint">下面是 <b>AI 批注</b>：题干逐词拆解、材料结构、找点动作、答案溯源、出题人的坑。<b>这部分不是粉笔原话</b>，是逐句分析材料得出的判断，和上面的粉笔讲解互为补充。</div><div class="ai"><h4><span class="an">AI</span>① 题干逐词拆解<span class="sub">每个字都在告诉你该干什么</span></h4><div class="tw"><table class="tstem"><thead><tr><th>题干词</th><th>类型</th><th>它到底在说什么</th><th>你该做什么</th></tr></thead><tbody><tr><td class='w'>假如你参加了</td><td><span class='ty ty-身份设定'>身份设定</span></td><td>「参加了」是事实锚点，不是假设游戏：你确实在场、确实诵读过、确实被震撼过，所以文章必须有第一人称的现场感，不能写成旁观者的评论</td><td class='act'>开头必须交代「我参加了什么活动、在什么场合」，这是心得体的身份证</td></tr><tr><td class='w'>L市政法系统</td><td><span class='ty ty-身份限定'>身份限定</span></td><td>你的身份是政法干警，不是普通读者、不是学生、不是机关文员；这决定了「联系实际」必须落到政法职责上（维护政治安全、社会稳定、执法司法为民）</td><td class='act'>结尾的「我该怎么做」必须出现政法岗位的具体动作，不能只写「努力工作」</td></tr><tr><td class='w'>“诵读红色家书，传承红色基因”主题活动</td><td><span class='ty ty-主题限定'>主题限定</span></td><td>主题是两个动作的合成：「诵读」是入口（读文本），「传承」是出口（化为行动）；中间必须有「从文本到精神到行动」的转化，缺了转化就只剩读后感</td><td class='act'>全文要能画出「家书原文→精神品质→我的岗位行动」这条链，每一段都在这条链上</td></tr><tr><td class='w'>根据“给定资料4”</td><td><span class='ty ty-范围信号'>范围信号</span></td><td>主要依据资料4的19句（三封家书＋活动现场），资料1-3可以作为「联系实际」的补充，但不能反客为主</td><td class='act'>三封家书必须都用到，只写夏明翰一封是明显的漏读</td></tr><tr><td class='w'>联系实际</td><td><span class='ty ty-素材要求'>素材要求</span></td><td>允许并且要求引入材料之外的内容，可以是政法工作的具体场景（办案、接访、值守），也可以是时代背景（社会转型、诱惑增多），但必须与「传承红色基因」同构</td><td class='act'>准备两个材料外的落点：一个岗位场景、一个时代背景，放在分论点段的后半</td></tr><tr><td class='w'>自选角度</td><td><span class='ty ty-自由度'>自由度</span></td><td>角度自由但有边界：必须从「红色家书」长出来，可以写信念、忠诚、气节、为民，但不能写成「论学习」「论青年成长」这种换掉主题的角度</td><td class='act'>拟完标题自检：把「红色家书」四个字换掉，文章还成立吗？成立说明角度跑偏</td></tr><tr><td class='w'>自拟题目</td><td><span class='ty ty-格式要求'>格式要求</span></td><td>标题要自己造，不能空着，也不能用「读《红色家书》有感」这种学生腔；好标题要同时含「红色」这个色系和「传承」这个动作</td><td class='act'>用「烈士英灵不朽 红色基因永存」这类八字对仗结构，两个分句各四字</td></tr><tr><td class='w'>写一篇心得体会</td><td><span class='ty ty-文种'>文种</span></td><td>心得体会不是议论文：议论文可以通篇不出现「我」，心得体会必须有「我」的在场；但它也不是散文，仍要有观点句和论证，只是论证的落点是「我的认识」不是「普遍真理」</td><td class='act'>通篇检查「我」字出现的次数，少于8次基本就是写成了议论文</td></tr><tr><td class='w'>观点明确，认识深刻</td><td><span class='ty ty-评分标准'>评分标准</span></td><td>「明确」要求有能一句话说清的中心观点；「深刻」要求不能停在「很感动」「要学习」，要说出「为什么今天还需要这些精神」这一层，这是40分题的分水岭</td><td class='act'>全文至少有一处回答「和平年代又不打仗，为什么还要读这些信」</td></tr><tr><td class='w'>结构完整，思路清晰</td><td><span class='ty ty-评分标准'>评分标准</span></td><td>要求有开头、分层的主体、结尾，且层与层之间有推进关系；四个并列的「我感受到的」是及格线，不是高分线</td><td class='act'>给分层各配一个递进词：读到了什么→为什么今天还需要→我该怎么做</td></tr><tr><td class='w'>字数800-1000字</td><td><span class='ty ty-字数'>字数</span></td><td>双向硬约束：不足800降档，超过1000答题纸没格子；这个额度装得下开头＋四个分层段＋结尾，装不下五个</td><td class='act'>按开头150＋四段各165＋结尾95＝905字配额度，写到905就收</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>② 为什么是这个题型<span class="sub">判断链，不是结论</span></h4><div class="prose">判断链：① 题干文种是「心得体会」，不是「议论文」「文章」→ 文体判断优先于立意判断，这决定了全文必须有「我」的视角；② 题干有「假如你参加了…活动」→ 必须有现场事实，这是心得体和评论体的分界线；③ 身份是「L市政法系统」的干警 → 「联系实际」的落点是政法职责；④ 材料4 的句15 一句话给出了四层精神（理想信念、对党忠诚、舍生取义、报国为民）→ 分论点不用自己想，材料白送；⑤ 40分 / 800-1000字 → 开头＋四个分层段＋结尾，五段式。
+
+⚠️ 最容易错判的地方：把心得体会写成议论文。两者最直观的区别是「我」的密度——议论文里「我」是多余的（「我认为」可以删掉，句子照样成立），心得体会里「我」是骨架（「我感受到的，是…」删掉「我」，整段就塌了）。第二个错判：把它写成读后感散文，通篇抒情（「我的眼眶湿润了」「心灵受到震撼」），但要求里明写「观点明确，认识深刻」——散文没有观点句，直接判三类。第三个错判：只写「感动」和「学习」，不写「为什么今天还需要」。这是40分和30分的分界：<b>能回答「和平年代为什么还要读这些信」，才是「认识深刻」。</b></div></div><div class="ai"><h4><span class="an">AI</span>③ 材料结构图<span class="sub">哪段有用、哪段是干扰，为什么</span></h4><div class="mmwrap"><div class="mm no"><div class="mmh"><b>句1-3</b><span class="mmb">不出点</span></div><div class="mmr">背景：总书记论断 + 烈士纪念日 + 活动开展</div><div class="mmw">句1「共和国是红色的，不能淡化这个颜色」是总书记论断，句2交代时间（第九个烈士纪念日），句3交代活动（重读烈士家书、缅怀先烈、传承基因、淬炼政法铁军）。三句都是背景，本身不出论点。但句1 是<b>全篇最好的开头引子</b>——它给的是「为什么」（颜色不能淡化），比句2 的「什么时候」高一个层次。参考答案的开头用了句2-3，没用句1，我觉得是个损失。</div></div><div class="mm pt"><div class="mmh"><b>句4-6</b><span class="mmb">出 1 点</span></div><div class="mmr">家书一：夏明翰——理想信念的极致表达</div><div class="mmw">句4「大姐为我坐监牢，外甥为我受株连，我们没有罪，我们要斗争，人该怎样做，路该怎样走，要有正确的答案」讲的是<b>选择</b>（路该怎样走）；句5「我一生无遗憾，认定了共产主义这个为人类翻身解放造幸福的真理，就刀山敢上，火海敢闯，甘愿抛头颅，洒热血」讲的是<b>认定</b>（认定了就不再动摇）。两句合起来，正好是「理想信念」这一层的完整证据：先选对了路，再走到底。句6 是出处标注，不进答案。</div></div><div class="mm pt"><div class="mmh"><b>句7-10</b><span class="mmb">出 1 点</span></div><div class="mmr">家书二：左权——报国为民、与人民共生死</div><div class="mmw">句7「我们也决心与华北人民共艰苦，共生死」是「报国为民」这一层最直接的一句；句8「不管敌人怎样进攻，我们准备不回到黄河南岸来」是决心；句9「为了民族国家的利益，过去没有一个铜板，现在仍然是没有一个铜板，准备将来也不要一个铜板，过去吃过草，准备还吃草」是全篇最震撼的一句——三个「没有一个铜板」层层递进，把「无私」写到了极致。句10 是出处。注意这封家书是写给<b>母亲</b>的，这个细节很重要：对母亲说「准备还吃草」，是把最苦的话说给最亲的人听，这份坦白本身就是忠诚的重量。</div></div><div class="mm pt"><div class="mmh"><b>句11-14</b><span class="mmb">出 1 点</span></div><div class="mmr">家书三：刘伯坚——舍生取义、舍家为国</div><div class="mmw">句11「我为中国革命没有一文钱的私产，把三个幼儿的养育都要累着诸兄嫂」讲的是<b>舍家</b>；句12「我四川的家听说久已破产，又被抄没过，人口死亡殆尽」讲的是<b>代价</b>；句13「为着中国民族就为不了家和个人，诸兄嫂明达当能了解，不致说弟这一生穷苦，是没有用处」是<b>自我确认</b>——他要在死前说服家人，自己这一生不是白活。这一句是「舍生取义」最动人的地方：他不怕死，怕的是家人不理解他为什么死。</div></div><div class="mm pt"><div class="mmh"><b>句15</b><span class="mmb">出 1 点</span></div><div class="mmr">题眼：活动现场 + 四层精神的总括（材料白送的分论点）</div><div class="mmw">「活动中，大家在背景音乐的衬托下，深情朗读这一封封感人肺腑的红色家书…大家无不被革命先烈们对理想信念的执着追求、对党绝对忠诚的赤子之心、舍生取义的崇高气节和报国为民的炙热情怀所折服」——这一句的后半截，就是四个现成的分论点：理想信念、对党忠诚、舍生取义、报国为民。全卷没有比这更直白的「白送」了。<b>本题的分论点不需要自己想，只需要把它抄下来配上家书。</b>这也是判断「材料哪里最值钱」的一个范例：一个长句里连排四个「对…的…」，几乎必然是层次提示。</div></div><div class="mm no"><div class="mmh"><b>句16-17</b><span class="mmb">不出点</span></div><div class="mmr">现场感言：王书记的感叹</div><div class="mmw">句16「革命先烈初心可鉴、正气永存，如今我们身处中国特色社会主义的新时代，更是应该在传承、担当、坚守中，为国出力，为民造福」是现场人员的感言，句17「市委政法委机关第三党支部王书记感叹道」是引语标记。这段不出独立论点，但它提供了两个东西：一是「传承、担当、坚守」三个动词（可作结尾骨架），二是「新时代」这个时间坐标——它正好回答了「和平年代为什么还要读」这个问题。</div></div><div class="mm pt"><div class="mmh"><b>句18-19</b><span class="mmb">出 1 点</span></div><div class="mmr">收束：种树培根 + 诵学家悟三个动作、三个层次</div><div class="mmw">句18「种树者必培其根，种德者必养其心」是古语，适合做结尾的引子；句19「通过组织大家诵家书、学家书、悟家书，体会革命道路的曲折和胜利的来之不易，感受革命先烈崇高的精神境界和理想追求，把对党的忠诚扎根头脑、变成信仰、化为行动」是<b>全篇最被浪费的一句</b>：它给了三个动作（诵、学、悟）和三个层次（头脑、信仰、行动），这六个短语天然就是结尾的骨架，比任何自造的口号都整齐。参考答案完全没用这句，我觉得可惜。</div></div></div></div><div class="ai"><h4><span class="an">AI</span>④ 我该怎么找答案<span class="sub">六步动作，照做就行</span></h4><ol class="steps"><li><div class="sh">第 1 步 · 先认文体，不先想立意</div><div class="st"><span class="lb">看哪</span>「心得体会」四个字 → 叙（我参加了）＋议（我认识到）＋感（我被打动）＋行（我要怎么做）</div><div class="ss"><span class="lb">凭什么</span>文体判断优先于立意判断。心得体会和议论文的差别不在内容，在<b>作者的位置</b>：议论文的作者在文本之外评判，心得体会的作者在文本之中经历。所以第一个动作是找「我」，不是找「论点」</div></li><li><div class="sh">第 2 步 · 找材料白送的分论点</div><div class="st"><span class="lb">看哪</span>句15 后半截：理想信念、对党忠诚、舍生取义、报国为民</div><div class="ss"><span class="lb">凭什么</span>材料4 只有19句，其中句15 一句话给了四层精神，而且用了「对…的…」的连排结构。这种「一个长句里并列四个抽象名词」的写法，在申论材料里几乎必然是层次提示。找到它，四个分论点就到手了，不用自己归纳</div></li><li><div class="sh">第 3 步 · 把三封家书和四层精神配对</div><div class="st"><span class="lb">看哪</span>夏明翰（句4-5）→ 理想信念；左权（句7-9）→ 报国为民；刘伯坚（句11-13）→ 舍生取义；对党忠诚由三封家书共同支撑</div><div class="ss"><span class="lb">凭什么</span>四层精神只有三封家书，说明有一层是<b>共同的底色</b>。哪一层？「对党忠诚」——三个人都在信里表达了对组织的绝对信任，但都没有单独一段专门讲忠诚。所以这一层要用三封家书的共同点来写，不能只挂一封。这是「材料给四层、只给三封信」时必然要做的判断</div></li><li><div class="sh">第 4 步 · 补「联系实际」的两个落点</div><div class="st"><span class="lb">看哪</span>岗位场景（办案、接访、值守）＋ 时代背景（社会转型、诱惑增多）</div><div class="ss"><span class="lb">凭什么</span>材料4 里没有一句讲当代政法工作，全是历史。但题干要求「联系实际」，而且身份是政法干警——所以「实际」只能自己补，补的方向由身份决定：「维护国家政治安全、确保社会大局稳定」这些政法职责，就是四层精神的当代对应物</div></li><li><div class="sh">第 5 步 · 定结构：活动—感受（分层）—践行</div><div class="st"><span class="lb">看哪</span>开头（我参加了＋总体感受）→ 四个分层（我感受到的，是…）→ 结尾（忆往昔／看今朝）</div><div class="ss"><span class="lb">凭什么</span>心得体的标准骨架是「入—感—出」：入（活动事实）、感（分层认识）、出（岗位行动）。三段缺一不可：缺「入」是评论，缺「感」是流水账，缺「出」是读后感。参考答案用的就是这个骨架，四段「我感受到的」是「感」的部分</div></li><li><div class="sh">第 6 步 · 卡字数、砍引文</div><div class="st"><span class="lb">看哪</span>开头150＋四段各165＋结尾95 ≈ 905 字</div><div class="ss"><span class="lb">凭什么</span>材料4 的19句里，家书原文占了9句（句4-5、7-9、11-13），近300字。整段搬进作文会超过全文三分之一，直接触发「抄袭材料」的判罚。每封家书只留一句最有力的引文（夏明翰「刀山敢上，火海敢闯」、左权「准备还吃草」、刘伯坚「生是为中国，死是为中国」），其余概括</div></li></ol></div><div class="ai"><h4><span class="an">AI</span>⑤ 每条答案从哪来<span class="sub">点句子编号可对照左边材料</span></h4><div class="tw"><table class="ttrace"><thead><tr><th>答案要点</th><th>来源句</th><th>怎么变成答案的</th></tr></thead><tbody><tr><td class='pt'>开头：活动事实 + 总体感受</td><td class='src'><code>句2</code> <code>句3</code> <code>句15</code></td><td>句2「2022年9月30日是第九个烈士纪念日」＋句3「L市政法系统开展『诵读红色家书，传承红色基因』主题活动，大家一起重读烈士家书，缅怀革命先烈」→「在第九个烈士纪念日，作为一名政法人，我很荣幸地参加了政法系统开展的『诵读红色家书，传承红色基因』主题活动」（把「L市」改成「我」，把「大家」改成「我和同仁们」，这是心得体的第一人称转换）；句15「深深震撼着在场的每一位政法干部的心灵」→「与烈士们进行了一场跨越时空的对话，感受那些振奋人心的红色记忆」（「震撼」升级成「对话」，因为「对话」比「震撼」更能体现「我」的参与）</td></tr><tr><td class='pt'>分论点组：四层精神（理想信念／对党忠诚／舍生取义／报国为民）</td><td class='src'><code>句4</code> <code>句5</code> <code>句7</code> <code>句9</code> <code>句11</code> <code>句13</code> <code>句15</code></td><td>句15 给出四层精神的名称（直接摘，一个词不改）；「理想信念」配句5「我一生无遗憾，认定了共产主义…就刀山敢上，火海敢闯，甘愿抛头颅，洒热血」；「对党忠诚」配句4「我们没有罪，我们要斗争，人该怎样做，路该怎样走，要有正确的答案」（三封家书的共同底色，不专挂一封）；「舍生取义」配句13「为着中国民族就为不了家和个人」＋句11「我为中国革命没有一文钱的私产」；「报国为民」配句7「我们也决心与华北人民共艰苦，共生死」＋句9「准备将来也不要一个铜板，过去吃过草，准备还吃草」</td></tr><tr><td class='pt'>时代之问：和平年代为什么还要读这些信</td><td class='src'><code>句1</code> <code>句16</code></td><td>句1「共和国是红色的，不能淡化这个颜色」→ 提供「为什么」的答案（颜色会淡化，所以要守）；句16「如今我们身处中国特色社会主义的新时代，更是应该在传承、担当、坚守中，为国出力，为民造福」→ 提供「怎么做」的三个动词（传承、担当、坚守）。两者合成一段：正因为颜色会淡化、时代会变迁，才需要反复诵读。<b>这一段是「认识深刻」的落点</b>，参考答案里没有独立成段，只在第二段顺带提了一句</td></tr><tr><td class='pt'>结尾：三个转化</td><td class='src'><code>句18</code> <code>句19</code></td><td>句18「种树者必培其根，种德者必养其心」→ 做引子（培根养心＝传承要从心上做）；句19「通过组织大家诵家书、学家书、悟家书…把对党的忠诚扎根头脑、变成信仰、化为行动」→「诵、学、悟」三个动作＋「头脑、信仰、行动」三个层次，直接做成结尾的排比骨架（比自造口号整齐得多）；「淬炼出一支新时代的政法铁军」（句3）→ 落到政法身份上收口</td></tr></tbody></table></div></div><div class="ai"><h4><span class="an">AI</span>⑥ 出题人埋的坑<span class="sub">这些地方专门骗新手</span></h4><div class="traps"><div class="trap"><div class="th">⚠ 把心得体会写成议论文——通篇讲道理，没有一个「我」</div><div class="tw2"><span class="lb">为什么错</span>这是40分题最大的坑，而且很难自察，因为写出来的文章结构完整、语言流畅、论点清晰，看起来像一篇好文章。但它答的不是「心得体会」。判据很简单：议论文里「我认为」可以删掉，句子照样成立；心得体里「我感受到的」删掉「我」，整段就塌了。阅卷人翻两段找不到「我」，直接按议论文判，文体分全丢</div><div class="ta"><span class="lb">怎么躲</span>写完数「我」字，少于8次就是写成了议论文。另外检查开头：有没有交代「我参加了什么活动」？没有就是评论不是心得</div></div><div class="trap"><div class="th">⚠ 大段抄三封家书原文（句4-5、7-9、11-13 共九句近300字）</div><div class="tw2"><span class="lb">为什么错</span>家书写得太好，抄进去显得有感情、有文采，而且几乎不用动脑。但材料4 只有19句，家书原文占了近一半，整段搬进作文会超过全文三分之一，直接触发「抄袭材料」判罚；而且挤掉的全是自己的论证，文章会变成「家书摘编＋几句感想」</div><div class="ta"><span class="lb">怎么躲</span>每封家书只留一句最有力的（夏明翰「刀山敢上，火海敢闯」、左权「准备还吃草」、刘伯坚「生是为中国，死是为中国」），其余全部概括成一句「他在信中表达了…」。引文总字数控制在全文10%以内</div></div><div class="trap"><div class="th">⚠ 四段「我感受到的，是…」完全并列，四层精神各占一段就收工</div><div class="tw2"><span class="lb">为什么错</span>这是参考答案的做法，也是粉笔自己承认的「并列逻辑颇为清晰」。它能拿二类上，但拿不到一类——因为四个并列等于把材料句15 抄了一遍，没有「我」的加工。而题干要求「认识深刻」，「深刻」的标志是<b>层次之间有推进</b>，不是四个品质排排坐</div><div class="ta"><span class="lb">怎么躲</span>保留四层，但在每段末尾加一句「这对政法工作意味着什么」，把「先烈的品质」翻译成「我的岗位要求」：理想信念→政治定力；对党忠诚→维护政治安全；舍生取义→执法司法中的担当；报国为民→司法为民。这样四层就从「历史」走到了「当下」</div></div><div class="trap"><div class="th">⚠ 忘了「政法」身份，通篇写「我们要努力工作」「为人民服务」</div><div class="tw2"><span class="lb">为什么错</span>题干给了「L市政法系统」这个身份，它不是装饰。联系实际的落点如果是泛泛的「努力工作」，等于放弃了最能体现身份优势的那部分内容。而且政法系统有它特定的职责语言（维护国家政治安全、确保社会大局稳定、促进社会公平正义、保障人民安居乐业），用这些词，身份才立得住</div><div class="ta"><span class="lb">怎么躲</span>结尾必须出现至少一个政法岗位的具体动作：办案、接访、值守、执法、司法救助，而不是「立足本职、扎实工作」这种放到任何行业都成立的话</div></div><div class="trap"><div class="th">⚠ 只写「感动」和「学习」，不回答「和平年代为什么还要读这些信」</div><div class="tw2"><span class="lb">为什么错</span>这是30分和40分的真正分界。三封家书都写于生死关头（「弟准备牺牲」），而读者生活在和平年代，如果文章只停在「很感动、要学习」，就会有一个逻辑漏洞没补上：<b>我又不用去死，学什么？</b>这个漏洞不补，「认识深刻」这一项就是空的</div><div class="ta"><span class="lb">怎么躲</span>全文至少有一处正面回答：今天的考验不是生死，是「冲击多、诱惑多」（可借句16「新时代」展开），所以先烈的那种「认定了就不动摇」，今天对应的是「在诱惑面前不动摇」。把「生死考验」翻译成「日常考验」，深刻性就出来了</div></div></div></div><div class="ai"><h4><span class="an">AI</span>⑦ 答案为什么长这样<span class="sub">骨架、字数、用词</span></h4><div class="prose">看参考答案的骨架：标题＋开头＋四个「我感受到的」段＋结尾。
+
+<b>标题</b>「烈士英灵不朽 红色基因永存」——八字对仗，两个分句各四字，前半写人（烈士）、后半写魂（基因），「不朽」对「永存」是同义呼应。这个标题的优点是主题词齐全（烈士、红色基因），缺点是<b>没有「传承」这个动作</b>，读起来像纪念碑的碑文，不像一篇谈「我该怎么做」的心得。
+
+<b>开头</b>149字，三句话完成三件事：（1）交代活动背景（第九个烈士纪念日、我参加了什么活动）；（2）概述活动情况（重读家书、跨越时空的对话）；（3）总结总体感受（「不但体会到了革命道路的曲折和胜利的来之不易，更深刻感受到了革命先烈崇高的精神境界和理想追求」）。注意「不但…更…」这个递进连词——它一句话就把感受分了两层（认知层＋精神层），为下文四个分层段做了铺垫。
+
+<b>四个分层段</b>，每段的结构完全一致：「我感受到的，是革命先烈们对XX的XX。」（观点句，位置在段首）→ 「讲道理」（这一品质是什么、为什么重要）→ 「举例子」（引用一封家书）→ 「结合自身」（我该怎么做）。四件套齐全，这是标准的议论文段法。<b>但四段的观点句是并列的</b>（理想信念／对党忠诚／舍生取义／报国为民），这是它只能到二类上的原因。
+
+<b>结尾</b>92字：「忆往昔峥嵘岁月稠，看今朝重任在肩头」起，「回顾历史…面向未来…」对举，最后落在「淬炼出一支新时代的政法铁军」。「忆往昔／看今朝」这个对举是心得体结尾的经典套路，因为它同时完成了「回扣主题」和「展望未来」。
+
+<b>字数账</b>：实测是 149（开头）＋197＋174＋198＋136（四段）＋92（结尾）＝ 946 字，加标题 13 字共 959 字，落在 800-1000 的中段偏上。注意四个分层段的长度<b>并不均匀</b>：197、174、198、136。第一、三、四段接近 200 字，第二段（对党忠诚）只有 174 字，第四段（报国为民）只有 136 字。为什么？因为「对党忠诚」这一层材料里没有专属家书，只能靠三封的共同点＋时代形势来撑，撑不满；「报国为民」只有一个左权，例子少，也撑不满。<b>分论点段的长度，取决于材料给的例子够不够厚，不是取决于你想写多长。</b>这也是一个提醒：如果某段写不到 150 字，说明那一层的材料不够，要么换一层，要么补一个材料外的例子。
+
+<b>用词规律</b>：大量使用「革命先烈们对…的…」这个定语结构（四个观点句全是），以及「铸就」「锤炼」「淬炼」「扎根」「化为」这类动词。这些词的功能是把抽象的精神<b>动作化</b>——精神不能停留在形容词上，必须变成「铸就什么」「锤炼什么」，文章才有力量感。</div></div><div class="ai extra"><h4><span class="an">AI</span>⑧ 粉笔没讲透的地方<span class="sub">我的补充判断</span></h4><div class="prose">粉笔的文章分析里写「四段是并列逻辑，颇为清晰」。我认为这句评价恰恰点出了这份范文的天花板。
+
+我的判断：<b>四个并列的分论点，是「抄」出来的，不是「想」出来的。</b>材料句15 一句话就给了四层精神（理想信念、对党忠诚、舍生取义、报国为民），照抄四个词当分论点，等于把材料的层次提示原样搬进了作文。这在考场上是安全的（要点不会错），但「认识深刻」这一项拿不到高分——因为读者读完四段，感受到的是「作者读懂了材料」，而不是「作者想通了什么」。<b>心得体会的高分标志，是读者能看见作者被改变的过程，不是作者复述材料的能力。</b>
+
+如果要冲一类，我会这么改：保留四层，但每段末尾加一句「翻译」——把先烈的品质翻译成政法岗位的具体要求。具体是：理想信念 → 面对复杂案情和舆论压力时的政治定力；对党忠诚 → 维护国家政治安全、确保社会大局稳定这份职责的底色；舍生取义 → 执法司法中「该碰的硬骨头要碰」的担当；报国为民 → 每一起小案里的司法为民。这样四层就从「历史人物的品质」变成了「我的岗位说明书」，「我」的视角才真正建立起来，而不只是每段开头挂一个「我感受到的」。
+
+第二个发现，也是我认为本题最被浪费的一处：<b>句19 是整则材料里最适合做结尾的一句，而参考答案一个字都没用。</b>「诵家书、学家书、悟家书」是三个递进的动作（读→懂→通），「扎根头脑、变成信仰、化为行动」是三个递进的层次（知→信→行）。这六个短语排在一起，天然就是结尾的排比骨架，而且它比「让先辈们的精神遗产燃起熊熊大火」这种空喊有力得多——因为它有具体的动作和方向。<b>材料里凡是出现「三个动词连排＋三个层次连排」的句子，基本都是结尾的现成素材。</b>
+
+第三个：句1「共和国是红色的，不能淡化这个颜色」，我认为它比参考答案用的开头更好。参考答案从「第九个烈士纪念日」起，那是<b>时间</b>；句1 给的是<b>理由</b>（颜色会淡化，所以要守）。心得体会的开头如果能先给理由再给事实，起点就高一层。而且「红色」这个词和「红色家书」「红色基因」是同一个色系，标题和开头能形成呼应。
+
+第四个，一个文体上的细节，很少有人提：<b>心得体会里「我」和「我们」的切换是有讲究的。</b>参考答案开头用「我」（「我很荣幸地参加」），四段用「我感受到的」（感受用「我」，真实、个人），但段内讲行动时转成「我们须牢牢树立…」（行动用「我们」，集体、号召）。这个切换不是随意，是心得体的一个隐性规则：<b>感受必须私人化，行动必须集体化。</b>如果通篇用「我们」，感受就假了；如果通篇用「我」，行动就没有号召力。这个细节参考答案做对了，但粉笔的分析里一个字没提。
+
+最后一个判断，关于「假如你参加了」这五个字。很多人把它当套话跳过，但它其实是<b>文体锚点</b>：它规定了你必须写「我参加了」，而这句「我参加了」正是心得体和评论体的分界线。没有它，文章就从「心得」变成了「书评」。所以开头第一段无论如何要交代清楚：什么时间、什么活动、我以什么身份参加。这三样齐了，文体就站住了；缺了，后面写得再好也是跑偏。</div></div></div></div>
 </div>
 <div id="nav">
   <button type="button" id="prev">← 上一题</button>

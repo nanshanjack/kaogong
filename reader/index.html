@@ -3,30 +3,75 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
-<meta name="theme-color" content="#f5f5f3">
+<meta name="theme-color" content="#F8F4EB">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>申论对照阅读器</title>
-<style>
+<style>:root{
+  --bg:#F8F4EB; --bg2:#F2EDE2; --panel:#FDFBF6; --panel2:#F8F3E8;
+  --ink:#332F28; --ink2:#575145; --ink3:#746C5E; --ink4:#958C7C;
+  --line:#E6DCCB; --line2:#EFE7D9;
+  --brand:#5B7A6C; --brand2:#769487; --brand-soft:#EDF4EF;
+  --mark:#F7E8BA; --mark2:#D8B85C;
+  --ok:#3C7A5A; --ok-soft:#EAF4EE;
+  --warn:#A9792A; --warn-soft:#F8EFDC;
+  --danger:#B34A45; --danger-soft:#F8E7E5;
+  --code-bg:#F4EFE3; --code-ink:#332F28;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+html[data-theme="cool"]{
+  --bg:#f7f7f5; --bg2:#ffffff; --panel:#ffffff; --panel2:#fafafa;
+  --ink:#18181b; --ink2:#3f3f46; --ink3:#71717a; --ink4:#a1a1aa;
+  --line:#e7e7e4; --line2:#f0f0ed;
+  --brand:#4f46e5; --brand2:#6366f1; --brand-soft:#eef2ff;
+  --mark:#fff3bf; --mark2:#f0b429;
+  --ok:#059669; --ok-soft:#ecfdf5;
+  --warn:#d97706; --warn-soft:#fffbeb;
+  --danger:#dc2626; --danger-soft:#fef2f2;
+  --code-bg:#1f2937; --code-ink:#e5e7eb;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+html[data-theme="dark"]{
+  --bg:#1B1A17; --bg2:#161512; --panel:#23211D; --panel2:#2A2722;
+  --ink:#E9E2D4; --ink2:#C9C0B0; --ink3:#9B9283; --ink4:#756E61;
+  --line:#35312A; --line2:#2E2A24;
+  --brand:#8FB3A6; --brand2:#A8C7BA; --brand-soft:#24312B;
+  --mark:#4A3D18; --mark2:#C9A227;
+  --ok:#7FC49A; --ok-soft:#163027;
+  --warn:#E0B45C; --warn-soft:#33270E;
+  --danger:#F08A8A; --danger-soft:#3A1717;
+  --code-bg:#141310; --code-ink:#E9E2D4;
+  /* 移动端旧变量别名 */
+  --card:var(--panel); --txt:var(--ink); --muted:var(--ink3);
+  --faint:var(--ink4); --blue:var(--brand); --red:var(--danger);
+  --amber:var(--warn); --green:var(--ok); --code:var(--code-bg);
+}
+
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#f5f5f3;color:#1f2937;
+body{margin:0;background:var(--bg);color:var(--ink);
   font:16px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 .wrap{max-width:760px;margin:0 auto;padding:26px 18px 60px}
 h1{font-size:23px;margin:0 0 6px}
-.sub{color:#6b7280;font-size:13.5px;margin:0 0 20px;line-height:1.8}
-.card{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:12px;
-  padding:14px 16px;margin:0 0 10px;text-decoration:none;color:#1f2937}
-.card:active{background:#eef2ff}
+.sub{color:var(--ink3);font-size:13.5px;margin:0 0 20px;line-height:1.8}
+.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;margin:0 0 10px;text-decoration:none;color:var(--ink)}
+.card:active{background:var(--brand-soft)}
 .card .t{font-size:15.5px;font-weight:700;margin:0 0 4px}
-.card .d{font-size:12.5px;color:#9ca3af;display:flex;gap:10px;flex-wrap:wrap}
-.card .d b{color:#2563eb;font-weight:600}
-h2{font-size:13px;color:#6b7280;font-weight:700;letter-spacing:.5px;
+.card .d{font-size:12.5px;color:var(--ink3);display:flex;gap:10px;flex-wrap:wrap}
+.card .d b{color:var(--brand);font-weight:600}
+h2{font-size:13px;color:var(--ink3);font-weight:700;letter-spacing:.5px;
   margin:26px 0 10px}
-.tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;
-  padding:12px 14px;font-size:13.5px;color:#1e40af;line-height:1.85;margin:0 0 18px}
-.tip b{color:#1d4ed8}
-.note{font-size:12.5px;color:#9ca3af;margin-top:24px;line-height:1.8;
-  border-top:1px dashed #e5e7eb;padding-top:16px}
+.tip{background:var(--brand-soft);border:1px solid color-mix(in srgb,var(--brand) 30%,transparent);border-radius:10px;
+  padding:12px 14px;font-size:13.5px;color:var(--brand);line-height:1.85;margin:0 0 18px}
+.tip b{color:var(--brand)}
+.note{font-size:12.5px;color:var(--ink3);margin-top:24px;line-height:1.8;
+  border-top:1px dashed var(--line);padding-top:16px}
 </style>
 </head>
 <body>
@@ -48,7 +93,7 @@ h2{font-size:13px;color:#6b7280;font-weight:700;letter-spacing:.5px;
   <div class="note">
     划线是粉笔「答题演示」里标注的答案来源句，逐条对齐到材料原文（对齐率 98–100%）。<br>
     逐题详解为粉笔原文，未改写。2026 卷第 2/3/4 题粉笔未提供演示，页面已标注。<br>
-    <a href="../index.html" style="color:#2563eb">← 回文档版</a>
+    <a href="../index.html" style="color:var(--brand)">← 回文档版</a>
   </div>
 </div>
 </body>
