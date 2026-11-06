@@ -140,6 +140,22 @@ h1{font-size:31px;line-height:1.25;margin:4px 0 8px;letter-spacing:-.01em}
 .case-row .opts{font-size:12.5px;color:var(--ink3);line-height:1.7}
 .case-take{margin-top:7px;padding:7px 9px;background:var(--panel);border-radius:7px;font-size:12.5px;color:var(--ink2)}
 .case-take b{color:var(--brand)}
+.case-fig{margin:7px 0 9px;padding:7px;background:#fff;border:1px solid var(--line);border-radius:9px}
+.case-fig a{display:block;position:relative;text-decoration:none;line-height:0}
+.case-fig img{display:block;width:100%;height:auto;border-radius:4px}
+.case-fig figcaption{font-size:11px;color:var(--ink4);text-align:center;margin-top:5px;line-height:1.5}
+.fig-zoom{
+  position:absolute;right:7px;bottom:7px;background:rgba(35,35,35,.74);color:#fff;
+  font-size:10.5px;line-height:1;padding:4px 8px;border-radius:999px;letter-spacing:.02em;
+}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(18,18,18,.94);display:flex;align-items:center;justify-content:center;padding:12px}
+.lightbox[hidden]{display:none}
+.lightbox img{max-width:100%;max-height:94vh;background:#fff;border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.lb-close{
+  position:absolute;top:10px;right:12px;width:38px;height:38px;border:none;border-radius:50%;
+  background:rgba(255,255,255,.16);color:#fff;font-size:22px;line-height:1;cursor:pointer;
+}
+body.lb-open{overflow:hidden}
 .x-list,.dot-list{margin:0;padding-left:20px;font-size:13.5px;color:var(--ink2)}
 .x-list li,.dot-list li{margin:5px 0}
 .x-list li::marker{content:"× ";color:var(--danger);font-weight:800}
@@ -219,6 +235,9 @@ input[type=search]{min-width:180px}
   .case-row{grid-template-columns:1fr;gap:1px}
   .case-row .lab{padding-top:0}
   .case-head{align-items:flex-start}
+  .case-fig{padding:5px;margin:6px 0 8px}
+  .case-fig figcaption{font-size:10.5px}
+  .lightbox{padding:4px}
   .ls h3{font-size:14.5px}
   .syncbar{overflow-x:auto}
   .syncbar .chip{white-space:normal}
@@ -250,10 +269,11 @@ input[type=search]{min-width:180px}
     <p class="lead">不是统计错了几道，而是把同一类错法拆开给你看：命题人怎么下套、你为什么会踩、下次按什么顺序做。</p>
     <ol class="usage">
       <li>每张卡先看“类题画像”认信号，再用“原题对照”看命题人怎么下套。</li>
+      <li>图推卡在原题对照里附完整原图（题干 + 选项），点图可全屏放大；先看图，再读文字拆解。</li>
       <li>把“正确解法链”背成一个固定动作，最后用“变式自测”检查自己是不是真的会了。</li>
       <li>自测只给题、不给答案；做完回粉笔找同类题验证，或把卡住的地方告诉我，我再补一张卡。</li>
     </ol>
-    <p class="boundary">公开页只保留改写后的题干骨架、关键选项和来源题号；完整原题、选项、解析原文和图片请回粉笔按来源题号查看。</p>
+    <p class="boundary">图推卡附完整原图；其余卡片只保留改写后的题干骨架、关键选项和来源题号，完整解析原文请回粉笔按来源题号查看。</p>
   </section>
 
   <details class="toc" id="tocFold">
@@ -357,6 +377,10 @@ input[type=search]{min-width:180px}
 
 <script src="./data.js"></script>
 <script src="./lessons.js"></script>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="完整原图">
+  <button class="lb-close" type="button" aria-label="关闭">×</button>
+  <img alt="完整原图">
+</div>
 <script>
 (function(){
   var $ = function(s){ return document.querySelector(s); };
@@ -379,17 +403,26 @@ input[type=search]{min-width:180px}
     '<span>精讲卡生成 <b>' + esc(generated) + '</b></span>' +
     '<span class="chip brand">' + L.cards.length + ' 类</span>' +
     (days != null ? '<span class="chip">距省考 ' + days + ' 天</span>' : '') +
-    '<span class="chip">完整原题请回粉笔按题号查看</span>';
+    '<span class="chip">图推卡附完整原图</span>';
 
   function sec(n, title, body){
     return '<section class="ls"><h3><span class="ls-n">' + n + '</span>' + title + '</h3>' + body + '</section>';
   }
 
   function caseHtml(c){
+    var fig = c.img ?
+      '<figure class="case-fig">' +
+        '<a href="' + esc(c.img) + '" data-fig="' + esc(c.img) + '" aria-label="放大完整原图">' +
+          '<img src="' + esc(c.img) + '" alt="' + esc(c.src) + '完整原图：题干与选项" decoding="async">' +
+          '<span class="fig-zoom">点击放大</span>' +
+        '</a>' +
+        '<figcaption>完整原图 · 题干与选项</figcaption>' +
+      '</figure>' : '';
     return '<article class="case">' +
       '<div class="case-head"><div class="case-src">' + esc(c.src) + '</div>' +
       '<div><span class="chip ok">答案 ' + esc(c.answer) + '</span> ' +
       '<span class="chip danger">你选 ' + esc(c.yours) + '</span></div></div>' +
+      fig +
       '<div class="case-row"><span class="lab">题干骨架</span><p>' + esc(c.skeleton) + '</p></div>' +
       '<div class="case-row"><span class="lab">关键选项</span><p class="opts">' + esc(c.options) + '</p></div>' +
       '<div class="case-row"><span class="lab">题眼</span><p>' + esc(c.clue) + '</p></div>' +
@@ -614,6 +647,29 @@ input[type=search]{min-width:180px}
     var next = cur === 'paper' ? 'eink' : 'paper';
     document.documentElement.setAttribute('data-theme', next);
     try{ localStorage.setItem('cuoti_theme', next); }catch(e){}
+  });
+  // 图推原图放大
+  var lb = $('#lightbox');
+  function closeLb(){
+    lb.hidden = true;
+    lb.querySelector('img').removeAttribute('src');
+    document.body.classList.remove('lb-open');
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('a[data-fig]') : null;
+    if(!a) return;
+    if(e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    lb.querySelector('img').src = a.getAttribute('data-fig');
+    lb.hidden = false;
+    document.body.classList.add('lb-open');
+    lb.querySelector('.lb-close').focus();
+  });
+  lb.addEventListener('click', function(e){
+    if(e.target === lb || e.target.classList.contains('lb-close')) closeLb();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !lb.hidden) closeLb();
   });
 })();
 </script>
