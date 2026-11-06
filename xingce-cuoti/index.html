@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="eink">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#E9E7E0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="行测类题精讲">
+<title>行测类题对照精讲 · 粉笔错题</title>
+<style>
+:root{
+  --bg:#E9E7E0; --bg2:#E2E0D8; --panel:#F1EFE9; --panel2:#EBE9E1;
+  --ink:#232323; --ink2:#3F3F3A; --ink3:#5C5C55; --ink4:#7A7A72;
+  --line:#D0CDC3; --line2:#DDDAD1;
+  --brand:#4E6A5D; --brand2:#6B8578; --brand-soft:#E3EAE4;
+  --mark:#D8D2C2; --mark2:#B9A96A;
+  --ok:#3F6B52; --ok-soft:#E6EEE7;
+  --warn:#8E6A2A; --warn-soft:#F2EADB;
+  --danger:#A64A45; --danger-soft:#F3E4E2;
+  --code-bg:#EDEAE2; --code-ink:#232323;
+  --r:14px; --sh:0 1px 2px rgba(35,35,35,.05);
+}
+html[data-theme="paper"]{
+  --bg:#F8F4EB; --bg2:#F2EDE2; --panel:#FDFBF6; --panel2:#F8F3E8;
+  --ink:#221E1A; --ink2:#3E3A33; --ink3:#5E574B; --ink4:#7A7264;
+  --line:#E6DCCB; --line2:#EFE7D9;
+  --brand:#5B7A6C; --brand2:#769487; --brand-soft:#EDF4EF;
+  --mark:#F7E8BA; --mark2:#D8B85C;
+  --ok:#3C7A5A; --ok-soft:#EAF4EE;
+  --warn:#A9792A; --warn-soft:#F8EFDC;
+  --danger:#B34A45; --danger-soft:#F8E7E5;
+  --code-bg:#F4EFE3; --code-ink:#221E1A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Noto Sans SC","Source Han Sans SC","Microsoft YaHei","PingFang SC",-apple-system,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.85; -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--brand);text-decoration-thickness:1px;text-underline-offset:3px}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--brand2);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 20px 64px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:16px}
+.top > div:first-child{min-width:0}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;color:var(--brand);font-weight:800}
+h1{font-size:31px;line-height:1.25;margin:4px 0 8px;letter-spacing:-.01em}
+.sub{color:var(--ink3);font-size:13.5px;margin:0;max-width:540px}
+.top-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink2);border-radius:10px;padding:7px 10px;
+  font-size:12.5px;text-decoration:none;cursor:pointer;transition:border-color .15s,background .15s;
+}
+.btn:hover{border-color:var(--brand2);background:var(--brand-soft)}
+.syncbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px;padding:10px 14px;
+  font-size:12.5px;color:var(--ink3);box-shadow:var(--sh);
+}
+.syncbar b{color:var(--ink2);font-weight:700}
+.chip{
+  display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:999px;
+  background:var(--bg2);border:1px solid var(--line2);font-size:11.5px;color:var(--ink3);
+  white-space:nowrap;
+}
+.chip.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.chip.danger{background:var(--danger-soft);color:var(--danger);border-color:transparent}
+.chip.brand{background:var(--brand-soft);color:var(--brand);border-color:transparent}
+.intro{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 18px;margin-top:14px;box-shadow:var(--sh);
+}
+.intro .lead{font-size:15px;color:var(--ink2);margin:0 0 10px}
+.usage{margin:0;padding-left:22px;font-size:13.5px;color:var(--ink2)}
+.usage li{margin:4px 0}
+.boundary{font-size:12px;color:var(--ink4);margin:10px 0 0;padding-top:9px;border-top:1px dashed var(--line)}
+.toc{margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--sh);overflow:hidden}
+.toc summary{
+  list-style:none;cursor:pointer;padding:12px 15px;font-weight:750;font-size:16px;
+  display:flex;justify-content:flex-start;align-items:center;gap:8px;
+}
+.toc summary::-webkit-details-marker{display:none}
+.toc summary:before{content:"▸";color:var(--brand);font-size:13px;margin-right:2px}
+.toc[open] summary:before{content:"▾"}
+.toc[open] summary{border-bottom:1px solid var(--line);background:var(--brand-soft)}
+.toc-count{font-size:11.5px;color:var(--brand);font-weight:700;background:var(--brand-soft);border-radius:999px;padding:1px 9px;margin-left:auto}
+.toc-inner{padding:12px 14px 14px}
+.toc-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{
+  border:1px solid var(--line);background:var(--panel);color:var(--ink3);border-radius:999px;
+  padding:5px 13px;font-size:12.5px;cursor:pointer;
+}
+.tab.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:700}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.toc-group{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--sh)}
+.toc-mod{font-size:12px;color:var(--brand);font-weight:800;letter-spacing:.08em;margin-bottom:6px}
+.toc-link{display:block;text-decoration:none;color:var(--ink2);font-size:13px;padding:6px 0;border-top:1px dashed var(--line2);line-height:1.55}
+.toc-link:first-of-type{border-top:0}
+.toc-link span{display:block;font-size:11px;color:var(--ink4);margin-bottom:1px}
+.toc-link:hover{color:var(--brand)}
+.lessons{margin-top:20px}
+.lesson{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  margin-bottom:12px;box-shadow:var(--sh);
+}
+.lesson[open]{border-color:var(--brand2)}
+.lesson summary{
+  display:grid;grid-template-columns:1fr auto;gap:3px 16px;align-items:center;
+  padding:15px 18px 15px 24px;cursor:pointer;list-style:none;position:relative;
+  border-radius:13px;
+}
+.lesson summary::-webkit-details-marker{display:none}
+.lesson summary:before{content:"▸";color:var(--brand);font-size:13px;position:absolute;left:8px;top:18px}
+.lesson[open] summary:before{content:"▾"}
+.lesson summary:hover{background:var(--brand-soft)}
+.lesson[open] summary{background:var(--brand-soft);border-bottom:1px solid var(--line);border-radius:13px 13px 0 0}
+.lesson-kicker{grid-column:1/-1;font-size:11.5px;letter-spacing:.1em;color:var(--brand);font-weight:800}
+.lesson-title{font-size:18px;font-weight:800;line-height:1.45;color:var(--ink)}
+.lesson-signal{font-size:11.5px;color:var(--ink4);text-align:right;max-width:330px}
+.lesson-body{padding:16px 18px 20px}
+.ls{border-top:1px dashed var(--line);padding:13px 0 4px}
+.ls:first-child{border-top:0;padding-top:2px}
+.ls h3{font-size:15.5px;margin:0 0 8px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.ls-n{
+  display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;
+  background:var(--brand);color:#fff;font-size:12px;font-weight:800;flex:0 0 auto;
+}
+.ls p{margin:0 0 7px;font-size:14px;color:var(--ink2)}
+.case{background:var(--bg2);border-radius:10px;padding:11px 13px;margin:9px 0;border-left:3px solid var(--brand2)}
+.case-head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:5px}
+.case-src{font-size:12.5px;font-weight:750;color:var(--brand)}
+.case-row{display:grid;grid-template-columns:66px 1fr;gap:8px;padding:5px 0;border-top:1px dashed var(--line)}
+.case-row .lab{font-size:11.5px;color:var(--ink4);font-weight:700;padding-top:2px}
+.case-row p{margin:0;font-size:13.5px;color:var(--ink2)}
+.case-row .opts{font-size:12.5px;color:var(--ink3);line-height:1.7}
+.case-take{margin-top:7px;padding:7px 9px;background:var(--panel);border-radius:7px;font-size:12.5px;color:var(--ink2)}
+.case-take b{color:var(--brand)}
+.x-list,.dot-list{margin:0;padding-left:20px;font-size:13.5px;color:var(--ink2)}
+.x-list li,.dot-list li{margin:5px 0}
+.x-list li::marker{content:"× ";color:var(--danger);font-weight:800}
+.dot-list li::marker{content:"· ";color:var(--brand);font-weight:800}
+.chain{margin:0;padding-left:22px;font-size:13.5px;color:var(--ink2)}
+.chain li{margin:6px 0}
+.chain li::marker{color:var(--brand);font-weight:800}
+.selftest{
+  background:var(--panel2);border:1px dashed var(--line);border-radius:10px;
+  padding:11px 13px;margin:9px 0;
+}
+.st-q{font-size:14px;color:var(--ink2);margin-bottom:5px}
+.st-q b{color:var(--brand);margin-right:6px}
+.st-opts{font-size:13px;color:var(--ink3);margin-bottom:5px}
+.st-hint{font-size:12px;color:var(--ink4);margin-bottom:6px}
+.st-blank{font-size:12px;color:var(--ink4);border-top:1px dashed var(--line);padding-top:7px}
+.closing{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 17px;margin-top:20px;box-shadow:var(--sh);
+}
+.closing h2{font-size:16px;margin:0 0 6px}
+.closing p{font-size:13.5px;color:var(--ink2);margin:0 0 6px}
+.fold{margin-top:24px}
+.fold summary{
+  cursor:pointer;font-weight:750;font-size:15px;padding:12px 15px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px;list-style:none;display:flex;align-items:center;gap:8px;
+}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary:before{content:"▸";color:var(--brand);font-size:13px}
+.fold[open] summary:before{content:"▾"}
+.fold[open] summary{border-bottom-left-radius:0;border-bottom-right-radius:0}
+.fold-body{border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;padding:14px 15px;background:var(--panel)}
+.stats-lead{font-size:12.5px;color:var(--ink4);margin:0 0 10px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 12px}
+.kpi{background:var(--bg2);border-radius:9px;padding:9px 11px}
+.kpi .lbl{font-size:11.5px;color:var(--ink3)}
+.kpi .num{font-size:22px;font-weight:850;letter-spacing:-.02em;line-height:1.2}
+.kpi .num small{font-size:11px;color:var(--ink4);font-weight:600;margin-left:2px}
+.kpi .foot{font-size:10.5px;color:var(--ink4)}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);box-shadow:var(--sh)}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:760px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line2);text-align:left;vertical-align:top}
+th{background:var(--panel2);font-size:11.5px;color:var(--ink3);font-weight:750;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--bg2)}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mono{font-family:"Cascadia Mono","SFMono-Regular",Consolas,monospace;font-size:11px;color:var(--ink4)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 9px}
+.filters label{display:flex;flex-direction:column;gap:3px;font-size:11px;color:var(--ink4)}
+select,input[type=search]{
+  font:inherit;font-size:12.5px;padding:6px 9px;border-radius:8px;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink);min-width:110px;
+}
+input[type=search]{min-width:180px}
+.count{font-size:12px;color:var(--ink4);align-self:flex-end;padding-bottom:6px}
+.caveats{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+.caveat{font-size:12.5px;color:var(--ink2);background:var(--bg2);border-radius:8px;padding:8px 10px;line-height:1.7}
+.caveat b{color:var(--warn)}
+.howto{font-size:12.5px;color:var(--ink2);line-height:1.85;margin-top:10px}
+.howto code{background:var(--code-bg);color:var(--code-ink);padding:1px 6px;border-radius:5px;font-size:11.5px}
+.foot{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink4);line-height:1.8}
+.empty{padding:20px;text-align:center;color:var(--ink3);font-size:13px}
+@media (max-width:820px){
+  .toc-grid{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .lesson summary{grid-template-columns:1fr;gap:4px}
+  .lesson-signal{text-align:left;max-width:none}
+}
+@media (max-width:600px){
+  .wrap{padding:18px 12px 48px}
+  h1{font-size:25px}
+  .top{flex-direction:column}
+  .top-actions{justify-content:flex-start}
+  .lesson summary{padding:13px 14px 13px 24px}
+  .lesson-title{font-size:16.5px}
+  .lesson-body{padding:13px 13px 16px}
+  .case-row{grid-template-columns:1fr;gap:1px}
+  .case-row .lab{padding-top:0}
+  .case-head{align-items:flex-start}
+  .ls h3{font-size:14.5px}
+  .syncbar{overflow-x:auto}
+  .syncbar .chip{white-space:normal}
+  .fold-body{padding:10px}
+  table{font-size:12px}
+  th,td{padding:7px 8px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">行测 · 类题精讲</div>
+      <h1>同一类错，拆开看</h1>
+      <p class="sub">最近 14 天粉笔练习错题，按“设错手法”归成 <span id="cardCount">15</span> 类；每类用原题对照，给一条能复用的解法链。统计只放页脚。</p>
+    </div>
+    <div class="top-actions">
+      <a class="btn" href="../">← 返回工作台</a>
+      <button class="btn" id="themeBtn" type="button" title="切换墨水屏 / 暖纸">切换纸色</button>
+      <button class="btn" id="openAll" type="button">展开全部</button>
+      <button class="btn" id="closeAll" type="button">收起全部</button>
+    </div>
+  </header>
+
+  <div class="syncbar" id="syncbar">正在读取精讲卡…</div>
+
+  <section class="intro" id="intro">
+    <p class="lead">不是统计错了几道，而是把同一类错法拆开给你看：命题人怎么下套、你为什么会踩、下次按什么顺序做。</p>
+    <ol class="usage">
+      <li>每张卡先看“类题画像”认信号，再用“原题对照”看命题人怎么下套。</li>
+      <li>把“正确解法链”背成一个固定动作，最后用“变式自测”检查自己是不是真的会了。</li>
+      <li>自测只给题、不给答案；做完回粉笔找同类题验证，或把卡住的地方告诉我，我再补一张卡。</li>
+    </ol>
+    <p class="boundary">公开页只保留改写后的题干骨架、关键选项和来源题号；完整原题、选项、解析原文和图片请回粉笔按来源题号查看。</p>
+  </section>
+
+  <details class="toc" id="tocFold">
+    <summary><span>先找你要补的那一类</span><span class="toc-count" id="tocCount">15 类</span></summary>
+    <div class="toc-inner">
+      <div class="toc-head">
+        <div class="tabs" id="moduleTabs">
+          <button class="tab on" data-module="" type="button">全部</button>
+          <button class="tab" data-module="言语理解" type="button">言语理解</button>
+          <button class="tab" data-module="判断推理" type="button">判断推理</button>
+          <button class="tab" data-module="常识判断" type="button">常识判断</button>
+          <button class="tab" data-module="政治理论" type="button">政治理论</button>
+        </div>
+      </div>
+      <div class="toc-grid" id="tocGrid"></div>
+    </div>
+  </details>
+
+  <main class="lessons" id="lessons"></main>
+
+  <section class="closing">
+    <h2>下一步</h2>
+    <p>一张卡看完不算完：把“变式自测”做一遍，卡住的地方记下来。下次同步时，我按你卡住的类型再补一张，不按“错了多少道”写报表。</p>
+    <p>如果你想要某一类的更多原题对照，把粉笔链接发我，我按同一模板扩卡。</p>
+  </section>
+
+  <details class="fold" id="statsFold">
+    <summary>页脚索引 · 数据与统计（点开看）</summary>
+    <div class="fold-body">
+      <p class="stats-lead">这一块才是统计。正文只讲类题，不看它也不影响复习。</p>
+      <p class="stats-lead">正文 <span id="statCards">15</span> 类卡对应 <span id="statPractice">54</span> 道练习错题；<span id="statExam">37</span> 道考场扫题只进统计，不单独做卡。</p>
+      <div class="kpis" id="kpis"></div>
+      <div class="table-wrap">
+        <table id="moduleTable">
+          <thead><tr>
+            <th>模块</th><th class="num">练习</th><th class="num">考场</th><th class="num">合计</th>
+            <th class="num">占比</th><th class="num">练习均时</th><th class="num">易错命中</th>
+            <th class="num">粉笔全量</th><th class="num">目标</th><th class="num">差距</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="stats-lead" style="margin-top:8px">“粉笔全量”是用户报告里的全模块正确率（2026-10-16），不是本窗口；本窗口样本只覆盖了部分模块。</p>
+
+      <h3 style="font-size:14px;margin:14px 0 7px">练习错题聚类</h3>
+      <div class="table-wrap">
+        <table id="clusterTable">
+          <thead><tr><th>模块</th><th>子类</th><th class="num">错题</th><th class="num">均时</th><th class="num">易错命中</th><th>主要手法</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size:14px;margin:14px 0 7px">时间结构</h3>
+      <div class="table-wrap">
+        <table id="timeTable">
+          <thead><tr><th>模式</th><th class="num">≤5s</th><th class="num">6-20s</th><th class="num">21-60s</th><th class="num">1-3min</th><th class="num">&gt;3min</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size:14px;margin:16px 0 7px">逐题清单</h3>
+      <div class="filters">
+        <label>模块<select id="fModule"><option value="">全部</option></select></label>
+        <label>错因<select id="fError"><option value="">全部</option></select></label>
+        <label>可信度<select id="fConf">
+          <option value="">全部</option>
+          <option value="A">A 直接证据</option>
+          <option value="B">B 方法迁移</option>
+          <option value="C">C 题面暴露</option>
+        </select></label>
+        <label>搜索<input id="fSearch" type="search" placeholder="考点 / 来源 / 题号"></label>
+        <span class="count" id="fCount"></span>
+      </div>
+      <div class="table-wrap">
+        <table id="rowTable">
+          <thead><tr>
+            <th>日期</th><th>模块</th><th>子类</th><th>考点</th><th class="num">对/你</th>
+            <th class="num">易错</th><th class="num">用时</th><th class="num">正确率</th>
+            <th>错因</th><th>可信</th><th>来源 / 题号</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="caveats" id="caveats"></div>
+      <div class="howto">
+        <b>怎么更新：</b>把粉笔链接发给 AI，我运行
+        <code>python _tools/fenbi/sync.py --url "链接"</code>，再运行
+        <code>python 申论/_publish.py</code>，本页自动更新。<br>
+        <b>一次性授权：</b>只需在 Chrome 登录粉笔；CDP 只读页面可见数据，不导出 cookie、不读 localStorage、不调接口。<br>
+        <b>公开边界：</b>本页正文只有改写后的题干骨架、关键选项、来源题号、错因和方法；题干全文、解析原文、图片只留在本地缓存。
+      </div>
+    </div>
+  </details>
+
+  <div class="foot">
+    数据源：粉笔练习历史 + 解析页 · 只读同步 · 生成于 <span id="builtAt">—</span><br>
+    本页是学习诊断工具，不替代粉笔原题与解析；题目版权归粉笔所有。
+  </div>
+</div>
+
+<script src="./data.js"></script>
+<script src="./lessons.js"></script>
+<script>
+(function(){
+  var $ = function(s){ return document.querySelector(s); };
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  }); };
+  var L = window.CUOTI_LESSONS;
+  var D = window.CUOTI_DATA;
+
+  if(!L){
+    $('#syncbar').textContent = '精讲卡数据未生成：请先运行 _tools/fenbi/lessons.py';
+    return;
+  }
+  if($('#cardCount')) $('#cardCount').textContent = L.cards.length;
+  if($('#tocCount')) $('#tocCount').textContent = L.cards.length + ' 类';
+
+  var generated = L.generated || '';
+  var days = D && D.meta && D.meta.days_to_exam;
+  $('#syncbar').innerHTML =
+    '<span>精讲卡生成 <b>' + esc(generated) + '</b></span>' +
+    '<span class="chip brand">' + L.cards.length + ' 类</span>' +
+    (days != null ? '<span class="chip">距省考 ' + days + ' 天</span>' : '') +
+    '<span class="chip">完整原题请回粉笔按题号查看</span>';
+
+  function sec(n, title, body){
+    return '<section class="ls"><h3><span class="ls-n">' + n + '</span>' + title + '</h3>' + body + '</section>';
+  }
+
+  function caseHtml(c){
+    return '<article class="case">' +
+      '<div class="case-head"><div class="case-src">' + esc(c.src) + '</div>' +
+      '<div><span class="chip ok">答案 ' + esc(c.answer) + '</span> ' +
+      '<span class="chip danger">你选 ' + esc(c.yours) + '</span></div></div>' +
+      '<div class="case-row"><span class="lab">题干骨架</span><p>' + esc(c.skeleton) + '</p></div>' +
+      '<div class="case-row"><span class="lab">关键选项</span><p class="opts">' + esc(c.options) + '</p></div>' +
+      '<div class="case-row"><span class="lab">题眼</span><p>' + esc(c.clue) + '</p></div>' +
+      '<div class="case-row"><span class="lab">你错在哪</span><p>' + esc(c.why) + '</p></div>' +
+      '<div class="case-take"><b>这一题记住：</b>' + esc(c.takeaway) + '</div>' +
+    '</article>';
+  }
+
+  function selftestHtml(list){
+    return list.map(function(s, i){
+      return '<div class="selftest">' +
+        '<div class="st-q"><b>自测 ' + (i + 1) + '</b>' + esc(s.q) + '</div>' +
+        '<div class="st-opts">' + esc(s.options) + '</div>' +
+        '<div class="st-hint">提示：' + esc(s.hint) + '</div>' +
+        '<div class="st-blank">我的判断：____________　卡住的地方：____________</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function cardHtml(c, idx){
+    var portrait = c.portrait.map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('');
+    var cases = c.cases.map(caseHtml).join('');
+    var traps = '<ul class="x-list">' + c.traps.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+    var replay = c.replay.map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('');
+    var chain = '<ol class="chain">' + c.chain.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ol>';
+    var general = '<ul class="dot-list">' + c.general.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+    var selftest = selftestHtml(c.selftest);
+
+    return '<details class="lesson" id="' + esc(c.id) + '" data-module="' + esc(c.module) + '"' + (idx === 0 ? ' open' : '') + '>' +
+      '<summary>' +
+        '<span class="lesson-kicker">' + esc(c.module) + ' · ' + esc(c.sub) + '</span>' +
+        '<span class="lesson-title">' + esc(c.title) + '</span>' +
+        '<span class="lesson-signal">信号：' + esc(c.signal) + '</span>' +
+      '</summary>' +
+      '<div class="lesson-body">' +
+        sec(1, '类题画像', portrait) +
+        sec(2, '原题对照', cases) +
+        sec(3, '共同设错手法', traps) +
+        sec(4, '你的错项复盘', replay) +
+        sec(5, '正确解法链', chain) +
+        sec(6, '同类通法', general) +
+        sec(7, '变式自测（只留题，不给答案）', selftest) +
+      '</div>' +
+    '</details>';
+  }
+
+  $('#lessons').innerHTML = L.cards.map(cardHtml).join('');
+
+  function renderToc(){
+    $('#tocGrid').innerHTML = L.modules.map(function(m){
+      var cards = L.cards.filter(function(c){ return c.module === m; });
+      if(!cards.length) return '';
+      return '<div class="toc-group" data-module="' + esc(m) + '">' +
+        '<div class="toc-mod">' + esc(m) + '</div>' +
+        cards.map(function(c){
+          return '<a class="toc-link" href="#' + esc(c.id) + '"><span>' + esc(c.sub) + '</span>' + esc(c.title) + '</a>';
+        }).join('') +
+      '</div>';
+    }).join('');
+  }
+  renderToc();
+
+  var tocFold = $('#tocFold');
+  if(tocFold && window.innerWidth <= 600) tocFold.open = false;
+  document.querySelectorAll('.toc-link').forEach(function(a){
+    a.addEventListener('click', function(){
+      if(window.innerWidth <= 600 && tocFold) tocFold.open = false;
+    });
+  });
+
+  function filterByModule(module){
+    document.querySelectorAll('.lesson').forEach(function(el){
+      el.style.display = (!module || el.getAttribute('data-module') === module) ? '' : 'none';
+    });
+    document.querySelectorAll('.toc-group').forEach(function(el){
+      el.style.display = (!module || el.getAttribute('data-module') === module) ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('#moduleTabs .tab').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#moduleTabs .tab').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      filterByModule(b.getAttribute('data-module'));
+    });
+  });
+
+  $('#openAll').addEventListener('click', function(){
+    document.querySelectorAll('.lesson').forEach(function(el){ el.open = true; });
+  });
+  $('#closeAll').addEventListener('click', function(){
+    document.querySelectorAll('.lesson').forEach(function(el){ el.open = false; });
+  });
+
+  function openHash(){
+    if(!location.hash) return;
+    var el = null;
+    try{ el = document.querySelector(location.hash); }catch(e){ return; }
+    if(el && el.tagName === 'DETAILS'){
+      el.open = true;
+      el.scrollIntoView({block:'start'});
+    }
+  }
+  window.addEventListener('hashchange', openHash);
+  openHash();
+
+  // 页脚统计
+  if(!D){
+    $('#builtAt').textContent = '数据未生成';
+    return;
+  }
+  var m = D.meta;
+  if($('#statCards')) $('#statCards').textContent = L.cards.length;
+  if($('#statPractice')) $('#statPractice').textContent = m.practice_wrong;
+  if($('#statExam')) $('#statExam').textContent = m.exam_wrong;
+  var fmtSecs = function(s){
+    if(s == null) return '—';
+    if(s < 60) return s + 's';
+    return Math.floor(s/60) + '分' + (s%60 ? (s%60)+'s' : '');
+  };
+  var confClass = function(c){ return c === 'A' ? 'ok' : c === 'B' ? 'brand' : 'warn'; };
+  var errClass = function(e){
+    if(e.indexOf('图推') >= 0 || e.indexOf('排查') >= 0) return 'brand';
+    if(e.indexOf('知识') >= 0) return 'warn';
+    if(e.indexOf('易错') >= 0) return 'danger';
+    return '';
+  };
+
+  $('#kpis').innerHTML = [
+    {lbl:'14 天唯一错题', num:m.wrong_unique, small:'道', foot:'共 ' + m.wrong_attempts + ' 次错误作答'},
+    {lbl:'练习模式', num:m.practice_wrong, small:'道', foot:'53/54 用时 ≥20 秒，认真做'},
+    {lbl:'考场扫题', num:m.exam_wrong, small:'道', foot:'31/37 ≤5 秒，低可信'},
+    {lbl:'易错项命中', num:m.easy_hit_practice, small:'/' + m.practice_wrong, foot:'练习错题里选了粉笔标的易错项'}
+  ].map(function(k){
+    return '<div class="kpi"><div class="lbl">' + k.lbl + '</div>' +
+      '<div class="num">' + k.num + '<small>' + k.small + '</small></div>' +
+      '<div class="foot">' + k.foot + '</div></div>';
+  }).join('');
+
+  $('#moduleTable tbody').innerHTML = D.modules.map(function(x){
+    var gap = x.report_rate == null ? null : Math.round((x.target - x.report_rate) * 10) / 10;
+    return '<tr><td><b>' + esc(x.name) + '</b></td>' +
+      '<td class="num">' + x.practice + '</td><td class="num">' + x.exam + '</td>' +
+      '<td class="num">' + x.total + '</td><td class="num">' + x.share + '%</td>' +
+      '<td class="num">' + (x.avg_secs == null ? '—' : fmtSecs(Math.round(x.avg_secs))) + '</td>' +
+      '<td class="num">' + x.easy_hit + '</td>' +
+      '<td class="num">' + (x.report_rate == null ? '—' : x.report_rate + '%') + '</td>' +
+      '<td class="num">' + (x.target == null ? '—' : x.target + '%') + '</td>' +
+      '<td class="num">' + (gap == null ? '—' : (gap > 0 ? '+' : '') + gap + 'pt') + '</td></tr>';
+  }).join('');
+
+  $('#clusterTable tbody').innerHTML = (D.clusters_practice || []).map(function(c){
+    return '<tr><td>' + esc(c.module) + '</td><td>' + esc(c.sub) + '</td>' +
+      '<td class="num">' + c.wrong + '</td>' +
+      '<td class="num">' + (c.avg_secs == null ? '—' : fmtSecs(Math.round(c.avg_secs))) + '</td>' +
+      '<td class="num">' + c.easy_hit + '</td>' +
+      '<td>' + esc(c.method) + '</td></tr>';
+  }).join('') || '<tr><td colspan="6" class="empty">暂无数据</td></tr>';
+
+  function timeRow(name, obj){
+    var keys = ['≤5s','6-20s','21-60s','1-3min','>3min'];
+    return '<tr><td><b>' + name + '</b></td>' + keys.map(function(k){
+      return '<td class="num">' + (obj[k] || 0) + '</td>';
+    }).join('') + '</tr>';
+  }
+  $('#timeTable tbody').innerHTML =
+    timeRow('练习模式', D.time_struct.practice) +
+    timeRow('考场模式', D.time_struct.exam);
+
+  $('#caveats').innerHTML = m.caveats.map(function(c){
+    return '<div class="caveat">' + esc(c) + '</div>';
+  }).join('');
+  $('#builtAt').textContent = m.synced_at;
+
+  var rows = D.rows.slice().sort(function(a,b){
+    return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
+  });
+  var moduleSel = $('#fModule'), errSel = $('#fError');
+  Array.from(new Set(rows.map(function(r){ return r.module; }))).forEach(function(x){
+    var o = document.createElement('option'); o.value = x; o.textContent = x; moduleSel.appendChild(o);
+  });
+  Array.from(new Set(rows.map(function(r){ return r.error_label; }))).forEach(function(x){
+    var o = document.createElement('option'); o.value = x; o.textContent = x; errSel.appendChild(o);
+  });
+  function renderRows(){
+    var fm = moduleSel.value, fe = errSel.value, fc = $('#fConf').value, q = $('#fSearch').value.trim().toLowerCase();
+    var out = rows.filter(function(r){
+      if(fm && r.module !== fm) return false;
+      if(fe && r.error_label !== fe) return false;
+      if(fc && r.confidence !== fc) return false;
+      if(q && (r.kp + ' ' + r.source + ' ' + r.key + ' ' + r.module + ' ' + r.sub + ' ' + r.num).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+    $('#fCount').textContent = '显示 ' + out.length + ' / ' + rows.length;
+    $('#rowTable tbody').innerHTML = out.map(function(r){
+      return '<tr><td>' + esc(r.date) + '</td>' +
+        '<td>' + esc(r.module) + '</td><td>' + esc(r.sub) + '</td>' +
+        '<td>' + esc(r.kp) + '</td>' +
+        '<td class="num">' + esc(r.correct) + ' / ' + esc(r.yours || '—') + '</td>' +
+        '<td class="num">' + esc(r.easy || '—') + '</td>' +
+        '<td class="num">' + esc(r.time) + '</td>' +
+        '<td class="num">' + r.rate + '%</td>' +
+        '<td><span class="chip ' + errClass(r.error_label) + '">' + esc(r.error_label) + '</span></td>' +
+        '<td><span class="chip ' + confClass(r.confidence) + '">' + r.confidence + '</span></td>' +
+        '<td title="' + esc(r.source) + '｜粉笔题目ID: ' + esc(r.key) + '">' + esc(r.source) +
+        ' <span class="mono">#' + esc(r.num) + (r.occurrences > 1 ? ' ×' + r.occurrences : '') + '</span></td></tr>';
+    }).join('') || '<tr><td colspan="11" class="empty">没有匹配的错题</td></tr>';
+  }
+  ['input','change'].forEach(function(ev){
+    moduleSel.addEventListener(ev, renderRows);
+    errSel.addEventListener(ev, renderRows);
+    $('#fConf').addEventListener(ev, renderRows);
+    $('#fSearch').addEventListener(ev, renderRows);
+  });
+  renderRows();
+
+  // 主题
+  var saved = null;
+  try{ saved = localStorage.getItem('cuoti_theme'); }catch(e){}
+  if(saved === 'paper') document.documentElement.setAttribute('data-theme','paper');
+  $('#themeBtn').addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    var next = cur === 'paper' ? 'eink' : 'paper';
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('cuoti_theme', next); }catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
