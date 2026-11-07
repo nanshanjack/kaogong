@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="eink">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#E9E7E0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="申论公文判定法">
+<title>申论与公文判定法 · 材料到成文</title>
+<style>
+:root{
+  --bg:#E9E7E0; --bg2:#E2E0D8; --panel:#F1EFE9; --panel2:#EBE9E1;
+  --ink:#232323; --ink2:#3F3F3A; --ink3:#5C5C55; --ink4:#7A7A72;
+  --line:#D0CDC3; --line2:#DDDAD1;
+  --brand:#4E6A5D; --brand2:#6B8578; --brand-soft:#E3EAE4;
+  --mark:#D8D2C2; --mark2:#B9A96A;
+  --ok:#3F6B52; --ok-soft:#E6EEE7;
+  --warn:#8E6A2A; --warn-soft:#F2EADB;
+  --danger:#A64A45; --danger-soft:#F3E4E2;
+  --r:14px; --sh:0 1px 2px rgba(35,35,35,.05);
+}
+html[data-theme="paper"]{
+  --bg:#F8F4EB; --bg2:#F2EDE2; --panel:#FDFBF6; --panel2:#F8F3E8;
+  --ink:#221E1A; --ink2:#3E3A33; --ink3:#5E574B; --ink4:#7A7264;
+  --line:#E6DCCB; --line2:#EFE7D9;
+  --brand:#5B7A6C; --brand2:#769487; --brand-soft:#EDF4EF;
+  --mark:#F7E8BA; --mark2:#D8B85C;
+  --ok:#3C7A5A; --ok-soft:#EAF4EE;
+  --warn:#A9792A; --warn-soft:#F8EFDC;
+  --danger:#B34A45; --danger-soft:#F8E7E5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans SC","Source Han Sans SC","Microsoft YaHei","PingFang SC",-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+a{color:var(--brand);text-decoration-thickness:1px;text-underline-offset:3px}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--brand2);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 20px 64px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px;padding-bottom:16px;border-bottom:3px double var(--line)}
+.top>div:first-child{min-width:0}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;color:var(--brand);font-weight:800}
+h1{font-size:31px;line-height:1.25;margin:4px 0 8px;letter-spacing:-.01em}
+.sub{color:var(--ink3);font-size:13.5px;margin:0;max-width:620px}
+.top-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink2);border-radius:10px;padding:7px 10px;
+  font-size:12.5px;text-decoration:none;cursor:pointer;transition:border-color .15s,background .15s;
+}
+.btn:hover{border-color:var(--brand2);background:var(--brand-soft)}
+.stamp{
+  display:inline-block;border:1.5px solid var(--danger);color:var(--danger);
+  border-radius:4px;padding:2px 9px;font-size:11px;font-weight:800;letter-spacing:.16em;
+  transform:rotate(-3deg);white-space:nowrap;
+}
+.syncbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px;padding:10px 14px;
+  font-size:12.5px;color:var(--ink3);box-shadow:var(--sh);
+}
+.syncbar b{color:var(--ink2);font-weight:700}
+.chip{
+  display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:999px;
+  background:var(--bg2);border:1px solid var(--line2);font-size:11.5px;color:var(--ink3);white-space:nowrap;
+}
+.chip.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.chip.danger{background:var(--danger-soft);color:var(--danger);border-color:transparent}
+.chip.brand{background:var(--brand-soft);color:var(--brand);border-color:transparent}
+.hero{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px 20px;margin-top:14px;box-shadow:var(--sh);
+}
+.hero .lead{font-size:16.5px;color:var(--ink);margin:0 0 10px;font-weight:650;line-height:1.75}
+.hero p{margin:0 0 8px;font-size:14px;color:var(--ink2)}
+.hero .sig{font-size:12.5px;color:var(--ink4);border-top:1px dashed var(--line);padding-top:9px;margin-top:12px}
+.axioms{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.axiom{background:var(--bg2);border-radius:10px;padding:11px 12px;border-left:3px solid var(--brand2)}
+.axiom b{display:block;font-size:13px;color:var(--brand);margin-bottom:3px}
+.axiom p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.7}
+.toc{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--sh);overflow:hidden}
+.toc summary{list-style:none;cursor:pointer;padding:12px 15px;font-weight:750;font-size:16px;display:flex;align-items:center;gap:8px}
+.toc summary::-webkit-details-marker{display:none}
+.toc summary:before{content:"▸";color:var(--brand);font-size:13px}
+.toc[open] summary:before{content:"▾"}
+.toc[open] summary{border-bottom:1px solid var(--line);background:var(--brand-soft)}
+.toc-inner{padding:10px 14px 14px;display:grid;grid-template-columns:1fr 1fr;gap:4px 18px}
+.toc a{display:block;text-decoration:none;color:var(--ink2);font-size:13px;padding:6px 0;border-top:1px dashed var(--line2);line-height:1.5}
+.toc a:nth-child(-n+2){border-top:0}
+.toc a:hover{color:var(--brand)}
+.section{margin-top:26px}
+.section>h2{font-size:21px;margin:0 0 4px;letter-spacing:-.01em}
+.section>.sub2{font-size:13px;color:var(--ink4);margin:0 0 12px}
+.steps{counter-reset:step;margin:0;padding:0;list-style:none}
+.step{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px 13px 48px;margin-bottom:9px;box-shadow:var(--sh)}
+.step:before{counter-increment:step;content:counter(step);position:absolute;left:14px;top:14px;width:23px;height:23px;border-radius:50%;background:var(--brand);color:#fff;font-size:12px;font-weight:850;display:flex;align-items:center;justify-content:center}
+.step b{font-size:14.5px;color:var(--ink)}
+.step p{margin:3px 0 0;font-size:13.5px;color:var(--ink2)}
+.step .micro{display:block;margin-top:4px;font-size:12px;color:var(--ink4)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:15px 17px;margin-top:12px;box-shadow:var(--sh)}
+.card h3{font-size:15.5px;margin:0 0 7px;color:var(--ink)}
+.card p{margin:0 0 7px;font-size:13.5px;color:var(--ink2)}
+.rules{margin:0;padding-left:20px;font-size:13.5px;color:var(--ink2)}
+.rules li{margin:6px 0}
+.rules li::marker{color:var(--brand);font-weight:800}
+.ev{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 4px}
+.ev span{font-size:11px;color:var(--brand);background:var(--brand-soft);border-radius:999px;padding:2px 8px}
+.example{background:var(--bg2);border-left:3px solid var(--brand2);border-radius:9px;padding:9px 11px;margin-top:8px;font-size:13px;color:var(--ink2)}
+.example b{color:var(--brand)}
+.example .ex-src{display:block;font-size:11px;color:var(--ink4);margin-bottom:3px}
+.traps{margin:6px 0 0;padding-left:18px;font-size:12.5px;color:var(--ink3)}
+.traps li{margin:3px 0}
+.traps li::marker{content:"× ";color:var(--danger);font-weight:800}
+.timeline{font-size:12px;color:var(--warn);background:var(--warn-soft);border-radius:7px;padding:4px 9px;display:inline-block;margin-top:8px}
+.module{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px;box-shadow:var(--sh)}
+.module summary{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:14px 17px 14px 24px;cursor:pointer;list-style:none;position:relative;border-radius:13px}
+.module summary::-webkit-details-marker{display:none}
+.module summary:before{content:"▸";color:var(--brand);font-size:13px;position:absolute;left:8px;top:17px}
+.module[open] summary:before{content:"▾"}
+.module summary:hover{background:var(--brand-soft)}
+.module[open] summary{background:var(--brand-soft);border-bottom:1px solid var(--line);border-radius:13px 13px 0 0}
+.mod-kicker{grid-column:1/-1;font-size:10.5px;letter-spacing:.1em;color:var(--brand);font-weight:800}
+.mod-title{font-size:17px;font-weight:800;line-height:1.4}
+.mod-signal{font-size:11px;color:var(--ink4);text-align:right;max-width:320px}
+.mod-body{padding:14px 17px 18px}
+.mod-body h3{font-size:15px;margin:0 0 7px;display:flex;align-items:center;gap:7px}
+.mod-body h3:before{content:"";width:3px;height:15px;border-radius:2px;background:var(--brand2)}
+.mod-body p{margin:0 0 7px;font-size:13.5px;color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);box-shadow:var(--sh);margin-top:8px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line2);text-align:left;vertical-align:top}
+th{font-size:11.5px;color:var(--ink4);font-weight:750;background:var(--bg2);white-space:nowrap;position:sticky;top:0}
+td{color:var(--ink2)}
+tr:last-child td{border-bottom:0}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.center{text-align:center}
+.mono{font-family:"Cascadia Mono","SFMono-Regular",Consolas,monospace;font-size:11.5px}
+.summary-table{min-width:720px}
+.summary-table td:first-child{font-weight:750;color:var(--ink);white-space:nowrap}
+.strategy{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.strategy .card{margin-top:0}
+.doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.doc-card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.doc-card .doc-name{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.doc-card .doc-name b{font-size:14px;color:var(--ink)}
+.doc-card .doc-code{font-family:"Cascadia Mono","SFMono-Regular",Consolas,monospace;font-size:10.5px;color:var(--brand);background:var(--brand-soft);border-radius:4px;padding:1px 6px;letter-spacing:.06em}
+.doc-card p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.7}
+.fmt{display:inline-block;font-size:10.5px;border-radius:4px;padding:1px 6px;margin-left:6px}
+.fmt.full{background:var(--ok-soft);color:var(--ok)}
+.fmt.half{background:var(--warn-soft);color:var(--warn)}
+.fmt.none{background:var(--bg2);color:var(--ink3);border:1px solid var(--line2)}
+.fold{margin-top:22px}
+.fold summary{cursor:pointer;font-weight:750;font-size:15px;padding:12px 15px;background:var(--panel);border:1px solid var(--line);border-radius:12px;list-style:none;display:flex;align-items:center;gap:8px}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary:before{content:"▸";color:var(--brand);font-size:13px}
+.fold[open] summary:before{content:"▾"}
+.fold[open] summary{border-bottom-left-radius:0;border-bottom-right-radius:0}
+.fold-body{border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;padding:13px 15px;background:var(--panel)}
+.notice{background:var(--panel2);border:1px dashed var(--line);border-radius:10px;padding:11px 13px;margin-top:12px;font-size:12.5px;color:var(--ink3)}
+.notice b{color:var(--ink2)}
+.closing{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-top:22px;box-shadow:var(--sh)}
+.closing h2{font-size:17px;margin:0 0 7px}
+.closing p{font-size:13.5px;color:var(--ink2);margin:0 0 7px}
+.closing .last{font-size:13px;color:var(--ink4);border-top:1px dashed var(--line);padding-top:9px;margin-top:10px}
+.footer{margin-top:26px;font-size:11.5px;color:var(--ink4);text-align:center;line-height:1.9}
+.check{margin:6px 0 0;padding-left:0;list-style:none;font-size:13.5px;color:var(--ink2)}
+.check li{margin:6px 0;padding-left:26px;position:relative}
+.check li:before{content:"✓";position:absolute;left:0;top:0;color:var(--ok);font-weight:850}
+@media(max-width:760px){
+  .wrap{padding:20px 14px 52px}
+  h1{font-size:26px}
+  .axioms{grid-template-columns:1fr}
+  .toc-inner{grid-template-columns:1fr}
+  .strategy{grid-template-columns:1fr}
+  .doc-grid{grid-template-columns:1fr}
+  .summary-table{min-width:640px}
+  .module summary{padding:13px 13px 13px 22px}
+  .mod-signal{display:none}
+  .mod-body{padding:12px 13px 15px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <div class="eyebrow">申论 · 公文轨道</div>
+      <h1>申论与公文判定法</h1>
+      <p class="sub">从官方公文逻辑 + 申论材料逻辑 + 你的 8 套行政执法卷，归纳同一套动作：定文种 → 定对象 → 摘要点 → 排结构 → 写表达。</p>
+    </div>
+    <div class="top-actions">
+      <span class="stamp">申论轨道</span>
+      <a class="btn" href="../xingce-fangfa/">行测判定法 →</a>
+      <a class="btn" href="../">← 工作台</a>
+      <button class="btn" id="themeBtn" type="button">纸色 / 墨水屏</button>
+    </div>
+  </div>
+
+  <div class="syncbar">
+    <span>依据 <b>2026-11-07</b> 考据</span>
+    <span class="chip">公文条例 + GB/T 9704（A 级）</span>
+    <span class="chip">高校课程 + 官方媒体（B+）</span>
+    <span class="chip brand">你的 32 题评分卡为验证层</span>
+    <span class="chip warn">四川省考时长以公告为准</span>
+  </div>
+
+  <div class="hero">
+    <p class="lead">申论不是“写作文”，是“从材料里把要点搬出来，按文种结构摆好”。</p>
+    <p>行测比的是“四个选项里哪个必然对”；申论比的是“材料要点有没有搬全、结构有没有摆对、语言有没有写准”。前者是<strong>条件判定</strong>，后者是<strong>要点重组</strong>。两件事共享同一个开头：先定目标，再找依据。</p>
+    <div class="axioms">
+      <div class="axiom"><b>铁律一</b><p>先定文种和对象，再动笔。文种决定结构和语气；对象决定称谓和口吻。</p></div>
+      <div class="axiom"><b>铁律二</b><p>要点来自材料。材料原句是唯一源头，只做压缩改写，不发明、不抒情。</p></div>
+      <div class="axiom"><b>铁律三</b><p>结构按公文走。标题/称谓/正文/落款，该有的一项都不能丢。</p></div>
+    </div>
+    <div class="sig">本页规则分三级标注：A=官方文件/国家标准；B=高校课程/官方媒体；C=开源与教学共识候选。未经你的评分卡验证的规则，会写明“待对照”。</div>
+  </div>
+
+  <details class="toc" open>
+    <summary>先看总纲 <span style="margin-left:auto;font-size:11.5px;color:var(--brand);font-weight:700">三层证据 + 五步 + 文种</span></summary>
+    <div class="toc-inner">
+      <a href="#evidence">01 · 三层证据与双轨衔接</a>
+      <a href="#chain">02 · 大纲四能力 → 五步动作</a>
+      <a href="#material">03 · 材料怎么读：词—句—段</a>
+      <a href="#genre">04 · 文种怎么定：法定 vs 事务性</a>
+      <a href="#format">05 · 格式三档与常考文种</a>
+      <a href="#structure">06 · 结构怎么排：分文种骨架</a>
+      <a href="#language">07 · 语言怎么写：三改三不</a>
+      <a href="#score">08 · 应试节奏与卷面</a>
+      <a href="#check">09 · 成文前 20 秒自检</a>
+      <a href="#sources">10 · 证据与来源</a>
+    </div>
+  </details>
+
+  <section class="section" id="evidence">
+    <h2>01 · 三层证据与双轨衔接</h2>
+    <p class="sub2">规则不靠“感觉”，按三层处理：官方定范围与文种，课程/媒体给方法，你的评分卡做验证。</p>
+    <div class="strategy">
+      <div class="card"><h3>① 范围层</h3><p>申论大纲：阅读理解、综合分析、提出和解决问题、文字表达；公文条例：15 个法定文种与行文规则。</p><p style="font-size:12px;color:var(--ink4);margin:0">解决“考什么、公文是什么”，不解决“怎么写快”。</p></div>
+      <div class="card"><h3>② 规则层</h3><p>高校慕课、官方媒体文章、公文教材：文种选用依据、材料阅读法、讲话稿要素、语言规范。</p><p style="font-size:12px;color:var(--ink4);margin:0">每条规则写清适用条件与边界。</p></div>
+      <div class="card"><h3>③ 验证层</h3><p>你的 8 套行政执法卷 / 32 题 / 134 个答案要点：文种分布、要点来源、结构评分都在评分卡台账里。</p><p style="font-size:12px;color:var(--ink4);margin:0">与台账冲突的规则，以台账为准。</p></div>
+    </div>
+    <div class="table-wrap" style="margin-top:10px">
+      <table class="summary-table">
+        <thead><tr><th>来源</th><th>等级</th><th>用途</th><th>采用决定</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://www.hhjp.gov.cn/info/5041/382891.htm" target="_blank" rel="noopener">申论大纲（国考 2026）</a></td><td>A</td><td>四项能力、试卷定位</td><td>直接采用</td></tr>
+          <tr><td><a href="https://news.12371.cn/2015/10/28/ARTI1446022251444121.shtml" target="_blank" rel="noopener">《党政机关公文处理工作条例》</a></td><td>A</td><td>15 文种、行文规则、拟制要求</td><td>直接采用</td></tr>
+          <tr><td><a href="https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F3CC9BEF482524C895FDA7A08BB4A70E" target="_blank" rel="noopener">GB/T 9704-2012</a></td><td>A</td><td>法定公文格式要素</td><td>仅法定公文采用</td></tr>
+          <tr><td><a href="https://www.icourse163.org/learn/HLJU-1002839012" target="_blank" rel="noopener">《公文写作规范》慕课（黑龙江大学）</a></td><td>B+</td><td>文种选用、行文关系、公文语言</td><td>改造后采用</td></tr>
+          <tr><td><a href="https://cbgc.scol.com.cn/news/5103606" target="_blank" rel="noopener">川观新闻：申论材料逻辑</a></td><td>B+</td><td>词—句—段三层读法</td><td>改造后采用</td></tr>
+          <tr><td><a href="https://yjgl.ln.gov.cn/yjgl/xcjy/xwxcdwgl/B373B0DE6DF047728FE989D8251337DA/index.shtml" target="_blank" rel="noopener">辽宁省应急管理厅：公文框架</a></td><td>B+</td><td>讲话稿六要素、事务性公文骨架</td><td>改造后采用</td></tr>
+          <tr><td><a href="https://jcb.cusx.edu.cn/info/1026/1580.htm" target="_blank" rel="noopener">山西传媒学院：公文写作方法</a></td><td>B</td><td>标题构成、语言四要求</td><td>改造后采用</td></tr>
+          <tr><td>教学共识：事务性公文格式三档、文种骨架</td><td>C</td><td>考场速查</td><td>与评分卡台账对照后采用</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="notice"><b>边界：</b>① 条例 15 文种适用于法定公文；申论常考的倡议书、讲话稿、公开信、汇报提纲是<strong>事务性公文</strong>，不能套全格式。② GB/T 9704 的版头/版记/字体字号，考场一般不考排版细节，只考“该有的结构项有没有”。③ “要点来自材料”适用于归纳概括、对策、公文；大作文可适度调用积累，但论据仍优先取自材料。</div>
+    <div class="table-wrap" style="margin-top:10px">
+      <table class="summary-table">
+        <thead><tr><th>轨道</th><th>目标</th><th>依据</th><th>动作</th><th>校验</th></tr></thead>
+        <tbody>
+          <tr><td>行测</td><td>选出正确项</td><td>题干条件 / 材料 / 数据</td><td>定问法 → 抽条件 → 验选项 → 锁唯一</td><td>四个选项内唯一</td></tr>
+          <tr><td><b>申论 / 公文（本页）</b></td><td>写出完整答案</td><td>材料原句 + 公文逻辑</td><td>定文种/目的 → 定对象 → 摘要点 → 排结构 → 写表达</td><td>要点完整 / 结构匹配</td></tr>
+          <tr><td>统一层</td><td colspan="4">先定目标，再找依据，再组织结构，最后校验完整性/唯一性</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="chain">
+    <h2>02 · 大纲四能力 → 五步动作</h2>
+    <p class="sub2">大纲只说“考什么能力”；本页把四项能力翻译成考场上可执行的五步。</p>
+    <div class="table-wrap">
+      <table class="summary-table">
+        <thead><tr><th>大纲能力</th><th>考场含义</th><th>对应动作</th></tr></thead>
+        <tbody>
+          <tr><td>阅读理解</td><td>读懂材料、找准范围</td><td>第 1–2 步：定文种/对象，带题读材料</td></tr>
+          <tr><td>综合分析</td><td>辨清材料逻辑</td><td>第 3 步：按“问题/原因/对策”摘要点</td></tr>
+          <tr><td>提出和解决问题</td><td>对策要能落地</td><td>第 3–4 步：对策从材料提炼，排进结构</td></tr>
+          <tr><td>文字表达</td><td>规范成文</td><td>第 5 步：按文种结构写，语言准、简、庄</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ol class="steps" style="margin-top:12px">
+      <li class="step"><b>定文种 / 目的</b><p>题干让你“写什么、为什么写”。文种决定结构，目的决定语气。</p><span class="micro">动作：圈出文种词（倡议书/讲话稿/汇报提纲…）和行为词（号召/汇报/动员）。</span></li>
+      <li class="step"><b>定对象 / 场合</b><p>写给谁、在什么场合。决定称谓、口吻、要不要落款。</p><span class="micro">动作：找“面向/针对/以××名义”。</span></li>
+      <li class="step"><b>摘要点</b><p>带题回材料，只摘三类：问题、原因、对策（按题干要求取舍）。</p><span class="micro">动作：一条要点 = 关键词 + 材料原句压缩，写进草稿不写进答案。</span></li>
+      <li class="step"><b>排结构</b><p>按文种骨架分配要点：开头给背景/目的，主体分条，结尾给要求/呼吁。</p><span class="micro">动作：先列一句话提纲，每段一行，再动笔。</span></li>
+      <li class="step"><b>写表达 + 校验</b><p>成文后 20 秒自检：文种、称谓、落款、字数、要点数。</p><span class="micro">动作：见第 09 节清单。</span></li>
+    </ol>
+  </section>
+
+  <section class="section" id="material">
+    <h2>03 · 材料怎么读：词—句—段</h2>
+    <p class="sub2">来自川观新闻的三层读法（B+），与“答案蕴含于材料”同源；这一步决定你能不能搬全要点。</p>
+    <div class="card">
+      <h3>词：重关联</h3>
+      <p>高频词、关联词、转折词就是材料的态度和结构信号。“但是/然而”后面是要点；“应当/需要/建议”后面是对策。</p>
+      <h3>句：抓首尾中</h3>
+      <p>段首句常给观点，段尾句常给结论，段中引用/数据/案例是论据。观点句直接做要点；案例只用来找“它证明了什么”。</p>
+      <h3>段：析逻辑</h3>
+      <p>材料常见逻辑是<strong>问题 → 影响 → 原因 → 对策</strong>。按这四个筐摘要点，筐名就是你的分类词。</p>
+    </div>
+    <div class="card">
+      <h3>要点改写三招：只压缩，不发明</h3>
+      <ol class="rules">
+        <li><b>换主语：</b>把案例里的“某人/某地”换成题干要求的主体（如“执法部门”）。</li>
+        <li><b>删修饰：</b>去掉形容词、例子、重复语，留下动词+宾语。</li>
+        <li><b>合并同类：</b>同一筐里意思相近的句子并成一条，关键词前置。</li>
+      </ol>
+      <ul class="traps">
+        <li>发明材料里没有的对策（“加强监管”但材料说的是“公开信息”）——不得分。</li>
+        <li>整段照抄——字数爆炸，阅卷找不到关键词。</li>
+        <li>只抄案例数字——数字是论据，要点是它背后的结论。</li>
+      </ul>
+    </div>
+    <div class="ev"><span>B+：川观新闻</span><span>问题→影响→原因→对策 四筐</span><span>观点句直接做要点</span></div>
+  </section>
+
+  <section class="section" id="genre">
+    <h2>04 · 文种怎么定：法定 vs 事务性</h2>
+    <p class="sub2">条例 15 文种是“法定公文”（A 级）；申论高频考的是事务性公文（教学共识，C 级，待你的评分卡逐题对照）。</p>
+    <details class="module">
+      <summary><span class="mod-kicker">GENRE MAP</span><span class="mod-title">先分清两套文种体系</span><span class="mod-signal">条例 A 级 · 事务性 C 级</span></summary>
+      <div class="mod-body">
+        <h3>法定 15 文种（条例第八条，A 级）</h3>
+        <p style="font-size:12.5px;color:var(--ink3)">决议、决定、命令（令）、公报、公告、通告、意见、通知、通报、报告、请示、批复、议案、函、纪要。考场单考法定文种的概率低，多是借它的<strong>行文逻辑</strong>考事务性文种。</p>
+        <h3>文种选用依据（条例 + 慕课）</h3>
+        <ol class="rules">
+          <li><b>行文目的：</b>要人做→通知/倡议；向上说→报告/汇报；对人讲→讲话稿；求批准→请示/建议。</li>
+          <li><b>发文者身份：</b>题干“以××局/××名义”——身份决定语气与权限，政府机关不用网络流行语。</li>
+          <li><b>主送对象：</b>“面向市民/全体商户/新生家长”——决定称谓与口吻；对象越具体，称谓越具体。</li>
+        </ol>
+        <h3>申论高频事务性文种（10 个）</h3>
+        <div class="doc-grid">
+          <div class="doc-card"><div class="doc-name"><b>倡议书</b><span class="doc-code">QUAN</span><span class="fmt full">全格式</span></div><p>面向公众号召行动。骨架：背景问题 → 分条倡议 → 呼吁。</p></div>
+          <div class="doc-card"><div class="doc-name"><b>公开信</b><span class="doc-code">XIN</span><span class="fmt full">全格式</span></div><p>面向特定群体说明+动员。骨架：缘由 → 事项 → 希望。</p></div>
+          <div class="doc-card"><div class="doc-name"><b>讲话稿 / 发言稿</b><span class="doc-code">HUA</span><span class="fmt half">半格式</span></div><p>场合性讲话。骨架：开场（场合+目的）→ 主体分条 → 结尾要求。六要素：讲者/对象/场合/目的/内容/语言。</p></div>
+          <div class="doc-card"><div class="doc-name"><b>汇报提纲</b><span class="doc-code">HUI</span><span class="fmt none">标题+正文</span></div><p>向上汇报。骨架：成绩 → 问题 → 原因 → 下一步。</p></div>
+          <div class="doc-card"><div class="doc-name"><b>工作汇报 / 情况汇报</b><span class="doc-code">BAO</span><span class="fmt full">全格式</span></div><p>同汇报提纲，多落款；要点按“做法+成效”配对写。</p></div>
+          <div class="doc-card"><div class="doc-name"><b>通知</b><span class="doc-code">TONG</span><span class="fmt full">全格式</span></div><p>要对象执行。骨架：依据/目的 → 事项分条 → 执行要求。</p></div>
+          <div class="doc-card"><div class="doc-name"><b>报告</b><span class="doc-code">BG</span><span class="fmt full">全格式</span></div><p>向上反映情况。骨架：情况 → 问题 → 建议；不夹带请示事项。</p></div>
+          <div class="doc-card"><div class="doc-name"><b>意见 / 建议</b><span class="doc-code">YIJ</span><span class="fmt full">全格式</span></div><p>给对象提对策。骨架：现状问题 → 分条建议（每条=做法+理由）。</p></div>
+          <div class="doc-card"><div class="doc-name"><b>短评 / 时评</b><span class="doc-code">DUP</span><span class="fmt none">标题+正文</span></div><p>媒体视角评现象。骨架：现象 → 观点 → 材料论证 → 结论。</p></div>
+          <div class="doc-card"><div class="doc-name"><b>经验交流材料</b><span class="doc-code">JY</span><span class="fmt half">半格式</span></div><p>介绍做法。骨架：总起（做法一句话）→ 分条经验（做法+效果）→ 结语。</p></div>
+        </div>
+        <div class="notice" style="margin-top:12px"><b>待对照：</b>以上 10 个文种的考频与格式档，需与工作台「采分点台账」里 32 题的实际文种逐题对照；不一致的以台账为准。</div>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="format">
+    <h2>05 · 格式三档：先保结构分，再保内容分</h2>
+    <p class="sub2">格式分是最便宜的分数：结构项缺一项丢一项。先判断档位，再动笔。</p>
+    <div class="table-wrap">
+      <table class="summary-table">
+        <thead><tr><th>档位</th><th>结构项</th><th>适用文种</th><th>阅卷看点</th></tr></thead>
+        <tbody>
+          <tr><td>全格式</td><td>标题 + 称谓 + 正文 + 落款 + 日期</td><td>倡议书、公开信、通知、报告、意见/建议、工作汇报</td><td>称谓顶格；落款单位+日期右下；日期写“×年×月×日”</td></tr>
+          <tr><td>半格式</td><td>标题 + 称谓 + 正文（无落款）</td><td>讲话稿、发言稿、经验交流</td><td>开头要有场合语（“各位代表：”）；结尾有要求/展望</td></tr>
+          <tr><td>无格式</td><td>标题 + 正文分条（无称谓/落款）</td><td>汇报提纲、短评、内容要点类</td><td>标题即观点或“关于××的提纲”；正文条理>辞藻</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>标题公式（山西传媒，B 级）</h3>
+      <p><b>单位 + 事由 + 文种</b>，例如《××市市场监管局关于规范摊贩经营的建议》。考场没给单位就写“关于××的××”；题干说“不必考虑格式”时，把时间还给要点。</p>
+      <ul class="traps">
+        <li>把“提纲”写成全文——字数爆炸、结构分没了。</li>
+        <li>讲话稿写落款——场合性文稿不署名落款。</li>
+        <li>称谓缺失——有对象却不敢称呼，格式分直接丢。</li>
+      </ul>
+    </div>
+    <div class="ev"><span>GB/T 9704 仅法定格式参考</span><span>三档为教学共识（C）</span><span>题干要求优先于模板</span></div>
+  </section>
+
+  <section class="section" id="structure">
+    <h2>06 · 结构怎么排：分文种骨架</h2>
+    <p class="sub2">骨架是“段落功能表”，不是套话；每个空位都从材料里填。</p>
+    <div class="table-wrap">
+      <table class="summary-table">
+        <thead><tr><th>文种</th><th>开头写什么</th><th>主体写什么</th><th>结尾写什么</th></tr></thead>
+        <tbody>
+          <tr><td>倡议书 / 公开信</td><td>背景+问题+目的（为何倡议）</td><td>分条倡议：每条=做法+一句理由</td><td>呼吁号召（对象+行动）</td></tr>
+          <tr><td>讲话稿</td><td>场合+目的+一句定调</td><td>分条讲清“做什么/为什么/怎么做”</td><td>要求或展望</td></tr>
+          <tr><td>汇报提纲 / 工作汇报</td><td>总起：工作主题一句</td><td>成绩（做法+成效）→ 问题 → 原因</td><td>下一步安排</td></tr>
+          <tr><td>通知</td><td>依据/目的一句</td><td>事项分条：时间、对象、要求</td><td>执行要求（“请遵照执行”）</td></tr>
+          <tr><td>意见 / 建议</td><td>现状与问题一句</td><td>分条建议：做法+理由/预期效果</td><td>一句收束（可无）</td></tr>
+          <tr><td>短评</td><td>引材料现象</td><td>观点+两层论证（材料为据）</td><td>回扣观点一句</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>要点分配的两条硬规矩</h3>
+      <ol class="rules">
+        <li><b>问什么答什么：</b>题干只要“对策”就别写问题背景超过一行；要素错位是最大丢分。</li>
+        <li><b>字数跟着要点走：</b>先数要点条数，再按条数均摊字数；一条要点≈关键词(4–8字)+一句话(15–30字)。</li>
+      </ol>
+    </div>
+    <div class="ev"><span>骨架为教学共识（C）</span><span>以你的评分卡结构分对照校准</span></div>
+  </section>
+
+  <section class="section" id="language">
+    <h2>07 · 语言怎么写：三改三不</h2>
+    <p class="sub2">条例要求“表述准确、文字精练”（A 级）；考场落地就是三改三不。</p>
+    <div class="strategy">
+      <div class="card">
+        <h3>三改</h3>
+        <ol class="rules">
+          <li><b>换主语：</b>案例主体 → 题干要求的执行主体。</li>
+          <li><b>删修饰：</b>形容词/排比/例子删掉，留动词+宾语。</li>
+          <li><b>并同类：</b>同义句合并，关键词提到句首。</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>三不</h3>
+        <ul class="traps" style="margin-top:2px">
+          <li>不发明：材料没有的对策、数据、意义。</li>
+          <li>不抒情：公文不用感叹号轰炸和排比堆砌。</li>
+          <li>不口语：不用“我觉得”“特别棒”；用“应当/建议/已/将”。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="example" style="margin-top:12px">
+      <span class="ex-src">压缩示例 · 只演示改写方向</span>
+      材料句：“执法人员经常在夜市巡查到深夜，非常辛苦，但占道经营还是屡禁不止，老百姓意见很大。”<br>
+      要点写法：<b>问题：</b>占道经营屡禁不止（执法投入大、效果差，群众不满）。——关键词前置，修饰删净。
+    </div>
+    <div class="ev"><span>语言四要求：准确/简洁/庄重/规范（B）</span><span>关键词前置</span></div>
+  </section>
+
+  <section class="section" id="score">
+    <h2>08 · 应试节奏与卷面</h2>
+    <p class="sub2">四川省考申论时长以公告为准；下面按比例给节奏，任何总时长都能换算。</p>
+    <div class="card">
+      <h3>时间按比例切</h3>
+      <div class="ev" style="margin-top:2px">
+        <span>审题 10%：文种/对象/范围/字数 四定</span>
+        <span>读材料 40%：带题划“问题/原因/对策”</span>
+        <span>提纲 10%：每段一行</span>
+        <span>成文 35%：先关键词后成句</span>
+        <span>校验 5%：清单过一遍</span>
+      </div>
+      <p style="margin:8px 0 0;font-size:12px;color:var(--ink4)">小题先做（要点好搬、分数稳），大作文留足 35% 以上时间；材料只读一遍半：第一遍通读划线，第二遍只回题干相关段。</p>
+    </div>
+    <div class="card">
+      <h3>卷面三条</h3>
+      <ol class="rules">
+        <li>分条清晰：一条一行起步，关键词写在句首。</li>
+        <li>不涂改：写错画一条斜线，不糊团。</li>
+        <li>顶格与空格按档位：称谓顶格、正文首行空两格、落款右下。</li>
+      </ol>
+    </div>
+    <span class="timeline">节奏比总时长重要：审题不超 10%，读材料不超过一半时间。</span>
+  </section>
+
+  <section class="section" id="check">
+    <h2>09 · 成文前 20 秒自检</h2>
+    <p class="sub2">交卷前把这张清单过一遍，每一项都是白给的分数。</p>
+    <div class="card">
+      <ul class="check">
+        <li><b>文种对吗：</b>写的结构是题干要的文种，不是我最熟的模板。</li>
+        <li><b>对象对吗：</b>称谓、口吻、身份与题干一致。</li>
+        <li><b>格式对吗：</b>全格式/半格式/无格式，档位没拿错。</li>
+        <li><b>要素全吗：</b>题干要的问题/原因/对策，筐筐有货。</li>
+        <li><b>要点来自材料吗：</b>每条都能指回材料某句，没有发明项。</li>
+        <li><b>结构合吗：</b>开头—主体—结尾的功能没有错位。</li>
+        <li><b>字数超吗：</b>按格子数过，留有余量。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="sources">
+    <h2>10 · 证据与来源</h2>
+    <p class="sub2">本页规则的三级标注：A=官方文件/国家标准；B=高校课程/官方媒体；C=教学共识候选。检索日期 2026-11-07。</p>
+    <details class="fold">
+      <summary>展开来源与采用决定</summary>
+      <div class="fold-body">
+        <div class="table-wrap">
+          <table class="summary-table">
+            <thead><tr><th>来源</th><th>等级</th><th>采用决定</th><th>边界</th></tr></thead>
+            <tbody>
+              <tr><td><a href="https://news.12371.cn/2015/10/28/ARTI1446022251444121.shtml" target="_blank" rel="noopener">公文处理工作条例</a></td><td>A</td><td>15 文种 / 行文规则 / 拟制要求</td><td>法定公文；事务性公文不套</td></tr>
+              <tr><td><a href="https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F3CC9BEF482524C895FDA7A08BB4A70E" target="_blank" rel="noopener">GB/T 9704-2012</a></td><td>A</td><td>法定公文格式参考</td><td>考场不考排版细节</td></tr>
+              <tr><td><a href="https://www.hhjp.gov.cn/info/5041/382891.htm" target="_blank" rel="noopener">申论大纲（国考 2026）</a></td><td>A</td><td>四项能力定位</td><td>不定解题步骤</td></tr>
+              <tr><td><a href="https://www.icourse163.org/learn/HLJU-1002839012" target="_blank" rel="noopener">公文写作规范慕课</a></td><td>B+</td><td>文种选用 / 行文关系 / 公文语言</td><td>考场化改造后用</td></tr>
+              <tr><td><a href="https://cbgc.scol.com.cn/news/5103606" target="_blank" rel="noopener">川观新闻：材料逻辑</a></td><td>B+</td><td>词—句—段读法 / 四筐要点</td><td>大作文可适度积累</td></tr>
+              <tr><td><a href="https://yjgl.ln.gov.cn/yjgl/xcjy/xwxcdwgl/B373B0DE6DF047728FE989D8251337DA/index.shtml" target="_blank" rel="noopener">辽宁省应急管理厅：公文框架</a></td><td>B+</td><td>讲话稿六要素 / 事务性骨架</td><td>不是法定文种</td></tr>
+              <tr><td><a href="https://jcb.cusx.edu.cn/info/1026/1580.htm" target="_blank" rel="noopener">山西传媒学院：写作方法</a></td><td>B</td><td>标题公式 / 语言四要求</td><td>排版细节不考</td></tr>
+              <tr><td>事务性公文格式三档 / 文种骨架</td><td>C</td><td>考场速查</td><td>与评分卡台账逐题对照</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="notice"><b>与评分卡的衔接：</b>工作台「采分点台账」记录了 8 套行政执法卷 32 题的 134 个答案要点。本页所有 C 级规则（格式三档、文种骨架）都要回到台账逐题对照；对照结果决定去留，不靠印象。</div>
+      </div>
+    </details>
+  </section>
+
+  <div class="closing">
+    <h2>最后一句</h2>
+    <p>申论的全部秘密就一句：<strong>要点从材料来，结构从文种来，语言从规范来。</strong>三样都对，分数就在那里。</p>
+    <p>行测页管“选得对”，本页管“写得全”；两边共用同一个开头——先定目标，再找依据。</p>
+    <p class="last">配套：<a href="../">工作台 · 评分卡与采分点台账</a> · <a href="../xingce-fangfa/">行测统一判定法</a> · <a href="../xingce-cuoti/">行测错题精讲</a></p>
+  </div>
+
+  <div class="footer">
+    申论与公文判定法 · 三层证据归纳 · 2026-11-07<br>
+    公文法规与标准原文版权归发布机关；教学资料只做要点转译，不复制原文。
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s){ return document.querySelector(s); };
+  var saved = null;
+  try{ saved = localStorage.getItem('cuoti_theme'); }catch(e){}
+  if(saved === 'paper') document.documentElement.setAttribute('data-theme','paper');
+  $('#themeBtn').addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    var next = cur === 'paper' ? 'eink' : 'paper';
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('cuoti_theme', next); }catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
