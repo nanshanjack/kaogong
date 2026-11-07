@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="eink">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#E9E7E0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="行测统一判定法">
+<title>行测统一判定法 · 300 题归纳</title>
+<style>
+:root{
+  --bg:#E9E7E0; --bg2:#E2E0D8; --panel:#F1EFE9; --panel2:#EBE9E1;
+  --ink:#232323; --ink2:#3F3F3A; --ink3:#5C5C55; --ink4:#7A7A72;
+  --line:#D0CDC3; --line2:#DDDAD1;
+  --brand:#4E6A5D; --brand2:#6B8578; --brand-soft:#E3EAE4;
+  --mark:#D8D2C2; --mark2:#B9A96A;
+  --ok:#3F6B52; --ok-soft:#E6EEE7;
+  --warn:#8E6A2A; --warn-soft:#F2EADB;
+  --danger:#A64A45; --danger-soft:#F3E4E2;
+  --r:14px; --sh:0 1px 2px rgba(35,35,35,.05);
+}
+html[data-theme="paper"]{
+  --bg:#F8F4EB; --bg2:#F2EDE2; --panel:#FDFBF6; --panel2:#F8F3E8;
+  --ink:#221E1A; --ink2:#3E3A33; --ink3:#5E574B; --ink4:#7A7264;
+  --line:#E6DCCB; --line2:#EFE7D9;
+  --brand:#5B7A6C; --brand2:#769487; --brand-soft:#EDF4EF;
+  --mark:#F7E8BA; --mark2:#D8B85C;
+  --ok:#3C7A5A; --ok-soft:#EAF4EE;
+  --warn:#A9792A; --warn-soft:#F8EFDC;
+  --danger:#B34A45; --danger-soft:#F8E7E5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans SC","Source Han Sans SC","Microsoft YaHei","PingFang SC",-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+a{color:var(--brand);text-decoration-thickness:1px;text-underline-offset:3px}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--brand2);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 20px 64px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:16px}
+.top>div:first-child{min-width:0}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;color:var(--brand);font-weight:800}
+h1{font-size:31px;line-height:1.25;margin:4px 0 8px;letter-spacing:-.01em}
+.sub{color:var(--ink3);font-size:13.5px;margin:0;max-width:600px}
+.top-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink2);border-radius:10px;padding:7px 10px;
+  font-size:12.5px;text-decoration:none;cursor:pointer;transition:border-color .15s,background .15s;
+}
+.btn:hover{border-color:var(--brand2);background:var(--brand-soft)}
+.syncbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px;padding:10px 14px;
+  font-size:12.5px;color:var(--ink3);box-shadow:var(--sh);
+}
+.syncbar b{color:var(--ink2);font-weight:700}
+.chip{
+  display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:999px;
+  background:var(--bg2);border:1px solid var(--line2);font-size:11.5px;color:var(--ink3);white-space:nowrap;
+}
+.chip.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.chip.danger{background:var(--danger-soft);color:var(--danger);border-color:transparent}
+.chip.brand{background:var(--brand-soft);color:var(--brand);border-color:transparent}
+.hero{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px 20px;margin-top:14px;box-shadow:var(--sh);
+}
+.hero .lead{font-size:16.5px;color:var(--ink);margin:0 0 10px;font-weight:650;line-height:1.75}
+.hero p{margin:0 0 8px;font-size:14px;color:var(--ink2)}
+.hero .sig{font-size:12.5px;color:var(--ink4);border-top:1px dashed var(--line);padding-top:9px;margin-top:12px}
+.axioms{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.axiom{background:var(--bg2);border-radius:10px;padding:11px 12px;border-left:3px solid var(--brand2)}
+.axiom b{display:block;font-size:13px;color:var(--brand);margin-bottom:3px}
+.axiom p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.7}
+.toc{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--sh);overflow:hidden}
+.toc summary{
+  list-style:none;cursor:pointer;padding:12px 15px;font-weight:750;font-size:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.toc summary::-webkit-details-marker{display:none}
+.toc summary:before{content:"▸";color:var(--brand);font-size:13px}
+.toc[open] summary:before{content:"▾"}
+.toc[open] summary{border-bottom:1px solid var(--line);background:var(--brand-soft)}
+.toc-inner{padding:10px 14px 14px;display:grid;grid-template-columns:1fr 1fr;gap:4px 18px}
+.toc a{display:block;text-decoration:none;color:var(--ink2);font-size:13px;padding:6px 0;border-top:1px dashed var(--line2);line-height:1.5}
+.toc a:nth-child(-n+2){border-top:0}
+.toc a:hover{color:var(--brand)}
+.section{margin-top:26px}
+.section>h2{font-size:21px;margin:0 0 4px;letter-spacing:-.01em}
+.section>.sub2{font-size:13px;color:var(--ink4);margin:0 0 12px}
+.steps{counter-reset:step;margin:0;padding:0;list-style:none}
+.step{
+  position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:13px 15px 13px 48px;margin-bottom:9px;box-shadow:var(--sh);
+}
+.step:before{
+  counter-increment:step;content:counter(step);position:absolute;left:14px;top:14px;
+  width:23px;height:23px;border-radius:50%;background:var(--brand);color:#fff;
+  font-size:12px;font-weight:850;display:flex;align-items:center;justify-content:center;
+}
+.step b{font-size:14.5px;color:var(--ink)}
+.step p{margin:3px 0 0;font-size:13.5px;color:var(--ink2)}
+.step .micro{display:block;margin-top:4px;font-size:12px;color:var(--ink4)}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 17px;margin-top:12px;box-shadow:var(--sh);
+}
+.card h3{font-size:15.5px;margin:0 0 7px;color:var(--ink)}
+.card p{margin:0 0 7px;font-size:13.5px;color:var(--ink2)}
+.kv{display:grid;grid-template-columns:74px 1fr;gap:6px 10px;font-size:13px;margin:8px 0}
+.kv .k{color:var(--ink4);font-weight:700;font-size:12px;padding-top:1px}
+.kv .v{color:var(--ink2)}
+.rules{margin:0;padding-left:20px;font-size:13.5px;color:var(--ink2)}
+.rules li{margin:6px 0}
+.rules li::marker{color:var(--brand);font-weight:800}
+.ev{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 4px}
+.ev span{font-size:11px;color:var(--brand);background:var(--brand-soft);border-radius:999px;padding:2px 8px}
+.example{
+  background:var(--bg2);border-left:3px solid var(--brand2);border-radius:9px;
+  padding:9px 11px;margin-top:8px;font-size:13px;color:var(--ink2);
+}
+.example b{color:var(--brand)}
+.example .ex-src{display:block;font-size:11px;color:var(--ink4);margin-bottom:3px}
+.traps{margin:6px 0 0;padding-left:18px;font-size:12.5px;color:var(--ink3)}
+.traps li{margin:3px 0}
+.traps li::marker{content:"× ";color:var(--danger);font-weight:800}
+.timeline{font-size:12px;color:var(--warn);background:var(--warn-soft);border-radius:7px;padding:4px 9px;display:inline-block;margin-top:8px}
+.module{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px;box-shadow:var(--sh)}
+.module summary{
+  display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;
+  padding:14px 17px 14px 24px;cursor:pointer;list-style:none;position:relative;border-radius:13px;
+}
+.module summary::-webkit-details-marker{display:none}
+.module summary:before{content:"▸";color:var(--brand);font-size:13px;position:absolute;left:8px;top:17px}
+.module[open] summary:before{content:"▾"}
+.module summary:hover{background:var(--brand-soft)}
+.module[open] summary{background:var(--brand-soft);border-bottom:1px solid var(--line);border-radius:13px 13px 0 0}
+.mod-kicker{grid-column:1/-1;font-size:10.5px;letter-spacing:.1em;color:var(--brand);font-weight:800}
+.mod-title{font-size:17px;font-weight:800;line-height:1.4}
+.mod-signal{font-size:11px;color:var(--ink4);text-align:right;max-width:320px}
+.mod-body{padding:14px 17px 18px}
+.mod-body h3{font-size:15px;margin:0 0 7px;display:flex;align-items:center;gap:7px}
+.mod-body h3:before{content:"";width:3px;height:15px;border-radius:2px;background:var(--brand2)}
+.mod-body p{margin:0 0 7px;font-size:13.5px;color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);box-shadow:var(--sh);margin-top:8px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line2);text-align:left;vertical-align:top}
+th{font-size:11.5px;color:var(--ink4);font-weight:750;background:var(--bg2);white-space:nowrap;position:sticky;top:0}
+td{color:var(--ink2)}
+tr:last-child td{border-bottom:0}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.center{text-align:center}
+.mono{font-family:"Cascadia Mono","SFMono-Regular",Consolas,monospace;font-size:11.5px}
+.summary-table{min-width:720px}
+.summary-table td:first-child{font-weight:750;color:var(--ink);white-space:nowrap}
+.strategy{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.strategy .card{margin-top:0}
+.budget{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:8px 0}
+.budget div{background:var(--bg2);border-radius:8px;padding:8px 6px;text-align:center}
+.budget b{display:block;font-size:15px;color:var(--brand)}
+.budget span{font-size:10.5px;color:var(--ink4)}
+.fold{margin-top:22px}
+.fold summary{
+  cursor:pointer;font-weight:750;font-size:15px;padding:12px 15px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px;list-style:none;display:flex;align-items:center;gap:8px;
+}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary:before{content:"▸";color:var(--brand);font-size:13px}
+.fold[open] summary:before{content:"▾"}
+.fold[open] summary{border-bottom-left-radius:0;border-bottom-right-radius:0}
+.fold-body{border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;padding:13px 15px;background:var(--panel)}
+.sample-table{min-width:820px}
+.sample-table td{font-size:12px;padding:6px 8px}
+.sample-table td:nth-child(2){max-width:260px;color:var(--ink3)}
+.sample-table td:nth-child(7){max-width:210px;color:var(--ink4)}
+.sample-meta{font-size:11.5px;color:var(--ink4);margin:0 0 8px}
+.notice{
+  background:var(--panel2);border:1px dashed var(--line);border-radius:10px;
+  padding:11px 13px;margin-top:12px;font-size:12.5px;color:var(--ink3);
+}
+.notice b{color:var(--ink2)}
+.closing{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 18px;margin-top:22px;box-shadow:var(--sh);
+}
+.closing h2{font-size:17px;margin:0 0 7px}
+.closing p{font-size:13.5px;color:var(--ink2);margin:0 0 7px}
+.closing .last{font-size:13px;color:var(--ink4);border-top:1px dashed var(--line);padding-top:9px;margin-top:10px}
+.footer{margin-top:26px;font-size:11.5px;color:var(--ink4);text-align:center;line-height:1.9}
+@media(max-width:760px){
+  .wrap{padding:20px 14px 52px}
+  h1{font-size:26px}
+  .axioms{grid-template-columns:1fr}
+  .toc-inner{grid-template-columns:1fr}
+  .strategy{grid-template-columns:1fr}
+  .budget{grid-template-columns:repeat(3,1fr)}
+  .summary-table{min-width:640px}
+  .module summary{padding:13px 13px 13px 22px}
+  .mod-signal{display:none}
+  .mod-body{padding:12px 13px 15px}
+  .kv{grid-template-columns:62px 1fr}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <div class="eyebrow">行测 · 统一判定法</div>
+      <h1>行测统一判定法</h1>
+      <p class="sub">从 300 道正确率 50–60% 的真题里，归纳同一套动作：把题干翻译成条件，选唯一满足全部条件的选项。</p>
+    </div>
+    <div class="top-actions">
+      <a class="btn" href="../xingce-cuoti/">← 错题精讲</a>
+      <button class="btn" id="themeBtn" type="button">纸色 / 墨水屏</button>
+    </div>
+  </div>
+
+  <div class="syncbar">
+    <span>取样 <b>2026-11-07</b></span>
+    <span class="chip">6 模块 × 50 题 = 300</span>
+    <span class="chip">正确率 50–60%</span>
+    <span class="chip">近 5 年 · 不限地区</span>
+    <span class="chip ok">未作答 · 未提交 · 未写入错题本</span>
+    <span class="chip brand">字段完整 300/300</span>
+  </div>
+
+  <div class="hero">
+    <p class="lead">行测不是“猜出题人想考什么”，而是“题干给条件，选项里只有一个解”。</p>
+    <p>把每道题看成一个小型条件系统：题干给出显性条件与隐含条件，四个选项是四个候选解。正确答案是<strong>同时满足全部条件</strong>的那一个；错误选项不是随机干扰，而是<strong>每一个都精准违反一个条件</strong>。</p>
+    <p>所以，做题的动作不是“找感觉”，而是：定问法 → 抽条件 → 逐项验 → 锁唯一 → 时间止损。六模块的差别，只在于“条件从哪里来”。</p>
+    <div class="axioms">
+      <div class="axiom"><b>铁律一</b><p>先定问法，再找条件。问“错误/不能推出”时，目标就是找违反条件的那一项。</p></div>
+      <div class="axiom"><b>铁律二</b><p>每个选项都要验条件，不能凭“顺眼”选。说不清它满足了哪条，就先不选。</p></div>
+      <div class="axiom"><b>铁律三</b><p>两个选项都像对，说明你漏了一个条件。回题干找区分点，而不是硬猜。</p></div>
+    </div>
+    <div class="sig">下面所有“比例/次数”都来自这 300 道样本的解析原文统计，不是口号；样本口径见页面末尾「数据与样本」。</div>
+  </div>
+
+  <details class="toc" open>
+    <summary>先看总纲 <span style="margin-left:auto;font-size:11.5px;color:var(--brand);font-weight:700">5 步 + 6 模块</span></summary>
+    <div class="toc-inner">
+      <a href="#chain">01 · 五步判定链</a>
+      <a href="#table">02 · 六模块一张表</a>
+      <a href="#verbal">03 · 言语：三关交集</a>
+      <a href="#judge">04 · 判断：规律/四槽/论证桥</a>
+      <a href="#math">05 · 数量：等量关系的唯一解</a>
+      <a href="#data">06 · 资料：问法→公式→数据</a>
+      <a href="#common">07 · 常识：原文与边界</a>
+      <a href="#politics">08 · 政治：考点原文对应</a>
+      <a href="#score">09 · 高分应试策略</a>
+      <a href="#samples">10 · 300 题核验表</a>
+    </div>
+  </details>
+
+  <section class="section" id="chain">
+    <h2>01 · 五步判定链</h2>
+    <p class="sub2">所有模块共用；不同模块只是“抽条件”的对象不同。</p>
+    <ol class="steps">
+      <li class="step"><b>定目标</b><p>先看问法：选正确、选错误、选最恰当、选能推出、选有几项。问法决定你要找“满足条件”还是“违反条件”的选项。</p><span class="micro">动作：圈出问法里的关键词，别急着读选项。</span></li>
+      <li class="step"><b>抽条件</b><p>把题干翻译成 2–4 条可检验的条件：语义关系、搭配、主题词；规律、定义四槽、论证桥；方程、公式、数据；法条、原理、原文。</p><span class="micro">动作：在心里写 C1/C2/C3，写不出条件就先别选。</span></li>
+      <li class="step"><b>逐项验</b><p>每个选项都过一遍条件：满足全部 → 候选；违反任意一条 → 排除。不要只验证你觉得“像”的那一项。</p><span class="micro">动作：排除时说出“它违反了哪条”，而不是“它不对”。</span></li>
+      <li class="step"><b>锁唯一</b><p>候选只能剩一个。若剩两个，说明条件漏了：回题干找区分点（程度、范围、主体、时间、例外）。</p><span class="micro">动作：两个都像对时，问“哪一个条件我还没用上？”</span></li>
+      <li class="step"><b>止损</b><p>超过该模块的单题上限仍闭不上条件，标记跳过；最后用排除到 2 选 1 再猜，不空题。</p><span class="micro">动作：平时就按上限计时，考场上才敢跳。</span></li>
+    </ol>
+    <div class="card">
+      <h3>条件卡：一道题长什么样</h3>
+      <p>以言语逻辑填空为例，题干条件可以写成：</p>
+      <div class="kv">
+        <div class="k">C1 语义</div><div class="v">空格与“消极懈怠”构成并列 → 必须含“停滞不前”义</div>
+        <div class="k">C2 搭配</div><div class="v">空格 + “泥潭” → 搭配要能落地</div>
+        <div class="k">C3 程度</div><div class="v">不能过重，不能带“自我放弃”</div>
+        <div class="k">判定</div><div class="v">A 过轻 / B 全过 / C 全过但第二空不符 / D 色彩不符 → 锁 B</div>
+      </div>
+      <p style="margin:0;font-size:12px;color:var(--ink4)">这就是“像学语法一样”：不是背题，而是看每个空要满足的语法槽位。</p>
+    </div>
+  </section>
+
+  <section class="section" id="table">
+    <h2>02 · 六模块一张表</h2>
+    <p class="sub2">先记这张表，再进各模块细节。</p>
+    <div class="table-wrap">
+      <table class="summary-table">
+        <thead><tr><th>模块</th><th>条件从哪来</th><th>正确答案是什么</th><th>错误项怎么错</th><th>单题止损</th></tr></thead>
+        <tbody>
+          <tr><td>政治理论</td><td>原理 / 会议文件 / 党史原文</td><td>与权威原文逐字对应</td><td>张冠李戴、偷换关键词、扩大缩小范围</td><td class="num">30s</td></tr>
+          <tr><td>常识判断</td><td>法条 / 地理 / 经济 / 文化事实</td><td>与权威原文一致</td><td>条件被换、范围扩大、主体偷换、绝对化</td><td class="num">40s</td></tr>
+          <tr><td>言语理解</td><td>语义关系 + 搭配 + 程度 + 主题词</td><td>同时满足全部线索</td><td>无中生有、搭配不当、缺主题词、程度过重</td><td class="num">80s</td></tr>
+          <tr><td>判断推理</td><td>图形规律 / 定义四槽 / 论证桥 / 词项关系</td><td>形式与条件全匹配</td><td>偷换主体、漏条件、话题不一致、关系反向</td><td class="num">90s</td></tr>
+          <tr><td>数量关系</td><td>等量关系 / 不等式 / 几何公式</td><td>方程或不等式的唯一解</td><td>漏条件、算错、近似值陷阱</td><td class="num">120s</td></tr>
+          <tr><td>资料分析</td><td>问法 → 公式 → 数据定位</td><td>公式计算的结果</td><td>时间错位、基期现期混用、单位错、比重增量混用</td><td class="num">90s</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="notice"><b>同一性：</b>六个模块都在做“必要条件检验”。差别只是条件的形式：文字语义、图形形式、数学等式、数据公式、知识原文。你不需要六套思维，只需要一套“验条件”的动作。</div>
+  </section>
+
+  <section class="section" id="verbal">
+    <h2>03 · 言语理解与表达：三关交集</h2>
+    <p class="sub2">50 题样本：逻辑填空 24，片段阅读/语句表达 26。</p>
+    <details class="module" open>
+      <summary><span class="mod-kicker">MODULE 01</span><span class="mod-title">言语：正确答案是“语义 + 搭配 + 程度”的交集</span><span class="mod-signal">50 题 · 答案 B17/D14/C9/A10</span></summary>
+      <div class="mod-body">
+        <h3>这个模块的条件是什么</h3>
+        <p>逻辑填空的条件来自空格前后：并列/反义/解释/递进/转折；搭配对象；程度与感情色彩。片段阅读的条件来自文段结构：主题词、行文脉络、问法。语句填空的条件来自横线位置：承上、启下，或两者同时。</p>
+        <h3>四条不变量</h3>
+        <ol class="rules">
+          <li><b>逻辑填空三关：</b>语义关系、搭配、程度。三个都过才是答案；只过两关的选项，就是“近义陷阱”。</li>
+          <li><b>片段阅读主题词：</b>正确答案必须覆盖文段核心话题；缺主题词、偷换主体、只谈非重点的选项，一律排除。</li>
+          <li><b>语句填空看位置：</b>横线在中间，必须同时承接前文、引出后文；只顺承一侧的，必错。</li>
+          <li><b>错误项四件套：</b>无中生有、搭配不当、程度过重/过轻、主题词缺失。先拿这四把刀切，再谈“语感”。</li>
+        </ol>
+        <div class="ev"><span>50/50 解析出现“排除”</span><span>52% 明确“对应”</span><span>24% 明确“搭配”</span><span>32% 提到“无中生有”</span></div>
+        <div class="example">
+          <span class="ex-src">最短判定例 · 3_1_4rn40 · 2022 天津 · 第24题 · 正确率 59.09</span>
+          <b>题干条件：</b>文段核心是“电影产业 + 美学经济”。<b>选项检验：</b>A 只谈龙头位置（非重点）；B 缺“美学”；D 缺“电影产业”；C 同时覆盖两个主题词 → <b>C</b>。
+        </div>
+        <div class="example">
+          <span class="ex-src">搭配例 · 3_1_5kcnl · 2024 浙江 A · 第29题 · 正确率 52.92</span>
+          <b>第三空：</b>“购买____的商品”。A“琳琅满目”文意通，但“购买琳琅满目的商品”搭配不当；B“物美价廉”搭配成立 → <b>B</b>。
+        </div>
+        <h3>高频陷阱</h3>
+        <ul class="traps">
+          <li>近义成语只差程度：如“安于现状/固步自封/裹足不前”，要看空格前的“消极懈怠”与后文“观望等待”落在哪一档。</li>
+          <li>形象表达：空格与“沃土”“牛鼻子”等比喻必须同框，不能只对字面义。</li>
+          <li>片段阅读选项“偷换主体”：把“电影产业”换成“文化产业”，把“美学”换成“价值”。</li>
+        </ul>
+        <span class="timeline">时间：逻辑填空 40–50s · 片段 60–80s · 语句填空 50–70s</span>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="judge">
+    <h2>04 · 判断推理：规律、四槽、论证桥</h2>
+    <p class="sub2">50 题样本：图推 20，论证 13，类比 7，定义 2，其他 8。</p>
+    <details class="module">
+      <summary><span class="mod-kicker">MODULE 02</span><span class="mod-title">判断：先定“形式”，再验“条件”</span><span class="mod-signal">50 题 · 答案 A12/B14/C12/D12</span></summary>
+      <div class="mod-body">
+        <h3>这个模块的条件是什么</h3>
+        <p>图推的条件是图形元素的变换规律；定义的条件是“主体 + 条件 + 方式 + 结果”四个槽位；论证的条件是“论据 → 论点”的桥；类比的条件是两侧词项的二元关系；翻译推理的条件是命题形式。</p>
+        <h3>五条不变量</h3>
+        <ol class="rules">
+          <li><b>图推先分层：</b>元素相同看位置（平移/旋转/翻转）；元素不同看属性（对称/曲直/开闭）→ 数量（点线面素）→ 样式（加减同异/黑白）。正确答案必须同时满足所有已观察到的规律。</li>
+          <li><b>定义拆四槽：</b>主体、条件、方式、结果。四槽全中才是答案；常见错法是偷换主体、漏一个条件、把“水平”换成“结构”。</li>
+          <li><b>论证打桥：</b>先写“论据 → 论点”的桥；削弱/加强必须打在桥上。话题不一致的选项，再正确也不能选。</li>
+          <li><b>类比同向：</b>先定两侧的二元关系，再要求关系方向一致；顺序颠倒、关系不同即错。</li>
+          <li><b>选非题反着验：</b>问“最不能支持/没有体现”时，先排除能支持/能体现的，再在剩下项里选。</li>
+        </ol>
+        <div class="ev"><span>66% 解析出现“排除”</span><span>58% 先找论点/定义关键词</span><span>图推 20 题 · 论证 13 题</span></div>
+        <div class="example">
+          <span class="ex-src">图推例 · 3_1_9ndep · 2024 黑龙江 · 第71题 · 正确率 51.79</span>
+          <b>条件 C1：</b>小黑球总数均为 14 → 排除 C。<b>条件 C2：</b>两条对角线上黑球数量的奇偶性分别相同 → 只有 A 满足 → <b>A</b>。
+        </div>
+        <div class="example">
+          <span class="ex-src">定义例 · 3_1_icfu2 · 2025 国考地市 · 第94题 · 正确率 52.19</span>
+          <b>四槽：</b>薪酬水平策略 = 支付标准 + 市场既定水平 + 对公司有利；薪酬结构策略 = 支付差异 + 工资等级/幅度等政策。<b>B</b> 全员调薪落在“水平”，C/D 落在“结构” → <b>B</b>。
+        </div>
+        <div class="example">
+          <span class="ex-src">论证例 · 3_1_c941h · 2025 广东 · 第63题 · 正确率 53.04</span>
+          <b>桥：</b>论据“泡沫最多” → 论点“除菌更好”，中间假设“泡沫 = 有害残留”。<b>D</b> 说专业化学检测才是唯一有效手段，直接切断桥；A 只是削弱泡沫与残留的关系，力度弱于 D → <b>D</b>。
+        </div>
+        <h3>高频陷阱</h3>
+        <ul class="traps">
+          <li>图推“规律叠加”：只看到一个规律就选，忽略第二个规律（如数量 + 奇偶）。</li>
+          <li>定义“主体偷换”：主体从企业换成个人、从行政换成民事，直接排除。</li>
+          <li>论证“话题漂移”：选项讨论死亡率，论点讨论发病率；说得再对也不选。</li>
+          <li>类比“顺序颠倒”：主宾关系前后反了，关系再像也不选。</li>
+        </ul>
+        <span class="timeline">时间：图推 45–60s · 定义 60–75s · 类比 30–40s · 逻辑 70–90s</span>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="math">
+    <h2>05 · 数量关系：等量关系的唯一解</h2>
+    <p class="sub2">50 题样本：和差倍比 10，几何 8，经济 3，概率 3，排列组合 3，数列 3，行程 3，最值 2。</p>
+    <details class="module">
+      <summary><span class="mod-kicker">MODULE 03</span><span class="mod-title">数量：把每个条件写进方程，答案自己会出来</span><span class="mod-signal">50 题 · 答案 B18/C18/A9/D5</span></summary>
+      <div class="mod-body">
+        <h3>这个模块的条件是什么</h3>
+        <p>题干里的比例、倍数、和差、增减、时间、速度、价格、浓度、几何关系，都是等量或不等关系。把这些关系写成方程/不等式，解就是答案。</p>
+        <h3>四条不变量</h3>
+        <ol class="rules">
+          <li><b>正确答案是唯一解：</b>方程/不等式解出什么，就选什么；选项只是解的容器。</li>
+          <li><b>每个条件都要进方程：</b>漏一个条件，就会精准落到某个错误选项。错误选项通常对应“漏条件/用错基数/算错一步”。</li>
+          <li><b>极值题先定方向：</b>问“至少”就让目标量尽量小，问“最多”就尽量大；再用不等式边界。选项代入从最小/最大开始。</li>
+          <li><b>先排除再精算：</b>选项是比例/范围时，先用量级、整除、尾数排除；能估算就不硬算。</li>
+        </ol>
+        <div class="ev"><span>42% 解析出现“解得”</span><span>24% 用公式</span><span>20% 赋值</span><span>10% 代入排除</span></div>
+        <div class="example">
+          <span class="ex-src">最短判定例 · 3_1_houlg · 2026 天津 · 第54题 · 正确率 50.66</span>
+          <b>条件：</b>甲:乙:丙:丁 = 5:4:3:2；调动后甲 = 2 丙。<b>列式：</b>5x+1=2(3x−3) → x=7；调动后为 36/27/18/17。<b>问“至少”：</b>从最小选项代入，C 使乙=20，可分 3 给丙、4 给丁，最终 21/21，满足“少于其余任何一个” → <b>C</b>。
+        </div>
+        <div class="example">
+          <span class="ex-src">反面思考例 · 3_1_houv3 · 2026 浙江 B · 第63题 · 正确率 54.98</span>
+          <b>正面对立面太多，转反面：</b>总情况 C(10,2)=45；不互质 = 同为 2/3/5 的倍数 = 10+3+1=14；所求 = 1−14/45 → <b>B</b>。
+        </div>
+        <h3>高频陷阱</h3>
+        <ul class="traps">
+          <li>比例题忘记“调动后”的基数变化，直接拿原比例算。</li>
+          <li>经济利润题把“定价/售价/成本”混用，或忘记打折。</li>
+          <li>极值题只算“最大”，忽略“还要满足其余条件”。</li>
+          <li>概率题正面分类漏项，或把“至少”当成“恰好”。</li>
+        </ul>
+        <span class="timeline">时间：60–90s · 超过 2 分钟标记猜，数量不恋战</span>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="data">
+    <h2>06 · 资料分析：问法 → 公式 → 数据</h2>
+    <p class="sub2">50 题样本：综合资料 16，文字 13，统计表 11，统计图 10；综合分析 12（题型交叉）。</p>
+    <details class="module">
+      <summary><span class="mod-kicker">MODULE 04</span><span class="mod-title">资料：先认题型，再找数据，最后才计算</span><span class="mod-signal">50 题 · 答案 B17/D18/C9/A6</span></summary>
+      <div class="mod-body">
+        <h3>这个模块的条件是什么</h3>
+        <p>问法决定公式，公式决定要找哪几个数据，数据在材料里的位置决定计算量。三者顺序不能反。</p>
+        <h3>四条不变量</h3>
+        <ol class="rules">
+          <li><b>先判定题型：</b>“占/比重”“同比增量/增长量”“增长率”“平均/倍数”“综合分析”，每一类对应固定公式。</li>
+          <li><b>正确答案是算出来的：</b>不是“看起来合理”的那个。错误选项对应时间错位、基期/现期混用、单位错、比重与增量混用。</li>
+          <li><b>区间选项只估算：</b>选项是“小于5%/5%–10%/…”时，算到能落区间就停，不追求精确。</li>
+          <li><b>综合分析先易后难：</b>先做能直接判定的选项；“逐年/均/超过/不超过”要查边界和例外。</li>
+        </ol>
+        <div class="ev"><span>74% 解析先“判定本题为”</span><span>90% 用公式</span><span>98% 先“定位”</span></div>
+        <div class="example">
+          <span class="ex-src">最短判定例 · 3_1_55gn0 · 2023 上海 A · 第50题 · 正确率 52.78</span>
+          <b>问法：</b>增量、增长率分别比较。<b>数据：</b>教育文化娱乐 3380−2857=523；消费支出 37303−30191=7112 → 增量“低于”。<b>再比增长率：</b>523/2857 ≈ 18.3%；7112/30191 ≈ 23.6% → 仍“低于” → <b>D（低于，低于）</b>。
+        </div>
+        <div class="example">
+          <span class="ex-src">综合分析例 · 3_1_4inj3 · 2022 湖北选调 · 第95题 · 正确率 55.36</span>
+          <b>逐项验：</b>A 用“12月 vs 全年平均”判错；B 用混合增长率“居中不正中”判错；C 用增长量公式算出下降超过 300 亿 → 判错；D 三项占比逐项比较 → 只有 D 成立 → <b>D</b>。
+        </div>
+        <h3>高频陷阱</h3>
+        <ul class="traps">
+          <li>时间错位：问 2023 年，材料给 2024 年；问“同比”，用了“环比”。</li>
+          <li>基期/现期混用：增长率题拿现期当基期。</li>
+          <li>单位错：万吨/亿吨、亿元/万亿元。</li>
+          <li>综合分析“逐年上升”：只看首尾，不看中间年份。</li>
+        </ul>
+        <span class="timeline">时间：每篇 5 题 6–7 分钟 · 简单题 50s · 综合分析 90s</span>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="common">
+    <h2>07 · 常识判断：原文与边界</h2>
+    <p class="sub2">50 题样本：法律 19，地理 8，经济 5，文化 4，其他 14。</p>
+    <details class="module">
+      <summary><span class="mod-kicker">MODULE 05</span><span class="mod-title">常识：不是“知道”，而是“知道边界”</span><span class="mod-signal">50 题 · 答案 D17/C13/A10/B10</span></summary>
+      <div class="mod-body">
+        <h3>这个模块的条件是什么</h3>
+        <p>法条的主体、行为、条件、例外；地理/经济/文化概念的定义边界。常识题的决定性条件，通常藏在一个“例外”或一个“绝对词”里。</p>
+        <h3>三条不变量</h3>
+        <ol class="rules">
+          <li><b>正确答案与权威原文一致：</b>法律题按法条，地理/经济题按定义。不要用“生活经验”替代原文。</li>
+          <li><b>错误项四把刀：</b>条件被换、范围被扩大、主体被偷换、绝对化。选“错误/不符合”时，先查“只能/唯一/必须/均”。</li>
+          <li><b>先定边界，再判真假：</b>例如“雾”与“霾”、“应当”与“可以”、“补偿”与“赔偿”，差一个字就是另一个知识点。</li>
+        </ol>
+        <div class="ev"><span>98% 解析“本题考查”</span><span>42% 直接引法条</span><span>98% 逐项判“错误”</span></div>
+        <div class="example">
+          <span class="ex-src">最短判定例 · 3_1_5665e · 2023 国考执法 · 第11题 · 正确率 51.26</span>
+          <b>题干问“不符合”：</b>B 说人脸识别信息“只能用于维护公共安全”，但法条还有“取得个人单独同意的除外”。B 把例外删掉、把范围绝对化 → <b>B</b>。
+        </div>
+        <div class="example">
+          <span class="ex-src">边界例 · 3_1_4rm48 · 2022 云南 · 第18题 · 正确率 57.44</span>
+          <b>D 把“霾”说成“水汽凝结”：</b>水汽凝结导致的是雾，霾是干气溶胶。定义边界一换就错 → <b>D</b>。
+        </div>
+        <h3>高频陷阱</h3>
+        <ul class="traps">
+          <li>“应当/可以”“补偿/赔偿”“定金/订金”混用。</li>
+          <li>法条只记结论，不记例外（如“取得单独同意”）。</li>
+          <li>地理题把“凌汛”和“汛期”、“雾”和“霾”混为一谈。</li>
+        </ul>
+        <span class="timeline">时间：20–40s · 不会就凭第一反应，不纠结</span>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="politics">
+    <h2>08 · 政治理论：考点原文对应</h2>
+    <p class="sub2">50 题样本：马哲 26，会议讲话 8，经济建设 7，其他建设 6，重要文件 5。</p>
+    <details class="module">
+      <summary><span class="mod-kicker">MODULE 06</span><span class="mod-title">政治：先认考点，再认原文</span><span class="mod-signal">50 题 · 答案 C18/B13/D13/A6</span></summary>
+      <div class="mod-body">
+        <h3>这个模块的条件是什么</h3>
+        <p>题干的关键词对应一个确定的考点：马哲原理、新思想、会议文件、党史事实。选项必须与这个考点的权威表述一致。</p>
+        <h3>四条不变量</h3>
+        <ol class="rules">
+          <li><b>100% 解析首句“本题考查…”：</b>先认考点，再认选项。考点是“马哲/新思想/文件/党史”，选项必须使用同一套话语。</li>
+          <li><b>正确答案逐字对应：</b>不是“意思差不多”，而是关键词不能换。错误项常见：张冠李戴、偷换关键词、扩大缩小范围、与题干无关。</li>
+          <li><b>问“没有直接体现/不准确/错误”时：</b>答案常是“本身正确，但题干没有”的选项。不要因为选项本身对就选它。</li>
+          <li><b>“体现”题要一一映射：</b>题干故事 → 原理关键词，必须能对上；多走一步、少走一步都不行。</li>
+        </ol>
+        <div class="ev"><span>100% 解析“本题考查”</span><span>92% 逐项判“错误”</span><span>48% 用“体现”对应原理</span></div>
+        <div class="example">
+          <span class="ex-src">最短判定例 · 3_1_a7fcr · 2026 上半年云南模考 · 第1题 · 正确率 54.03</span>
+          <b>题干：</b>“草摇叶响知鹿过、松风一起知虎来、一叶易色而知天下秋”，强调见微知著、下先手棋。<b>对应：</b>联系与发展（B）、意识能动性（C）、现象与本质（D）都能对上；A“矛盾普遍性”本身正确，但题干没有直接体现 → <b>A</b>。
+        </div>
+        <div class="example">
+          <span class="ex-src">关键词例 · 3_1_d8ic3 · 2025 下半年天津模考 · 第50题 · 正确率 54.57</span>
+          <b>D 项把“以实践为导向的法学院校教育培养机制”偷换成“以理论创新为导向”</b>，一个关键词换掉，整项错 → <b>D</b>。
+        </div>
+        <h3>高频陷阱</h3>
+        <ul class="traps">
+          <li>“先立后破”被改成“先破后立”（3_1_584kf）。</li>
+          <li>“综合运用自然恢复和人工修复”被改成“集中采用人工修复”（3_1_9q7rb）。</li>
+          <li>“理论创新”被改成“实践”、“实践”被改成“理论”。</li>
+        </ul>
+        <span class="timeline">时间：20–30s · 不会就选最熟悉的原文表述</span>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="score">
+    <h2>09 · 高分应试策略</h2>
+    <p class="sub2">会做不等于考得高；考场上的核心是“把时间花在能闭合的题上”。</p>
+    <div class="card">
+      <h3>时间预算（以 100 题 / 120 分钟为例）</h3>
+      <div class="budget">
+        <div><b>12–15</b><span>政治+常识</span></div>
+        <div><b>28–30</b><span>言语</span></div>
+        <div><b>28–30</b><span>判断</span></div>
+        <div><b>25–28</b><span>资料</span></div>
+        <div><b>10–12</b><span>数量</span></div>
+        <div><b>5–8</b><span>涂卡复查</span></div>
+      </div>
+      <p style="margin:0;font-size:12px;color:var(--ink4)">按你实际卷面调整；原则是“先做能闭合的，数量最后”。</p>
+    </div>
+    <div class="strategy">
+      <div class="card">
+        <h3>三遍做题法</h3>
+        <ol class="rules">
+          <li><b>第一遍（约 60% 时间）：</b>只做条件能闭合的题；闭合不了就标记，绝不恋战。</li>
+          <li><b>第二遍（约 25%）：</b>处理标记题；用“漏了哪个条件”回题干找区分点。</li>
+          <li><b>第三遍（约 15%）：</b>蒙猜 + 涂卡 + 检查错位；不空题。</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>蒙猜规则</h3>
+        <ol class="rules">
+          <li>先排除到 2 选 1，再猜；不要四选一硬蒙。</li>
+          <li>选项分布只做最后校验，不作为主策略。样本答案分布并不均匀：数量 D 只有 5/50，资料 D 有 18/50。</li>
+          <li>改答案只在“找到漏掉的条件”时改；凭感觉不要改。</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>复盘规则</h3>
+        <ol class="rules">
+          <li>错题只写一行：<b>我漏了哪个条件？</b>不抄解析。</li>
+          <li>按“条件类型”归类，不按题归类：搭配没看、定义漏槽、论证桥没找、公式错、法条例外没记。</li>
+          <li>每周回看一次“条件卡”，只看自己漏过的那几类。</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>训练节奏（考前 4 周）</h3>
+        <ol class="rules">
+          <li>每天 20 题限时 + 10 题复盘；限时按模块上限。</li>
+          <li>每周 2 套整卷；整卷只记录“超时题”和“漏条件题”。</li>
+          <li>考前 2 周不再追新题；只刷错题条件卡 + 资料/言语手感。</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="samples">
+    <h2>10 · 300 题核验表</h2>
+    <p class="sub2">每模块 50 题；可展开核对来源、正确率、答案、最易错选与考点。表内只保留题号与最小摘要，完整原文按来源题号回粉笔查看。</p>
+    <div class="syncbar" id="sampleMetaBar" style="margin-bottom:10px"></div>
+    <div class="table-wrap" style="margin-bottom:12px">
+      <table class="summary-table">
+        <thead><tr><th>模块</th><th>题数</th><th>正确率区间</th><th>均值</th><th>A/B/C/D 答案分布</th><th>带图题</th></tr></thead>
+        <tbody id="sampleStats"></tbody>
+      </table>
+    </div>
+
+    <details class="fold" id="sampleFold">
+      <summary>展开 6 模块 × 50 题明细</summary>
+      <div class="fold-body" id="sampleModules"></div>
+    </details>
+
+    <div class="notice">
+      <b>口径：</b>2026-11-07 从粉笔行测题库自定义刷题（背题模式）取样；正确率范围 50–60%，近 5 年，不限地区；每题正确率为抓取时全站正确率。取样过程只读页面数据，不作答、不提交、不写入错题本。样本只代表这 300 题，不外推为“所有行测题都如此”。
+    </div>
+  </section>
+
+  <div class="closing">
+    <h2>最后一句</h2>
+    <p>你不需要在考场上“变得聪明”，你只需要做同一件事：<strong>把题干的条件一条条摆出来，选那个全部满足的选项。</strong></p>
+    <p>言语看三关交集，判断看形式匹配，数量看方程唯一解，资料看公式计算，常识/政治看原文边界。六个模块，一套动作。</p>
+    <p class="last">配套病例：<a href="../xingce-cuoti/">行测类题对照精讲</a> · 本页只讲“怎么判”，精讲页讲“这一类为什么错”。</p>
+  </div>
+
+  <div class="footer">
+    行测统一判定法 · 300 题样本归纳 · 2026-11-07<br>
+    数据只读抓取；题目原文与解析版权归粉笔所有，本页只保留判定所需的最小摘要。
+  </div>
+</div>
+
+<script src="samples.js"></script>
+<script>
+(function(){
+  'use strict';
+  var $ = function(s){ return document.querySelector(s); };
+  var D = window.FANGFA_DATA || {meta:{modules:{}},modules:{}};
+  var MODS = ['政治理论','常识判断','言语理解与表达','数量关系','判断推理','资料分析'];
+
+  // 主题
+  var saved = null;
+  try{ saved = localStorage.getItem('cuoti_theme'); }catch(e){}
+  if(saved === 'paper') document.documentElement.setAttribute('data-theme','paper');
+  $('#themeBtn').addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    var next = cur === 'paper' ? 'eink' : 'paper';
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('cuoti_theme', next); }catch(e){}
+  });
+
+  var m = D.meta || {};
+  $('#sampleMetaBar').innerHTML =
+    '<span>样本 <b>' + (m.total || 0) + '</b> 题</span>' +
+    '<span class="chip">正确率 ' + (m.accuracy || '50-60%') + '</span>' +
+    '<span class="chip">' + (m.years || '近5年') + '</span>' +
+    '<span class="chip">' + (m.region || '不限地区') + '</span>' +
+    '<span class="chip brand">' + (m.source || '') + '</span>';
+
+  var stats = '';
+  MODS.forEach(function(mod){
+    var x = (m.modules || {})[mod];
+    if(!x) return;
+    stats += '<tr><td><b>' + mod + '</b></td>' +
+      '<td class="num">' + x.count + '</td>' +
+      '<td class="num">' + x.rate_min.toFixed(2) + '% – ' + x.rate_max.toFixed(2) + '%</td>' +
+      '<td class="num">' + x.rate_mean.toFixed(2) + '%</td>' +
+      '<td class="num">' + x.answer.A + ' / ' + x.answer.B + ' / ' + x.answer.C + ' / ' + x.answer.D + '</td>' +
+      '<td class="num">' + x.with_image + '</td></tr>';
+  });
+  $('#sampleStats').innerHTML = stats;
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  var wrap = $('#sampleModules');
+  var out = '';
+  MODS.forEach(function(mod, idx){
+    var rows = (D.modules || {})[mod] || [];
+    if(!rows.length) return;
+    out += '<details class="module" style="margin-top:10px">' +
+      '<summary><span class="mod-kicker">SAMPLES ' + (idx + 1) + '</span>' +
+      '<span class="mod-title">' + mod + ' · ' + rows.length + ' 题</span>' +
+      '<span class="mod-signal">正确率 50–60% · 按题号排序</span></summary>' +
+      '<div class="mod-body"><div class="table-wrap"><table class="sample-table">' +
+      '<thead><tr><th>#</th><th>题号 / 来源</th><th>正确率</th><th>答案</th><th>最易错选</th><th>考点</th><th>题干摘要</th></tr></thead><tbody>';
+    rows.forEach(function(r, i){
+      out += '<tr><td class="num">' + (i + 1) + '</td>' +
+        '<td><span class="mono">' + esc(r[0]) + '</span><br>' + esc(r[1]) + '</td>' +
+        '<td class="num">' + Number(r[2]).toFixed(2) + '%</td>' +
+        '<td class="center"><b>' + esc(r[3]) + '</b></td>' +
+        '<td class="center">' + esc(r[4] || '—') + '</td>' +
+        '<td>' + esc(r[5] || '—') + '</td>' +
+        '<td>' + esc(r[6] || '') + '…</td></tr>';
+    });
+    out += '</tbody></table></div></div></details>';
+  });
+  wrap.innerHTML = out;
+})();
+</script>
+</body>
+</html>
