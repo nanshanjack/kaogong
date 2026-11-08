@@ -203,6 +203,61 @@ tr:last-child td{border-bottom:0}
 .walk-steps li{margin:3px 0}
 .walk-steps li::marker{color:var(--brand);font-weight:800}
 .walk-fail{font-size:11.5px;color:var(--warn);margin-top:5px}
+
+/* 04.5 考点图鉴皮（方案 D） */
+#gtkill{--mg-indigo:#2B4A6F;--mg-indigo-soft:#E6EBF2}
+#gtkill .index-strip{display:flex;border:1.5px solid var(--ink);margin:16px 0 0;overflow-x:auto;background:var(--panel)}
+#gtkill .index-strip a{flex:1;min-width:96px;text-decoration:none;color:var(--ink2);text-align:center;padding:8px 6px;border-right:1px solid var(--line);font-size:12.5px;background:var(--card)}
+#gtkill .index-strip a:last-of-type{border-right:0}
+#gtkill .index-strip a:hover{background:var(--brand-soft)}
+#gtkill .index-strip a .c{display:block;font-family:"Cascadia Mono",Consolas,monospace;font-size:10.5px;color:var(--ink4)}
+#gtkill .index-strip .zero{flex:1;min-width:104px;text-align:center;padding:8px 6px;font-size:12.5px;color:var(--ink4);background:var(--bg2)}
+#gtkill .gt-grid{display:grid;grid-template-columns:1fr 250px;gap:24px;margin-top:18px;align-items:start}
+#gtkill .gt-aside{position:sticky;top:14px;display:grid;gap:14px}
+#gtkill .databox{background:var(--card);border:1.5px solid var(--ink);padding:12px 14px;box-shadow:3px 4px 0 rgba(38,34,27,.07)}
+#gtkill .databox .h{font-size:11px;letter-spacing:.2em;color:var(--ink3);font-weight:800;margin-bottom:8px}
+#gtkill .barrow{display:grid;grid-template-columns:74px 1fr 24px;gap:8px;align-items:center;font-size:12px;margin:6px 0}
+#gtkill .barrow .bl{color:var(--ink2);white-space:nowrap}
+#gtkill .barrow .track{height:8px;background:var(--bg2);border:1px solid var(--line2)}
+#gtkill .barrow .track i{display:block;height:100%;background:var(--brand)}
+#gtkill .barrow.hot .track i{background:var(--danger)}
+#gtkill .barrow .bv{font-family:"Cascadia Mono",Consolas,monospace;color:var(--ink3);text-align:right}
+#gtkill .timebox{background:var(--amber-soft);border:1.5px solid var(--amber);color:var(--ink2);padding:12px 14px;box-shadow:3px 4px 0 rgba(38,34,27,.07)}
+#gtkill .timebox .h{font-size:11px;letter-spacing:.2em;font-weight:800;margin-bottom:6px;color:var(--amber)}
+#gtkill .timebox .row span{color:var(--ink2)}
+#gtkill .timebox .row{display:flex;justify-content:space-between;font-family:"Cascadia Mono",Consolas,monospace;font-size:12.5px;margin:3px 0}
+#gtkill .timebox .row em{font-style:normal;color:#D9B87C}
+#gtkill .card:first-of-type{background:var(--mg-indigo);border-color:var(--mg-indigo);color:#DCE4EE}
+#gtkill .card:first-of-type h3{color:#F0F3F7}
+#gtkill .card:first-of-type p{color:#C9D4E2}
+#gtkill .card:first-of-type .rules{color:#DCE4EE}
+#gtkill .card:first-of-type .rules li::marker{color:#9FB3CC}
+#gtkill .card:first-of-type .rules li b{color:#FFFFFF}
+#gtkill .card:first-of-type .ev span{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#DCE4EE}
+#gtkill .card:first-of-type .notice{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#DCE4EE}
+#gtkill .card:first-of-type .notice b{color:#F3E3C0}
+#gtkill details.module{border:1.5px solid var(--ink);background:var(--card);box-shadow:3px 4px 0 rgba(38,34,27,.07)}
+#gtkill details.module[open] summary{background:var(--brand-soft)}
+#gtkill .mod-kicker{font-family:"Cascadia Mono",Consolas,monospace;letter-spacing:.22em;color:var(--danger)}
+#gtkill .mod-title{font-family:"Source Han Serif SC","Noto Serif SC","SimSun",serif;font-weight:900}
+#gtkill .mod-body h3{border-left:3px solid var(--danger);padding-left:9px}
+#gtkill .walk{border:1.5px solid var(--ink);background:var(--card);box-shadow:3px 4px 0 rgba(38,34,27,.07);margin-top:12px;padding:14px}
+#gtkill .walk-head{gap:9px}
+#gtkill .rate{font-family:"Cascadia Mono",Consolas,monospace;font-size:21px;font-weight:800;color:var(--mg-indigo);line-height:1}
+#gtkill .rate small{display:block;font-size:9.5px;color:var(--ink4);letter-spacing:.1em}
+#gtkill .ans-pill{position:relative;font-family:"Cascadia Mono",Consolas,monospace;font-weight:800;color:var(--brand);border:2px solid var(--brand);border-radius:50%/42%;padding:0 10px;transform:rotate(-6deg);font-size:14px}
+#gtkill .wrong-pill{font-family:"Cascadia Mono",Consolas,monospace;font-size:11px;color:var(--danger);border:1.5px dashed var(--danger);border-radius:2px;padding:0 7px}
+#gtkill .wstep{margin-left:auto;font:inherit;font-family:"Cascadia Mono",Consolas,monospace;font-size:11px;font-weight:800;color:var(--ink2);background:var(--bg2);border:1px solid var(--line2);border-radius:6px;padding:2px 11px;cursor:pointer}
+#gtkill .wstep:hover{color:var(--brand);border-color:var(--brand)}
+#gtkill .walk.stepping .walk-steps li{display:none}
+#gtkill .walk.stepping .walk-steps li.cur{display:list-item}
+#gtkill .walk.stepping .ans-pill{color:transparent;border-color:var(--danger)}
+#gtkill .walk.stepping .ans-pill:after{content:"答案 ?";position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);color:var(--danger);font-size:13px;letter-spacing:.05em}
+#gtkill .walk.stepping .wrong-pill{visibility:hidden}
+#gtkill .walk.stepping .walk-fail{display:none}
+@media(max-width:1080px){#gtkill .gt-grid{grid-template-columns:1fr}#gtkill .gt-aside{position:static;grid-template-columns:1fr 1fr}}
+@media(max-width:760px){#gtkill .gt-aside{grid-template-columns:1fr}#gtkill .index-strip a{min-width:88px}}
+
 .lightbox{position:fixed;inset:0;z-index:100;background:rgba(18,18,18,.94);display:flex;align-items:center;justify-content:center;padding:12px}
 .lightbox[hidden]{display:none}
 .lightbox img{max-width:100%;max-height:94vh;background:#fff;border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
@@ -451,6 +506,9 @@ body.lb-open{overflow:hidden}
   <section class="section" id="gtkill">
     <h2>04.5 · 图推考点秒杀链（对照原题）</h2>
     <p class="sub2">20 道图推样本逐题走链后的考点级产物。每条链都有样本支持、失效条件和时间上限；位置规律样本为 0，暂不编链。</p>
+  <nav class="index-strip"><a href="#gt-01">数量规律<span class="c">5 题</span></a><a href="#gt-04">平面拼合<span class="c">5 题</span></a><a href="#gt-07">空间类<span class="c">5 题</span></a><a href="#gt-02">属性-对称<span class="c">2 题</span></a><a href="#gt-03">样式规律<span class="c">2 题</span></a><a href="#gt-05">图形间关系<span class="c">2 题</span></a><a href="#gt-06">黑白块<span class="c">1 题</span></a><span class="zero">位置规律 · 0 题待补样</span></nav>
+  <div class="gt-grid">
+  <div class="gt-main">
     <div class="card">
       <h3>统一判定顺序（最终版，合并“先看组成”与“属性→位置→样式→数量→特殊”）</h3>
       <p><b>第一步永远看元素组成：</b></p>
@@ -464,7 +522,7 @@ body.lb-open{overflow:hidden}
       <div class="notice" style="margin-top:8px"><b>考点分布（20 题）：</b>平面拼合 5 · 数量规律 5（含混合）· 空间类 5 · 图形间关系 2 · 对称性 2 · 样式规律 2 · 黑白块 1 · <b>位置规律 0（待补样）</b>。原题图已本地化，点击可放大；解析只做要点转译，不搬运原文。</div>
     </div>
 
-    <details class="module" open>
+    <details class="module" id="gt-01" open>
       <summary><span class="mod-kicker">GT-01 · 样本 5</span><span class="mod-title">数量规律：黑球 / 笔画 / 交点，三种子信号三条链</span><span class="mod-signal">9ndep · i9bs5 · 5850r · 4io31 · 584nv</span></summary>
       <div class="mod-body">
         <h3>第一眼信号 → 子链</h3>
@@ -482,25 +540,25 @@ body.lb-open{overflow:hidden}
         <h3>原题走链</h3>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_9ndep.png" data-fig="img/tk-3_1_9ndep.png"><img src="img/tk-3_1_9ndep.png" alt="3_1_9ndep 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_9ndep</b><span>2024 黑龙江 71 · 正确率 51.79 · 答案 A · 易错 B</span></div>
+          <div><div class="walk-head"><b>3_1_9ndep</b><span>2024 黑龙江 71 · <span class="rate">51.79<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 B</span></span></div>
           <ol class="walk-steps"><li>信号：四格子＋小黑球 → 数量-素。</li><li>总数：每图黑球均 14 → 排除 C。</li><li>分布：对角线奇偶相同（左下→右上全奇、右下→左上全偶）→ 仅 A。</li></ol>
           <div class="walk-fail">反例警示：易错选 B 的考生停在“总数 14”没走第二层。</div></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_i9bs5.png" data-fig="img/tk-3_1_i9bs5.png"><img src="img/tk-3_1_i9bs5.png" alt="3_1_i9bs5 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_i9bs5</b><span>正确率 53.59 · 答案 C · 易错 B（分组题）</span></div>
+          <div><div class="walk-head"><b>3_1_i9bs5</b><span><span class="rate">53.59<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span>（分组题）</span></div>
           <ol class="walk-steps"><li>信号：“日”字变形图群 → 笔画数。</li><li>奇点：①④⑥两笔、②③⑤一笔 → 分组 C。</li></ol>
           <div class="walk-fail">失效：不是“日/田/A”变形时，老实数奇点，别硬套。</div></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_5850r.png" data-fig="img/tk-3_1_5850r.png"><img src="img/tk-3_1_5850r.png" alt="3_1_5850r 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_5850r</b><span>正确率 51.06 · 答案 D · 易错 B</span></div>
+          <div><div class="walk-head"><b>3_1_5850r</b><span><span class="rate">51.06<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
           <ol class="walk-steps"><li>信号：线条交叉明显＋外框 → 框内交点数。</li><li>数列：框内交点 1→2→3→4→5 → ？= 6 → D。</li></ol></div>
         </div>
       </div>
     </details>
 
-    <details class="module">
+    <details class="module" id="gt-02">
       <summary><span class="mod-kicker">GT-02 · 样本 2</span><span class="mod-title">属性-对称性：规整＋等腰，轴/中心两把尺</span><span class="mod-signal">5853l · 584nv</span></summary>
       <div class="mod-body">
         <h3>第一眼信号 → 秒杀链</h3>
@@ -513,19 +571,19 @@ body.lb-open{overflow:hidden}
         <h3>原题走链</h3>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_5853l.png" data-fig="img/tk-3_1_5853l.png"><img src="img/tk-3_1_5853l.png" alt="3_1_5853l 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_5853l</b><span>2024 黑龙江 46 · 正确率 59.82 · 答案 D · 易错 B</span></div>
+          <div><div class="walk-head"><b>3_1_5853l</b><span>2024 黑龙江 46 · <span class="rate">59.82<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
           <ol class="walk-steps"><li>规律：奇数项仅轴对称，偶数项轴＋中心。</li><li>？= 轴＋中心 → D。</li></ol></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_584nv.png" data-fig="img/tk-3_1_584nv.png"><img src="img/tk-3_1_584nv.png" alt="3_1_584nv 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_584nv</b><span>正确率 56.36 · 答案 B · 易错 C（双解样本）</span></div>
+          <div><div class="walk-head"><b>3_1_584nv</b><span><span class="rate">56.36<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span>（双解样本）</span></div>
           <ol class="walk-steps"><li>路一（对称）：两长条中间画线，左右对称 → 锁 B。</li><li>路二（数量）：每种长度出现两次 → ？处补同长 → 锁 B。</li></ol>
           <div class="walk-fail">教学点：双解题不必纠结用哪条路，能锁唯一就行。</div></div>
         </div>
       </div>
     </details>
 
-    <details class="module">
+    <details class="module" id="gt-03">
       <summary><span class="mod-kicker">GT-03 · 样本 2</span><span class="mod-title">样式规律：遍历找公共元素，加减同异配旋转</span><span class="mod-signal">4io31 · 55gmn</span></summary>
       <div class="mod-body">
         <h3>两条子链</h3>
@@ -538,18 +596,18 @@ body.lb-open{overflow:hidden}
         <h3>原题走链</h3>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_4io31.png" data-fig="img/tk-3_1_4io31.png"><img src="img/tk-3_1_4io31.png" alt="3_1_4io31 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_4io31</b><span>正确率 50.03 · 答案 A · 易错 D</span></div>
+          <div><div class="walk-head"><b>3_1_4io31</b><span><span class="rate">50.03<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 D</span></span></div>
           <ol class="walk-steps"><li>信号：组成相似＋元素反复 → 遍历。</li><li>公共元素：每图都含长方形 → ？必含 → A。</li></ol></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_55gmn.png" data-fig="img/tk-3_1_55gmn.png"><img src="img/tk-3_1_55gmn.png" alt="3_1_55gmn 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_55gmn</b><span>正确率 50.91 · 答案 B · 易错 C</span></div>
+          <div><div class="walk-head"><b>3_1_55gmn</b><span><span class="rate">50.91<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
           <ol class="walk-steps"><li>信号：线条叠合 → 加减同异。</li><li>规律：图1＋图2 相加 → 顺时针旋转 → 重合线缩短、其余延长 → B。</li></ol></div>
         </div>
       </div>
     </details>
 
-    <details class="module">
+    <details class="module" id="gt-04">
       <summary><span class="mod-kicker">GT-04 · 样本 5（图推最大考点）</span><span class="mod-title">平面拼合：无颜色走“平行等长相消”，有颜色逐片验色</span><span class="mod-signal">aeu0f · aqtb7 · 5fkpm · fb612 · aqtbk</span></summary>
       <div class="mod-body">
         <h3>两条子链</h3>
@@ -562,24 +620,24 @@ body.lb-open{overflow:hidden}
         <h3>原题走链</h3>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_aeu0f.png" data-fig="img/tk-3_1_aeu0f.png"><img src="img/tk-3_1_aeu0f.png" alt="3_1_aeu0f 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_aeu0f</b><span>正确率 53.26 · 答案 B · 易错 A</span></div>
+          <div><div class="walk-head"><b>3_1_aeu0f</b><span><span class="rate">53.26<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
           <ol class="walk-steps"><li>信号：纸片拼轮廓、无颜色 → 平行且等长相消。</li><li>消去平行等长线段 → 轮廓 = B。</li></ol></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_aqtb7.png" data-fig="img/tk-3_1_aqtb7.png"><img src="img/tk-3_1_aqtb7.png" alt="3_1_aqtb7 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_aqtb7</b><span>正确率 53.25 · 答案 C · 易错 A</span></div>
+          <div><div class="walk-head"><b>3_1_aqtb7</b><span><span class="rate">53.25<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
           <ol class="walk-steps"><li>信号：一面黑一面白 → 翻转会变色。</li><li>逐片验色：A 中间三角形应黑现白；B 应白现黑；D 形状对不上 → C。</li></ol>
-          <div class="walk-fail">反例警示：易错 A 就是只拼形状忘了验色。</div></div>
+          <div class="walk-fail">反例警示：<span class="wrong-pill">易错 A</span> 就是只拼形状忘了验色。</div></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_5fkpm.png" data-fig="img/tk-3_1_5fkpm.png"><img src="img/tk-3_1_5fkpm.png" alt="3_1_5fkpm 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_5fkpm</b><span>正确率 56.98 · 答案 B · 易错 C（选非题）</span></div>
+          <div><div class="walk-head"><b>3_1_5fkpm</b><span><span class="rate">56.98<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span>（选非题）</span></div>
           <ol class="walk-steps"><li>问法：选“不能拼成”的项。</li><li>A/C/D 均可拼出（拼法如图）→ 排除 → B 四片颜色全错、拼不成 → B。</li></ol></div>
         </div>
       </div>
     </details>
 
-    <details class="module">
+    <details class="module" id="gt-05">
       <summary><span class="mod-kicker">GT-05 · 样本 2</span><span class="mod-title">图形间关系：相交于线数数列，连接方式分组</span><span class="mod-signal">buin5 · houno</span></summary>
       <div class="mod-body">
         <h3>两条子链</h3>
@@ -592,18 +650,18 @@ body.lb-open{overflow:hidden}
         <h3>原题走链</h3>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_buin5.png" data-fig="img/tk-3_1_buin5.png"><img src="img/tk-3_1_buin5.png" alt="3_1_buin5 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_buin5</b><span>正确率 53.39 · 答案 C · 易错 D</span></div>
+          <div><div class="walk-head"><b>3_1_buin5</b><span><span class="rate">53.39<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
           <ol class="walk-steps"><li>信号：两小图形拼合 → 相交线数量。</li><li>第一组 1/2/3 → 第二组 4/5/？= 6 → C。</li></ol></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_houno.png" data-fig="img/tk-3_1_houno.png"><img src="img/tk-3_1_houno.png" alt="3_1_houno 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_houno</b><span>正确率 52.98 · 答案 C · 易错 B（分组题）</span></div>
+          <div><div class="walk-head"><b>3_1_houno</b><span><span class="rate">52.98<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span>（分组题）</span></div>
           <ol class="walk-steps"><li>信号：组成相同、位置无规律 → 连接方式。</li><li>①③⑥两方块直接相连；②④⑤中间隔一块 → C。</li></ol></div>
         </div>
       </div>
     </details>
 
-    <details class="module">
+    <details class="module" id="gt-06">
       <summary><span class="mod-kicker">GT-06 · 样本 1</span><span class="mod-title">黑白块：常规规律全无时，相邻比较找形状特征</span><span class="mod-signal">55n7e</span></summary>
       <div class="mod-body">
         <h3>秒杀链</h3>
@@ -616,13 +674,13 @@ body.lb-open{overflow:hidden}
         <h3>原题走链</h3>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_55n7e.png" data-fig="img/tk-3_1_55n7e.png"><img src="img/tk-3_1_55n7e.png" alt="3_1_55n7e 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_55n7e</b><span>2023 浙江 C 81 · 正确率 55.66 · 答案 A · 易错 C</span></div>
+          <div><div class="walk-head"><b>3_1_55n7e</b><span>2023 浙江 C 81 · <span class="rate">55.66<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
           <ol class="walk-steps"><li>常规规律全无 → 相邻比较。</li><li>每个拐角处均为黑块 → B/C/D 拐角有白 → A。</li></ol></div>
         </div>
       </div>
     </details>
 
-    <details class="module">
+    <details class="module" id="gt-07">
       <summary><span class="mod-kicker">GT-07 · 样本 5</span><span class="mod-title">空间类：重构先排相对面，视图先排不可能，拼合先做减法</span><span class="mod-signal">5dsc3 · buij3 · 4ejj9 · fqcc0 · 58507</span></summary>
       <div class="mod-body">
         <h3>三条子链</h3>
@@ -636,34 +694,40 @@ body.lb-open{overflow:hidden}
         <h3>原题走链</h3>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_5dsc3-1.png" data-fig="img/tk-3_1_5dsc3-1.png"><img src="img/tk-3_1_5dsc3-1.png" alt="3_1_5dsc3 原题图1" style="width:88px;margin:0 auto 6px" loading="lazy"></a><a href="img/tk-3_1_5dsc3-2.png" data-fig="img/tk-3_1_5dsc3-2.png"><img src="img/tk-3_1_5dsc3-2.png" alt="3_1_5dsc3 原题图2" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_5dsc3</b><span>2025 浙江 A 90 · 正确率 53.42 · 答案 A · 易错 C</span></div>
+          <div><div class="walk-head"><b>3_1_5dsc3</b><span>2025 浙江 A 90 · <span class="rate">53.42<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
           <ol class="walk-steps"><li>信号：展开图＋“任一角度至少看到一个圆” → 相对面原理。</li><li>同时看 3 个面 = 3 组相对面各出一个 → 需一组相对面都是圆 → A。</li></ol></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_buij3.png" data-fig="img/tk-3_1_buij3.png"><img src="img/tk-3_1_buij3.png" alt="3_1_buij3 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_buij3</b><span>正确率 57.61 · 答案 C · 易错 A</span></div>
+          <div><div class="walk-head"><b>3_1_buij3</b><span><span class="rate">57.61<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
           <ol class="walk-steps"><li>相对面排除：h–e、i–g 不能同现，A/B/D 面组合冲突。</li><li>剩 C → 画边验证：特征边顺时针比对一致 → C。</li></ol>
           <div class="walk-fail">反例警示：只排相对面不停，会被干扰项拖到超时——最后一步画边确认。</div></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_4ejj9.png" data-fig="img/tk-3_1_4ejj9.png"><img src="img/tk-3_1_4ejj9.png" alt="3_1_4ejj9 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_4ejj9</b><span>2025 国考县级 44 · 正确率 51.84 · 答案 B · 易错 A</span></div>
+          <div><div class="walk-head"><b>3_1_4ejj9</b><span>2025 国考县级 44 · <span class="rate">51.84<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
           <ol class="walk-steps"><li>C/D 无法投出第一个视图 → 排除。</li><li>A/B 都可能 → 遮挡比较：B 全部方块可见，A 依赖看不见的白块 → B 更稳。</li></ol></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_fqcc0.png" data-fig="img/tk-3_1_fqcc0.png"><img src="img/tk-3_1_fqcc0.png" alt="3_1_fqcc0 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_fqcc0</b><span>正确率 50.42 · 答案 C · 易错 B（选非题）</span></div>
+          <div><div class="walk-head"><b>3_1_fqcc0</b><span><span class="rate">50.42<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span>（选非题）</span></div>
           <ol class="walk-steps"><li>问“不是该立体视图”的项。</li><li>A/B/D 按箭头可见 → C 上半右侧应是曲线、下半应为矩形，视图错误 → C。</li></ol></div>
         </div>
         <div class="walk">
           <div class="walk-figs"><a href="img/tk-3_1_58507.png" data-fig="img/tk-3_1_58507.png"><img src="img/tk-3_1_58507.png" alt="3_1_58507 原题图" loading="lazy"></a></div>
-          <div><div class="walk-head"><b>3_1_58507</b><span>正确率 55.92 · 答案 A · 易错 D</span></div>
+          <div><div class="walk-head"><b>3_1_58507</b><span><span class="rate">55.92<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 D</span></span></div>
           <ol class="walk-steps"><li>信号：立体凹凸拼合 → 先减去已给部分。</li><li>剩余形状 = ①＋②＋？ → A 互补。</li></ol></div>
         </div>
       </div>
     </details>
 
     <div class="notice" style="margin-top:12px"><b>证据标注：</b>以上链的每一步都来自对应样本的解析动作归纳（样本 20 题）；“拐角黑块”“双解不纠结”两条为单样本或两样本结论，已标<b>待验证</b>。补样方式：用自定义刷题对“图形推理”子模块按 50–60% 正确率再取 20–40 题，回填本节。</div>
+  </div>
+<aside class="gt-aside">
+<div class="databox"><div class="h">考点分布 · 20 题（题数）</div><div class="barrow hot"><span class="bl">平面拼合</span><span class="track"><i style="width:100%"></i></span><span class="bv">5</span></div><div class="barrow hot"><span class="bl">数量规律</span><span class="track"><i style="width:100%"></i></span><span class="bv">5</span></div><div class="barrow hot"><span class="bl">空间类</span><span class="track"><i style="width:100%"></i></span><span class="bv">5</span></div><div class="barrow"><span class="bl">属性-对称</span><span class="track"><i style="width:40%"></i></span><span class="bv">2</span></div><div class="barrow"><span class="bl">样式规律</span><span class="track"><i style="width:40%"></i></span><span class="bv">2</span></div><div class="barrow"><span class="bl">图形间关系</span><span class="track"><i style="width:40%"></i></span><span class="bv">2</span></div><div class="barrow"><span class="bl">黑白块</span><span class="track"><i style="width:20%"></i></span><span class="bv">1</span></div><div class="barrow"><span class="bl">位置规律</span><span class="track"><i style="width:0;background:repeating-linear-gradient(90deg,var(--ink4) 0 4px,transparent 4px 8px)"></i></span><span class="bv">0</span></div></div>
+<div class="timebox"><div class="h">各考点时间上限</div><div class="row"><span>数量规律</span><em>60s</em></div><div class="row"><span>对称 / 图形间</span><em>50s</em></div><div class="row"><span>样式规律</span><em>70s</em></div><div class="row"><span>平面拼合</span><em>90s</em></div><div class="row"><span>空间重构</span><em>90s</em></div><div class="row"><span>超时动作</span><em>标记跳过</em></div></div>
+<div class="databox"><div class="h">步进自测</div><p style="margin:0;font-size:12.5px;color:var(--ink2)">每道原题可进入自测：步骤与答案隐藏，逐步揭晓；走完恢复全显。适合考前 30 秒盲测一个考点。</p></div>
+</aside></div>
   </section>
 
   <section class="section" id="math">
@@ -1013,6 +1077,23 @@ body.lb-open{overflow:hidden}
     out += '</tbody></table></div></div></details>';
   });
   wrap.innerHTML = out;
+
+  // 走链步进自测（方案 D）
+  document.querySelectorAll('#gtkill .walk').forEach(function(w){
+    var lis=w.querySelectorAll('.walk-steps li');
+    if(!lis.length)return;
+    var head=w.querySelector('.walk-head');
+    if(!head||head.querySelector('.wstep'))return;
+    var btn=document.createElement('button');btn.type='button';btn.className='wstep';btn.textContent='步进';
+    head.appendChild(btn);
+    var i=0;
+    function paint(n){lis.forEach(function(l,idx){l.classList.toggle('cur',idx<n)})}
+    btn.addEventListener('click',function(){
+      if(w.dataset.mode!=='step'){w.classList.add('stepping');w.dataset.mode='step';i=1;paint(i);btn.textContent='下一步 1/'+lis.length;}
+      else if(i<lis.length){i++;paint(i);btn.textContent=i<lis.length?('下一步 '+i+'/'+lis.length):'揭晓答案';}
+      else{w.classList.remove('stepping');w.dataset.mode='full';paint(lis.length);btn.textContent='步进';}
+    });
+  });
 
   // 原题图放大
   var lb = $('#lightbox');

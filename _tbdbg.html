@@ -1,0 +1,14 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>
+<iframe id="f" src="/xingce-fangfa/" style="width:1280px;height:800px;border:0"></iframe>
+<pre id="out">wait</pre>
+<script>
+document.getElementById('f').onload=function(){setTimeout(function(){
+  var d=document.getElementById('f').contentDocument;
+  var tb=d.querySelector('#gtkill .timebox');
+  if(!tb){document.getElementById('out').textContent='no timebox';return}
+  var row=tb.querySelector('.row');
+  var sp=row.querySelector('span');
+  var cs=getComputedStyle(tb), cs2=getComputedStyle(sp);
+  document.getElementById('out').textContent=JSON.stringify({bg:cs.backgroundColor,color:cs.color,spanColor:cs2.color,spanText:sp.textContent,w:Math.round(tb.getBoundingClientRect().width)});
+},2500)};
+</script></body></html>
