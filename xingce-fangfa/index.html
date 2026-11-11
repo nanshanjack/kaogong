@@ -279,9 +279,64 @@ body.lb-open{overflow:hidden}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
+  <link rel="stylesheet" href="../fangfa.css">
 </head>
 <body>
+<div class="readbar" aria-hidden="true"><i id="readbar"></i></div>
 <div class="wrap">
+
+<aside class="book-rail" aria-label="本页目录">
+  <div class="rail-head">行测方法讲义<small>XINGCE / 13 SECTIONS</small></div>
+  <nav class="rail-nav">
+    <a href="#chain" class="active"><i>01</i><span>五步判定链</span></a><a href="#table"><i>02</i><span>六模块一张表</span></a><a href="#evidence"><i>02.5</i><span>证据与边界</span></a><a href="#verbal"><i>03</i><span>言语：三关交集</span></a><a href="#judge"><i>04</i><span>判断：规律/四槽/论证桥</span></a><a href="#gtkill"><i>04.5</i><span>图推考点秒杀链</span></a><a href="#math"><i>05</i><span>数量：等量关系的唯一解</span></a><a href="#data"><i>06</i><span>资料：问法→公式→数据</span></a><a href="#common"><i>07</i><span>常识：原文与边界</span></a><a href="#politics"><i>08</i><span>政治：考点原文对应</span></a><a href="#kplist"><i>08.5</i><span>六模块考点清单</span></a><a href="#score"><i>09</i><span>高分应试策略</span></a><a href="#samples"><i>10</i><span>300 题核验表</span></a>
+  </nav>
+  <div class="rail-progress"><i id="railProgress"></i></div>
+  <div class="rail-note">样本 2026-11-07<br>50–60% · 近 5 年<br>未作答 · 未提交</div>
+</aside>
+
+<details class="quick-rail" id="quickRail" open>
+  <summary>速查 · 本页数据与时间上限</summary>
+  <div class="quick-inner">
+    
+<div class="qcard">
+  <div class="qcap">五步顺序</div>
+  <p>定目标 → 抽条件 → 逐项验 → 锁唯一 → 止损</p>
+</div>
+<div class="qcard">
+  <div class="qcap">单题止损</div>
+  <div class="qrow"><span>图推</span><b>60s</b></div>
+  <div class="qrow"><span>定义</span><b>75s</b></div>
+  <div class="qrow"><span>逻辑</span><b>90s</b></div>
+  <div class="qrow"><span>数量</span><b>120s</b></div>
+  <div class="qrow"><span>资料</span><b>90s</b></div>
+</div>
+<div class="qcard">
+  <div class="qcap">样本口径</div>
+  <p><b>300</b> 题 · 6 模块 × 50</p>
+  <p>正确率 50–60% · 近 5 年 · 不限地区</p>
+</div>
+<div class="qcard">
+  <div class="qcap">最容易丢分</div>
+  <ul>
+    <li>只找到一个规律就选</li>
+    <li>定义漏一个槽位</li>
+    <li>资料时间 / 单位错位</li>
+    <li>两个都像时硬猜</li>
+  </ul>
+</div>
+<div class="qcard qmotto">
+  <div class="qcap">一句话</div>
+  <p>先定问法，再抽条件；<br>每个选项都验，两个都像就是漏了条件。</p>
+</div>
+<a class="qlink" href="../">工作台 · 评分卡与错题 →</a>
+<a class="qlink" href="../shenlun-fangfa/">申论 / 公文判定法 →</a>
+
+    <button class="qlink qprint" id="printBtn" type="button">打印本页</button>
+  </div>
+</details>
+
+<main class="book-main">
+
 
   <div class="top">
     <div>
@@ -1001,6 +1056,7 @@ body.lb-open{overflow:hidden}
     <a href="https://www.eol.cn/kaoshi/gwy/gjgwy/202607/t20260709_2754299.shtml" target="_blank" rel="noopener">图推流程文章</a><br>
     商业/名师资料仅作规则候选，转译不复制；题目原文与解析版权归粉笔所有，本页只保留判定所需的最小摘要。
   </div>
+  </main>
 </div>
 
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="原题图放大">
@@ -1112,5 +1168,7 @@ body.lb-open{overflow:hidden}
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !lb.hidden) closeLb(); });
 })();
 </script>
+<button class="to-top" id="toTop" type="button" aria-label="回到顶部">↑ 顶部</button>
+<script src="../fangfa.js" defer></script>
 </body>
 </html>

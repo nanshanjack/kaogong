@@ -184,9 +184,64 @@ tr:last-child td{border-bottom:0}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
+  <link rel="stylesheet" href="../fangfa.css">
 </head>
 <body>
+<div class="readbar" aria-hidden="true"><i id="readbar"></i></div>
 <div class="wrap">
+
+<aside class="book-rail" aria-label="本页目录">
+  <div class="rail-head">申论公文讲义<small>SHENLUN / 10 SECTIONS</small></div>
+  <nav class="rail-nav">
+    <a href="#evidence" class="active"><i>01</i><span>三层证据与双轨衔接</span></a><a href="#chain"><i>02</i><span>大纲四能力 → 五步动作</span></a><a href="#material"><i>03</i><span>材料怎么读：词—句—段</span></a><a href="#genre"><i>04</i><span>文种怎么定：法定 vs 事务性</span></a><a href="#format"><i>05</i><span>格式三档与常考文种</span></a><a href="#structure"><i>06</i><span>结构怎么排：分文种骨架</span></a><a href="#language"><i>07</i><span>语言怎么写：三改三不</span></a><a href="#score"><i>08</i><span>应试节奏与卷面</span></a><a href="#check"><i>09</i><span>成文前 20 秒自检</span></a><a href="#sources"><i>10</i><span>证据与来源</span></a>
+  </nav>
+  <div class="rail-progress"><i id="railProgress"></i></div>
+  <div class="rail-note">考据 2026-11-07<br>A/B/C 三级证据<br>32 题评分卡</div>
+</aside>
+
+<details class="quick-rail" id="quickRail" open>
+  <summary>速查 · 本页数据与时间上限</summary>
+  <div class="quick-inner">
+    
+<div class="qcard">
+  <div class="qcap">成文前 20 秒</div>
+  <ol>
+    <li>文种对吗</li>
+    <li>对象对吗</li>
+    <li>格式档位对吗</li>
+    <li>要素全吗</li>
+    <li>要点来自材料吗</li>
+    <li>结构顺吗</li>
+    <li>字数超吗</li>
+  </ol>
+</div>
+<div class="qcard">
+  <div class="qcap">格式三档</div>
+  <p><b>全</b> 标题 + 称谓 + 正文 + 落款 + 日期</p>
+  <p><b>半</b> 标题 + 称谓 + 正文</p>
+  <p><b>无</b> 标题 + 正文分条</p>
+</div>
+<div class="qcard">
+  <div class="qcap">三改三不</div>
+  <p>改：换主语 / 删修饰 / 并同类</p>
+  <p>不：不发明 / 不抒情 / 不口语</p>
+</div>
+<div class="qcard">
+  <div class="qcap">验证层</div>
+  <p><b>8</b> 套行政执法卷 · <b>32</b> 题 · <b>134</b> 个答案要点</p>
+</div>
+<div class="qcard qmotto">
+  <div class="qcap">一句话</div>
+  <p>要点从材料来，<br>结构从文种来，语言从规范来。</p>
+</div>
+<a class="qlink" href="../xingce-fangfa/">行测 / 统一判定法 →</a>
+
+    <button class="qlink qprint" id="printBtn" type="button">打印本页</button>
+  </div>
+</details>
+
+<main class="book-main">
+
 
   <div class="top">
     <div>
@@ -513,6 +568,7 @@ tr:last-child td{border-bottom:0}
     申论与公文判定法 · 三层证据归纳 · 2026-11-07<br>
     公文法规与标准原文版权归发布机关；教学资料只做要点转译，不复制原文。
   </div>
+  </main>
 </div>
 
 <script>
@@ -530,5 +586,7 @@ tr:last-child td{border-bottom:0}
   });
 })();
 </script>
+<button class="to-top" id="toTop" type="button" aria-label="回到顶部">↑ 顶部</button>
+<script src="../fangfa.js" defer></script>
 </body>
 </html>
