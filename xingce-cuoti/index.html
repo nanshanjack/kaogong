@@ -55,6 +55,7 @@ h1{font-size:31px;line-height:1.25;margin:4px 0 8px;letter-spacing:-.01em}
   font-size:12.5px;text-decoration:none;cursor:pointer;transition:border-color .15s,background .15s;
 }
 .btn:hover{border-color:var(--brand2);background:var(--brand-soft)}
+.top-actions .btn{padding:6px 8px;font-size:12px;white-space:nowrap}
 .syncbar{
   display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--panel);
   border:1px solid var(--line);border-radius:12px;padding:10px 14px;
@@ -253,23 +254,23 @@ input[type=search]{min-width:180px}
     <div>
       <div class="eyebrow">行测 · 类题精讲</div>
       <h1>同一类错，拆开看</h1>
-      <p class="sub">最近 16 天粉笔练习错题，按“设错手法”归成 <span id="cardCount">15</span> 类；每类用原题对照，给一条能复用的解法链。统计只放页脚。</p>
+      <p class="sub">2026-11-11 至 11-13 新增 57 道练习错题，按模块归成 <span id="cardCount">20</span> 类；每类用原题对照，给一条能复用的解法链。统计只放页脚。</p>
     </div>
     <div class="top-actions">
       <a class="btn" href="../">← 返回工作台</a>
       <a class="btn" href="../xingce-fangfa/">行测统一判定法 →</a>
       <button class="btn" id="themeBtn" type="button" title="切换墨水屏 / 暖纸">切换纸色</button>
-      <button class="btn" id="openAll" type="button">展开全部</button>
-      <button class="btn" id="closeAll" type="button">收起全部</button>
+      <button class="btn" id="toggleAll" type="button">展开</button>
     </div>
   </header>
 
   <div class="syncbar" id="syncbar">正在读取精讲卡…</div>
 
   <section class="intro" id="intro">
-    <p class="lead">不是统计错了几道，而是把同一类错法拆开给你看：命题人怎么下套、你为什么会踩、下次按什么顺序做。</p>
+    <p class="lead">不是统计错了几道，而是把同一类错法拆开给你看：命题人怎么下套、你为什么会踩、下次按什么顺序做。本页已并入 2026-11-13 增量：57 道新错题、20 张类题卡。</p>
     <ol class="usage">
-      <li>每张卡先看“类题画像”认信号，再用“原题对照”看命题人怎么下套。</li>
+      <li>先看各模块开头的“本轮增量”卡：上面是这 3 天的新错因和时间链。</li>
+      <li>再回同类旧卡补方法；每张卡先看“类题画像”认信号，再用“原题对照”看命题人怎么下套。</li>
       <li>图推卡在原题对照里附完整原图（题干 + 选项），点图可全屏放大；先看图，再读文字拆解。</li>
       <li>把“正确解法链”背成一个固定动作，最后用“变式自测”检查自己是不是真的会了。</li>
       <li>自测只给题、不给答案；做完回粉笔找同类题验证，或把卡住的地方告诉我，我再补一张卡。</li>
@@ -278,7 +279,7 @@ input[type=search]{min-width:180px}
   </section>
 
   <details class="toc" id="tocFold">
-    <summary><span>先找你要补的那一类</span><span class="toc-count" id="tocCount">15 类</span></summary>
+    <summary><span>先找你要补的那一类</span><span class="toc-count" id="tocCount">20 类</span></summary>
     <div class="toc-inner">
       <div class="toc-head">
         <div class="tabs" id="moduleTabs">
@@ -287,6 +288,7 @@ input[type=search]{min-width:180px}
           <button class="tab" data-module="判断推理" type="button">判断推理</button>
           <button class="tab" data-module="常识判断" type="button">常识判断</button>
           <button class="tab" data-module="政治理论" type="button">政治理论</button>
+          <button class="tab" data-module="数量关系" type="button">数量关系</button>
         </div>
       </div>
       <div class="toc-grid" id="tocGrid"></div>
@@ -305,7 +307,7 @@ input[type=search]{min-width:180px}
     <summary>页脚索引 · 数据与统计（点开看）</summary>
     <div class="fold-body">
       <p class="stats-lead">这一块才是统计。正文只讲类题，不看它也不影响复习。</p>
-      <p class="stats-lead">正文 <span id="statCards">15</span> 类卡对应 <span id="statPractice">54</span> 道练习错题；<span id="statExam">37</span> 道考场扫题只进统计，不单独做卡。</p>
+      <p class="stats-lead">正文 <span id="statCards">20</span> 类卡；本轮 <span id="statPractice">57</span> 道练习错题已计入页脚统计（<span id="statExam">0</span> 道考场扫题），旧卡保留作方法库。</p>
       <div class="kpis" id="kpis"></div>
       <div class="table-wrap">
         <table id="moduleTable">
@@ -319,7 +321,7 @@ input[type=search]{min-width:180px}
       </div>
       <p class="stats-lead" style="margin-top:8px">“粉笔全量”是用户报告里的全模块正确率（2026-10-16），不是本窗口；本窗口样本只覆盖了部分模块。</p>
 
-      <h3 style="font-size:14px;margin:14px 0 7px">练习错题聚类</h3>
+      <h3 style="font-size:14px;margin:14px 0 7px">本轮错题聚类</h3>
       <div class="table-wrap">
         <table id="clusterTable">
           <thead><tr><th>模块</th><th>子类</th><th class="num">错题</th><th class="num">均时</th><th class="num">易错命中</th><th>主要手法</th></tr></thead>
@@ -510,11 +512,11 @@ input[type=search]{min-width:180px}
     });
   });
 
-  $('#openAll').addEventListener('click', function(){
-    document.querySelectorAll('.lesson').forEach(function(el){ el.open = true; });
-  });
-  $('#closeAll').addEventListener('click', function(){
-    document.querySelectorAll('.lesson').forEach(function(el){ el.open = false; });
+  $('#toggleAll').addEventListener('click', function(){
+    var all = document.querySelectorAll('.lesson');
+    var anyClosed = Array.prototype.some.call(all, function(el){ return !el.open; });
+    Array.prototype.forEach.call(all, function(el){ el.open = anyClosed; });
+    this.textContent = anyClosed ? '收起' : '展开';
   });
 
   function openHash(){
@@ -551,11 +553,21 @@ input[type=search]{min-width:180px}
     return '';
   };
 
+  function avgSecs(rs){
+    var vals = rs.map(function(r){ return r.secs; }).filter(function(v){ return v != null; });
+    return vals.length ? vals.reduce(function(a,b){ return a+b; },0)/vals.length : null;
+  }
+  var graphRows = D.rows.filter(function(r){ return r.module === '判断推理' && r.sub === '图形推理'; });
+  var qtyRows = D.rows.filter(function(r){ return r.module === '数量关系'; });
+  var graphOver90 = graphRows.filter(function(r){ return (r.secs || 0) > 90; }).length;
+  var qtyOver120 = qtyRows.filter(function(r){ return (r.secs || 0) > 120; }).length;
+  var graphAvg = avgSecs(graphRows), qtyAvg = avgSecs(qtyRows);
+  var win = m.window || {};
   $('#kpis').innerHTML = [
-    {lbl:'16 天唯一错题', num:m.wrong_unique, small:'道', foot:'共 ' + m.wrong_attempts + ' 次错误作答'},
-    {lbl:'练习模式', num:m.practice_wrong, small:'道', foot:'53/54 用时 ≥20 秒，认真做'},
-    {lbl:'考场扫题', num:m.exam_wrong, small:'道', foot:'31/37 ≤5 秒，低可信'},
-    {lbl:'易错项命中', num:m.easy_hit_practice, small:'/' + m.practice_wrong, foot:'练习错题里选了粉笔标的易错项'}
+    {lbl:'本轮新增错题', num:m.wrong_unique, small:'道', foot:m.sessions.total + ' 场练习 · ' + (win.from||'').slice(5) + '～' + (win.to||'').slice(5)},
+    {lbl:'易错项命中', num:m.easy_hit_practice, small:'/' + m.practice_wrong, foot:'选了粉笔标注的易错项'},
+    {lbl:'判断推理均时', num:graphAvg == null ? '—' : fmtSecs(Math.round(graphAvg)), small:'', foot:'图推 ' + graphRows.length + ' 道，' + graphOver90 + ' 道超 90 秒'},
+    {lbl:'数量均时', num:qtyAvg == null ? '—' : fmtSecs(Math.round(qtyAvg)), small:'', foot:'数量 ' + qtyRows.length + ' 道，' + qtyOver120 + ' 道超 2 分钟'}
   ].map(function(k){
     return '<div class="kpi"><div class="lbl">' + k.lbl + '</div>' +
       '<div class="num">' + k.num + '<small>' + k.small + '</small></div>' +
