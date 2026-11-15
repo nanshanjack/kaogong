@@ -141,6 +141,19 @@ h1{font-size:31px;line-height:1.25;margin:4px 0 8px;letter-spacing:-.01em}
 .case-row .opts{font-size:12.5px;color:var(--ink3);line-height:1.7}
 .case-take{margin-top:7px;padding:7px 9px;background:var(--panel);border-radius:7px;font-size:12.5px;color:var(--ink2)}
 .case-take b{color:var(--brand)}
+.case-evidence{margin:8px 0 10px;padding:10px 11px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--mark2);border-radius:8px}
+.case-evidence-head{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.case-evidence-title{font-size:12px;font-weight:850;color:var(--ink)}
+.case-evidence-source{font-size:11px;color:var(--ink4)}
+.case-evidence-label{display:block;margin:5px 0 2px;font-size:10.5px;letter-spacing:.04em;color:var(--brand);font-weight:800}
+.case-evidence-prompt{margin:0;font-size:13px;line-height:1.75;color:var(--ink2)}
+.case-evidence-options{display:grid;gap:3px;margin-top:3px}
+.case-evidence-option{margin:0;padding:3px 6px;border-radius:5px;font-size:12.5px;line-height:1.65;color:var(--ink3)}
+.case-evidence-option.is-answer{background:var(--brand-soft);color:var(--ink);font-weight:750}
+.case-evidence-option.is-yours{border-left:2px solid var(--danger);padding-left:4px}
+.case-evidence-mark{font-weight:900;text-decoration-line:underline;text-decoration-thickness:2px;text-decoration-color:var(--mark2);text-underline-offset:3px;background:linear-gradient(transparent 60%,var(--mark) 60%)}
+.case-evidence-note{margin:7px 0 0;padding-top:6px;border-top:1px dashed var(--line);font-size:11px;line-height:1.6;color:var(--ink4)}
+.case-evidence-note b{color:var(--brand)}
 .case-fig{margin:7px 0 9px;padding:7px;background:#fff;border:1px solid var(--line);border-radius:9px}
 .case-fig a{display:block;position:relative;text-decoration:none;line-height:0}
 .case-fig img{display:block;width:100%;height:auto;border-radius:4px}
@@ -238,6 +251,9 @@ input[type=search]{min-width:180px}
   .case-head{align-items:flex-start}
   .case-fig{padding:5px;margin:6px 0 8px}
   .case-fig figcaption{font-size:10.5px}
+  .case-evidence{padding:9px 10px}
+  .case-evidence-prompt,.case-evidence-option{font-size:12.5px}
+  .case-evidence-source{max-width:100%;overflow-wrap:anywhere}
   .lightbox{padding:4px}
   .ls h3{font-size:14.5px}
   .syncbar{overflow-x:auto}
@@ -275,7 +291,7 @@ input[type=search]{min-width:180px}
       <li>把“正确解法链”背成一个固定动作，最后用“变式自测”检查自己是不是真的会了。</li>
       <li>自测只给题、不给答案；做完回粉笔找同类题验证，或把卡住的地方告诉我，我再补一张卡。</li>
     </ol>
-    <p class="boundary">图推卡附完整原图；其余卡片只保留改写后的题干骨架、关键选项和来源题号，完整解析原文请回粉笔按来源题号查看。</p>
+    <p class="boundary">每道卡片的“真题对应”直接展示已核对的原题摘录、选项与重点标记；图推卡附完整原图。公开页仍不展示粉笔整段解析，来源与题号保留在证据栏。</p>
   </section>
 
   <details class="toc" id="tocFold">
@@ -406,26 +422,49 @@ input[type=search]{min-width:180px}
     '<span>精讲卡生成 <b>' + esc(generated) + '</b></span>' +
     '<span class="chip brand">' + L.cards.length + ' 类</span>' +
     (days != null ? '<span class="chip">距省考 ' + days + ' 天</span>' : '') +
-    '<span class="chip">图推卡附完整原图</span>';
+    '<span class="chip">真题证据已挂接</span>';
 
   function sec(n, title, body){
     return '<section class="ls"><h3><span class="ls-n">' + n + '</span>' + title + '</h3>' + body + '</section>';
   }
 
+  function markedText(text, focus){
+    text = String(text == null ? '' : text);
+    focus = String(focus == null ? '' : focus);
+    var at = focus ? text.indexOf(focus) : -1;
+    if(at < 0) return esc(text);
+    return esc(text.slice(0, at)) + '<strong class="case-evidence-mark">' + esc(text.slice(at, at + focus.length)) + '</strong>' + esc(text.slice(at + focus.length));
+  }
+
+  function evidenceHtml(c){
+    var e = c.evidence;
+    if(!e || e.status !== 'verified') return '<div class="case-evidence"><b>真题对应</b><p>本题来源待核，暂不展示未确认原文。</p></div>';
+    var questionFocus = e.focus_target === 'question' ? e.focus_text : '';
+    var answerLetter = String(e.correct_option || '').slice(0, 1);
+    var yoursLetter = String(e.your_option || '').slice(0, 1);
+    var answerFocus = e.focus_target === 'answer' ? e.focus_text : '';
+    var opts = (e.options || []).map(function(option){
+      var letter = option.slice(0, 1);
+      var content = option.replace(/^[A-D]\s*/, '');
+      var classes = 'case-evidence-option' + (letter === answerLetter ? ' is-answer' : '') + (letter === yoursLetter ? ' is-yours' : '');
+      return '<p class="' + classes + '">' + '<span class="lab">' + esc(letter) + '</span> ' + markedText(content, letter === answerLetter ? answerFocus : '') + '</p>';
+    }).join('');
+    var figure = e.image ? '<figure class="case-fig"><a href="' + esc(e.image) + '" data-fig="' + esc(e.image) + '" aria-label="放大真题原图"><img src="' + esc(e.image) + '" alt="' + esc(e.source) + '真题原图：题干与选项" decoding="async"><span class="fig-zoom">点击放大</span></a><figcaption>已核对真题原图 · 图上依据见下方题眼与解析</figcaption></figure>' : '';
+    return '<section class="case-evidence" aria-label="真题原文与解析依据">' +
+      '<div class="case-evidence-head"><span class="case-evidence-title">真题原文 · 对应依据</span><span class="case-evidence-source">' + esc(e.source) + '</span></div>' +
+      figure +
+      '<span class="case-evidence-label">题干原文</span><p class="case-evidence-prompt">' + markedText(e.question, questionFocus) + '</p>' +
+      '<span class="case-evidence-label">原题选项</span><div class="case-evidence-options">' + opts + '</div>' +
+      '<p class="case-evidence-note"><b>重点：</b>加粗下划线为本卡题眼对应的原文；答案选项用墨绿色标出，你的原选项用红线标出。</p>' +
+    '</section>';
+  }
+
   function caseHtml(c){
-    var fig = c.img ?
-      '<figure class="case-fig">' +
-        '<a href="' + esc(c.img) + '" data-fig="' + esc(c.img) + '" aria-label="放大完整原图">' +
-          '<img src="' + esc(c.img) + '" alt="' + esc(c.src) + '完整原图：题干与选项" decoding="async">' +
-          '<span class="fig-zoom">点击放大</span>' +
-        '</a>' +
-        '<figcaption>完整原图 · 题干与选项</figcaption>' +
-      '</figure>' : '';
     return '<article class="case">' +
       '<div class="case-head"><div class="case-src">' + esc(c.src) + '</div>' +
       '<div><span class="chip ok">答案 ' + esc(c.answer) + '</span> ' +
       '<span class="chip danger">你选 ' + esc(c.yours) + '</span></div></div>' +
-      fig +
+      evidenceHtml(c) +
       '<div class="case-row"><span class="lab">题干骨架</span><p>' + esc(c.skeleton) + '</p></div>' +
       '<div class="case-row"><span class="lab">关键选项</span><p class="opts">' + esc(c.options) + '</p></div>' +
       '<div class="case-row"><span class="lab">题眼</span><p>' + esc(c.clue) + '</p></div>' +
