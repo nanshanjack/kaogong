@@ -1,0 +1,35 @@
+<details class="module" id="gt-01" open>
+      <summary><span class="mod-kicker">GT-01 · 样本 5</span><span class="mod-title">数量规律：黑球 / 笔画 / 交点，三种子信号三条链</span><span class="mod-signal">9ndep · i9bs5 · 5850r · 4io31 · 584nv</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules">
+          <li><b>格子＋小黑球</b> → 先数总数（常数？）→ 再看分布（奇偶/位置）。只数总数常常停在一半，第二层分布才是区分点。</li>
+          <li><b>“日”“田”“A”字变形图群</b> → 笔画数：奇点数 ÷ 2。</li>
+          <li><b>线条交叉明显＋有明显外框</b> → 框内交点数，看是否成数列。</li>
+        </ol>
+        <h3>秒杀链</h3>
+        <ol class="rules">
+          <li>认子信号（5s）→ 2. 套对应数法（20–30s）→ 3. 与选项差值排除（10s）→ 4. 常数/数列锁定（10s）。</li>
+        </ol>
+        <p class="walk-fail">失效：数完既非常数也非数列 → 回属性规律（曲直/开闭/对称）；两层规律叠加时必须走完第二层。</p>
+        <span class="timeline">时间 45–60s · 超 60s 标记</span>
+        <h3>原题走链</h3>
+        <div class="walk">
+          <div class="walk-figs"><a href="img/tk-3_1_9ndep.png" data-fig="img/tk-3_1_9ndep.png"><img src="img/tk-3_1_9ndep.png" alt="3_1_9ndep 原题图" loading="lazy"></a></div>
+          <div><div class="walk-head"><b>3_1_9ndep</b><span>2024 黑龙江 71 · <span class="rate">51.79<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>信号：四格子＋小黑球 → 数量-素。</li><li>总数：每图黑球均 14 → 排除 C。</li><li>分布：对角线奇偶相同（左下→右上全奇、右下→左上全偶）→ 仅 A。</li></ol>
+          <div class="walk-fail">反例警示：易错选 B 的考生停在“总数 14”没走第二层。</div></div>
+        </div>
+        <div class="walk">
+          <div class="walk-figs"><a href="img/tk-3_1_i9bs5.png" data-fig="img/tk-3_1_i9bs5.png"><img src="img/tk-3_1_i9bs5.png" alt="3_1_i9bs5 原题图" loading="lazy"></a></div>
+          <div><div class="walk-head"><b>3_1_i9bs5</b><span><span class="rate">53.59<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span>（分组题）</span></div>
+          <ol class="walk-steps"><li>信号：“日”字变形图群 → 笔画数。</li><li>奇点：①④⑥两笔、②③⑤一笔 → 分组 C。</li></ol>
+          <div class="walk-fail">失效：不是“日/田/A”变形时，老实数奇点，别硬套。</div></div>
+        </div>
+        <div class="walk">
+          <div class="walk-figs"><a href="img/tk-3_1_5850r.png" data-fig="img/tk-3_1_5850r.png"><img src="img/tk-3_1_5850r.png" alt="3_1_5850r 原题图" loading="lazy"></a></div>
+          <div><div class="walk-head"><b>3_1_5850r</b><span><span class="rate">51.06<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>信号：线条交叉明显＋外框 → 框内交点数。</li><li>数列：框内交点 1→2→3→4→5 → ？= 6 → D。</li></ol></div>
+        </div>
+      </div>
+    </details>

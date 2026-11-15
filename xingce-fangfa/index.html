@@ -203,6 +203,10 @@ tr:last-child td{border-bottom:0}
 .walk-steps li{margin:3px 0}
 .walk-steps li::marker{color:var(--brand);font-weight:800}
 .walk-fail{font-size:11.5px;color:var(--warn);margin-top:5px}
+/* 非图推走链：无原题图时用单列，避免左侧 300px 空白 */
+.walk.noble{grid-template-columns:1fr}
+.walk-src{margin-top:6px;font-size:11px;color:var(--ink4);font-family:"Cascadia Mono",Consolas,monospace;border-top:1px dashed var(--line);padding-top:5px}
+@media(max-width:760px){.walk.noble{grid-template-columns:1fr}}
 
 /* 04.5 考点图鉴皮（方案 D） */
 #gtkill{--mg-indigo:#2B4A6F;--mg-indigo-soft:#E6EBF2}
@@ -286,9 +290,9 @@ body.lb-open{overflow:hidden}
 <div class="wrap">
 
 <aside class="book-rail" aria-label="本页目录">
-  <div class="rail-head">行测方法讲义<small>XINGCE / 13 SECTIONS</small></div>
+  <div class="rail-head">行测方法讲义<small>XINGCE / 19 SECTIONS</small></div>
   <nav class="rail-nav">
-    <a href="#chain" class="active"><i>01</i><span>五步判定链</span></a><a href="#table"><i>02</i><span>六模块一张表</span></a><a href="#evidence"><i>02.5</i><span>证据与边界</span></a><a href="#verbal"><i>03</i><span>言语：三关交集</span></a><a href="#judge"><i>04</i><span>判断：规律/四槽/论证桥</span></a><a href="#gtkill"><i>04.5</i><span>图推考点秒杀链</span></a><a href="#math"><i>05</i><span>数量：等量关系的唯一解</span></a><a href="#data"><i>06</i><span>资料：问法→公式→数据</span></a><a href="#common"><i>07</i><span>常识：原文与边界</span></a><a href="#politics"><i>08</i><span>政治：考点原文对应</span></a><a href="#kplist"><i>08.5</i><span>六模块考点清单</span></a><a href="#score"><i>09</i><span>高分应试策略</span></a><a href="#samples"><i>10</i><span>300 题核验表</span></a>
+    <a href="#chain" class="active"><i>01</i><span>五步判定链</span></a><a href="#table"><i>02</i><span>六模块一张表</span></a><a href="#evidence"><i>02.5</i><span>证据与边界</span></a><a href="#verbal"><i>03</i><span>言语：三关交集</span></a><a href="#judge"><i>04</i><span>判断：规律/四槽/论证桥</span></a><a href="#gtkill"><i>04.5</i><span>图推考点秒杀链</span></a><a href="#math"><i>05</i><span>数量：等量关系的唯一解</span></a><a href="#data"><i>06</i><span>资料：问法→公式→数据</span></a><a href="#common"><i>07</i><span>常识：原文与边界</span></a><a href="#politics"><i>08</i><span>政治：考点原文对应</span></a><a href="#mod-yy"><i>08.6</i><span>言语 · 秒杀链</span></a><a href="#mod-pd"><i>08.7</i><span>判断 · 秒杀链</span></a><a href="#mod-sl"><i>08.8</i><span>数量 · 秒杀链</span></a><a href="#mod-zl"><i>08.9</i><span>资料 · 秒杀链</span></a><a href="#mod-cs"><i>08.10</i><span>常识 · 秒杀链</span></a><a href="#mod-zz"><i>08.11</i><span>政治 · 秒杀链</span></a><a href="#kplist"><i>08.5</i><span>六模块考点清单</span></a><a href="#score"><i>09</i><span>高分应试策略</span></a><a href="#samples"><i>10</i><span>300 题核验表</span></a>
   </nav>
   <div class="rail-progress"><i id="railProgress"></i></div>
   <div class="rail-note">样本 2026-11-07<br>50–60% · 近 5 年<br>未作答 · 未提交</div>
@@ -922,6 +926,1049 @@ body.lb-open{overflow:hidden}
           <li>“理论创新”被改成“实践”、“实践”被改成“理论”。</li>
         </ul>
         <span class="timeline">时间：20–30s · 不会就选最熟悉的原文表述</span>
+      </div>
+    </details>
+  </section>
+
+    <section class="section" id="mod-yy">
+    <h2>言语 · 非图推考点秒杀链（14 条，逐题对照原题）</h2>
+    <p class="sub2">每条走链对应一道真实原题，题干、选项、答案、正确率均可在 <code>_cache/fenbi/samples/selected.json</code> 中按 key 复算。解析经 DeepSeek-V4.1-Flash、GPT-6.1-Sol 两个模型独立作答后与粉笔交叉验证。</p>
+    <div class="notice" style="margin:8px 0 12px"><b>本模块秒杀链：</b>把空格前后当证据，把文段核心话题当边界<br><b>四拍动作：</b>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。<br><b>失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</b> · <b>时间：</b>40–50s · 超 60s 先标记</div>
+    <details class="module" id="YY-01">
+      <summary><span class="mod-kicker">YY-01 · 言语</span><span class="mod-title">对应关系-前后呼应</span><span class="mod-signal">3_1_9q7p9</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>对应关系-前后呼应</b> → 看到“依次填入画横线”且第一空前有“将原始居民全部迁出”、第二空后紧跟“失去鲜活的魅力”，两空都是前后文解释型呼应。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_9q7p9</b><span>2025年天津市公务员录用考试《行测》题 · <span class="rate">55.98<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
+          <ol class="walk-steps"><li>先看第一空前面的原因句“将原始居民全部迁出”，判定第一空要填这一原因造成的结果，即“场景消失”义（10s）</li><li>用“消失”义筛成语，“转瞬即逝”只强调时间短、不含消失至没有的意思，先排掉，其余三个暂留（15s）</li><li>第二空不纠缠词义，先抓搭配对象是“遗址”，把只能形容人的“呆板”和形容思想制度的“陈腐”直接划掉（20s）</li><li>只剩“静态”能与“遗址”搭配，且正好与后文“失去鲜活的魅力”构成动静对照，所以选 C（10s）</li></ol>
+          <div class="walk-src">源：3_1_9q7p9 · 2025天津市公务员录用考试《行测》题 · 第19题 · 正确率 55.98</div>
+          <div class="walk-fail">最容易走错的是第一空把“转瞬即逝”当“消失得快”留下来，它讲的是时间短暂而非逐步消失，必须靠第二空“遗址”的搭配才能把答案钉死在 C。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-02">
+      <summary><span class="mod-kicker">YY-02 · 言语</span><span class="mod-title">词的辨析-搭配对象</span><span class="mod-signal">3_1_cmf3u</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>词的辨析-搭配对象</b> → 题干连用三个“当……当……当……”排比，且第三空后面紧跟“共识”二字，排比提示并列呼应、“共识”提示看固定搭配。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_cmf3u</b><span>2025年江苏省公务员录用考试《行测》题（C类） · <span class="rate">53.78<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>先不读选项，标出第二空要接“某项成果、某个侧面”、第三空要搭配“共识”，明确这两空是抓手（10s）</li><li>第一空用主体排除：主语是中国探月、对象是太空，“碧海青天”写海天景色与女子忠贞、“蟾宫折桂”喻科举得中，秒排 A、D（15s）</li><li>第二空比“心心相印”和“不期而遇”，前者只能配人、配不了“成果”“侧面”这类物，据此排掉 B（20s）</li><li>第三空代入验证“凝聚共识”是唯一成立的固定搭配，另外三个都拼不成，所以选 C（10s）</li></ol>
+          <div class="walk-src">源：3_1_cmf3u · 2025江苏省公务员录用考试《行测》题（C类） · 第44题 · 正确率 53.78</div>
+          <div class="walk-fail">最容易错在第二空凭语感挑“心心相印”，它形容彼此心意相通、只能接人，一旦后面是“成果”“侧面”就已经错配。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-03">
+      <summary><span class="mod-kicker">YY-03 · 言语</span><span class="mod-title">混搭填空</span><span class="mod-signal">3_1_5ka43</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>混搭填空</b> → 第一空后面紧跟“折射出一个地区发展变迁”“一部铁路交通变迁史”，“变迁”这个词直接说明第一空要填“变化”义。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5ka43</b><span>2024年山东省公务员录用考试《行测》试题 · <span class="rate">53.63<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>抓第一空的解释句“发展变迁”“变迁史”，判定第一空必须含“变化”义（10s）</li><li>拿“变化”义一刀切：“贯通”是连接、“延展”是延长伸展，都不含变化，A、B 全排（15s）</li><li>第二空看搭配对象“发展史”加上前文“大动脉”“主动脉”的分量，要的是规模宏大类词，“流光溢彩”只写光彩好看、与“史”不搭，排 C（20s）</li><li>剩“嬗变”对“变迁”、“波澜壮阔”对“大动脉”的宏大规模，两空都对得上，所以选 D（10s）</li></ol>
+          <div class="walk-src">源：3_1_5ka43 · 2024山东省公务员录用考试《行测》试题 · 第25题 · 正确率 53.63</div>
+          <div class="walk-fail">最容易在第一空反复比较“演变”和“嬗变”白耗时间，这两个词都对，定答案的是第二空“发展史”只能配“波澜壮阔”这类大词。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-04">
+      <summary><span class="mod-kicker">YY-04 · 言语</span><span class="mod-title">主题词</span><span class="mod-signal">3_1_4rn40</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>主题词</b> → 设问是“这段文字意在说明”，且尾句用“既……也……”把落点收在“社会整体风尚”上，主旨题要看尾句落脚。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_4rn40</b><span>2022年天津市公务员录用考试《行测》试题 · <span class="rate">59.09<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>先找话题词：开头“美学经济时代”、后文反复出现“电影产业”“电影”，判定文段核心词有两个，美学和电影（10s）</li><li>用缺词法扫选项：B 全篇没提“美学”，D 没提“电影产业”，A 只说“龙头位置”丢了“美学经济”，三项都缺核心话题，直接排（20s）</li><li>剩下 C，回原文验证“引领社会整体风尚”正对应尾句“对社会整体风尚与价值发挥引领作用”，且“美学经济时代”也在（15s）</li><li>确认 C 同时盖住两个话题词、且落在尾句，所以选 C（5s）</li></ol>
+          <div class="walk-src">源：3_1_4rn40 · 2022天津市公务员录用考试《行测》试题 · 第24题 · 正确率 59.09</div>
+          <div class="walk-fail">最容易错在看见 A 项“龙头位置”文中有原话就选它，那只是论证过程中的一句，“内容产业头部位置”不是“意在说明”的落点，含原词不等于主旨。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-05">
+      <summary><span class="mod-kicker">YY-05 · 言语</span><span class="mod-title">横线在中间</span><span class="mod-signal">3_1_4j0pe</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>横线在中间</b> → 要求“填入画横线部分”且横线夹在“一方面……然而另一方面”两个分句中间，横线在中间就必须承上启下，盯的是前后接缝。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_4j0pe</b><span>2022年四川省公务员录用考试《行测》题 · <span class="rate">53.45<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>先划结构：横线前是“一方面”讲数字经济迫切要求和2025年60万亿，横线后紧接“数字产品或服务的供给、交付均需……制度指引”，再往下才是“然而另一方面”（15s）</li><li>据此判定横线要同时承上（数据跨境对数字经济重要）和启下（数字产品服务需要跨境制度），即“跨境流动是数字贸易的必需”（15s）</li><li>逐项查话题两头能不能接上：A“全球贸易”“海量数据”偷换并放大范围，C“主权属性”文中没有，D 只说立法框架、丢了数字经济，三项全排（20s）</li><li>只有 B 既接得住“数字经济”又接得住“数字产品服务交付”，所以选 B（10s）</li></ol>
+          <div class="walk-src">源：3_1_4j0pe · 2022四川省公务员录用考试《行测》题 · 第36题 · 正确率 53.45</div>
+          <div class="walk-fail">最容易错选 D，它看着像对上文《个人信息保护法》的总结，但横线在中间不在段尾，D 只回望前文、接不上后文“数字产品服务”的落点。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-06">
+      <summary><span class="mod-kicker">YY-06 · 言语</span><span class="mod-title">横线在结尾</span><span class="mod-signal">3_1_4j0pp</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>横线在结尾</b> → 横线在文末，且前面站着总结词「换言之」，一看就知道要去上文找总话题而不是接新话。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_4j0pp</b><span>2022年四川省公务员录用考试《行测》题 · <span class="rate">52.73<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>盯住横线前的「换言之」，把它当总结开关，明确这一步只做归纳不引申（10s）</li><li>顺分号数并列：小麦大麦、中国稻米、玉米大豆等，每段都写饮食随驯化地经贸易路线铺满全球（20s）</li><li>回头看前半：先讲饮食是文明交流的重要部分，再讲文明发展与繁荣靠驯化技艺的传播改进，两条线比的都是「发展轨迹」（25s）</li><li>逐项过筛：B只覆盖亚洲一国、C把关系说成饮食带文明印记、D丢了「文明」这个核心词，只剩A的「脉络相同」（20s）</li><li>两个话题都在、关系也对，所以选A（5s）</li></ol>
+          <div class="walk-src">源：3_1_4j0pp · 2022四川省公务员录用考试《行测》题 · 第37题 · 正确率 52.73</div>
+          <div class="walk-fail">最易被尾句「遍布全球」牵着选D「连成一个整体」，可那是形象的比喻不是总结，总结句必须同时扣住「饮食」和「文明」两个话题。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-07">
+      <summary><span class="mod-kicker">YY-07 · 言语</span><span class="mod-title">关联关系-并列关系</span><span class="mod-signal">3_1_584tr</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>关联关系-并列关系</b> → 第一空前面是顿号连接「礼祭祖先、____」，顿号就是并列信号，直接锁定同义方向。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_584tr</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">57.72<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先定对象：整段说的是清明节，空里只可能填祭祖追思一类词，其余先挂起（10s）</li><li>用顿号并列去校验，「礼祭祖先」要同义替换，慎终追远正是虔诚祭祀远代祖先，一空成立（15s）</li><li>反向淘汰三个：睹物思人要看见遗物、抚今追昔偏回想过去、鉴往知来偏推知未来，都没有「祭」的动作（25s）</li><li>二空验搭配，「____奋进力量」是固定说法，凝聚力量成立，聚齐汇聚聚合都不带「凝成一股」这层（15s）</li><li>两空都对得上，所以选D（5s）</li></ol>
+          <div class="walk-src">源：3_1_584tr · 2023江西省公务员录用考试《行测》题 · 第37题 · 正确率 57.72</div>
+          <div class="walk-fail">最容易在第二空凭语感选B「汇聚」，汇聚只是汇集到一处，配「力量」要的是凝成一股的「凝聚」。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-08">
+      <summary><span class="mod-kicker">YY-08 · 言语</span><span class="mod-title">关联关系-转折关系</span><span class="mod-signal">3_1_fqc8v</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>关联关系-转折关系</b> → 第一空前一个「但」字，转折关系一出，空格的意思必然和「占比不高」相反。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_fqc8v</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">58.12<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>圈出「但」，明确一空只能填「影响很大」，先把方向钉死再进选项（10s）</li><li>按方向筛一空：不容小觑、举足轻重保留；毋庸置喙是别让人插嘴、兹事体大是搭配事件本身，双双出局（25s）</li><li>用二空定生死，后文说「通过这一数字……寻找规律、得到启发」，是以小见大，管窥（隔着竹管看天）严丝合缝（20s）</li><li>回验C，「估量运转状况」搭配不成立，估量是估数量，且丢了由部分推整体的逻辑，排除（20s）</li><li>一空合规、二空精准，所以选B（5s）</li></ol>
+          <div class="walk-src">源：3_1_fqc8v · 2024甘肃公务员录用考试《行测》题 · 第26题 · 正确率 58.12</div>
+          <div class="walk-fail">别因为「举足轻重」更眼熟就倒向C，真正的杀招在第二空：「估量」配不了「运转状况」。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-09">
+      <summary><span class="mod-kicker">YY-09 · 言语</span><span class="mod-title">关联词-因果</span><span class="mod-signal">3_1_5kcla</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>关联词-因果</b> → 尾句一开口就是「从这个角度」，指代词接管上文，说明主旨句在最后而不是转折处。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5kcla</b><span>2024年浙江省公务员录用考试《行测》题（A类） · <span class="rate">56.41<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>先判题型，问「意在说明」就是主旨题，只找作者落点，不纠缠细节（10s）</li><li>划结构：市场需要→研发→利润→再研发是分述链条，「从这个角度」后面才是收口（25s）</li><li>抽总结句主干，「市场需求是技术进步的基础」，主话题落在「市场需求」上（15s）</li><li>反查三个干扰：A利润、B高利润都在分述层，D说技术推动经济，被原文「技术是经济发展的副产品」直接否掉（25s）</li><li>主话题只有一个，所以选C（5s）</li></ol>
+          <div class="walk-src">源：3_1_5kcla · 2024浙江省公务员录用考试《行测》题（A类） · 第48题 · 正确率 56.41</div>
+          <div class="walk-fail">别把「但归根到底，是对利润的追求驱动文明」当主旨，那只是插入的补充判断，真正的总结句由「从这个角度」领起。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-10">
+      <summary><span class="mod-kicker">YY-10 · 言语</span><span class="mod-title">关联词-对策</span><span class="mod-signal">3_1_584tb</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>关联词-对策</b> → 中段冒出对策标志词「要」，一段话里只要出现「要」加一串动宾，重点基本就压在它身上。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_584tb</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">58.64<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先判题型，「主要强调」是主旨概括题，答案必须是能罩住全段的那个（10s）</li><li>切三段：首句列六大特征是引子，中间「要谋划开展……」是对策，尾句「以具体行动……」是意义（20s）</li><li>抄对策的宾语，「保护、传承、弘扬和创新黄河文化」，四个动词一个都不能漏（15s）</li><li>反淘汰：A源远流长、B可持续性都在首句引子里，C讲好黄河故事只是对策四个分句中的一个，都罩不住全段（20s）</li><li>覆盖面最大的只有D，所以选D（5s）</li></ol>
+          <div class="walk-src">源：3_1_584tb · 2023江西省公务员录用考试《行测》题 · 第47题 · 正确率 58.64</div>
+          <div class="walk-fail">最易错是选C，因为「讲好黄河故事」字面最生动，但它只是「要」字句里并列的一小项，属于以偏概全。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-11">
+      <summary><span class="mod-kicker">YY-11 · 言语</span><span class="mod-title">实词填空</span><span class="mod-signal">3_1_fqc9n</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>实词填空</b> → 题干出现「依次填入」三个空，且第三空后面直接跟着「三大难题」——从搭配最硬的第三空起步</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_fqc9n</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">53.97<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>看到「依次填入」别按顺序做，先扫三个空的搭配对象，选中「___难题」这个最硬的空当突破口（10s）</li><li>拿「难题」当尺子筛：解决、破解都能配，「分解」是拆整体、「解答」是回答疑问，C、D 直接划掉（15s）</li><li>第一空回看「重要___」且后文重复「重要载体」，说明只要「中心、关键」义，B枢纽胜A纽带（20s）</li><li>第二空回代验证：前有「却」表转折，「落户意愿并未显著增强」通顺，A「增加」配意愿不通（15s）</li><li>所以选 B（5s）</li></ol>
+          <div class="walk-src">源：3_1_fqc9n · 2024甘肃公务员录用考试《行测》题 · 第32题 · 正确率 53.97</div>
+          <div class="walk-fail">最容易栽在第一空：只凭「连接农村和城市」这段意思选A纽带（读着最顺），却没注意前面有「重要」、后面又重复「重要载体」，此处要的是「中心环节」而不是单纯连接。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-12">
+      <summary><span class="mod-kicker">YY-12 · 言语</span><span class="mod-title">成语填空</span><span class="mod-signal">3_1_i4sdj</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>成语填空</b> → 空格前有「显然」+ 让……传教士___，说明空格是对前文「相斥、有别于欧洲的知识体系」下的结果判断</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_i4sdj</b><span>2024年山西省县级纪委监委公务员录用考试《行测》题 · <span class="rate">54.02<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>先圈住「显然」这个因果标记，把空格定性为「结果」，前面的365.25度对360度、相斥、有别于欧洲全是原因（15s）</li><li>给原因提性质：不是「没想到」，而是两套坐标系换算不通、按老习惯解释不了（20s）</li><li>四个选项按反应类型归档：始料不及=没预料到，迷惑不解=不理解，目瞪口呆=惊呆了，不屑一顾=看不起（20s）</li><li>用「接受过古希腊天文学训练、习惯黄道坐标系」验证：习惯被打破只会转不过弯，落在认知轴上的只有迷惑不解（15s）</li><li>所以选 B（5s）</li></ol>
+          <div class="walk-src">源：3_1_i4sdj · 2024山西省县级纪委监委公务员录用考试《行测》题 · 第2题 · 正确率 54.02</div>
+          <div class="walk-fail">最容易错选A始料不及：「相斥、有别于」容易读成「出乎意料」，但文段强调的是换算不通、理解不了，不是「没料到」。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-13">
+      <summary><span class="mod-kicker">YY-13 · 言语</span><span class="mod-title">词的辨析-程度轻重</span><span class="mod-signal">3_1_9ndf4</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>词的辨析-程度轻重</b> → 两空题，第二空的搭配对象是「严峻形势」，且前面有「遏制」这个力度词</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_9ndf4</b><span>2024年青海省公务员录用考试《行测》题 · <span class="rate">56.26<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
+          <ol class="walk-steps"><li>第一空只看搭配：「___新途径」，发明只能接具体事物（发明电灯），配不上途径，A先划掉（15s）</li><li>第二空把搭配对象「严峻形势」和前面的「遏制」一起圈住，定方向为「不让形势继续恶化」，语气偏重（20s）</li><li>给选项排程度梯度：缓解最轻（减一点）＜扭转（改局面）＜抢救（急救，对象是人命财物），能配「形势」的只剩扭转、缓解（20s）</li><li>程度校准：题干用「遏制」「严峻」，要的是改方向不是减强度，缓解太轻，D划掉（15s）</li><li>所以选 B（5s）</li></ol>
+          <div class="walk-src">源：3_1_9ndf4 · 2024青海省公务员录用考试《行测》题 · 第34题 · 正确率 56.26</div>
+          <div class="walk-fail">最容易错在第二空选D缓解：它读起来最顺，但只能把形势减轻一点，扛不住「遏制」「严峻」要求的力度，程度题要先比力度再比顺口。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="YY-14">
+      <summary><span class="mod-kicker">YY-14 · 言语</span><span class="mod-title">词的辨析-词义侧重</span><span class="mod-signal">3_1_5850q</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>词的辨析-词义侧重</b> → 四个选项都是「崇X」（崇敬/崇信/崇奉/推崇），同音近义扎堆，只能拆第二个语素定侧重</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定位提示词（30s）→ 2. 拆语素定侧重（20s）→ 3. 选项逐个回代原句（20s）→ 4. 核心话题兜底排除（10s）。</li></ol>
+        <p class="walk-fail">失效：空格前后无明显提示词，或文段本身话题游离 → 回「主题词」单链，先定核心话题再拆空。</p>
+        <span class="timeline">时间 40–50s · 超 60s 先标记</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5850q</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">58.82<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>认出题型：四选项共享「崇」字、语义高度重叠，别凭语感，改拆第二个语素（10s）</li><li>逐个拆语素：崇敬=敬（敬重人），崇信=信（信奉信条），崇奉=奉（供奉神位），推崇=推（推重、给高评价）（20s）</li><li>用空格后的引文定方向：「杰出的」「英国长期追求而没有达到」＝在打高分、给评价，不是敬人、不是信教（20s）</li><li>搭配回代：宾语是「中国园林艺术」，敬、信、奉的对象都得是人或神，只有推崇能接艺术（15s）</li><li>所以选 D（5s）</li></ol>
+          <div class="walk-src">源：3_1_5850q · 2023江西省公务员录用考试《行测》题 · 第40题 · 正确率 58.82</div>
+          <div class="walk-fail">最容易错选A崇敬：「崇敬」最正面、看着最像褒义，但它的对象是人（英雄、老师），接不了「园林艺术」，题干要的是评价高而不是尊敬。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="mod-pd">
+    <h2>判断 · 非图推考点秒杀链（5 条，逐题对照原题）</h2>
+    <p class="sub2">每条走链对应一道真实原题，题干、选项、答案、正确率均可在 <code>_cache/fenbi/samples/selected.json</code> 中按 key 复算。解析经 DeepSeek-V4.1-Flash、GPT-6.1-Sol 两个模型独立作答后与粉笔交叉验证。</p>
+    <div class="notice" style="margin:8px 0 12px"><b>本模块秒杀链：</b>先定性（论证/定义/类比/翻译），再按类走链<br><b>四拍动作：</b>1. 认题型（5s）→ 2. 找论点或拆定义槽（20s）→ 3. 逐项映射（25s）→ 4. 力度/范围比对（10s）。<br><b>失效：四个选项都能削弱/加强 → 比力度（直接&gt;间接）和范围（整体&gt;部分）。</b> · <b>时间：</b>50–70s</div>
+    <details class="module" id="PD-01">
+      <summary><span class="mod-kicker">PD-01 · 判断</span><span class="mod-title">削弱论点</span><span class="mod-signal">3_1_5857q</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>削弱论点</b> → 设问是“最能削弱上述建议实施效果”，而且题干只有一个建议、没有任何论据或数据，属于“只有论点”型削弱，枪口要直接对准建议能不能落地。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型（5s）→ 2. 找论点或拆定义槽（20s）→ 3. 逐项映射（25s）→ 4. 力度/范围比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都能削弱/加强 → 比力度（直接&gt;间接）和范围（整体&gt;部分）。</p>
+        <span class="timeline">时间 50–70s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5857q</b><span>2023年山东省公务员录用考试《行测》试题 · <span class="rate">54.47<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>20 秒内把论点写成一句话：在校园显著位置贴求助电话，学生被欺凌后打这个电话就能得到老师帮助，从而防止欺凌（20s）</li><li>认清本题只有论点没有论据，所以不能去挑论据的毛病，只能证明这个建议实施后根本不起作用（15s）</li><li>带着“哪个选项能让电话打不通或打了也没用”扫选项，B 说欺凌多发生在夜间、求助电话无人接听，直接把“拨打电话”这一环掐断，先圈 B（15s）</li><li>逐个排掉干扰：A 说老师缺乏训诫手段，只说明接到了效果打折，没否定建议；C 说欺凌者恐吓，但学生到底打不打不确定；D 说部分受害者不愿求助，反而意味着有部分人愿意，且“部分”力度太弱（25s）</li><li>只有 B 否定了“电话有人接”这个前提，所以选 B（10s）</li></ol>
+          <div class="walk-src">源：3_1_5857q · 2023山东省公务员录用考试《行测》试题 · 第74题 · 正确率 54.47</div>
+          <div class="walk-fail">最容易错选 A 或 C，这两项都默认了“电话能打通”，只是在效果和意愿上打折扣，属于削弱力度弱或不明确；B 打掉的是整个建议赖以成立的前提，才是断链式削弱。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="PD-02">
+      <summary><span class="mod-kicker">PD-02 · 判断</span><span class="mod-title">特殊问法</span><span class="mod-signal">3_1_ijsou</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>特殊问法</b> → 设问“下列说法错误的是”，题干一口气给了设备利用率、完好率、总台数、负荷率、闲置率五个定义，是典型的多定义选非题。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型（5s）→ 2. 找论点或拆定义槽（20s）→ 3. 逐项映射（25s）→ 4. 力度/范围比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都能削弱/加强 → 比力度（直接&gt;间接）和范围（整体&gt;部分）。</p>
+        <span class="timeline">时间 50–70s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_ijsou</b><span>2026年国家公务员录用考试《行测》题 · <span class="rate">54.47<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先在题号旁写下“选非”两个字，全程提醒自己最后要挑错的那个，避免选出正确项（5s）</li><li>不要通读五个定义，从能直接算的定义下手：设备利用率=实际使用时间/计划用时，A 项 9 个月÷75%=12 个月，算得上，正确，划掉（20s）</li><li>B 项拿“设备总台数”的定义做核对：原文明确含“正在检修的”设备，与 B 说法一致，正确，划掉（15s）</li><li>C 项核“设备负荷率=需要台数/选用台数”，比值大于 1 说明设备不足、小于 1 说明有余，确实能反映选用合理性，正确，划掉（15s）</li><li>只剩 D，先看“反映投资回报程度”定义里根本没有，再用反例验证大小关系：10 台里闲置 8 台（其中 3 台完好）、完好共 5 台，闲置率 80% ＞ 完好率 50%，“一般小于”被推翻，所以选 D（25s）</li></ol>
+          <div class="walk-src">源：3_1_ijsou · 2026国家公务员录用考试《行测》题 · 第96题 · 正确率 54.47</div>
+          <div class="walk-fail">最容易在 D 上凭日常直觉放过它——“闲置多、完好的少”听起来顺理成章，但两个率的分子一个是闲置台数、一个是完好台数，彼此独立，没有必然大小关系，必须靠举反例才能推翻。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="PD-03">
+      <summary><span class="mod-kicker">PD-03 · 判断</span><span class="mod-title">加强选非题</span><span class="mod-signal">3_1_hov0t</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>加强选非题</b> → 设问是“最不能支持这一结论的是”，出现“最不能支持”四个字就锁定这是加强选非题，后面所有动作都只为找那个既不搭桥也不加强的选项。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型（5s）→ 2. 找论点或拆定义槽（20s）→ 3. 逐项映射（25s）→ 4. 力度/范围比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都能削弱/加强 → 比力度（直接&gt;间接）和范围（整体&gt;部分）。</p>
+        <span class="timeline">时间 50–70s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_hov0t</b><span>2026年广东省公务员录用考试《行测》题 · <span class="rate">53.50<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>先圈论点和论据：论点是“该材料能在一定程度上抗衰老”，论据是“代谢水平显著提高、端粒延长15%、肌肉再生能力提升40%”，三个都是现象指标、没提“衰老”（15s）</li><li>认出话题不一致，预判正确选项必然是一个“既不把指标和衰老连起来、也不给材料加正面理由”的选项，把 A、B、D 三个疑似搭桥项先圈住但不动笔（15s）</li><li>逐个检验三个疑似项：A 说代谢水平与衰老负相关，B 说再生能力低就更老，D 说端粒延长代表细胞恢复年轻，三项都在指标和衰老之间搭了桥，全是加强项，按选非要求全排（25s）</li><li>剩 C 只说“未产生明显免疫反应”，讲的是安全性而不是抗衰老，既没搭桥也没加强，正是那个最不能支持的，所以选 C（10s）</li></ol>
+          <div class="walk-src">源：3_1_hov0t · 2026广东省公务员录用考试《行测》题 · 第60题 · 正确率 53.50</div>
+          <div class="walk-fail">最容易错在把 C 当加强项留下，因为“没免疫反应”听着像好事，但安全性好不等于能抗衰老，它和论点压根不同话题，选非题里这种“正确的废话”就是答案。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="PD-04">
+      <summary><span class="mod-kicker">PD-04 · 判断</span><span class="mod-title">单定义-其他句式</span><span class="mod-signal">3_1_icg0a</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>单定义-其他句式</b> → 题干先给“植物、乔木、水杉”三个有包含关系的概念，再抛出一句“由‘所有乔木都是植物’‘所有水杉都是植物’推出‘所有水杉都是乔木’”，这种“两个都归到同一个上位概念、再互推”的反向推理就是定义内核。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型（5s）→ 2. 找论点或拆定义槽（20s）→ 3. 逐项映射（25s）→ 4. 力度/范围比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都能削弱/加强 → 比力度（直接&gt;间接）和范围（整体&gt;部分）。</p>
+        <span class="timeline">时间 50–70s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_icg0a</b><span>2025年国家公务员录用考试《行测》题 · <span class="rate">58.22<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 D</span></span></div>
+          <ol class="walk-steps"><li>不背定义原文，直接把题干例子抽象成公式：所有 a 是 b，所有 c 是 b，所以所有 c 是 a，注意结论是把两个平级概念互换，这是排序推理的指纹（20s）</li><li>用第一句硬条件筛概念：必须是三个层层包含的概念，扫 C 的“文字、符号、图形”和 D 的“花园的花、迎春花、冬春季开放的花”，都不构成包含与被包含的三个概念，直接排（20s）</li><li>只剩 A、B 比句式，把 A 代入公式：“平行四边形是四边形（a→b）、菱形是四边形（c→b）、菱形是平行四边形（c→a）”，与指纹完全吻合（15s）</li><li>再用 B 反证：“昆虫是动物、蝴蝶是昆虫、蝴蝶是动物”是层层递推的正向三段论，结构是 a→b、c→a、所以 c→b，方向不对，排掉 B，所以选 A（15s）</li></ol>
+          <div class="walk-src">源：3_1_icg0a · 2025国家公务员录用考试《行测》题 · 第100题 · 正确率 58.22</div>
+          <div class="walk-fail">最容易错在凭“看着像三段论”就选 B，B 是标准的传递推理、结论必然成立，但定义要的是“由两个同归上位概念的判断反推彼此包含”这种错误结构，方向反了就不是排序推理。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="PD-05">
+      <summary><span class="mod-kicker">PD-05 · 判断</span><span class="mod-title">逻辑关系-包容关系</span><span class="mod-signal">3_1_icfoo</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>逻辑关系-包容关系</b> → 题干是“行政文书 对于 （ ） 相当于 （ ） 对于 汇编语言”的括号式类比，四个选项都是两词组合，看到这种“相当于”加双括号，动作就是逐项代入、逐个比关系。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型（5s）→ 2. 找论点或拆定义槽（20s）→ 3. 逐项映射（25s）→ 4. 力度/范围比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都能削弱/加强 → 比力度（直接&gt;间接）和范围（整体&gt;部分）。</p>
+        <span class="timeline">时间 50–70s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_icfoo</b><span>2025年国家公务员录用考试《行测》题 · <span class="rate">52.90<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先在题干下面写明比较规则：左半边是“行政文书与第一空”的关系，右半边是“第二空与汇编语言”的关系，两边关系类型和方向都必须一致（10s）</li><li>代入 A、B 两组的第一个词：行政机关发布行政文书是主宾关系、行政管理用行政文书是工具关系，但对应到右边分别是“编程人员编写汇编语言”“汇编语言传送指令”，主宾和工具都出现了前后顺序颠倒，两个都排（20s）</li><li>代入 C：左边行政文书与商务文书是并列关系，右边符号语言与汇编语言是同一个东西的全同关系，一边并列一边全同，不一致，排（15s）</li><li>代入 D：监管函是一种行政文书、汇编语言是一种计算机语言，两边都是“后者包含前者”的种属关系且方向一致，关系类型完全对齐，所以选 D（15s）</li></ol>
+          <div class="walk-src">源：3_1_icfoo · 2025国家公务员录用考试《行测》题 · 第100题 · 正确率 52.90</div>
+          <div class="walk-fail">最容易错在 A、B 两组，很多考生只看到“主宾关系对主宾关系”“工具关系对工具关系”就选，忽略了“行政机关发布行政文书”和“编程人员编写汇编语言”的主体位置是反的，括号式类比必须连方向一起比。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="mod-sl">
+    <h2>数量 · 非图推考点秒杀链（10 条，逐题对照原题）</h2>
+    <p class="sub2">每条走链对应一道真实原题，题干、选项、答案、正确率均可在 <code>_cache/fenbi/samples/selected.json</code> 中按 key 复算。解析经 DeepSeek-V4.1-Flash、GPT-6.1-Sol 两个模型独立作答后与粉笔交叉验证。</p>
+    <div class="notice" style="margin:8px 0 12px"><b>本模块秒杀链：</b>每个条件都要进方程，答案自己会出来<br><b>四拍动作：</b>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。<br><b>失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</b> · <b>时间：</b>60–90s · 超 2 分钟标记猜</div>
+    <details class="module" id="SL-01">
+      <summary><span class="mod-kicker">SL-01 · 数量</span><span class="mod-title">和差倍比</span><span class="mod-signal">3_1_584d7</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>和差倍比</b> → 题干出现「两位数」「数字交换位置」「中间多了一个0」，再加上「匀速行驶」＝每段时间车费相等</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_584d7</b><span>2023年甘肃公务员录用考试《行测》题 · <span class="rate">51.58<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>设原两位数为10x+y，把三个时刻的数字摆成一排：0时=10x+y，1时=10y+x，2时=100x+y（20s）</li><li>抓「匀速」翻成等式：两小时增量相等，(10y+x)-(10x+y)=(100x+y)-(10y+x)（25s）</li><li>化简：左边=9(y-x)，右边=99x-9y=9(11x-y)，约掉9得 y-x=11x-y，即2y=12x，y=6x（20s）</li><li>用数位约束收口：x、y只能取1~9的整数，只有x=1、y=6成立，三数为16、61、106（15s）</li><li>车费=106-16=90（也可记住总车费必是90x的倍数），所以选 C（15s）</li></ol>
+          <div class="walk-src">源：3_1_584d7 · 2023甘肃公务员录用考试《行测》题 · 第67题 · 正确率 51.58</div>
+          <div class="walk-fail">最容易错在第1步写数位：「中间多了一个0」是三位数100x+y，若误写成10x+y或1000x+y，等式必崩；另外算出y=6x后不能直接得答案，必须回到「1~9整数」这个约束把解唯一化。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="SL-02">
+      <summary><span class="mod-kicker">SL-02 · 数量</span><span class="mod-title">几何公式类-平面图形</span><span class="mod-signal">3_1_584tp</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>几何公式类-平面图形</b> → 看到"无盖""底部造价""侧面造价""最低总造价"这几个词同时出现，立刻判定这是"底面积先锁死、再让侧面积最小"的两段式造价题</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_584tp</b><span>2023年新疆公务员录用考试《行测》试题 · <span class="rate">57.96<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>先用体积除以深度把底面积抠出来：144÷4=36平方米，底面积一定，底部造价36×260就固定了（15s）</li><li>明确"求最低总造价"其实是求侧面积最小，因为深4米已定，侧面积=底面周长×4，只需让底面周长最短（20s）</li><li>套"面积一定时正方形周长最短"：a×b=36取a=b=6，周长=4×6=24米，不要去解二次函数，也不要试2×18、3×12（25s）</li><li>侧面积=周长×深=24×4=96平方米，总价=36×260+96×180=9360+17280=26640元（30s）</li><li>拿26640对选项，只有C吻合，所以选C（10s）</li></ol>
+          <div class="walk-src">源：3_1_584tp · 2023新疆公务员录用考试《行测》试题 · 第58题 · 正确率 57.96</div>
+          <div class="walk-fail">最容易走错的是没注意"无盖"而按两个底面算，或者拿36去逐个试长宽比侧面造价——面积固定时正方形周长一定最短，试第二组就白扔40秒。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="SL-03">
+      <summary><span class="mod-kicker">SL-03 · 数量</span><span class="mod-title">几何结论类-三角形相关</span><span class="mod-signal">3_1_5kkbk</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>几何结论类-三角形相关</b> → 看到"圆台型""上、下口直径""侧面积之比"，立刻调出圆台侧面积=π(r+R)l，并意识到母线l题目没给、必须自己用勾股求</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5kkbk</b><span>2024年江苏省公务员录用考试《行测》题（B类） · <span class="rate">54.25<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先把四个直径全部砍半成半径再动笔：M为35与25，N为30与22.5，写在选项旁边防串（20s）</li><li>算半径差：M差10、N差7.5（别把N写成15），这是母线勾股的一条直角边（15s）</li><li>母线=√(半径差²+高²)：M=√(10²+80²)=10√65，N=√(7.5²+60²)=7.5√65，两个都带√65，比的时候直接约掉（35s）</li><li>侧面积=π(r+R)l：M为π×60×10√65，N为π×52.5×7.5√65，约去π和√65后是600:393.75（30s）</li><li>600:393.75同除18.75得32:21，所以选B（15s）</li></ol>
+          <div class="walk-src">源：3_1_5kkbk · 2024江苏省公务员录用考试《行测》题（B类） · 第58题 · 正确率 54.25</div>
+          <div class="walk-fail">最容易错的是半径差那一步：把N的上口60当半径不砍半，差就成了37.5，√65约不掉，只能硬开根号算到崩。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="SL-04">
+      <summary><span class="mod-kicker">SL-04 · 数量</span><span class="mod-title">经济利润</span><span class="mod-signal">3_1_5662q</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>经济利润</b> → 看到"A、B定价相同""分别打六折、七折"，且"8000元"和"2万元"两种单位混在同一句里，立刻判定是"设定价x＋先统一单位"的方程题</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5662q</b><span>2023年国家公务员录用考试《行测》题 · <span class="rate">55.43<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>先统一单位再读题：8000元=0.8万元，全题只用万元，把0.8和2并排写在草稿上（10s）</li><li>设A、B定价均为x万元，写出促销价A=0.6x、B=0.7x，C固定0.8（15s）</li><li>按"买1台B的钱=买A、C各1台的钱再高2万"列式0.7x=0.6x+0.8+2，移项得0.1x=2.8，x=28，故A促销价0.6×28=16.8万元（35s）</li><li>1000÷16.8=59.5多，钱不够买第60台，只能向下取整为59（25s）</li><li>59正好是选项C，所以选C（10s）</li></ol>
+          <div class="walk-src">源：3_1_5662q · 2023国家公务员录用考试《行测》题 · 第63题 · 正确率 55.43</div>
+          <div class="walk-fail">最容易走错的是单位：直接把8000塞进万元方程，或者算出59.5后四舍五入当成60；剩余的钱买不起整台，台数只能向下取。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="SL-05">
+      <summary><span class="mod-kicker">SL-05 · 数量</span><span class="mod-title">给情况求概率</span><span class="mod-signal">3_1_houv3</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>给情况求概率</b> → 看到"随机选择两个数""最大公约数为1"，立刻反应出正面数互质对数太麻烦，题目是在暗示走反面</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_houv3</b><span>2026年浙江省公务员录用考试《行测》题（B类） · <span class="rate">54.98<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先锁分母：从10个数里选2个，C(10,2)=45（15s）</li><li>把"最大公约数为1"翻成反面"两数有大于1的公约数"，即同时被2、或3、或5整除（15s）</li><li>按质因子分三类各数组合数：2的倍数{2,4,6,8,10}取2个=C(5,2)=10；3的倍数{3,6,9}取2个=C(3,2)=3；5的倍数{5,10}取2个=1（35s）</li><li>三类相加10+3+1=14，再验有没有重复计算：两个数同为6的倍数、同为10的倍数在1-10里各只有一个数，凑不成一对，所以反面就是14种（20s）</li><li>所求=1-14/45=31/45，所以选B（15s）</li></ol>
+          <div class="walk-src">源：3_1_houv3 · 2026浙江省公务员录用考试《行测》题（B类） · 第63题 · 正确率 54.98</div>
+          <div class="walk-fail">最容易走错的是漏掉重叠校验或只算2的倍数就收工；另外别把"选两个数"误当成有顺序的排列去算90，分母一错全废。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="SL-06">
+      <summary><span class="mod-kicker">SL-06 · 数量</span><span class="mod-title">基础排列组合</span><span class="mod-signal">3_1_584fo</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>基础排列组合</b> → 看到"回文数"加上"三位数"这个范围限定，立刻把问题翻译成"百位数字=个位数字"的填数题</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_584fo</b><span>2023年吉林省公务员录用考试《行测》题 · <span class="rate">52.98<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先把回文条件落到数位上：三位数abc是回文数只需a=c，b随意（10s）</li><li>优先数限制最多的位：百位a不能为0，只能取1-9共9种（15s）</li><li>个位c被a锁死，只有1种取法；十位b不受限，0-9共10种（15s）</li><li>分步相乘9×10×1=90个（20s）</li><li>90对应选项B，所以选B，并顺手排除C99、D100这类"忘了百位不能为0"的诱导项（10s）</li></ol>
+          <div class="walk-src">源：3_1_584fo · 2023吉林省公务员录用考试《行测》题 · 第58题 · 正确率 52.98</div>
+          <div class="walk-fail">最容易走错的是把百位也按0-9算成10种得出100，或漏掉十位可以取0；百位非零是这类数位题唯一的坎。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="SL-07">
+      <summary><span class="mod-kicker">SL-07 · 数量</span><span class="mod-title">数列问题</span><span class="mod-signal">3_1_9q7vt</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>数列问题</b> → 题干出现"最少""任意2个单位人数都不相同""最少3人"，三个字眼全是最值信号，先别看选项，先把这个"最少构造成什么样"算死</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_9q7vt</b><span>2025年浙江省公务员录用考试《行测》题（C类） · <span class="rate">54.35<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>看到"人数各不相同且最少3人"，立刻按公差1做最省构造成3、4、5……17，15项求和=（3+17）×15÷2=150，和总人数150对上，说明构型唯一、没有别的排法（25s）</li><li>写出"要A校占的单位最少"就是"让A校的人往人多的单位里挤"，人多单位是17、16、15，加起来17+16+15=48（20s）</li><li>拿50-48=2，说明还差2个人放不进这3个满分单位，必须再开1个单位，所以单位数=3+1=4（20s）</li><li>4在选项里，其余3、5、6都排除，所以选B（10s）</li></ol>
+          <div class="walk-src">源：3_1_9q7vt · 2025浙江省公务员录用考试《行测》题（C类） · 第57题 · 正确率 54.35</div>
+          <div class="walk-fail">最容易错在第2步：把"让A校人集中在人多的单位"误当成"让A校人少去几个单位"，直接拿总数一除就选3；必须用"前三名之和48&lt;50"这一步证明3个单位装不下</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="SL-08">
+      <summary><span class="mod-kicker">SL-08 · 数量</span><span class="mod-title">普通行程</span><span class="mod-signal">3_1_5kcl3</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>普通行程</b> → 题目只给时间和倍数关系、不给具体速度和路程，典型"缺量→赋值"，同时"乙比甲提前12分钟到达"提醒最后要求的是甲的总用时（含休息）</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5kcl3</b><span>2024年浙江省公务员录用考试《行测》题（A类） · <span class="rate">50.34<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>赋值甲、乙骑车速度都是1，则开车速度是5，全程路程记作S（10s）</li><li>把乙的行程拆成三段：返回前已骑1小时（60分钟），原速回A地再花60分钟，此时甲已骑120分钟，即甲先行到S-120的位置（30s）</li><li>设乙开车从A到B用t分钟，则乙开车走5t=S；甲从120分钟起再骑（t+12）分钟到B，即120+t+12=S，联立5t=120+t+12，得4t=132、t=33（35s）</li><li>甲总用时=休息20+骑行（120+33+12）=165+20=185分钟，所以选C（20s）</li></ol>
+          <div class="walk-src">源：3_1_5kcl3 · 2024浙江省公务员录用考试《行测》题（A类） · 第61题 · 正确率 50.34</div>
+          <div class="walk-fail">最容易错在漏加那20分钟休息：算出165就急着选A，而题目问的是"甲全程用了多少分钟"，休息的20分钟必须加进去才是185</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="SL-09">
+      <summary><span class="mod-kicker">SL-09 · 数量</span><span class="mod-title">相遇追及</span><span class="mod-signal">3_1_58frb</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>相遇追及</b> → 三人同向、环形、"每20分钟追上小张一次""每40分钟追上老朱一次"，三个信息凑齐就是环形追及，追上一次两人正好差一整圈</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_58frb</b><span>2023年深圳市考公务员录用考试《行测》试题 · <span class="rate">55.16<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>先设一圈长S（环线固定周长）、车速v1、自行车v2、步行v3，同向追及每追上一次，快者就比慢者多跑整整一圈（20s）</li><li>写出两个已知条件：S=（v1-v3）×20，S=（v1-v2）×40（20s）</li><li>两式相等于得（v1-v3）×20=（v1-v2）×40，即v1-2v2+v3=0，变形v2-v3=（v1-v3）÷2（25s）</li><li>老朱追小张的时间t=S÷（v2-v3）=（v1-v3）×20÷[（v1-v3）÷2]=40分钟，所以选B（15s）</li></ol>
+          <div class="walk-src">源：3_1_58frb · 2023深圳市考公务员录用考试《行测》试题 · 第60题 · 正确率 55.16</div>
+          <div class="walk-fail">最容易错在第3步的代数变形：把"20/40"直接当成答案的倒数去算，或者把"追上"当成相遇把相对速度写成速度和；同向追及永远是速度差，且S是同一个S可以直接消掉</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="SL-10">
+      <summary><span class="mod-kicker">SL-10 · 数量</span><span class="mod-title">非典型最值问题</span><span class="mod-signal">3_1_5669i</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>非典型最值问题</b> → 题干出现"最多可能生产了多少台甲"，又是"不超过200个""超过100个"的双边界，最值题先定方向：甲要多，乙就得少</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 摘条件列式（30s）→ 2. 解方程/不等式（30s）→ 3. 量级与整除排除（15s）→ 4. 选项回代验证（15s）。</li></ol>
+        <p class="walk-fail">失效：条件不足以列唯一方程 → 转「赋值法」或「选项代入」，别硬解。</p>
+        <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5669i</b><span>2023年国家公务员录用考试《行测》题 · <span class="rate">50.84<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>抓关键结构"只有乙用C零件"+"C超过100个"，于是乙的数量下限=101÷9=11余2，向上取整得12台（30s）</li><li>算乙吃掉多少零件：每台乙=4个B+9个C=13个，12×13=156个（20s）</li><li>剩下给甲的零件=200-156=44个，每台甲=5个A+11个B=16个，44÷16=2余12，取整得2台（25s）</li><li>逐个验证：3台甲至少要5×3+11×3=48个，加156超过200，不行；2台可行，所以选B（20s）</li></ol>
+          <div class="walk-src">源：3_1_5669i · 2023国家公务员录用考试《行测》题 · 第63题 · 正确率 50.84</div>
+          <div class="walk-fail">最容易错在"超过100"当成"不少于100"：若按9×11=99算，乙会取11台，剩余零件变多，容易错算成3台甲；101÷9要向上取整到12，这一步定生死</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="mod-zl">
+    <h2>资料 · 非图推考点秒杀链（8 条，逐题对照原题）</h2>
+    <p class="sub2">每条走链对应一道真实原题，题干、选项、答案、正确率均可在 <code>_cache/fenbi/samples/selected.json</code> 中按 key 复算。解析经 DeepSeek-V4.1-Flash、GPT-6.1-Sol 两个模型独立作答后与粉笔交叉验证。</p>
+    <div class="notice" style="margin:8px 0 12px"><b>本模块秒杀链：</b>问法定公式，公式定数据，数据定算法<br><b>四拍动作：</b>1. 认题型定公式（15s）→ 2. 材料里定位数据（25s）→ 3. 估算落区间（25s）→ 4. 单位与时间主体复核（10s）。<br><b>失效：选项是精确值而非区间 → 放弃估算，老实列式计算。</b> · <b>时间：</b>60–90s · 综合分析可到 120s</div>
+    <details class="module" id="ZL-01">
+      <summary><span class="mod-kicker">ZL-01 · 资料</span><span class="mod-title">文字资料</span><span class="mod-signal">3_1_ijsil</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>文字资料</b> → 题干写"2024年……日均"，而材料明写2025年，时间一错位就是基期题，再加"日均"要再除天数，两个动作缺一不可</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型定公式（15s）→ 2. 材料里定位数据（25s）→ 3. 估算落区间（25s）→ 4. 单位与时间主体复核（10s）。</li></ol>
+        <p class="walk-fail">失效：选项是精确值而非区间 → 放弃估算，老实列式计算。</p>
+        <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_ijsil</b><span>2026年国家公务员录用考试《行测》题 · <span class="rate">55.14<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>读到"2024年"和"日均"两个词，立刻定公式：基期日均=现期收入÷（1+增长率）÷天数（20s）</li><li>三行数据抄成最简：清明107.8÷1.087÷3，五一295÷1.203÷5，端午114.4÷1.256÷3（25s）</li><li>只算到量级就够排序：清明约107.8÷3.26≈33，五一约295÷6.02≈49，端午约114.4÷3.77≈30（30s）</li><li>大小关系五一&gt;清明&gt;端午，对应选项C，所以选C（10s）</li></ol>
+          <div class="walk-src">源：3_1_ijsil · 2026国家公务员录用考试《行测》题 · 第128题 · 正确率 55.14</div>
+          <div class="walk-fail">最容易错在漏除天数：三天假和五天假混着比总收入，会得五一&gt;端午&gt;清明而错选A；"日均"两个字必须落到除数上</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZL-02">
+      <summary><span class="mod-kicker">ZL-02 · 资料</span><span class="mod-title">统计图</span><span class="mod-signal">3_1_55gn0</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>统计图</b> → 题干把“增量”和“增长率”各比一次，选项又是“高于/低于”两两组合，一眼判定是“增长量比较+增长率比较”双空题</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型定公式（15s）→ 2. 材料里定位数据（25s）→ 3. 估算落区间（25s）→ 4. 单位与时间主体复核（10s）。</li></ol>
+        <p class="walk-fail">失效：选项是精确值而非区间 → 放弃估算，老实列式计算。</p>
+        <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_55gn0</b><span>2023年上海市公务员录用考试《行测》题（A类） · <span class="rate">52.78<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先在图表里只抓四个数并抄成两列：2015/2020年人均教育文化娱乐支出2857、3380，人均消费支出30191、37303（20s）</li><li>第一空做减法比增量：3380-2857=523，37303-30191=7112，523&lt;7112，第一空“低于”，直接排除A、B（25s）</li><li>第二空不要比523和7112，换成增量÷基期：523/2857≈18%，7112/30191≈24%，18%&lt;24%，第二空也“低于”（25s）</li><li>两空都是“低于”，对照选项只剩一个，所以选D（5s）</li></ol>
+          <div class="walk-src">源：3_1_55gn0 · 2023上海市公务员录用考试《行测》题（A类） · 第50题 · 正确率 52.78</div>
+          <div class="walk-fail">最容易错在第二空拿523和7112直接大小比，那是增量不是增长率，必须各自除以基期后再比。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZL-03">
+      <summary><span class="mod-kicker">ZL-03 · 资料</span><span class="mod-title">统计表</span><span class="mod-signal">3_1_4inj3</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>统计表</b> → 题干只有一句“能够推出的是”，四个选项各挂一个不同分项，这是综合分析题，先挑“一步能算完”的选项下手、其余靠排除</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型定公式（15s）→ 2. 材料里定位数据（25s）→ 3. 估算落区间（25s）→ 4. 单位与时间主体复核（10s）。</li></ol>
+        <p class="walk-fail">失效：选项是精确值而非区间 → 放弃估算，老实列式计算。</p>
+        <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_4inj3</b><span>2022年湖北省选调生招录考试综合知识和行政职业能力测验试卷 · <span class="rate">55.36<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>扫四个选项先分类：A是“12月与全年平均比”、B是“每个月都正增长”、C是“降幅是否超300亿”、D是“三个占比比大小”，先做D（25s）</li><li>验D：12月西部/全国三组数相除，1776.1/5590.3≈31.8%，23.4/156.9≈14.9%，24.9/72.8≈34.2%，起降架次占比最高，D成立（40s）</li><li>排除A：全年平均1782.5/12≈148.5万吨&lt;12月156.9万吨，A说“低于”故错（20s）</li><li>排除B、C：B用“混合居中不正中”，全年-38.4%、12月+56.4%，则1-11月必为负增长，不可能每月正增长；C用90.6/(1-79.5%)×79.5%≈351亿人公里&gt;300亿，C错（35s）</li><li>三项全错、D唯一成立，所以选D（5s）</li></ol>
+          <div class="walk-src">源：3_1_4inj3 · 2022湖北省选调生招录考试综合知识和行政职业能力测验试卷 · 第95题 · 正确率 55.36</div>
+          <div class="walk-fail">最容易错在先啃B这种“每个月”的表述：它给的是全年和12月两个增速，只能用混合增长率倒推1-11月为负，不能真去逐个找月份。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZL-04">
+      <summary><span class="mod-kicker">ZL-04 · 资料</span><span class="mod-title">综合资料</span><span class="mod-signal">3_1_houvm</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>综合资料</b> → 题干要“从低到高排序”三个群体，但材料里这三个数一个都没直接给，全是“比某某高/低多少个百分点”绕出来的，先把能直读的锚点数圈出来</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型定公式（15s）→ 2. 材料里定位数据（25s）→ 3. 估算落区间（25s）→ 4. 单位与时间主体复核（10s）。</li></ol>
+        <p class="walk-fail">失效：选项是精确值而非区间 → 放弃估算，老实列式计算。</p>
+        <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_houvm</b><span>2026年浙江省公务员录用考试《行测》题（C类） · <span class="rate">59.87<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>圈出三个锚点：00后线上占比69.8%、城镇居民50.18%、初中及以下22.63%（15s）</li><li>求70后：材料说00后“比70后高53.79个百分点”，往下减，69.8%-53.79%=16.01%（20s）</li><li>求务农：先用50.18%-11.66%=38.52%得到农村，再减19.74%，38.52%-19.74%=18.78%（25s）</li><li>三值排序16.01%&lt;18.78%&lt;22.63%，即70后&lt;务农&lt;初中及以下，所以选D（15s）</li></ol>
+          <div class="walk-src">源：3_1_houvm · 2026浙江省公务员录用考试《行测》题（C类） · 第108题 · 正确率 59.87</div>
+          <div class="walk-fail">最容易错在两处减法方向：00后“比70后高”要用69.8减53.79，务农“比农村低”要先还原农村38.52%再减19.74%，别把两个百分点加在城镇50.18%上。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZL-05">
+      <summary><span class="mod-kicker">ZL-05 · 资料</span><span class="mod-title">综合分析</span><span class="mod-signal">3_1_5jrkj</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>综合分析</b> → 题干是“能够从上述资料中推出的有几项”加①②③三个小项，答案只数个数，所以每项只判断“能不能算出”，不算具体值</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型定公式（15s）→ 2. 材料里定位数据（25s）→ 3. 估算落区间（25s）→ 4. 单位与时间主体复核（10s）。</li></ol>
+        <p class="walk-fail">失效：选项是精确值而非区间 → 放弃估算，老实列式计算。</p>
+        <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5jrkj</b><span>2024年国家公务员录用考试《行测》题 · <span class="rate">54.43<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
+          <ol class="walk-steps"><li>先给三项各写所需条件：①要两期第一产业增加值、②要2013年天津总产值和非三产占比、③要“新增就业人员中三产人数”（20s）</li><li>验①：2013年总产值=10.0/1.8≈5.56万亿，第一产业=5.56×6.2%≈0.34万亿；2022年=10.0×4.8%=0.48万亿，两期都有，可推（30s）</li><li>验②：2013年天津总产值=1.6/1.6=1万亿，2013年三产占比=61.3%-7.2%=54.1%，1-54.1%=45.9%，可求，可推（25s）</li><li>验③：材料只有“城镇累计新增就业人数”和“就业人员中三产占比”，占比的分母是全部就业人员、不是新增人员，两个口径乘不到一起，不可推（25s）</li><li>可推的是①②共2项，对应选项只有C，所以选C（10s）</li></ol>
+          <div class="walk-src">源：3_1_5jrkj · 2024国家公务员录用考试《行测》题 · 第135题 · 正确率 54.43</div>
+          <div class="walk-fail">最容易错在第③项，看到“新增就业人数”和“三产占比”就顺手相乘，但占比的基数是就业人员总量，和“累计新增”不是同一个分母。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZL-06">
+      <summary><span class="mod-kicker">ZL-06 · 资料</span><span class="mod-title">一般增长率</span><span class="mod-signal">3_1_58556</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>一般增长率</b> → 题干求“收支盈余比上一年”变化百分之几，选项是“增加了/减少了约X%”，而材料只给收入和消费各自的现期与增速，说明要先还原基期再算增长率</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型定公式（15s）→ 2. 材料里定位数据（25s）→ 3. 估算落区间（25s）→ 4. 单位与时间主体复核（10s）。</li></ol>
+        <p class="walk-fail">失效：选项是精确值而非区间 → 放弃估算，老实列式计算。</p>
+        <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_58556</b><span>2023年广东省公务员录用考试《行测》题（县级卷） · <span class="rate">54.32<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>先算现期盈余：36883-24538=12345元（15s）</li><li>基期不能拿两个增速相减，要分别回推：2021年收入=36883/1.05≈35127元，2021年消费=24538/1.018≈24104元（35s）</li><li>相减得基期盈余：35127-24104≈11023元（10s）</li><li>求增长率：(12345-11023)/11023≈1322/11023≈12%，是“增加”，所以选C（20s）</li></ol>
+          <div class="walk-src">源：3_1_58556 · 2023广东省公务员录用考试《行测》题（县级卷） · 第93题 · 正确率 54.32</div>
+          <div class="walk-fail">最容易错在直接算5.0%-1.8%=3.2%当答案，差额的增长率不等于两个分量的增长率相减，必须回到步骤2各自除以（1+增速）还原基期。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZL-07">
+      <summary><span class="mod-kicker">ZL-07 · 资料</span><span class="mod-title">增长量比较</span><span class="mod-signal">3_1_9q7n6</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>增长量比较</b> → 题干里同时出现“同比增量”“超过200万吨”“有几个”，是增长量比较的计数题，不是求增长率</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型定公式（15s）→ 2. 材料里定位数据（25s）→ 3. 估算落区间（25s）→ 4. 单位与时间主体复核（10s）。</li></ol>
+        <p class="walk-fail">失效：选项是精确值而非区间 → 放弃估算，老实列式计算。</p>
+        <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_9q7n6</b><span>2025年天津市公务员录用考试《行测》题 · <span class="rate">59.35<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>圈出“同比增量超过200万吨”和“几个”，先定死这是逐月算减法再数个数，不要去找增长率公式（10s）</li><li>翻到图1，把2022年、2023年3—12月共20个柱子按月份上下配对，用眼一扫先排除2023年明显比2022年矮的月份（9月、11月、3月、4月）（30s）</li><li>只对“2023年更高”的候选月做减法：5月1064-907=157、6月1039-872=167、7月1031-870=161、8月1086-885=201、10月879-761=118、12月1265-1028=237，逐个月旁注“超/不超”（60s）</li><li>数一遍打“超”的只有8月、12月共2个，所以选B（10s）</li></ol>
+          <div class="walk-src">源：3_1_9q7n6 · 2025天津市公务员录用考试《行测》题 · 第101题 · 正确率 59.35</div>
+          <div class="walk-fail">最容易走错的是把“同比增量”当成“比上月增量”或去算增长率，还有8月只有201万吨、只高出1万吨，口算成200整就会把这个月漏掉、误选A。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZL-08">
+      <summary><span class="mod-kicker">ZL-08 · 资料</span><span class="mod-title">现期比重</span><span class="mod-signal">3_1_ckgpu</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>现期比重</b> → 题干问的是“各分类指数对总指数增长的贡献中，贡献最大与贡献最小相差最悬殊的是哪一年”，出现“贡献”+“相差最悬殊”+跨年比较，触发贡献率比较</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 认题型定公式（15s）→ 2. 材料里定位数据（25s）→ 3. 估算落区间（25s）→ 4. 单位与时间主体复核（10s）。</li></ol>
+        <p class="walk-fail">失效：选项是精确值而非区间 → 放弃估算，老实列式计算。</p>
+        <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_ckgpu</b><span>2023年重庆市选调优秀大学生到基层工作考试《行测》题 · <span class="rate">56.32<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先写出贡献率=该分类指数权重×（本期分类指数-上期分类指数）÷（本期总指数-上期总指数），并抄下材料给的“权重均为0.2”（20s）</li><li>盯住同一年里权重0.2和分母（总指数增量）完全相同，立刻把题目降级为“比各年5个分类指数增量（今年-去年）的极差”，全程不除不乘、不写百分数（20s）</li><li>每年只找两个数：最大的网络经济指数增量和最小的那个增量，2018年239.3与7.4差231.9，2019年253.3与1.5差251.8，2020年468.6与4.8差463.8，2021年640.1与10.5差629.6，四个差列在草稿角上（60s）</li><li>四个极差里629.6最大，说明2021年贡献率落差最悬殊，所以选D（10s）</li></ol>
+          <div class="walk-src">源：3_1_ckgpu · 2023重庆市选调优秀大学生到基层工作考试《行测》题 · 第98题 · 正确率 56.32</div>
+          <div class="walk-fail">最容易走错的是被材料里没给全的公式吓住，硬按“分类指数÷总指数”逐年算5个百分数再相减，既超时又容易在2020与2021之间算错；正确做法是先用“同分母同年份”把式子约掉。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="mod-cs">
+    <h2>常识 · 非图推考点秒杀链（8 条，逐题对照原题）</h2>
+    <p class="sub2">每条走链对应一道真实原题，题干、选项、答案、正确率均可在 <code>_cache/fenbi/samples/selected.json</code> 中按 key 复算。解析经 DeepSeek-V4.1-Flash、GPT-6.1-Sol 两个模型独立作答后与粉笔交叉验证。</p>
+    <div class="notice" style="margin:8px 0 12px"><b>本模块秒杀链：</b>主体＋行为＋条件＋例外，四查完再选<br><b>四拍动作：</b>1. 定性（法律/地理/经济/文化）（5s）→ 2. 回忆条文或定义边界（15s）→ 3. 绝对词与例外排查（15s）→ 4. 剩余项比对（10s）。<br><b>失效：四个选项都陌生 → 找「绝对词」和「主体错位」排除，剩下的蒙。</b> · <b>时间：</b>20–30s · 不恋战</div>
+    <details class="module" id="CS-01">
+      <summary><span class="mod-kicker">CS-01 · 常识</span><span class="mod-title">民法典</span><span class="mod-signal">3_1_h297t</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>民法典</b> → 题干里“出租给沈某”把刘某和沈某定成出租人与承租人，“关押在邻近的农场”“拒绝返还”把农场定成拾得人，三个人身份一摆，就是按主体找法条</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定性（法律/地理/经济/文化）（5s）→ 2. 回忆条文或定义边界（15s）→ 3. 绝对词与例外排查（15s）→ 4. 剩余项比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都陌生 → 找「绝对词」和「主体错位」排除，剩下的蒙。</p>
+        <span class="timeline">时间 20–30s · 不恋战</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_h297t</b><span>2024年江苏省公务员录用考试《行测》题（C类） · <span class="rate">54.49<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 D</span></span></div>
+          <ol class="walk-steps"><li>先在草稿上写三行身份：刘某=出租人（所有权人）、沈某=承租人（占有人）、农场=拾得人，别急着读选项（15s）</li><li>A项问“耕牛毁坏果园谁赔”，调民法典第749条——承租人占有租赁物期间，租赁物造成第三人财产损失，出租人不承担责任，责任落在承租人沈某身上，A对（25s）</li><li>B项“管护费”调第317条，权利人领取遗失物应当支付拾得人必要费用，沈某要付，B说“无须”是错的；D项“有权关押”调第314条，拾得人只负返还和通知义务、没有留置权，D错（25s）</li><li>C项“仅在2万元限度内”是拿赔偿协议当责任上限，可749条已经让出租人完全免责，与2万无关，C错（15s）</li><li>除A外三项逐条被法条否掉，所以选A（5s）</li></ol>
+          <div class="walk-src">源：3_1_h297t · 2024江苏省公务员录用考试《行测》题（C类） · 第8题 · 正确率 54.49</div>
+          <div class="walk-fail">最容易走错的是被题干“赔偿2万元”这个数字带跑，觉得责任有上限就选C，忽略了749条把出租人的责任直接归零、题目问的也不是协议范围。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="CS-02">
+      <summary><span class="mod-kicker">CS-02 · 常识</span><span class="mod-title">其他法律法规</span><span class="mod-signal">3_1_5jrk8</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>其他法律法规</b> → 题干只有一句“根据《立法法》下列说法错误的是”，重点在“错误的是”三个字，这是选非题</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定性（法律/地理/经济/文化）（5s）→ 2. 回忆条文或定义边界（15s）→ 3. 绝对词与例外排查（15s）→ 4. 剩余项比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都陌生 → 找「绝对词」和「主体错位」排除，剩下的蒙。</p>
+        <span class="timeline">时间 20–30s · 不恋战</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5jrk8</b><span>2024年国家公务员录用考试《行测》题 · <span class="rate">53.66<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>读题时立刻在“错误”上画圈或打个叉，提醒自己最后要挑说法不成立的那一项，避免验完三项正确就随手选个正确项（5s）</li><li>扫B项：“县级人大常委”+“地方性法规”两个词撞在一起，立法法第81条只授权“设区的市”人大及其常委会就城乡建设与管理、生态文明建设、历史文化保护、基层治理等事项立法，县级人大没有地方立法权，B直接锁定（20s）</li><li>其余三项快速过一遍找反例：A项监察委属立法法第17条列举的提案主体，对；C项第90条明确省、自治区、直辖市和设区的市、自治州人大常委会可设基层立法联系点，对；D项第58条要求草案说明包含起草过程中对重大分歧意见的协调处理情况，对（35s）</li><li>三项都站得住、只有B把立法主体从“设区的市”偷换成“县级”，所以选B（10s）</li></ol>
+          <div class="walk-src">源：3_1_5jrk8 · 2024国家公务员录用考试《行测》题 · 第9题 · 正确率 53.66</div>
+          <div class="walk-fail">最容易走错的是把B项的“县级”看成“设区的市”的笔误而放过，或者验完A、C、D都正确后忘了这是选非题，反手选了一个正确表述。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="CS-03">
+      <summary><span class="mod-kicker">CS-03 · 常识</span><span class="mod-title">刑法</span><span class="mod-signal">3_1_fqc8d</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>刑法</b> → 题干就一句“关于自首的判断说法正确的是”，四个选项各讲一个案例，属于自首认定的逐项排除题</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定性（法律/地理/经济/文化）（5s）→ 2. 回忆条文或定义边界（15s）→ 3. 绝对词与例外排查（15s）→ 4. 剩余项比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都陌生 → 找「绝对词」和「主体错位」排除，剩下的蒙。</p>
+        <span class="timeline">时间 20–30s · 不恋战</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_fqc8d</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">55.52<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>先在草稿顶头写死自首两要件：自动投案+如实供述本人罪行，后面每项都拿这两条去卡（10s）</li><li>A项是共同犯罪，甲“独自承担了全部罪行”，等于没有供述同案犯，不满足如实供述，划掉（15s）</li><li>B项甲是在因酒驾被讯问时交代乙的杀人行为，交代的是他人犯罪，属检举揭发型立功而非自首，划掉（15s）</li><li>D项说单位犯罪中直接责任人“不能单独成立自首”，与单位犯罪中直接负责的主管人员可单独成立自首的规则相反，划掉（15s）</li><li>C项虽是被父亲“扭送”，但司法解释明确亲友规劝、陪同或送去投案视为自动投案，加上王某主动交代肇事逃逸，两要件都齐，成立自首，所以选C（20s）</li></ol>
+          <div class="walk-src">源：3_1_fqc8d · 2024甘肃公务员录用考试《行测》题 · 第7题 · 正确率 55.52</div>
+          <div class="walk-fail">最容易走错的是看见C项“扭送”就认定是被动归案、直接排除，漏掉“亲友送去投案视为自动投案”这一司法解释例外。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="CS-04">
+      <summary><span class="mod-kicker">CS-04 · 常识</span><span class="mod-title">诉讼法</span><span class="mod-signal">3_1_4inr7</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>诉讼法</b> → 题干把“第一审程序未认罪认罚”和“第二审程序认罪认罚”摆在一起，两个程序的认罪状态不一致，这个“一审没认、二审才认”的错位就是信号。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定性（法律/地理/经济/文化）（5s）→ 2. 回忆条文或定义边界（15s）→ 3. 绝对词与例外排查（15s）→ 4. 剩余项比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都陌生 → 找「绝对词」和「主体错位」排除，剩下的蒙。</p>
+        <span class="timeline">时间 20–30s · 不恋战</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_4inr7</b><span>2022年湖北省选调生招录考试综合知识和行政职业能力测验试卷 · <span class="rate">55.05<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先圈出两个时间点：一审没认、二审认了，本题问的是二审法院该怎么处理这种“半路认罪”的情形（10s）</li><li>排掉 A、B：制度并不禁止二审认罪认罚，只是从宽要另行判断，所以“拒绝接受”“接受但不从宽”都过头，直接划掉（15s）</li><li>剩下 C、D，比的只是“与一审一致”还是“有所区别”，抓住一审根本没认过、不存在可比基数这一点，一致就无从谈起（20s）</li><li>一审无认罚基础、二审才认属于事后补救，从宽幅度理应有别，所以选 D（10s）</li></ol>
+          <div class="walk-src">源：3_1_4inr7 · 2022湖北省选调生招录考试综合知识和行政职业能力测验试卷 · 第35题 · 正确率 55.05</div>
+          <div class="walk-fail">最容易错在觉得“同案同罚、从宽标准应当统一”而选 C，忽略了 C 的前提是一审已经认罪认罚，本题一审压根没有认罚。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="CS-05">
+      <summary><span class="mod-kicker">CS-05 · 常识</span><span class="mod-title">中国地理</span><span class="mod-signal">3_1_5jrd4</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>中国地理</b> → 设问问的是“说法错误”，且 D 项同时出现“目前最大”和“云南省内”两个绝对化、可核查的具体表述，选非题加绝对化选项就是靶子。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定性（法律/地理/经济/文化）（5s）→ 2. 回忆条文或定义边界（15s）→ 3. 绝对词与例外排查（15s）→ 4. 剩余项比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都陌生 → 找「绝对词」和「主体错位」排除，剩下的蒙。</p>
+        <span class="timeline">时间 20–30s · 不恋战</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5jrd4</b><span>2024年国家公务员录用考试《行测》题 · <span class="rate">54.04<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先确认这是选非题，四个选项要找出错的那一个，别做成选对（5s）</li><li>扫能一口判定的硬知识点：锡矿是我国优势矿产、储量产量居世界前列，A 对，先放过（10s）</li><li>南海北部神狐海域 2017 年天然气水合物试采成功，B 对；新疆罗布泊是钾盐主产地之一，C 对，两项都放过（15s）</li><li>只剩 D，我国最大单体金矿是山东莱州三山岛深部的西岭金矿，不在云南，所以选 D（15s）</li></ol>
+          <div class="walk-src">源：3_1_5jrd4 · 2024国家公务员录用考试《行测》题 · 第15题 · 正确率 54.04</div>
+          <div class="walk-fail">最容易错在凭“云南出产黄金”的模糊印象放过 D，或把“最大”当成无法判断的表述，其实金矿归属地是明确的硬知识。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="CS-06">
+      <summary><span class="mod-kicker">CS-06 · 常识</span><span class="mod-title">自然地理</span><span class="mod-signal">3_1_4rm48</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>自然地理</b> → 设问是“说法错误”，而 D 项把“水汽凝结”和“能见度低于 1 千米”绑在一起，1 千米正是雾的界定值，指标与现象对不上就是信号。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定性（法律/地理/经济/文化）（5s）→ 2. 回忆条文或定义边界（15s）→ 3. 绝对词与例外排查（15s）→ 4. 剩余项比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都陌生 → 找「绝对词」和「主体错位」排除，剩下的蒙。</p>
+        <span class="timeline">时间 20–30s · 不恋战</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_4rm48</b><span>2022年云南公务员录用考试《行测》题 · <span class="rate">57.44<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>先定选非，四个自然现象逐个比对定义，别在“哪个更像错的”上凭感觉（5s）</li><li>A 项拉尼娜就是赤道太平洋中东部海水大范围持续异常变冷，说法准确，放过（10s）</li><li>B 项龙卷风属强对流、多发于中纬度春夏，C 项凌汛是冰凌阻水致江河水位明显上涨，两项定义都对，放过（15s）</li><li>D 项把雾的定义安给了霾：雾才是水汽凝结、能见度低于 1 千米，霾是干尘粒、能见度小于 10 千米，所以选 D（15s）</li></ol>
+          <div class="walk-src">源：3_1_4rm48 · 2022云南公务员录用考试《行测》题 · 第18题 · 正确率 57.44</div>
+          <div class="walk-fail">最容易在 D 项上犹豫，因为“能见度低”确实是霾的特征，错的是“水汽凝结”和“1 千米”这两个只属于雾的指标。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="CS-07">
+      <summary><span class="mod-kicker">CS-07 · 常识</span><span class="mod-title">宏观经济与调控政策</span><span class="mod-signal">3_1_a72v6</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>宏观经济与调控政策</b> → 设问是“短期内将出现（ ）个”，配 ①②③④ 四个带序号的现象，这是计数题，动作是逐条判对错再数个数，不是选一个说法。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定性（法律/地理/经济/文化）（5s）→ 2. 回忆条文或定义边界（15s）→ 3. 绝对词与例外排查（15s）→ 4. 剩余项比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都陌生 → 找「绝对词」和「主体错位」排除，剩下的蒙。</p>
+        <span class="timeline">时间 20–30s · 不恋战</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_a72v6</b><span>2024年深圳市考公务员录用考试《行测》试题 · <span class="rate">55.37<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>先咬住“短期内”三个字，凡是讲长期效果或制度好坏的都按短期震荡来判（10s）</li><li>①货币急剧贬值、物价飞涨，正是放开价格加货币贬值的直接后果，判对（10s）</li><li>②多国愿意与该国互换货币判错，本币暴跌时资本外逃、各国是抛售而非愿意持有；③取消儿童福利救济、④政府购入及投资大幅减少，都是紧缩财政的题中之义，判对（20s）</li><li>数下来对的是 ①③④ 共 3 个，所以选 C（10s）</li></ol>
+          <div class="walk-src">源：3_1_a72v6 · 2024深圳市考公务员录用考试《行测》试题 · 第11题 · 正确率 55.37</div>
+          <div class="walk-fail">最容易把 ② 判对，误以为“货币贬值利于出口、别国就愿意互换货币”，实际短期是本币被抛售，这一条错就把答案从 3 个带偏成 4 个。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="CS-08">
+      <summary><span class="mod-kicker">CS-08 · 常识</span><span class="mod-title">文化常识</span><span class="mod-signal">3_1_584u7</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>文化常识</b> → 设问是“不符合这一避讳原则”，四个选项都是“把某字改掉”，动作是逐个反查被改的字撞上了哪位君王的名讳。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 定性（法律/地理/经济/文化）（5s）→ 2. 回忆条文或定义边界（15s）→ 3. 绝对词与例外排查（15s）→ 4. 剩余项比对（10s）。</li></ol>
+        <p class="walk-fail">失效：四个选项都陌生 → 找「绝对词」和「主体错位」排除，剩下的蒙。</p>
+        <span class="timeline">时间 20–30s · 不恋战</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_584u7</b><span>2023年陕西省公务员录用考试《行测》题 · <span class="rate">55.25<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先把避讳原则压成一句话：君王名字里的字不能直接写，要换字或缺笔（5s）</li><li>B 项彻侯改通侯，避的是汉武帝刘彻；C 项观世音改观音，避的是唐太宗李世民，两项都能对上名讳，放过（15s）</li><li>D 项天地玄黄改天地元黄，避的是康熙帝玄烨，也对上名讳，放过（10s）</li><li>回头查 A，金陵改秣陵是秦始皇东巡时泄王气、把此地贬为牧马场，“秣”是草料义，与避讳无关，所以选 A（15s）</li></ol>
+          <div class="walk-src">源：3_1_584u7 · 2023陕西省公务员录用考试《行测》题 · 第10题 · 正确率 55.25</div>
+          <div class="walk-fail">最容易错在把“改地名”一律当成避讳，甚至硬去找秦始皇名字里的字；A 项改名的动因是政治贬抑，不是避名讳。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="mod-zz">
+    <h2>政治 · 非图推考点秒杀链（8 条，逐题对照原题）</h2>
+    <p class="sub2">每条走链对应一道真实原题，题干、选项、答案、正确率均可在 <code>_cache/fenbi/samples/selected.json</code> 中按 key 复算。解析经 DeepSeek-V4.1-Flash、GPT-6.1-Sol 两个模型独立作答后与粉笔交叉验证。</p>
+    <div class="notice" style="margin:8px 0 12px"><b>本模块秒杀链：</b>题干故事 → 原理一一映射，不多走一步<br><b>四拍动作：</b>1. 抓题干关键词（10s）→ 2. 对应原理（15s）→ 3. 选项逐个映射（20s）→ 4. 排除「正确但无关」（10s）。<br><b>失效：原理都对但都只是「沾边」→ 回题干找那个最具体的限定词。</b> · <b>时间：</b>25–35s</div>
+    <details class="module" id="ZZ-01">
+      <summary><span class="mod-kicker">ZZ-01 · 政治</span><span class="mod-title">唯物辩证法</span><span class="mod-signal">3_1_hfb51</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>唯物辩证法</b> → 题干引一句古文，四个选项里面两项讲内因/量变质变、两项讲外因，其中 C、D 只差“决定性”和“非常重大”一个词，这个“同主语不同强度”的对子就是信号。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 抓题干关键词（10s）→ 2. 对应原理（15s）→ 3. 选项逐个映射（20s）→ 4. 排除「正确但无关」（10s）。</li></ol>
+        <p class="walk-fail">失效：原理都对但都只是「沾边」→ 回题干找那个最具体的限定词。</p>
+        <span class="timeline">时间 25–35s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_hfb51</b><span>2025下半年省考第十季行测模考大赛（北京卷） · <span class="rate">53.96<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>先把古文压成白话：晒一天、冻十天，再易活的植物也长不成，说的全是“外部条件”（10s）</li><li>用“外”字定方向：A 讲量变质变、B 讲内因，方向不对先划掉（10s）</li><li>C、D 同讲外因，只比一个词——外因是“决定性”还是“非常重大”，背一句原理：内因是根本、起决定作用，外因通过内因起作用（15s）</li><li>C 把“决定性”安到外因头上是原理性硬错，排掉，所以选 D（10s）</li></ol>
+          <div class="walk-src">源：3_1_hfb51 · 2025下半年省考第十季行测模考大赛（北京卷） · 第1题 · 正确率 53.96</div>
+          <div class="walk-fail">最容易错在看见“一日”“十日”就把数字当量的积累去选 A，题干根本没讲积累到质变，讲的是外部环境能不能让事物存活。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZZ-02">
+      <summary><span class="mod-kicker">ZZ-02 · 政治</span><span class="mod-title">重要会议讲话</span><span class="mod-signal">3_1_5ka4c</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>重要会议讲话</b> → 四个判断 ①②③④ 配“三选”式组合选项，① 出现在 A、B、D 里，② 出现在 A、C、D 里，选项结构说明只要判死其中一条就能一步定答案。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 抓题干关键词（10s）→ 2. 对应原理（15s）→ 3. 选项逐个映射（20s）→ 4. 排除「正确但无关」（10s）。</li></ol>
+        <p class="walk-fail">失效：原理都对但都只是「沾边」→ 回题干找那个最具体的限定词。</p>
+        <span class="timeline">时间 25–35s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_5ka4c</b><span>2024年山东省公务员录用考试《行测》试题 · <span class="rate">55.06<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
+          <ol class="walk-steps"><li>先看选项结构，找出被多数选项共用的 ②，把它当成主攻点，别四条平均用力（10s）</li><li>①“休戚与共、荣辱与共、生死与共、命运与共”四个“与共”是铸牢共同体意识的标配表述，判对（10s）</li><li>死抠 ②：前半句“坚持各民族自信和独立”把民族工作引向“独立”，与共同团结奋斗、共同繁荣发展的方向相悖；后半句“物质和文化基础”也不对，原文是为铸牢共同体意识奠定坚实的“精神和文化基础”，判错（20s）</li><li>② 一错，含 ② 的 A、C、D 全排，只剩 B；再用 ③“以中华民族大团结促进中国式现代化”、④“构筑中华民族共有精神家园”反查都对，所以选 B（10s）</li></ol>
+          <div class="walk-src">源：3_1_5ka4c · 2024山东省公务员录用考试《行测》试题 · 第3题 · 正确率 55.06</div>
+          <div class="walk-fail">最容易错在 ② 上犹豫，因为“各民族自信”听着很正，错的是“独立”这个方向和“物质和文化基础”这个搭配，任一处都能判死。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZZ-03">
+      <summary><span class="mod-kicker">ZZ-03 · 政治</span><span class="mod-title">重要文件</span><span class="mod-signal">3_1_ig17f</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>重要文件</b> → 设问问“正确的有（ ）”而选项是“2项/3项/4项/5项”，这是计数题，动作是逐条判对错再数个数，不是挑一句话。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 抓题干关键词（10s）→ 2. 对应原理（15s）→ 3. 选项逐个映射（20s）→ 4. 排除「正确但无关」（10s）。</li></ol>
+        <p class="walk-fail">失效：原理都对但都只是「沾边」→ 回题干找那个最具体的限定词。</p>
+        <span class="timeline">时间 25–35s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_ig17f</b><span>2026下半年省考第十七季行测模考大赛（广东卷） · <span class="rate">55.52<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
+          <ol class="walk-steps"><li>先在草稿上写“①②③④⑤”，把题型钉成数个数，避免做成选一项（5s）</li><li>扫 ①②③④ 四条主干：惠民生与促消费、投资于物与投资于人；高水平科技自立自强、数字中国；新版市场准入负面清单、整治招标投标；农业转移人口市民化、新型城镇化试点，四条都是报告原话，判对（20s）</li><li>⑤ 单独抠细节，前三个短句（教育强国三年行动计划、高校学科专业调整）都对，只有“加强城区普通高中建设”里的“城区”有问题，原文是“县域普通高中”（15s）</li><li>⑤ 因一个词判错，正确的只剩 ①②③④ 共 4 项，所以选 C（10s）</li></ol>
+          <div class="walk-src">源：3_1_ig17f · 2026下半年省考第十七季行测模考大赛（广东卷） · 第5题 · 正确率 55.52</div>
+          <div class="walk-fail">最容易错在把 ⑤ 整条放过，⑤ 前半段全是原文，只有“城区/县域”一字之差，一旦放过就会数成 5 项选 D。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZZ-04">
+      <summary><span class="mod-kicker">ZZ-04 · 政治</span><span class="mod-title">其他建设</span><span class="mod-signal">3_1_d8ibl</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>其他建设</b> → 设问是“错误的是”，而 D 项把“稳中求进、以进促稳、先立后破”三个短语连成一串，这种三连套话就是靶子——它是别的重要会议对经济工作的提法。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 抓题干关键词（10s）→ 2. 对应原理（15s）→ 3. 选项逐个映射（20s）→ 4. 排除「正确但无关」（10s）。</li></ol>
+        <p class="walk-fail">失效：原理都对但都只是「沾边」→ 回题干找那个最具体的限定词。</p>
+        <span class="timeline">时间 25–35s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_d8ibl</b><span>2025下半年省考第二季行测模考大赛（深圳卷） · <span class="rate">54.90<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>先定选非，四个选项里只找错的那一个，别顺手选对的（5s）</li><li>扫 A、B、C：共商共建共享是原则、互联互通是主线、硬联通软联通心联通是协调推进机制，三项都是共建“一带一路”的原话，放过（15s）</li><li>盯住 D 的三连短语，本次座谈会讲的是“坚持稳中求进工作总基调”，“以进促稳、先立后破”是中央经济工作会议的表述，多出来的两个短语属拼贴（20s）</li><li>三项正确、一项错误，所以选 D（10s）</li></ol>
+          <div class="walk-src">源：3_1_d8ibl · 2025下半年省考第二季行测模考大赛（深圳卷） · 第3题 · 正确率 54.90</div>
+          <div class="walk-fail">最容易错在看见“稳中求进”四个字确实出现过就整条放过，错的是后面硬加的两个短语，把别的会议的套话嫁接过来了。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZZ-05">
+      <summary><span class="mod-kicker">ZZ-05 · 政治</span><span class="mod-title">经济建设</span><span class="mod-signal">3_1_4rmp7</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>经济建设</b> → 设问是“不准确的是”，A 项出现“一对一”这种整齐划一的限定词，而 B、C、D 都在讲多主体、整合资源，与题干“谁有本事谁就揭榜”的开放精神相冲。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 抓题干关键词（10s）→ 2. 对应原理（15s）→ 3. 选项逐个映射（20s）→ 4. 排除「正确但无关」（10s）。</li></ol>
+        <p class="walk-fail">失效：原理都对但都只是「沾边」→ 回题干找那个最具体的限定词。</p>
+        <span class="timeline">时间 25–35s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_4rmp7</b><span>2022年湖北省公务员录用考试《行测》题 · <span class="rate">54.85<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
+          <ol class="walk-steps"><li>先定选非，再抓题干那句“谁有本事谁就揭榜”，这句话本身就排除了指定唯一对象的做法（10s）</li><li>C 项“以科研成果兑现的科研经费投入体制”正是科技悬赏制的定义，D 项“政府搭台、创新唱戏”是整合各方资源的常见表述，两项都对，放过（15s）</li><li>B 项“支持企业牵头组建创新联合体揭榜攻关”符合龙头企业牵头、多主体协同的方向，也对，放过（10s）</li><li>回看 A：“一对一”只是多数省份的默认做法，实践中还鼓励组建联合体共同攻关，需求方定不了唯一对象时可 2-3 家“赛马”，说成“一对一”的揭榜方式就不准确，所以选 A（15s）</li></ol>
+          <div class="walk-src">源：3_1_4rmp7 · 2022湖北省公务员录用考试《行测》题 · 第14题 · 正确率 54.85</div>
+          <div class="walk-fail">最容易错在把 A 判成“正确”，因为“一对一”确实存在，但题目问的是不准确，把它写成固定唯一的揭榜方式就与“赛马”制相悖。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZZ-06">
+      <summary><span class="mod-kicker">ZZ-06 · 政治</span><span class="mod-title">唯物史观</span><span class="mod-signal">3_1_cs3p2</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>唯物史观</b> → 设问是“最直接体现了哪些基本观点”，后面四个观点混排、选项是四选二组合，看到组合选项就先排观点本身错的。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 抓题干关键词（10s）→ 2. 对应原理（15s）→ 3. 选项逐个映射（20s）→ 4. 排除「正确但无关」（10s）。</li></ol>
+        <p class="walk-fail">失效：原理都对但都只是「沾边」→ 回题干找那个最具体的限定词。</p>
+        <span class="timeline">时间 25–35s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_cs3p2</b><span>2025年云南省公务员录用考试《行测》题 · <span class="rate">51.86<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+          <ol class="walk-steps"><li>先不读题干案例，只扫四个观点判真伪：③“生产关系对生产力具有决定作用”把决定关系说反了，生产力才决定生产关系，秒删含③的 C、D（15s）</li><li>剩下 A（①②）和 B（①④），比较②和④谁在题干里有落点（10s）</li><li>回题干抓动作词：“深化经济体制、科技体制等改革”“打通堵点卡点”，这些说的都是靠改革推动生产力，正好对上④“改革是社会主义社会发展的直接动力”（20s）</li><li>②讲经济基础变更引起上层建筑变革，题干通篇只有生产力与生产关系、只字未提上层建筑，属于“说法对但没体现”，排 A（15s）</li><li>①“生产关系必须与生产力发展要求相适应”由“形成与之相适应的新型生产关系”直接印证，①④齐了，所以选 B（10s）</li></ol>
+          <div class="walk-src">源：3_1_cs3p2 · 2025云南省公务员录用考试《行测》题 · 第7题 · 正确率 51.86</div>
+          <div class="walk-fail">最容易卡在②上：它本身表述完全正确，很多人见“正确”就留下并选 A，但本题要的是“最直接体现”，②在题干里找不到经济基础、上层建筑的任何对应词，属于文对题不对。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZZ-07">
+      <summary><span class="mod-kicker">ZZ-07 · 政治</span><span class="mod-title">唯物论</span><span class="mod-signal">3_1_dpojd</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>唯物论</b> → 题干只有一句“科幻文学、影视都诞生于科学技术不断发展这一现实基础之上”，末尾问“这体现了”，选项全是关于意识的判断，是典型的“考意识从哪来”的单选题。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 抓题干关键词（10s）→ 2. 对应原理（15s）→ 3. 选项逐个映射（20s）→ 4. 排除「正确但无关」（10s）。</li></ol>
+        <p class="walk-fail">失效：原理都对但都只是「沾边」→ 回题干找那个最具体的限定词。</p>
+        <span class="timeline">时间 25–35s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_dpojd</b><span>2025上半年省考第九季行测模考大赛（河北卷） · <span class="rate">56.95<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
+          <ol class="walk-steps"><li>先给题干定调：抓“诞生于……现实基础”“离不开”两个词，判定主题是意识依赖客观存在，而不是意识去改造世界（15s）</li><li>扫选项里的硬伤：C“意识具有直接现实性”错，直接现实性是实践的特点，意识只能通过实践转化，秒排（10s）</li><li>D“意识……可以促进社会发展”漏了“正确”这层限定，错误意识会阻碍社会发展，绝对化表述，排掉（10s）</li><li>剩 A、B：A“自觉选择性”讲反映的能动特点，题干讲的是来源和基础，方向不对，排 A（15s）</li><li>B“意识的形成离不开被反映的客观存在”与“诞生于现实基础之上”逐字对应，所以选 B（10s）</li></ol>
+          <div class="walk-src">源：3_1_dpojd · 2025上半年省考第九季行测模考大赛（河北卷） · 第1题 · 正确率 56.95</div>
+          <div class="walk-fail">最容易错选 A，因为“科幻”看着很像是意识的选择性和创造性，但题干的落点是“诞生于”“离不开”这种来源表述，考的是物质决定意识，不是意识的能动性。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="module" id="ZZ-08">
+      <summary><span class="mod-kicker">ZZ-08 · 政治</span><span class="mod-title">认识论</span><span class="mod-signal">3_1_iaope</span></summary>
+      <div class="mod-body">
+        <h3>第一眼信号 → 子链</h3>
+        <ol class="rules"><li><b>认识论</b> → 题干出现“以理论创新引领实践创新”，一个句子里同时有“实践→理论”和“理论→实践”两个方向，这种来回结构直接指向认识运动的循环上升。</li></ol>
+        <h3>秒杀链</h3>
+        <ol class="rules"><li>1. 抓题干关键词（10s）→ 2. 对应原理（15s）→ 3. 选项逐个映射（20s）→ 4. 排除「正确但无关」（10s）。</li></ol>
+        <p class="walk-fail">失效：原理都对但都只是「沾边」→ 回题干找那个最具体的限定词。</p>
+        <span class="timeline">时间 25–35s</span>
+        <h3>原题走链</h3>
+        <div class="walk noble">
+          <div><div class="walk-head"><b>3_1_iaope</b><span>2025下半年省考第三十四季行测模考大赛（深圳卷） · <span class="rate">55.40<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
+          <ol class="walk-steps"><li>把题干切成两半：前半“同中国具体实际相结合、探索规律、回答实践课题”是从实践到认识，后半“以理论创新引领实践创新”是从认识到实践（15s）</li><li>判定答案必须同时盖住这两个方向，扫选项中只有 D“从实践到认识再到实践的螺旋式上升”是双向闭环，先锁定 D（15s）</li><li>反向验 A：A 讲“检验真理”，题干没有检验、证实、证明一类字眼，排除（10s）</li><li>再想 B 为何不行：B 只说实践是认识的来源和动力，只有单向、缺“理论回到实践”那一半；C 讲真理的具体性条件性，是适用范围问题，与题干结构无关（20s）</li><li>D 是唯一完整覆盖“实践—认识—实践”的选项，所以选 D（10s）</li></ol>
+          <div class="walk-src">源：3_1_iaope · 2025下半年省考第三十四季行测模考大赛（深圳卷） · 第2题 · 正确率 55.40</div>
+          <div class="walk-fail">最容易错选 B，因为“不断回答实践遇到的崭新课题”确实很像“实践是认识发展的动力”，但题干后半句“以理论创新引领实践创新”B 完全覆盖不到，只解释了一半就不能当“最能体现”。</div>
+          </div>
+        </div>
       </div>
     </details>
   </section>
