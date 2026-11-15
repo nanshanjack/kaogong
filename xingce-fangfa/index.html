@@ -205,6 +205,20 @@ tr:last-child td{border-bottom:0}
 .walk-fail{font-size:11.5px;color:var(--warn);margin-top:5px}
 /* 非图推走链：无原题图时用单列，避免左侧 300px 空白 */
 .walk.noble{grid-template-columns:1fr}
+/* 原题完整展示 */
+.q-material{font-size:13px;line-height:1.75;color:var(--ink2);background:var(--bg3,#F7F5EF);border-left:3px solid var(--line);border-radius:6px;padding:9px 11px;margin:7px 0}
+.q-stem{font-size:13.5px;line-height:1.8;color:var(--ink);margin:8px 0;padding:9px 11px;background:var(--panel);border-radius:6px;border:1px solid var(--line)}
+.q-options{list-style:none;margin:8px 0 10px;padding:0;counter-reset:opt}
+.q-options li{font-size:13px;line-height:1.7;color:var(--ink2);padding:5px 10px 5px 12px;margin:4px 0;border-radius:6px;background:var(--bg2);border:1px solid transparent}
+.q-options li b{font-family:"Cascadia Mono",Consolas,monospace;color:var(--brand);margin-right:4px}
+.q-options li.opt-right{background:#E8F0EA;border-color:#9CB8A6;color:var(--ink);font-weight:600}
+.q-options li.opt-wrong{background:#FBEFEA;border-color:#D9A894}
+.opt-tag{font-size:10.5px;padding:1px 6px;border-radius:4px;background:var(--brand);color:#fff;margin-left:6px;font-weight:700}
+.q-options li.opt-wrong .opt-tag{background:var(--danger)}
+.walk-label{font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--brand);margin:11px 0 5px;padding-left:2px;border-left:3px solid var(--brand2);padding-left:8px}
+.walk-steps b,.walk-fail b{font-weight:800;color:#1F1D19}
+.walk-steps u,.walk-fail u{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:2.5px;text-decoration-color:var(--brand)}
+.walk-steps b u,.walk-fail b u{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:2.5px;text-decoration-color:var(--brand)}
 .walk-src{margin-top:6px;font-size:11px;color:var(--ink4);font-family:"Cascadia Mono",Consolas,monospace;border-top:1px dashed var(--line);padding-top:5px}
 @media(max-width:760px){.walk.noble{grid-template-columns:1fr}}
 
@@ -947,52 +961,115 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 40–55s · 超 60s 先标记</span>
         <h3>原题走链（7 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_9q7p9</b><span>2025年天津市公务员录用考试《行测》题 · <span class="rate">55.98<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
-          <ol class="walk-steps"><li>先看第一空前面的原因句“将原始居民全部迁出”，判定第一空要填这一原因造成的结果，即“场景消失”义（10s）</li><li>用“消失”义筛成语，“转瞬即逝”只强调时间短、不含消失至没有的意思，先排掉，其余三个暂留（15s）</li><li>第二空不纠缠词义，先抓搭配对象是“遗址”，把只能形容人的“呆板”和形容思想制度的“陈腐”直接划掉（20s）</li><li>只剩“静态”能与“遗址”搭配，且正好与后文“失去鲜活的魅力”构成动静对照，所以选 C（10s）</li></ol>
-          <div class="walk-src">源：3_1_9q7p9 · 2025天津市公务员录用考试《行测》题 · 第19题 · 正确率 55.98</div>
-          <div class="walk-fail">最容易走错的是第一空把“转瞬即逝”当“消失得快”留下来，它讲的是时间短暂而非逐步消失，必须靠第二空“遗址”的搭配才能把答案钉死在 C。</div>
+          <div>
+            <div class="walk-head"><b>3_1_9q7p9</b><span>2025年天津市公务员录用考试《行测》题 · <span class="rate">55.98<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
+            <div class="q-stem"><b>【题干】</b>当前不少城市对文化遗产的保护进入了旅游驱动的误区。过度地商业化，将原始居民全部迁出，充满活力的生产、生活场景 ，文化遗产成为 的遗址，失去鲜活的魅力。依次填入画横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 转瞬即逝 停滞</li>
+              <li><b>B.</b> 无影无踪 陈腐</li>
+              <li class="opt-right"><b>C.</b> 消失殆尽 静态 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>D.</b> 烟消云散 呆板 <span class="opt-tag">易错</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先看第一空前面的原因句<b><u>“将原始居民全部迁出”</u></b>，判定第一空要填这一原因造成的结果，即<b><u>“场景消失”</u></b>义（10s）</li><li>用<b><u>“消失”</u></b>义筛成语，<b><u>“转瞬即逝”</u></b>只强调时间短、不含消失至没有的意思，先排掉，其余三个暂留（15s）</li><li>第二空不纠缠词义，先抓<b>搭配对象</b>是<b><u>“遗址”</u></b>，把只能形容人的<b><u>“呆板”</u></b>和形容思想制度的<b><u>“陈腐”</u></b>直接划掉（20s）</li><li>只剩<b><u>“静态”</u></b>能与<b><u>“遗址”</u></b>搭配，且正好与后文<b><u>“失去鲜活的魅力”</u></b>构成动静对照，所以选 C（10s）</li></ol>
+            <div class="walk-fail">最容易走错的是第一空把<b><u>“转瞬即逝”</u></b>当<b><u>“消失得快”</u></b>留下来，它讲的是时间短暂而非逐步消失，必须靠第二空<b><u>“遗址”</u></b>的搭配才能把答案钉死在 C。</div>
+            <div class="walk-src">源：3_1_9q7p9 · 2025天津市公务员录用考试《行测》题 · 第19题 · 正确率 55.98</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_cmf3u</b><span>2025年江苏省公务员录用考试《行测》题（C类） · <span class="rate">53.78<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>先不读选项，标出第二空要接“某项成果、某个侧面”、第三空要搭配“共识”，明确这两空是抓手（10s）</li><li>第一空用主体排除：主语是中国探月、对象是太空，“碧海青天”写海天景色与女子忠贞、“蟾宫折桂”喻科举得中，秒排 A、D（15s）</li><li>第二空比“心心相印”和“不期而遇”，前者只能配人、配不了“成果”“侧面”这类物，据此排掉 B（20s）</li><li>第三空代入验证“凝聚共识”是唯一成立的固定搭配，另外三个都拼不成，所以选 C（10s）</li></ol>
-          <div class="walk-src">源：3_1_cmf3u · 2025江苏省公务员录用考试《行测》题（C类） · 第44题 · 正确率 53.78</div>
-          <div class="walk-fail">最容易错在第二空凭语感挑“心心相印”，它形容彼此心意相通、只能接人，一旦后面是“成果”“侧面”就已经错配。</div>
+          <div>
+            <div class="walk-head"><b>3_1_cmf3u</b><span>2025年江苏省公务员录用考试《行测》题（C类） · <span class="rate">53.78<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>中国探月20年，拉近了 与普通公众生活的距离。当一粒棉花种子在月球上生根发芽，当月球车玉兔微博下满是网友的祝福，当中小学教材换上了崭新的中国月面图······越来越多的人与探月工程的某项成果、某个侧面 ，一个共识在人们心中不断 ：我们离月球并不遥远！依次填入画横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 碧海青天 邂逅相逢 汇集</li>
+              <li class="opt-wrong"><b>B.</b> 浩瀚苍穹 心心相印 回响 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>C.</b> 星辰大海 不期而遇 凝聚 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 蟾宫折桂 情投意合 激荡</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先不读选项，标出第二空要接<b><u>“某项成果、某个侧面”</u></b>、第三空要搭配<b><u>“共识”</u></b>，明确这两空是抓手（10s）</li><li>第一空用主体排除：主语是中国探月、对象是太空，<b><u>“碧海青天”</u></b>写海天景色与女子忠贞、<b><u>“蟾宫折桂”</u></b>喻科举得中，秒排 <b><u>A</u></b>、D（15s）</li><li>第二空比<b><u>“心心相印”</u></b>和<b><u>“不期而遇”</u></b>，前者只能配人、配不了<b><u>“成果”</u></b><b><u>“侧面”</u></b>这类物，据此排掉 B（20s）</li><li>第三空代入验证<b><u>“凝聚共识”</u></b>是唯一成立的固定搭配，另外三个都拼不成，所以选 C（10s）</li></ol>
+            <div class="walk-fail">最容易错在第二空凭语感挑<b><u>“心心相印”</u></b>，它形容彼此心意相通、只能接人，一旦后面是<b><u>“成果”</u></b><b><u>“侧面”</u></b>就已经错配。</div>
+            <div class="walk-src">源：3_1_cmf3u · 2025江苏省公务员录用考试《行测》题（C类） · 第44题 · 正确率 53.78</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5ka43</b><span>2024年山东省公务员录用考试《行测》试题 · <span class="rate">53.63<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>抓第一空的解释句“发展变迁”“变迁史”，判定第一空必须含“变化”义（10s）</li><li>拿“变化”义一刀切：“贯通”是连接、“延展”是延长伸展，都不含变化，A、B 全排（15s）</li><li>第二空看搭配对象“发展史”加上前文“大动脉”“主动脉”的分量，要的是规模宏大类词，“流光溢彩”只写光彩好看、与“史”不搭，排 C（20s）</li><li>剩“嬗变”对“变迁”、“波澜壮阔”对“大动脉”的宏大规模，两空都对得上，所以选 D（10s）</li></ol>
-          <div class="walk-src">源：3_1_5ka43 · 2024山东省公务员录用考试《行测》试题 · 第25题 · 正确率 53.63</div>
-          <div class="walk-fail">最容易在第一空反复比较“演变”和“嬗变”白耗时间，这两个词都对，定答案的是第二空“发展史”只能配“波澜壮阔”这类大词。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5ka43</b><span>2024年山东省公务员录用考试《行测》试题 · <span class="rate">53.63<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>铁路是国民经济大动脉。一条铁路线的 ，往往折射出一个地区发展变迁和现代化的崛起步伐。在山东发展史上，百廿胶济，就是这样一条担纲主动脉的铁路线。可以说，一部百廿胶济发展史，是一部铁路交通变迁史，更是一部 的沿线经济文化发展史。依次填入画横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 贯通 气势磅礴 <span class="opt-tag">易错</span></li>
+              <li><b>B.</b> 延展 活力四射</li>
+              <li><b>C.</b> 演变 流光溢彩</li>
+              <li class="opt-right"><b>D.</b> 嬗变 波澜壮阔 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>抓第一空的解释句<b><u>“发展变迁”</u></b><b><u>“变迁史”</u></b>，判定第一空必须含<b><u>“变化”</u></b>义（10s）</li><li>拿<b><u>“变化”</u></b>义一刀切：<b><u>“贯通”</u></b>是连接、<b><u>“延展”</u></b>是延长伸展，都不含变化，A、B 全排（15s）</li><li>第二空看<b>搭配对象</b><b><u>“发展史”</u></b>加上前文<b><u>“大动脉”</u></b><b><u>“主动脉”</u></b>的分量，要的是规模宏大类词，<b><u>“流光溢彩”</u></b>只写光彩好看、与“史”不搭，排 C（20s）</li><li>剩<b><u>“嬗变”</u></b>对<b><u>“变迁”</u></b>、<b><u>“波澜壮阔”</u></b>对<b><u>“大动脉”</u></b>的宏大规模，两空都对得上，所以选 D（10s）</li></ol>
+            <div class="walk-fail">最容易在第一空反复比较<b><u>“演变”</u></b>和<b><u>“嬗变”</u></b>白耗时间，这两个词都对，定答案的是第二空<b><u>“发展史”</u></b>只能配<b><u>“波澜壮阔”</u></b>这类大词。</div>
+            <div class="walk-src">源：3_1_5ka43 · 2024山东省公务员录用考试《行测》试题 · 第25题 · 正确率 53.63</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_fqc9n</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">53.97<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>看到「依次填入」别按顺序做，先扫三个空的搭配对象，选中「___难题」这个最硬的空当突破口（10s）</li><li>拿「难题」当尺子筛：解决、破解都能配，「分解」是拆整体、「解答」是回答疑问，C、D 直接划掉（15s）</li><li>第一空回看「重要___」且后文重复「重要载体」，说明只要「中心、关键」义，B枢纽胜A纽带（20s）</li><li>第二空回代验证：前有「却」表转折，「落户意愿并未显著增强」通顺，A「增加」配意愿不通（15s）</li><li>所以选 B（5s）</li></ol>
-          <div class="walk-src">源：3_1_fqc9n · 2024甘肃公务员录用考试《行测》题 · 第32题 · 正确率 53.97</div>
-          <div class="walk-fail">最容易栽在第一空：只凭「连接农村和城市」这段意思选A纽带（读着最顺），却没注意前面有「重要」、后面又重复「重要载体」，此处要的是「中心环节」而不是单纯连接。</div>
+          <div>
+            <div class="walk-head"><b>3_1_fqc9n</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">53.97<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>县域是连接农村和城市的重要 ，也是未来城镇化的重要载体。然而，虽然县域流动户籍限制取消，农民工落户意愿却并未显著 。究其原因，县域产业聚集力弱、公共服务滞后等因素，都影响了其落户意愿。因此，进一步提升县域农民工市民化质量，关键是 “稳定就业难、体面居住难、安心落户难”三大难题。依次填入画横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 纽带 增加 解决 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> 枢纽 增强 破解 <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> 关节 加强 分解</li>
+              <li><b>D.</b> 节点 上涨 解答</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>看到「依次填入」别按顺序做，先扫三个空的<b>搭配对象</b>，选中「___难题」这个最硬的空当突破口（10s）</li><li>拿「难题」当尺子筛：解决、破解都能配，「分解」是拆整体、「解答」是回答疑问，C、D 直接划掉（15s）</li><li>第一空回看「重要___」且后文重复「重要载体」，说明只要「中心、关键」义，B枢纽胜A纽带（20s）</li><li>第二空回代验证：前有「却」表转折，「落户意愿并未显著增强」通顺，A「增加」配意愿不通（15s）</li><li>所以选 B（5s）</li></ol>
+            <div class="walk-fail">最容易栽在第一空：只凭「连接农村和城市」这段意思选A纽带（读着最顺），却没注意前面有「重要」、后面又重复「重要载体」，此处要的是「中心环节」而不是单纯连接。</div>
+            <div class="walk-src">源：3_1_fqc9n · 2024甘肃公务员录用考试《行测》题 · 第32题 · 正确率 53.97</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_9ndf4</b><span>2024年青海省公务员录用考试《行测》题 · <span class="rate">56.26<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
-          <ol class="walk-steps"><li>第一空只看搭配：「___新途径」，发明只能接具体事物（发明电灯），配不上途径，A先划掉（15s）</li><li>第二空把搭配对象「严峻形势」和前面的「遏制」一起圈住，定方向为「不让形势继续恶化」，语气偏重（20s）</li><li>给选项排程度梯度：缓解最轻（减一点）＜扭转（改局面）＜抢救（急救，对象是人命财物），能配「形势」的只剩扭转、缓解（20s）</li><li>程度校准：题干用「遏制」「严峻」，要的是改方向不是减强度，缓解太轻，D划掉（15s）</li><li>所以选 B（5s）</li></ol>
-          <div class="walk-src">源：3_1_9ndf4 · 2024青海省公务员录用考试《行测》题 · 第34题 · 正确率 56.26</div>
-          <div class="walk-fail">最容易错在第二空选D缓解：它读起来最顺，但只能把形势减轻一点，扛不住「遏制」「严峻」要求的力度，程度题要先比力度再比顺口。</div>
+          <div>
+            <div class="walk-head"><b>3_1_9ndf4</b><span>2024年青海省公务员录用考试《行测》题 · <span class="rate">56.26<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
+            <div class="q-stem"><b>【题干】</b>在当今世界，科学家利用基因编辑技术，为“复活”灭绝物种 了生态修复的新途径，但挽救濒危物种，保护生物多样性才是核心要义，人类需要采取组合措施来遏制和 生物多样性丧失的严峻形势。依次填入划横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 发明 拯救</li>
+              <li class="opt-right"><b>B.</b> 开拓 扭转 <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> 发现 抢救</li>
+              <li class="opt-wrong"><b>D.</b> 开辟 缓解 <span class="opt-tag">易错</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>第一空只看搭配：「___新途径」，发明只能接具体事物（发明电灯），配不上途径，A先划掉（15s）</li><li>第二空把<b>搭配对象</b>「严峻形势」和前面的「遏制」一起圈住，定方向为「不让形势继续恶化」，语气偏重（20s）</li><li>给选项排程度梯度：缓解最轻（减一点）＜扭转（改局面）＜抢救（急救，对象是人命财物），能配「形势」的只剩扭转、缓解（20s）</li><li>程度校准：题干用「遏制」「严峻」，要的是改方向不是减强度，缓解太轻，D划掉（15s）</li><li>所以选 B（5s）</li></ol>
+            <div class="walk-fail">最容易错在第二空选D缓解：它读起来最顺，但只能把形势减轻一点，扛不住「遏制」「严峻」要求的力度，程度题要先比力度再比顺口。</div>
+            <div class="walk-src">源：3_1_9ndf4 · 2024青海省公务员录用考试《行测》题 · 第34题 · 正确率 56.26</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_i4sdj</b><span>2024年山西省县级纪委监委公务员录用考试《行测》题 · <span class="rate">54.02<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>先圈住「显然」这个因果标记，把空格定性为「结果」，前面的365.25度对360度、相斥、有别于欧洲全是原因（15s）</li><li>给原因提性质：不是「没想到」，而是两套坐标系换算不通、按老习惯解释不了（20s）</li><li>四个选项按反应类型归档：始料不及=没预料到，迷惑不解=不理解，目瞪口呆=惊呆了，不屑一顾=看不起（20s）</li><li>用「接受过古希腊天文学训练、习惯黄道坐标系」验证：习惯被打破只会转不过弯，落在认知轴上的只有迷惑不解（15s）</li><li>所以选 B（5s）</li></ol>
-          <div class="walk-src">源：3_1_i4sdj · 2024山西省县级纪委监委公务员录用考试《行测》题 · 第2题 · 正确率 54.02</div>
-          <div class="walk-fail">最容易错选A始料不及：「相斥、有别于」容易读成「出乎意料」，但文段强调的是换算不通、理解不了，不是「没料到」。</div>
+          <div>
+            <div class="walk-head"><b>3_1_i4sdj</b><span>2024年山西省县级纪委监委公务员录用考试《行测》题 · <span class="rate">54.02<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>在漫长的天文研究过程中，中国古代科学家建立了一套有别于欧洲的知识体系。如赤道圈依据太阳的视运动分为365.25度，对应的每日太阳的平均视运动为1度，这与欧洲采用360度的六十进制的西方传统相斥。显然，这种对赤道的划分方式让那些接受过古希腊天文学传统训练，习惯了黄道坐标系的传教士 。填入画横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 始料不及 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> 迷惑不解 <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> 目瞪口呆</li>
+              <li><b>D.</b> 不屑一顾</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先圈住「显然」这个因果标记，把空格定性为「结果」，前面的365.25度对360度、相斥、有别于欧洲全是原因（15s）</li><li>给原因提性质：不是「没想到」，而是两套坐标系换算不通、按老习惯解释不了（20s）</li><li>四个选项按反应类型归档：始料不及=没预料到，迷惑不解=不理解，目瞪口呆=惊呆了，不屑一顾=看不起（20s）</li><li>用「接受过古希腊天文学训练、习惯黄道坐标系」验证：习惯被打破只会转不过弯，落在认知轴上的只有迷惑不解（15s）</li><li>所以选 B（5s）</li></ol>
+            <div class="walk-fail">最容易错选A始料不及：「相斥、有别于」容易读成「出乎意料」，但文段强调的是换算不通、理解不了，不是「没料到」。</div>
+            <div class="walk-src">源：3_1_i4sdj · 2024山西省县级纪委监委公务员录用考试《行测》题 · 第2题 · 正确率 54.02</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5850q</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">58.82<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>认出题型：四选项共享「崇」字、语义高度重叠，别凭语感，改拆第二个语素（10s）</li><li>逐个拆语素：崇敬=敬（敬重人），崇信=信（信奉信条），崇奉=奉（供奉神位），推崇=推（推重、给高评价）（20s）</li><li>用空格后的引文定方向：「杰出的」「英国长期追求而没有达到」＝在打高分、给评价，不是敬人、不是信教（20s）</li><li>搭配回代：宾语是「中国园林艺术」，敬、信、奉的对象都得是人或神，只有推崇能接艺术（15s）</li><li>所以选 D（5s）</li></ol>
-          <div class="walk-src">源：3_1_5850q · 2023江西省公务员录用考试《行测》题 · 第40题 · 正确率 58.82</div>
-          <div class="walk-fail">最容易错选A崇敬：「崇敬」最正面、看着最像褒义，但它的对象是人（英雄、老师），接不了「园林艺术」，题干要的是评价高而不是尊敬。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5850q</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">58.82<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>当时的英国皇室建筑师钱伯斯也非常 中国园林艺术。钱伯斯曾经在东印度公司的船上工作过好几年，到过中国三次，1757年他在《中国园林的布局艺术》中说：“中国人的花园布局是杰出的，他们在那上面表现出来的趣味，是英国长期追求而没有达到的。”填入画横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 崇敬 <span class="opt-tag">易错</span></li>
+              <li><b>B.</b> 崇信</li>
+              <li><b>C.</b> 崇奉</li>
+              <li class="opt-right"><b>D.</b> 推崇 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>认出题型：四选项共享「崇」字、语义高度重叠，别凭语感，改拆第二个语素（10s）</li><li>逐个拆语素：崇敬=敬（敬重人），崇信=信（信奉信条），崇奉=奉（供奉神位），推崇=推（推重、给高评价）（20s）</li><li>用空格后的引文定方向：「杰出的」「英国长期追求而没有达到」＝在打高分、给评价，不是敬人、不是信教（20s）</li><li>搭配回代：宾语是「中国园林艺术」，敬、信、奉的对象都得是人或神，只有推崇能接艺术（15s）</li><li>所以选 D（5s）</li></ol>
+            <div class="walk-fail">最容易错选A崇敬：「崇敬」最正面、看着最像褒义，但它的对象是人（英雄、老师），接不了「园林艺术」，题干要的是评价高而不是尊敬。</div>
+            <div class="walk-src">源：3_1_5850q · 2023江西省公务员录用考试《行测》题 · 第40题 · 正确率 58.82</div>
           </div>
         </div>
       </div>
@@ -1011,31 +1088,67 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 40–55s · 超 60s 先标记</span>
         <h3>原题走链（4 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_4rn40</b><span>2022年天津市公务员录用考试《行测》试题 · <span class="rate">59.09<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>先找话题词：开头“美学经济时代”、后文反复出现“电影产业”“电影”，判定文段核心词有两个，美学和电影（10s）</li><li>用缺词法扫选项：B 全篇没提“美学”，D 没提“电影产业”，A 只说“龙头位置”丢了“美学经济”，三项都缺核心话题，直接排（20s）</li><li>剩下 C，回原文验证“引领社会整体风尚”正对应尾句“对社会整体风尚与价值发挥引领作用”，且“美学经济时代”也在（15s）</li><li>确认 C 同时盖住两个话题词、且落在尾句，所以选 C（5s）</li></ol>
-          <div class="walk-src">源：3_1_4rn40 · 2022天津市公务员录用考试《行测》试题 · 第24题 · 正确率 59.09</div>
-          <div class="walk-fail">最容易错在看见 A 项“龙头位置”文中有原话就选它，那只是论证过程中的一句，“内容产业头部位置”不是“意在说明”的落点，含原词不等于主旨。</div>
+          <div>
+            <div class="walk-head"><b>3_1_4rn40</b><span>2022年天津市公务员录用考试《行测》试题 · <span class="rate">59.09<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>美学经济时代，伴随着消费需求与消费体验的不断升级，以美学价值为核心的生产要素在产品的价值生产、企业的品牌建设以及产业价值链的提升中发挥着越来越重要的作用。电影产业作为当前经济中吸附资本能力最强、生产时效最快、引爆审美迭代和文化价值翻新变异的内容产业，对产业升级和经济增长的重要性不言而喻。电影是当代新文化、新时尚、新美感、新神话、新观念的重要策源地，牢牢占据着内容产业的头部位置，既对社会整体风尚与价值发挥引领作用，也会优化赋能全经济产业链。这段文字意在说明：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 电影产业长期处于内容产业的龙头位置</li>
+              <li class="opt-wrong"><b>B.</b> 电影对中国产业的转型升级具有重要推动作用 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>C.</b> 电影产业的发展引领着美学经济时代的整体风尚 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 美学经济时代以价值为核心的生产要素愈发重要</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先找话题词：开头<b><u>“美学经济时代”</u></b>、后文反复出现<b><u>“电影产业”</u></b><b><u>“电影”</u></b>，判定文段核心词有两个，美学和电影（10s）</li><li>用缺词法扫选项：B 全篇没提<b><u>“美学”</u></b>，D 没提<b><u>“电影产业”</u></b>，A 只说<b><u>“龙头位置”</u></b>丢了<b><u>“美学经济”</u></b>，三项都缺<b>核心话题</b>，直接排（20s）</li><li>剩下 C，回原文验证<b><u>“引领社会整体风尚”</u></b>正对应尾句<b><u>“对社会整体风尚与价值发挥引领作用”</u></b>，且<b><u>“美学经济时代”</u></b>也在（15s）</li><li>确认 C 同时盖住两个话题词、且落在尾句，所以选 C（5s）</li></ol>
+            <div class="walk-fail">最容易错在看见 A 项<b><u>“龙头位置”</u></b>文中有原话就选它，那只是论证过程中的一句，<b><u>“内容产业头部位置”</u></b>不是<b><u>“意在说明”</u></b>的落点，含原词不等于主旨。</div>
+            <div class="walk-src">源：3_1_4rn40 · 2022天津市公务员录用考试《行测》试题 · 第24题 · 正确率 59.09</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5kcla</b><span>2024年浙江省公务员录用考试《行测》题（A类） · <span class="rate">56.41<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>先判题型，问「意在说明」就是主旨题，只找作者落点，不纠缠细节（10s）</li><li>划结构：市场需要→研发→利润→再研发是分述链条，「从这个角度」后面才是收口（25s）</li><li>抽总结句主干，「市场需求是技术进步的基础」，主话题落在「市场需求」上（15s）</li><li>反查三个干扰：A利润、B高利润都在分述层，D说技术推动经济，被原文「技术是经济发展的副产品」直接否掉（25s）</li><li>主话题只有一个，所以选C（5s）</li></ol>
-          <div class="walk-src">源：3_1_5kcla · 2024浙江省公务员录用考试《行测》题（A类） · 第48题 · 正确率 56.41</div>
-          <div class="walk-fail">别把「但归根到底，是对利润的追求驱动文明」当主旨，那只是插入的补充判断，真正的总结句由「从这个角度」领起。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5kcla</b><span>2024年浙江省公务员录用考试《行测》题（A类） · <span class="rate">56.41<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>在市场需求的推动下，企业会不断投入研发，开发出新技术，满足消费者的新需求，从而获得更高的利润。为了持续发展，企业又会将这些利润用于研发，推动技术不断进步，从而获得更多的利润。这就是人类的技术循环过程，这个过程不断推动着技术和经济的发展。但归根到底，是对利润的追求，而不是对道德的追求，驱动着人类文明的发展。从这个角度，市场需求是技术进步的基础，技术是经济发展的副产品。这段文字意在说明：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 利润主导了人类技术循环过程 <span class="opt-tag">易错</span></li>
+              <li><b>B.</b> 高利润的实现是企业唯一目标</li>
+              <li class="opt-right"><b>C.</b> 市场的需求催生了技术的进步 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 技术的进步推动了经济的发展</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先判题型，问「意在说明」就是主旨题，只找作者落点，不纠缠细节（10s）</li><li>划结构：市场需要→研发→利润→再研发是分述链条，「从这个角度」后面才是收口（25s）</li><li>抽总结句主干，「市场需求是技术进步的基础」，主话题落在「市场需求」上（15s）</li><li>反查三个干扰：A利润、B高利润都在分述层，D说技术推动经济，被原文「技术是经济发展的副产品」直接否掉（25s）</li><li>主话题只有一个，所以选<b><u>C</u></b>（5s）</li></ol>
+            <div class="walk-fail">别把「但归根到底，是对利润的追求驱动文明」当主旨，那只是插入的补充判断，真正的总结句由「从这个角度」领起。</div>
+            <div class="walk-src">源：3_1_5kcla · 2024浙江省公务员录用考试《行测》题（A类） · 第48题 · 正确率 56.41</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_584tb</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">58.64<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先判题型，「主要强调」是主旨概括题，答案必须是能罩住全段的那个（10s）</li><li>切三段：首句列六大特征是引子，中间「要谋划开展……」是对策，尾句「以具体行动……」是意义（20s）</li><li>抄对策的宾语，「保护、传承、弘扬和创新黄河文化」，四个动词一个都不能漏（15s）</li><li>反淘汰：A源远流长、B可持续性都在首句引子里，C讲好黄河故事只是对策四个分句中的一个，都罩不住全段（20s）</li><li>覆盖面最大的只有D，所以选D（5s）</li></ol>
-          <div class="walk-src">源：3_1_584tb · 2023江西省公务员录用考试《行测》题 · 第47题 · 正确率 58.64</div>
-          <div class="walk-fail">最易错是选C，因为「讲好黄河故事」字面最生动，但它只是「要」字句里并列的一小项，属于以偏概全。</div>
+          <div>
+            <div class="walk-head"><b>3_1_584tb</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">58.64<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>黄河文化源远流长、博大精深，具有根源性、灵魂性、包容性、忠诚性、原创性、可持续性特征。全面认识和把握这些特征，有利于我们坚定文化自信，保护生态环境。在保护、传承、弘扬和创新黄河文化方面要谋划开展丰富多彩的活动，系统打造代表黄河文化六大特征的典型地标，以传统艺术和现代艺术相结合的形式讲好“黄河故事”，延续历史文脉，以具体行动激励全社会坚定文化自信，为实现中华民族伟大复兴的中国梦凝聚精神力量，谱写新时代建设社会主义现代化国家更加出彩的绚丽篇章。这段文字主要强调的是：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 黄河文化源远流长、博大精深</li>
+              <li><b>B.</b> 黄河文化具有可持续性的特征</li>
+              <li class="opt-wrong"><b>C.</b> 讲好“黄河故事”延续历史文脉 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> 黄河文化的保护、传承、弘扬和创新 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先判题型，「主要强调」是主旨概括题，答案必须是能罩住全段的那个（10s）</li><li>切三段：首句列六大特征是引子，中间「要谋划开展……」是对策，尾句「以具体行动……」是意义（20s）</li><li>抄对策的宾语，「保护、传承、弘扬和创新黄河文化」，四个动词一个都不能漏（15s）</li><li>反淘汰：A源远流长、B可持续性都在首句引子里，C讲好黄河故事只是对策四个分句中的一个，都罩不住全段（20s）</li><li>覆盖面最大的只有D，所以选<b><u>D</u></b>（5s）</li></ol>
+            <div class="walk-fail">最易错是选C，因为「讲好黄河故事」字面最生动，但它只是「要」字句里并列的一小项，属于以偏概全。</div>
+            <div class="walk-src">源：3_1_584tb · 2023江西省公务员录用考试《行测》题 · 第47题 · 正确率 58.64</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_fqc8v</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">58.12<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>圈出「但」，明确一空只能填「影响很大」，先把方向钉死再进选项（10s）</li><li>按方向筛一空：不容小觑、举足轻重保留；毋庸置喙是别让人插嘴、兹事体大是搭配事件本身，双双出局（25s）</li><li>用二空定生死，后文说「通过这一数字……寻找规律、得到启发」，是以小见大，管窥（隔着竹管看天）严丝合缝（20s）</li><li>回验C，「估量运转状况」搭配不成立，估量是估数量，且丢了由部分推整体的逻辑，排除（20s）</li><li>一空合规、二空精准，所以选B（5s）</li></ol>
-          <div class="walk-src">源：3_1_fqc8v · 2024甘肃公务员录用考试《行测》题 · 第26题 · 正确率 58.12</div>
-          <div class="walk-fail">别因为「举足轻重」更眼熟就倒向C，真正的杀招在第二空：「估量」配不了「运转状况」。</div>
+          <div>
+            <div class="walk-head"><b>3_1_fqc8v</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">58.12<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>电影黄金档期票房以及年度总票房在整个经济总量中占比不高，但电影产业的经济影响 ，因为人们会通过这一数字，来 经济、社会的运转状况，尝试从中寻找规律、得到启发。依次填入画横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 毋庸置喙 分析 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> 不容小觑 管窥 <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> 举足轻重 估量</li>
+              <li><b>D.</b> 兹事体大 洞察</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>圈出「但」，明确一空只能填「影响很大」，先把方向钉死再进选项（10s）</li><li>按方向筛一空：不容小觑、举足轻重保留；毋庸置喙是别让人插嘴、兹事体大是搭配事件本身，双双出局（25s）</li><li>用二空定生死，后文说「通过这一数字……寻找规律、得到启发」，是以小见大，管窥（隔着竹管看天）严丝合缝（20s）</li><li>回验C，「估量运转状况」搭配不成立，估量是估数量，且丢了由部分推整体的逻辑，排除（20s）</li><li>一空合规、二空精准，所以选<b><u>B</u></b>（5s）</li></ol>
+            <div class="walk-fail">别因为「举足轻重」更眼熟就倒向C，真正的杀招在第二空：「估量」配不了「运转状况」。</div>
+            <div class="walk-src">源：3_1_fqc8v · 2024甘肃公务员录用考试《行测》题 · 第26题 · 正确率 58.12</div>
           </div>
         </div>
       </div>
@@ -1054,24 +1167,51 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 40–55s · 超 60s 先标记</span>
         <h3>原题走链（3 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_4j0pe</b><span>2022年四川省公务员录用考试《行测》题 · <span class="rate">53.45<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>先划结构：横线前是“一方面”讲数字经济迫切要求和2025年60万亿，横线后紧接“数字产品或服务的供给、交付均需……制度指引”，再往下才是“然而另一方面”（15s）</li><li>据此判定横线要同时承上（数据跨境对数字经济重要）和启下（数字产品服务需要跨境制度），即“跨境流动是数字贸易的必需”（15s）</li><li>逐项查话题两头能不能接上：A“全球贸易”“海量数据”偷换并放大范围，C“主权属性”文中没有，D 只说立法框架、丢了数字经济，三项全排（20s）</li><li>只有 B 既接得住“数字经济”又接得住“数字产品服务交付”，所以选 B（10s）</li></ol>
-          <div class="walk-src">源：3_1_4j0pe · 2022四川省公务员录用考试《行测》题 · 第36题 · 正确率 53.45</div>
-          <div class="walk-fail">最容易错选 D，它看着像对上文《个人信息保护法》的总结，但横线在中间不在段尾，D 只回望前文、接不上后文“数字产品服务”的落点。</div>
+          <div>
+            <div class="walk-head"><b>3_1_4j0pe</b><span>2022年四川省公务员录用考试《行测》题 · <span class="rate">53.45<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>《中华人民共和国个人信息保护法》首次在法律层面构建了相对全面的个人信息跨境流动制度，这一制度需要兼顾多重面向与利益。一方面，个人信息跨境流动已经成为我国数字经济发展的迫切要求。根据预测，2025年我国数字经济规模有望跃居全球首位，可达人民币60万亿元， ，数字产品或服务的供给、交付均需清晰的数据跨境制度指引。然而另一方面，地缘政治冲突加剧，世界数字大国间博弈，不同经济体主导的数据流动框架竞争日趋激烈，数字贸易保护主义抬头，导致数字经济发展面临的国际环境更加复杂。填入画横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 全球贸易发展促成海量数据的跨境流动 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> 个人信息跨境流动成为数字贸易之必需 <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> 不同数据蕴含的价值和主权属性并不相同</li>
+              <li><b>D.</b> 本法为个人信息跨境流动确立了基本框架</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先划结构：横线前是<b><u>“一方面”</u></b>讲数字经济迫切要求和2025年60万亿，横线后紧接“数字产品或服务的供给、交付均需……制度指引”，再往下才是<b><u>“然而另一方面”</u></b>（15s）</li><li>据此判定横线要同时承上（数据跨境对数字经济重要）和启下（数字产品服务需要跨境制度），即<b><u>“跨境流动是数字贸易的必需”</u></b>（15s）</li><li>逐项查话题两头能不能接上：A<b><u>“全球贸易”</u></b><b><u>“海量数据”</u></b>偷换并放大范围，C<b><u>“主权属性”</u></b>文中没有，D 只说立法框架、丢了数字经济，三项全排（20s）</li><li>只有 B 既接得住<b><u>“数字经济”</u></b>又接得住<b><u>“数字产品服务交付”</u></b>，所以选 B（10s）</li></ol>
+            <div class="walk-fail">最容易错选 D，它看着像对上文《个人信息保护法》的总结，但横线在中间不在段尾，D 只回望前文、接不上后文<b><u>“数字产品服务”</u></b>的落点。</div>
+            <div class="walk-src">源：3_1_4j0pe · 2022四川省公务员录用考试《行测》题 · 第36题 · 正确率 53.45</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_4j0pp</b><span>2022年四川省公务员录用考试《行测》题 · <span class="rate">52.73<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>盯住横线前的「换言之」，把它当总结开关，明确这一步只做归纳不引申（10s）</li><li>顺分号数并列：小麦大麦、中国稻米、玉米大豆等，每段都写饮食随驯化地经贸易路线铺满全球（20s）</li><li>回头看前半：先讲饮食是文明交流的重要部分，再讲文明发展与繁荣靠驯化技艺的传播改进，两条线比的都是「发展轨迹」（25s）</li><li>逐项过筛：B只覆盖亚洲一国、C把关系说成饮食带文明印记、D丢了「文明」这个核心词，只剩A的「脉络相同」（20s）</li><li>两个话题都在、关系也对，所以选A（5s）</li></ol>
-          <div class="walk-src">源：3_1_4j0pp · 2022四川省公务员录用考试《行测》题 · 第37题 · 正确率 52.73</div>
-          <div class="walk-fail">最易被尾句「遍布全球」牵着选D「连成一个整体」，可那是形象的比喻不是总结，总结句必须同时扣住「饮食」和「文明」两个话题。</div>
+          <div>
+            <div class="walk-head"><b>3_1_4j0pp</b><span>2022年四川省公务员录用考试《行测》题 · <span class="rate">52.73<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>丝绸之路连通了亚洲各国，各种文明在交流互鉴中互通有无、携手前行，饮食是其中重要的一部分。人类从荒昧走向文明，学会驯化动植物是成因之一；文明的发展与繁荣，则在于这种技艺的传播与改进。原产于西南亚的小麦和大麦沿东西向传播，支撑起亚欧非无数个古典文明；诞生于中国的稻米，至今仍哺育着世界近一半的人口；现在餐桌上常见的玉米、大豆、马铃薯、西红柿、黄瓜等，都是从初始的驯化地沿着贸易路线最终遍布全球的。换言之， 。填入画横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li class="opt-right"><b>A.</b> 饮食的发展史与文明的发展史有着相同的脉络 <span class="opt-tag">正确</span></li>
+              <li><b>B.</b> 亚洲人民在饮食文明传播方面做出了积极贡献</li>
+              <li class="opt-wrong"><b>C.</b> 世界各地的饮食中镌刻着文明的印记 <span class="opt-tag">易错</span></li>
+              <li><b>D.</b> 美食将亚洲乃至世界连成了一个整体</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>盯住横线前的「换言之」，把它当总结开关，明确这一步只做归纳不引申（10s）</li><li>顺分号数并列：小麦大麦、中国稻米、玉米大豆等，每段都写饮食随驯化地经贸易路线铺满全球（20s）</li><li>回头看前半：先讲饮食是文明交流的重要部分，再讲文明发展与繁荣靠驯化技艺的传播改进，两条线比的都是「发展轨迹」（25s）</li><li>逐项过筛：B只覆盖亚洲一国、C把关系说成饮食带文明印记、D丢了「文明」这个核心词，只剩A的「脉络相同」（20s）</li><li>两个话题都在、关系也对，所以选<b><u>A</u></b>（5s）</li></ol>
+            <div class="walk-fail">最易被尾句「遍布全球」牵着选D「连成一个整体」，可那是形象的比喻不是总结，总结句必须同时扣住「饮食」和「文明」两个话题。</div>
+            <div class="walk-src">源：3_1_4j0pp · 2022四川省公务员录用考试《行测》题 · 第37题 · 正确率 52.73</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_584tr</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">57.72<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先定对象：整段说的是清明节，空里只可能填祭祖追思一类词，其余先挂起（10s）</li><li>用顿号并列去校验，「礼祭祖先」要同义替换，慎终追远正是虔诚祭祀远代祖先，一空成立（15s）</li><li>反向淘汰三个：睹物思人要看见遗物、抚今追昔偏回想过去、鉴往知来偏推知未来，都没有「祭」的动作（25s）</li><li>二空验搭配，「____奋进力量」是固定说法，凝聚力量成立，聚齐汇聚聚合都不带「凝成一股」这层（15s）</li><li>两空都对得上，所以选D（5s）</li></ol>
-          <div class="walk-src">源：3_1_584tr · 2023江西省公务员录用考试《行测》题 · 第37题 · 正确率 57.72</div>
-          <div class="walk-fail">最容易在第二空凭语感选B「汇聚」，汇聚只是汇集到一处，配「力量」要的是凝成一股的「凝聚」。</div>
+          <div>
+            <div class="walk-head"><b>3_1_584tr</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">57.72<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>天地英雄气，千秋尚凛然。清明节既是礼祭祖先、 的日子，也是寄托哀思、祭奠英烈的时刻。社会各界以多种形式表达对英烈深切的缅怀之情和崇高敬意，追思他们的英勇事迹，感受他们的高尚精神，在新征程中 奋进力量。依次填入划横线部分最恰当的一项是：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 睹物思人 聚齐</li>
+              <li><b>B.</b> 鉴往知来 汇聚</li>
+              <li class="opt-wrong"><b>C.</b> 抚今追昔 聚合 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> 慎终追远 凝聚 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先定对象：整段说的是清明节，空里只可能填祭祖追思一类词，其余先挂起（10s）</li><li>用顿号并列去校验，「礼祭祖先」要同义替换，慎终追远正是虔诚祭祀远代祖先，一空成立（15s）</li><li>反向淘汰三个：睹物思人要看见遗物、抚今追昔偏回想过去、鉴往知来偏推知未来，都没有「祭」的动作（25s）</li><li>二空验搭配，「____奋进力量」是固定说法，凝聚力量成立，聚齐汇聚聚合都不带「凝成一股」这层（15s）</li><li>两空都对得上，所以选<b><u>D</u></b>（5s）</li></ol>
+            <div class="walk-fail">最容易在第二空凭语感选B「汇聚」，汇聚只是汇集到一处，配「力量」要的是凝成一股的「凝聚」。</div>
+            <div class="walk-src">源：3_1_584tr · 2023江西省公务员录用考试《行测》题 · 第37题 · 正确率 57.72</div>
           </div>
         </div>
       </div>
@@ -1111,17 +1251,35 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 50–70s</span>
         <h3>原题走链（2 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5857q</b><span>2023年山东省公务员录用考试《行测》试题 · <span class="rate">54.47<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>20 秒内把论点写成一句话：在校园显著位置贴求助电话，学生被欺凌后打这个电话就能得到老师帮助，从而防止欺凌（20s）</li><li>认清本题只有论点没有论据，所以不能去挑论据的毛病，只能证明这个建议实施后根本不起作用（15s）</li><li>带着“哪个选项能让电话打不通或打了也没用”扫选项，B 说欺凌多发生在夜间、求助电话无人接听，直接把“拨打电话”这一环掐断，先圈 B（15s）</li><li>逐个排掉干扰：A 说老师缺乏训诫手段，只说明接到了效果打折，没否定建议；C 说欺凌者恐吓，但学生到底打不打不确定；D 说部分受害者不愿求助，反而意味着有部分人愿意，且“部分”力度太弱（25s）</li><li>只有 B 否定了“电话有人接”这个前提，所以选 B（10s）</li></ol>
-          <div class="walk-src">源：3_1_5857q · 2023山东省公务员录用考试《行测》试题 · 第74题 · 正确率 54.47</div>
-          <div class="walk-fail">最容易错选 A 或 C，这两项都默认了“电话能打通”，只是在效果和意愿上打折扣，属于削弱力度弱或不明确；B 打掉的是整个建议赖以成立的前提，才是断链式削弱。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5857q</b><span>2023年山东省公务员录用考试《行测》试题 · <span class="rate">54.47<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>校园欺凌是当今社会高度关注的现象。为了防止校园欺凌，有人建议在校园内显著位置张贴公布校园欺凌的求助电话，学生遭遇欺凌后，可以拨打求助电话，获得老师帮助。以下哪项如果为真，最能削弱上述建议实施效果?</div>
+            <ol class="q-options">
+              <li><b>A.</b> 很多教师面对实施欺凌的学生，缺乏有效教育训诫手段</li>
+              <li class="opt-right"><b>B.</b> 校园欺凌多发生在夜间，求助电话无人接听 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>C.</b> 欺凌者会恐吓被欺凌者，不要试图向教师或家长求助 <span class="opt-tag">易错</span></li>
+              <li><b>D.</b> 部分受害者认为“告状”可耻，不愿寻求成人的帮助</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>20 秒内把论点写成一句话：在校园显著位置贴求助电话，学生被欺凌后打这个电话就能得到老师帮助，从而防止欺凌（20s）</li><li>认清本题只有论点没有论据，所以不能去挑论据的毛病，只能证明这个建议实施后根本不起作用（15s）</li><li>带着<b><u>“哪个选项能让电话打不通或打了也没用”</u></b>扫选项，B 说欺凌多发生在夜间、求助电话无人接听，直接把<b><u>“拨打电话”</u></b>这一环掐断，先圈 B（15s）</li><li>逐个排掉干扰：A 说老师缺乏训诫手段，只说明接到了效果打折，没否定建议；C 说欺凌者恐吓，但学生到底打不打不确定；D 说部分受害者不愿求助，反而意味着有部分人愿意，且<b><u>“部分”</u></b>力度太弱（25s）</li><li>只有 B 否定了<b><u>“电话有人接”</u></b>这个前提，所以选 B（10s）</li></ol>
+            <div class="walk-fail">最容易错选 A 或 C，这两项都默认了<b><u>“电话能打通”</u></b>，只是在效果和意愿上打折扣，属于削弱力度弱或不明确；B 打掉的是整个建议赖以成立的前提，才是断链式削弱。</div>
+            <div class="walk-src">源：3_1_5857q · 2023山东省公务员录用考试《行测》试题 · 第74题 · 正确率 54.47</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_hov0t</b><span>2026年广东省公务员录用考试《行测》题 · <span class="rate">53.50<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>先圈论点和论据：论点是“该材料能在一定程度上抗衰老”，论据是“代谢水平显著提高、端粒延长15%、肌肉再生能力提升40%”，三个都是现象指标、没提“衰老”（15s）</li><li>认出话题不一致，预判正确选项必然是一个“既不把指标和衰老连起来、也不给材料加正面理由”的选项，把 A、B、D 三个疑似搭桥项先圈住但不动笔（15s）</li><li>逐个检验三个疑似项：A 说代谢水平与衰老负相关，B 说再生能力低就更老，D 说端粒延长代表细胞恢复年轻，三项都在指标和衰老之间搭了桥，全是加强项，按选非要求全排（25s）</li><li>剩 C 只说“未产生明显免疫反应”，讲的是安全性而不是抗衰老，既没搭桥也没加强，正是那个最不能支持的，所以选 C（10s）</li></ol>
-          <div class="walk-src">源：3_1_hov0t · 2026广东省公务员录用考试《行测》题 · 第60题 · 正确率 53.50</div>
-          <div class="walk-fail">最容易错在把 C 当加强项留下，因为“没免疫反应”听着像好事，但安全性好不等于能抗衰老，它和论点压根不同话题，选非题里这种“正确的废话”就是答案。</div>
+          <div>
+            <div class="walk-head"><b>3_1_hov0t</b><span>2026年广东省公务员录用考试《行测》题 · <span class="rate">53.50<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>研究团队开发了一种新型抗衰老水凝胶材料，为了验证这一材料的实际效果，研究团队开展了系列实验。结果发现，与未注入该材料的实验鼠相比，注入该材料的实验鼠肌肉组织中细胞的代谢水平显著提高，细胞端粒长度平均延长15%，且肌肉再生能力提升40%。由此可以推断，该材料能在一定程度上抗衰老。以下选项如果为真，最不能支持这一结论的是（ ）。</div>
+            <ol class="q-options">
+              <li><b>A.</b> 细胞的代谢水平往往与其衰老程度呈负相关</li>
+              <li class="opt-wrong"><b>B.</b> 老年动物的肌肉再生能力显著低于青壮年动物 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>C.</b> 将该材料注入小鼠体内后，小鼠未产生明显的免疫反应 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 端粒长度延长是细胞分裂激活的伴随现象，表明细胞恢复了“年轻”</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先圈论点和论据：论点是<b><u>“该材料能在一定程度上抗衰老”</u></b>，论据是“代谢水平显著提高、端粒延长15%、肌肉再生能力提升40%”，三个都是现象指标、没提<b><u>“衰老”</u></b>（15s）</li><li>认出话题不一致，预判正确选项必然是一个“既不把指标和衰老连起来、也不给材料加正面理由”的选项，把 A、B、D 三个疑似搭桥项先圈住但不动笔（15s）</li><li>逐个检验三个疑似项：A 说代谢水平与衰老负相关，B 说再生能力低就更老，D 说端粒延长代表细胞恢复年轻，三项都在指标和衰老之间搭了桥，全是加强项，按选非要求全排（25s）</li><li>剩 C 只说<b><u>“未产生明显免疫反应”</u></b>，讲的是安全性而不是抗衰老，既没搭桥也没加强，正是那个最不能支持的，所以选 C（10s）</li></ol>
+            <div class="walk-fail">最容易错在把 C 当加强项留下，因为<b><u>“没免疫反应”</u></b>听着像好事，但安全性好不等于能抗衰老，它和论点压根不同话题，选非题里这种<b><u>“正确的废话”</u></b>就是答案。</div>
+            <div class="walk-src">源：3_1_hov0t · 2026广东省公务员录用考试《行测》题 · 第60题 · 正确率 53.50</div>
           </div>
         </div>
       </div>
@@ -1140,17 +1298,35 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 50–70s</span>
         <h3>原题走链（2 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_ijsou</b><span>2026年国家公务员录用考试《行测》题 · <span class="rate">54.47<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先在题号旁写下“选非”两个字，全程提醒自己最后要挑错的那个，避免选出正确项（5s）</li><li>不要通读五个定义，从能直接算的定义下手：设备利用率=实际使用时间/计划用时，A 项 9 个月÷75%=12 个月，算得上，正确，划掉（20s）</li><li>B 项拿“设备总台数”的定义做核对：原文明确含“正在检修的”设备，与 B 说法一致，正确，划掉（15s）</li><li>C 项核“设备负荷率=需要台数/选用台数”，比值大于 1 说明设备不足、小于 1 说明有余，确实能反映选用合理性，正确，划掉（15s）</li><li>只剩 D，先看“反映投资回报程度”定义里根本没有，再用反例验证大小关系：10 台里闲置 8 台（其中 3 台完好）、完好共 5 台，闲置率 80% ＞ 完好率 50%，“一般小于”被推翻，所以选 D（25s）</li></ol>
-          <div class="walk-src">源：3_1_ijsou · 2026国家公务员录用考试《行测》题 · 第96题 · 正确率 54.47</div>
-          <div class="walk-fail">最容易在 D 上凭日常直觉放过它——“闲置多、完好的少”听起来顺理成章，但两个率的分子一个是闲置台数、一个是完好台数，彼此独立，没有必然大小关系，必须靠举反例才能推翻。</div>
+          <div>
+            <div class="walk-head"><b>3_1_ijsou</b><span>2026年国家公务员录用考试《行测》题 · <span class="rate">54.47<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>设备利用率是指每年度设备实际使用时间占计划用时的百分比。设备完好率是根据各类设备完好标准，对企业设备进行逐台检查所确定的完好台数与设备总台数之比。设备总台数是指企业在用的、备用的、停用的以及正在检修的全部生产设备台数，完好台数是指设备性能良好、运转正常，且原料、燃料、油料等消耗正常的设备台数。设备负荷率是指设备需要台数与实际选用设备的台数之比。设备闲置率是指闲置不用的设备台数与设备总台数的比值。根据上述定义，下列说法错误的是：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 若年度设备实际使用时间为9个月、设备利用率为75%，则计划用时为12个月</li>
+              <li><b>B.</b> 企业正在检修的、零部件出现磨损或腐蚀的设备应当纳入设备总台数的计算中</li>
+              <li class="opt-wrong"><b>C.</b> 设备负荷率可用来考核设备选用的合理性程度，可用于量化分析设备运行状态 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> 设备闲置率可以反映出设备资产投资的回报程度，其数值一般小于设备完好率 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先在题号旁写下<b><u>“选非”</u></b>两个字，全程提醒自己最后要挑错的那个，避免选出正确项（5s）</li><li>不要通读五个定义，从能直接算的定义下手：设备利用率=实际使用时间/计划用时，A 项 9 个月÷75%=12 个月，算得上，正确，划掉（20s）</li><li>B 项拿<b><u>“设备总台数”</u></b>的定义做核对：原文明确含<b><u>“正在检修的”</u></b>设备，与 B 说法一致，正确，划掉（15s）</li><li>C 项核<b><u>“设备负荷率=需要台数/选用台数”</u></b>，比值大于 1 说明设备不足、小于 1 说明有余，确实能反映选用合理性，正确，划掉（15s）</li><li>只剩 D，先看<b><u>“反映投资回报程度”</u></b>定义里根本没有，再用反例验证大小关系：10 台里闲置 8 台（其中 3 台完好）、完好共 5 台，闲置率 80% ＞ 完好率 50%，<b><u>“一般小于”</u></b>被推翻，所以选 D（25s）</li></ol>
+            <div class="walk-fail">最容易在 D 上凭日常直觉放过它——<b><u>“闲置多、完好的少”</u></b>听起来顺理成章，但两个率的分子一个是闲置台数、一个是完好台数，彼此独立，没有必然大小关系，必须靠举反例才能推翻。</div>
+            <div class="walk-src">源：3_1_ijsou · 2026国家公务员录用考试《行测》题 · 第96题 · 正确率 54.47</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_icg0a</b><span>2025年国家公务员录用考试《行测》题 · <span class="rate">58.22<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 D</span></span></div>
-          <ol class="walk-steps"><li>不背定义原文，直接把题干例子抽象成公式：所有 a 是 b，所有 c 是 b，所以所有 c 是 a，注意结论是把两个平级概念互换，这是排序推理的指纹（20s）</li><li>用第一句硬条件筛概念：必须是三个层层包含的概念，扫 C 的“文字、符号、图形”和 D 的“花园的花、迎春花、冬春季开放的花”，都不构成包含与被包含的三个概念，直接排（20s）</li><li>只剩 A、B 比句式，把 A 代入公式：“平行四边形是四边形（a→b）、菱形是四边形（c→b）、菱形是平行四边形（c→a）”，与指纹完全吻合（15s）</li><li>再用 B 反证：“昆虫是动物、蝴蝶是昆虫、蝴蝶是动物”是层层递推的正向三段论，结构是 a→b、c→a、所以 c→b，方向不对，排掉 B，所以选 A（15s）</li></ol>
-          <div class="walk-src">源：3_1_icg0a · 2025国家公务员录用考试《行测》题 · 第100题 · 正确率 58.22</div>
-          <div class="walk-fail">最容易错在凭“看着像三段论”就选 B，B 是标准的传递推理、结论必然成立，但定义要的是“由两个同归上位概念的判断反推彼此包含”这种错误结构，方向反了就不是排序推理。</div>
+          <div>
+            <div class="walk-head"><b>3_1_icg0a</b><span>2025年国家公务员录用考试《行测》题 · <span class="rate">58.22<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 D</span></span></div>
+            <div class="q-stem"><b>【题干】</b>具有包含与被包含关系的三个概念，如植物、乔木、水杉等，可至少形成三个正确的命题：所有的水杉都是乔木，所有的乔木都是植物，所有的水杉都是植物，由“所有的乔木都是植物”“所有的水杉都是植物”而得出“所有的水杉都是乔木”，这样的推理被称为排序推理。根据上述定义，下列属于排序推理的是：</div>
+            <ol class="q-options">
+              <li class="opt-right"><b>A.</b> 所有的平行四边形都是四边形，所有的菱形都是四边形，所以，所有的菱形都是平行四边形 <span class="opt-tag">正确</span></li>
+              <li><b>B.</b> 所有的昆虫都是动物，所有的蝴蝶都是昆虫，所以，所有的蝴蝶都是动物</li>
+              <li><b>C.</b> 所有的文字都是符号，所有的文字都是图形，所以，所有的符号都是图形</li>
+              <li class="opt-wrong"><b>D.</b> 这个花园的花都是迎春花，迎春花都在冬、春季开放，所以，这个花园的花都在冬、春季开放 <span class="opt-tag">易错</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>不背定义原文，直接把题干例子抽象成公式：所有 a 是 b，所有 c 是 b，所以所有 c 是 a，注意结论是把两个平级概念互换，这是排序推理的指纹（20s）</li><li>用第一句硬条件筛概念：必须是三个层层包含的概念，扫 C 的<b><u>“文字、符号、图形”</u></b>和 D 的<b><u>“花园的花、迎春花、冬春季开放的花”</u></b>，都不构成包含与被包含的三个概念，直接排（20s）</li><li>只剩 A、B 比句式，把 A 代入公式：“平行四边形是四边形（a→b）、菱形是四边形（c→b）、菱形是平行四边形（c→a）”，与指纹完全吻合（15s）</li><li>再用 B 反证：<b><u>“昆虫是动物、蝴蝶是昆虫、蝴蝶是动物”</u></b>是层层递推的正向三段论，结构是 a→b、c→a、所以 c→b，方向不对，排掉 B，所以选 A（15s）</li></ol>
+            <div class="walk-fail">最容易错在凭<b><u>“看着像三段论”</u></b>就选 B，B 是标准的传递推理、结论必然成立，但定义要的是<b><u>“由两个同归上位概念的判断反推彼此包含”</u></b>这种错误结构，方向反了就不是排序推理。</div>
+            <div class="walk-src">源：3_1_icg0a · 2025国家公务员录用考试《行测》题 · 第100题 · 正确率 58.22</div>
           </div>
         </div>
       </div>
@@ -1169,10 +1345,19 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 50–70s</span>
         <h3>原题走链（1 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_icfoo</b><span>2025年国家公务员录用考试《行测》题 · <span class="rate">52.90<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先在题干下面写明比较规则：左半边是“行政文书与第一空”的关系，右半边是“第二空与汇编语言”的关系，两边关系类型和方向都必须一致（10s）</li><li>代入 A、B 两组的第一个词：行政机关发布行政文书是主宾关系、行政管理用行政文书是工具关系，但对应到右边分别是“编程人员编写汇编语言”“汇编语言传送指令”，主宾和工具都出现了前后顺序颠倒，两个都排（20s）</li><li>代入 C：左边行政文书与商务文书是并列关系，右边符号语言与汇编语言是同一个东西的全同关系，一边并列一边全同，不一致，排（15s）</li><li>代入 D：监管函是一种行政文书、汇编语言是一种计算机语言，两边都是“后者包含前者”的种属关系且方向一致，关系类型完全对齐，所以选 D（15s）</li></ol>
-          <div class="walk-src">源：3_1_icfoo · 2025国家公务员录用考试《行测》题 · 第100题 · 正确率 52.90</div>
-          <div class="walk-fail">最容易错在 A、B 两组，很多考生只看到“主宾关系对主宾关系”“工具关系对工具关系”就选，忽略了“行政机关发布行政文书”和“编程人员编写汇编语言”的主体位置是反的，括号式类比必须连方向一起比。</div>
+          <div>
+            <div class="walk-head"><b>3_1_icfoo</b><span>2025年国家公务员录用考试《行测》题 · <span class="rate">52.90<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>行政文书 对于 （ ） 相当于 （ ） 对于 汇编语言</div>
+            <ol class="q-options">
+              <li><b>A.</b> 行政机关；编程人员</li>
+              <li><b>B.</b> 行政管理；传送指令</li>
+              <li class="opt-wrong"><b>C.</b> 商务文书；符号语言 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> 监管函；计算机语言 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先在题干下面写明比较规则：左半边是<b><u>“行政文书与第一空”</u></b>的关系，右半边是<b><u>“第二空与汇编语言”</u></b>的关系，两边关系类型和方向都必须一致（10s）</li><li>代入 A、B 两组的第一个词：行政机关发布行政文书是主宾关系、行政管理用行政文书是工具关系，但对应到右边分别是<b><u>“编程人员编写汇编语言”</u></b><b><u>“汇编语言传送指令”</u></b>，主宾和工具都出现了前后顺序颠倒，两个都排（20s）</li><li>代入 C：左边行政文书与商务文书是并列关系，右边符号语言与汇编语言是同一个东西的全同关系，一边并列一边全同，不一致，排（15s）</li><li>代入 D：监管函是一种行政文书、汇编语言是一种计算机语言，两边都是<b><u>“后者包含前者”</u></b>的种属关系且方向一致，关系类型完全对齐，所以选 D（15s）</li></ol>
+            <div class="walk-fail">最容易错在 A、B 两组，很多考生只看到<b><u>“主宾关系对主宾关系”</u></b><b><u>“工具关系对工具关系”</u></b>就选，忽略了<b><u>“行政机关发布行政文书”</u></b>和<b><u>“编程人员编写汇编语言”</u></b>的主体位置是反的，括号式类比必须连方向一起比。</div>
+            <div class="walk-src">源：3_1_icfoo · 2025国家公务员录用考试《行测》题 · 第100题 · 正确率 52.90</div>
           </div>
         </div>
       </div>
@@ -1196,31 +1381,67 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
         <h3>原题走链（4 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_584d7</b><span>2023年甘肃公务员录用考试《行测》题 · <span class="rate">51.58<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>设原两位数为10x+y，把三个时刻的数字摆成一排：0时=10x+y，1时=10y+x，2时=100x+y（20s）</li><li>抓「匀速」翻成等式：两小时增量相等，(10y+x)-(10x+y)=(100x+y)-(10y+x)（25s）</li><li>化简：左边=9(y-x)，右边=99x-9y=9(11x-y)，约掉9得 y-x=11x-y，即2y=12x，y=6x（20s）</li><li>用数位约束收口：x、y只能取1~9的整数，只有x=1、y=6成立，三数为16、61、106（15s）</li><li>车费=106-16=90（也可记住总车费必是90x的倍数），所以选 C（15s）</li></ol>
-          <div class="walk-src">源：3_1_584d7 · 2023甘肃公务员录用考试《行测》题 · 第67题 · 正确率 51.58</div>
-          <div class="walk-fail">最容易错在第1步写数位：「中间多了一个0」是三位数100x+y，若误写成10x+y或1000x+y，等式必崩；另外算出y=6x后不能直接得答案，必须回到「1~9整数」这个约束把解唯一化。</div>
+          <div>
+            <div class="walk-head"><b>3_1_584d7</b><span>2023年甘肃公务员录用考试《行测》题 · <span class="rate">51.58<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>一辆出租车的计价器出现故障，显示屏上保留了一个两位数，无法清除，但还能按行驶路程准确地将应付的车费累加上去。小王乘坐该车匀速行驶了2小时，当行驶1小时的时候，计价器上的两个数字刚好交换了位置，在2小时的时候，计价器上的两个数字又交换了位置，但他们中间多了一个0。如车费按里程计，问小王应付多少元车费？</div>
+            <ol class="q-options">
+              <li><b>A.</b> 82</li>
+              <li class="opt-wrong"><b>B.</b> 86 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>C.</b> 90 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 95</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>设原两位数为10x+y，把三个时刻的数字摆成一排：0时=10x+y，1时=10y+x，2时=100x+y（20s）</li><li>抓「匀速」翻成等式：两小时增量相等，(10y+x)-(10x+y)=(100x+y)-(10y+x)（25s）</li><li>化简：左边=9(y-x)，右边=99x-9y=9(11x-y)，约掉9得 y-x=11x-y，即2y=12x，y=6x（20s）</li><li>用数位约束收口：x、y只能取1~9的整数，只有x=1、y=6成立，三数为16、61、106（15s）</li><li>车费=106-16=90（也可记住总车费必是90x的倍数），所以选 C（15s）</li></ol>
+            <div class="walk-fail">最容易错在第1步写数位：「中间多了一个0」是三位数100x+y，若误写成10x+y或1000x+y，等式必崩；另外算出y=6x后不能直接得答案，必须回到「1~9整数」这个约束把解唯一化。</div>
+            <div class="walk-src">源：3_1_584d7 · 2023甘肃公务员录用考试《行测》题 · 第67题 · 正确率 51.58</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5662q</b><span>2023年国家公务员录用考试《行测》题 · <span class="rate">55.43<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>先统一单位再读题：8000元=0.8万元，全题只用万元，把0.8和2并排写在草稿上（10s）</li><li>设A、B定价均为x万元，写出促销价A=0.6x、B=0.7x，C固定0.8（15s）</li><li>按"买1台B的钱=买A、C各1台的钱再高2万"列式0.7x=0.6x+0.8+2，移项得0.1x=2.8，x=28，故A促销价0.6×28=16.8万元（35s）</li><li>1000÷16.8=59.5多，钱不够买第60台，只能向下取整为59（25s）</li><li>59正好是选项C，所以选C（10s）</li></ol>
-          <div class="walk-src">源：3_1_5662q · 2023国家公务员录用考试《行测》题 · 第63题 · 正确率 55.43</div>
-          <div class="walk-fail">最容易走错的是单位：直接把8000塞进万元方程，或者算出59.5后四舍五入当成60；剩余的钱买不起整台，台数只能向下取。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5662q</b><span>2023年国家公务员录用考试《行测》题 · <span class="rate">55.43<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>已知A、B两种设备定价相同，C设备单价为8000元/台。现A、B两种设备分别打六折、七折促销，购买1台B设备的费用比购买A、C设备各1台的总费用高2万元。问促销期间1000万元预算最多可以购买多少台A设备？</div>
+            <ol class="q-options">
+              <li><b>A.</b> 35</li>
+              <li class="opt-wrong"><b>B.</b> 51 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>C.</b> 59 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 77</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先统一单位再读题：8000元=0.8万元，全题只用万元，把0.8和2并排写在草稿上（10s）</li><li>设A、B定价均为x万元，写出促销价A=0.6x、B=0.7x，C固定0.8（15s）</li><li>按<b><u>“买1台B的钱=买A、C各1台的钱再高2万”</u></b>列式0.7x=0.6x+0.8+2，移项得0.1x=2.8，x=28，故A促销价0.6×28=16.8万元（35s）</li><li>1000÷16.8=59.5多，钱不够买第60台，只能向下取整为59（25s）</li><li>59正好是选项C，所以选<b><u>C</u></b>（10s）</li></ol>
+            <div class="walk-fail">最容易走错的是单位：直接把8000塞进万元方程，或者算出59.5后四舍五入当成60；剩余的钱买不起整台，台数只能向下取。</div>
+            <div class="walk-src">源：3_1_5662q · 2023国家公务员录用考试《行测》题 · 第63题 · 正确率 55.43</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5kcl3</b><span>2024年浙江省公务员录用考试《行测》题（A类） · <span class="rate">50.34<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>赋值甲、乙骑车速度都是1，则开车速度是5，全程路程记作S（10s）</li><li>把乙的行程拆成三段：返回前已骑1小时（60分钟），原速回A地再花60分钟，此时甲已骑120分钟，即甲先行到S-120的位置（30s）</li><li>设乙开车从A到B用t分钟，则乙开车走5t=S；甲从120分钟起再骑（t+12）分钟到B，即120+t+12=S，联立5t=120+t+12，得4t=132、t=33（35s）</li><li>甲总用时=休息20+骑行（120+33+12）=165+20=185分钟，所以选C（20s）</li></ol>
-          <div class="walk-src">源：3_1_5kcl3 · 2024浙江省公务员录用考试《行测》题（A类） · 第61题 · 正确率 50.34</div>
-          <div class="walk-fail">最容易错在漏加那20分钟休息：算出165就急着选A，而题目问的是"甲全程用了多少分钟"，休息的20分钟必须加进去才是185</div>
+          <div>
+            <div class="walk-head"><b>3_1_5kcl3</b><span>2024年浙江省公务员录用考试《行测》题（A类） · <span class="rate">50.34<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>甲、乙两人以相同速度一起骑车从A地前往B地。同行1小时后，两人休息20分钟，然后甲继续原速出发，此时乙发现有重要物品未带，原速返回A地去取，到达A地后立即开车前往B地。最终乙比甲提前12分钟到达B地。已知开车速度是骑行速度的5倍，那么甲全程用了多少分钟？</div>
+            <ol class="q-options">
+              <li><b>A.</b> 165</li>
+              <li class="opt-wrong"><b>B.</b> 175 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>C.</b> 185 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 195</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>赋值甲、乙骑车速度都是1，则开车速度是5，全程路程记作S（10s）</li><li>把乙的行程拆成三段：返回前已骑1小时（60分钟），原速回A地再花60分钟，此时甲已骑120分钟，即甲先行到S-120的位置（30s）</li><li>设乙开车从A到B用t分钟，则乙开车走5t=S；甲从120分钟起再骑（t+12）分钟到B，即120+t+12=S，联立5t=120+t+12，得4t=132、t=33（35s）</li><li>甲总用时=休息20+骑行（120+33+12）=165+20=185分钟，所以选<b><u>C</u></b>（20s）</li></ol>
+            <div class="walk-fail">最容易错在漏加那20分钟休息：算出165就急着选A，而题目问的是<b><u>“甲全程用了多少分钟”</u></b>，休息的20分钟必须加进去才是185</div>
+            <div class="walk-src">源：3_1_5kcl3 · 2024浙江省公务员录用考试《行测》题（A类） · 第61题 · 正确率 50.34</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_58frb</b><span>2023年深圳市考公务员录用考试《行测》试题 · <span class="rate">55.16<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>先设一圈长S（环线固定周长）、车速v1、自行车v2、步行v3，同向追及每追上一次，快者就比慢者多跑整整一圈（20s）</li><li>写出两个已知条件：S=（v1-v3）×20，S=（v1-v2）×40（20s）</li><li>两式相等于得（v1-v3）×20=（v1-v2）×40，即v1-2v2+v3=0，变形v2-v3=（v1-v3）÷2（25s）</li><li>老朱追小张的时间t=S÷（v2-v3）=（v1-v3）×20÷[（v1-v3）÷2]=40分钟，所以选B（15s）</li></ol>
-          <div class="walk-src">源：3_1_58frb · 2023深圳市考公务员录用考试《行测》试题 · 第60题 · 正确率 55.16</div>
-          <div class="walk-fail">最容易错在第3步的代数变形：把"20/40"直接当成答案的倒数去算，或者把"追上"当成相遇把相对速度写成速度和；同向追及永远是速度差，且S是同一个S可以直接消掉</div>
+          <div>
+            <div class="walk-head"><b>3_1_58frb</b><span>2023年深圳市考公务员录用考试《行测》试题 · <span class="rate">55.16<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>老杨、老朱和小张三人开展社区巡防工作，巡防路线固定，三人同时同向出发，老杨开车，老朱骑自行车，小张走路。已知老杨每20分钟追上小张一次，每40分钟追上老朱一次，则老朱每（ ）分钟追上小张一次。</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 30 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> 40 <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> 50</li>
+              <li><b>D.</b> 60</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先设一圈长S（环线固定周长）、车速v1、自行车v2、步行v3，同向追及每追上一次，快者就比慢者多跑整整一圈（20s）</li><li>写出两个已知条件：S=（v1-v3）×20，S=（v1-v2）×40（20s）</li><li>两式相等于得（v1-v3）×20=（v1-v2）×40，即v1-2v2+v3=0，变形v2-v3=（v1-v3）÷2（25s）</li><li>老朱追小张的时间t=S÷（v2-v3）=（v1-v3）×20÷[（v1-v3）÷2]=40分钟，所以选<b><u>B</u></b>（15s）</li></ol>
+            <div class="walk-fail">最容易错在第3步的代数变形：把<b><u>“20/40”</u></b>直接当成答案的倒数去算，或者把<b><u>“追上”</u></b>当成相遇把相对速度写成速度和；同向追及永远是速度差，且S是同一个S可以直接消掉</div>
+            <div class="walk-src">源：3_1_58frb · 2023深圳市考公务员录用考试《行测》试题 · 第60题 · 正确率 55.16</div>
           </div>
         </div>
       </div>
@@ -1239,17 +1460,35 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
         <h3>原题走链（2 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_584fo</b><span>2023年吉林省公务员录用考试《行测》题 · <span class="rate">52.98<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先把回文条件落到数位上：三位数abc是回文数只需a=c，b随意（10s）</li><li>优先数限制最多的位：百位a不能为0，只能取1-9共9种（15s）</li><li>个位c被a锁死，只有1种取法；十位b不受限，0-9共10种（15s）</li><li>分步相乘9×10×1=90个（20s）</li><li>90对应选项B，所以选B，并顺手排除C99、D100这类"忘了百位不能为0"的诱导项（10s）</li></ol>
-          <div class="walk-src">源：3_1_584fo · 2023吉林省公务员录用考试《行测》题 · 第58题 · 正确率 52.98</div>
-          <div class="walk-fail">最容易走错的是把百位也按0-9算成10种得出100，或漏掉十位可以取0；百位非零是这类数位题唯一的坎。</div>
+          <div>
+            <div class="walk-head"><b>3_1_584fo</b><span>2023年吉林省公务员录用考试《行测》题 · <span class="rate">52.98<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>像中国的回文联“洞帘水挂水帘洞，山果花开花果山”一样，如果将一个数的数字倒排后所得的数仍是这个数，这样的数称为回文数，例如11，22，343，565，1881，20102等，在所有三位数中回文数共有：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 81个</li>
+              <li class="opt-right"><b>B.</b> 90个 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>C.</b> 99个 <span class="opt-tag">易错</span></li>
+              <li><b>D.</b> 100个</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先把回文条件落到数位上：三位数abc是回文数只需a=c，b随意（10s）</li><li>优先数限制最多的位：百位a不能为0，只能取1-9共9种（15s）</li><li>个位c被a锁死，只有1种取法；十位b不受限，0-9共10种（15s）</li><li>分步相乘9×10×1=90个（20s）</li><li>90对应选项B，所以选<b><u>B</u></b>，并顺手排除<b><u>C</u></b>99、D100这类<b><u>“忘了百位不能为0”</u></b>的诱导项（10s）</li></ol>
+            <div class="walk-fail">最容易走错的是把百位也按0-9算成10种得出100，或漏掉十位可以取0；百位非零是这类数位题唯一的坎。</div>
+            <div class="walk-src">源：3_1_584fo · 2023吉林省公务员录用考试《行测》题 · 第58题 · 正确率 52.98</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_houv3</b><span>2026年浙江省公务员录用考试《行测》题（B类） · <span class="rate">54.98<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先锁分母：从10个数里选2个，C(10,2)=45（15s）</li><li>把"最大公约数为1"翻成反面"两数有大于1的公约数"，即同时被2、或3、或5整除（15s）</li><li>按质因子分三类各数组合数：2的倍数{2,4,6,8,10}取2个=C(5,2)=10；3的倍数{3,6,9}取2个=C(3,2)=3；5的倍数{5,10}取2个=1（35s）</li><li>三类相加10+3+1=14，再验有没有重复计算：两个数同为6的倍数、同为10的倍数在1-10里各只有一个数，凑不成一对，所以反面就是14种（20s）</li><li>所求=1-14/45=31/45，所以选B（15s）</li></ol>
-          <div class="walk-src">源：3_1_houv3 · 2026浙江省公务员录用考试《行测》题（B类） · 第63题 · 正确率 54.98</div>
-          <div class="walk-fail">最容易走错的是漏掉重叠校验或只算2的倍数就收工；另外别把"选两个数"误当成有顺序的排列去算90，分母一错全废。</div>
+          <div>
+            <div class="walk-head"><b>3_1_houv3</b><span>2026年浙江省公务员录用考试《行测》题（B类） · <span class="rate">54.98<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>从1，2，3，4，5，6，7，8，9，10十个数中随机选择两个数，它们的最大公约数为1的概率是多少？</div>
+            <ol class="q-options">
+              <li><b>A.</b> 2/3</li>
+              <li class="opt-right"><b>B.</b> 31/45 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>C.</b> 11/15 <span class="opt-tag">易错</span></li>
+              <li><b>D.</b> 7/9</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先锁分母：从10个数里选2个，C(10,2)=45（15s）</li><li>把<b><u>“最大公约数为1”</u></b>翻成反面<b><u>“两数有大于1的公约数”</u></b>，即同时被2、或3、或5整除（15s）</li><li>按质因子分三类各数组合数：2的倍数{2,4,6,8,10}取2个=C(5,2)=10；3的倍数{3,6,9}取2个=C(3,2)=3；5的倍数{5,10}取2个=1（35s）</li><li>三类相加10+3+1=14，再验有没有重复计算：两个数同为6的倍数、同为10的倍数在1-10里各只有一个数，凑不成一对，所以反面就是14种（20s）</li><li>所求=1-14/45=31/45，所以选<b><u>B</u></b>（15s）</li></ol>
+            <div class="walk-fail">最容易走错的是漏掉重叠校验或只算2的倍数就收工；另外别把<b><u>“选两个数”</u></b>误当成有顺序的排列去算90，分母一错全废。</div>
+            <div class="walk-src">源：3_1_houv3 · 2026浙江省公务员录用考试《行测》题（B类） · 第63题 · 正确率 54.98</div>
           </div>
         </div>
       </div>
@@ -1268,17 +1507,35 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
         <h3>原题走链（2 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_584tp</b><span>2023年新疆公务员录用考试《行测》试题 · <span class="rate">57.96<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>先用体积除以深度把底面积抠出来：144÷4=36平方米，底面积一定，底部造价36×260就固定了（15s）</li><li>明确"求最低总造价"其实是求侧面积最小，因为深4米已定，侧面积=底面周长×4，只需让底面周长最短（20s）</li><li>套"面积一定时正方形周长最短"：a×b=36取a=b=6，周长=4×6=24米，不要去解二次函数，也不要试2×18、3×12（25s）</li><li>侧面积=周长×深=24×4=96平方米，总价=36×260+96×180=9360+17280=26640元（30s）</li><li>拿26640对选项，只有C吻合，所以选C（10s）</li></ol>
-          <div class="walk-src">源：3_1_584tp · 2023新疆公务员录用考试《行测》试题 · 第58题 · 正确率 57.96</div>
-          <div class="walk-fail">最容易走错的是没注意"无盖"而按两个底面算，或者拿36去逐个试长宽比侧面造价——面积固定时正方形周长一定最短，试第二组就白扔40秒。</div>
+          <div>
+            <div class="walk-head"><b>3_1_584tp</b><span>2023年新疆公务员录用考试《行测》试题 · <span class="rate">57.96<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>某村拟建造一个容积为144立方米，深度为4米的长方体无盖蓄水池。经测算，蓄水池底部造价为260元/平方米，侧面造价为180元/平方米。那么该水池的最低总造价为：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 11440元</li>
+              <li class="opt-wrong"><b>B.</b> 25920元 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>C.</b> 26640元 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 31680元</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先用体积除以深度把底面积抠出来：144÷4=36平方米，底面积一定，底部造价36×260就固定了（15s）</li><li>明确<b><u>“求最低总造价”</u></b>其实是求侧面积最小，因为深4米已定，侧面积=底面周长×4，只需让底面周长最短（20s）</li><li>套<b><u>“面积一定时正方形周长最短”</u></b>：a×b=36取a=b=6，周长=4×6=24米，不要去解二次函数，也不要试2×18、3×12（25s）</li><li>侧面积=周长×深=24×4=96平方米，总价=36×260+96×180=9360+17280=26640元（30s）</li><li>拿26640对选项，只有C吻合，所以选<b><u>C</u></b>（10s）</li></ol>
+            <div class="walk-fail">最容易走错的是没注意<b><u>“无盖”</u></b>而按两个底面算，或者拿36去逐个试长宽比侧面造价——面积固定时正方形周长一定最短，试第二组就白扔40秒。</div>
+            <div class="walk-src">源：3_1_584tp · 2023新疆公务员录用考试《行测》试题 · 第58题 · 正确率 57.96</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5kkbk</b><span>2024年江苏省公务员录用考试《行测》题（B类） · <span class="rate">54.25<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先把四个直径全部砍半成半径再动笔：M为35与25，N为30与22.5，写在选项旁边防串（20s）</li><li>算半径差：M差10、N差7.5（别把N写成15），这是母线勾股的一条直角边（15s）</li><li>母线=√(半径差²+高²)：M=√(10²+80²)=10√65，N=√(7.5²+60²)=7.5√65，两个都带√65，比的时候直接约掉（35s）</li><li>侧面积=π(r+R)l：M为π×60×10√65，N为π×52.5×7.5√65，约去π和√65后是600:393.75（30s）</li><li>600:393.75同除18.75得32:21，所以选B（15s）</li></ol>
-          <div class="walk-src">源：3_1_5kkbk · 2024江苏省公务员录用考试《行测》题（B类） · 第58题 · 正确率 54.25</div>
-          <div class="walk-fail">最容易错的是半径差那一步：把N的上口60当半径不砍半，差就成了37.5，√65约不掉，只能硬开根号算到崩。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5kkbk</b><span>2024年江苏省公务员录用考试《行测》题（B类） · <span class="rate">54.25<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>某品牌奶茶所用纸杯均为圆台型。已知M型纸杯的上、下口直径分别为70毫米、50毫米，高为80毫米；N型纸杯的上、下口直径分别为60毫米、45毫米，高为60毫米。则M型纸杯与N型纸杯的侧面积之比为（ ）。</div>
+            <ol class="q-options">
+              <li><b>A.</b> 16：7</li>
+              <li class="opt-right"><b>B.</b> 32：21 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>C.</b> 48：35 <span class="opt-tag">易错</span></li>
+              <li><b>D.</b> 64：49</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先把四个直径全部砍半成半径再动笔：M为35与25，N为30与22.5，写在选项旁边防串（20s）</li><li>算半径差：M差10、N差7.5（别把N写成15），这是母线勾股的一条直角边（15s）</li><li>母线=√(半径差²+高²)：M=√(10²+80²)=10√65，N=√(7.5²+60²)=7.5√65，两个都带√65，比的时候直接约掉（35s）</li><li>侧面积=π(r+R)l：M为π×60×10√65，N为π×52.5×7.5√65，约去π和√65后是600:393.75（30s）</li><li>600:393.75同除18.75得32:21，所以选<b><u>B</u></b>（15s）</li></ol>
+            <div class="walk-fail">最容易错的是半径差那一步：把N的上口60当半径不砍半，差就成了37.5，√65约不掉，只能硬开根号算到崩。</div>
+            <div class="walk-src">源：3_1_5kkbk · 2024江苏省公务员录用考试《行测》题（B类） · 第58题 · 正确率 54.25</div>
           </div>
         </div>
       </div>
@@ -1297,17 +1554,35 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 60–90s · 超 2 分钟标记猜</span>
         <h3>原题走链（2 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5669i</b><span>2023年国家公务员录用考试《行测》题 · <span class="rate">50.84<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>抓关键结构"只有乙用C零件"+"C超过100个"，于是乙的数量下限=101÷9=11余2，向上取整得12台（30s）</li><li>算乙吃掉多少零件：每台乙=4个B+9个C=13个，12×13=156个（20s）</li><li>剩下给甲的零件=200-156=44个，每台甲=5个A+11个B=16个，44÷16=2余12，取整得2台（25s）</li><li>逐个验证：3台甲至少要5×3+11×3=48个，加156超过200，不行；2台可行，所以选B（20s）</li></ol>
-          <div class="walk-src">源：3_1_5669i · 2023国家公务员录用考试《行测》题 · 第63题 · 正确率 50.84</div>
-          <div class="walk-fail">最容易错在"超过100"当成"不少于100"：若按9×11=99算，乙会取11台，剩余零件变多，容易错算成3台甲；101÷9要向上取整到12，这一步定生死</div>
+          <div>
+            <div class="walk-head"><b>3_1_5669i</b><span>2023年国家公务员录用考试《行测》题 · <span class="rate">50.84<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>工厂生产甲、乙两种设备，需要用到A、B、C三种零件。其中生产1台甲设备需要5个A零件和11个B零件，生产1台乙设备需要4个B零件和9个C零件。工厂某日生产的一批设备共用A、B、C三种零件不超过200个，其中C零件的用量超过100个。问最多可能生产了多少台甲设备？</div>
+            <ol class="q-options">
+              <li><b>A.</b> 1</li>
+              <li class="opt-right"><b>B.</b> 2 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>C.</b> 3 <span class="opt-tag">易错</span></li>
+              <li><b>D.</b> 4</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>抓关键结构<b><u>“只有乙用C零件”</u></b>+<b><u>“C超过100个”</u></b>，于是乙的数量下限=101÷9=11余2，向上取整得12台（30s）</li><li>算乙吃掉多少零件：每台乙=4个B+9个C=13个，12×13=156个（20s）</li><li>剩下给甲的零件=200-156=44个，每台甲=5个A+11个B=16个，44÷16=2余12，取整得2台（25s）</li><li>逐个验证：3台甲至少要5×3+11×3=48个，加156超过200，不行；2台可行，所以选<b><u>B</u></b>（20s）</li></ol>
+            <div class="walk-fail">最容易错在<b><u>“超过100”</u></b>当成<b><u>“不少于100”</u></b>：若按9×11=99算，乙会取11台，剩余零件变多，容易错算成3台甲；101÷9要向上取整到12，这一步定生死</div>
+            <div class="walk-src">源：3_1_5669i · 2023国家公务员录用考试《行测》题 · 第63题 · 正确率 50.84</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_9q7vt</b><span>2025年浙江省公务员录用考试《行测》题（C类） · <span class="rate">54.35<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>看到"人数各不相同且最少3人"，立刻按公差1做最省构造成3、4、5……17，15项求和=（3+17）×15÷2=150，和总人数150对上，说明构型唯一、没有别的排法（25s）</li><li>写出"要A校占的单位最少"就是"让A校的人往人多的单位里挤"，人多单位是17、16、15，加起来17+16+15=48（20s）</li><li>拿50-48=2，说明还差2个人放不进这3个满分单位，必须再开1个单位，所以单位数=3+1=4（20s）</li><li>4在选项里，其余3、5、6都排除，所以选B（10s）</li></ol>
-          <div class="walk-src">源：3_1_9q7vt · 2025浙江省公务员录用考试《行测》题（C类） · 第57题 · 正确率 54.35</div>
-          <div class="walk-fail">最容易错在第2步：把"让A校人集中在人多的单位"误当成"让A校人少去几个单位"，直接拿总数一除就选3；必须用"前三名之和48&lt;50"这一步证明3个单位装不下</div>
+          <div>
+            <div class="walk-head"><b>3_1_9q7vt</b><span>2025年浙江省公务员录用考试《行测》题（C类） · <span class="rate">54.35<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>某地从A、B、C三所高校分别招聘了50名应届毕业生，并将他们分配到15个基层单位。已知每个基层单位最少分配3人，且任意2个基层单位分配到的人数都不相同。问A校毕业生最少被分配到多少个基层单位中？</div>
+            <ol class="q-options">
+              <li><b>A.</b> 3</li>
+              <li class="opt-right"><b>B.</b> 4 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>C.</b> 5 <span class="opt-tag">易错</span></li>
+              <li><b>D.</b> 6</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>看到<b><u>“人数各不相同且最少3人”</u></b>，立刻按公差1做最省构造成3、4、5……17，15项求和=（3+17）×15÷2=150，和总人数150对上，说明构型唯一、没有别的排法（25s）</li><li>写出<b><u>“要A校占的单位最少”</u></b>就是<b><u>“让A校的人往人多的单位里挤”</u></b>，人多单位是17、16、15，加起来17+16+15=48（20s）</li><li>拿50-48=2，说明还差2个人放不进这3个满分单位，必须再开1个单位，所以单位数=3+1=4（20s）</li><li>4在选项里，其余3、5、6都排除，所以选<b><u>B</u></b>（10s）</li></ol>
+            <div class="walk-fail">最容易错在第2步：把<b><u>“让A校人集中在人多的单位”</u></b>误当成<b><u>“让A校人少去几个单位”</u></b>，直接拿总数一除就选3；必须用<b><u>“前三名之和48&lt;50”</u></b>这一步证明3个单位装不下</div>
+            <div class="walk-src">源：3_1_9q7vt · 2025浙江省公务员录用考试《行测》题（C类） · 第57题 · 正确率 54.35</div>
           </div>
         </div>
       </div>
@@ -1331,24 +1606,53 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
         <h3>原题走链（3 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_58556</b><span>2023年广东省公务员录用考试《行测》题（县级卷） · <span class="rate">54.32<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>先算现期盈余：36883-24538=12345元（15s）</li><li>基期不能拿两个增速相减，要分别回推：2021年收入=36883/1.05≈35127元，2021年消费=24538/1.018≈24104元（35s）</li><li>相减得基期盈余：35127-24104≈11023元（10s）</li><li>求增长率：(12345-11023)/11023≈1322/11023≈12%，是“增加”，所以选C（20s）</li></ol>
-          <div class="walk-src">源：3_1_58556 · 2023广东省公务员录用考试《行测》题（县级卷） · 第93题 · 正确率 54.32</div>
-          <div class="walk-fail">最容易错在直接算5.0%-1.8%=3.2%当答案，差额的增长率不等于两个分量的增长率相减，必须回到步骤2各自除以（1+增速）还原基期。</div>
+          <div>
+            <div class="walk-head"><b>3_1_58556</b><span>2023年广东省公务员录用考试《行测》题（县级卷） · <span class="rate">54.32<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-material"><b>【材料】</b>2022年，全国居民人均可支配收入36883元，比上年增长（以下如无特别说明，均为同比名义增长）5.0%。分城乡看，城镇居民人均可支配收入49283元，增长3.9%；农村居民人均可支配收入20133元，增长6.3%。 按收入来源分，2022年，全国居民人均工资性收入20590元，增长4.9%；人均经营性收入6175元，增长4.8%；人均财产净收入3227元，增长4.9%；人均转移净收入6892元，增长5.5%。 2022年，全国居民人均消费支出24538元，比上年增长1.8%。分城乡看，城镇居民人均消费支出30391元，增长0.3%；农村居民人均消费支出16632元，增长4.5%。</div>
+            <div class="q-stem"><b>【题干】</b>2022年，全国居民人均收支盈余比上一年（ ）。（注：收支盈余=收入-消费支出）</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 增加了约5% <span class="opt-tag">易错</span></li>
+              <li><b>B.</b> 减少了约5%</li>
+              <li class="opt-right"><b>C.</b> 增加了约12% <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 减少了约12%</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先算现期盈余：36883-24538=12345元（15s）</li><li>基期不能拿两个增速相减，要分别回推：2021年收入=36883/1.05≈35127元，2021年消费=24538/1.018≈24104元（35s）</li><li>相减得基期盈余：35127-24104≈11023元（10s）</li><li>求增长率：(12345-11023)/11023≈1322/11023≈12%，是<b><u>“增加”</u></b>，所以选<b><u>C</u></b>（20s）</li></ol>
+            <div class="walk-fail">最容易错在直接算5.0%-1.8%=3.2%当答案，差额的增长率不等于两个分量的增长率相减，必须回到步骤2各自除以（1+增速）还原基期。</div>
+            <div class="walk-src">源：3_1_58556 · 2023广东省公务员录用考试《行测》题（县级卷） · 第93题 · 正确率 54.32</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_ckgpu</b><span>2023年重庆市选调优秀大学生到基层工作考试《行测》题 · <span class="rate">56.32<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先写出贡献率=该分类指数权重×（本期分类指数-上期分类指数）÷（本期总指数-上期总指数），并抄下材料给的“权重均为0.2”（20s）</li><li>盯住同一年里权重0.2和分母（总指数增量）完全相同，立刻把题目降级为“比各年5个分类指数增量（今年-去年）的极差”，全程不除不乘、不写百分数（20s）</li><li>每年只找两个数：最大的网络经济指数增量和最小的那个增量，2018年239.3与7.4差231.9，2019年253.3与1.5差251.8，2020年468.6与4.8差463.8，2021年640.1与10.5差629.6，四个差列在草稿角上（60s）</li><li>四个极差里629.6最大，说明2021年贡献率落差最悬殊，所以选D（10s）</li></ol>
-          <div class="walk-src">源：3_1_ckgpu · 2023重庆市选调优秀大学生到基层工作考试《行测》题 · 第98题 · 正确率 56.32</div>
-          <div class="walk-fail">最容易走错的是被材料里没给全的公式吓住，硬按“分类指数÷总指数”逐年算5个百分数再相减，既超时又容易在2020与2021之间算错；正确做法是先用“同分母同年份”把式子约掉。</div>
+          <div>
+            <div class="walk-head"><b>3_1_ckgpu</b><span>2023年重庆市选调优秀大学生到基层工作考试《行测》题 · <span class="rate">56.32<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-material"><b>【材料】</b>2021年，我国经济发展新动能指数为598.8，比上年增长35.4%。2021年，各项分类指数与上年相比均有提升，其中，网络经济指数增长最快，对总指数增长的贡献率为81.9%。附：1.分类指数对总指数增长贡献率公式：2.各分类指数占总指数的权重均为0.2</div>
+            <div class="q-stem"><b>【题干】</b>2017年-2021年，各分类指数对经济发展新动能指数增长的贡献中，贡献最大与贡献最小之间相差最悬殊的是哪一年?</div>
+            <ol class="q-options">
+              <li><b>A.</b> 2018</li>
+              <li><b>B.</b> 2019</li>
+              <li class="opt-wrong"><b>C.</b> 2020 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> 2021 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先写出贡献率=该分类指数权重×（本期分类指数-上期分类指数）÷（本期总指数-上期总指数），并抄下材料给的<b><u>“权重均为0.2”</u></b>（20s）</li><li>盯住同一年里权重0.2和分母（总指数增量）完全相同，立刻把题目降级为“比各年5个分类指数增量（今年-去年）的极差”，全程不除不乘、不写百分数（20s）</li><li>每年只找两个数：最大的网络经济指数增量和最小的那个增量，2018年239.3与7.4差231.9，2019年253.3与1.5差251.8，2020年468.6与4.8差463.8，2021年640.1与10.5差629.6，四个差列在草稿角上（60s）</li><li>四个极差里629.6最大，说明2021年贡献率落差最悬殊，所以选<b><u>D</u></b>（10s）</li></ol>
+            <div class="walk-fail">最容易走错的是被材料里没给全的公式吓住，硬按<b><u>“分类指数÷总指数”</u></b>逐年算5个百分数再相减，既超时又容易在2020与2021之间算错；正确做法是先用<b><u>“同分母同年份”</u></b>把式子约掉。</div>
+            <div class="walk-src">源：3_1_ckgpu · 2023重庆市选调优秀大学生到基层工作考试《行测》题 · 第98题 · 正确率 56.32</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_9q7n6</b><span>2025年天津市公务员录用考试《行测》题 · <span class="rate">59.35<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>圈出“同比增量超过200万吨”和“几个”，先定死这是逐月算减法再数个数，不要去找增长率公式（10s）</li><li>翻到图1，把2022年、2023年3—12月共20个柱子按月份上下配对，用眼一扫先排除2023年明显比2022年矮的月份（9月、11月、3月、4月）（30s）</li><li>只对“2023年更高”的候选月做减法：5月1064-907=157、6月1039-872=167、7月1031-870=161、8月1086-885=201、10月879-761=118、12月1265-1028=237，逐个月旁注“超/不超”（60s）</li><li>数一遍打“超”的只有8月、12月共2个，所以选B（10s）</li></ol>
-          <div class="walk-src">源：3_1_9q7n6 · 2025天津市公务员录用考试《行测》题 · 第101题 · 正确率 59.35</div>
-          <div class="walk-fail">最容易走错的是把“同比增量”当成“比上月增量”或去算增长率，还有8月只有201万吨、只高出1万吨，口算成200整就会把这个月漏掉、误选A。</div>
+          <div>
+            <div class="walk-head"><b>3_1_9q7n6</b><span>2025年天津市公务员录用考试《行测》题 · <span class="rate">59.35<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>2023年3-12月，我国天然气月度进口量同比增量超过200万吨的月份有几个？</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 1 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> 2 <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> 3</li>
+              <li><b>D.</b> 4</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>圈出<b><u>“同比增量超过200万吨”</u></b>和<b><u>“几个”</u></b>，先定死这是逐月算减法再数个数，不要去找增长率公式（10s）</li><li>翻到图1，把2022年、2023年3—12月共20个柱子按月份上下配对，用眼一扫先排除2023年明显比2022年矮的月份（9月、11月、3月、4月）（30s）</li><li>只对<b><u>“2023年更高”</u></b>的候选月做减法：5月1064-907=157、6月1039-872=167、7月1031-870=161、8月1086-885=201、10月879-761=118、12月1265-1028=237，逐个月旁注<b><u>“超/不超”</u></b>（60s）</li><li>数一遍打“超”的只有8月、12月共2个，所以选<b><u>B</u></b>（10s）</li></ol>
+            <div class="walk-fail">最容易走错的是把<b><u>“同比增量”</u></b>当成<b><u>“比上月增量”</u></b>或去算增长率，还有8月只有201万吨、只高出1万吨，口算成200整就会把这个月漏掉、误选A。</div>
+            <div class="walk-src">源：3_1_9q7n6 · 2025天津市公务员录用考试《行测》题 · 第101题 · 正确率 59.35</div>
           </div>
         </div>
       </div>
@@ -1383,31 +1687,69 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
         <h3>原题走链（4 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_ijsil</b><span>2026年国家公务员录用考试《行测》题 · <span class="rate">55.14<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>读到"2024年"和"日均"两个词，立刻定公式：基期日均=现期收入÷（1+增长率）÷天数（20s）</li><li>三行数据抄成最简：清明107.8÷1.087÷3，五一295÷1.203÷5，端午114.4÷1.256÷3（25s）</li><li>只算到量级就够排序：清明约107.8÷3.26≈33，五一约295÷6.02≈49，端午约114.4÷3.77≈30（30s）</li><li>大小关系五一&gt;清明&gt;端午，对应选项C，所以选C（10s）</li></ol>
-          <div class="walk-src">源：3_1_ijsil · 2026国家公务员录用考试《行测》题 · 第128题 · 正确率 55.14</div>
-          <div class="walk-fail">最容易错在漏除天数：三天假和五天假混着比总收入，会得五一&gt;端午&gt;清明而错选A；"日均"两个字必须落到除数上</div>
+          <div>
+            <div class="walk-head"><b>3_1_ijsil</b><span>2026年国家公务员录用考试《行测》题 · <span class="rate">55.14<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-material"><b>【材料】</b>2025年清明假期3天，Y省接待游客2110.5万人次，同比增长6.4%；实现旅游收入107.8亿元，同比增长8.7%。全省4A级及以上景区接待游客657.5万人次，同比增长7.4%；纳入监测的13家红色旅游经典景区接待游客54.7万人次，同比增长5.1%。 2025年“五一”假期5天，Y省接待游客4608.2万人次，同比增长18.7%；实现旅游收入295亿元，同比增长20.3%。全省4A级及以上景区接待游客1629.9万人次，同比增长14.3%；纳入监测的13家红色旅游经典景区接待游客119.5万人次，同比增长12.0%。 2025年端午假期3天，Y省接待游客2321.0万人次，同比增长20.6%；实现旅游收入114.4亿元，同比增长25.6%。全省4A级及以上景区接待游客726.1万人次，同比增长18.9%；纳入监测的13家红色旅游经典景区接待游客54.4万人次，同比增长17.5%。</div>
+            <div class="q-stem"><b>【题干】</b>将Y省2024年清明假期、“五一”假期和端午假期日均实现旅游收入从高到低排列，以下正确的是：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> “五一”、端午、清明 <span class="opt-tag">易错</span></li>
+              <li><b>B.</b> 清明、“五一”、端午</li>
+              <li class="opt-right"><b>C.</b> “五一”、清明、端午 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 清明、端午、“五一”</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>读到<b><u>“2024年”</u></b>和<b><u>“日均”</u></b>两个词，立刻定公式：基期日均=现期收入÷（1+增长率）÷天数（20s）</li><li>三行数据抄成最简：清明107.8÷1.087÷3，五一295÷1.203÷5，端午114.4÷1.256÷3（25s）</li><li>只算到量级就够排序：清明约107.8÷3.26≈33，五一约295÷6.02≈49，端午约114.4÷3.77≈30（30s）</li><li>大小关系五一&gt;清明&gt;端午，对应选项C，所以选<b><u>C</u></b>（10s）</li></ol>
+            <div class="walk-fail">最容易错在漏除天数：三天假和五天假混着比总收入，会得五一&gt;端午&gt;清明而错选A；<b><u>“日均”</u></b>两个字必须落到除数上</div>
+            <div class="walk-src">源：3_1_ijsil · 2026国家公务员录用考试《行测》题 · 第128题 · 正确率 55.14</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_55gn0</b><span>2023年上海市公务员录用考试《行测》题（A类） · <span class="rate">52.78<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先在图表里只抓四个数并抄成两列：2015/2020年人均教育文化娱乐支出2857、3380，人均消费支出30191、37303（20s）</li><li>第一空做减法比增量：3380-2857=523，37303-30191=7112，523&lt;7112，第一空“低于”，直接排除A、B（25s）</li><li>第二空不要比523和7112，换成增量÷基期：523/2857≈18%，7112/30191≈24%，18%&lt;24%，第二空也“低于”（25s）</li><li>两空都是“低于”，对照选项只剩一个，所以选D（5s）</li></ol>
-          <div class="walk-src">源：3_1_55gn0 · 2023上海市公务员录用考试《行测》题（A类） · 第50题 · 正确率 52.78</div>
-          <div class="walk-fail">最容易错在第二空拿523和7112直接大小比，那是增量不是增长率，必须各自除以基期后再比。</div>
+          <div>
+            <div class="walk-head"><b>3_1_55gn0</b><span>2023年上海市公务员录用考试《行测》题（A类） · <span class="rate">52.78<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>与2015年相比，2020年江浙沪地区年人均教育文化娱乐支出增量 年人均消费支出增量，年人均教育文化娱乐支出增长率 年人均消费支出增长率。</div>
+            <ol class="q-options">
+              <li><b>A.</b> 高于，高于</li>
+              <li><b>B.</b> 高于，低于</li>
+              <li class="opt-wrong"><b>C.</b> 低于，高于 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> 低于，低于 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先在图表里只抓四个数并抄成两列：2015/2020年人均教育文化娱乐支出2857、3380，人均消费支出30191、37303（20s）</li><li>第一空做减法比增量：3380-2857=523，37303-30191=7112，523&lt;7112，第一空<b><u>“低于”</u></b>，直接排除<b><u>A</u></b>、B（25s）</li><li>第二空不要比523和7112，换成增量÷基期：523/2857≈18%，7112/30191≈24%，18%&lt;24%，第二空也<b><u>“低于”</u></b>（25s）</li><li>两空都是<b><u>“低于”</u></b>，对照选项只剩一个，所以选<b><u>D</u></b>（5s）</li></ol>
+            <div class="walk-fail">最容易错在第二空拿523和7112直接大小比，那是增量不是增长率，必须各自除以基期后再比。</div>
+            <div class="walk-src">源：3_1_55gn0 · 2023上海市公务员录用考试《行测》题（A类） · 第50题 · 正确率 52.78</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_4inj3</b><span>2022年湖北省选调生招录考试综合知识和行政职业能力测验试卷 · <span class="rate">55.36<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>扫四个选项先分类：A是“12月与全年平均比”、B是“每个月都正增长”、C是“降幅是否超300亿”、D是“三个占比比大小”，先做D（25s）</li><li>验D：12月西部/全国三组数相除，1776.1/5590.3≈31.8%，23.4/156.9≈14.9%，24.9/72.8≈34.2%，起降架次占比最高，D成立（40s）</li><li>排除A：全年平均1782.5/12≈148.5万吨&lt;12月156.9万吨，A说“低于”故错（20s）</li><li>排除B、C：B用“混合居中不正中”，全年-38.4%、12月+56.4%，则1-11月必为负增长，不可能每月正增长；C用90.6/(1-79.5%)×79.5%≈351亿人公里&gt;300亿，C错（35s）</li><li>三项全错、D唯一成立，所以选D（5s）</li></ol>
-          <div class="walk-src">源：3_1_4inj3 · 2022湖北省选调生招录考试综合知识和行政职业能力测验试卷 · 第95题 · 正确率 55.36</div>
-          <div class="walk-fail">最容易错在先啃B这种“每个月”的表述：它给的是全年和12月两个增速，只能用混合增长率倒推1-11月为负，不能真去逐个找月份。</div>
+          <div>
+            <div class="walk-head"><b>3_1_4inj3</b><span>2022年湖北省选调生招录考试综合知识和行政职业能力测验试卷 · <span class="rate">55.36<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>从上述资料中能够推出的是：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 2021年12月的货邮吞吐量低于2021年全年平均数</li>
+              <li><b>B.</b> 港澳台航线旅客运输量2021年每个月比上年同月均有正增长</li>
+              <li class="opt-wrong"><b>C.</b> 2021年国际航线旅客周转量比上年降低了不超过300亿人公里 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> 2021年12月，西部地区旅客吞吐量、货邮吞吐量在全国占比低于起降架次在全国占比 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>扫四个选项先分类：A是<b><u>“12月与全年平均比”</u></b>、B是<b><u>“每个月都正增长”</u></b>、C是<b><u>“降幅是否超300亿”</u></b>、D是<b><u>“三个占比比大小”</u></b>，先做D（25s）</li><li>验D：12月西部/全国三组数相除，1776.1/5590.3≈31.8%，23.4/156.9≈14.9%，24.9/72.8≈34.2%，起降架次占比最高，D成立（40s）</li><li>排除<b><u>A</u></b>：全年平均1782.5/12≈148.5万吨&lt;12月156.9万吨，A说<b><u>“低于”</u></b>故错（20s）</li><li>排除<b><u>B</u></b>、C：B用<b><u>“混合居中不正中”</u></b>，全年-38.4%、12月+56.4%，则1-11月必为负增长，不可能每月正增长；C用90.6/(1-79.5%)×79.5%≈351亿人公里&gt;300亿，C错（35s）</li><li>三项全错、D唯一成立，所以选<b><u>D</u></b>（5s）</li></ol>
+            <div class="walk-fail">最容易错在先啃B这种<b><u>“每个月”</u></b>的表述：它给的是全年和12月两个增速，只能用混合增长率倒推1-11月为负，不能真去逐个找月份。</div>
+            <div class="walk-src">源：3_1_4inj3 · 2022湖北省选调生招录考试综合知识和行政职业能力测验试卷 · 第95题 · 正确率 55.36</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_houvm</b><span>2026年浙江省公务员录用考试《行测》题（C类） · <span class="rate">59.87<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>圈出三个锚点：00后线上占比69.8%、城镇居民50.18%、初中及以下22.63%（15s）</li><li>求70后：材料说00后“比70后高53.79个百分点”，往下减，69.8%-53.79%=16.01%（20s）</li><li>求务农：先用50.18%-11.66%=38.52%得到农村，再减19.74%，38.52%-19.74%=18.78%（25s）</li><li>三值排序16.01%&lt;18.78%&lt;22.63%，即70后&lt;务农&lt;初中及以下，所以选D（15s）</li></ol>
-          <div class="walk-src">源：3_1_houvm · 2026浙江省公务员录用考试《行测》题（C类） · 第108题 · 正确率 59.87</div>
-          <div class="walk-fail">最容易错在两处减法方向：00后“比70后高”要用69.8减53.79，务农“比农村低”要先还原农村38.52%再减19.74%，别把两个百分点加在城镇50.18%上。</div>
+          <div>
+            <div class="walk-head"><b>3_1_houvm</b><span>2026年浙江省公务员录用考试《行测》题（C类） · <span class="rate">59.87<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-material"><b>【材料】</b>2025年初，某杂志社联合民生智库开展城乡居民消费调查，全面了解城乡居民收支与消费信心状况，深入分析居民消费意愿、能力、行为与场景。 调查显示，城乡居民在2024年有48.07%的家庭收入持平，22.01%的家庭收入增加，其中6.09%的家庭收入明显增加；近三成被访者表示收入减少，其中11.23%的家庭明显减少。对于2025年的家庭收入，46.10%的居民预计将基本持平，19.04%的居民预期收入将增加，23.28%的居民对未来收入变化不确定，11.58%的居民预期收入将明显减少。 调查发现，47.01%的城乡居民日常购物以线上渠道为主，37.52%的城乡居民线上、线下并重，只有15.48%的城乡居民明确表示以线下为主。 不同群体的购物选择存在较大差异：一是代际断层，年轻群体成为线上消费主力，其中00后群体线上购物占比69.8%，比70后群体高了53.79个百分点；二是城乡分化，城镇居民的线上购物占比50.18%，高于农村居民11.66个百分点，务农群体选择线上购物的占比比农村居民还要低19.74个百分点；三是学历分化，高学历群体选择线上购物比例更高，硕士以上学历群体线上购物占比62.81%，远高于初中及以下学历群体的22.63%。</div>
+            <div class="q-stem"><b>【题干】</b>将70后群体、务农群体、初中及以下学历群体线上购物占比从低到高顺序排列，正确的是：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 初中及以下学历群体、务农群体、70后群体 <span class="opt-tag">易错</span></li>
+              <li><b>B.</b> 初中及以下学历群体、70后群体、务农群体</li>
+              <li><b>C.</b> 务农群体、70后群体、初中及以下学历群体</li>
+              <li class="opt-right"><b>D.</b> 70后群体、务农群体、初中及以下学历群体 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>圈出三个锚点：00后线上占比69.8%、城镇居民50.18%、初中及以下22.63%（15s）</li><li>求70后：材料说00后<b><u>“比70后高53.79个百分点”</u></b>，往下减，69.8%-53.79%=16.01%（20s）</li><li>求务农：先用50.18%-11.66%=38.52%得到农村，再减19.74%，38.52%-19.74%=18.78%（25s）</li><li>三值排序16.01%&lt;18.78%&lt;22.63%，即70后&lt;务农&lt;初中及以下，所以选<b><u>D</u></b>（15s）</li></ol>
+            <div class="walk-fail">最容易错在两处减法方向：00后<b><u>“比70后高”</u></b>要用69.8减53.79，务农<b><u>“比农村低”</u></b>要先还原农村38.52%再减19.74%，别把两个百分点加在城镇50.18%上。</div>
+            <div class="walk-src">源：3_1_houvm · 2026浙江省公务员录用考试《行测》题（C类） · 第108题 · 正确率 59.87</div>
           </div>
         </div>
       </div>
@@ -1426,10 +1768,20 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 60–90s · 综合分析可到 120s</span>
         <h3>原题走链（1 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5jrkj</b><span>2024年国家公务员录用考试《行测》题 · <span class="rate">54.43<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
-          <ol class="walk-steps"><li>先给三项各写所需条件：①要两期第一产业增加值、②要2013年天津总产值和非三产占比、③要“新增就业人员中三产人数”（20s）</li><li>验①：2013年总产值=10.0/1.8≈5.56万亿，第一产业=5.56×6.2%≈0.34万亿；2022年=10.0×4.8%=0.48万亿，两期都有，可推（30s）</li><li>验②：2013年天津总产值=1.6/1.6=1万亿，2013年三产占比=61.3%-7.2%=54.1%，1-54.1%=45.9%，可求，可推（25s）</li><li>验③：材料只有“城镇累计新增就业人数”和“就业人员中三产占比”，占比的分母是全部就业人员、不是新增人员，两个口径乘不到一起，不可推（25s）</li><li>可推的是①②共2项，对应选项只有C，所以选C（10s）</li></ol>
-          <div class="walk-src">源：3_1_5jrkj · 2024国家公务员录用考试《行测》题 · 第135题 · 正确率 54.43</div>
-          <div class="walk-fail">最容易错在第③项，看到“新增就业人数”和“三产占比”就顺手相乘，但占比的基数是就业人员总量，和“累计新增”不是同一个分母。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5jrkj</b><span>2024年国家公务员录用考试《行测》题 · <span class="rate">54.43<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
+            <div class="q-material"><b>【材料】</b>2022年，京津冀地区生产总值合计10.0万亿元，是2013年的1.8倍。其中，北京、河北跨越4万亿元量级，均为4.2万亿元，分别是2013年的2.0倍和1.7倍；天津1.6万亿元，是2013年的1.6倍。京津冀第一产业、第二产业、第三产业增加值占生产总值比重构成由2013年的6.2：35.7：58.1变化为2022年的4.8：29.6：65.6。京津冀三地第三产业增加值占生产总值比重分别为83.8%、61.3％和49.4%，较2013年分别提高4.3、7.2和8.4个百分点。 2013—2022年，京津冀地区城镇累计分别新增就业288.1万、405.5万和748.4万人。2021年，北京法人单位从业人员中，第三产业比重为84.4%，较2013年提高6.2个百分点，其中信息服务业和商务服务业占比达25.5%，较2013年提高6.2个百分点；天津和河北第三产业就业人员占比为60.5％和46.6%，较2013年提高10.9和15.1个百分点。 2022年，京津冀三地全体居民人均可支配收入分别为77415元、48976元和30867元，与2013年相比，年均分别增长7.4%、7.1％和8.2%。其中，城镇居民人均可支配收入分别增长7.3%、6.9％和7.1%，农村居民人均可支配收入分别增长8.2%、7.3％和8.6%。</div>
+            <div class="q-stem"><b>【题干】</b>在以下信息中，能够从上述资料中推出的有几项？①2013—2022年京津冀第一产业增加值年均增量（以2013年为基期）②2013年天津第一产业、第二产业增加值之和③2013—2022年河北城镇新增就业人员中第三产业就业人员人数</div>
+            <ol class="q-options">
+              <li><b>A.</b> 0项</li>
+              <li><b>B.</b> 1项</li>
+              <li class="opt-right"><b>C.</b> 2项 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>D.</b> 3项 <span class="opt-tag">易错</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先给三项各写所需条件：①要两期第一产业增加值、②要2013年天津总产值和非三产占比、③要<b><u>“新增就业人员中三产人数”</u></b>（20s）</li><li>验①：2013年总产值=10.0/1.8≈5.56万亿，第一产业=5.56×6.2%≈0.34万亿；2022年=10.0×4.8%=0.48万亿，两期都有，可推（30s）</li><li>验②：2013年天津总产值=1.6/1.6=1万亿，2013年三产占比=61.3%-7.2%=54.1%，1-54.1%=45.9%，可求，可推（25s）</li><li>验③：材料只有<b><u>“城镇累计新增就业人数”</u></b>和<b><u>“就业人员中三产占比”</u></b>，占比的分母是全部就业人员、不是新增人员，两个口径乘不到一起，不可推（25s）</li><li>可推的是①②共2项，对应选项只有C，所以选<b><u>C</u></b>（10s）</li></ol>
+            <div class="walk-fail">最容易错在第③项，看到<b><u>“新增就业人数”</u></b>和<b><u>“三产占比”</u></b>就顺手相乘，但占比的基数是就业人员总量，和<b><u>“累计新增”</u></b>不是同一个分母。</div>
+            <div class="walk-src">源：3_1_5jrkj · 2024国家公务员录用考试《行测》题 · 第135题 · 正确率 54.43</div>
           </div>
         </div>
       </div>
@@ -1453,31 +1805,67 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 20–30s · 不恋战</span>
         <h3>原题走链（4 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_h297t</b><span>2024年江苏省公务员录用考试《行测》题（C类） · <span class="rate">54.49<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 D</span></span></div>
-          <ol class="walk-steps"><li>先在草稿上写三行身份：刘某=出租人（所有权人）、沈某=承租人（占有人）、农场=拾得人，别急着读选项（15s）</li><li>A项问“耕牛毁坏果园谁赔”，调民法典第749条——承租人占有租赁物期间，租赁物造成第三人财产损失，出租人不承担责任，责任落在承租人沈某身上，A对（25s）</li><li>B项“管护费”调第317条，权利人领取遗失物应当支付拾得人必要费用，沈某要付，B说“无须”是错的；D项“有权关押”调第314条，拾得人只负返还和通知义务、没有留置权，D错（25s）</li><li>C项“仅在2万元限度内”是拿赔偿协议当责任上限，可749条已经让出租人完全免责，与2万无关，C错（15s）</li><li>除A外三项逐条被法条否掉，所以选A（5s）</li></ol>
-          <div class="walk-src">源：3_1_h297t · 2024江苏省公务员录用考试《行测》题（C类） · 第8题 · 正确率 54.49</div>
-          <div class="walk-fail">最容易走错的是被题干“赔偿2万元”这个数字带跑，觉得责任有上限就选C，忽略了749条把出租人的责任直接归零、题目问的也不是协议范围。</div>
+          <div>
+            <div class="walk-head"><b>3_1_h297t</b><span>2024年江苏省公务员录用考试《行测》题（C类） · <span class="rate">54.49<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 D</span></span></div>
+            <div class="q-stem"><b>【题干】</b>刘某将一头耕牛出租给沈某，因沈某照管不周，耕牛走失。为此，双方达成赔偿协议，由沈某赔偿刘某2万元。沈某支付赔偿金后，发现耕牛被关押在邻近的农场。沈某与刘某便请求农场返还耕牛。农场认为耕牛毁坏了果园，拒绝返还。对此，下列说法正确的是：</div>
+            <ol class="q-options">
+              <li class="opt-right"><b>A.</b> 耕牛毁坏果园，应由沈某承担赔偿责任 <span class="opt-tag">正确</span></li>
+              <li><b>B.</b> 沈某无须向农场支付耕牛关押期间的管护费</li>
+              <li><b>C.</b> 刘某仅在2万元的限度内，向农场承担赔偿责任</li>
+              <li class="opt-wrong"><b>D.</b> 农场在获得刘某或沈某的赔偿之前有权关押耕牛 <span class="opt-tag">易错</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先在草稿上写三行身份：刘某=出租人（所有权人）、沈某=承租人（占有人）、农场=拾得人，别急着读选项（15s）</li><li>A项问<b><u>“耕牛毁坏果园谁赔”</u></b>，调民法典第749条——承租人占有租赁物期间，租赁物造成第三人财产损失，出租人不承担责任，责任落在承租人沈某身上，A对（25s）</li><li>B项<b><u>“管护费”</u></b>调第317条，权利人领取遗失物应当支付拾得人必要费用，沈某要付，B说<b><u>“无须”</u></b>是错的；D项<b><u>“有权关押”</u></b>调第314条，拾得人只负返还和通知义务、没有留置权，D错（25s）</li><li>C项<b><u>“仅在2万元限度内”</u></b>是拿赔偿协议当责任上限，可749条已经让出租人完全免责，与2万无关，C错（15s）</li><li>除A外三项逐条被法条否掉，所以选<b><u>A</u></b>（5s）</li></ol>
+            <div class="walk-fail">最容易走错的是被题干<b><u>“赔偿2万元”</u></b>这个数字带跑，觉得责任有上限就选C，忽略了749条把出租人的责任直接归零、题目问的也不是协议范围。</div>
+            <div class="walk-src">源：3_1_h297t · 2024江苏省公务员录用考试《行测》题（C类） · 第8题 · 正确率 54.49</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5jrk8</b><span>2024年国家公务员录用考试《行测》题 · <span class="rate">53.66<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>读题时立刻在“错误”上画圈或打个叉，提醒自己最后要挑说法不成立的那一项，避免验完三项正确就随手选个正确项（5s）</li><li>扫B项：“县级人大常委”+“地方性法规”两个词撞在一起，立法法第81条只授权“设区的市”人大及其常委会就城乡建设与管理、生态文明建设、历史文化保护、基层治理等事项立法，县级人大没有地方立法权，B直接锁定（20s）</li><li>其余三项快速过一遍找反例：A项监察委属立法法第17条列举的提案主体，对；C项第90条明确省、自治区、直辖市和设区的市、自治州人大常委会可设基层立法联系点，对；D项第58条要求草案说明包含起草过程中对重大分歧意见的协调处理情况，对（35s）</li><li>三项都站得住、只有B把立法主体从“设区的市”偷换成“县级”，所以选B（10s）</li></ol>
-          <div class="walk-src">源：3_1_5jrk8 · 2024国家公务员录用考试《行测》题 · 第9题 · 正确率 53.66</div>
-          <div class="walk-fail">最容易走错的是把B项的“县级”看成“设区的市”的笔误而放过，或者验完A、C、D都正确后忘了这是选非题，反手选了一个正确表述。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5jrk8</b><span>2024年国家公务员录用考试《行测》题 · <span class="rate">53.66<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>根据《中华人民共和国立法法》下列说法错误的是（ ）。</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 国家监察委员会可以向全国人大常委会提出法律案 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> 县级人大常委可以对基层治理方面的事项制定地方性法规 <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> 设区的市人大常委会可以根据实际需要设立基层立法联系点</li>
+              <li><b>D.</b> 法律草案的说明应当包括起草过程中对重大分歧意见的协调处理情况</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>读题时立刻在<b><u>“错误”</u></b>上画圈或打个叉，提醒自己最后要挑说法不成立的那一项，避免验完三项正确就随手选个正确项（5s）</li><li>扫B项：<b><u>“县级人大常委”</u></b>+<b><u>“地方性法规”</u></b>两个词撞在一起，立法法第81条只授权<b><u>“设区的市”</u></b>人大及其常委会就城乡建设与管理、生态文明建设、历史文化保护、基层治理等事项立法，县级人大没有地方立法权，B直接锁定（20s）</li><li>其余三项快速过一遍找反例：A项监察委属立法法第17条列举的提案主体，对；C项第90条明确省、自治区、直辖市和设区的市、自治州人大常委会可设基层立法联系点，对；D项第58条要求草案说明包含起草过程中对重大分歧意见的协调处理情况，对（35s）</li><li>三项都站得住、只有B把立法主体从<b><u>“设区的市”</u></b>偷换成<b><u>“县级”</u></b>，所以选<b><u>B</u></b>（10s）</li></ol>
+            <div class="walk-fail">最容易走错的是把B项的<b><u>“县级”</u></b>看成<b><u>“设区的市”</u></b>的笔误而放过，或者验完A、C、D都正确后忘了这是选非题，反手选了一个正确表述。</div>
+            <div class="walk-src">源：3_1_5jrk8 · 2024国家公务员录用考试《行测》题 · 第9题 · 正确率 53.66</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_fqc8d</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">55.52<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>先在草稿顶头写死自首两要件：自动投案+如实供述本人罪行，后面每项都拿这两条去卡（10s）</li><li>A项是共同犯罪，甲“独自承担了全部罪行”，等于没有供述同案犯，不满足如实供述，划掉（15s）</li><li>B项甲是在因酒驾被讯问时交代乙的杀人行为，交代的是他人犯罪，属检举揭发型立功而非自首，划掉（15s）</li><li>D项说单位犯罪中直接责任人“不能单独成立自首”，与单位犯罪中直接负责的主管人员可单独成立自首的规则相反，划掉（15s）</li><li>C项虽是被父亲“扭送”，但司法解释明确亲友规劝、陪同或送去投案视为自动投案，加上王某主动交代肇事逃逸，两要件都齐，成立自首，所以选C（20s）</li></ol>
-          <div class="walk-src">源：3_1_fqc8d · 2024甘肃公务员录用考试《行测》题 · 第7题 · 正确率 55.52</div>
-          <div class="walk-fail">最容易走错的是看见C项“扭送”就认定是被动归案、直接排除，漏掉“亲友送去投案视为自动投案”这一司法解释例外。</div>
+          <div>
+            <div class="walk-head"><b>3_1_fqc8d</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">55.52<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>下列关于自首的判断说法正确的是：</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 甲和乙共同实施盗窃犯罪，后甲因为内心害怕，主动到公安机关交代，并独自承担了全部罪行，甲构成自首 <span class="opt-tag">易错</span></li>
+              <li><b>B.</b> 甲和乙共同实施诈骗犯罪，后甲因酒驾被公安机关讯问时，主动交代乙曾经实施的故意杀人行为，甲构成自首</li>
+              <li class="opt-right"><b>C.</b> 王某交通肇事逃逸，其父知道后将其扭送至公安机关，王某主动交代了其肇事逃逸行为，王某构成自首 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 甲公司非法集资且规模很大，该公司总经理李某因为害怕，瞒着其他高管偷偷到公安机关交代了相关情况，李某作为单位犯罪的直接责任人不能单独成立自首</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先在草稿顶头写死自首两要件：自动投案+如实供述本人罪行，后面每项都拿这两条去卡（10s）</li><li>A项是共同犯罪，甲<b><u>“独自承担了全部罪行”</u></b>，等于没有供述同案犯，不满足如实供述，划掉（15s）</li><li>B项甲是在因酒驾被讯问时交代乙的杀人行为，交代的是他人犯罪，属检举揭发型立功而非自首，划掉（15s）</li><li>D项说单位犯罪中直接责任人<b><u>“不能单独成立自首”</u></b>，与单位犯罪中直接负责的主管人员可单独成立自首的规则相反，划掉（15s）</li><li>C项虽是被父亲<b><u>“扭送”</u></b>，但司法解释明确亲友规劝、陪同或送去投案视为自动投案，加上王某主动交代肇事逃逸，两要件都齐，成立自首，所以选<b><u>C</u></b>（20s）</li></ol>
+            <div class="walk-fail">最容易走错的是看见C项<b><u>“扭送”</u></b>就认定是被动归案、直接排除，漏掉<b><u>“亲友送去投案视为自动投案”</u></b>这一司法解释例外。</div>
+            <div class="walk-src">源：3_1_fqc8d · 2024甘肃公务员录用考试《行测》题 · 第7题 · 正确率 55.52</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_4inr7</b><span>2022年湖北省选调生招录考试综合知识和行政职业能力测验试卷 · <span class="rate">55.05<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先圈出两个时间点：一审没认、二审认了，本题问的是二审法院该怎么处理这种“半路认罪”的情形（10s）</li><li>排掉 A、B：制度并不禁止二审认罪认罚，只是从宽要另行判断，所以“拒绝接受”“接受但不从宽”都过头，直接划掉（15s）</li><li>剩下 C、D，比的只是“与一审一致”还是“有所区别”，抓住一审根本没认过、不存在可比基数这一点，一致就无从谈起（20s）</li><li>一审无认罚基础、二审才认属于事后补救，从宽幅度理应有别，所以选 D（10s）</li></ol>
-          <div class="walk-src">源：3_1_4inr7 · 2022湖北省选调生招录考试综合知识和行政职业能力测验试卷 · 第35题 · 正确率 55.05</div>
-          <div class="walk-fail">最容易错在觉得“同案同罚、从宽标准应当统一”而选 C，忽略了 C 的前提是一审已经认罪认罚，本题一审压根没有认罚。</div>
+          <div>
+            <div class="walk-head"><b>3_1_4inr7</b><span>2022年湖北省选调生招录考试综合知识和行政职业能力测验试卷 · <span class="rate">55.05<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>对被告人在第一审程序中未认罪认罚，在第二审程序中认罪认罚的案件，二审法院应当：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 拒绝接受认罪认罚者</li>
+              <li><b>B.</b> 接受认罪但不从宽</li>
+              <li class="opt-wrong"><b>C.</b> 确定从宽幅度与一审程序认罪认罚保持一致 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> 确定从宽幅度与一审程序认罪认罚有所区别 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先圈出两个时间点：一审没认、二审认了，本题问的是二审法院该怎么处理这种<b><u>“半路认罪”</u></b>的情形（10s）</li><li>排掉 A、B：制度并不禁止二审认罪认罚，只是从宽要另行判断，所以<b><u>“拒绝接受”</u></b><b><u>“接受但不从宽”</u></b>都过头，直接划掉（15s）</li><li>剩下 C、D，比的只是<b><u>“与一审一致”</u></b>还是<b><u>“有所区别”</u></b>，抓住一审根本没认过、不存在可比基数这一点，一致就无从谈起（20s）</li><li>一审无认罚基础、二审才认属于事后补救，从宽幅度理应有别，所以选 D（10s）</li></ol>
+            <div class="walk-fail">最容易错在觉得<b><u>“同案同罚、从宽标准应当统一”</u></b>而选 C，忽略了 C 的前提是一审已经认罪认罚，本题一审压根没有认罚。</div>
+            <div class="walk-src">源：3_1_4inr7 · 2022湖北省选调生招录考试综合知识和行政职业能力测验试卷 · 第35题 · 正确率 55.05</div>
           </div>
         </div>
       </div>
@@ -1496,31 +1884,67 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 20–30s · 不恋战</span>
         <h3>原题走链（4 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5jrd4</b><span>2024年国家公务员录用考试《行测》题 · <span class="rate">54.04<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先确认这是选非题，四个选项要找出错的那一个，别做成选对（5s）</li><li>扫能一口判定的硬知识点：锡矿是我国优势矿产、储量产量居世界前列，A 对，先放过（10s）</li><li>南海北部神狐海域 2017 年天然气水合物试采成功，B 对；新疆罗布泊是钾盐主产地之一，C 对，两项都放过（15s）</li><li>只剩 D，我国最大单体金矿是山东莱州三山岛深部的西岭金矿，不在云南，所以选 D（15s）</li></ol>
-          <div class="walk-src">源：3_1_5jrd4 · 2024国家公务员录用考试《行测》题 · 第15题 · 正确率 54.04</div>
-          <div class="walk-fail">最容易错在凭“云南出产黄金”的模糊印象放过 D，或把“最大”当成无法判断的表述，其实金矿归属地是明确的硬知识。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5jrd4</b><span>2024年国家公务员录用考试《行测》题 · <span class="rate">54.04<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>习近平总书记在给山东省地矿局第六地质大队全体地质工作者的回信中强调：“矿产资源是经济社会发展的重要物质基础，矿产资源勘查开发事关国计民生和国家安全。”下列与我国矿产资源有关的说法错误的是：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 锡矿是我国的优势矿产资源之一</li>
+              <li><b>B.</b> 我国已在南海实现天然气水合物试采</li>
+              <li class="opt-wrong"><b>C.</b> 新疆罗布泊是我国钾盐的主要产地之一 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> 我国目前最大的金矿在云南省内 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先确认这是选非题，四个选项要找出错的那一个，别做成选对（5s）</li><li>扫能一口判定的硬知识点：锡矿是我国优势矿产、储量产量居世界前列，A 对，先放过（10s）</li><li>南海北部神狐海域 2017 年天然气水合物试采成功，B 对；新疆罗布泊是钾盐主产地之一，C 对，两项都放过（15s）</li><li>只剩 D，我国最大单体金矿是山东莱州三山岛深部的西岭金矿，不在云南，所以选 D（15s）</li></ol>
+            <div class="walk-fail">最容易错在凭<b><u>“云南出产黄金”</u></b>的模糊印象放过 D，或把<b><u>“最大”</u></b>当成无法判断的表述，其实金矿归属地是明确的硬知识。</div>
+            <div class="walk-src">源：3_1_5jrd4 · 2024国家公务员录用考试《行测》题 · 第15题 · 正确率 54.04</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_4rm48</b><span>2022年云南公务员录用考试《行测》题 · <span class="rate">57.44<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>先定选非，四个自然现象逐个比对定义，别在“哪个更像错的”上凭感觉（5s）</li><li>A 项拉尼娜就是赤道太平洋中东部海水大范围持续异常变冷，说法准确，放过（10s）</li><li>B 项龙卷风属强对流、多发于中纬度春夏，C 项凌汛是冰凌阻水致江河水位明显上涨，两项定义都对，放过（15s）</li><li>D 项把雾的定义安给了霾：雾才是水汽凝结、能见度低于 1 千米，霾是干尘粒、能见度小于 10 千米，所以选 D（15s）</li></ol>
-          <div class="walk-src">源：3_1_4rm48 · 2022云南公务员录用考试《行测》题 · 第18题 · 正确率 57.44</div>
-          <div class="walk-fail">最容易在 D 项上犹豫，因为“能见度低”确实是霾的特征，错的是“水汽凝结”和“1 千米”这两个只属于雾的指标。</div>
+          <div>
+            <div class="walk-head"><b>3_1_4rm48</b><span>2022年云南公务员录用考试《行测》题 · <span class="rate">57.44<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>下列关于自然现象的说法错误的是：</div>
+            <ol class="q-options">
+              <li><b>A.</b> 拉尼娜现象表现为赤道太平洋中东部海水大范围持续异常变冷</li>
+              <li class="opt-wrong"><b>B.</b> 龙卷风是一种强对流天气，主要出现在中纬度地区的春季和夏季 <span class="opt-tag">易错</span></li>
+              <li><b>C.</b> 凌汛是冰凌对水流产生阻力而引起的江河水位明显上涨的水文现象</li>
+              <li class="opt-right"><b>D.</b> 霾是大气中因悬浮的水汽凝结而导致能见度低于1千米的天气现象 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先定选非，四个自然现象逐个比对定义，别在<b><u>“哪个更像错的”</u></b>上凭感觉（5s）</li><li>A 项拉尼娜就是赤道太平洋中东部海水大范围持续异常变冷，说法准确，放过（10s）</li><li>B 项龙卷风属强对流、多发于中纬度春夏，C 项凌汛是冰凌阻水致江河水位明显上涨，两项定义都对，放过（15s）</li><li>D 项把雾的定义安给了霾：雾才是水汽凝结、能见度低于 1 千米，霾是干尘粒、能见度小于 10 千米，所以选 D（15s）</li></ol>
+            <div class="walk-fail">最容易在 D 项上犹豫，因为<b><u>“能见度低”</u></b>确实是霾的特征，错的是<b><u>“水汽凝结”</u></b>和<b><u>“1 千米”</u></b>这两个只属于雾的指标。</div>
+            <div class="walk-src">源：3_1_4rm48 · 2022云南公务员录用考试《行测》题 · 第18题 · 正确率 57.44</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_a72v6</b><span>2024年深圳市考公务员录用考试《行测》试题 · <span class="rate">55.37<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>先咬住“短期内”三个字，凡是讲长期效果或制度好坏的都按短期震荡来判（10s）</li><li>①货币急剧贬值、物价飞涨，正是放开价格加货币贬值的直接后果，判对（10s）</li><li>②多国愿意与该国互换货币判错，本币暴跌时资本外逃、各国是抛售而非愿意持有；③取消儿童福利救济、④政府购入及投资大幅减少，都是紧缩财政的题中之义，判对（20s）</li><li>数下来对的是 ①③④ 共 3 个，所以选 C（10s）</li></ol>
-          <div class="walk-src">源：3_1_a72v6 · 2024深圳市考公务员录用考试《行测》试题 · 第11题 · 正确率 55.37</div>
-          <div class="walk-fail">最容易把 ② 判对，误以为“货币贬值利于出口、别国就愿意互换货币”，实际短期是本币被抛售，这一条错就把答案从 3 个带偏成 4 个。</div>
+          <div>
+            <div class="walk-head"><b>3_1_a72v6</b><span>2024年深圳市考公务员录用考试《行测》试题 · <span class="rate">55.37<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>“休克疗法”是一种应对经济危机、实现经济稳定的政策组合，主要措施是实行贸易自由化，推行国有企业私有化，执行紧缩的金融和财政政策，压缩政府开支、取消能源补贴、全面放开价格，但在短期内可能会使社会经济生活产生巨大震荡甚至出现“休克状态”，某国持续面临严峻的财政赤字和居高难下的通货膨胀，该国新任总统推行“休克疗法”，下列现象，该国短期内将出现（ ）个。①货币急剧贬值、物价飞涨②多国愿意与该国互换货币③取消儿童福利及救济资金④政府购入及投资大幅减少</div>
+            <ol class="q-options">
+              <li><b>A.</b> 1</li>
+              <li class="opt-wrong"><b>B.</b> 2 <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>C.</b> 3 <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> 4</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先咬住<b><u>“短期内”</u></b>三个字，凡是讲长期效果或制度好坏的都按短期震荡来判（10s）</li><li>①货币急剧贬值、物价飞涨，正是放开价格加货币贬值的直接后果，判对（10s）</li><li>②多国愿意与该国互换货币判错，本币暴跌时资本外逃、各国是抛售而非愿意持有；③取消儿童福利救济、④政府购入及投资大幅减少，都是紧缩财政的题中之义，判对（20s）</li><li>数下来对的是 ①③④ 共 3 个，所以选 C（10s）</li></ol>
+            <div class="walk-fail">最容易把 ② 判对，误以为<b><u>“货币贬值利于出口、别国就愿意互换货币”</u></b>，实际短期是本币被抛售，这一条错就把答案从 3 个带偏成 4 个。</div>
+            <div class="walk-src">源：3_1_a72v6 · 2024深圳市考公务员录用考试《行测》试题 · 第11题 · 正确率 55.37</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_584u7</b><span>2023年陕西省公务员录用考试《行测》题 · <span class="rate">55.25<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先把避讳原则压成一句话：君王名字里的字不能直接写，要换字或缺笔（5s）</li><li>B 项彻侯改通侯，避的是汉武帝刘彻；C 项观世音改观音，避的是唐太宗李世民，两项都能对上名讳，放过（15s）</li><li>D 项天地玄黄改天地元黄，避的是康熙帝玄烨，也对上名讳，放过（10s）</li><li>回头查 A，金陵改秣陵是秦始皇东巡时泄王气、把此地贬为牧马场，“秣”是草料义，与避讳无关，所以选 A（15s）</li></ol>
-          <div class="walk-src">源：3_1_584u7 · 2023陕西省公务员录用考试《行测》题 · 第10题 · 正确率 55.25</div>
-          <div class="walk-fail">最容易错在把“改地名”一律当成避讳，甚至硬去找秦始皇名字里的字；A 项改名的动因是政治贬抑，不是避名讳。</div>
+          <div>
+            <div class="walk-head"><b>3_1_584u7</b><span>2023年陕西省公务员录用考试《行测》题 · <span class="rate">55.25<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>为了避讳，古代君王的名字在说话或行文中不能直接说出或写出，而以改字、缺字等办法处理。下列说法不符合这一避讳原则的是：</div>
+            <ol class="q-options">
+              <li class="opt-right"><b>A.</b> 秦代将金陵这一地名改为秣陵 <span class="opt-tag">正确</span></li>
+              <li><b>B.</b> 汉代将彻侯这一爵位更名为通侯</li>
+              <li class="opt-wrong"><b>C.</b> 唐代佛经中将“观世音菩萨”译为“观音菩萨” <span class="opt-tag">易错</span></li>
+              <li><b>D.</b> 清代将《千字文》首句“天地玄黄”改为“天地元黄”</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先把避讳原则压成一句话：君王名字里的字不能直接写，要换字或缺笔（5s）</li><li>B 项彻侯改通侯，避的是汉武帝刘彻；C 项观世音改观音，避的是唐太宗李世民，两项都能对上名讳，放过（15s）</li><li>D 项天地玄黄改天地元黄，避的是康熙帝玄烨，也对上名讳，放过（10s）</li><li>回头查 A，金陵改秣陵是秦始皇东巡时泄王气、把此地贬为牧马场，“秣”是草料义，与避讳无关，所以选 A（15s）</li></ol>
+            <div class="walk-fail">最容易错在把<b><u>“改地名”</u></b>一律当成避讳，甚至硬去找秦始皇名字里的字；A 项改名的动因是政治贬抑，不是避名讳。</div>
+            <div class="walk-src">源：3_1_584u7 · 2023陕西省公务员录用考试《行测》题 · 第10题 · 正确率 55.25</div>
           </div>
         </div>
       </div>
@@ -1544,31 +1968,67 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 25–35s</span>
         <h3>原题走链（4 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_hfb51</b><span>2025下半年省考第十季行测模考大赛（北京卷） · <span class="rate">53.96<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>先把古文压成白话：晒一天、冻十天，再易活的植物也长不成，说的全是“外部条件”（10s）</li><li>用“外”字定方向：A 讲量变质变、B 讲内因，方向不对先划掉（10s）</li><li>C、D 同讲外因，只比一个词——外因是“决定性”还是“非常重大”，背一句原理：内因是根本、起决定作用，外因通过内因起作用（15s）</li><li>C 把“决定性”安到外因头上是原理性硬错，排掉，所以选 D（10s）</li></ol>
-          <div class="walk-src">源：3_1_hfb51 · 2025下半年省考第十季行测模考大赛（北京卷） · 第1题 · 正确率 53.96</div>
-          <div class="walk-fail">最容易错在看见“一日”“十日”就把数字当量的积累去选 A，题干根本没讲积累到质变，讲的是外部环境能不能让事物存活。</div>
+          <div>
+            <div class="walk-head"><b>3_1_hfb51</b><span>2025下半年省考第十季行测模考大赛（北京卷） · <span class="rate">53.96<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>孟子曾有言：“虽有天下易生之物也，一日暴之，十日寒之，未有能生者也。”从哲学角度看，这句话蕴含的哲理是（ ）。</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> 事物的发展是量变与质变的统一 <span class="opt-tag">易错</span></li>
+              <li><b>B.</b> 内因是事物发展的根本原因，是第一位的原因</li>
+              <li><b>C.</b> 外因对事物的发展起决定性作用</li>
+              <li class="opt-right"><b>D.</b> 外因对事物的发展起着非常重大的作用 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先把古文压成白话：晒一天、冻十天，再易活的植物也长不成，说的全是<b><u>“外部条件”</u></b>（10s）</li><li>用“外”字定方向：A 讲量变质变、B 讲内因，方向不对先划掉（10s）</li><li>C、D 同讲外因，只比一个词——外因是<b><u>“决定性”</u></b>还是<b><u>“非常重大”</u></b>，背一句原理：内因是根本、起决定作用，外因通过内因起作用（15s）</li><li>C 把<b><u>“决定性”</u></b>安到外因头上是原理性硬错，排掉，所以选 D（10s）</li></ol>
+            <div class="walk-fail">最容易错在看见<b><u>“一日”</u></b><b><u>“十日”</u></b>就把数字当量的积累去选 A，题干根本没讲积累到质变，讲的是外部环境能不能让事物存活。</div>
+            <div class="walk-src">源：3_1_hfb51 · 2025下半年省考第十季行测模考大赛（北京卷） · 第1题 · 正确率 53.96</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_iaope</b><span>2025下半年省考第三十四季行测模考大赛（深圳卷） · <span class="rate">55.40<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>把题干切成两半：前半“同中国具体实际相结合、探索规律、回答实践课题”是从实践到认识，后半“以理论创新引领实践创新”是从认识到实践（15s）</li><li>判定答案必须同时盖住这两个方向，扫选项中只有 D“从实践到认识再到实践的螺旋式上升”是双向闭环，先锁定 D（15s）</li><li>反向验 A：A 讲“检验真理”，题干没有检验、证实、证明一类字眼，排除（10s）</li><li>再想 B 为何不行：B 只说实践是认识的来源和动力，只有单向、缺“理论回到实践”那一半；C 讲真理的具体性条件性，是适用范围问题，与题干结构无关（20s）</li><li>D 是唯一完整覆盖“实践—认识—实践”的选项，所以选 D（10s）</li></ol>
-          <div class="walk-src">源：3_1_iaope · 2025下半年省考第三十四季行测模考大赛（深圳卷） · 第2题 · 正确率 55.40</div>
-          <div class="walk-fail">最容易错选 B，因为“不断回答实践遇到的崭新课题”确实很像“实践是认识发展的动力”，但题干后半句“以理论创新引领实践创新”B 完全覆盖不到，只解释了一半就不能当“最能体现”。</div>
+          <div>
+            <div class="walk-head"><b>3_1_iaope</b><span>2025下半年省考第三十四季行测模考大赛（深圳卷） · <span class="rate">55.40<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>习近平总书记强调：“我们要坚持把马克思主义基本原理同中国具体实际相结合、同中华优秀传统文化相结合，深入探索中国式现代化建设规律，不断回答实践遇到的崭新课题，以理论创新引领实践创新。”这句话最能体现的马克思主义哲学原理是（ ）。</div>
+            <ol class="q-options">
+              <li><b>A.</b> 实践是检验认识真理性的唯一标准</li>
+              <li class="opt-wrong"><b>B.</b> 实践是认识的来源和发展动力 <span class="opt-tag">易错</span></li>
+              <li><b>C.</b> 真理是具体的、有条件的</li>
+              <li class="opt-right"><b>D.</b> 认识运动是一个从实践到认识再到实践的螺旋式上升过程 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>把题干切成两半：前半“同中国具体实际相结合、探索规律、回答实践课题”是从实践到认识，后半<b><u>“以理论创新引领实践创新”</u></b>是从认识到实践（15s）</li><li>判定答案必须同时盖住这两个方向，扫选项中只有 D<b><u>“从实践到认识再到实践的螺旋式上升”</u></b>是双向闭环，先锁定 D（15s）</li><li>反向验 A：A 讲<b><u>“检验真理”</u></b>，题干没有检验、证实、证明一类字眼，排除（10s）</li><li>再想 B 为何不行：B 只说实践是认识的来源和动力，只有单向、缺<b><u>“理论回到实践”</u></b>那一半；C 讲真理的具体性条件性，是适用范围问题，与题干结构无关（20s）</li><li>D 是唯一完整覆盖<b><u>“实践—认识—实践”</u></b>的选项，所以选 D（10s）</li></ol>
+            <div class="walk-fail">最容易错选 B，因为<b><u>“不断回答实践遇到的崭新课题”</u></b>确实很像<b><u>“实践是认识发展的动力”</u></b>，但题干后半句<b><u>“以理论创新引领实践创新”</u></b>B 完全覆盖不到，只解释了一半就不能当<b><u>“最能体现”</u></b>。</div>
+            <div class="walk-src">源：3_1_iaope · 2025下半年省考第三十四季行测模考大赛（深圳卷） · 第2题 · 正确率 55.40</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_cs3p2</b><span>2025年云南省公务员录用考试《行测》题 · <span class="rate">51.86<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-          <ol class="walk-steps"><li>先不读题干案例，只扫四个观点判真伪：③“生产关系对生产力具有决定作用”把决定关系说反了，生产力才决定生产关系，秒删含③的 C、D（15s）</li><li>剩下 A（①②）和 B（①④），比较②和④谁在题干里有落点（10s）</li><li>回题干抓动作词：“深化经济体制、科技体制等改革”“打通堵点卡点”，这些说的都是靠改革推动生产力，正好对上④“改革是社会主义社会发展的直接动力”（20s）</li><li>②讲经济基础变更引起上层建筑变革，题干通篇只有生产力与生产关系、只字未提上层建筑，属于“说法对但没体现”，排 A（15s）</li><li>①“生产关系必须与生产力发展要求相适应”由“形成与之相适应的新型生产关系”直接印证，①④齐了，所以选 B（10s）</li></ol>
-          <div class="walk-src">源：3_1_cs3p2 · 2025云南省公务员录用考试《行测》题 · 第7题 · 正确率 51.86</div>
-          <div class="walk-fail">最容易卡在②上：它本身表述完全正确，很多人见“正确”就留下并选 A，但本题要的是“最直接体现”，②在题干里找不到经济基础、上层建筑的任何对应词，属于文对题不对。</div>
+          <div>
+            <div class="walk-head"><b>3_1_cs3p2</b><span>2025年云南省公务员录用考试《行测》题 · <span class="rate">51.86<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
+            <div class="q-stem"><b>【题干】</b>发展新质生产力，必须进一步全面深化改革，形成与之相适应的新型生产关系。要深化经济体制、科技体制等改革，着力打通束缚新质生产力发展的堵点卡点，建立高标准市场体系，创新生产要素配置方式，让各类先进优质生产要素向发展新质生产力顺畅流动，这最直接体现了马克思主义的哪些基本观点？①生产关系必须与生产力发展要求相适应，才能促进生产力发展②经济基础的变更必然引起上层建筑的变革，并决定其变革方向③生产关系对生产力发展具有决定作用④改革是社会主义社会发展的直接动力</div>
+            <ol class="q-options">
+              <li class="opt-wrong"><b>A.</b> ①② <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> ①④ <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> ②③</li>
+              <li><b>D.</b> ②④</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先不读题干案例，只扫四个观点判真伪：③<b><u>“生产关系对生产力具有决定作用”</u></b>把决定关系说反了，生产力才决定生产关系，秒删含③的 C、D（15s）</li><li>剩下 A（①②）和 B（①④），比较②和④谁在题干里有落点（10s）</li><li>回题干抓动作词：<b><u>“深化经济体制、科技体制等改革”</u></b><b><u>“打通堵点卡点”</u></b>，这些说的都是靠改革推动生产力，正好对上④<b><u>“改革是社会主义社会发展的直接动力”</u></b>（20s）</li><li>②讲经济基础变更引起上层建筑变革，题干通篇只有生产力与生产关系、只字未提上层建筑，属于<b><u>“说法对但没体现”</u></b>，排 A（15s）</li><li>①<b><u>“生产关系必须与生产力发展要求相适应”</u></b>由<b><u>“形成与之相适应的新型生产关系”</u></b>直接印证，①④齐了，所以选 B（10s）</li></ol>
+            <div class="walk-fail">最容易卡在②上：它本身表述完全正确，很多人见<b><u>“正确”</u></b>就留下并选 A，但本题要的是<b><u>“最直接体现”</u></b>，②在题干里找不到经济基础、上层建筑的任何对应词，属于文对题不对。</div>
+            <div class="walk-src">源：3_1_cs3p2 · 2025云南省公务员录用考试《行测》题 · 第7题 · 正确率 51.86</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_dpojd</b><span>2025上半年省考第九季行测模考大赛（河北卷） · <span class="rate">56.95<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
-          <ol class="walk-steps"><li>先给题干定调：抓“诞生于……现实基础”“离不开”两个词，判定主题是意识依赖客观存在，而不是意识去改造世界（15s）</li><li>扫选项里的硬伤：C“意识具有直接现实性”错，直接现实性是实践的特点，意识只能通过实践转化，秒排（10s）</li><li>D“意识……可以促进社会发展”漏了“正确”这层限定，错误意识会阻碍社会发展，绝对化表述，排掉（10s）</li><li>剩 A、B：A“自觉选择性”讲反映的能动特点，题干讲的是来源和基础，方向不对，排 A（15s）</li><li>B“意识的形成离不开被反映的客观存在”与“诞生于现实基础之上”逐字对应，所以选 B（10s）</li></ol>
-          <div class="walk-src">源：3_1_dpojd · 2025上半年省考第九季行测模考大赛（河北卷） · 第1题 · 正确率 56.95</div>
-          <div class="walk-fail">最容易错选 A，因为“科幻”看着很像是意识的选择性和创造性，但题干的落点是“诞生于”“离不开”这种来源表述，考的是物质决定意识，不是意识的能动性。</div>
+          <div>
+            <div class="walk-head"><b>3_1_dpojd</b><span>2025上半年省考第九季行测模考大赛（河北卷） · <span class="rate">56.95<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
+            <div class="q-stem"><b>【题干】</b>无论是科幻文学，还是科幻影视，都诞生于科学技术不断发展这一现实基础之上。纵观两百年世界科幻文艺发展史，科幻文艺的每一次突破都离不开科学技术的跨越式发展。这体现了（ ）。</div>
+            <ol class="q-options">
+              <li><b>A.</b> 人的意识活动具有自觉选择性</li>
+              <li class="opt-right"><b>B.</b> 意识的形成离不开被反映的客观存在 <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> 意识具有直接现实性，能够能动地改造世界</li>
+              <li class="opt-wrong"><b>D.</b> 意识是人脑对客观存在的反映，可以促进社会发展 <span class="opt-tag">易错</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先给题干定调：抓<b><u>“诞生于……现实基础”</u></b><b><u>“离不开”</u></b>两个词，判定主题是意识依赖客观存在，而不是意识去改造世界（15s）</li><li>扫选项里的硬伤：C<b><u>“意识具有直接现实性”</u></b>错，直接现实性是实践的特点，意识只能通过实践转化，秒排（10s）</li><li>D<b><u>“意识……可以促进社会发展”</u></b>漏了<b><u>“正确”</u></b>这层限定，错误意识会阻碍社会发展，绝对化表述，排掉（10s）</li><li>剩 A、B：A<b><u>“自觉选择性”</u></b>讲反映的能动特点，题干讲的是来源和基础，方向不对，排 A（15s）</li><li>B<b><u>“意识的形成离不开被反映的客观存在”</u></b>与<b><u>“诞生于现实基础之上”</u></b>逐字对应，所以选 B（10s）</li></ol>
+            <div class="walk-fail">最容易错选 A，因为<b><u>“科幻”</u></b>看着很像是意识的选择性和创造性，但题干的落点是<b><u>“诞生于”</u></b><b><u>“离不开”</u></b>这种来源表述，考的是物质决定意识，不是意识的能动性。</div>
+            <div class="walk-src">源：3_1_dpojd · 2025上半年省考第九季行测模考大赛（河北卷） · 第1题 · 正确率 56.95</div>
           </div>
         </div>
       </div>
@@ -1587,31 +2047,67 @@ body.lb-open{overflow:hidden}
         <span class="timeline">时间 25–35s</span>
         <h3>原题走链（4 道）</h3>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_5ka4c</b><span>2024年山东省公务员录用考试《行测》试题 · <span class="rate">55.06<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
-          <ol class="walk-steps"><li>先看选项结构，找出被多数选项共用的 ②，把它当成主攻点，别四条平均用力（10s）</li><li>①“休戚与共、荣辱与共、生死与共、命运与共”四个“与共”是铸牢共同体意识的标配表述，判对（10s）</li><li>死抠 ②：前半句“坚持各民族自信和独立”把民族工作引向“独立”，与共同团结奋斗、共同繁荣发展的方向相悖；后半句“物质和文化基础”也不对，原文是为铸牢共同体意识奠定坚实的“精神和文化基础”，判错（20s）</li><li>② 一错，含 ② 的 A、C、D 全排，只剩 B；再用 ③“以中华民族大团结促进中国式现代化”、④“构筑中华民族共有精神家园”反查都对，所以选 B（10s）</li></ol>
-          <div class="walk-src">源：3_1_5ka4c · 2024山东省公务员录用考试《行测》试题 · 第3题 · 正确率 55.06</div>
-          <div class="walk-fail">最容易错在 ② 上犹豫，因为“各民族自信”听着很正，错的是“独立”这个方向和“物质和文化基础”这个搭配，任一处都能判死。</div>
+          <div>
+            <div class="walk-head"><b>3_1_5ka4c</b><span>2024年山东省公务员录用考试《行测》试题 · <span class="rate">55.06<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
+            <div class="q-stem"><b>【题干】</b>铸牢中华民族共同体意识、推进新时代党的民族工作高质量发展，是全国各族人民的共同任务。关于铸牢中华民族共同体意识，下列表述正确的是：①引导各族人民牢固树立休戚与共、荣辱与共、生死与共、命运与共的共同体理念②坚持各民族自信和独立，为铸牢中华民族共同体意识奠定坚实物质和文化基础③促进各民族广泛交往交流交融，以中华民族大团结促进中国式现代化④着眼建设中华民族现代文明，不断构筑中华民族共有精神家园</div>
+            <ol class="q-options">
+              <li><b>A.</b> ①②④</li>
+              <li class="opt-right"><b>B.</b> ①③④ <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> ②③④</li>
+              <li class="opt-wrong"><b>D.</b> ①②③ <span class="opt-tag">易错</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先看选项结构，找出被多数选项共用的 ②，把它当成主攻点，别四条平均用力（10s）</li><li>①<b><u>“休戚与共、荣辱与共、生死与共、命运与共”</u></b>四个<b><u>“与共”</u></b>是铸牢共同体意识的标配表述，判对（10s）</li><li>死抠 ②：前半句<b><u>“坚持各民族自信和独立”</u></b>把民族工作引向<b><u>“独立”</u></b>，与共同团结奋斗、共同繁荣发展的方向相悖；后半句<b><u>“物质和文化基础”</u></b>也不对，原文是为铸牢共同体意识奠定坚实的<b><u>“精神和文化基础”</u></b>，判错（20s）</li><li>② 一错，含 ② 的 A、C、D 全排，只剩 B；再用 ③<b><u>“以中华民族大团结促进中国式现代化”</u></b>、④<b><u>“构筑中华民族共有精神家园”</u></b>反查都对，所以选 B（10s）</li></ol>
+            <div class="walk-fail">最容易错在 ② 上犹豫，因为<b><u>“各民族自信”</u></b>听着很正，错的是<b><u>“独立”</u></b>这个方向和<b><u>“物质和文化基础”</u></b>这个搭配，任一处都能判死。</div>
+            <div class="walk-src">源：3_1_5ka4c · 2024山东省公务员录用考试《行测》试题 · 第3题 · 正确率 55.06</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_ig17f</b><span>2026下半年省考第十七季行测模考大赛（广东卷） · <span class="rate">55.52<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
-          <ol class="walk-steps"><li>先在草稿上写“①②③④⑤”，把题型钉成数个数，避免做成选一项（5s）</li><li>扫 ①②③④ 四条主干：惠民生与促消费、投资于物与投资于人；高水平科技自立自强、数字中国；新版市场准入负面清单、整治招标投标；农业转移人口市民化、新型城镇化试点，四条都是报告原话，判对（20s）</li><li>⑤ 单独抠细节，前三个短句（教育强国三年行动计划、高校学科专业调整）都对，只有“加强城区普通高中建设”里的“城区”有问题，原文是“县域普通高中”（15s）</li><li>⑤ 因一个词判错，正确的只剩 ①②③④ 共 4 项，所以选 C（10s）</li></ol>
-          <div class="walk-src">源：3_1_ig17f · 2026下半年省考第十七季行测模考大赛（广东卷） · 第5题 · 正确率 55.52</div>
-          <div class="walk-fail">最容易错在把 ⑤ 整条放过，⑤ 前半段全是原文，只有“城区/县域”一字之差，一旦放过就会数成 5 项选 D。</div>
+          <div>
+            <div class="walk-head"><b>3_1_ig17f</b><span>2026下半年省考第十七季行测模考大赛（广东卷） · <span class="rate">55.52<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
+            <div class="q-stem"><b>【题干】</b>新征程上，我国坚持稳中求进工作总基调，全面落实党中央各项决策部署，统筹推进改革发展稳定各项工作，着力推动高质量发展、做强国内大循环，推动中国式现代化迈出坚实步伐。下列相关表述正确的有（ ）。①坚持惠民生和促消费、投资于物和投资于人紧密结合，大力提振消费②着眼高水平科技自立自强，加强原始创新和关键核心技术攻关，深入推进数字中国建设③出台新版市场准入负面清单，系统整治招标投标、招商引资领域突出问题④促进城乡区域协调发展，落实好农业转移人口市民化政策，开展新型城镇化试点⑤推进教育强国建设三年行动计划，推动高校学科专业调整，加强城区普通高中建设</div>
+            <ol class="q-options">
+              <li><b>A.</b> 2项</li>
+              <li><b>B.</b> 3项</li>
+              <li class="opt-right"><b>C.</b> 4项 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>D.</b> 5项 <span class="opt-tag">易错</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先在草稿上写<b><u>“①②③④⑤”</u></b>，把题型钉成数个数，避免做成选一项（5s）</li><li>扫 ①②③④ 四条主干：惠民生与促消费、投资于物与投资于人；高水平科技自立自强、数字中国；新版市场准入负面清单、整治招标投标；农业转移人口市民化、新型城镇化试点，四条都是报告原话，判对（20s）</li><li>⑤ 单独抠细节，前三个短句（教育强国三年行动计划、高校学科专业调整）都对，只有<b><u>“加强城区普通高中建设”</u></b>里的<b><u>“城区”</u></b>有问题，原文是<b><u>“县域普通高中”</u></b>（15s）</li><li>⑤ 因一个词判错，正确的只剩 ①②③④ 共 4 项，所以选 C（10s）</li></ol>
+            <div class="walk-fail">最容易错在把 ⑤ 整条放过，⑤ 前半段全是原文，只有<b><u>“城区/县域”</u></b>一字之差，一旦放过就会数成 5 项选 D。</div>
+            <div class="walk-src">源：3_1_ig17f · 2026下半年省考第十七季行测模考大赛（广东卷） · 第5题 · 正确率 55.52</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_d8ibl</b><span>2025下半年省考第二季行测模考大赛（深圳卷） · <span class="rate">54.90<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
-          <ol class="walk-steps"><li>先定选非，四个选项里只找错的那一个，别顺手选对的（5s）</li><li>扫 A、B、C：共商共建共享是原则、互联互通是主线、硬联通软联通心联通是协调推进机制，三项都是共建“一带一路”的原话，放过（15s）</li><li>盯住 D 的三连短语，本次座谈会讲的是“坚持稳中求进工作总基调”，“以进促稳、先立后破”是中央经济工作会议的表述，多出来的两个短语属拼贴（20s）</li><li>三项正确、一项错误，所以选 D（10s）</li></ol>
-          <div class="walk-src">源：3_1_d8ibl · 2025下半年省考第二季行测模考大赛（深圳卷） · 第3题 · 正确率 54.90</div>
-          <div class="walk-fail">最容易错在看见“稳中求进”四个字确实出现过就整条放过，错的是后面硬加的两个短语，把别的会议的套话嫁接过来了。</div>
+          <div>
+            <div class="walk-head"><b>3_1_d8ibl</b><span>2025下半年省考第二季行测模考大赛（深圳卷） · <span class="rate">54.90<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 B</span></span></div>
+            <div class="q-stem"><b>【题干】</b>2024年12月2日，中共中央总书记、国家主席、中央军委主席习近平在北京出席第四次“一带一路”建设工作座谈会并发表重要讲话。关于共建“一带一路”，下列说法错误的是（ ）。</div>
+            <ol class="q-options">
+              <li><b>A.</b> 要始终坚持共商共建共享的原则</li>
+              <li class="opt-wrong"><b>B.</b> 要以互联互通为主线 <span class="opt-tag">易错</span></li>
+              <li><b>C.</b> 要完善“硬联通”、“软联通”、“心联通”协调推进机制</li>
+              <li class="opt-right"><b>D.</b> 要坚持稳中求进、以进促稳、先立后破工作总基调 <span class="opt-tag">正确</span></li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先定选非，四个选项里只找错的那一个，别顺手选对的（5s）</li><li>扫 A、B、C：共商共建共享是原则、互联互通是主线、硬联通软联通心联通是协调推进机制，三项都是共建<b><u>“一带一路”</u></b>的原话，放过（15s）</li><li>盯住 D 的三连短语，本次座谈会讲的是<b><u>“坚持稳中求进工作总基调”</u></b>，<b><u>“以进促稳、先立后破”</u></b>是中央经济工作会议的表述，多出来的两个短语属拼贴（20s）</li><li>三项正确、一项错误，所以选 D（10s）</li></ol>
+            <div class="walk-fail">最容易错在看见<b><u>“稳中求进”</u></b>四个字确实出现过就整条放过，错的是后面硬加的两个短语，把别的会议的套话嫁接过来了。</div>
+            <div class="walk-src">源：3_1_d8ibl · 2025下半年省考第二季行测模考大赛（深圳卷） · 第3题 · 正确率 54.90</div>
           </div>
         </div>
         <div class="walk noble">
-          <div><div class="walk-head"><b>3_1_4rmp7</b><span>2022年湖北省公务员录用考试《行测》题 · <span class="rate">54.85<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
-          <ol class="walk-steps"><li>先定选非，再抓题干那句“谁有本事谁就揭榜”，这句话本身就排除了指定唯一对象的做法（10s）</li><li>C 项“以科研成果兑现的科研经费投入体制”正是科技悬赏制的定义，D 项“政府搭台、创新唱戏”是整合各方资源的常见表述，两项都对，放过（15s）</li><li>B 项“支持企业牵头组建创新联合体揭榜攻关”符合龙头企业牵头、多主体协同的方向，也对，放过（10s）</li><li>回看 A：“一对一”只是多数省份的默认做法，实践中还鼓励组建联合体共同攻关，需求方定不了唯一对象时可 2-3 家“赛马”，说成“一对一”的揭榜方式就不准确，所以选 A（15s）</li></ol>
-          <div class="walk-src">源：3_1_4rmp7 · 2022湖北省公务员录用考试《行测》题 · 第14题 · 正确率 54.85</div>
-          <div class="walk-fail">最容易错在把 A 判成“正确”，因为“一对一”确实存在，但题目问的是不准确，把它写成固定唯一的揭榜方式就与“赛马”制相悖。</div>
+          <div>
+            <div class="walk-head"><b>3_1_4rmp7</b><span>2022年湖北省公务员录用考试《行测》题 · <span class="rate">54.85<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
+            <div class="q-stem"><b>【题干】</b>“揭榜挂帅”是通过高额悬赏征集科技创新成果，把需要攻关的科研项目张榜，谁有本事谁就揭榜。这充分体现了国家对改革科研项目管理模式、提高科技创新支撑能力的高度重视。下列说法不准确的是：</div>
+            <ol class="q-options">
+              <li class="opt-right"><b>A.</b> 采取“一对一”的揭榜方式 <span class="opt-tag">正确</span></li>
+              <li><b>B.</b> 支持企业牵头组建的创新联合体“揭榜攻关”</li>
+              <li class="opt-wrong"><b>C.</b> 是一种以科研成果来兑现的科研经费投入体制 <span class="opt-tag">易错</span></li>
+              <li><b>D.</b> “政府搭台、创新唱戏”将各自的资源优势有力整合到一起</li>
+            </ol>
+            <div class="walk-label">分步走链</div>
+            <ol class="walk-steps"><li>先定选非，再抓题干那句<b><u>“谁有本事谁就揭榜”</u></b>，这句话本身就排除了指定唯一对象的做法（10s）</li><li>C 项<b><u>“以科研成果兑现的科研经费投入体制”</u></b>正是科技悬赏制的定义，D 项<b><u>“政府搭台、创新唱戏”</u></b>是整合各方资源的常见表述，两项都对，放过（15s）</li><li>B 项<b><u>“支持企业牵头组建创新联合体揭榜攻关”</u></b>符合龙头企业牵头、多主体协同的方向，也对，放过（10s）</li><li>回看 A：<b><u>“一对一”</u></b>只是多数省份的默认做法，实践中还鼓励组建联合体共同攻关，需求方定不了唯一对象时可 2-3 家<b><u>“赛马”</u></b>，说成<b><u>“一对一”</u></b>的揭榜方式就不准确，所以选 A（15s）</li></ol>
+            <div class="walk-fail">最容易错在把 A 判成<b><u>“正确”</u></b>，因为<b><u>“一对一”</u></b>确实存在，但题目问的是不准确，把它写成固定唯一的揭榜方式就与<b><u>“赛马”</u></b>制相悖。</div>
+            <div class="walk-src">源：3_1_4rmp7 · 2022湖北省公务员录用考试《行测》题 · 第14题 · 正确率 54.85</div>
           </div>
         </div>
       </div>
