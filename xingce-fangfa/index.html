@@ -205,6 +205,69 @@ tr:last-child td{border-bottom:0}
 .walk-fail{font-size:11.5px;color:var(--warn);margin-top:5px}
 /* 非图推走链：无原题图时用单列，避免左侧 300px 空白 */
 .walk.noble{grid-template-columns:1fr}
+/* ===== 填空位占位块（用户要求：可见下划线 + 三空留横向） ===== */
+.blank{
+  display:inline-block;
+  height:1.15em;
+  min-width:2.6em;
+  border-bottom:2px solid var(--brand);
+  margin:0 4px;
+  vertical-align:-0.18em;
+  position:relative;
+  background:linear-gradient(to bottom, transparent 62%, rgba(63,93,83,.07) 62%);
+  border-radius:2px 2px 0 0;
+}
+/* 三空及以上：加宽，给横向留白 */
+.blank[data-wide]{
+  min-width:3.4em;
+}
+/* 序号角标挂右下，不占行高 */
+.blank::after{
+  content:attr(data-no);
+  position:absolute;
+  right:-2px;
+  bottom:-1.22em;
+  font-size:9.5px;
+  line-height:1;
+  color:var(--brand);
+  font-family:"Cascadia Mono",Consolas,monospace;
+  white-space:nowrap;
+  opacity:.85;
+}
+/* 题干有空位时，整体行高加大，避免角标压住下一行 */
+.q-stem.has-blank{
+  line-height:2.5;
+  padding-bottom:14px;
+}
+.blank-hint{
+  font-size:11.5px;
+  color:var(--brand);
+  background:rgba(63,93,83,.06);
+  border-left:3px solid var(--brand);
+  border-radius:4px;
+  padding:4px 9px;
+  margin:2px 0 8px;
+}
+/* 多空题的选项词元标注 */
+.tokwrap{display:inline-flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.tok{display:inline-flex;align-items:baseline;gap:4px}
+.tok i{
+  font-style:normal;
+  font-size:9.5px;
+  color:var(--brand);
+  background:rgba(63,93,83,.1);
+  border-radius:3px;
+  padding:1px 4px;
+  font-family:"Cascadia Mono",Consolas,monospace;
+  transform:translateY(-1px);
+}
+@media(max-width:760px){
+  .blank{min-width:2.2em;margin:0 3px}
+  .blank[data-wide]{min-width:2.8em}
+  .q-stem.has-blank{line-height:2.7}
+  .tokwrap{gap:6px}
+}
+
 /* 原题完整展示 */
 .q-material{font-size:13px;line-height:1.75;color:var(--ink2);background:var(--bg3,#F7F5EF);border-left:3px solid var(--line);border-radius:6px;padding:9px 11px;margin:7px 0}
 .q-stem{font-size:13.5px;line-height:1.8;color:var(--ink);margin:8px 0;padding:9px 11px;background:var(--panel);border-radius:6px;border:1px solid var(--line)}
@@ -963,12 +1026,13 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_9q7p9</b><span>2025年天津市公务员录用考试《行测》题 · <span class="rate">55.98<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 D</span></span></div>
-            <div class="q-stem"><b>【题干】</b>当前不少城市对文化遗产的保护进入了旅游驱动的误区。过度地商业化，将原始居民全部迁出，充满活力的生产、生活场景 ，文化遗产成为 的遗址，失去鲜活的魅力。依次填入画横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>当前不少城市对文化遗产的保护进入了旅游驱动的误区。过度地商业化，将原始居民全部迁出，充满活力的生产、生活场景<span class="blank" data-no="空1"></span>，文化遗产成为<span class="blank" data-no="空2"></span>的遗址，失去鲜活的魅力。依次填入画横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>2</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
-              <li><b>A.</b> 转瞬即逝 停滞</li>
-              <li><b>B.</b> 无影无踪 陈腐</li>
-              <li class="opt-right"><b>C.</b> 消失殆尽 静态 <span class="opt-tag">正确</span></li>
-              <li class="opt-wrong"><b>D.</b> 烟消云散 呆板 <span class="opt-tag">易错</span></li>
+              <li><b>A.</b> <span class="tokwrap"><span class="tok"><i>空1</i>转瞬即逝</span><span class="tok"><i>空2</i>停滞</span></span></li>
+              <li><b>B.</b> <span class="tokwrap"><span class="tok"><i>空1</i>无影无踪</span><span class="tok"><i>空2</i>陈腐</span></span></li>
+              <li class="opt-right"><b>C.</b> <span class="tokwrap"><span class="tok"><i>空1</i>消失殆尽</span><span class="tok"><i>空2</i>静态</span></span> <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>D.</b> <span class="tokwrap"><span class="tok"><i>空1</i>烟消云散</span><span class="tok"><i>空2</i>呆板</span></span> <span class="opt-tag">易错</span></li>
             </ol>
             <div class="walk-label">分步走链</div>
             <ol class="walk-steps"><li>先看第一空前面的原因句<b><u>“将原始居民全部迁出”</u></b>，判定第一空要填这一原因造成的结果，即<b><u>“场景消失”</u></b>义（10s）</li><li>用<b><u>“消失”</u></b>义筛成语，<b><u>“转瞬即逝”</u></b>只强调时间短、不含消失至没有的意思，先排掉，其余三个暂留（15s）</li><li>第二空不纠缠词义，先抓<b>搭配对象</b>是<b><u>“遗址”</u></b>，把只能形容人的<b><u>“呆板”</u></b>和形容思想制度的<b><u>“陈腐”</u></b>直接划掉（20s）</li><li>只剩<b><u>“静态”</u></b>能与<b><u>“遗址”</u></b>搭配，且正好与后文<b><u>“失去鲜活的魅力”</u></b>构成动静对照，所以选 C（10s）</li></ol>
@@ -979,12 +1043,13 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_cmf3u</b><span>2025年江苏省公务员录用考试《行测》题（C类） · <span class="rate">53.78<small>%正确率</small></span> · <span class="ans-pill">答案 C</span> · <span class="wrong-pill">易错 B</span></span></div>
-            <div class="q-stem"><b>【题干】</b>中国探月20年，拉近了 与普通公众生活的距离。当一粒棉花种子在月球上生根发芽，当月球车玉兔微博下满是网友的祝福，当中小学教材换上了崭新的中国月面图······越来越多的人与探月工程的某项成果、某个侧面 ，一个共识在人们心中不断 ：我们离月球并不遥远！依次填入画横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>中国探月20年，拉近了<span class="blank" data-no="空1" data-wide="1"></span>与普通公众生活的距离。当一粒棉花种子在月球上生根发芽，当月球车玉兔微博下满是网友的祝福，当中小学教材换上了崭新的中国月面图······越来越多的人与探月工程的某项成果、某个侧面<span class="blank" data-no="空2" data-wide="1"></span>，一个共识在人们心中不断<span class="blank" data-no="空3" data-wide="1"></span>：我们离月球并不遥远！依次填入画横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>3</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
-              <li><b>A.</b> 碧海青天 邂逅相逢 汇集</li>
-              <li class="opt-wrong"><b>B.</b> 浩瀚苍穹 心心相印 回响 <span class="opt-tag">易错</span></li>
-              <li class="opt-right"><b>C.</b> 星辰大海 不期而遇 凝聚 <span class="opt-tag">正确</span></li>
-              <li><b>D.</b> 蟾宫折桂 情投意合 激荡</li>
+              <li><b>A.</b> <span class="tokwrap"><span class="tok"><i>空1</i>碧海青天</span><span class="tok"><i>空2</i>邂逅相逢</span><span class="tok"><i>空3</i>汇集</span></span></li>
+              <li class="opt-wrong"><b>B.</b> <span class="tokwrap"><span class="tok"><i>空1</i>浩瀚苍穹</span><span class="tok"><i>空2</i>心心相印</span><span class="tok"><i>空3</i>回响</span></span> <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>C.</b> <span class="tokwrap"><span class="tok"><i>空1</i>星辰大海</span><span class="tok"><i>空2</i>不期而遇</span><span class="tok"><i>空3</i>凝聚</span></span> <span class="opt-tag">正确</span></li>
+              <li><b>D.</b> <span class="tokwrap"><span class="tok"><i>空1</i>蟾宫折桂</span><span class="tok"><i>空2</i>情投意合</span><span class="tok"><i>空3</i>激荡</span></span></li>
             </ol>
             <div class="walk-label">分步走链</div>
             <ol class="walk-steps"><li>先不读选项，标出第二空要接<b><u>“某项成果、某个侧面”</u></b>、第三空要搭配<b><u>“共识”</u></b>，明确这两空是抓手（10s）</li><li>第一空用主体排除：主语是中国探月、对象是太空，<b><u>“碧海青天”</u></b>写海天景色与女子忠贞、<b><u>“蟾宫折桂”</u></b>喻科举得中，秒排 <b><u>A</u></b>、D（15s）</li><li>第二空比<b><u>“心心相印”</u></b>和<b><u>“不期而遇”</u></b>，前者只能配人、配不了<b><u>“成果”</u></b><b><u>“侧面”</u></b>这类物，据此排掉 B（20s）</li><li>第三空代入验证<b><u>“凝聚共识”</u></b>是唯一成立的固定搭配，另外三个都拼不成，所以选 C（10s）</li></ol>
@@ -995,12 +1060,13 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_5ka43</b><span>2024年山东省公务员录用考试《行测》试题 · <span class="rate">53.63<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
-            <div class="q-stem"><b>【题干】</b>铁路是国民经济大动脉。一条铁路线的 ，往往折射出一个地区发展变迁和现代化的崛起步伐。在山东发展史上，百廿胶济，就是这样一条担纲主动脉的铁路线。可以说，一部百廿胶济发展史，是一部铁路交通变迁史，更是一部 的沿线经济文化发展史。依次填入画横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>铁路是国民经济大动脉。一条铁路线的<span class="blank" data-no="空1"></span>，往往折射出一个地区发展变迁和现代化的崛起步伐。在山东发展史上，百廿胶济，就是这样一条担纲主动脉的铁路线。可以说，一部百廿胶济发展史，是一部铁路交通变迁史，更是一部<span class="blank" data-no="空2"></span>的沿线经济文化发展史。依次填入画横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>2</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
-              <li class="opt-wrong"><b>A.</b> 贯通 气势磅礴 <span class="opt-tag">易错</span></li>
-              <li><b>B.</b> 延展 活力四射</li>
-              <li><b>C.</b> 演变 流光溢彩</li>
-              <li class="opt-right"><b>D.</b> 嬗变 波澜壮阔 <span class="opt-tag">正确</span></li>
+              <li class="opt-wrong"><b>A.</b> <span class="tokwrap"><span class="tok"><i>空1</i>贯通</span><span class="tok"><i>空2</i>气势磅礴</span></span> <span class="opt-tag">易错</span></li>
+              <li><b>B.</b> <span class="tokwrap"><span class="tok"><i>空1</i>延展</span><span class="tok"><i>空2</i>活力四射</span></span></li>
+              <li><b>C.</b> <span class="tokwrap"><span class="tok"><i>空1</i>演变</span><span class="tok"><i>空2</i>流光溢彩</span></span></li>
+              <li class="opt-right"><b>D.</b> <span class="tokwrap"><span class="tok"><i>空1</i>嬗变</span><span class="tok"><i>空2</i>波澜壮阔</span></span> <span class="opt-tag">正确</span></li>
             </ol>
             <div class="walk-label">分步走链</div>
             <ol class="walk-steps"><li>抓第一空的解释句<b><u>“发展变迁”</u></b><b><u>“变迁史”</u></b>，判定第一空必须含<b><u>“变化”</u></b>义（10s）</li><li>拿<b><u>“变化”</u></b>义一刀切：<b><u>“贯通”</u></b>是连接、<b><u>“延展”</u></b>是延长伸展，都不含变化，A、B 全排（15s）</li><li>第二空看<b>搭配对象</b><b><u>“发展史”</u></b>加上前文<b><u>“大动脉”</u></b><b><u>“主动脉”</u></b>的分量，要的是规模宏大类词，<b><u>“流光溢彩”</u></b>只写光彩好看、与“史”不搭，排 C（20s）</li><li>剩<b><u>“嬗变”</u></b>对<b><u>“变迁”</u></b>、<b><u>“波澜壮阔”</u></b>对<b><u>“大动脉”</u></b>的宏大规模，两空都对得上，所以选 D（10s）</li></ol>
@@ -1011,12 +1077,13 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_fqc9n</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">53.97<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-            <div class="q-stem"><b>【题干】</b>县域是连接农村和城市的重要 ，也是未来城镇化的重要载体。然而，虽然县域流动户籍限制取消，农民工落户意愿却并未显著 。究其原因，县域产业聚集力弱、公共服务滞后等因素，都影响了其落户意愿。因此，进一步提升县域农民工市民化质量，关键是 “稳定就业难、体面居住难、安心落户难”三大难题。依次填入画横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>县域是连接农村和城市的重要<span class="blank" data-no="空1" data-wide="1"></span>，也是未来城镇化的重要载体。然而，虽然县域流动户籍限制取消，农民工落户意愿却并未显著<span class="blank" data-no="空2" data-wide="1"></span>。究其原因，县域产业聚集力弱、公共服务滞后等因素，都影响了其落户意愿。因此，进一步提升县域农民工市民化质量，关键是<span class="blank" data-no="空3" data-wide="1"></span>“稳定就业难、体面居住难、安心落户难”三大难题。依次填入画横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>3</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
-              <li class="opt-wrong"><b>A.</b> 纽带 增加 解决 <span class="opt-tag">易错</span></li>
-              <li class="opt-right"><b>B.</b> 枢纽 增强 破解 <span class="opt-tag">正确</span></li>
-              <li><b>C.</b> 关节 加强 分解</li>
-              <li><b>D.</b> 节点 上涨 解答</li>
+              <li class="opt-wrong"><b>A.</b> <span class="tokwrap"><span class="tok"><i>空1</i>纽带</span><span class="tok"><i>空2</i>增加</span><span class="tok"><i>空3</i>解决</span></span> <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> <span class="tokwrap"><span class="tok"><i>空1</i>枢纽</span><span class="tok"><i>空2</i>增强</span><span class="tok"><i>空3</i>破解</span></span> <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> <span class="tokwrap"><span class="tok"><i>空1</i>关节</span><span class="tok"><i>空2</i>加强</span><span class="tok"><i>空3</i>分解</span></span></li>
+              <li><b>D.</b> <span class="tokwrap"><span class="tok"><i>空1</i>节点</span><span class="tok"><i>空2</i>上涨</span><span class="tok"><i>空3</i>解答</span></span></li>
             </ol>
             <div class="walk-label">分步走链</div>
             <ol class="walk-steps"><li>看到「依次填入」别按顺序做，先扫三个空的<b>搭配对象</b>，选中「___难题」这个最硬的空当突破口（10s）</li><li>拿「难题」当尺子筛：解决、破解都能配，「分解」是拆整体、「解答」是回答疑问，C、D 直接划掉（15s）</li><li>第一空回看「重要___」且后文重复「重要载体」，说明只要「中心、关键」义，B枢纽胜A纽带（20s）</li><li>第二空回代验证：前有「却」表转折，「落户意愿并未显著增强」通顺，A「增加」配意愿不通（15s）</li><li>所以选 B（5s）</li></ol>
@@ -1027,12 +1094,13 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_9ndf4</b><span>2024年青海省公务员录用考试《行测》题 · <span class="rate">56.26<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 D</span></span></div>
-            <div class="q-stem"><b>【题干】</b>在当今世界，科学家利用基因编辑技术，为“复活”灭绝物种 了生态修复的新途径，但挽救濒危物种，保护生物多样性才是核心要义，人类需要采取组合措施来遏制和 生物多样性丧失的严峻形势。依次填入划横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>在当今世界，科学家利用基因编辑技术，为“复活”灭绝物种<span class="blank" data-no="空1"></span>了生态修复的新途径，但挽救濒危物种，保护生物多样性才是核心要义，人类需要采取组合措施来遏制和<span class="blank" data-no="空2"></span>生物多样性丧失的严峻形势。依次填入划横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>2</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
-              <li><b>A.</b> 发明 拯救</li>
-              <li class="opt-right"><b>B.</b> 开拓 扭转 <span class="opt-tag">正确</span></li>
-              <li><b>C.</b> 发现 抢救</li>
-              <li class="opt-wrong"><b>D.</b> 开辟 缓解 <span class="opt-tag">易错</span></li>
+              <li><b>A.</b> <span class="tokwrap"><span class="tok"><i>空1</i>发明</span><span class="tok"><i>空2</i>拯救</span></span></li>
+              <li class="opt-right"><b>B.</b> <span class="tokwrap"><span class="tok"><i>空1</i>开拓</span><span class="tok"><i>空2</i>扭转</span></span> <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> <span class="tokwrap"><span class="tok"><i>空1</i>发现</span><span class="tok"><i>空2</i>抢救</span></span></li>
+              <li class="opt-wrong"><b>D.</b> <span class="tokwrap"><span class="tok"><i>空1</i>开辟</span><span class="tok"><i>空2</i>缓解</span></span> <span class="opt-tag">易错</span></li>
             </ol>
             <div class="walk-label">分步走链</div>
             <ol class="walk-steps"><li>第一空只看搭配：「___新途径」，发明只能接具体事物（发明电灯），配不上途径，A先划掉（15s）</li><li>第二空把<b>搭配对象</b>「严峻形势」和前面的「遏制」一起圈住，定方向为「不让形势继续恶化」，语气偏重（20s）</li><li>给选项排程度梯度：缓解最轻（减一点）＜扭转（改局面）＜抢救（急救，对象是人命财物），能配「形势」的只剩扭转、缓解（20s）</li><li>程度校准：题干用「遏制」「严峻」，要的是改方向不是减强度，缓解太轻，D划掉（15s）</li><li>所以选 B（5s）</li></ol>
@@ -1043,7 +1111,8 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_i4sdj</b><span>2024年山西省县级纪委监委公务员录用考试《行测》题 · <span class="rate">54.02<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-            <div class="q-stem"><b>【题干】</b>在漫长的天文研究过程中，中国古代科学家建立了一套有别于欧洲的知识体系。如赤道圈依据太阳的视运动分为365.25度，对应的每日太阳的平均视运动为1度，这与欧洲采用360度的六十进制的西方传统相斥。显然，这种对赤道的划分方式让那些接受过古希腊天文学传统训练，习惯了黄道坐标系的传教士 。填入画横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>在漫长的天文研究过程中，中国古代科学家建立了一套有别于欧洲的知识体系。如赤道圈依据太阳的视运动分为365.25度，对应的每日太阳的平均视运动为1度，这与欧洲采用360度的六十进制的西方传统相斥。显然，这种对赤道的划分方式让那些接受过古希腊天文学传统训练，习惯了黄道坐标系的传教士<span class="blank" data-no="空"></span>。填入画横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>1</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
               <li class="opt-wrong"><b>A.</b> 始料不及 <span class="opt-tag">易错</span></li>
               <li class="opt-right"><b>B.</b> 迷惑不解 <span class="opt-tag">正确</span></li>
@@ -1059,7 +1128,8 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_5850q</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">58.82<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 A</span></span></div>
-            <div class="q-stem"><b>【题干】</b>当时的英国皇室建筑师钱伯斯也非常 中国园林艺术。钱伯斯曾经在东印度公司的船上工作过好几年，到过中国三次，1757年他在《中国园林的布局艺术》中说：“中国人的花园布局是杰出的，他们在那上面表现出来的趣味，是英国长期追求而没有达到的。”填入画横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>当时的英国皇室建筑师钱伯斯也非常<span class="blank" data-no="空"></span>中国园林艺术。钱伯斯曾经在东印度公司的船上工作过好几年，到过中国三次，1757年他在《中国园林的布局艺术》中说：“中国人的花园布局是杰出的，他们在那上面表现出来的趣味，是英国长期追求而没有达到的。”填入画横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>1</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
               <li class="opt-wrong"><b>A.</b> 崇敬 <span class="opt-tag">易错</span></li>
               <li><b>B.</b> 崇信</li>
@@ -1138,12 +1208,13 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_fqc8v</b><span>2024年甘肃公务员录用考试《行测》题 · <span class="rate">58.12<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-            <div class="q-stem"><b>【题干】</b>电影黄金档期票房以及年度总票房在整个经济总量中占比不高，但电影产业的经济影响 ，因为人们会通过这一数字，来 经济、社会的运转状况，尝试从中寻找规律、得到启发。依次填入画横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>电影黄金档期票房以及年度总票房在整个经济总量中占比不高，但电影产业的经济影响<span class="blank" data-no="空1"></span>，因为人们会通过这一数字，来<span class="blank" data-no="空2"></span>经济、社会的运转状况，尝试从中寻找规律、得到启发。依次填入画横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>2</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
-              <li class="opt-wrong"><b>A.</b> 毋庸置喙 分析 <span class="opt-tag">易错</span></li>
-              <li class="opt-right"><b>B.</b> 不容小觑 管窥 <span class="opt-tag">正确</span></li>
-              <li><b>C.</b> 举足轻重 估量</li>
-              <li><b>D.</b> 兹事体大 洞察</li>
+              <li class="opt-wrong"><b>A.</b> <span class="tokwrap"><span class="tok"><i>空1</i>毋庸置喙</span><span class="tok"><i>空2</i>分析</span></span> <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>B.</b> <span class="tokwrap"><span class="tok"><i>空1</i>不容小觑</span><span class="tok"><i>空2</i>管窥</span></span> <span class="opt-tag">正确</span></li>
+              <li><b>C.</b> <span class="tokwrap"><span class="tok"><i>空1</i>举足轻重</span><span class="tok"><i>空2</i>估量</span></span></li>
+              <li><b>D.</b> <span class="tokwrap"><span class="tok"><i>空1</i>兹事体大</span><span class="tok"><i>空2</i>洞察</span></span></li>
             </ol>
             <div class="walk-label">分步走链</div>
             <ol class="walk-steps"><li>圈出「但」，明确一空只能填「影响很大」，先把方向钉死再进选项（10s）</li><li>按方向筛一空：不容小觑、举足轻重保留；毋庸置喙是别让人插嘴、兹事体大是搭配事件本身，双双出局（25s）</li><li>用二空定生死，后文说「通过这一数字……寻找规律、得到启发」，是以小见大，管窥（隔着竹管看天）严丝合缝（20s）</li><li>回验C，「估量运转状况」搭配不成立，估量是估数量，且丢了由部分推整体的逻辑，排除（20s）</li><li>一空合规、二空精准，所以选<b><u>B</u></b>（5s）</li></ol>
@@ -1169,7 +1240,8 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_4j0pe</b><span>2022年四川省公务员录用考试《行测》题 · <span class="rate">53.45<small>%正确率</small></span> · <span class="ans-pill">答案 B</span> · <span class="wrong-pill">易错 A</span></span></div>
-            <div class="q-stem"><b>【题干】</b>《中华人民共和国个人信息保护法》首次在法律层面构建了相对全面的个人信息跨境流动制度，这一制度需要兼顾多重面向与利益。一方面，个人信息跨境流动已经成为我国数字经济发展的迫切要求。根据预测，2025年我国数字经济规模有望跃居全球首位，可达人民币60万亿元， ，数字产品或服务的供给、交付均需清晰的数据跨境制度指引。然而另一方面，地缘政治冲突加剧，世界数字大国间博弈，不同经济体主导的数据流动框架竞争日趋激烈，数字贸易保护主义抬头，导致数字经济发展面临的国际环境更加复杂。填入画横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>《中华人民共和国个人信息保护法》首次在法律层面构建了相对全面的个人信息跨境流动制度，这一制度需要兼顾多重面向与利益。一方面，个人信息跨境流动已经成为我国数字经济发展的迫切要求。根据预测，2025年我国数字经济规模有望跃居全球首位，可达人民币60万亿元，<span class="blank" data-no="空"></span>，数字产品或服务的供给、交付均需清晰的数据跨境制度指引。然而另一方面，地缘政治冲突加剧，世界数字大国间博弈，不同经济体主导的数据流动框架竞争日趋激烈，数字贸易保护主义抬头，导致数字经济发展面临的国际环境更加复杂。填入画横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>1</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
               <li class="opt-wrong"><b>A.</b> 全球贸易发展促成海量数据的跨境流动 <span class="opt-tag">易错</span></li>
               <li class="opt-right"><b>B.</b> 个人信息跨境流动成为数字贸易之必需 <span class="opt-tag">正确</span></li>
@@ -1185,7 +1257,8 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_4j0pp</b><span>2022年四川省公务员录用考试《行测》题 · <span class="rate">52.73<small>%正确率</small></span> · <span class="ans-pill">答案 A</span> · <span class="wrong-pill">易错 C</span></span></div>
-            <div class="q-stem"><b>【题干】</b>丝绸之路连通了亚洲各国，各种文明在交流互鉴中互通有无、携手前行，饮食是其中重要的一部分。人类从荒昧走向文明，学会驯化动植物是成因之一；文明的发展与繁荣，则在于这种技艺的传播与改进。原产于西南亚的小麦和大麦沿东西向传播，支撑起亚欧非无数个古典文明；诞生于中国的稻米，至今仍哺育着世界近一半的人口；现在餐桌上常见的玉米、大豆、马铃薯、西红柿、黄瓜等，都是从初始的驯化地沿着贸易路线最终遍布全球的。换言之， 。填入画横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>丝绸之路连通了亚洲各国，各种文明在交流互鉴中互通有无、携手前行，饮食是其中重要的一部分。人类从荒昧走向文明，学会驯化动植物是成因之一；文明的发展与繁荣，则在于这种技艺的传播与改进。原产于西南亚的小麦和大麦沿东西向传播，支撑起亚欧非无数个古典文明；诞生于中国的稻米，至今仍哺育着世界近一半的人口；现在餐桌上常见的玉米、大豆、马铃薯、西红柿、黄瓜等，都是从初始的驯化地沿着贸易路线最终遍布全球的。换言之，<span class="blank" data-no="空"></span>。填入画横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>1</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
               <li class="opt-right"><b>A.</b> 饮食的发展史与文明的发展史有着相同的脉络 <span class="opt-tag">正确</span></li>
               <li><b>B.</b> 亚洲人民在饮食文明传播方面做出了积极贡献</li>
@@ -1201,12 +1274,13 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_584tr</b><span>2023年江西省公务员录用考试《行测》题 · <span class="rate">57.72<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-            <div class="q-stem"><b>【题干】</b>天地英雄气，千秋尚凛然。清明节既是礼祭祖先、 的日子，也是寄托哀思、祭奠英烈的时刻。社会各界以多种形式表达对英烈深切的缅怀之情和崇高敬意，追思他们的英勇事迹，感受他们的高尚精神，在新征程中 奋进力量。依次填入划横线部分最恰当的一项是：</div>
+            <div class="q-stem has-blank"><b>【题干】</b>天地英雄气，千秋尚凛然。清明节既是礼祭祖先、<span class="blank" data-no="空1"></span>的日子，也是寄托哀思、祭奠英烈的时刻。社会各界以多种形式表达对英烈深切的缅怀之情和崇高敬意，追思他们的英勇事迹，感受他们的高尚精神，在新征程中<span class="blank" data-no="空2"></span>奋进力量。依次填入划横线部分最恰当的一项是：</div>
+            <div class="blank-hint">本题共 <b>2</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
-              <li><b>A.</b> 睹物思人 聚齐</li>
-              <li><b>B.</b> 鉴往知来 汇聚</li>
-              <li class="opt-wrong"><b>C.</b> 抚今追昔 聚合 <span class="opt-tag">易错</span></li>
-              <li class="opt-right"><b>D.</b> 慎终追远 凝聚 <span class="opt-tag">正确</span></li>
+              <li><b>A.</b> <span class="tokwrap"><span class="tok"><i>空1</i>睹物思人</span><span class="tok"><i>空2</i>聚齐</span></span></li>
+              <li><b>B.</b> <span class="tokwrap"><span class="tok"><i>空1</i>鉴往知来</span><span class="tok"><i>空2</i>汇聚</span></span></li>
+              <li class="opt-wrong"><b>C.</b> <span class="tokwrap"><span class="tok"><i>空1</i>抚今追昔</span><span class="tok"><i>空2</i>聚合</span></span> <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> <span class="tokwrap"><span class="tok"><i>空1</i>慎终追远</span><span class="tok"><i>空2</i>凝聚</span></span> <span class="opt-tag">正确</span></li>
             </ol>
             <div class="walk-label">分步走链</div>
             <ol class="walk-steps"><li>先定对象：整段说的是清明节，空里只可能填祭祖追思一类词，其余先挂起（10s）</li><li>用顿号并列去校验，「礼祭祖先」要同义替换，慎终追远正是虔诚祭祀远代祖先，一空成立（15s）</li><li>反向淘汰三个：睹物思人要看见遗物、抚今追昔偏回想过去、鉴往知来偏推知未来，都没有「祭」的动作（25s）</li><li>二空验搭配，「____奋进力量」是固定说法，凝聚力量成立，聚齐汇聚聚合都不带「凝成一股」这层（15s）</li><li>两空都对得上，所以选<b><u>D</u></b>（5s）</li></ol>
@@ -1347,12 +1421,13 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_icfoo</b><span>2025年国家公务员录用考试《行测》题 · <span class="rate">52.90<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-            <div class="q-stem"><b>【题干】</b>行政文书 对于 （ ） 相当于 （ ） 对于 汇编语言</div>
+            <div class="q-stem has-blank"><b>【题干】</b>行政文书 对于 <span class="blank" data-no="空1"></span> 相当于 <span class="blank" data-no="空2"></span> 对于 汇编语言</div>
+            <div class="blank-hint">本题共 <b>2</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
-              <li><b>A.</b> 行政机关；编程人员</li>
-              <li><b>B.</b> 行政管理；传送指令</li>
-              <li class="opt-wrong"><b>C.</b> 商务文书；符号语言 <span class="opt-tag">易错</span></li>
-              <li class="opt-right"><b>D.</b> 监管函；计算机语言 <span class="opt-tag">正确</span></li>
+              <li><b>A.</b> <span class="tokwrap"><span class="tok"><i>空1</i>行政机关</span><span class="tok"><i>空2</i>编程人员</span></span></li>
+              <li><b>B.</b> <span class="tokwrap"><span class="tok"><i>空1</i>行政管理</span><span class="tok"><i>空2</i>传送指令</span></span></li>
+              <li class="opt-wrong"><b>C.</b> <span class="tokwrap"><span class="tok"><i>空1</i>商务文书</span><span class="tok"><i>空2</i>符号语言</span></span> <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> <span class="tokwrap"><span class="tok"><i>空1</i>监管函</span><span class="tok"><i>空2</i>计算机语言</span></span> <span class="opt-tag">正确</span></li>
             </ol>
             <div class="walk-label">分步走链</div>
             <ol class="walk-steps"><li>先在题干下面写明比较规则：左半边是<b><u>“行政文书与第一空”</u></b>的关系，右半边是<b><u>“第二空与汇编语言”</u></b>的关系，两边关系类型和方向都必须一致（10s）</li><li>代入 A、B 两组的第一个词：行政机关发布行政文书是主宾关系、行政管理用行政文书是工具关系，但对应到右边分别是<b><u>“编程人员编写汇编语言”</u></b><b><u>“汇编语言传送指令”</u></b>，主宾和工具都出现了前后顺序颠倒，两个都排（20s）</li><li>代入 C：左边行政文书与商务文书是并列关系，右边符号语言与汇编语言是同一个东西的全同关系，一边并列一边全同，不一致，排（15s）</li><li>代入 D：监管函是一种行政文书、汇编语言是一种计算机语言，两边都是<b><u>“后者包含前者”</u></b>的种属关系且方向一致，关系类型完全对齐，所以选 D（15s）</li></ol>
@@ -1706,12 +1781,13 @@ body.lb-open{overflow:hidden}
         <div class="walk noble">
           <div>
             <div class="walk-head"><b>3_1_55gn0</b><span>2023年上海市公务员录用考试《行测》题（A类） · <span class="rate">52.78<small>%正确率</small></span> · <span class="ans-pill">答案 D</span> · <span class="wrong-pill">易错 C</span></span></div>
-            <div class="q-stem"><b>【题干】</b>与2015年相比，2020年江浙沪地区年人均教育文化娱乐支出增量 年人均消费支出增量，年人均教育文化娱乐支出增长率 年人均消费支出增长率。</div>
+            <div class="q-stem has-blank"><b>【题干】</b>与2015年相比，2020年江浙沪地区年人均教育文化娱乐支出增量<span class="blank" data-no="空1"></span>年人均消费支出增量，年人均教育文化娱乐支出增长率<span class="blank" data-no="空2"></span>年人均消费支出增长率。</div>
+            <div class="blank-hint">本题共 <b>2</b> 处待填空位，已用下划线标出</div>
             <ol class="q-options">
-              <li><b>A.</b> 高于，高于</li>
-              <li><b>B.</b> 高于，低于</li>
-              <li class="opt-wrong"><b>C.</b> 低于，高于 <span class="opt-tag">易错</span></li>
-              <li class="opt-right"><b>D.</b> 低于，低于 <span class="opt-tag">正确</span></li>
+              <li><b>A.</b> <span class="tokwrap"><span class="tok"><i>空1</i>高于</span><span class="tok"><i>空2</i>高于</span></span></li>
+              <li><b>B.</b> <span class="tokwrap"><span class="tok"><i>空1</i>高于</span><span class="tok"><i>空2</i>低于</span></span></li>
+              <li class="opt-wrong"><b>C.</b> <span class="tokwrap"><span class="tok"><i>空1</i>低于</span><span class="tok"><i>空2</i>高于</span></span> <span class="opt-tag">易错</span></li>
+              <li class="opt-right"><b>D.</b> <span class="tokwrap"><span class="tok"><i>空1</i>低于</span><span class="tok"><i>空2</i>低于</span></span> <span class="opt-tag">正确</span></li>
             </ol>
             <div class="walk-label">分步走链</div>
             <ol class="walk-steps"><li>先在图表里只抓四个数并抄成两列：2015/2020年人均教育文化娱乐支出2857、3380，人均消费支出30191、37303（20s）</li><li>第一空做减法比增量：3380-2857=523，37303-30191=7112，523&lt;7112，第一空<b><u>“低于”</u></b>，直接排除<b><u>A</u></b>、B（25s）</li><li>第二空不要比523和7112，换成增量÷基期：523/2857≈18%，7112/30191≈24%，18%&lt;24%，第二空也<b><u>“低于”</u></b>（25s）</li><li>两空都是<b><u>“低于”</u></b>，对照选项只剩一个，所以选<b><u>D</u></b>（5s）</li></ol>
