@@ -12645,8 +12645,8 @@ B县综合行政执法局 XXXX年XX月XX日
         </div>
         <div class="pi-status" id="pracStatus"></div>
       </div>
-      <h3 style="margin:0 0 12px;font-size:15px">已有批注（1）</h3>
-      <div class="prac-list"><div class="prac-card" data-open="1_2_4189pog"><div class="pc-top"><div class="pc-title">申论片段批改（概括归纳）</div><div class="pc-score">1.5<small> / 2</small></div></div><div class="pc-meta"><span>2018年公务员多省联考《申论》题（湖南通用卷）</span><span>4分31秒</span><span>命中 1/3</span></div></div></div>
+      <h3 style="margin:0 0 12px;font-size:15px">已有批注（2）</h3>
+      <div class="prac-list"><div class="prac-card" data-open="1_2_4189pog"><div class="pc-top"><div class="pc-title">申论片段批改（概括归纳）</div><div class="pc-score">1.5<small> / 2</small></div></div><div class="pc-meta"><span>2018年公务员多省联考《申论》题（湖南通用卷）</span><span>4分31秒</span><span>命中 1/3</span></div></div><div class="prac-card" data-open="1_2_41j52r7"><div class="pc-top"><div class="pc-title">申论片段批改（摘抄）</div><div class="pc-score">1.5<small> / 3</small></div></div><div class="pc-meta"><span></span><span></span><span>命中 1/5</span></div></div></div>
     </div>
   </div>
   </div>
@@ -12950,7 +12950,7 @@ B县综合行政执法局 XXXX年XX月XX日
 
 
 
-// ===== 练题批注模块（本地服务冷启动 + AI 评分标注）=====
+// ===== 练题批注模块（支持 /exercise/ 练习页 + /solution/ 已交卷）=====
 var PRAC_PORT = 8850;
 var PRAC_API = "http://127.0.0.1:" + PRAC_PORT;
 
@@ -12997,20 +12997,29 @@ function pracBadge(judge){
   return '<span class="prac-badge human" title="采分点经人工核对">人工核对</span>';
 }
 
+function pracLinkKind(u){
+  if(/\/exercise\/[\w-]+/.test(u)) return "exercise";
+  if(/\/solution\/[\w-]+/.test(u)) return "solution";
+  return null;
+}
+
 function pracRender(r){
   if(!r.ok){
     if(r.stage === "need_llm"){
       var d = r.data || {};
-      pracSetStatus(
-        '<div style="line-height:1.9">' +
-        '<b>⚠️ 本题无既有评分源，需要 AI 拆解采分点</b><br>' +
-        '已抓取四要素：' + (d.title || '') + ' ｜ 满分 ' + (d.full_score || '?') + ' 分<br>' +
-        '已生成拆点指令：<code>practice/prompts/' + r.key + '.txt</code><br><br>' +
-        '<b>下一步（二选一）：</b><br>' +
-        '① 把该 prompt 文件交给 AI，产出 <code>practice/scoring/' + r.key + '_llm.json</code>，' +
+      var noRef = r.no_reference;
+      var html = '<div style="line-height:1.9">' +
+        '<b>⚠️ ' + (noRef ? '练习页未交卷，粉笔不提供参考答案' : '本题无既有评分源') + '</b><br>' +
+        '已抓取：' + (d.title || '') + ' ｜ 满分 ' + (d.full_score || '?') + ' 分<br>' +
+        '你的作答：' + ((d.user_answer || '').slice(0, 60)) + '<br>' +
+        (noRef ? '<span style="color:var(--ink3);font-size:11.5px">将依据材料独立拆解采分点</span><br>' : '') +
+        '<br><b>下一步（二选一）：</b><br>' +
+        '① 把 <code>practice/prompts/' + r.key + '.txt</code> 交给 AI，产出 ' +
+        '<code>practice/scoring/' + r.key + '_llm.json</code>，' +
         '再运行 <code>python 申论/practice_llm_flow.py ' + r.key + ' --promote</code><br>' +
-        '② 直接回复我「拆解 ' + r.key + '」，我来生成采分点<br>' +
-        '</div>', "err");
+        '② 直接回复我「拆解 ' + r.key + '」，我来生成采分点' +
+        '</div>';
+      pracSetStatus(html, "err");
       return;
     }
     pracSetStatus("❌ " + (r.stage || "") + " 阶段失败：" + (r.err || "未知"), "err");
@@ -13029,8 +13038,6 @@ function pracRender(r){
     '<div class="pr-hint">批注报告已生成，可在下方「已有批注」中查看</div>' +
     '</div>';
   pracSetStatus(html, "ok");
-  // 刷新列表
-  if(typeof pracReloadList === "function") setTimeout(pracReloadList, 500);
 }
 
 function pracInit(){
@@ -13041,8 +13048,14 @@ function pracInit(){
   btn.addEventListener("click", function(){
     var u = (inp.value || "").trim();
     if(!u){ pracSetStatus("请先粘贴链接", "err"); return; }
-    var m = u.match(/\/solution\/([\w-]+)/);
-    if(!m){ pracSetStatus("链接格式不对，应含 /solution/1_2_xxxxx", "err"); return; }
+
+    var kind = pracLinkKind(u);
+    if(!kind){
+      pracSetStatus("链接格式不对。支持两种：<br>" +
+        "① 练习页 <code>/exercise/1_2_xxx</code>（未交卷也行）<br>" +
+        "② 已交卷 <code>/solution/1_2_xxx</code>", "err");
+      return;
+    }
 
     pracSetStatus("检查本地服务…");
     pracHealth(function(up){
@@ -13059,7 +13072,7 @@ function pracInit(){
   });
 
   pracHealth(function(up){
-    if(up){ pracSetStatus("✅ 本地服务在线，可直接粘贴链接", "ok"); }
+    if(up){ pracSetStatus("✅ 本地服务在线，可直接粘贴链接（练习页/已交卷均可）", "ok"); }
   });
 }
 
