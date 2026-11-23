@@ -767,6 +767,22 @@ ul.key li{margin:0 0 7px;font-size:14.5px;line-height:1.88;color:var(--ink2)}
   .dim-lv{display:none}
 }
 
+
+/* 练题批注：AI 评分徽章与结果卡 */
+.prac-badge{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:4px;font-weight:700;margin-left:8px;vertical-align:middle}
+.prac-badge.ai{background:#F5E6C8;color:#8A6A16;border:1px solid #D9C27E}
+.prac-badge.human{background:#DDE8E0;color:#3F6A50;border:1px solid #A9C4B3}
+.prac-result{background:var(--panel);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:10px}
+.pr-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.pr-score{font-family:"Cascadia Mono",Consolas,monospace;font-size:26px;font-weight:800;color:var(--brand)}
+.pr-score small{font-size:13px;color:var(--ink3);font-weight:400}
+.pr-mode{font-size:12px;color:var(--ink3)}
+.pr-tokens{font-size:11.5px;color:var(--ink3);margin-left:auto;font-family:"Cascadia Mono",Consolas,monospace}
+.pr-detail{font-size:12.5px;color:var(--ink2);margin-top:8px}
+.pr-detail b{color:var(--brand)}
+.pr-hint{font-size:11.5px;color:var(--ink3);margin-top:6px}
+.prac-cmd{display:inline-block;margin:6px 0;padding:5px 10px;background:#232323;color:#D8D8D8;border-radius:5px;font-family:"Cascadia Mono",Consolas,monospace;font-size:12px}
+
 </style>
 </head>
 <body>
@@ -12932,28 +12948,118 @@ B县综合行政执法局 XXXX年XX月XX日
   route();
 })();
 
-// ===== 练题批注模块 =====
+
+
+// ===== 练题批注模块（本地服务冷启动 + AI 评分标注）=====
+var PRAC_PORT = 8850;
+var PRAC_API = "http://127.0.0.1:" + PRAC_PORT;
+
+function pracSetStatus(msg, cls){
+  var st = document.getElementById("pracStatus");
+  if(!st) return;
+  st.className = "pi-status " + (cls || "");
+  st.innerHTML = msg;
+}
+
+function pracHealth(cb){
+  var x = new XMLHttpRequest();
+  x.open("GET", PRAC_API + "/api/health", true);
+  x.timeout = 2500;
+  x.onload = function(){ cb(x.status === 200); };
+  x.onerror = function(){ cb(false); };
+  x.ontimeout = function(){ cb(false); };
+  try { x.send(); } catch(e){ cb(false); }
+}
+
+function pracAnnotate(url){
+  pracSetStatus("正在抓取与分析…（首次约 10-30 秒）", "ok");
+  var x = new XMLHttpRequest();
+  x.open("POST", PRAC_API + "/api/annotate", true);
+  x.setRequestHeader("Content-Type", "application/json");
+  x.timeout = 300000;
+  x.onload = function(){
+    var r;
+    try { r = JSON.parse(x.responseText); }
+    catch(e){ pracSetStatus("服务返回异常：" + x.responseText.slice(0,120), "err"); return; }
+    pracRender(r);
+  };
+  x.onerror = function(){
+    pracSetStatus("连不上本地服务（127.0.0.1:" + PRAC_PORT + "）", "err");
+  };
+  x.ontimeout = function(){ pracSetStatus("超时，抓取可能卡住了", "err"); };
+  x.send(JSON.stringify({url: url}));
+}
+
+function pracBadge(judge){
+  if(judge === "llm"){
+    return '<span class="prac-badge ai" title="采分点与判定由 AI 生成，可能有 ±0.5 档漂移">AI 评分</span>';
+  }
+  return '<span class="prac-badge human" title="采分点经人工核对">人工核对</span>';
+}
+
+function pracRender(r){
+  if(!r.ok){
+    if(r.stage === "need_llm"){
+      var d = r.data || {};
+      pracSetStatus(
+        '<div style="line-height:1.9">' +
+        '<b>⚠️ 本题无既有评分源，需要 AI 拆解采分点</b><br>' +
+        '已抓取四要素：' + (d.title || '') + ' ｜ 满分 ' + (d.full_score || '?') + ' 分<br>' +
+        '已生成拆点指令：<code>practice/prompts/' + r.key + '.txt</code><br><br>' +
+        '<b>下一步（二选一）：</b><br>' +
+        '① 把该 prompt 文件交给 AI，产出 <code>practice/scoring/' + r.key + '_llm.json</code>，' +
+        '再运行 <code>python 申论/practice_llm_flow.py ' + r.key + ' --promote</code><br>' +
+        '② 直接回复我「拆解 ' + r.key + '」，我来生成采分点<br>' +
+        '</div>', "err");
+      return;
+    }
+    pracSetStatus("❌ " + (r.stage || "") + " 阶段失败：" + (r.err || "未知"), "err");
+    return;
+  }
+
+  var html = '<div class="prac-result">' +
+    '<div class="pr-top">' +
+      '<span class="pr-score">' + r.score + '<small> / ' + r.full + '</small></span>' +
+      pracBadge(r.judge_by) +
+      '<span class="pr-mode">' + (r.mode || '') + '</span>' +
+      '<span class="pr-tokens">tokens: ' + r.tokens + '</span>' +
+    '</div>' +
+    '<div class="pr-detail">采分点：命中 <b>' + r.hit + '</b> ｜ 部分命中 <b>' + r.part +
+      '</b> ｜ 未命中 <b>' + r.miss + '</b></div>' +
+    '<div class="pr-hint">批注报告已生成，可在下方「已有批注」中查看</div>' +
+    '</div>';
+  pracSetStatus(html, "ok");
+  // 刷新列表
+  if(typeof pracReloadList === "function") setTimeout(pracReloadList, 500);
+}
+
 function pracInit(){
-  var btn=document.getElementById("pracGo");
-  var inp=document.getElementById("pracUrl");
-  var st=document.getElementById("pracStatus");
-  if(!btn||!inp) return;
-  btn.addEventListener("click",function(){
-    var u=(inp.value||"").trim();
-    if(!u){ st.className="pi-status err"; st.textContent="请先粘贴链接"; return; }
-    var m=u.match(/\/solution\/([\w-]+)/);
-    if(!m){ st.className="pi-status err";
-      st.textContent="链接格式不对，应含 /solution/1_2_xxxxx"; return; }
-    st.className="pi-status ok";
-    st.textContent="识别到题目 key = "+m[1]+
-      " ｜ 下一步请在项目目录运行：python 申论/_practice_fetch.py \""+u+"\" 然后 python 申论/_practice_score.py "+m[1]+" 然后重新构建";
-  });
-  // 卡片点击跳到对应批注（若已生成 HTML）
-  document.querySelectorAll(".prac-card[data-open]").forEach(function(c){
-    c.addEventListener("click",function(){
-      var k=c.getAttribute("data-open");
-      location.hash="#/practice/"+k;
+  var btn = document.getElementById("pracGo");
+  var inp = document.getElementById("pracUrl");
+  if(!btn || !inp) return;
+
+  btn.addEventListener("click", function(){
+    var u = (inp.value || "").trim();
+    if(!u){ pracSetStatus("请先粘贴链接", "err"); return; }
+    var m = u.match(/\/solution\/([\w-]+)/);
+    if(!m){ pracSetStatus("链接格式不对，应含 /solution/1_2_xxxxx", "err"); return; }
+
+    pracSetStatus("检查本地服务…");
+    pracHealth(function(up){
+      if(!up){
+        pracSetStatus(
+          "本地服务未启动。请在项目目录运行：<br>" +
+          "<code class='prac-cmd'>python 申论/_practice_server.py</code><br>" +
+          "<span style='font-size:11.5px;color:var(--ink3)'>启动后重新点击此按钮（服务可常开，也可用完关掉）</span>",
+          "err");
+        return;
+      }
+      pracAnnotate(u);
     });
+  });
+
+  pracHealth(function(up){
+    if(up){ pracSetStatus("✅ 本地服务在线，可直接粘贴链接", "ok"); }
   });
 }
 
