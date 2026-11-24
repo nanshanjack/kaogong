@@ -670,6 +670,7 @@ ul.key li{margin:0 0 7px;font-size:14.5px;line-height:1.88;color:var(--ink2)}
 }
 
 
+
 /* ===== 练题批注模块 ===== */
 .page[data-pid="practice"] .prac-wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
 .prac-input{background:var(--panel);border:1.5px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:22px}
@@ -694,6 +695,19 @@ ul.key li{margin:0 0 7px;font-size:14.5px;line-height:1.88;color:var(--ink2)}
 .prac-card .pc-score small{font-size:12px;color:var(--ink3);font-weight:400}
 .prac-card .pc-meta{font-size:11.5px;color:var(--ink3);margin-top:6px;display:flex;gap:14px;flex-wrap:wrap}
 .prac-empty{text-align:center;padding:50px 20px;color:var(--ink3);font-size:13.5px}
+
+/* 历史列表：可滚动，长列表不会把页面撑烂 */
+.prac-list{display:grid;gap:12px;max-height:min(72vh,820px);overflow-y:auto;
+  padding-right:6px;scrollbar-width:thin}
+.prac-list::-webkit-scrollbar{width:8px}
+.prac-list::-webkit-scrollbar-thumb{background:#C9C4B8;border-radius:4px}
+.prac-list::-webkit-scrollbar-track{background:transparent}
+.prac-card .pc-detail{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.pc-loading{font-size:12px;color:var(--ink3);padding:8px 0}
+.pcd-sec{margin-bottom:14px}
+.pcd-cap{font-size:11.5px;font-weight:700;color:var(--ink3);margin-bottom:6px;letter-spacing:.4px}
+.pcd-text{font-size:12.5px;line-height:1.85;color:var(--ink);background:var(--bg);
+  border-radius:7px;padding:9px 12px;white-space:pre-wrap}
 
 /* 报告正文 */
 .prac{max-width:1180px;margin:0 auto}
@@ -804,7 +818,7 @@ ul.key li{margin:0 0 7px;font-size:14.5px;line-height:1.88;color:var(--ink2)}
   .dim-lv{display:none}
 }
 
-/* practice-css-ver: 2026-11-24-textform */
+/* practice-css-ver: 2026-11-24-history */
 
 /* 练题批注：AI 评分徽章与结果卡 */
 .prac-badge{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:4px;font-weight:700;margin-left:8px;vertical-align:middle}
@@ -881,6 +895,8 @@ ul.key li{margin:0 0 7px;font-size:14.5px;line-height:1.88;color:var(--ink2)}
       <div id="prog"><i></i></div>
     </header>
     <main id="view">
+
+
 
 
 
@@ -12688,6 +12704,8 @@ B县综合行政执法局 XXXX年XX月XX日
 
 
 
+
+
   <div class="page" data-pid="practice" data-crumb="练题批注 · 申论" data-title="练题批注" data-practice-module>
     <div class="prac-wrap">
       <div class="prac-input">
@@ -12709,8 +12727,12 @@ B县综合行政执法局 XXXX年XX月XX日
         </div>
         <div class="pi-status" id="pracStatus"></div>
       </div>
-      <h3 style="margin:0 0 12px;font-size:15px">已有批注（8）</h3>
-      <div class="prac-list"><div class="prac-card" data-open="1_2_4189pog"><div class="pc-top"><div class="pc-title">申论片段批改（概括归纳）</div><div class="pc-score">1.5<small> / 2</small></div></div><div class="pc-meta"><span>2018年公务员多省联考《申论》题（湖南通用卷）</span><span>4分31秒</span><span>命中 1/3</span></div></div><div class="prac-card" data-open="1_2_41j52r7"><div class="pc-top"><div class="pc-title">申论片段批改（摘抄）</div><div class="pc-score">1.5<small> / 3</small></div></div><div class="pc-meta"><span></span><span></span><span>命中 1/5</span></div></div><div class="prac-card" data-open="calib_hunan"><div class="pc-top"><div class="pc-title">申论概括归纳（题库原题：内蒙古 2018 统考 第3题）</div><div class="pc-score">1.5<small> / 2</small></div></div><div class="pc-meta"><span>题库原题：内蒙古 2018 统考 第3题</span><span></span><span>命中 1/3</span></div></div><div class="prac-card" data-open="calib_liangzhu"><div class="pc-top"><div class="pc-title">申论概括归纳（现场拆解（题库未匹配到原题））</div><div class="pc-score">1<small> / 3</small></div></div><div class="pc-meta"><span>现场拆解（题库未匹配到原题）</span><span></span><span>命中 0/6</span></div></div><div class="prac-card" data-open="grade_47bf1fbe4c4b"><div class="pc-top"><div class="pc-title">申论概括归纳（现场拆解（题库未匹配到原题））</div><div class="pc-score">1<small> / 3</small></div></div><div class="pc-meta"><span>现场拆解（题库未匹配到原题）</span><span></span><span>命中 0/6</span></div></div><div class="prac-card" data-open="grade_56dc6b929043"><div class="pc-top"><div class="pc-title">申论提出对策（现场拆解（题库未匹配到原题）｜无材料依据）</div><div class="pc-score">1<small> / 2</small></div></div><div class="pc-meta"><span>现场拆解（题库未匹配到原题）｜无材料依据</span><span></span><span>命中 1/2</span></div></div><div class="prac-card" data-open="grade_bfb564b97cfc"><div class="pc-top"><div class="pc-title">申论概括归纳（题库原题：内蒙古 2018 统考 第3题）</div><div class="pc-score">1<small> / 2</small></div></div><div class="pc-meta"><span>题库原题：内蒙古 2018 统考 第3题</span><span></span><span>命中 0/4</span></div></div><div class="prac-card" data-open="grade_ccccfc189b8e"><div class="pc-top"><div class="pc-title">申论概括归纳（现场拆解（题库未匹配到原题）｜无材料依据）</div><div class="pc-score">0<small> / 10</small></div></div><div class="pc-meta"><span>现场拆解（题库未匹配到原题）｜无材料依据</span><span></span><span>命中 0/5</span></div></div></div>
+      <h3 style="margin:0 0 12px;font-size:15px">已有批注
+        <small style="font-weight:400;color:var(--ink3)">（点击卡片展开批注详情）</small>
+      </h3>
+      <div class="prac-list" id="pracList">
+        <div class="prac-empty">加载中…</div>
+      </div>
     </div>
   </div>
   </div>
@@ -13023,6 +13045,8 @@ B县综合行政执法局 XXXX年XX月XX日
 
 
 
+
+
 // ===== 练题批注模块（文字提交版）=====
 // 提交方式：题干 + 我的作答（材料可选），系统检索全量题库 → 匹配原题 → LLM 批改
 var PRAC_PORT = 8850;
@@ -13064,8 +13088,23 @@ function pracGrade(){
   var stem = pracVal("pracStem");
   var ans  = pracVal("pracAnswer");
 
-  if(!stem){ pracSetStatus("请先填题目", "err"); return; }
-  if(!ans){ pracSetStatus("请先填你的作答", "err"); return; }
+  if(!stem){
+    pracSetStatus("❌ 「题目」那栏是空的。<br>" +
+      "请把题干整段粘贴进去（含分值和要求行），系统要靠题干去题库里找原题。", "err");
+    var e1 = document.getElementById("pracStem"); if(e1) e1.focus();
+    return;
+  }
+  if(stem.length < 10){
+    pracSetStatus("❌ 题干太短（" + stem.length + " 字）。<br>" +
+      "只贴几个关键词无法匹配原题，请粘贴完整题干。", "err");
+    var e2 = document.getElementById("pracStem"); if(e2) e2.focus();
+    return;
+  }
+  if(!ans){
+    pracSetStatus("❌ 「我的作答」那栏是空的。", "err");
+    var e3 = document.getElementById("pracAnswer"); if(e3) e3.focus();
+    return;
+  }
 
   var btn = document.getElementById("pracGo");
   if(btn) btn.disabled = true;
@@ -13099,6 +13138,7 @@ function pracDoGrade(btn, stem, ans){
     try { r = JSON.parse(x.responseText); }
     catch(e){ pracSetStatus("服务返回异常：" + x.responseText.slice(0,160), "err"); return; }
     pracRender(r);
+    pracLoadHistory();
   };
   x.onerror = function(){
     if(btn) btn.disabled = false;
@@ -13215,6 +13255,11 @@ function pracInit(){
     var t = e.target;
     while(t && t !== document){
       if(t.id === "pracGo"){ e.preventDefault(); pracGrade(); return; }
+      // 历史卡片：点开后加载详情
+      if(t.classList && t.classList.contains("prac-card") && t.getAttribute("data-open")){
+        pracToggleHistory(t.getAttribute("data-open"), t);
+        return;
+      }
       t = t.parentNode;
     }
   }, false);
@@ -13236,6 +13281,7 @@ function pracInit(){
       if(tried++ < 20) return setTimeout(probe, 300);   // 等 DOM 出现
       return;
     }
+    pracLoadHistory();
     pracHealth(function(up){
       if(up){ pracSetStatus("✅ 本地服务在线，填两栏后点「批注并打分」", "ok"); }
       else {
@@ -13244,6 +13290,128 @@ function pracInit(){
       }
     });
   })();
+}
+
+// ===== 历史记录：列表 + 点击展开详情 =====
+function pracLoadHistory(){
+  var box = document.getElementById("pracList");
+  if(!box) return;
+  var x = new XMLHttpRequest();
+  x.open("GET", PRAC_API + "/api/history", true);
+  x.timeout = 10000;
+  x.onload = function(){
+    var r;
+    try { r = JSON.parse(x.responseText); } catch(e){ return; }
+    pracRenderHistory(r.items || []);
+  };
+  try { x.send(); } catch(e){}
+}
+
+function pracRenderHistory(items){
+  var box = document.getElementById("pracList");
+  if(!box) return;
+  if(!items.length){
+    box.innerHTML = '<div class="prac-empty">还没有批注记录。<br>' +
+      '填题目 + 你的作答，点「批注并打分」出第一份报告。</div>';
+    return;
+  }
+  var h = '';
+  for(var i=0;i<items.length;i++){
+    var it = items[i];
+    var title = it.stem || it.type || "（无题目）";
+    var badge = it.matched ? '<span class="prac-badge human">题库原题</span>'
+                           : '<span class="prac-badge ai">现场拆解</span>';
+    h += '<div class="prac-card" data-open="' + pracEsc(it.key) + '">' +
+         '<div class="pc-top">' +
+           '<div class="pc-title">' + pracEsc(title) + '</div>' +
+           '<div class="pc-score">' + it.score + '<small> / ' + it.full + '</small></div>' +
+         '</div>' +
+         '<div class="pc-meta">' +
+           '<span>' + pracEsc(it.source || '') + '</span>' +
+           '<span>' + pracEsc(it.at || '') + '</span>' +
+           '<span>命中 ' + it.hit + ' ｜ 部分 ' + it.part + ' ｜ 未命中 ' + it.miss + '</span>' +
+           badge +
+         '</div>' +
+         '<div class="pc-detail" id="pcd-' + pracEsc(it.key) + '"></div>' +
+         '</div>';
+  }
+  box.innerHTML = h;
+}
+
+function pracToggleHistory(key, cardEl){
+  var box = document.getElementById("pcd-" + key);
+  if(!box) return;
+  if(box.getAttribute("data-loaded") === "1"){
+    box.style.display = (box.style.display === "none") ? "block" : "none";
+    return;
+  }
+  box.innerHTML = '<div class="pc-loading">加载中…</div>';
+  box.style.display = "block";
+  var x = new XMLHttpRequest();
+  x.open("GET", PRAC_API + "/api/result?key=" + encodeURIComponent(key), true);
+  x.timeout = 15000;
+  x.onload = function(){
+    var r;
+    try { r = JSON.parse(x.responseText); } catch(e){
+      box.innerHTML = '<div class="pc-loading">读取失败</div>'; return; }
+    if(!r.ok){ box.innerHTML = '<div class="pc-loading">' + pracEsc(r.err||'失败') + '</div>'; return; }
+    box.innerHTML = pracDetailHtml(r.detail || {});
+    box.setAttribute("data-loaded","1");
+  };
+  x.onerror = function(){ box.innerHTML = '<div class="pc-loading">连不上服务</div>'; };
+  try { x.send(); } catch(e){}
+}
+
+function pracDetailHtml(d){
+  var h = '';
+  if(d.stem){
+    h += '<div class="pcd-sec"><div class="pcd-cap">题目</div>' +
+         '<div class="pcd-text">' + pracEsc(d.stem) + '</div></div>';
+  }
+  if(d.user_answer){
+    h += '<div class="pcd-sec"><div class="pcd-cap">我的作答</div>' +
+         '<div class="pcd-text">' + pracEsc(d.user_answer) + '</div></div>';
+  }
+  var pts = d.points || [];
+  if(pts.length){
+    h += '<div class="pcd-sec"><div class="pcd-cap">采分点逐项（' + pts.length + '）</div>';
+    for(var i=0;i<pts.length;i++){
+      var p = pts[i];
+      var cls = p.verdict === "命中" ? "hit" : (p.verdict === "部分命中" ? "part" : "miss");
+      h += '<div class="pr-point ' + cls + '">' +
+           '<div class="pp-head">' +
+             '<span class="pp-mark">' + (PRAC_MARK[p.verdict] || "?") + '</span>' +
+             '<span class="pp-name">' + pracEsc(p.point) + '</span>' +
+             '<span class="pp-w">' + p.weight + ' 分</span>' +
+           '</div>';
+      if(p.user_quote) h += '<div class="pp-q">你写的：' + pracEsc(p.user_quote) + '</div>';
+      if(p.issue) h += '<div class="pp-issue"><b>问题</b> ' + pracEsc(p.issue) + '</div>';
+      if(p.fix) h += '<div class="pp-fix"><b>改法</b> ' + pracEsc(p.fix) + '</div>';
+      if(p.material_quote) h += '<div class="pp-mat">材料依据：' + pracEsc(p.material_quote) + '</div>';
+      h += '</div>';
+    }
+    h += '</div>';
+  }
+  var dims = d.dims || [];
+  if(dims.length){
+    h += '<div class="pcd-sec"><div class="pcd-cap">5 维评分</div>';
+    for(var j=0;j<dims.length;j++){
+      var m = dims[j];
+      var pct = Math.round(m.level / 4 * 100);
+      h += '<div class="pr-dim">' +
+           '<span class="pd-name">' + pracEsc(m.dim) + '</span>' +
+           '<span class="pd-bar"><i style="width:' + pct + '%"></i></span>' +
+           '<span class="pd-val">' + m.level + '/4</span>' +
+           '<span class="pd-score">' + m.score + '/' + m.weight + '</span>' +
+           '</div>';
+      var note = (d.dims_note || {})[m.dim];
+      if(note) h += '<div class="pd-note">' + pracEsc(note) + '</div>';
+    }
+    h += '</div>';
+  }
+  h += '<div class="pr-foot">来源：' + pracEsc(d.source_note || d.source || '—') +
+       ' ｜ 批注时间：' + pracEsc(d.graded_at || '—') + '</div>';
+  return h;
 }
 
 
